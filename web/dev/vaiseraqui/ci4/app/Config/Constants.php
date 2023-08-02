@@ -77,9 +77,9 @@ defined('EXIT__AUTO_MIN') || define('EXIT__AUTO_MIN', 9); // lowest automaticall
 defined('EXIT__AUTO_MAX') || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 
-defined('PATHSITE') || define('PATHSITE', "https://www.projetosonlinearq.com.br/site/"); // highest automatically-assigned error code 
-defined('PATHSITE2') || define('PATHSITE2', "https://www.projetosonlinearq.com.br/site"); // highest automatically-assigned error code 
-defined('PATHHOME') || define('PATHHOME', "/var/www/clients/client5/web194/web/site/"); // highest automatically-assigned error code
+defined('PATHSITE') || define('PATHSITE', "https://www.uaau.digital/dev/vaiseraqui/"); // highest automatically-assigned error code 
+defined('PATHSITE2') || define('PATHSITE2', "https://www.uaau.digital/dev/vaiseraqui"); // highest automatically-assigned error code 
+defined('PATHHOME') || define('PATHHOME', "/var/www/clients/client5/web16/web/dev/vaiseraqui/"); // highest automatically-assigned error code
 // echo getcwd();
 
 defined('FRENETKEY') || define('FRENETKEY', "jean.adriel@gmail.com");

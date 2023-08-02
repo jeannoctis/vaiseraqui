@@ -8,6 +8,7 @@ class Pages extends Controller {
 
     public function buscaGeral() {
         helper('text');
+        exit();
         $this->session = \Config\Services::session($config);
         $this->redeSocialModel = model('App\Models\RedeSocialModel', false);
         $this->redeSocialModel->where("link != '' AND link IS NOT NULL ");
