@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html amp lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web Story</title>
+    <link rel="canonical" href="https://example.com/my-web-story">
+    <link rel="amphtml" href="https://example.com/my-web-story.amp.html">
+    <!--<link rel="stylesheet" href="style.css"> -->
+   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/amp-html/0.1.2/amp-custom.min.js"></script> -->
+   <script src='https://cdn.ampproject.org/v0/amp-script-0.1.js'></script>
+<!--    <script async custom-element="amp-carousel" src="https://cdnjs.cloudflare.com/ajax/libs/amp-carousel/0.1.0/amp-carousel.min.js"></script> -->
+<script async custom-element='amp-carousel' src='https://cdn.ampproject.org/v0/amp-carousel-0.1.js'></script>
+
+    <style>
+        body {
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+a {
+  color: #0000FF;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.carousel {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.carousel img {
+  margin: 10px;
+}
+
+.content {
+  padding: 10px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: center;
+}
+    </style>
+    
+  </head>
+  <body>
+    <amp-carousel id="carousel" layout="responsive" height="300" controls>
+      <amp-img src="assets/images/avatar.png" alt="Image 1" width="100%" height="100%"></amp-img>
+      <amp-img src="assets/images/amostra-detalhes-adicionais.jpg" alt="Image 2" width="100%" height="100%"></amp-img>
+      <amp-img src="assets/images/bg-tour.png" alt="Image 3" width="100%" height="100%"></amp-img>
+    </amp-carousel>
+    <div class="content">
+      <h1>My Web Story</h1>
+      <p>This is the content of my Web Story.</p>
+      <p>You can use this Web Story as a template to create your own Web Stories.</p>
+      <p>Just customize the content and design to fit your story.</p>
+    </div>
+    <footer>
+      <a href="#">Visit my website</a>
+    </footer>
+  </body>
+</html>
