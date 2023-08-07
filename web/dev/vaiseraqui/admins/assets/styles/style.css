@@ -5265,7 +5265,17 @@ tr.sort.uniforme td:nth-child(2) a {
 #imagem input[type=checkbox]:checked ~ label  {
   color: #ea4335;
 }
+/* Input Imagem */
+div.switch label {
+  margin-top: 6px; 
+  margin-left: -12px;
+}
 
+/* Preview Video */
+.form-group iframe {
+  border: none;
+  width: 100%;
+}
 /* Paginate */
 /* .navigation-pages {
   margin-top: 150px;

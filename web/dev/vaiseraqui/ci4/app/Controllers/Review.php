@@ -30,7 +30,7 @@ class Review extends BaseController
 
       $data['title'] = 'Depoimentos';
       $data['tabela'] = "review";
-      $data["nomeModel"] = "AlvoModel";
+      $data["nomeModel"] = "ReviewModel";
 
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);

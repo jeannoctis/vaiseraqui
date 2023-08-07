@@ -78,18 +78,21 @@ $routes->group('admin', function ($routes) {
   $routes->add('artigo/form', 'Artigo::form');
   $routes->add('artigo/form/(:any)', 'Artigo::form/$i');
 
-  $routes->add('bcategoria', 'BCategoria::index');
-  $routes->add('bcategoria/form', 'BCategoria::form');
-  $routes->add('bcategoria/form/(:any)', 'BCategoria::form/$i');
+  $routes->add('categoriaArtigo', 'CategoriaArtigo::index');
+  $routes->add('categoriaArtigo/form', 'CategoriaArtigo::form');
+  $routes->add('categoriaArtigo/form/(:any)', 'CategoriaArtigo::form/$i');
 
   $routes->add('texto/form/(:any)', 'Texto::form/$i');
 
   $routes->add('contato/form/(:any)', 'Contato::form/$i');
   $routes->add('contato/', 'Contato::index');
   
-    $routes->add('pedido', 'Pedido::index');
-  $routes->add('pedido/form', 'Pedido::form');
-  $routes->add('pedido/form/(:any)', 'Pedido::form/$i');
+  $routes->add('plano', 'Plano::index');
+  $routes->add('plano/form', 'Plano::form');
+  $routes->add('plano/form/(:any)', 'Plano::form/$i');
+  $routes->add('planoAnuncio', 'PlanoAnuncio::index');
+  $routes->add('planoAnuncio/form', 'PlanoAnuncio::form');
+  $routes->add('planoAnuncio/form/(:any)', 'PlanoAnuncio::form/$i');
   
   $routes->add('usuario', 'Usuario::index');
   $routes->add('usuario/form', 'Usuario::form');
@@ -125,7 +128,7 @@ $routes->add('utils/contadorWhatsapp', 'Utils::contadorWhatsapp');
 $routes->add('utils/contadorBanner', 'Utils::contadorBanner');
 $routes->add('utils/abreComprovantes', 'Utils::abreComprovantes');
 
-$routes->add('artigo/addprincipal', 'Artigo::addPrincipal');
+$routes->add('artigo/destaque', 'Artigo::destaque');
 $routes->add('workshop/abrirmodalworkshop', 'Workshop::abrirModalWorkshop');
 
 $routes->add('cliente/loginFacebook', 'Cliente::loginFacebook');

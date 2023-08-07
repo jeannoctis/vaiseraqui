@@ -14,7 +14,7 @@
 					</div>
 					<!-- /.dropdown js__dropdown -->
 
-					<? if ($artigos) {  ?>
+					<? if ($lista) {  ?>
 						<div class='col-xs-12 paddingZeroM'>
 							<form method='post' id='form'>
 
@@ -22,26 +22,21 @@
 									<table class="table  sortable">
 										<thead>
 											<tr>
-												<th class='menorTh'>Excluir</th>
-												<th>Nome</th>
-												<th>Destaque</th>
-												<th>Ordenar</th>
+												<th class='menorTh'>Excluir</th>												
+												<th>Título</th>
+                                    <th>Ordenar</th>
 											</tr>
 										</thead>
 										<tbody>
-											<? foreach ($artigos as $elemento) { ?>
+											<? foreach ($lista as $elemento) { ?>
 												<tr class="ui-state-default sort" rel="<?= $elemento->id ?>">
 													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
 													<td>
-														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>">
-															<?= $elemento->titulo ?>
+														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->autor) ?>">
+
+															<?= $elemento->autor ?>
 														</a>
-													</td>													
-													<td>
-														<button type="button" class="btn btn-md btn-rounded <?= $elemento->destaque == "S" ? 'btn-primary' : '' ?>" onclick="destaque(<?= $elemento->id ?>)" id="btn<?= $elemento->id ?>">
-															<i class="bi bi-star-fill"></i>
-														</button>
-													</td>
+													</td>                                       
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
 												</tr>
 											<? } ?>
@@ -55,17 +50,4 @@
 				</div>
 			</div>
 		</div>
-		<script>
-			function destaque(id) {
-				$.post('<?= PATHSITE ?>artigo/destaque', {
-					id
-				}, function(retorno) {
-
-					const response = jQuery.parseJSON(retorno)
-
-					if (response.ok) {
-						$(`#btn${id}`).toggleClass("btn-warning")
-					}
-				});
-			}
-		</script>
+      

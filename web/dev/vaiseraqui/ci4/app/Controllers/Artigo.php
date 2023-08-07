@@ -107,4 +107,20 @@ class Artigo extends BaseController
       echo view("{$data['tabela']}/form");
       echo view('templates/admin-footer');
    }
+
+   public function destaque(){
+      $post = \request()->getPost();
+
+      if ($post) {
+         $artigo = $this->model->find($post['id']);         
+         $toggleDestaque = $artigo->destaque == "S" ? "N" : "S";
+
+         $return['ok'] = $this->model
+            ->where("id", $post['id'])
+            ->set("destaque", $toggleDestaque)
+            ->update();         
+      }
+
+      echo \json_encode($return);
+   }
 }
