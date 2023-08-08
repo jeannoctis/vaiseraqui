@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-class Pavimento extends BaseController
+class ProdutoCategoria extends BaseController
 {
    public function __construct()
    {
       $this->db = \Config\Database::connect();
       $this->session = \Config\Services::session($config);
       helper(['encrypt', 'text']);
-      $this->model = model('App\Models\PavimentoModel', false);
-      $this->tabela = "pavimento";
-      $this->session->set('menuAdmin', '4');
+      $this->model = model('App\Models\ProdutoCategoriaModel', false);
+      $this->tabela = "anunciante";
+      $this->session->set('menuAdmin', '5');
    }
 
    public function index()
@@ -23,14 +23,17 @@ class Pavimento extends BaseController
       } else if ($_POST['nexc']) {
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
+      
+      $request = request();
+      $data['get'] = $request->getGet();
 
-      $this->model->orderBy("ordem ASC");
+      $this->model->orderBy("titulo ASC");
 
-      $data['pavimentos'] = $this->model->findAll();
+      $data['artigos'] = $this->model->findAll();
 
-      $data['title'] = 'Pavimentos';
-      $data['tabela'] = "pavimento";
-      $data["nomeModel"] = "PavimentoModel";
+      $data['title'] = 'Produto Categoria';
+      $data['tabela'] = "produto_categoria";
+      $data["nomeModel"] = "ProdutoCategoriaModel";
 
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);
@@ -41,17 +44,15 @@ class Pavimento extends BaseController
    {
       helper('form');
 
-      $this->bCategoriaModel = \model('App\Models\BCategoriaModel', false);
-      $data['bCategorias'] = $this->bCategoriaModel->findAll();
-
       $request = request();
       $post = $request->getPost();
+       $data['get'] = $request->getGet();
       $id = decode($this->request->uri->getSegment(4));
 
-      $data['title'] = 'Pavimento';
-      $data['tabela'] = 'pavimento';
+      $data['title'] = 'Produto Categoria';
+      $data['tabela'] = 'produto_categoria';
       $data['resultado'] = "";
-
+      
       if ($post) {
 
          if ($post['apagararquivo']) {
@@ -85,6 +86,10 @@ class Pavimento extends BaseController
                }
             }
          }
+         
+         if($post['senha']) {
+         $post['senha'] = sha1($post['senha']);
+         }
 
          if ($id) {
             $post["id"] = $id;
@@ -95,8 +100,7 @@ class Pavimento extends BaseController
          }
 
          $data["erros"] = $this->model->errors();                
-         $post['pavimentoFK'] = $id;
-
+         $post['artigoFK'] = $id;
       }
 
       if ($id) {

@@ -14,30 +14,27 @@
 					</div>
 					<!-- /.dropdown js__dropdown -->
 
-					<? if ($lista) {  ?>
+					<? if ($artigos) {  ?>
 						<div class='col-xs-12 paddingZeroM'>
 							<form method='post' id='form'>
 
 								<div class="table-responsive">
-									<table class="table  sortable">
+									<table class="table  ">
 										<thead>
 											<tr>
 												<th class='menorTh'>Excluir</th>
-												<th>Nome</th>
-												<th>Ordenar</th>
+												<th>Nome</th>												
 											</tr>
 										</thead>
 										<tbody>
-											<? foreach ($lista as $elemento) { ?>
-												<tr class="ui-state-default sort" rel="<?= $elemento->id ?>">
-													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
+											<? foreach ($artigos as $artigo) { ?>
+												<tr class="ui-state-default sort" rel="<?= $artigo->id ?>">
+													<td><input type="checkbox" name="excluir[]" value="<?= $artigo->id ?>" /> </td>
 													<td>
-														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>">
-
-															<?= $elemento->titulo ?>
+														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($artigo->id) ?>/<?= arruma_url($artigo->titulo) ?>">
+															<?= $artigo->titulo ?>
 														</a>
-													</td>
-													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
+													</td>													
 												</tr>
 											<? } ?>
 										</tbody>
@@ -48,12 +45,5 @@
 						</div>
 					<? } ?>
 				</div>
-				<!-- /.box-content -->
 			</div>
-			<!-- /.col-lg-6 col-xs-12 -->
-
-
 		</div>
-		<!-- /.row -->
-
-		<!-- /.row small-spacing -->

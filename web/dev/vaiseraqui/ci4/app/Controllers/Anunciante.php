@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-class Aspecto extends BaseController
+class Anunciante extends BaseController
 {
    public function __construct()
    {
       $this->db = \Config\Database::connect();
       $this->session = \Config\Services::session($config);
       helper(['encrypt', 'text']);
-      $this->model = model('App\Models\AspectoModel', false);
-      $this->tabela = "aspecto";
-      $this->session->set('menuAdmin', '2');
+      $this->model = model('App\Models\AnuncianteModel', false);
+      $this->tabela = "anunciante";
+      $this->session->set('menuAdmin', '4');
    }
 
    public function index()
@@ -24,13 +24,13 @@ class Aspecto extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $this->model->orderBy("ordem ASC");
+      $this->model->orderBy("titulo ASC");
 
-      $data['lista'] = $this->model->findAll();
+      $data['artigos'] = $this->model->findAll();
 
-      $data['title'] = 'Aspectos';
-      $data['tabela'] = "aspecto";
-      $data["nomeModel"] = "AspectoModel";
+      $data['title'] = 'Anunciante';
+      $data['tabela'] = "anunciante";
+      $data["nomeModel"] = "AnuncianteModel";
 
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);
@@ -45,20 +45,15 @@ class Aspecto extends BaseController
       $post = $request->getPost();
       $id = decode($this->request->uri->getSegment(4));
 
-      $data['title'] = 'Aspecto';
-      $data['tabela'] = 'aspecto';
+      $data['title'] = 'Anunciante';
+      $data['tabela'] = 'anunciante';
       $data['resultado'] = "";
-
+      
       if ($post) {
 
-         if ($id) {
-            $post["id"] = $id;
-         }
-
-         if ($post['apagar-arquivo']) {
+         if ($post['apagararquivo']) {
             $post['arquivo'] = NULL;
          }
-
          $img = $this->request->getFile("arquivo");
          if ($img) {
             if ($img->isValid() && !$img->hasMoved()) {
@@ -88,23 +83,28 @@ class Aspecto extends BaseController
             }
          }
          
-         if (!$id) {
-            $data['salvou'] =  $this->model->insert($post);
-         } else {
-            $data['salvou'] = $this->model->save($post);
+         if($post['senha']) {
+         $post['senha'] = sha1($post['senha']);
          }
 
-         $data["erros"] = $this->model->errors();
+         if ($id) {
+            $post["id"] = $id;
+            $data['salvou'] = $this->model->save($post);            
+         } else {
+            $post["identificador"] = \arruma_url($post['titulo']);
+            $data['salvou'] = $this->model->insert($post);
+         }
+
+         $data["erros"] = $this->model->errors();                
+         $post['artigoFK'] = $id;
       }
 
       if ($id) {
-         $data["resultado"] = $this->model->find($id);
+         $data["resultado"] = $this->model->find($id);         
       }
 
       echo view('templates/admin-header', $data);
       echo view("{$data['tabela']}/form");
       echo view('templates/admin-footer');
    }
-
-   //--------------------------------------------------------------------
 }

@@ -9,12 +9,21 @@
                   <div class="card-content">
                      
                      <div class='form-group col-xs-12 paddingZeroM'>
-                        <div class="col-xs-12 col-sm-12">
+                        <div class="col-xs-12 col-sm-6">
                            <label for="titulo">Título</label>
                            <input type="text" required  name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?>" placeholder="Escreva...">
                         </div>
+                         <div class="col-xs-12 col-sm-6">
+                           <label for="estadoFK">Estado</label>
+                           <select name="estadoFK" required class="form-control" id="estadoFK">
+                              <option value="">Selecione um estado</option>
+                              <? foreach ($estados as $cat) { ?>
+                                 <option <?=$resultado->estadoFK == $cat->id ? 'selected' : '' ?> value="<?= $cat->id ?>"><?= $cat->titulo ?></option>
+                              <? } ?>
+                           </select>
+                        </div>
                      </div>
-                     
+
                      <!-- Botões -->
                      <div class="form-group col-xs-12">
                         <div class="col-xs-12 col-sm-12">

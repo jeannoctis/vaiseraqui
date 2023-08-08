@@ -81,14 +81,9 @@ if ($_SERVER['HTTP_HOST'] == 'www.localhost' || $_SERVER['HTTP_HOST'] == 'localh
   defined('PATHSITE') || define('PATHSITE', "http://localhost/vaiseraqui/web/dev/vaiseraqui/"); // highest automatically-assigned error code 
   defined('PATHSITE2') || define('PATHSITE2', "http://localhost/vaiseraqui/web/web/dev/vaiseraqui"); // highest automatically-assigned error code 
   defined('PATHHOME') || define('PATHHOME', "C:\\xampp7-4\htdocs\\vaiseraqui\\web\\dev\\vaiseraqui\\"); // highest automatically-assigned error code 
-  // echo getcwd();
+// echo getcwd();
 } else {      
-  defined('PATHSITE') || define('PATHSITE', "http://www.vaiseraqui.com.br/site/"); // highest automatically-assigned error code 
-  defined('PATHSITE2') || define('PATHSITE2', "http://www.vaiseraqui.com.br/site"); // highest automatically-assigned error code 
-  defined('PATHHOME') || define('PATHHOME', "/var/www/clients/client5/web89/web/site/"); // highest automatically-assigned error code
+defined('PATHSITE') || define('PATHSITE', "https://www.uaau.digital/dev/vaiseraqui/"); // highest automatically-assigned error code 
+defined('PATHSITE2') || define('PATHSITE2', "https://www.uaau.digital/dev/vaiseraqui"); // highest automatically-assigned error code 
+defined('PATHHOME') || define('PATHHOME', "/var/www/clients/client5/web16/web/dev/vaiseraqui/"); // highest automatically-assigned error code
 }
-
-defined('FRENETKEY') || define('FRENETKEY', "jean.adriel@gmail.com");
-defined('FRENETPASS') || define('FRENETPASS', "b8Mz+FFTk4xMVhr7a8xPlQ==");
-defined('FRENETTOKEN') || define('FRENETTOKEN', "474F3EBBR4BEBR474AR9D4BR57F9DA2A2F92");
-defined('FRENETURL') || define('FRENETURL', "http://services.frenet.com.br/logistics/ShippingQuoteWS.asmx");
