@@ -2,16 +2,16 @@
 
 namespace App\Controllers;
 
-class Review extends BaseController
+class ProdutoCategoria extends BaseController
 {
    public function __construct()
    {
       $this->db = \Config\Database::connect();
       $this->session = \Config\Services::session($config);
       helper(['encrypt', 'text']);
-      $this->model = model('App\Models\ReviewModel', false);
-      $this->tabela = "review";
-      $this->session->set('menuAdmin', '1');
+      $this->model = model('App\Models\ProdutoCategoriaModel', false);
+      $this->tabela = "anunciante";
+      $this->session->set('menuAdmin', '5');
    }
 
    public function index()
@@ -23,14 +23,17 @@ class Review extends BaseController
       } else if ($_POST['nexc']) {
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
+      
+      $request = request();
+      $data['get'] = $request->getGet();
 
-      $this->model->orderBy("ordem ASC");
+      $this->model->orderBy("titulo ASC");
 
-      $data['lista'] = $this->model->findAll();
+      $data['artigos'] = $this->model->findAll();
 
-      $data['title'] = 'Depoimentos';
-      $data['tabela'] = "review";
-      $data["nomeModel"] = "ReviewModel";
+      $data['title'] = 'Produto Categoria';
+      $data['tabela'] = "produto_categoria";
+      $data["nomeModel"] = "ProdutoCategoriaModel";
 
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);
@@ -43,10 +46,11 @@ class Review extends BaseController
 
       $request = request();
       $post = $request->getPost();
+       $data['get'] = $request->getGet();
       $id = decode($this->request->uri->getSegment(4));
 
-      $data['title'] = 'Depoimento';
-      $data['tabela'] = 'review';
+      $data['title'] = 'Produto Categoria';
+      $data['tabela'] = 'produto_categoria';
       $data['resultado'] = "";
       
       if ($post) {
@@ -54,7 +58,6 @@ class Review extends BaseController
          if ($post['apagararquivo']) {
             $post['arquivo'] = NULL;
          }
-
          $img = $this->request->getFile("arquivo");
          if ($img) {
             if ($img->isValid() && !$img->hasMoved()) {
@@ -83,50 +86,29 @@ class Review extends BaseController
                }
             }
          }
-            
-         if ($id) {
-            $post["id"] = $id;
-            $data['salvou'] = $this->model->save($post);
-         } else {
-            $data['salvou'] =  $this->model->insert($post);   
+         
+         if($post['senha']) {
+         $post['senha'] = sha1($post['senha']);
          }
 
-         $data["erros"] = $this->model->errors();
+         if ($id) {
+            $post["id"] = $id;
+            $data['salvou'] = $this->model->save($post);            
+         } else {
+            $post["identificador"] = \arruma_url($post['titulo']);
+            $data['salvou'] = $this->model->insert($post);
+         }
+
+         $data["erros"] = $this->model->errors();                
+         $post['artigoFK'] = $id;
       }
 
       if ($id) {
-         $data["resultado"] = $this->model->find($id);
+         $data["resultado"] = $this->model->find($id);         
       }
 
       echo view('templates/admin-header', $data);
       echo view("{$data['tabela']}/form");
       echo view('templates/admin-footer');
    }
-
-   public function reviewInfo()
-   {
-      $post = \request()->getPost();
-
-      $crrReview = $this->model->find($post['id']);
-
-      \ob_start();
-
-      if ($post) { ?>
-         <article>
-            <?= $crrReview->texto ?>
-            <div class="author">
-               <img src="<?=PATHSITE?>uploads/review/<?= $crrReview->arquivo ?>" alt="foto do cliente">
-               <div class="author-info">
-                  <h6><?= $crrReview->autor ?></h6>
-                  <p><?= $crrReview->servico ?></p>
-               </div>
-            </div>
-         </article>
-      <? }
-
-      $retorno['html'] = \ob_get_clean();
-      echo \json_encode($retorno);
-   }
-
-   //--------------------------------------------------------------------
 }

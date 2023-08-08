@@ -77,19 +77,13 @@ defined('EXIT__AUTO_MIN') || define('EXIT__AUTO_MIN', 9); // lowest automaticall
 defined('EXIT__AUTO_MAX') || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 
+if ($_SERVER['HTTP_HOST'] == 'www.localhost' || $_SERVER['HTTP_HOST'] == 'localhost') {
+  defined('PATHSITE') || define('PATHSITE', "http://localhost/vaiseraqui/web/dev/vaiseraqui/"); // highest automatically-assigned error code 
+  defined('PATHSITE2') || define('PATHSITE2', "http://localhost/vaiseraqui/web/web/dev/vaiseraqui"); // highest automatically-assigned error code 
+  defined('PATHHOME') || define('PATHHOME', "C:\\xampp7-4\htdocs\\vaiseraqui\\web\\dev\\vaiseraqui\\"); // highest automatically-assigned error code 
+// echo getcwd();
+} else {      
 defined('PATHSITE') || define('PATHSITE', "https://www.uaau.digital/dev/vaiseraqui/"); // highest automatically-assigned error code 
 defined('PATHSITE2') || define('PATHSITE2', "https://www.uaau.digital/dev/vaiseraqui"); // highest automatically-assigned error code 
 defined('PATHHOME') || define('PATHHOME', "/var/www/clients/client5/web16/web/dev/vaiseraqui/"); // highest automatically-assigned error code
-// echo getcwd();
-
-defined('FRENETKEY') || define('FRENETKEY', "jean.adriel@gmail.com");
-defined('FRENETPASS') || define('FRENETPASS', "b8Mz+FFTk4xMVhr7a8xPlQ==");
-defined('FRENETTOKEN') || define('FRENETTOKEN', "474F3EBBR4BEBR474AR9D4BR57F9DA2A2F92");
-defined('FRENETURL') || define('FRENETURL', "http://services.frenet.com.br/logistics/ShippingQuoteWS.asmx");
-
-
-//defined('MERCADOPAGOKEY') || define('MERCADOPAGOKEY', "APP_USR-8ec5c48c-b98e-4032-980b-5e5a14776b06");
-//defined('MERCADOPAGOTOKEN') || define('MERCADOPAGOTOKEN', "APP_USR-7182042201718740-071914-ee546f9b17422551bc5dd7282caa6ca5-250220234");
-
-defined('MERCADOPAGOKEY') || define('MERCADOPAGOKEY', "TEST-9b0cc2f4-7aaf-4b47-8747-51e9cc7eee1e");
-defined('MERCADOPAGOTOKEN') || define('MERCADOPAGOTOKEN', "TEST-7182042201718740-071914-1180e58ead299e602a3713acfe4bf213-250220234");
+}
