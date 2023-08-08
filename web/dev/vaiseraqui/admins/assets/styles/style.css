@@ -5325,3 +5325,14 @@ div.switch label {
 .navigation-pages .content a.prev:not(.more):hover svg path {
   stroke: #b3bceb;
 }
+
+/* Select2 */
+.js-example-basic-single ~ .select2-container--default :is(.select2-selection--single, .select2-selection--multiple) {
+  height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.js-example-basic-single ~ .select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 42px;
+}

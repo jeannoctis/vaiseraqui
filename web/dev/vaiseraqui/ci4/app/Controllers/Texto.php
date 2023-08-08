@@ -55,10 +55,13 @@ class Texto extends BaseController
             $post['arquivo3'] = NULL;
          }
          if ($post['apagararquivo4']) {
-            $post['arquiv  o4'] = NULL;
+            $post['arquivo4'] = NULL;
          }
          if ($post['apagararquivo5']) {
-            $post['arquivo4'] = NULL;
+            $post['arquivo5'] = NULL;
+         }
+         if ($post['apagararquivo6']) {
+            $post['arquivo6'] = NULL;
          }
 
          $img = $this->request->getFile("arquivo");
@@ -178,6 +181,34 @@ class Texto extends BaseController
             if ($img->isValid() && !$img->hasMoved()) {
                $newName = date('Y-m-d') . $img->getRandomName();
                $post["arquivo5"] = $newName;
+               $img->move(PATHHOME . '/uploads/texto/', $newName);
+               try {
+                  echo View('templates/tinypng');
+
+                  $upload_path = "uploads/{$data['tabela']}/";
+                  $upload_path_root = PATHHOME  . $upload_path;
+
+                  $file_name = $img->getName();
+                  $file_path = $upload_path_root . "/" . $file_name;
+
+                  $tinyfile = \Tinify\fromFile($file_path);
+                  $tinyfile->toFile($file_path);
+
+                  $img = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/" . $newName));
+                  imagepalettetotruecolor($img);
+                  imagealphablending($img, true);
+                  imagesavealpha($img, true);
+                  imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
+                  imagedestroy($img);
+               } catch (\Tinify\ClientException $e) {
+               }
+            }
+         }
+         $img = $this->request->getFile("arquivo6");
+         if ($img) {
+            if ($img->isValid() && !$img->hasMoved()) {
+               $newName = date('Y-m-d') . $img->getRandomName();
+               $post["arquivo6"] = $newName;
                $img->move(PATHHOME . '/uploads/texto/', $newName);
                try {
                   echo View('templates/tinypng');

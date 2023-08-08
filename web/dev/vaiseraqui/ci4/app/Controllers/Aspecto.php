@@ -2,16 +2,17 @@
 
 namespace App\Controllers;
 
-class Banner extends BaseController
+class Aspecto extends BaseController
 {
+
    public function __construct()
    {
       $this->db = \Config\Database::connect();
       $this->session = \Config\Services::session($config);
       helper(['encrypt', 'text']);
-      $this->model = model('App\Models\BannerModel', false);
-      $this->tabela = "banner";
-      $this->session->set('menuAdmin', '1');
+      $this->model = model('App\Models\AspectoModel', false);
+      $this->tabela = "aspecto";
+      $this->session->set('menuAdmin', '2');
    }
 
    public function index()
@@ -20,13 +21,17 @@ class Banner extends BaseController
          foreach ($_POST['excluir'] as $exc) {
             $data['excluiu'] =  $this->model->delete(['id' => $exc]);
          }
+      } else if ($_POST['nexc']) {
+         $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
+
+      $this->model->orderBy("ordem ASC");
 
       $data['lista'] = $this->model->findAll();
 
-      $data['title'] = 'Banners';
-      $data['tabela'] = "banner";
-      $data["nomeModel"] = "BannerModel";
+      $data['title'] = 'Aspectos';
+      $data['tabela'] = "aspecto";
+      $data["nomeModel"] = "AspectoModel";
 
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);
@@ -41,19 +46,15 @@ class Banner extends BaseController
       $post = $request->getPost();
       $id = decode($this->request->uri->getSegment(4));
 
-      $data['title'] = 'Banner';
-      $data['tabela'] = 'banner';
-      $data['resultado'] = "";      
-      
+      $data['title'] = 'Aspecto';
+      $data['tabela'] = 'aspecto';
+      $data['resultado'] = "";
+
       if ($post) {
 
          if ($post['apagararquivo']) {
             $post['arquivo'] = NULL;
          }
-         if ($post['apagararquivo2']) {
-            $post['arquivo2'] = NULL;
-         }         
-
          $img = $this->request->getFile("arquivo");
          if ($img) {
             if ($img->isValid() && !$img->hasMoved()) {
@@ -82,40 +83,12 @@ class Banner extends BaseController
                }
             }
          }
-         $img = $this->request->getFile("arquivo2");
-         if ($img) {
-            if ($img->isValid() && !$img->hasMoved()) {
-               $newName = date('Y-m-d') . $img->getRandomName();
-               $post["arquivo2"] = $newName;
-               $img->move(PATHHOME . "/uploads/{$data['tabela']}/", $newName);
-               try {
-                  echo View('templates/tinypng');
 
-                  $upload_path = "uploads/{$data['tabela']}/";
-                  $upload_path_root = PATHHOME  . $upload_path;
-
-                  $file_name = $img->getName();
-                  $file_path = $upload_path_root . "/" . $file_name;
-
-                  $tinyfile = \Tinify\fromFile($file_path);
-                  $tinyfile->toFile($file_path);
-
-                  $img = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/" . $newName));
-                  imagepalettetotruecolor($img);
-                  imagealphablending($img, true);
-                  imagesavealpha($img, true);
-                  imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
-                  imagedestroy($img);
-               } catch (\Tinify\ClientException $e) {
-               }
-            }
-         }
-
-         if (!$id) {
-            $data['salvou'] =  $this->model->insert($post);
-         } else {
+         if ($id) {
             $post["id"] = $id;
             $data['salvou'] = $this->model->save($post);
+         } else {
+            $data['salvou'] =  $this->model->insert($post);   
          }
 
          $data["erros"] = $this->model->errors();
@@ -129,6 +102,4 @@ class Banner extends BaseController
       echo view("{$data['tabela']}/form");
       echo view('templates/admin-footer');
    }
-
-   //--------------------------------------------------------------------
 }

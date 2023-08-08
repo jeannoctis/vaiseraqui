@@ -96,6 +96,8 @@
 <!-- Datepicker -->
 <script src="<?= PATHSITE ?>admins/assets/plugin/datepicker/js/bootstrap-datepicker.min.js"></script>
 
+<script src="<?= PATHSITE ?>admins/assets/plugin/select2/js/select2.min.js"></script>
+
 
 
 
@@ -127,6 +129,13 @@
   }
 
   $('#widget').draggable();
+
+  $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+  });
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+  });
 </script>
 
 

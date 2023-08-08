@@ -11,7 +11,7 @@ class PlanoAnuncio extends BaseController
       helper(['encrypt', 'text']);
       $this->model = model('App\Models\PlanoAnuncioModel', false);
       $this->tabela = "plano";
-      $this->session->set('menuAdmin', '5');
+      $this->session->set('menuAdmin', '6');
    }
 
    public function index()

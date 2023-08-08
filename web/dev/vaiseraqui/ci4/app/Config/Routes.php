@@ -58,9 +58,17 @@ $routes->group('admin', function ($routes) {
     $routes->add('produto_categoria/form', 'ProdutoCategoria::form');
     $routes->add('produto_categoria/form/(:any)', 'ProdutoCategoria::form/$i');
 
+    $routes->add('produto', 'Produto::index');
+    $routes->add('produto/form', 'Produto::form');
+    $routes->add('produto/form/(:any)', 'Produto::form/$i');
+
     $routes->add('faq', 'Faq::index');
     $routes->add('faq/form', 'Faq::form');
     $routes->add('faq/form/(:any)', 'Faq::form/$i');
+
+    $routes->add('aspecto', 'Aspecto::index');
+    $routes->add('aspecto/form', 'Aspecto::form');
+    $routes->add('aspecto/form/(:any)', 'Aspecto::form/$i');
 
     $routes->add('artigo', 'Artigo::index');
     $routes->add('artigo/form', 'Artigo::form');
