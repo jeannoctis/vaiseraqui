@@ -88,6 +88,30 @@
 
                <div class="box-content card white">
                   <h4 class="box-title">
+                     Anunciante
+                  </h4>
+                  <!-- /.box-title -->
+                  <div class="card-content">
+
+                     <div class='form-group col-xs-12 paddingZeroM'>
+                        <div class="col-xs-12">
+                           <label for="anunciateFK">Itens</label>
+                           <select name="anunciateFK" id="anunciateFK">
+                              <? if ($anunciantes) {
+                                 foreach ($anunciantes as $anunciante) { ?>
+                                    
+                                 <? }
+                              } ?>
+                              <option value=""></option>
+                           </select>
+                           <input type="text" name="anunciateFK" class="form-control" id="anunciateFK" value="<?= $resultado->anunciateFK ?>" placeholder="Escreva...">
+                        </div>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="box-content card white">
+                  <h4 class="box-title">
                      Descrição
                   </h4>
                   <div class="card-content">
