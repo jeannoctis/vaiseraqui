@@ -4,15 +4,14 @@
 			<div class="col-xs-12">
 				<div class="box-content">
 					<div class='col-xs-12 col-md-6'>
-						<h4 class="box-title"><?= $title ?></h4>
+						<h4 class="box-title"><?= $tipo ?></h4>
 					</div>
 					<div class='col-xs-12 col-md-6 text-right form-group'>
-						<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/">
+						<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form?tipo=<?= $get['tipo'] ?>">
 							<button type="button" class="btn btn-violet btn-rounded waves-effect waves-light">Adicionar</button>
 						</a>
 						<button onclick='$("#form").submit()' type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Excluir</button>
 					</div>
-					<!-- /.dropdown js__dropdown -->
 
 					<? if ($lista) {  ?>
 						<div class='col-xs-12 paddingZeroM'>
@@ -39,15 +38,15 @@
 														</a>
 													</td>
 													<td>
-														<a href="">
-															Galeria
+														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/fotos/<?= encode($elemento->id) ?>?tipo=<?= $get['tipo'] ?>" class="subdivisao">
+															Ver Fotos <i class="bi bi-image-fill"></i>
 														</a>
 													</td>
 													<td>
-														<a href="">
-															Vídeos
+														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/videos/<?= encode($elemento->id) ?>?tipo=<?= $get['tipo'] ?>" class="subdivisao">
+															Vídeos <i class="bi bi-collection-play-fill"></i>
 														</a>
-													</td>										
+													</td>
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
 												</tr>
 											<? } ?>

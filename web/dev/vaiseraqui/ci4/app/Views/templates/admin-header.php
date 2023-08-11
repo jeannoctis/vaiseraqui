@@ -150,7 +150,7 @@ if ($acesso['usuarioFK'] > 3) {
                     <? if (in_array(1, $aprovados) || $adminMaster) { ?>
                         <ul class="menu js__accordion">
                             <li class='<?= ($_SESSION["menuAdmin"] == 1) ? 'current active' : '' ?> '>
-                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-house-check-fill"></i><span>Home</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-house-door-fill"></i><span>Home</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'banner' && decode($segments[3]) == 1) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/banner/form/<?= encode(1) ?>">Banner</a></li>
                                     <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 8) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(8) ?>">Texto Menu</a></li>                                    
@@ -194,6 +194,7 @@ if ($acesso['usuarioFK'] > 3) {
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'cidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cidade/"><i class="bi-caret-right-fill"></i> Cidades</a></li>
                                     <li class='<?= ($segments[1] == 'anunciante') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anunciante/"><i class="bi-caret-right-fill"></i> Anunciantes</a></li>
+                                    <li class='<?= ($segments[1] == 'comodidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/comodidade/"><i class="bi-caret-right-fill"></i> Comodidades</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -202,7 +203,7 @@ if ($acesso['usuarioFK'] > 3) {
                     <? if (in_array(4, $aprovados) || $adminMaster) { ?>
                         <ul class="menu js__accordion">
                             <li class='<?= ($_SESSION["menuAdmin"] == 4) ? 'current active' : '' ?> '>
-                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-tools"></i><span>Aluguel para temporada</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-house-heart-fill"></i><span>Aluguel Temporada</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=1"><i class="bi-caret-right-fill"></i> Listagem</a></li>
                                     <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=1"><i class="bi-caret-right-fill"></i> Categorias</a></li>
@@ -214,9 +215,10 @@ if ($acesso['usuarioFK'] > 3) {
                     <? if (in_array(11, $aprovados) || $adminMaster) { ?>
                         <ul class="menu js__accordion">
                             <li class='<?= ($_SESSION["menuAdmin"] == 11) ? 'current active' : '' ?> '>
-                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-tools"></i><span>Salões e Áreas de Lazer</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-balloon-fill"></i></i><span>Salões e Áreas de Lazer</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
-                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=1"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=2"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=2"><i class="bi-caret-right-fill"></i> Categorias</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -225,9 +227,10 @@ if ($acesso['usuarioFK'] > 3) {
                     <? if (in_array(12, $aprovados) || $adminMaster) { ?>
                         <ul class="menu js__accordion">
                             <li class='<?= ($_SESSION["menuAdmin"] == 12) ? 'current active' : '' ?> '>
-                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-tools"></i><span>Hospedagem</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-houses"></i><span>Hospedagem</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
-                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=1"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=3"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=3"><i class="bi-caret-right-fill"></i> Categorias</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -236,9 +239,10 @@ if ($acesso['usuarioFK'] > 3) {
                     <? if (in_array(13, $aprovados) || $adminMaster) { ?>
                         <ul class="menu js__accordion">
                             <li class='<?= ($_SESSION["menuAdmin"] == 13) ? 'current active' : '' ?> '>
-                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-tools"></i><span>Lojas Temporárias</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-stopwatch-fill"></i><span>Lojas Temporárias</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
-                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=1"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=4"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=4"><i class="bi-caret-right-fill"></i> Categorias</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -247,9 +251,10 @@ if ($acesso['usuarioFK'] > 3) {
                     <? if (in_array(14, $aprovados) || $adminMaster) { ?>
                         <ul class="menu js__accordion">
                             <li class='<?= ($_SESSION["menuAdmin"] == 14) ? 'current active' : '' ?> '>
-                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-tools"></i><span>Eventos</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-calendar-event"></i><span>Eventos</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
-                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=1"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=5"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=5"><i class="bi-caret-right-fill"></i> Categorias</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -258,9 +263,10 @@ if ($acesso['usuarioFK'] > 3) {
                     <? if (in_array(15, $aprovados) || $adminMaster) { ?>
                         <ul class="menu js__accordion">
                             <li class='<?= ($_SESSION["menuAdmin"] == 15) ? 'current active' : '' ?> '>
-                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-tools"></i><span>Prestadores de Serviços</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-briefcase-fill"></i><span>Prestadores de Serviços</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
-                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=1"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=6"><i class="bi-caret-right-fill"></i> Listagem</a></li>
+                                    <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=6"><i class="bi-caret-right-fill"></i> Categorias</a></li>
                                 </ul>
                             </li>
                         </ul>

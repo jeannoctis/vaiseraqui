@@ -4,17 +4,17 @@
 			<div class="col-xs-12">
 				<div class="box-content">
 					<div class='col-xs-12 col-md-6'>
-						<h4 class="box-title"><?= $title ?></h4>
+						<h4 class="box-title"><?= $produtoFK->titulo ?> - <?= $title ?></h4>
 					</div>
 					<div class='col-xs-12 col-md-6 text-right form-group'>
-						<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form?tipo=<?=$get['tipo']?>">
+						<a href="<?= PATHSITE ?>admin/<?= $tabelaFK ?>/<?= $tabelaFKF ?>/<?= encode($idFK) ?>?tipo=<?= $get['tipo'] ?>">
 							<button type="button" class="btn btn-violet btn-rounded waves-effect waves-light">Adicionar</button>
 						</a>
 						<button onclick='$("#form").submit()' type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Excluir</button>
 					</div>
 					<!-- /.dropdown js__dropdown -->
 
-					<? if ($lista) {  ?>
+					<? if ($videos) {  ?>
 						<div class='col-xs-12 paddingZeroM'>
 							<form method='post' id='form'>
 
@@ -28,14 +28,14 @@
 											</tr>
 										</thead>
 										<tbody>
-											<? foreach ($lista as $elemento) { ?>
+											<? foreach ($videos as $elemento) { ?>
 												<tr class="ui-state-default sort" rel="<?= $elemento->id ?>">
 													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
 													<td>
-														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>">
+														<a href="<?= PATHSITE ?>admin/<?= $tabelaFK ?>/<?= $tabelaFKF ?>/<?= encode($idFK) ?>/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=<?= $get['tipo'] ?>">
 															<?= $elemento->titulo ?>
 														</a>
-													</td>													
+													</td>
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
 												</tr>
 											<? } ?>
@@ -46,6 +46,18 @@
 							</form>
 						</div>
 					<? } ?>
+					<div class="form-group col-xs-12 paddingZeroM mt-5">
+						<a href="<?= PATHSITE ?>admin/produto?tipo=<?= $get['tipo'] ?>">
+							<button type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Voltar</button>
+						</a>
+					</div>
 				</div>
+				<!-- /.box-content -->
 			</div>
+			<!-- /.col-lg-6 col-xs-12 -->
+
+
 		</div>
+		<!-- /.row -->
+
+		<!-- /.row small-spacing -->

@@ -145,6 +145,17 @@
       allowSpaces: true
     });
   });
+
+  $("#principaiscomodidades").tagit({    
+    beforeTagRemoved: function(event, ui) {
+      let label = ui.tagLabel
+      const item = document.querySelector(`.sugestoes li[data-id='${label}'][data-target="principaiscomodidades"]`);
+
+      if(item) {
+        item.style.display = "inline-block"
+      }
+    }
+  });
 </script>
 
 

@@ -61,6 +61,20 @@ $routes->group('admin', function ($routes) {
     $routes->add('produto', 'Produto::index');
     $routes->add('produto/form', 'Produto::form');
     $routes->add('produto/form/(:any)', 'Produto::form/$i');
+    $routes->add('produto/fotos/(:any)', 'Produto::fotos/$i');
+    $routes->add('produto/foto/(:any)', 'Produto::foto');
+    $routes->add('produto/foto/(:any)/(:any)', 'Produto::foto');
+    $routes->add('produto/videos/(:any)', 'Produto::videos/$i');
+    $routes->add('produto/video/(:any)', 'Produto::video');
+    $routes->add('produto/video/(:any)/(:any)', 'Produto::video');
+
+    $routes->add('comodidade', 'Comodidade::index');
+    $routes->add('comodidade/form', 'Comodidade::form');
+    $routes->add('comodidade/form/(:any)', 'Comodidade::form/$i');
+
+    $routes->add('proximidade', 'Proximidade::index');
+    $routes->add('proximidade/form', 'Proximidade::form');
+    $routes->add('proximidade/form/(:any)', 'Proximidade::form/$i');
 
     $routes->add('faq', 'Faq::index');
     $routes->add('faq/form', 'Faq::form');
@@ -144,8 +158,6 @@ $routes->add('utils/instagram', 'Utils::instagram');
 $routes->add('utils/deleteCard', 'Utils::deleteCard');
 $routes->add('review/reviewInfo', 'Review::reviewInfo');
 $routes->add('(:any)', 'Pages::view/$1');
-
-
 
 //$routes->get('default_controller', 'Pages::view/');
 
