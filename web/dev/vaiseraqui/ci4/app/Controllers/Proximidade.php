@@ -2,18 +2,16 @@
 
 namespace App\Controllers;
 
-class ProdutoCategoria extends BaseController
+class Proximidade extends BaseController
 {
    public function __construct()
    {
       $this->db = \Config\Database::connect();
       $this->session = \Config\Services::session($config);
-      helper(['encrypt', 'text', 'utils']);
-      $this->model = model('App\Models\ProdutoCategoriaModel', false);
-      $this->tabela = "anunciante";
-
-      $get = request()->getGet();
-      $this->session->set('menuAdmin', setMenuAdminTipo($get['tipo']));
+      helper(['encrypt', 'text']);
+      $this->model = model('App\Models\ProximidadeModel', false);
+      $this->tabela = "proximidade";
+      $this->session->set('menuAdmin', '1');
    }
 
    public function index()
@@ -22,20 +20,12 @@ class ProdutoCategoria extends BaseController
          foreach ($_POST['excluir'] as $exc) {
             $data['excluiu'] =  $this->model->delete(['id' => $exc]);
          }
-      } else if ($_POST['nexc']) {
-         $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
-      
-      $data['get'] = $get = request()->getGet();
+      $data['lista'] = $this->model->findAll();
 
-      $data['lista'] = $this->model
-      ->where("tipoFK", $get['tipo'])
-      ->orderBy("titulo ASC")
-      ->findAll();
-
-      $data['title'] = 'Produto Categoria';
-      $data['tabela'] = "produto_categoria";
-      $data["nomeModel"] = "ProdutoCategoriaModel";
+      $data['title'] = 'Proximidades';
+      $data['tabela'] = "proximidade";
+      $data["nomeModel"] = "ProximidadeModel";
 
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);
@@ -47,20 +37,19 @@ class ProdutoCategoria extends BaseController
       helper('form');
 
       $post = request()->getPost();
-      $data['get'] = $get = request()->getGet();
       $id = decode($this->request->uri->getSegment(4));
 
-      $data['title'] = 'Categoria';
-      $data['tabela'] = 'produto_categoria';
-      $data['resultado'] = "";
-
-      $data['tipo'] = \getTipo($get['tipo']);
+      $data['title'] = 'Proximidade';
+      $data['tabela'] = 'proximidade';
+      $data['resultado'] = "";      
       
       if ($post) {
 
          if ($post['apagararquivo']) {
             $post['arquivo'] = NULL;
          }
+               
+
          $img = $this->request->getFile("arquivo");
          if ($img) {
             if ($img->isValid() && !$img->hasMoved()) {
@@ -90,24 +79,24 @@ class ProdutoCategoria extends BaseController
             }
          }
 
-         if ($id) {
-            $post["id"] = $id;
-            $data['salvou'] = $this->model->save($post);            
+         if (!$id) {
+            $data['salvou'] =  $this->model->insert($post);
          } else {
-            $post["identificador"] = \arruma_url($post['titulo']);
-            $data['salvou'] = $this->model->insert($post);
+            $post["id"] = $id;
+            $data['salvou'] = $this->model->save($post);
          }
 
-         $data["erros"] = $this->model->errors();                
-         $post['tipoFK'] = $get['tipo'];
+         $data["erros"] = $this->model->errors();
       }
 
       if ($id) {
-         $data["resultado"] = $this->model->find($id);         
+         $data["resultado"] = $this->model->find($id);
       }
 
       echo view('templates/admin-header', $data);
       echo view("{$data['tabela']}/form");
       echo view('templates/admin-footer');
    }
+
+   //--------------------------------------------------------------------
 }
