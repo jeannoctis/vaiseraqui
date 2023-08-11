@@ -11,7 +11,7 @@ class Proximidade extends BaseController
       helper(['encrypt', 'text']);
       $this->model = model('App\Models\ProximidadeModel', false);
       $this->tabela = "proximidade";
-      $this->session->set('menuAdmin', '1');
+      $this->session->set('menuAdmin', '5');
    }
 
    public function index()
