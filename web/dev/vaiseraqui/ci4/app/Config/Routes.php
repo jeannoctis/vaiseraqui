@@ -144,11 +144,10 @@ $routes->add('workshop/abrirmodalworkshop', 'Workshop::abrirModalWorkshop');
 $routes->add('cliente/loginFacebook', 'Cliente::loginFacebook');
 $routes->add('cliente/loginGoogle', 'Cliente::loginGoogle');
 
-$routes->add('pedido/finalizarPedido', 'Pedido::finalizarPedido');
-$routes->add('pedido/pagarPedido', 'Pedido::pagarPedido');
-$routes->add('pedido/cancelarPedido', 'Pedido::cancelarPedido');
-$routes->add('pedido/webhook', 'Pedido::webhook');
-$routes->add('produto/deleteValor', 'Produto::deleteValor');
+$routes->add('produto/carregaCalendarios', 'Produto::carregaCalendarios');
+$routes->add('produto/whats', 'Produto::whats');
+$routes->add('produto/visitas', 'Produto::visitas');
+$routes->add('produto/fone', 'Produto::fone');
 
 $routes->add('utils/ordena', 'Utils::ordena');
 $routes->add('utils/ordena2', 'Utils::ordena2');

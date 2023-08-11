@@ -1,0 +1,36 @@
+@font-face {
+    font-family: 'Carmen Sans';
+    src: url('CarmenSans-Regular.woff2') format('woff2'),
+        url('CarmenSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Carmen Sans';
+    src: url('CarmenSans-Bold.woff2') format('woff2'),
+        url('CarmenSans-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Carmen Sans';
+    src: url('CarmenSans-Medium.woff2') format('woff2'),
+        url('CarmenSans-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Carmen Sans';
+    src: url('CarmenSans-SemiBold.woff2') format('woff2'),
+        url('CarmenSans-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+

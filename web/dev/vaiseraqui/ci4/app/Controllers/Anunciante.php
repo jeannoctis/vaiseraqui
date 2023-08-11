@@ -107,4 +107,9 @@ class Anunciante extends BaseController
       echo view("{$data['tabela']}/form");
       echo view('templates/admin-footer');
    }
+   
+   public function anunciante() {
+       
+   }
+   
 }

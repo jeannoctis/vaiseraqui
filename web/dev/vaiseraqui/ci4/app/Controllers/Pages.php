@@ -8,7 +8,7 @@ class Pages extends Controller {
 
     public function buscaGeral() {
         helper('text');
-        exit();
+           
         $this->session = \Config\Services::session($config);
         $this->redeSocialModel = model('App\Models\RedeSocialModel', false);
         $this->redeSocialModel->where("link != '' AND link IS NOT NULL ");
@@ -193,16 +193,28 @@ class Pages extends Controller {
     public function redirects($segments) {
         
     }
+    
+      public function anunciante($page = 'home') {    
+    $segments = $this->request->uri->getSegments();
+    $anuncianteModel = model('App\Models\AnuncianteModel', false);         
+     $anuncianteModel->verPagina($segments);
+    
+  }
 
     public function view($page = 'home') {
+    
         $data = $this->buscaGeral();
         $segments = $this->request->uri->getSegments();
-        $this->redirects($segments);
+        $this->redirects($segments);  
 
         $header = "header";
-        $footer = "footer";
+        $footer = "footer"; 
 
         switch ($page) {
+                case "area-do-anunciante":
+$this->anunciante($page);
+                    exit();
+        break;
             case "sobre-nos":
                 $data['pagina'] = 2;
 
