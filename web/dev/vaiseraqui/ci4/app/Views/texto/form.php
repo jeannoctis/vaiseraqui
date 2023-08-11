@@ -15,7 +15,6 @@
  								</div>
  							</div>
 
- 							<!-- Maycon -->
  							<? if ($resultado->isDescricao == 'S') { ?>
  								<div class='form-group col-xs-12 paddingZeroM'>
  									<div class="col-xs-12 col-sm-12">
@@ -173,15 +172,6 @@
  								<div class='form-group col-xs-12 paddingZeroM'>
  									<div class="col-xs-12 col-sm-12">
  										<label for="extra1">Informação adicional</label>
- 										<input type="text" name="extra1" class="form-control" id="extra1" value="<?= $resultado->extra1 ?>" placeholder="Escreva...">
- 									</div>
- 								</div>
- 							<? } ?>
-
- 							<? if ($resultado->id == 8) { ?>
- 								<div class='form-group col-lg-6 paddingZeroM'>
- 									<div class="col-xs-12 col-sm-12 form-group">
- 										<label for="extra1">Texto 2 em negrito</label>
  										<input type="text" name="extra1" class="form-control" id="extra1" value="<?= $resultado->extra1 ?>" placeholder="Escreva...">
  									</div>
  								</div>

@@ -4,14 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PavimentoModel extends Model
+class ProdutoCategoriaModel extends Model
 {
    protected $DBGroup = 'default';
-   protected $table = 'pavimento';
+   protected $table = 'produto_categoria';
    protected $primaryKey = 'id';
    protected $returnType = 'object';
    protected $useSoftDeletes = true;
-   protected $allowedFields = ['titulo', 'identificador', 'ordem'];
+   protected $allowedFields = ['titulo', 'identificador', 'ordem', 'tipoFK', 'arquivo', 'subtitulo', 'arquivo2'];
    protected $useTimestamps = true;
    protected $createdField = 'dtCriacao';
    protected $updatedField = 'dtAlteracao';

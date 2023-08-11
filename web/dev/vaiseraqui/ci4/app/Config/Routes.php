@@ -58,9 +58,17 @@ $routes->group('admin', function ($routes) {
     $routes->add('produto_categoria/form', 'ProdutoCategoria::form');
     $routes->add('produto_categoria/form/(:any)', 'ProdutoCategoria::form/$i');
 
+    $routes->add('produto', 'Produto::index');
+    $routes->add('produto/form', 'Produto::form');
+    $routes->add('produto/form/(:any)', 'Produto::form/$i');
+
     $routes->add('faq', 'Faq::index');
     $routes->add('faq/form', 'Faq::form');
     $routes->add('faq/form/(:any)', 'Faq::form/$i');
+
+    $routes->add('aspecto', 'Aspecto::index');
+    $routes->add('aspecto/form', 'Aspecto::form');
+    $routes->add('aspecto/form/(:any)', 'Aspecto::form/$i');
 
     $routes->add('artigo', 'Artigo::index');
     $routes->add('artigo/form', 'Artigo::form');
@@ -122,10 +130,10 @@ $routes->add('workshop/abrirmodalworkshop', 'Workshop::abrirModalWorkshop');
 $routes->add('cliente/loginFacebook', 'Cliente::loginFacebook');
 $routes->add('cliente/loginGoogle', 'Cliente::loginGoogle');
 
-$routes->add('pedido/finalizarPedido', 'Pedido::finalizarPedido');
-$routes->add('pedido/pagarPedido', 'Pedido::pagarPedido');
-$routes->add('pedido/cancelarPedido', 'Pedido::cancelarPedido');
-$routes->add('pedido/webhook', 'Pedido::webhook');
+$routes->add('produto/carregaCalendarios', 'Produto::carregaCalendarios');
+$routes->add('produto/whats', 'Produto::whats');
+$routes->add('produto/visitas', 'Produto::visitas');
+$routes->add('produto/fone', 'Produto::fone');
 
 $routes->add('utils/ordena', 'Utils::ordena');
 $routes->add('utils/ordena2', 'Utils::ordena2');
@@ -136,6 +144,8 @@ $routes->add('utils/instagram', 'Utils::instagram');
 $routes->add('utils/deleteCard', 'Utils::deleteCard');
 $routes->add('review/reviewInfo', 'Review::reviewInfo');
 $routes->add('(:any)', 'Pages::view/$1');
+
+
 
 //$routes->get('default_controller', 'Pages::view/');
 

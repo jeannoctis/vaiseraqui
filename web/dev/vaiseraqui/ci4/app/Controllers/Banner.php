@@ -52,13 +52,7 @@ class Banner extends BaseController
          }
          if ($post['apagararquivo2']) {
             $post['arquivo2'] = NULL;
-         }
-         if ($post['apagaricone1']) {
-            $post['icone1'] = NULL;
-         }
-         if ($post['apagaricone2']) {
-            $post['icone2'] = NULL;
-         }
+         }         
 
          $img = $this->request->getFile("arquivo");
          if ($img) {
@@ -93,62 +87,6 @@ class Banner extends BaseController
             if ($img->isValid() && !$img->hasMoved()) {
                $newName = date('Y-m-d') . $img->getRandomName();
                $post["arquivo2"] = $newName;
-               $img->move(PATHHOME . "/uploads/{$data['tabela']}/", $newName);
-               try {
-                  echo View('templates/tinypng');
-
-                  $upload_path = "uploads/{$data['tabela']}/";
-                  $upload_path_root = PATHHOME  . $upload_path;
-
-                  $file_name = $img->getName();
-                  $file_path = $upload_path_root . "/" . $file_name;
-
-                  $tinyfile = \Tinify\fromFile($file_path);
-                  $tinyfile->toFile($file_path);
-
-                  $img = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/" . $newName));
-                  imagepalettetotruecolor($img);
-                  imagealphablending($img, true);
-                  imagesavealpha($img, true);
-                  imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
-                  imagedestroy($img);
-               } catch (\Tinify\ClientException $e) {
-               }
-            }
-         }
-         $img = $this->request->getFile("icone1");
-         if ($img) {
-            if ($img->isValid() && !$img->hasMoved()) {
-               $newName = date('Y-m-d') . $img->getRandomName();
-               $post["icone1"] = $newName;
-               $img->move(PATHHOME . "/uploads/{$data['tabela']}/", $newName);
-               try {
-                  echo View('templates/tinypng');
-
-                  $upload_path = "uploads/{$data['tabela']}/";
-                  $upload_path_root = PATHHOME  . $upload_path;
-
-                  $file_name = $img->getName();
-                  $file_path = $upload_path_root . "/" . $file_name;
-
-                  $tinyfile = \Tinify\fromFile($file_path);
-                  $tinyfile->toFile($file_path);
-
-                  $img = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/" . $newName));
-                  imagepalettetotruecolor($img);
-                  imagealphablending($img, true);
-                  imagesavealpha($img, true);
-                  imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
-                  imagedestroy($img);
-               } catch (\Tinify\ClientException $e) {
-               }
-            }
-         }
-         $img = $this->request->getFile("icone2");
-         if ($img) {
-            if ($img->isValid() && !$img->hasMoved()) {
-               $newName = date('Y-m-d') . $img->getRandomName();
-               $post["icone2"] = $newName;
                $img->move(PATHHOME . "/uploads/{$data['tabela']}/", $newName);
                try {
                   echo View('templates/tinypng');
