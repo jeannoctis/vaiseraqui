@@ -81,13 +81,23 @@ class Produto extends BaseController
          $data['estados'][$ind]->cidades = $this->cidadeModel->findAll();
       }
 
+      $this->anuncianteModel = \model('App\Models\AnuncianteModel', false);
+      $data['anunciantes'] = $this->anuncianteModel->orderBy("titulo ASC, id DESC")->findAll();
+
       $data['tipo'] = \getTipo($get['tipo']);
 
       $this->produtoValorModel = \model('App\Models\ProdutoValorModel', false);
       $this->produtoComodidadeModel = \model('App\Models\ProdutoComodidadeModel', false);
+      $this->produtoProximidadeModel = \model('App\Models\ProdutoProximidadeModel', false);
+      $this->produtoSetorModel = \model('App\Models\ProdutoSetorModel', false);
+      $this->setorIngressoModel = \model('App\Models\SetorIngressoModel', false);
+
 
       $this->comodidadeModel = \model('App\Models\ComodidadeModel', false);
       $data['comodidadesDisponiveis'] = $this->comodidadeModel->findAll();
+
+      $this->proximidadeModel = \model('App\Models\ProximidadeModel', false);
+      $data['proximidadesDisponiveis'] = $this->proximidadeModel->orderBy("ordem ASC, id DESC")->findAll();
 
       $data['title'] = 'Produto';
       $data['tabela'] = 'produto';
@@ -118,7 +128,6 @@ class Produto extends BaseController
                if (!empty($item['id'])) {
                   $updateValor[] = [
                      'id' => $item['id'],
-                     'produtoFK' => $lastId,
                      'titulo' => $item['titulo'],
                      'valor' => $item['valor'],
                   ];
@@ -129,7 +138,7 @@ class Produto extends BaseController
                      'valor' => $item['valor'],
                   ];
                }
-            }            
+            }
 
             if (!empty($updateValor)) {
                $this->produtoValorModel->updateBatch($updateValor, "id");
@@ -154,7 +163,6 @@ class Produto extends BaseController
                if (!empty($item['id'])) {
                   $updateCatCmdd[] = [
                      'id' => $item['id'],
-                     'produtoFK' => $lastId,
                      'titulo' => $item['titulo'],
                      'comodidades' => $item['comodidades']
                   ];
@@ -177,6 +185,89 @@ class Produto extends BaseController
             $this->produtoComodidadeModel->where("produtoFK", $lastId)->delete();
          }
 
+         if (!empty($post['proximidade'])) {
+            $IDsReceviedProximidade = \array_column($post['proximidade'], "id");
+
+            $this->produtoProximidadeModel
+               ->where("produtoFK", $lastId)
+               ->whereNotIn("id", $IDsReceviedProximidade)
+               ->delete();
+
+            foreach ($post['proximidade'] as $item) {
+
+               if (!empty($item['id'])) {
+                  $updateProximidade[] = [
+                     'id' => $item['id'],
+                     'proximidades' => $item['proximidades']
+                  ];
+               } else {
+                  $insertProximidade[] = [
+                     'produtoFK' => $lastId,
+                     'proximidadeFK' => $item['proximidadeFK'],
+                     'proximidades' => $item['proximidades']
+                  ];
+               }
+            }
+
+            if (!empty($updateProximidade)) {
+               $this->produtoProximidadeModel->updateBatch($updateProximidade, "id");
+            }
+            if (!empty($insertProximidade)) {
+               $this->produtoProximidadeModel->insertBatch($insertProximidade);
+            }
+         }         
+
+         if (!empty($post['setorIngresso'])) {            
+
+            foreach ($post['setorIngresso'] as $item) {
+
+               // echo '<pre>';
+               // print_r($post['setorIngresso']);
+               // echo '</pre>';
+               // exit();
+               
+               if (!empty($item['id'])) {
+
+                  foreach($item['ingressos'] as $ingresso) {
+                     $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
+
+                     echo $ingresso['preco'] . " insert <br>";
+                     $updateIngresso[] = [
+                        'id' => $ingresso['idIngresso'],
+                        'titulo' => $ingresso['modalidade'],
+                        'preco' => $ingresso['preco']   
+                     ];
+                  }
+               } else {
+                  $setorData = [
+                     'produtoFK' => $lastId,
+                     'setor' => $item['setor']
+                  ];
+
+                  $lastSetorId = $this->produtoSetorModel->insert($setorData);
+
+                  foreach($item['ingressos'] as $ingresso) {
+                     $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
+
+                     echo $ingresso['preco'] . " insert <br>";
+
+                     $insertIngressos[] = [
+                        'setorFK' => $lastSetorId,
+                        'titulo' => $ingresso['modalidade'],
+                        'preco' => $ingresso['preco']
+                     ];
+                  }
+               }
+            } 
+
+            if(!empty($updateIngresso)) {
+               $this->setorIngressoModel->updateBatch($updateIngresso, "id");
+            }
+
+            if (!empty($insertIngressos)) {               
+               $this->setorIngressoModel->insertBatch($insertIngressos);               
+            }
+         }
          $data["erros"] = $this->model->errors();
       }
 
@@ -194,6 +285,32 @@ class Produto extends BaseController
          $data['catsCmdds'] = $this->produtoComodidadeModel
             ->where("produtoFK", $id)
             ->findAll();
+
+         $data['proximidadesProduto'] = $this->produtoProximidadeModel
+            ->where("produtoFK", $id)
+            ->select("produto_proximidade.id AS pp_id, proximidadeFK, produtoFK, proximidades, p.titulo, p.arquivo")
+            ->join("proximidade p", "p.id = produto_proximidade.proximidadeFK")
+            ->findAll();
+
+         if (!empty($data['proximidadesProduto'])) {
+            $proximidadesFKProduto = \array_column($data['proximidadesProduto'], "proximidadeFK");
+
+            $data['proximidadesDisponiveis'] = $this->proximidadeModel
+               ->whereNotIn("id", $proximidadesFKProduto)
+               ->findAll();
+         }
+
+         $data['setores'] = $this->produtoSetorModel
+         ->where("produtoFK", $id)         
+         ->findAll();
+
+         foreach($data['setores'] as $key => $setor) {
+            $this->setorIngressoModel
+               ->resetQuery()
+               ->where("setorFK", $setor->id)
+               ->orderBy("preco ASC, id DESC");
+            $data['setores'][$key]->ingressos = $this->setorIngressoModel->findAll();
+         }
       }
 
       echo view('templates/admin-header', $data);

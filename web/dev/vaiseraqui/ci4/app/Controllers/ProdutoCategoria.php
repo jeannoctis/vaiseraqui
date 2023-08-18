@@ -10,7 +10,7 @@ class ProdutoCategoria extends BaseController
       $this->session = \Config\Services::session($config);
       helper(['encrypt', 'text', 'utils']);
       $this->model = model('App\Models\ProdutoCategoriaModel', false);
-      $this->tabela = "anunciante";
+      $this->tabela = "produto_categoria";
 
       $get = request()->getGet();
       $this->session->set('menuAdmin', setMenuAdminTipo($get['tipo']));
@@ -57,6 +57,7 @@ class ProdutoCategoria extends BaseController
       $data['tipo'] = \getTipo($get['tipo']);
       
       if ($post) {
+         $post['tipoFK'] = $get['tipo'];
 
          if ($post['apagararquivo']) {
             $post['arquivo'] = NULL;
@@ -96,10 +97,10 @@ class ProdutoCategoria extends BaseController
          } else {
             $post["identificador"] = \arruma_url($post['titulo']);
             $data['salvou'] = $this->model->insert($post);
-         }
+         }         
 
          $data["erros"] = $this->model->errors();                
-         $post['tipoFK'] = $get['tipo'];
+         
       }
 
       if ($id) {
