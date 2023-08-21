@@ -4,23 +4,25 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProdutoVideoModel extends Model
+class CardapioModel extends Model
 {
    protected $DBGroup = 'default';
-   protected $table = 'produto_video';
+   protected $table = 'cardapio';
    protected $primaryKey = 'id';
    protected $returnType = 'object';
    protected $useSoftDeletes = true;
-   protected $allowedFields = ['titulo', 'produtoFK', 'video', 'ordem'];
+   protected $allowedFields = ['titulo', 'ordem'];
    protected $useTimestamps = true;
    protected $createdField = 'dtCriacao';
    protected $updatedField = 'dtAlteracao';
    protected $deletedField = 'excluido';
    protected $validationRules = [
-      
+      'titulo' => 'required',
    ];
    protected $validationMessages = [
-      
+      'titulo' => [
+         'required' => 'Título obrigatório'
+      ],
    ];
    protected $skipValidation = false;
 }

@@ -170,14 +170,32 @@
                                     </div>
                                     <div class="input-group">
                                        <span class="input-group-addon">R$</span>
-                                       <input type="text" name="valor[<?= $ind ?>][valor]" class="form-control money" value="<?= $item->valor?>" placeholder="Escreva..." required>
+                                       <input type="text" name="valor[<?= $ind ?>][valor]" class="form-control money" value="<?= $item->valor ?>" placeholder="Escreva..." required>
                                     </div>
                                  </div>
                               </div>
                            <? } ?>
                         <? } ?>
                      </div>
+                  </div>
+               <? } ?>
 
+               <? if (in_array($get['tipo'], [2, 4])) { ?>
+                  <div class="box-content card white">
+                     <h4 class="box-title">
+                        Itens disponíveis
+                     </h4>
+                     <!-- /.box-title -->
+                     <div class="card-content">
+
+                        <div class='form-group col-xs-12 paddingZeroM'>
+                           <div class="col-xs-12">
+                              <label for="itensdisponiveis">Itens</label>
+                              <input type="text" name="itensdisponiveis" class="form-control mySingleFieldTags" id="itensdisponiveis" value="<?= $resultado->itensdisponiveis ?>" placeholder="Escreva...">
+                           </div>
+                        </div>
+
+                     </div>
                   </div>
                <? } ?>
 
@@ -292,24 +310,6 @@
                         </div>
                      </div>
                   </div>
-
-                  <div class="box-content card white">
-                     <h4 class="box-title">
-                        Itens disponíveis
-                     </h4>
-                     <!-- /.box-title -->
-                     <div class="card-content">
-
-                        <div class='form-group col-xs-12 paddingZeroM'>
-                           <div class="col-xs-12">
-                              <label for="itensdisponiveis">Itens</label>
-                              <input type="text" name="itensdisponiveis" class="form-control mySingleFieldTags" id="itensdisponiveis" value="<?= $resultado->itensdisponiveis ?>" placeholder="Escreva...">
-                           </div>
-                        </div>
-
-                     </div>
-                  </div>
-
                <? } ?>
 
                <? if (in_array($get['tipo'], [1, 3])) { ?>
@@ -400,26 +400,88 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1])) { ?>
+               <? if (in_array($get['tipo'], [1, 4])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Condomínio
                      </h4>
                      <!-- /.box-title -->
                      <div class="card-content">
-
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
                               <label for="condominio">Comodidades do condomínio</label>
                               <input type="text" name="condominio" class="form-control mySingleFieldTags" id="condominio" value="<?= $resultado->condominio ?>" placeholder="Escreva...">
                            </div>
                         </div>
-
                      </div>
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1, 2, 3, 4])) { ?>
+               <? if (in_array($get['tipo'], [6])) { ?>
+                  <div class="box-content card white">
+                     <h4 class="box-title with-btn">
+                        Cardápios
+                        <button type="button" class="btn btn-icon btn-icon-left btn-success btn-xs btn-rounded dialog-btn" data-target="modalCardapio">
+                           Adicionar Cardápio
+                           <i class="ico bi bi-plus-lg"></i>
+                        </button>
+                     </h4>
+                     <div class="card-content" id="cardapioContainer">
+                        <? if ($cardapios) { ?>
+                           <? foreach ($cardapios as $ind => $item) { ?>
+                              <div class="form-group col-xs-12 paddingZeroM cardapio-div card-content" data-cardapio-titulo="<?= $item->titulo ?>">
+
+                                 <input type="hidden" name="cardapios[ <?= $ind ?> ][id]" value="<?= $item->id ?>">
+
+                                 <div class="col-xs-12 col-sm-12 form-group">
+                                    <label for="cardapio<?= $item->titulo ?>" class="with-btn">
+                                       Cardápio
+                                       <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="cardapio-div">Excluir</button>
+                                    </label>
+                                    <input type="text" name="cardapios[ <?= $ind ?> ][titulo]" class="form-control" id="cardapio<?= $item->titulo ?>" value="<?= $item->titulo ?>" placeholder="cozinha, banheiro...">
+                                 </div>
+
+                                 <div class="col-xs-12 form-group">
+                                    <label for="cardapio-menu<?= $item->titulo ?>">Adicionadas</label>
+                                    <input type="text" name="cardapios[ <?= $ind ?> ][menu]" class="form-control tag-it mySingleFieldTags" id="cardapio-menu<?= $item->titulo ?>" value="<?= $item->menu ?>" placeholder="Escreva...">
+                                 </div>
+
+                                 <div class='form-group col-xs-12 paddingZeroM'>
+                                    <label for="">Sugestões <i class="bi bi-arrow-down-up"></i></label>
+                                    <? if ($cardapiosDisponiveis) {
+                                       $atuais = explode(";", $item->menu);
+                                    } ?>
+                                    <ul class="sugestoes cardapios">
+                                       <? foreach ($cardapiosDisponiveis as $cardapio) { ?>
+                                          <li class="btn btn-rounded btn-xs btn-bordered" style="<?= in_array($cardapio->titulo, $atuais) ? "display: none" : "" ?>" data-id="<?= $cardapio->titulo ?>" data-target="cardapio-menu<?= $item->titulo ?>">
+                                             <?= $cardapio->titulo ?>
+                                          </li>
+                                       <? } ?>
+                                    </ul>
+                                 </div>
+
+                              </div>
+                           <? } ?>
+                        <? } ?>
+
+                     </div>
+
+                     <div class="card content">
+                        <div class="form-group col-xs-12 paddingZeroM mt-5">
+                           <div class='col-xs-12'>
+                              <label for="cardapio">Cardápio completo <b>(Formato recomendado: .PDF)</b> </label>
+                              <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->cardapio ?>' type="file" name='cardapio' id="cardapio" class="dropify">
+                              <div class="col-xs-12 switch danger">
+                                 <input id="apagar-cardapio" type="checkbox" name="apagarcardapio">
+                                 <label for="apagar-cardapio">Apagar arquivo</label>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               <? } ?>
+
+               <? if (in_array($get['tipo'], [1, 2, 3, 4, 6])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Observações
@@ -433,6 +495,46 @@
                         </div>
                      </div>
                   </div>
+               <? } ?>
+
+               <? if (in_array($get['tipo'], [6])) { ?>
+                  <div class="box-content card white">
+                     <h4 class="box-title">
+                        O que fazemos e não fazemos
+                     </h4>
+                     <div class="card-content">
+                        <div class='col-xm-12 paddingZeroM'>
+                           <div class="col-xs-12 form-group">
+                              <label for="pode">O que fazemos</label>
+                              <input type="text" name="pode" class="form-control" id="pode" value="<?= $resultado->pode ?>" placeholder="Escreva..." required>
+                           </div>
+                        </div>
+                        <div class='col-xm-12 paddingZeroM'>
+                           <div class="col-xs-12 form-group">
+                              <label for="naopode">O que não fazemos</label>
+                              <input type="text" name="naopode" class="form-control" id="naopode" value="<?= $resultado->naopode ?>" placeholder="Escreva..." required>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="box-content card white">
+                     <h4 class="box-title">
+                        Eventos que atendemos
+                     </h4>
+                     <!-- /.box-title -->
+                     <div class="card-content">
+
+                        <div class='form-group col-xs-12 paddingZeroM'>
+                           <div class="col-xs-12">
+                              <label for="eventosatendidos">Eventos</label>
+                              <input type="text" name="eventosatendidos" class="form-control mySingleFieldTags" id="eventosatendidos" value="<?= $resultado->eventosatendidos ?>" placeholder="Escreva...">
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+
                <? } ?>
 
                <? if (in_array($get['tipo'], [2, 3])) { ?>
@@ -484,17 +586,22 @@
 
                         <? if ($setores) {
                            foreach ($setores as $key => $setor) { ?>
-                              <div class="form-group, col-xs-12 paddingZeroM setor-ingresso card-content" data-setor-ingresso="<?= $setor->setor ?>">
+                              <div class="form-group col-xs-12 paddingZeroM setor-ingresso card-content" data-setor-ingresso="<?= $setor->setor ?>">
                                  <div class="box-title with-btn">
                                     <?= $setor->setor ?>
-                                    <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="<?= $setor->setor ?>" ->
-                                       Adicionar ingresso
-                                       <i class="ico bi bi-plus-lg"></i>
-                                    </button>
+                                    <div class="btns-cont">
+                                       <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="<?= $setor->setor ?>" ->
+                                          Adicionar ingresso
+                                          <i class="ico bi bi-plus-lg"></i>
+                                       </button>
+                                       <button type="button" class="btn btn-xs btn-rounded btn-danger" data-parent="setor-ingresso">
+                                          <i class="bi bi-trash"></i>
+                                       </button>
+                                    </div>
                                  </div>
 
                                  <? foreach ($setor->ingressos as $keyIng => $ingresso) { ?>
-                                    <div class="col-xs-12 paddingZeroM ingresso-div card-content">                                       
+                                    <div class="col-xs-12 paddingZeroM ingresso-div card-content">
                                        <div class="input-group">
                                           <input type="hidden" name="setorIngresso[ <?= $key ?> ][id]" value="<?= $setor->id ?>">
                                           <input type="hidden" name="setorIngresso[ <?= $key ?> ][setor]" value="<?= $setor->setor ?>">
@@ -504,11 +611,112 @@
                                           <input type="text" name="setorIngresso[ <?= $key ?> ][ingressos][ <?= $keyIng ?> ][modalidade]" class="form-control" value="<?= $ingresso->titulo ?>" placeholder="Escreva...">
                                           <span class="input-group-addon">R$</span>
                                           <input type="text" name="setorIngresso[ <?= $key ?> ][ingressos][ <?= $keyIng ?> ][preco]" class="form-control money" value="<?= $ingresso->preco ?>" placeholder="Escreva...">
-                                       </div>                                       
+                                       </div>
                                     </div>
                                  <? } ?>
                               </div>
                         <? }
+                        } ?>
+                     </div>
+                  </div>
+
+                  <div class="box-content card white">
+                     <h4 class="box-title with-btn">
+                        Pontos de Venda
+                        <button type="button" class="btn btn-icon btn-icon-left btn-success btn-xs btn-rounded dialog-btn" data-target="modalPontoDeVenda">
+                           Adicionar ponto de venda
+                           <i class="ico bi bi-plus-lg"></i>
+                        </button>
+                     </h4>
+                     <div class="card-content" id="pontosDeVendaContainer">
+
+                        <? if ($pontosDeVenda) {
+                           foreach ($pontosDeVenda as $ind => $pdv) { ?>
+                              <div class="col-xs-12 paddingZeroM pdv-div card-content">
+                                 <label for="pdv<?= $pdv->id ?>-titulo" class="with-btn">
+                                    <div>
+                                       <img src="<?= PATHSITE ?>assets2/<?= $pdv->tipo == "fisico" ? "Group 2310" : "web" ?>.png" alt="ícone de ponto de venda <?= $pdv->tipo ?>">
+                                       Ponto de Venda <?= $pdv->tipo == "fisico" ? "Físico" : "Online" ?>
+                                    </div>
+                                    <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="pdv-div">Excluir</button>
+                                 </label>
+
+                                 <input type="hidden" name="pdvs[ <?= $ind ?> ][id]" value="<?= $pdv->id ?>">
+
+                                 <label for="pdv<?= $pdv->id ?>-endereco" class="col-xs-12 col-lg-6">
+                                    Título
+                                    <input type="text" name="pdvs[ <?= $ind ?> ][titulo]" value="<?= $pdv->titulo ?>" class="form-control" required minlength="3" placeholder="Sua Loja ou Seu Site etc...">
+                                 </label>
+
+                                 <label for="pdv<?= $pdv->id ?>-endereco" class="col-xs-12 col-lg-6">
+                                    Endereço / Site
+                                    <input type="text" name="pdvs[ <?= $ind ?> ][endereco]" value="<?= $pdv->endereco ?>" class="form-control" required minlength="3" placeholder="Rua Margarida ou www.site.com.br etc...">
+                                 </label>
+
+                                 <? if ($pdv->tipo == "fisico") { ?>
+                                    <label for="pdv<?= $pdv->id ?>-cep" class="col-xs-12 col-lg-6">
+                                       CEP
+                                       <input type="text" name="pdvs[ <?= $ind ?> ][cep]" value="<?= $pdv->cep ?>" class="form-control cep" required minlength="3" placeholder="apenas números">
+                                    </label>
+
+                                    <label for="pdv<?= $pdv->id ?>-cep" class="col-xs-12 col-lg-6">
+                                       Cidade
+                                       <input type="text" name="pdvs[ <?= $ind ?> ][cidade]" value="<?= $pdv->cidade ?>" class="form-control" required minlength="3" placeholder="Cidade - UF">
+                                    </label>
+                                 <? } ?>
+                              </div>
+                        <? }
+                        } ?>
+
+                     </div>
+                  </div>
+
+                  <div class="box-content card white">
+                     <h4 class="box-title with-btn">
+                        Organização
+                        <button type="button" class="btn btn-icon btn-icon-left btn-success btn-xs btn-rounded" onclick="adicionarOrganizadores()">
+                           Adicionar organizadores
+                           <i class="ico bi bi-plus-lg"></i>
+                        </button>
+                     </h4>
+                     <div class="card-content" id="organizadoresContainer">
+
+                        <? if ($organizadores) {
+                           foreach ($organizadores as $key => $item) { ?>
+                              <div class="form-group col-xs-12 paddingZeroM organizacao-div card-content">
+
+                                 <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="organizacao-div"><i class="bi bi-trash"></i></button>
+                                 <input type="hidden" name="organizadores[ <?= $key ?> ][id]" value="<?= $item->id ?>">
+
+                                 <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                                    <div class="col-xs-12 form-group">
+                                       <label>Organização <?=$key + 1?></label>
+                                       <input type="text" name="organizadores[ <?= $key ?> ][titulo]" class="form-control" value="<?= $item->titulo ?>" placeholder="Escreva..." required>
+                                    </div>
+                                 </div>
+
+                                 <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                                    <div class="col-xs-12 form-group">
+                                       <label>Endereço, número, complemento</label>
+                                       <input type="text" name="organizadores[ <?= $key ?> ][endereco]" class="form-control" value="<?= $item->endereco ?>" placeholder="Escreva..." required>
+                                    </div>
+                                 </div>
+
+                                 <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                                    <div class="col-xs-12 form-group">
+                                       <label>Cidade - UF</label>
+                                       <input type="text" name="organizadores[ <?= $key ?> ][cidade]" class="form-control" value="<?= $item->cidade ?>" placeholder="Escreva..." required>
+                                    </div>
+                                 </div>
+
+                                 <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                                    <div class="col-xs-12 form-group">
+                                       <label>Site</label>
+                                       <input type="text" name="organizadores[ <?= $key ?> ][site]" class="form-control" value="<?= $item->site ?>" placeholder="Escreva..." required>
+                                    </div>
+                                 </div>
+                              </div>
+                           <? }
                         } ?>
                      </div>
                   </div>
@@ -592,7 +800,7 @@
             <h2 class="box-title">Adicionar área com comodidades</h2>
             <span class="close"><i class="bi bi-x-lg"></i></span>
 
-            <label for="" class="form-group col-xs-12" style="padding-inline: 0;">
+            <label for="" class="form-group col-xs-12">
                Título
                <input type="text" name="tituloCmdd" class="form-control">
             </label>
@@ -613,7 +821,7 @@
                   <? foreach ($proximidadesDisponiveis as $prox) { ?>
                      <li>
                         <div class="radio info">
-                           <input type="hidden" name="proximidadeFK" value="<?= $prox->id ?>">
+                           <input type="hidden" name="proximidadeFK" value="<?= $prox->id ?>" data-img="<?= $prox->arquivo ?>">
                            <input type="radio" name="proximidade" id="proximidade<?= $prox->id ?>" value="<?= $prox->titulo ?>">
                            <label for="proximidade<?= $prox->id ?>">
                               <img src="<?= PATHSITE ?>uploads/proximidade/<?= $prox->arquivo ?>" alt="ícone <?= $prox->titulo ?>">
@@ -629,14 +837,14 @@
 
             <span class="msgErro text-warning bold"></span>
          </div>
-      </dialog>     
+      </dialog>
 
       <dialog id="modalSetorIngresso" class="dialog">
          <div class="content box-content">
             <h2 class="box-title">Adicionar categoria de Ingresso</h2>
             <span class="close"><i class="bi bi-x-lg"></i></span>
 
-            <label for="tituloSetor" class="form-group col-xs-12" style="padding-inline: 0;">
+            <label for="tituloSetor" class="form-group col-xs-12">
                Título
                <input type="text" name="titulo" id="tituloSetor" class="form-control" placeholder="pista, vip, camarote...">
             </label>
@@ -665,6 +873,52 @@
          </div>
       </dialog>
 
+      <dialog id="modalPontoDeVenda" class="dialog">
+         <div class="content box-content">
+            <h2 class="box-title">Adicionar ponto de venda</h2>
+            <span class="close"><i class="bi bi-x-lg"></i></span>
+
+            <ul class="tipo-ponto-de-venda">
+               <li>
+                  <div class="radio info">
+                     <input type="radio" name="tipo-pdv" id="pdv-fisico" value="fisico">
+                     <label for="pdv-fisico">
+                        Ponto de venda físico
+                        <img src="<?= PATHSITE ?>assets2/Group 2310.png" alt="ícone ponto de venda físico">
+                     </label>
+                  </div>
+               </li>
+               <li>
+                  <div class="radio info">
+                     <input type="radio" name="tipo-pdv" id="pdv-online" value="online">
+                     <label for="pdv-online">
+                        Ponto de venda online
+                        <img src="<?= PATHSITE ?>assets2/web.png" alt="ícone ponto de venda online">
+                     </label>
+                  </div>
+               </li>
+            </ul>
+
+            <button class="form-control btn-primary" type="button">Adicionar Campo</button>
+            <span class="msgErro text-warning bold"></span>
+         </div>
+      </dialog>
+
+      <dialog id="modalCardapio" class="dialog">
+         <div class="content box-content">
+            <h2 class="box-title">Adicionar Cardápio</h2>
+            <span class="close"><i class="bi bi-x-lg"></i></span>
+
+            <label for="" class="form-group col-xs-12">
+               Título
+               <input type="text" name="titulo" class="form-control">
+            </label>
+
+            <button class="form-control btn-primary" type="button">Adicionar Campo</button>
+            <span class="msgErro text-warning bold"></span>
+         </div>
+      </dialog>
+
       <style>
          /* Input Dinamico */
          label.with-btn {
@@ -684,7 +938,13 @@
 
          .dialog .content {
             position: relative;
+            display: flex;
+            flex-direction: column;
             padding: 2.75rem;
+         }
+
+         .dialog .content label.form-group.col-xs-12 {
+            padding-inline: 0;
          }
 
          .dialog::backdrop {
@@ -716,31 +976,42 @@
             margin-inline-end: 1rem;
          }
 
-         .dialog#modalProximidades ul {
+         :is(.dialog#modalProximidades, .dialog#modalPontoDeVenda) ul {
             list-style: none;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
+            align-items: center;
             gap: 1.75rem;
+            padding: 0;
          }
 
-         .dialog#modalProximidades ul img {
+         :is(.dialog#modalProximidades, .dialog#modalPontoDeVenda) ul img {
             width: 26px;
             aspect-ratio: 1;
             object-fit: contain;
          }
 
-         .dialog#modalProximidades ul li {
+         :is(.dialog#modalProximidades, .dialog#modalPontoDeVenda) ul li {
             padding: 10px 20px;
             border-radius: 1rem;
             transition: all 200ms ease-in-out;
+            width: fit-content;
          }
 
-         .dialog#modalProximidades ul li:hover {
+         :is(.dialog#modalProximidades, .dialog#modalPontoDeVenda) ul li:hover {
             background-color: aliceblue;
          }
 
+         .dialog#modalPontoDeVenda ul li:hover {
+            background-color: aliceblue;
+         }
+
+         */ .dialog#modalPontoDeVenda label {
+            max-width: 50%;
+         }
+
          /* Sugestões */
-         :is(.catCmdd-div, .proximidade-div, .setor-ingresso-div, div[data-setor-ingresso]) {
+         :is(.catCmdd-div, .proximidade-div, .setor-ingresso-div, div[data-setor-ingresso], .pdv-div, .cardapio-div, .organizacao-div) {
             border: 1px solid #e6e9ed;
             border-radius: 4px;
             margin-block-end: 3rem;
@@ -778,9 +1049,195 @@
          li.customTag {
             background-color: red !important;
          }
+
+         .organizacao-div {
+            position: relative;
+         }
+         .organizacao-div button[data-parent] {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 5;
+         }
       </style>
 
       <script>
+         // Adicionar Organizadores
+         let organizadoresCount = document.querySelectorAll(".organizacao-div").length
+         
+
+         function adicionarOrganizadores() {
+            const organizadoresContainer = document.querySelector("#organizadoresContainer")
+            const newElement = document.createElement("div")
+
+            organizadoresCount++
+
+            newElement.classList.add("form-group", "col-xs-12", "paddingZeroM", "organizacao-div", "card-content")
+            newElement.innerHTML = `
+               <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="organizacao-div"><i class="bi bi-trash"></i></button>
+
+               <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                  <div class="col-xs-12 form-group">
+                     <label>Organização</label>
+                     <input type="text" name="organizadores[${organizadoresCount}][titulo]" class="form-control" value="" placeholder="Escreva..." required>
+                  </div>
+               </div>
+
+               <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                  <div class="col-xs-12 form-group">
+                     <label>Endereço, número, complemento</label>
+                     <input type="text" name="organizadores[${organizadoresCount}][endereco]" class="form-control" value="" placeholder="Escreva..." required>
+                  </div>
+               </div>
+
+               <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                  <div class="col-xs-12 form-group">
+                     <label>Cidade - UF</label>
+                     <input type="text" name="organizadores[${organizadoresCount}][cidade]" class="form-control" value="" placeholder="Escreva..." required>
+                  </div>
+               </div>
+
+               <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                  <div class="col-xs-12 form-group">
+                     <label>Site</label>
+                     <input type="text" name="organizadores[${organizadoresCount}][site]" class="form-control" value="" placeholder="Escreva..." required>
+                  </div>
+               </div>
+            `
+            organizadoresContainer.appendChild(newElement)
+         }
+
+         // Modal Adicionar Cardápio
+         const cardapioList = document.querySelectorAll(".cardapio-div")
+         const addCardapio = document.querySelector("#modalCardapio button")
+         let cardapioCount = cardapioList.length
+
+         addCardapio.addEventListener("click", conferirModalCardapio)
+
+         function conferirModalCardapio() {
+            const modal = document.querySelector("#modalCardapio")
+            const titulo = modal.querySelector("input[name=titulo]")
+            const msg = modal.querySelector("span.msgErro")
+
+            msg.textContent = ""
+            if (titulo.value.length <= 2) {
+               msg.textContent = "Título com pelo menos 3 caracteres"
+               return
+            }
+            modal.close()
+
+            adicionarCampoCardapio(titulo.value)
+            titulo.value = ""
+         }
+
+         function adicionarCampoCardapio(titulo) {
+            const cardapioContainer = document.querySelector("#cardapioContainer")
+            const newElement = document.createElement("div")
+
+            cardapioCount++
+
+            newElement.classList.add("form-group", "col-xs-12", "paddingZeroM", "cardapio-div", "card-content")
+            newElement.innerHTML = `
+               <input type="hidden" name="cardapios[${cardapioCount}][id]" value="">
+               <div class="col-xs-12 col-sm-12 form-group">
+                  <label for="cardapio${titulo}" class="with-btn">
+                     Cardápio
+                     <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="cardapio-div">Excluir</button>
+                  </label>
+                  <input type="text" name="cardapios[${cardapioCount}][titulo]" class="form-control" id="cardapio${titulo}" value="${titulo}" placeholder="Buffet aniversário, festa, casamento...">
+               </div>
+               <div class="col-xs-12 form-group">
+                  <label for="cardapio-menu${titulo}">Adicionadas</label>
+                  <input type="text" name="cardapios[${cardapioCount}][menu]" class="form-control" id="cardapio-menu${titulo}" value="" placeholder="Escreva...">
+               </div>
+
+               <div class='form-group col-xs-12 paddingZeroM'>
+                  
+                  <label for="">Sugestões <i class="bi bi-arrow-down-up"></i></label>                     
+                  <ul class="sugestoes cardapio">
+                     <? foreach ($cardapiosDisponiveis as $cardapio) { ?>
+                        <li class="btn btn-rounded btn-xs btn-bordered"
+                           data-id="<?= $cardapio->titulo ?>"
+                           data-target="cardapio-menu${titulo}"
+                        > 
+                           <?= $cardapio->titulo ?>
+                        </li>
+                     <? } ?>
+                  </ul>
+               
+               </div>
+            `
+            cardapioContainer.appendChild(newElement)
+            addFuncionalidadesSugestoes(titulo, 'cardapio-menu')
+         }
+
+         // Modal Adicionar Ponto de Venda (pdv)
+         const pdvList = document.querySelectorAll(".pdv-div")
+         const addPdv = document.querySelector("#modalPontoDeVenda button")
+         let pdvCount = pdvList.length
+
+         addPdv.addEventListener("click", conferirModalPdv)
+
+         function conferirModalPdv() {
+            const modal = document.querySelector("#modalPontoDeVenda")
+            const tipoPdv = modal.querySelector("input[name=tipo-pdv]:checked")
+            const msg = modal.querySelector("span.msgErro")
+
+            msg.textContent = "";
+            if (!tipoPdv) {
+               msg.textContent = "Selecione o tipo do ponto de venda"
+               return
+            }
+
+            modal.close()
+            adicionarCampoPdv(tipoPdv.value)
+            tipoPdv.checked = false
+         }
+
+         function adicionarCampoPdv(tipo) {
+            const pdvsContainer = document.querySelector("#pontosDeVendaContainer")
+            const newElement = document.createElement("div")
+            pdvCount++
+
+            newElement.classList.add("col-xs-12", "paddingZeroM", "pdv-div", 'card-content')
+            newElement.innerHTML = `
+               <label class="with-btn">
+                  <div>
+                     <img src="<?= PATHSITE ?>assets2/${tipo == "fisico" ? "Group 2310" : "web"}.png" alt="ícone de ponto de venda ${tipo}">
+                     Ponto de venda ${tipo == "fisico" ? "Físico" : "Online"}
+                  </div>
+                  <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="pdv-div">Excluir</button>
+               </label>
+
+               <input type="hidden" name="pdvs[${pdvCount}][tipo]" value="${tipo}">
+
+               <label class="col-xs-12 col-lg-6">
+                  Título
+                  <input type="text" name="pdvs[${pdvCount}][titulo]" value="" class="form-control" required minlength="3" placeholder="Sua Loja ou Seu Site etc...">
+               </label>
+
+               <label class="col-xs-12 col-lg-6">
+                  Endereço / Site
+                  <input type="text" name="pdvs[${pdvCount}][endereco]" value="" class="form-control" required minlength="3" placeholder="Rua Margarida ou www.site.com.br etc...">
+               </label>
+            `
+            if (tipo == 'fisico') {
+               newElement.innerHTML += `
+                  <label class="col-xs-12 col-lg-6">
+                     CEP
+                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control" required minlength="3" placeholder="apenas números">
+                  </label>
+
+                  <label class="col-xs-12 col-lg-6">
+                     Cidade
+                     <input type="text" name="pdvs[${pdvCount}][cidade]" value="" class="form-control" required minlength="3" placeholder="Cidade - UF">
+                  </label>
+               `
+            }
+
+            pdvsContainer.appendChild(newElement);
+         }
+
          // Modal Adicionar Ingresso
          const ingressoList = document.querySelectorAll(".ingresso-div")
          const addIngresso = document.querySelector("#modalIngresso button")
@@ -879,7 +1336,7 @@
             newElement.innerHTML = `
                <div class="box-title with-btn">
                   ${titulo}
-                  <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="${titulo}"->
+                  <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="${titulo}"
                      Adicionar ingresso
                      <i class="ico bi bi-plus-lg"></i>
                   </button>
@@ -898,7 +1355,6 @@
          function conferirModalProximidade() {
             const modal = document.querySelector("#modalProximidades")
             const optionSelected = modal.querySelector("input:checked")
-            const idOption = optionSelected.previousElementSibling
             const msg = modal.querySelector("span.msgErro")
 
             msg.textContent = "";
@@ -906,16 +1362,18 @@
                msg.textContent = "Seleciona uma opção!"
                return
             }
+            const idOption = optionSelected.previousElementSibling
 
             const titulo = optionSelected.value
             const id = idOption.value
+            const img = idOption.dataset.img
 
             optionSelected.checked = false
             modal.close()
-            adicionarCampoProximidade(titulo, id)
+            adicionarCampoProximidade(titulo, id, img)
          }
 
-         function adicionarCampoProximidade(titulo, id) {
+         function adicionarCampoProximidade(titulo, id, imagem) {
             const proximidadesContainer = document.querySelector("#proximidadesContainer")
             const newElement = document.createElement("div")
             proximidadesCount++
@@ -926,7 +1384,12 @@
                <input type="hidden" name="proximidade[${proximidadesCount}][proximidadeFK]" value="${id}">
                <div class="col-xs-12 col-sm-12 form-group">
                   <label for="proximidade${titulo}" class="with-btn">
-                     ${titulo} 
+
+                     <div>
+                        <img src="<?= PATHSITE ?>uploads/proximidade/${imagem}" alt="ícone ${titulo} ">
+                        ${titulo}
+                     </div>
+                     
                      <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="proximidade-div">Excluir</button>
                   </label>
                   <input type="text" name="proximidade[${proximidadesCount}][proximidades]" class="form-control" id="proximidade${titulo}" value="" placeholder="Escreva...">
@@ -998,7 +1461,7 @@
                </div>
             `
             cmddCatContainer.appendChild(newElement)
-            addFuncionalidadesSugestoes(titulo)
+            addFuncionalidadesSugestoes(titulo, 'catCmdd')
          }
 
          // Modal Valor
@@ -1064,7 +1527,7 @@
             });
          }
 
-         // Sugestões de Comodidades
+         // Sugestões
          document.querySelector("form").addEventListener("click", event => {
             if (event.target.matches(".sugestoes li")) {
                const item = event.target;
@@ -1075,23 +1538,33 @@
                item.style.display = "none";
             }
          })
+
+         // Sugestões de Comodidades
          const catCmddExistentes = document.querySelectorAll(".catCmdd-div")
          document.addEventListener("DOMContentLoaded", () => {
             catCmddExistentes.forEach(element => {
                const titulo = element.dataset.catTitulo
-               addFuncionalidadesSugestoes(titulo)
+               addFuncionalidadesSugestoes(titulo, 'catCmdd')
             });
          })
 
-         function addFuncionalidadesSugestoes(titulo) {
-            $(`#catCmdd${titulo}`).tagit({
+         // Sugestão de Cardápios
+         const cardapiosExistentes = document.querySelectorAll(".cardapio-div")
+         document.addEventListener("DOMContentLoaded", () => {
+            cardapiosExistentes.forEach(element => {
+               const titulo = element.dataset.cardapioTitulo
+               addFuncionalidadesSugestoes(titulo, 'cardapio-menu')
+            });
+         })
+
+         function addFuncionalidadesSugestoes(titulo, classeDivs) {
+            $(`#${classeDivs}${titulo}`).tagit({
                allowSpaces: true,
                caseSensitive: false,
                beforeTagRemoved: function(event, ui) {
                   let label = ui.tagLabel
-                  const item = document.querySelector(`.sugestoes li[data-id='${label}'][data-target="catCmdd${titulo}"]`);
+                  const item = document.querySelector(`.sugestoes li[data-id='${label}'][data-target="${classeDivs}${titulo}"]`);
 
-                  console.log(item)
                   if (item) {
                      item.style.display = "inline-block"
                   }
@@ -1115,7 +1588,6 @@
                      dangerMode: true,
                   }).then((confirmDel) => {
                      if (confirmDel) {
-
                         const parentToDelete = element.dataset.parent
                         element.closest(`.${parentToDelete}`).remove()
 
@@ -1143,6 +1615,7 @@
                      setorIngresso = btn.dataset.setor
                   }
                   modalTarget.showModal()
+                  modalTarget.querySelector("input").focus()
                }
             })
          })

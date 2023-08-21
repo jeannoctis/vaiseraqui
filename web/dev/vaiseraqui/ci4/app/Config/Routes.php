@@ -76,6 +76,10 @@ $routes->group('admin', function ($routes) {
     $routes->add('proximidade/form', 'Proximidade::form');
     $routes->add('proximidade/form/(:any)', 'Proximidade::form/$i');
 
+    $routes->add('cardapio', 'Cardapio::index');
+    $routes->add('cardapio/form', 'Cardapio::form');
+    $routes->add('cardapio/form/(:any)', 'Cardapio::form/$i');
+
     $routes->add('faq', 'Faq::index');
     $routes->add('faq/form', 'Faq::form');
     $routes->add('faq/form/(:any)', 'Faq::form/$i');

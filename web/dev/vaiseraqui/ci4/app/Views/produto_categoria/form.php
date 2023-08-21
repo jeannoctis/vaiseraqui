@@ -4,7 +4,7 @@
             <div class="col-lg-12 col-xs-12">
                 <form method="post" enctype="multipart/form-data">
                     <div class="box-content card white">
-                        <h4 class="box-title"><?= $tipo ?> - Categoria: <?= $resultado->titulo ?></h4>
+                        <h4 class="box-title"><?= getTipo($get['tipo']) ?> - Categoria: <?= $resultado->titulo ?></h4>
                         <!-- /.box-title -->
                         <div class="card-content">
 

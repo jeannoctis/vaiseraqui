@@ -91,7 +91,9 @@ class Produto extends BaseController
       $this->produtoProximidadeModel = \model('App\Models\ProdutoProximidadeModel', false);
       $this->produtoSetorModel = \model('App\Models\ProdutoSetorModel', false);
       $this->setorIngressoModel = \model('App\Models\SetorIngressoModel', false);
-
+      $this->produtoPontoDeVendaModel = \model('App\Models\ProdutoPontoDeVendaModel', false);
+      $this->produtoCardapioModel = \model('App\Models\ProdutoCardapioModel', false);
+      $this->produtoOrganizacaoModel = \model('App\Models\ProdutoOrganizacaoModel', false);
 
       $this->comodidadeModel = \model('App\Models\ComodidadeModel', false);
       $data['comodidadesDisponiveis'] = $this->comodidadeModel->findAll();
@@ -99,11 +101,47 @@ class Produto extends BaseController
       $this->proximidadeModel = \model('App\Models\ProximidadeModel', false);
       $data['proximidadesDisponiveis'] = $this->proximidadeModel->orderBy("ordem ASC, id DESC")->findAll();
 
+      $this->cardapioModel = \model('App\Models\CardapioModel', false);
+      $data['cardapiosDisponiveis'] = $this->cardapioModel->findAll();
+
       $data['title'] = 'Produto';
       $data['tabela'] = 'produto';
       $data['resultado'] = "";
 
       if ($post) {
+
+         if ($post['apagarcardapio']) {
+            $post['cardapio'] = NULL;
+         }
+
+         $pdf = $this->request->getFile("cardapio");
+         if ($pdf) {
+            if ($pdf->isValid() && !$pdf->hasMoved()) {
+               $newName = date('Y-m-d') . $pdf->getRandomName();
+               $post["cardapio"] = $newName;
+               $pdf->move(PATHHOME . "/uploads/{$data['tabela']}/", $newName);
+               try {
+                  echo View('templates/tinypng');
+
+                  $upload_path = "uploads/{$data['tabela']}/";
+                  $upload_path_root = PATHHOME  . $upload_path;
+
+                  $file_name = $pdf->getName();
+                  $file_path = $upload_path_root . "/" . $file_name;
+
+                  $tinyfile = \Tinify\fromFile($file_path);
+                  $tinyfile->toFile($file_path);
+
+                  $pdf = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/" . $newName));
+                  imagepalettetotruecolor($pdf);
+                  imagealphablending($pdf, true);
+                  imagesavealpha($pdf, true);
+                  imagewebp($pdf, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
+                  imagedestroy($pdf);
+               } catch (\Tinify\ClientException $e) {
+               }
+            }
+         }
 
          if ($id) {
             $post["id"] = $lastId = $id;
@@ -114,13 +152,14 @@ class Produto extends BaseController
          }
 
          if (!empty($post['valor'])) {
-
             $IDsReceviedValor = \array_column($post['valor'], "id");
 
-            $this->produtoValorModel
-               ->where("produtoFK", $lastId)
-               ->whereNotIn("id", $IDsReceviedValor)
-               ->delete();
+            if (!empty($IDsReceviedValor)) {
+               $this->produtoValorModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceviedValor)
+                  ->delete();
+            }
 
             foreach ($post['valor'] as $item) {
                $item['valor'] = \str_replace(['.', ','], ['', '.'], $item['valor']);
@@ -153,10 +192,12 @@ class Produto extends BaseController
          if (!empty($post['catCmdd'])) {
             $IDsReceviedCatCmdd = \array_column($post['catCmdd'], "id");
 
-            $this->produtoComodidadeModel
-               ->where("produtoFK", $lastId)
-               ->whereNotIn("id", $IDsReceviedCatCmdd)
-               ->delete();
+            if (!empty($IDsReceviedCatCmdd)) {
+               $this->produtoComodidadeModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceviedCatCmdd)
+                  ->delete();
+            }
 
             foreach ($post['catCmdd'] as $item) {
 
@@ -188,10 +229,12 @@ class Produto extends BaseController
          if (!empty($post['proximidade'])) {
             $IDsReceviedProximidade = \array_column($post['proximidade'], "id");
 
-            $this->produtoProximidadeModel
-               ->where("produtoFK", $lastId)
-               ->whereNotIn("id", $IDsReceviedProximidade)
-               ->delete();
+            if (!empty($IDsReceviedProximidade)) {
+               $this->produtoProximidadeModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceviedProximidade)
+                  ->delete();
+            }
 
             foreach ($post['proximidade'] as $item) {
 
@@ -215,27 +258,31 @@ class Produto extends BaseController
             if (!empty($insertProximidade)) {
                $this->produtoProximidadeModel->insertBatch($insertProximidade);
             }
-         }         
+         } else {
+            $this->produtoProximidadeModel->where("produtoFK", $lastId)->delete();
+         }
 
-         if (!empty($post['setorIngresso'])) {            
+         if (!empty($post['setorIngresso'])) {
+            $IDsReceivedSetor = \array_column($post['setorIngresso'], "id");
+
+            if (!empty($IDsReceivedSetor)) {
+               $this->produtoSetorModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceivedSetor)
+                  ->delete();
+            }
 
             foreach ($post['setorIngresso'] as $item) {
 
-               // echo '<pre>';
-               // print_r($post['setorIngresso']);
-               // echo '</pre>';
-               // exit();
-               
                if (!empty($item['id'])) {
 
-                  foreach($item['ingressos'] as $ingresso) {
+                  foreach ($item['ingressos'] as $ingresso) {
                      $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
 
-                     echo $ingresso['preco'] . " insert <br>";
                      $updateIngresso[] = [
                         'id' => $ingresso['idIngresso'],
                         'titulo' => $ingresso['modalidade'],
-                        'preco' => $ingresso['preco']   
+                        'preco' => $ingresso['preco']
                      ];
                   }
                } else {
@@ -246,10 +293,8 @@ class Produto extends BaseController
 
                   $lastSetorId = $this->produtoSetorModel->insert($setorData);
 
-                  foreach($item['ingressos'] as $ingresso) {
+                  foreach ($item['ingressos'] as $ingresso) {
                      $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
-
-                     echo $ingresso['preco'] . " insert <br>";
 
                      $insertIngressos[] = [
                         'setorFK' => $lastSetorId,
@@ -258,16 +303,139 @@ class Produto extends BaseController
                      ];
                   }
                }
-            } 
+            }
 
-            if(!empty($updateIngresso)) {
+            if (!empty($updateIngresso)) {
                $this->setorIngressoModel->updateBatch($updateIngresso, "id");
             }
 
-            if (!empty($insertIngressos)) {               
-               $this->setorIngressoModel->insertBatch($insertIngressos);               
+            if (!empty($insertIngressos)) {
+               $this->setorIngressoModel->insertBatch($insertIngressos);
             }
+         } else {
+            $this->produtoSetorModel->where("produtoFK", $lastId)->delete();
          }
+
+         if (!empty($post['pdvs'])) {
+            $IDsReceivedPdv = \array_column($post['pdvs'], "id");
+
+            if (!empty($IDsReceivedPdv)) {
+               $this->produtoPontoDeVendaModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceivedPdv)
+                  ->delete();
+            }
+
+            foreach ($post['pdvs'] as $item) {
+               if (!empty($item['id'])) {
+                  $updatePdv[] = [
+                     'id' => $item['id'],
+                     'titulo' => $item['titulo'],
+                     'endereco' => $item['endereco'],
+                     'cep' => $item['cep'],
+                     'cidade' => $item['cidade'],
+                  ];
+               } else {
+                  $insertPdv[] = [
+                     'produtoFK' => $lastId,
+                     'tipo' => $item['tipo'],
+                     'titulo' => $item['titulo'],
+                     'endereco' => $item['endereco'],
+                     'cep' => $item['cep'],
+                     'cidade' => $item['cidade'],
+                  ];
+               }
+            }
+
+            if (!empty($updatePdv)) {
+               $this->produtoPontoDeVendaModel->updateBatch($updatePdv, "id");
+            }
+
+            if (!empty($insertPdv)) {
+               $this->produtoPontoDeVendaModel->insertBatch($insertPdv);
+            }
+         } else {
+            $this->produtoPontoDeVendaModel->where("produtoFK", $lastId)->delete();
+         }
+
+         if (!empty($post['cardapios'])) {
+            $IDsReceviedCardapios = \array_column($post['cardapios'], "id");
+
+            if (!empty($IDsReceviedCardapios)) {
+               $this->produtoCardapioModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceviedCardapios)
+                  ->delete();
+            }
+
+            foreach ($post['cardapios'] as $item) {
+
+               if (!empty($item['id'])) {
+                  $updateCardapios[] = [
+                     'id' => $item['id'],
+                     'titulo' => $item['titulo'],
+                     'menu' => $item['menu']
+                  ];
+               } else {
+                  $insertCardapios[] = [
+                     'produtoFK' => $lastId,
+                     'titulo' => $item['titulo'],
+                     'menu' => $item['menu']
+                  ];
+               }
+            }
+
+            if (!empty($updateCardapios)) {
+               $this->produtoCardapioModel->updateBatch($updateCardapios, "id");
+            }
+            if (!empty($insertCardapios)) {
+               $this->produtoCardapioModel->insertBatch($insertCardapios);
+            }
+         } else {
+            $this->produtoCardapioModel->where("produtoFK", $lastId)->delete();
+         }
+
+         if (!empty($post['organizadores'])) {
+            $IDsReceviedOrganizadores = \array_column($post['organizadores'], "id");
+
+            if (!empty($IDsReceviedOrganizadores)) {
+               $this->produtoOrganizacaoModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceviedOrganizadores)
+                  ->delete();
+            }
+
+            foreach ($post['organizadores'] as $item) {
+
+               if (!empty($item['id'])) {
+                  $updateOrganizadores[] = [
+                     'id' => $item['id'],
+                     'titulo' => $item['titulo'],
+                     'endereco' => $item['endereco'],
+                     'cidade' => $item['cidade'],
+                     'site' => $item['site']
+                  ];
+               } else {
+                  $insertOrganizadores[] = [
+                     'produtoFK' => $lastId,
+                     'titulo' => $item['titulo'],
+                     'endereco' => $item['endereco'],
+                     'cidade' => $item['cidade'],
+                     'site' => $item['site']
+                  ];
+               }
+            }
+
+            if (!empty($updateOrganizadores)) {
+               $this->produtoOrganizacaoModel->updateBatch($updateOrganizadores, "id");
+            }
+            if (!empty($insertOrganizadores)) {
+               $this->produtoOrganizacaoModel->insertBatch($insertOrganizadores);
+            }
+         } else {
+            $this->produtoOrganizacaoModel->where("produtoFK", $lastId)->delete();
+         }
+
          $data["erros"] = $this->model->errors();
       }
 
@@ -301,16 +469,21 @@ class Produto extends BaseController
          }
 
          $data['setores'] = $this->produtoSetorModel
-         ->where("produtoFK", $id)         
-         ->findAll();
+            ->where("produtoFK", $id)
+            ->findAll();
 
-         foreach($data['setores'] as $key => $setor) {
+         foreach ($data['setores'] as $key => $setor) {
             $this->setorIngressoModel
                ->resetQuery()
                ->where("setorFK", $setor->id)
                ->orderBy("preco ASC, id DESC");
             $data['setores'][$key]->ingressos = $this->setorIngressoModel->findAll();
          }
+
+         $data['pontosDeVenda'] = $this->produtoPontoDeVendaModel->where("produtoFK", $id)->findAll();
+
+         $data['cardapios'] = $this->produtoCardapioModel->where("produtoFK", $id)->findAll();
+         $data['organizadores'] = $this->produtoOrganizacaoModel->where("produtoFK", $id)->findAll();
       }
 
       echo view('templates/admin-header', $data);

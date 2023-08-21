@@ -196,6 +196,7 @@ if ($acesso['usuarioFK'] > 3) {
                                     <li class='<?= ($segments[1] == 'anunciante') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anunciante/"><i class="bi-caret-right-fill"></i> Anunciantes</a></li>
                                     <li class='<?= ($segments[1] == 'comodidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/comodidade/"><i class="bi-caret-right-fill"></i> Comodidades</a></li>
                                     <li class='<?= ($segments[1] == 'proximidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/proximidade/"><i class="bi-caret-right-fill"></i> Proximidades</a></li>
+                                    <li class='<?= ($segments[1] == 'cardapio') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cardapio/"><i class="bi-caret-right-fill"></i> Cardápio</a></li>
                                 </ul>
                             </li>
                         </ul>

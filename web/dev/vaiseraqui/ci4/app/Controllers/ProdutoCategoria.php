@@ -33,7 +33,7 @@ class ProdutoCategoria extends BaseController
       ->orderBy("titulo ASC")
       ->findAll();
 
-      $data['title'] = 'Produto Categoria';
+      $data['title'] = 'Categorias';
       $data['tabela'] = "produto_categoria";
       $data["nomeModel"] = "ProdutoCategoriaModel";
 
