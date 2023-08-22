@@ -11,7 +11,7 @@ class Cidade extends BaseController
       helper(['encrypt', 'text']);
       $this->model = model('App\Models\CidadeModel', false);
       $this->tabela = "artigo";
-      $this->session->set('menuAdmin', '4');
+      $this->session->set('menuAdmin', '5');
    }
 
    public function index()

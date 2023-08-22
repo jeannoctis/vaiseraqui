@@ -91,7 +91,7 @@ $(window).ready(function () {
     $('.cpf').mask('999.999.999-99');
     $('.cep').mask('99999-999');
     $('.data').mask('99/99/9999');
-  $(".time").mask("99:99");
+    $(".time").mask("99:99");
     $('.dia').mask('90');
     $('.telefone-fixo').mask('(99) 9999-9999');
     $('.ano').mask('9999');

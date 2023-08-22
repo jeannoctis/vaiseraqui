@@ -83,6 +83,18 @@
                            <textarea name='mapa' class="form-control" id="mapa"><?= $resultado->mapa ?></textarea>
                         </div>
                      </div>
+
+                     <div class='col-xs-12 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="coordenadas">Coordenadas
+                              <a href='https://support.google.com/maps/answer/18539?hl=pt-BR&co=GENIE.Platform%3DDesktop&oco=0' target='_blank'>
+                                 <i class='mdi mdi-comment-question-outline'></i>
+                              </a>
+                           </label>
+                           <textarea name='coordenadas' class="form-control" id="coordenadas"><?= $resultado->coordenadas ?></textarea>
+                        </div>
+                     </div>
+
                   </div>
                </div>
 
@@ -96,16 +108,15 @@
                      <div class='form-group col-xs-12 paddingZeroM'>
                         <div class="col-xs-12">
                            <label for="anuncianteFK">Responsável</label>
-                           <select name="anuncianteFK" id="anuncianteFK" class="js-example-basic-single form-control">
+                           <select name="anuncianteFK" id="anuncianteFK" class="js-example-basic-single form-control" required>
                               <? if ($anunciantes) { ?>
                                  <option value="">-- Selecione a pessoa responsável</option>
                                  <? foreach ($anunciantes as $anunciante) { ?>
                                     <option <?= $resultado->anuncianteFK == $anunciante->id ? 'selected' : '' ?> value="<?= $anunciante->id ?>">
-                                       <?= $anunciante->titulo ?>
+                                       <?= "{$anunciante->titulo} ({$anunciante->email})" ?>
                                     </option>
                                  <? } ?>
                               <? } ?>
-                              <option value=""></option>
                            </select>
                         </div>
                      </div>
@@ -120,7 +131,7 @@
                      <div class='col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="descricao">Descrição de apresentação</label>
-                           <textarea name='descricao' class="tinymce_full" id="descricao"><?= $resultado->descricao ?></textarea>
+                           <textarea name='descricao' class="form-control" id="descricao" required><?= $resultado->descricao ?></textarea>
                         </div>
                      </div>
 
@@ -324,7 +335,7 @@
                      <div class="card-content" id="cmddCatContainer">
                         <? if ($catsCmdds) { ?>
                            <? foreach ($catsCmdds as $ind => $area) { ?>
-                              <div class="form-group col-xs-12 paddingZeroM catCmdd-div card-content" data-cat-titulo="<?= $area->titulo ?>">
+                              <div class="form-group col-xs-12 paddingZeroM catCmdd-div card-content" data-cat-titulo="<?=str_replace(' ', '', $area->titulo) ?>">
 
                                  <input type="hidden" name="catCmdd[ <?= $ind ?> ][id]" value="<?= $area->id ?>">
 
@@ -338,7 +349,7 @@
 
                                  <div class="col-xs-12 form-group">
                                     <label for="catCmdd<?= $area->titulo ?>">Adicionadas</label>
-                                    <input type="text" name="catCmdd[ <?= $ind ?> ][comodidades]" class="form-control tag-it mySingleFieldTags" id="catCmdd<?= $area->titulo ?>" value="<?= $area->comodidades ?>" placeholder="Escreva...">
+                                    <input type="text" name="catCmdd[ <?= $ind ?> ][comodidades]" class="form-control tag-it mySingleFieldTags" id="catCmdd<?= str_replace(' ', '', $area->titulo)?>" value="<?= $area->comodidades ?>" placeholder="Escreva...">
                                  </div>
 
                                  <div class='form-group col-xs-12 paddingZeroM'>
@@ -348,7 +359,7 @@
                                     } ?>
                                     <ul class="sugestoes comodidades">
                                        <? foreach ($comodidadesDisponiveis as $comodidade) { ?>
-                                          <li class="btn btn-rounded btn-xs btn-bordered" style="<?= in_array($comodidade->titulo, $atuais) ? "display: none" : "" ?>" data-id="<?= $comodidade->titulo ?>" data-target="catCmdd<?= $area->titulo ?>">
+                                          <li class="btn btn-rounded btn-xs btn-bordered" style="<?= in_array($comodidade->titulo, $atuais) ? "display: none" : "" ?>" data-id="<?= $comodidade->titulo ?>" data-target="catCmdd<?= str_replace(' ', '', $area->titulo) ?>">
                                              <?= $comodidade->titulo ?>
                                           </li>
                                        <? } ?>
@@ -358,7 +369,6 @@
                               </div>
                            <? } ?>
                         <? } ?>
-
                      </div>
                   </div>
                <? } ?>
@@ -429,7 +439,7 @@
                      <div class="card-content" id="cardapioContainer">
                         <? if ($cardapios) { ?>
                            <? foreach ($cardapios as $ind => $item) { ?>
-                              <div class="form-group col-xs-12 paddingZeroM cardapio-div card-content" data-cardapio-titulo="<?= $item->titulo ?>">
+                              <div class="form-group col-xs-12 paddingZeroM cardapio-div card-content" data-cardapio-titulo="<?= str_replace(' ', '', $item->titulo) ?>">
 
                                  <input type="hidden" name="cardapios[ <?= $ind ?> ][id]" value="<?= $item->id ?>">
 
@@ -443,7 +453,7 @@
 
                                  <div class="col-xs-12 form-group">
                                     <label for="cardapio-menu<?= $item->titulo ?>">Adicionadas</label>
-                                    <input type="text" name="cardapios[ <?= $ind ?> ][menu]" class="form-control tag-it mySingleFieldTags" id="cardapio-menu<?= $item->titulo ?>" value="<?= $item->menu ?>" placeholder="Escreva...">
+                                    <input type="text" name="cardapios[ <?= $ind ?> ][menu]" class="form-control tag-it mySingleFieldTags" id="cardapio-menu<?= str_replace(' ', '', $item->titulo) ?>" value="<?= $item->menu ?>" placeholder="Escreva...">
                                  </div>
 
                                  <div class='form-group col-xs-12 paddingZeroM'>
@@ -453,7 +463,7 @@
                                     } ?>
                                     <ul class="sugestoes cardapios">
                                        <? foreach ($cardapiosDisponiveis as $cardapio) { ?>
-                                          <li class="btn btn-rounded btn-xs btn-bordered" style="<?= in_array($cardapio->titulo, $atuais) ? "display: none" : "" ?>" data-id="<?= $cardapio->titulo ?>" data-target="cardapio-menu<?= $item->titulo ?>">
+                                          <li class="btn btn-rounded btn-xs btn-bordered" style="<?= in_array($cardapio->titulo, $atuais) ? "display: none" : "" ?>" data-id="<?= $cardapio->titulo ?>" data-target="cardapio-menu<?= str_replace(' ', '', $item->titulo) ?>">
                                              <?= $cardapio->titulo ?>
                                           </li>
                                        <? } ?>
@@ -586,11 +596,11 @@
 
                         <? if ($setores) {
                            foreach ($setores as $key => $setor) { ?>
-                              <div class="form-group col-xs-12 paddingZeroM setor-ingresso card-content" data-setor-ingresso="<?= $setor->setor ?>">
+                              <div class="form-group col-xs-12 paddingZeroM setor-ingresso card-content" data-setor-ingresso="<?= $setor->setor ?>" data-setor-numero=<?= $key ?>>
                                  <div class="box-title with-btn">
                                     <?= $setor->setor ?>
                                     <div class="btns-cont">
-                                       <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="<?= $setor->setor ?>" ->
+                                       <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="<?= $setor->setor ?>">
                                           Adicionar ingresso
                                           <i class="ico bi bi-plus-lg"></i>
                                        </button>
@@ -603,14 +613,15 @@
                                  <? foreach ($setor->ingressos as $keyIng => $ingresso) { ?>
                                     <div class="col-xs-12 paddingZeroM ingresso-div card-content">
                                        <div class="input-group">
-                                          <input type="hidden" name="setorIngresso[ <?= $key ?> ][id]" value="<?= $setor->id ?>">
-                                          <input type="hidden" name="setorIngresso[ <?= $key ?> ][setor]" value="<?= $setor->setor ?>">
+                                          <input type="hidden" name="setorIngresso[<?= $key ?>][id]" value="<?= $setor->id ?>">
+                                          <input type="hidden" name="setorIngresso[<?= $key ?>][setor]" value="<?= $setor->setor ?>">
+                                          <input type="hidden" name="setorIngresso[<?= $key ?>][idSetor]" value="<?= $setor->id ?>">
 
                                           <span class="input-group-addon">Tipo</span>
-                                          <input type="hidden" name="setorIngresso[ <?= $key ?> ][ingressos][ <?= $keyIng ?> ][idIngresso]" value="<?= $ingresso->id ?>">
-                                          <input type="text" name="setorIngresso[ <?= $key ?> ][ingressos][ <?= $keyIng ?> ][modalidade]" class="form-control" value="<?= $ingresso->titulo ?>" placeholder="Escreva...">
+                                          <input type="hidden" name="setorIngresso[<?= $key ?>][ingressos][ <?= $keyIng ?> ][idIngresso]" value="<?= $ingresso->id ?>">
+                                          <input type="text" name="setorIngresso[<?= $key ?>][ingressos][ <?= $keyIng ?> ][modalidade]" class="form-control" value="<?= $ingresso->titulo ?>" placeholder="Escreva...">
                                           <span class="input-group-addon">R$</span>
-                                          <input type="text" name="setorIngresso[ <?= $key ?> ][ingressos][ <?= $keyIng ?> ][preco]" class="form-control money" value="<?= $ingresso->preco ?>" placeholder="Escreva...">
+                                          <input type="text" name="setorIngresso[<?= $key ?>][ingressos][ <?= $keyIng ?> ][preco]" class="form-control money" value="<?= $ingresso->preco ?>" placeholder="Escreva...">
                                        </div>
                                     </div>
                                  <? } ?>
@@ -1133,7 +1144,7 @@
          function adicionarCampoCardapio(titulo) {
             const cardapioContainer = document.querySelector("#cardapioContainer")
             const newElement = document.createElement("div")
-
+            titulo = titulo.replace(/\s+/g, '')
             cardapioCount++
 
             newElement.classList.add("form-group", "col-xs-12", "paddingZeroM", "cardapio-div", "card-content")
@@ -1225,7 +1236,7 @@
                newElement.innerHTML += `
                   <label class="col-xs-12 col-lg-6">
                      CEP
-                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control" required minlength="3" placeholder="apenas números">
+                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control cep" required minlength="3" placeholder="apenas números">
                   </label>
 
                   <label class="col-xs-12 col-lg-6">
@@ -1236,6 +1247,7 @@
             }
 
             pdvsContainer.appendChild(newElement);
+            $('.cep').mask('99999-999');
          }
 
          // Modal Adicionar Ingresso
@@ -1272,30 +1284,32 @@
 
          function adicionarCampoIngresso(titulo, preco, setor) {
             const ingressoContainer = document.querySelector(`[data-setor-ingresso="${setor}"`)
+            const setorNumber = ingressoContainer.dataset.setorNumero
             const newElement = document.createElement("div")
             ingressoCount++
 
             newElement.classList.add("col-xs-12", "paddingZeroM", "ingresso-div", "card-content")
-
             newElement.innerHTML = `
                <div class="input-group">
-                  <input type="hidden" name="setorIngresso[${setorIngressoCount}][setor]" value="${setor}">
+                  <input type="hidden" name="setorIngresso[${setorNumber}][setor]" value="${setor}">
+
                   <span class="input-group-addon">Tipo</span>
                   <input type="text" 
-                     name="setorIngresso[${setorIngressoCount}][ingressos][${ingressoCount}][titulo]" 
+                     name="setorIngresso[${setorNumber}][ingressos][${ingressoCount}][titulo]" 
                      value="${titulo}" 
                      class="form-control" 
                      value="${titulo}"
                      placeholder="Escreva..."
                   >
+
                   <span class="input-group-addon">R$</span>
                   <input type="text" 
-                     name="setorIngresso[${setorIngressoCount}][ingressos][${ingressoCount}][preco]" 
+                     name="setorIngresso[${setorNumber}][ingressos][${ingressoCount}][preco]" 
                      value="${preco}" 
                      class="form-control money" 
                      placeholder="Escreva..."
                   >                     
-               </div>               
+               </div>
             `
             ingressoContainer.appendChild(newElement)
          }
@@ -1332,14 +1346,20 @@
 
             newElement.classList.add("form-group", "col-xs-12", "paddingZeroM", "setor-ingresso", "card-content")
             newElement.setAttribute("data-setor-ingresso", `${titulo}`)
+            newElement.setAttribute("data-setor-numero", `${setorIngressoCount}`)
 
             newElement.innerHTML = `
                <div class="box-title with-btn">
                   ${titulo}
-                  <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="${titulo}"
-                     Adicionar ingresso
-                     <i class="ico bi bi-plus-lg"></i>
-                  </button>
+                  <div class="btns-cont">
+                     <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="${titulo}">
+                        Adicionar ingresso
+                        <i class="ico bi bi-plus-lg"></i>
+                     </button>
+                     <button type="button" class="btn btn-xs btn-rounded btn-danger" data-parent="setor-ingresso">
+                        <i class="bi bi-trash"></i>
+                     </button>
+                  </div>
                </div>            
             `
             setorIngressoContainer.appendChild(newElement)
@@ -1426,7 +1446,7 @@
          function adicionarCampoCatCmdd(titulo) {
             const cmddCatContainer = document.querySelector("#cmddCatContainer")
             const newElement = document.createElement("div")
-
+            titulo = titulo.replace(/\s+/g, '')
             catCmddCount++
 
             newElement.classList.add("form-group", "col-xs-12", "paddingZeroM", "catCmdd-div", "card-content")
@@ -1578,8 +1598,7 @@
             card.addEventListener("click", e => {
                const element = e.target
 
-               if (element.matches("button[data-parent]")) {
-
+               if (element.matches("button[data-parent], button[data-parent] i")) {
                   swal({
                      title: "Confirmação",
                      text: "Tem certeza que quer excluir o item?",
@@ -1613,6 +1632,7 @@
 
                   if (btn.dataset.setor) {
                      setorIngresso = btn.dataset.setor
+                     console.log(setorIngresso);
                   }
                   modalTarget.showModal()
                   modalTarget.querySelector("input").focus()

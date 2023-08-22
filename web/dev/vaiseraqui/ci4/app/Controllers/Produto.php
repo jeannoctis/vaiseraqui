@@ -263,8 +263,13 @@ class Produto extends BaseController
          }
 
          if (!empty($post['setorIngresso'])) {
-            $IDsReceivedSetor = \array_column($post['setorIngresso'], "id");
 
+            // echo '<pre>';
+            // print_r($post['setorIngresso']);
+            // echo '</pre>';
+            // exit();
+
+            $IDsReceivedSetor = \array_column($post['setorIngresso'], "id");
             if (!empty($IDsReceivedSetor)) {
                $this->produtoSetorModel
                   ->where("produtoFK", $lastId)
@@ -279,11 +284,22 @@ class Produto extends BaseController
                   foreach ($item['ingressos'] as $ingresso) {
                      $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
 
-                     $updateIngresso[] = [
-                        'id' => $ingresso['idIngresso'],
-                        'titulo' => $ingresso['modalidade'],
-                        'preco' => $ingresso['preco']
-                     ];
+                     if (!empty($ingresso['idIngresso'])) {
+
+                        $updateIngresso[] = [
+                           'id' => $ingresso['idIngresso'],
+                           'titulo' => $ingresso['modalidade'],
+                           'preco' => $ingresso['preco']
+                        ];
+
+                     } else {
+
+                        $insertIngressos[] = [
+                           'setorFK' => $item['idSetor'],
+                           'titulo' => $ingresso['titulo'],
+                           'preco' => $ingresso['preco']
+                        ];
+                     }
                   }
                } else {
                   $setorData = [
@@ -298,7 +314,7 @@ class Produto extends BaseController
 
                      $insertIngressos[] = [
                         'setorFK' => $lastSetorId,
-                        'titulo' => $ingresso['modalidade'],
+                        'titulo' => $ingresso['titulo'],
                         'preco' => $ingresso['preco']
                      ];
                   }
