@@ -24,6 +24,7 @@
                                             <tr>                                              
                                                 <th>Nome</th>
                                                 <th>E-mail</th>
+                                                <th>Entrar no perfil</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -37,6 +38,11 @@
                                                     <td>
                                                         <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($artigo->id) ?>/<?= arruma_url($artigo->titulo) ?>">
                                                             <?= $artigo->email ?>
+                                                        </a>
+                                                    </td>	
+                                                    <td>
+                                                        <a target="_blank" href="<?= PATHSITE ?>area-do-anunciante/login-admin?id=<?=encode($artigo->id)?>">
+                                                           Logar
                                                         </a>
                                                     </td>	
                                                 </tr>
