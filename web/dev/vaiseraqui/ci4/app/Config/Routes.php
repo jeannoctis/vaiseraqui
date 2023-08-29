@@ -149,9 +149,20 @@ $routes->add('cliente/loginFacebook', 'Cliente::loginFacebook');
 $routes->add('cliente/loginGoogle', 'Cliente::loginGoogle');
 
 $routes->add('produto/carregaCalendarios', 'Produto::carregaCalendarios');
+$routes->add('produto/excluirFoto', 'Produto::excluirFoto');  
 $routes->add('produto/whats', 'Produto::whats');
+$routes->add('produto/fotoDestaque', 'Produto::fotoDestaque');
+$routes->add('produto/novoVideo', 'Produto::novoVideo');
+$routes->add('produto/excluirVideo', 'Produto::excluirVideo');
+$routes->add('produto/excluirAba', 'Produto::excluirAba');
+$routes->add('produto/adicionaData', 'Produto::adicionaData');
+$routes->add('produto/novoPreco', 'Produto::novoPreco');
+
 $routes->add('produto/visitas', 'Produto::visitas');
 $routes->add('produto/fone', 'Produto::fone');
+$routes->add('produto/novaComodidade', 'Produto::novaComodidade');
+$routes->add('produto/novoPontoDeVenda', 'Produto::novoPontoDeVenda');
+$routes->add('produto/novaOrganizacao', 'Produto::novaOrganizacao');
 
 $routes->add('utils/ordena', 'Utils::ordena');
 $routes->add('utils/ordena2', 'Utils::ordena2');

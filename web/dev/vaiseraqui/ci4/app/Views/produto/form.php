@@ -138,7 +138,7 @@
                      <div class='col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="detalhes">Descrição completa</label>
-                           <textarea name='detalhes' class="tinymce_full" id="detalhes"><?= $resultado->detalhes ?></textarea>
+                           <textarea name='texto' class="tinymce_full" id="detalhes"><?= $resultado->texto ?></textarea>
                         </div>
                      </div>
                   </div>
@@ -213,7 +213,7 @@
                <? if (in_array($get['tipo'], [1, 3])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
-                        Comodidades em Destaque
+                       Informações importantes
                      </h4>
                      <!-- /.box-title -->
                      <div class="card-content">
