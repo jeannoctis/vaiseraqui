@@ -8,12 +8,13 @@
 <script type="text/javascript" src="<?=PATHSITE?>js2/plugins.js"></script>
 <script type="text/javascript" src="<?=PATHSITE?>js2/jquery.mask.js"></script>
 <script src="https://cdn.tiny.cloud/1/1r8cx3i7ili64dicaol4mmsetzsypxpd2bjkpthxjsu6mbfu/tinymce/5/tinymce.min.js" referrerpolicy="origin"/></script>
-<script type="text/javascript" src="<?=PATHSITE?>js2/scripts.js?v=1.0.6"></script>
 <script src="<?= PATHSITE ?>admins/assets/scripts/jquery-ui.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script src="<?=PATHSITE?>admins/assets/plugin/tagit/tag-it.min.js"></script>
-<script src="<?=PATHSITE?>/js/sweetalert/sweetalert2.min.js"></script>
-
+<script src="https://www.uaau.digital/dev/vaiseraqui/admins/assets/plugin/sweet-alert/sweetalert.min.js"></script>
+<script type="text/javascript" src="<?=PATHSITE?>js2/scripts.js?v=1.0.6"></script>
+    
    <script>
      function carregaCalendarios(mes, ano, id) {
     $.post("<?= PATHSITE ?>" + "produto/carregaCalendarios/", {"mes": mes, "ano": ano, "id": id}, function (retorno) {
@@ -49,6 +50,8 @@
             items: ".sort", opacity: 0.5, update: function (event, ui) {
                 var lista = [];
                 $('#sortable .sort').each(function (cont, element) {
+                   var id = $(element).attr('idtd');
+                     $("#sort-"+id).html(cont+1);
                     lista.push($(element).attr("rel"));
                 });
                 ordena(lista, "<?= $tabela ?>","<?= $nomeModel ?>");
@@ -62,14 +65,7 @@
         });
     }
 
- $('#check-excluir').change(function() {
-        if(this.checked) {
-         $("#sortable").addClass("exclusao");
-        }else {
-           $("#sortable").removeClass("exclusao");
-        }
-    });
-     
+ 
   
     $(document).ready(function () {   
     visitas(<?=$anuncio->id?>);  
@@ -84,11 +80,15 @@
 <script>
  <?
   if($erroLogin){?>
-   swal.fire("Ops,", "<?=$erroLogin?>", "error");
-<?  } else if ($salvou) {
+   swal("Ops,", "<?=$erroLogin?>", "error");
+    if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
+window.location = window.location.href;
+<?  } else if ($sucesso) {
   ?>
-  swal.fire("Sucesso", "<?=$sucesso ? $sucesso : "Salvo com sucesso!"?>", "success").then((result) => {
- 
+  swal("Sucesso", "<?=$sucesso ? $sucesso : "Salvo com sucesso!"?>", "success").then((result) => {
+      
  if ( window.history.replaceState ) {
     window.history.replaceState( null, null, window.location.href );
 }
@@ -96,7 +96,11 @@ window.location = window.location.href;
 });
   
   <? } else if ($_POST) { ?>
-  swal.fire("Ops,", "<?=$erro?>", "error");
+  swal("Ops,", "<?=$erro?>", "error");
+   if ( window.history.replaceState ) {
+    window.history.replaceState( null, null, window.location.href );
+}
+window.location = window.location.href;
   <?
                         }
   ?>

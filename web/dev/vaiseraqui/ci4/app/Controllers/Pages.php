@@ -465,158 +465,7 @@ $this->anunciante($page);
                 $this->workshopModel->orderBy("ordem ASC, id DESC");
                 $data['workshops'] = $this->workshopModel->findAll();
                 break;
-            case 'finalize-pedido':
-                $request = \request();
-                $data['get'] = $get = $request->getGet();
-                $projetoModel = \model("App\Models\ProjetoModel", false);
-
-                if (!$_SESSION['cliente']) {
-                    $this->session->set("projetoLogin", $get['projeto']);
-                    $this->session->set("adicionalLogin", $get['adicional']);
-                }
-
-                $this->clienteModel = \model('App\Models\ClienteModel', false);
-                $this->clienteModel->isLogged();
-
-                $data['clienteLogado'] = $this->clienteModel->find($_SESSION['cliente']);
-
-                $data['bodyClass'] = 'finalize-your-order';
-
-                $projetoAdicionalModel = \model("App\Models\PjAdicionalModel", false);
-
-                $data['pagina'] = 15;
-
-                $projetoModel->where('identificador', $get['projeto']);
-                $data['projeto'] = $projetoModel->find()[0];
-
-                $data['valorImpressao'] = $data['projeto']->impressao;
-
-                $projetoAdicionalModel->where('projetoFK', $data['projeto']->id);
-                $projetoAdicionalModel->orderBy('ordem ASC, id DESC');
-                // if($get['adicional']) {
-                //      $projetoAdicionalModel->whereIn('id', $get['adicional']);
-                // }
-                $data['adicionais'] = $projetoAdicionalModel->findAll();
-
-                if ($data['adicionais']) {
-                    foreach ($data['adicionais'] as $adicional) {
-                        $data['valorImpressao'] += $adicional->impressao;
-                    }
-                }
-
-                $estadoModel = \model("App\Models\EstadoModel", false);
-                $data['estados'] = $estadoModel->findAll();
-
-                break;
-            case 'forma-pagamento':
-                $data['bodyClass'] = "methods-of-payments";
-                $data['pagina'] = 16;
-                $request = \request();
-                $post = $request->getPost();
-
-                if ($post) {
-                    $this->session->set("carrinho", $post);
-                    header('Status: 301 Moved Permanently', false, 301);
-                    header('Location:' . PATHSITE . "forma-pagamento/");
-                    exit();
-                }
-                if (!$_SESSION['carrinho']) {
-                    header('Status: 301 Moved Permanently', false, 301);
-                    header('Location:' . PATHSITE . "projetos/");
-                    exit();
-                }
-
-                $data['carrinho'] = $carrinho = $this->session->get('carrinho');
-
-                $data['valorTotal'] = 0.0;
-
-                $projetoModel = \model("App\Models\ProjetoModel", false);
-                $projetoModel->where('identificador', $carrinho['projeto']);
-                $data['projeto'] = $projetoModel->find()[0];
-
-                if ($data['carrinho']['envio'] == 'ambos') {
-                    $medidas[0]['Height'] = $data['projeto']->altura/1000;
-                    $medidas[0]['Length'] = $data['projeto']->largura/1000;
-                    $medidas[0]['Quantity'] = $carrinho['copias'];
-                    $medidas[0]['Weight'] = $data['projeto']->peso/1000;
-                    $medidas[0]['Width'] = $data['projeto']->comprimento/1000;
-                    $medidas[0]['SKU'] = 'P-' . $data['projeto']->id;
-                    $medidas[0]['Category'] = 'Projeto Arquitetônico';
-                    $data['valorImpressao'] = ( $carrinho['copias'] * $data['projeto']->impressao);
-                }
-
-                $data['valorTotal'] += $data['projeto']->valor;
-
-                if ($carrinho['adicional']) {
-                    $projetoAdicionalModel = \model("App\Models\PjAdicionalModel", false);
-                    $projetoAdicionalModel->where('projetoFK', $data['projeto']->id);
-                    $projetoAdicionalModel->whereIn('id', $carrinho['adicional']);
-                    $data['adicionais'] = $projetoAdicionalModel->findAll();
-
-                    if ($data['adicionais']) {
-                        foreach ($data['adicionais'] as $ind => $adicional) {
-                            $data['valorImpressao'] += $carrinho['copias'] * ($adicional->impressao);
-                            $data['valorTotal'] += $adicional->valor;
-
-                            $medidas[$ind + 1]['Height'] = $adicional->altura/1000;
-                            $medidas[$ind + 1]['Length'] = $adicional->largura/1000;
-                            $medidas[$ind + 1]['Quantity'] = $carrinho['copias'];
-                            $medidas[$ind + 1]['Weight'] = $adicional->peso/1000;
-                            $medidas[$ind + 1]['Width'] = $adicional->comprimento/1000;
-                            $medidas[$ind + 1]['SKU'] = 'A-' . $adicional->id;
-                            $medidas[$ind + 1]['Category'] = 'Projeto Arquitetônico';
-                        }
-                    }
-                }
-                
-                //   $data['valorTotal'] += $valorFrete;
-
-                $data['valorTotal'] += $data['valorImpressao'];
-                
-                if ($medidas) {
-                     $data['frete'] = $projetoModel->calcularFrete($medidas, $carrinho['cep'], $data['valorTotal']);
-                    
-                    if($data['frete'][0]->ShippingPrice) {
-                          $_SESSION['ultimoFrete'] =$data['frete'][0]->ShippingPrice;
-                    $data['valorTotal'] += $data['frete'][0]->ShippingPrice;
-                    } else {
-                        unset($_SESSION['ultimoFrete']);
-                        }
-                    
-                  
-                }
-                break;
-
-            case 'pedido-finalizado':
-                helper('encrypt');
-                $data['pagina'] = 17;
-                $data['bodyClass'] = 'order-placed pix';
-
-                $pedidoModel = \model("App\Models\PedidoModel", false);
-                $data['pedido'] = $pedidoModel->find(decode($segments[1]));
-
-                $projetoModel = \model("App\Models\ProjetoModel", false);
-                $data['projeto'] = $projetoModel->find($data['pedido']->projetoFK);
-
-                $pedidoItemModel = \model("App\Models\PedidoItemModel", false);
-                $pedidoItemModel->select('pedido_item.*,pa.titulo');
-                $pedidoItemModel->join('pj_adicional pa', 'pa.id = pedido_item.adicionalFK');
-                $pedidoItemModel->where('pedidoFK', $data['pedido']->id);
-                $data['adicionais'] = $pedidoItemModel->findAll();
-
-                $transacaoModel = \model("App\Models\TransacaoModel", false);
-                $transacaoModel->where('pedidoFK', $data['pedido']->id);
-                $data['transacao'] = $transacaoModel->find()[0];
-
-                \MercadoPago\SDK::setAccessToken(\MERCADOPAGOTOKEN);
-
-                $data['payment'] = \MercadoPago\Payment::find_by_id($data['transacao']->transacao_id);
-               
-                $clienteModel = \model("App\Models\ClienteModel", false);
-                  $clienteModel->isLogged();
-
-                break;
-
+                        
             case 'esqueci':
                 $data['pagina'] = 18;
 
@@ -699,6 +548,13 @@ $this->anunciante($page);
                 }
 
                 break;
+                
+                case "logout":
+                    unset($_SESSION);
+                    ?>
+                    <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>">
+                   <? exit();
+                    break;
 
             case "area-do-cliente":
                 $this->clienteModel = \model("App\Models\ClienteModel", false);

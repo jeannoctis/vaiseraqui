@@ -4,37 +4,24 @@
          <div class="col-lg-12 col-xs-12">
             <form method="post" enctype="multipart/form-data">
                <div class="box-content card white">
-                  <h4 class="box-title">
-                     <?= $title ?>
-                  </h4>
+                  <h4 class="box-title"><?= $title ?> - <?= $resultado->titulo ?></h4>
                   <!-- /.box-title -->
                   <div class="card-content">
 
                      <div class='form-group col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 col-sm-12">
-                           <label for="titulo">Título</label>
+                           <label for="titulo">Título </label>
                            <input type="text" name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?>" placeholder="Escreva...">
-                        </div>
-                     </div>
-
-                     <div id='imagem' class="form-group col-xs-12 paddingZeroM mt-5">
-                        <div class='col-xs-12'>
-                           <label for="arquivo">Ícone <b>(Tamanho recomendado: 000 x 000 )</b> </label>
-                           <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo ?>' type="file" name='arquivo' id="arquivo" class="dropify" required>
-                           <div class="col-xs-12 switch danger">
-                              <input id="apagar-arquivo" type="checkbox" name="apagararquivo">
-                              <label for="apagar-arquivo">Apagar imagem</label>
-                           </div>
                         </div>
                      </div>
 
                      <!-- Botões -->
                      <div class="form-group col-xs-12">
-                        <div class='col-xs-12'>
+                        <div class="col-xs-12 col-sm-12">
                            <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/<?= $tipo ?>">
                               <button type="button" class="btn btn-primary btn-rounded waves-effect mb-1">Voltar</button>
                            </a>
-                           <input type="submit" name="salvar" value="Salvar e Atualizar" class="btn btn-success btn-rounded waves-effect mb-1" />
+                           <input type="submit" name="salvar" value="Salvar e atualizar" class="btn btn-success btn-rounded waves-effect mb-1">
                         </div>
                      </div>
 
@@ -42,5 +29,7 @@
                </div>
 
             </form>
+            <!-- /.card-content -->
          </div>
+         <!-- /.box-content -->
       </div>

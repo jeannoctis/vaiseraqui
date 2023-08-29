@@ -33,7 +33,7 @@
 												<tr class="ui-state-default sort" rel="<?= $elemento->id ?>">
 													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
 													<td>
-														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=1">
+														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=<?= $get['tipo'] ?>">
 															<?= $elemento->titulo ?>
 														</a>
 													</td>

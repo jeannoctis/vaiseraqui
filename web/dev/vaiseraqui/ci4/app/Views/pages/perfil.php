@@ -13,7 +13,6 @@
                 </div>
                 <hr class="linhaform">
 
-
                 <form class="form-horizontal" method="post" enctype="multipart/form-data" id="formBusca1">
                     <fieldset>
                 
@@ -57,7 +56,7 @@
                                             </div>
                                             <div class="col-12">
                                                 <label>WhatsApp 01</label>
-                                                <input type="text" name="telefone1" value="<?=$anunciante->telefone1?>" class="form-control phone_with_ddd">
+                                                <input type="text" name="telefone" value="<?=$anunciante->telefone?>" class="form-control phone_with_ddd">
                                             </div>
                                             <div class="col-12">
                                                 <label>Whatsapp 02</label>

@@ -17,13 +17,14 @@
 					<? if ($lista) {  ?>
 						<div class='col-xs-12 paddingZeroM'>
 							<form method='post' id='form'>
+
 								<div class="table-responsive">
 									<table class="table  sortable">
 										<thead>
 											<tr>
 												<th class='menorTh'>Excluir</th>
 												<th>Nome</th>
-												<th></th>
+												<th>Ordenar</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -32,15 +33,17 @@
 													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
 													<td>
 														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>">
+
 															<?= $elemento->titulo ?>
 														</a>
-													</td>													
-													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
+													</td>
+													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png"/> </td>
 												</tr>
 											<? } ?>
 										</tbody>
 									</table>
 								</div>
+								<input type="hidden" name="nexc" value="1">
 							</form>
 						</div>
 					<? } ?>

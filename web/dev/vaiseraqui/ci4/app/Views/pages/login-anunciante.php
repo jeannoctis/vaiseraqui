@@ -1,9 +1,8 @@
-
 <body>
-
     <section class="areaPerfil">
         <div class="container">
             <div class="row">
+                
                 <div class="col-12">
                     <div class="marca">
                         <a href="<?=PATHSITE?>" class="logo">
@@ -11,7 +10,12 @@
                         </a> 
                     </div>
 
-                    <div class="boxPerfil">
+                    <div class="boxPerfil row">
+                        
+                         <div class="col-12 col-md-6">
+                                        <img class="img-fluid" src="<?=PATHSITE?>assets/images/capalogin.jpg" />
+                                    </div>
+                        <div class="col-12 col-md-5">
                         <h5>
                            Área do anunciante
                         </h5>
@@ -21,7 +25,7 @@
 
                         <form class="form-horizontal" method="post" >
                             <fieldset>
-                                <div class="row">
+                                <div class="row">                                   
                                     <div class="col-12">
                                         <label>E-mail</label>
                                         <input required type="email" name="email" class="form-control" placeholder="ex: joao@gmail.com">
@@ -42,19 +46,10 @@
 
                         <div class="linkPerfil">
                             <a href="<?=PATHSITE?>esqueci/anunciante">Esqueci a senha</a>
-                        </div>
-    
-
+                        </div>    
+                        </div>                            
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-    
-
-
-
-
-
-

@@ -181,7 +181,7 @@ if ($acesso['usuarioFK'] > 3) {
                                 <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-pencil-fill"></i><span>Blog</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">                        
                                     <li class='<?= ($segments[1] == 'artigo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/artigo/"><i class="bi-caret-right-fill"></i> Artigos</a></li>
-                        <li class='<?= ($segments[1] == 'categoriaArtigo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/categoriaArtigo/">Categorias</a></li>
+                                    <li class='<?= ($segments[1] == 'categoriaArtigo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/categoriaArtigo/">Categorias</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -195,6 +195,8 @@ if ($acesso['usuarioFK'] > 3) {
                                     <li class='<?= ($segments[1] == 'cidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cidade/"><i class="bi-caret-right-fill"></i> Cidades</a></li>
                                     <li class='<?= ($segments[1] == 'anunciante') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anunciante/"><i class="bi-caret-right-fill"></i> Anunciantes</a></li>
                                     <li class='<?= ($segments[1] == 'comodidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/comodidade/"><i class="bi-caret-right-fill"></i> Comodidades</a></li>
+                                    <li class='<?= ($segments[1] == 'proximidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/proximidade/"><i class="bi-caret-right-fill"></i> Proximidades</a></li>
+                                    <li class='<?= ($segments[1] == 'cardapio') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cardapio/"><i class="bi-caret-right-fill"></i> Cardápio</a></li>
                                 </ul>
                             </li>
                         </ul>

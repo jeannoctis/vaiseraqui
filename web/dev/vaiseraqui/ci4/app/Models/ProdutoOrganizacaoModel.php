@@ -4,14 +4,14 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProdutoVideoModel extends Model
+class ProdutoOrganizacaoModel extends Model
 {
    protected $DBGroup = 'default';
-   protected $table = 'produto_video';
+   protected $table = 'produto_organizacao';
    protected $primaryKey = 'id';
    protected $returnType = 'object';
    protected $useSoftDeletes = true;
-   protected $allowedFields = ['titulo', 'produtoFK', 'video', 'ordem'];
+   protected $allowedFields = ['produtoFK', 'titulo', 'endereco', 'site', 'cidade', 'ordem'];
    protected $useTimestamps = true;
    protected $createdField = 'dtCriacao';
    protected $updatedField = 'dtAlteracao';

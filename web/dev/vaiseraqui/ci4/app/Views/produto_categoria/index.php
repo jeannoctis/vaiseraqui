@@ -4,10 +4,10 @@
 			<div class="col-xs-12">
 				<div class="box-content">
 					<div class='col-xs-12 col-md-6'>
-						<h4 class="box-title"><?= $title ?></h4>
+						<h4 class="box-title"><?= $title ?> - <?= getTipo($get['tipo']) ?></h4>
 					</div>
 					<div class='col-xs-12 col-md-6 text-right form-group'>
-						<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form?tipo=<?=$get['tipo']?>">
+						<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form?tipo=<?= $get['tipo'] ?>">
 							<button type="button" class="btn btn-violet btn-rounded waves-effect waves-light">Adicionar</button>
 						</a>
 						<button onclick='$("#form").submit()' type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Excluir</button>
@@ -32,10 +32,10 @@
 												<tr class="ui-state-default sort" rel="<?= $elemento->id ?>">
 													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
 													<td>
-														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>">
+														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=<?= $get['tipo'] ?>">
 															<?= $elemento->titulo ?>
 														</a>
-													</td>													
+													</td>
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
 												</tr>
 											<? } ?>
