@@ -24,21 +24,22 @@
                         <? foreach ($fotos as $ind => $elemento) { ?>
                            <div class="ui-state-default sort col-md-4 base" rel="<?= $elemento->id ?>">
 
-                              <div style="background-image:url('<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $elemento->arquivo ?>');" class="base-bg"></div>
+                              <div style="background-image:url('<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $elemento->arquivo ?>'); filter: <?= $produtoFK->fotoFK == $elemento->id ? "brightness(1)" : "" ?>;" class="base-bg"></div>
 
                               <div class="hover">
 
                                  <input class="excluir" type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" />
+
                                  <div class="icones">
-
-                                    <div>
-                                       <a href="<?= PATHSITE ?>admin/<?= $tabelaFK ?>/<?= $tabelaFKF ?>/<?= encode($idFK) ?>/<?= encode($elemento->id) ?>?tipo=<?= $get['tipo'] ?>">
-                                          <i class="bi bi-pencil-square"></i> Editar
-                                       </a>
-                                    </div>
-
+                                    <a href="<?= PATHSITE ?>admin/<?= $tabelaFK ?>/<?= $tabelaFKF ?>/<?= encode($idFK) ?>/<?= encode($elemento->id) ?>?tipo=<?= $get['tipo'] ?>">
+                                       <i class="bi bi-pencil-square"></i> Editar
+                                    </a>
+                                    <a href="#" onclick="fotoDestaque('<?= encode($elemento->id) ?>', '<?= $elemento->id ?>')" id="princBtn<?= $elemento->id ?>">
+                                       <i class="bi bi-star-fill <?= $produtoFK->fotoFK == $elemento->id ? 'yellow' : '' ?>"></i> <span><?= $produtoFK->fotoFK == $elemento->id ? 'Foto Principal' : 'Tornar Principal' ?> </span>
+                                    </a>
                                  </div>
                               </div>
+                              
                            </div>
                         <? } ?>
                      <? } ?>
@@ -72,6 +73,7 @@
       background-position: center center;
       background-repeat: no-repeat;
       border-radius: 10px;
+      filter: brightness(0.5);
    }
 
    .exclusao .hover {
@@ -111,15 +113,27 @@
       display: block;
    }
 
+   .base .isPrincipal {
+      position: absolute;
+   }
+
    .icones {
       left: 50%;
       top: 50%;
       position: absolute;
-      transform: translate(-50%);
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
    }
 
    .icones a {
       color: #FFF !important;
+      text-align: center;
+   }
+
+   .icones a:nth-child(2) i.yellow {
+      color: yellow;
    }
 
    .botao {
@@ -139,3 +153,31 @@
       background-color: #428bca;
    }
 </style>
+
+<script>
+   function fotoDestaque(id, idFoto) {
+      $.post(PATHSITE + 'produto/fotoDestaque/', {
+         id
+      }, function(data) {
+         const retorno = jQuery.parseJSON(data);
+
+         if(retorno.ok) {
+            const icones = document.querySelectorAll(".hover .icones i")
+            const textos = document.querySelectorAll(".hover .icones span")
+            const bgs = document.querySelectorAll(".base-bg")
+
+            icones.forEach(i => i.classList.remove("yellow"))
+            textos.forEach(t => t.textContent = "Tornar principal")
+            bgs.forEach(bg => bg.style.filter = 'brightness(0.5)')
+
+            const icone = document.querySelector(`#princBtn${idFoto} i`)
+            const texto = document.querySelector(`#princBtn${idFoto} span`)
+            const bg = icone.closest(".hover").previousElementSibling
+
+            icone.classList.add("yellow")
+            texto.textContent = "Foto principal"
+            bg.style.filter = 'brightness(1)';
+         }
+      });
+   }
+</script>

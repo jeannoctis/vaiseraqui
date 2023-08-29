@@ -22,7 +22,7 @@
                             <div class='form-group col-xs-12 col-lg-12 paddingZeroM'>
                                <div class="col-xs-12 col-sm-6">
                                     <label for="telefone">Telefone</label>
-                                    <input type="text" required  name="telefone" class="form-control" id="telefone" value="<?= $resultado->telefone ?>" placeholder="Escreva...">
+                                    <input type="text" required  name="telefone" class="form-control telefone" id="telefone" value="<?= $resultado->telefone ?>" placeholder="Escreva...">
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <label for="senha">Senha</label>

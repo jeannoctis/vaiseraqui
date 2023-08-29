@@ -146,16 +146,20 @@
     });
   });
 
-  $("#principaiscomodidades").tagit({    
+  $("#principaiscomodidades").tagit({
     beforeTagRemoved: function(event, ui) {
       let label = ui.tagLabel
       const item = document.querySelector(`.sugestoes li[data-id='${label}'][data-target="principaiscomodidades"]`);
 
-      if(item) {
+      if (item) {
         item.style.display = "inline-block"
       }
     }
   });
+
+  $('select#categorias, select#cidades, select#anunciantes').on('change', function() {
+    $("#formFiltro").submit()
+  })
 </script>
 
 
