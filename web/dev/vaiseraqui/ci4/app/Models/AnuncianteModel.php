@@ -50,7 +50,7 @@ class AnuncianteModel extends Model {
         $produtoModel->select("produto.titulo, produto.id, pc.tipoFK, tipo.titulo as tipo");
         $produtoModel->join("produto_categoria pc", "pc.id = produto.categoriaFK ");
         $produtoModel->join('tipo', 'tipo.id = pc.tipoFK');
-        $produtoModel->where("produto.anuncianteFK", $this->session->get('anunciante')->id);
+        $produtoModel->where("produto.anuncianteFK", $this->session->get('anunciante'));
         $data['anuncios'] = $produtoModel->findAll();
 
         if ($data['anuncios']) {
@@ -86,6 +86,26 @@ class AnuncianteModel extends Model {
 
                 break;
 
+            case 'login-admin':
+                    unset($_SESSION['anuncio']);
+                if ($_SESSION['admin']) {
+
+                    $request = \Config\Services::request();
+                    $get = $request->getGet();
+
+                    $id = decode($get['id']);
+                    $result = $this->find($id);
+
+                    if ($result) {
+                        $this->session->set('anunciante', $result->id);
+                        ?>
+                        <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />   
+                        <?
+                    }
+                    exit();
+                }
+
+                break;
             case "downloads":
 
                 $textoModel = model('App\Models\TextoModel', false);
@@ -425,7 +445,7 @@ class AnuncianteModel extends Model {
                 $produtoOrganizacaoModel->where("produtoFK", $data['anuncio']->id);
 
                 $data['organizacoes'] = $produtoOrganizacaoModel->findAll();
-                
+
                 if ($post) {
                     if ($post['titulo']) {
                         $save['produtoFK'] = $data['anuncio']->id;
@@ -982,7 +1002,7 @@ class AnuncianteModel extends Model {
                         if (!$result) {
                             $data["erroLogin"] = "E-mail/usu&aacute;rio e/ou senha inv&aacute;lidos";
                         } else {
-                            $this->session->set('anunciante', $result);
+                            $this->session->set('anunciante', $result->id);
                             session_write_close();
                             ?>
                             <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />         

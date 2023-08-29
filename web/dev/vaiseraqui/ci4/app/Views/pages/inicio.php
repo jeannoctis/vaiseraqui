@@ -200,45 +200,7 @@ $infoPagina['statusAnuncio'] = "ATIVO";
                         </div>
                     </div>
                 </div>
-              <? } else { ?>
-  <div id="avisoSair" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-  
-        <div class="modal-content">
-            <div class="modal-body modalForm">
-                <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
-
-                <div class="iconeModal text-center">
-                    <img src="<?=PATHSITE?>images/soufesta.svg">
-                </div>
-
-                <h2 class='mt-3 mb-3'>
-                   Olá <?=$anunciante->titulo?>,
-                </h2>
-                <h4 class='mt-3 mb-3'>
-                   seja bem vindo a área do anunciante do Vai Ser Aqui. Para iniciar, selecione o tipo de anuncio que você irá cadastrar e o nome do seu anúncio:
-                </h4>
-              
-                 <input placeholder='Qual o nome do seu anúncio?' id='titulo' class='form-control' type='text' name='titulo' value='' />
-              
-                <select id='tipoFK' name='tipopFK' class='form-control'>
-                  <option value=''>Selecione</option>
-                   <option value='1'>Espaço</option>  
-                    <option value='2'>Serviço</option>  
-                   <!-- <option value='3'>Bares e Restaurantes</option>  -->
-                  <!--  <option value='4'>Evento</option>  -->
-              </select>
-              
-          
-              <button onclick='primeiroAnuncio()' type="button" class="form-control formsubmit" name="">
-                                    Cadastrar
-                                </button>
-                
-            </div>
-        </div>
-    </div>
-</div>
-<? } ?>
+              <? } ?>
             </div>
         </div>        
     </section>
