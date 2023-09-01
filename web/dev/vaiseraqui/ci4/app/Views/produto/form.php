@@ -31,6 +31,54 @@
                         </div>
                      </div>
 
+                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="ativo">Anúncio ativo?</label>
+                           <select name="ativo" id="ativo" class="form-control" required>
+                              <option value="0" <?= $resultado->ativo == "0" ? "selected" : "" ?>>NÃO</option>
+                              <option value="1" <?= $resultado->ativo == "1" ? "selected" : "" ?>>SIM</option>
+                           </select>
+                        </div>
+                     </div>
+
+                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="inicioValidade">Início validade</label>
+                           <input type="date" name="inicioValidade" class="form-control" id="inicioValidade" value="<?= $resultado->inicioValidade ?>" placeholder="Escreva..." required>
+                        </div>
+                     </div>
+
+                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="validade">Fim validade</label>
+                           <input type="date" name="validade" class="form-control" id="validade" value="<?= $resultado->validade ?>" placeholder="Escreva..." required>
+                        </div>
+                     </div>
+
+                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="destaque">Anúncio destacado?</label>
+                           <select name="destaque" id="destaque" class="form-control" required>
+                              <option value="0" <?= $resultado->destaque == "0" ? "selected" : "" ?>>NÃO</option>
+                              <option value="1" <?= $resultado->destaque == "1" ? "selected" : "" ?>>SIM</option>
+                           </select>
+                        </div>
+                     </div>
+
+                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="inicioDestaque">Início destaque</label>
+                           <input type="date" name="inicioDestaque" class="form-control" id="inicioDestaque" value="<?= $resultado->inicioDestaque ?>" placeholder="Escreva..." required>
+                        </div>
+                     </div>
+
+                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="validadeDestaque">Fim Destaque</label>
+                           <input type="date" name="validadeDestaque" class="form-control" id="validadeDestaque" value="<?= $resultado->validadeDestaque ?>" placeholder="Escreva..." required>
+                        </div>
+                     </div>
+
                   </div>
                </div>
 
@@ -213,7 +261,7 @@
                <? if (in_array($get['tipo'], [1, 3])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
-                       Informações importantes
+                        Informações importantes
                      </h4>
                      <!-- /.box-title -->
                      <div class="card-content">
@@ -335,7 +383,7 @@
                      <div class="card-content" id="cmddCatContainer">
                         <? if ($catsCmdds) { ?>
                            <? foreach ($catsCmdds as $ind => $area) { ?>
-                              <div class="form-group col-xs-12 paddingZeroM catCmdd-div card-content" data-cat-titulo="<?=str_replace(' ', '', $area->titulo) ?>">
+                              <div class="form-group col-xs-12 paddingZeroM catCmdd-div card-content" data-cat-titulo="<?= str_replace(' ', '', $area->titulo) ?>">
 
                                  <input type="hidden" name="catCmdd[ <?= $ind ?> ][id]" value="<?= $area->id ?>">
 
@@ -349,7 +397,7 @@
 
                                  <div class="col-xs-12 form-group">
                                     <label for="catCmdd<?= $area->titulo ?>">Adicionadas</label>
-                                    <input type="text" name="catCmdd[ <?= $ind ?> ][comodidades]" class="form-control tag-it mySingleFieldTags" id="catCmdd<?= str_replace(' ', '', $area->titulo)?>" value="<?= $area->comodidades ?>" placeholder="Escreva...">
+                                    <input type="text" name="catCmdd[ <?= $ind ?> ][comodidades]" class="form-control tag-it mySingleFieldTags" id="catCmdd<?= str_replace(' ', '', $area->titulo) ?>" value="<?= $area->comodidades ?>" placeholder="Escreva...">
                                  </div>
 
                                  <div class='form-group col-xs-12 paddingZeroM'>
@@ -586,6 +634,48 @@
                <? if (in_array($get['tipo'], [5])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title with-btn">
+                        Datas
+                        <button type="button" class="btn btn-icon btn-icon-left btn-success btn-xs btn-rounded " onclick="adicionarData()">
+                           Adicionar data
+                           <i class="ico bi bi-plus-lg"></i>
+                        </button>
+                     </h4>
+
+                     <div class="card-content" id="datas-container">
+                        <? if ($datas) { ?>
+                           <? foreach ($datas as $ind => $item) { ?>
+                              <div class='form-group col-xm-12 col-lg-4 paddingZeroM card-content data-div'>
+                                 <div class="col-xs-12 col-sm-12">
+
+                                    <input type="hidden" name="datas[<?= $ind ?>][id]" value="<?= $item->id ?>">                                    
+                                    <label for="data<?= $ind ?>" class="with-btn">
+                                       Data 
+                                       <button class="btn btn-rounded btn-danger btn-xs" type="button" data-parent="data-div">Excluir</button>
+                                    </label>
+                                    <input type="date" name="datas[<?= $ind ?>][data]" class="form-control" id="data<?= $ind ?>" value="<?= $item->data ?>" placeholder="Escreva..." required>
+
+                                    <label for="horario<?= $ind ?>">Horário</label>
+                                    <input type="time" name="datas[<?= $ind ?>][horario]" class="form-control" id="horario<?= $ind ?>" value="<?= $item->horario ?>" placeholder="Escreva..." required>
+                                 </div>
+                              </div>
+                           <? } ?>
+                        <? } else { ?>
+                           <div class='form-group col-xm-12 col-lg-4 paddingZeroM card-content data-div'>
+                              <div class="col-xs-12 col-sm-12">
+                                 <label for="data0">Data</label>
+                                 <input type="date" name="datas[0][data]" class="form-control" id="data0" value="" placeholder="Escreva..." required>
+
+                                 <label for="horario0">Horário</label>
+                                 <input type="time" name="datas[0][horario]" class="form-control" id="horario0" value="" placeholder="Escreva..." required>
+                              </div>
+                           </div>
+                        <? } ?>
+                     </div>
+                  </div>
+
+
+                  <div class="box-content card white">
+                     <h4 class="box-title with-btn">
                         Ingressos
                         <button type="button" class="btn btn-icon btn-icon-left btn-success btn-xs btn-rounded dialog-btn" data-target="modalSetorIngresso">
                            Adicionar categoria
@@ -701,7 +791,7 @@
 
                                  <div class='col-xm-12 col-lg-6 paddingZeroM'>
                                     <div class="col-xs-12 form-group">
-                                       <label>Organização <?=$key + 1?></label>
+                                       <label>Organização <?= $key + 1 ?></label>
                                        <input type="text" name="organizadores[ <?= $key ?> ][titulo]" class="form-control" value="<?= $item->titulo ?>" placeholder="Escreva..." required>
                                     </div>
                                  </div>
@@ -727,7 +817,7 @@
                                     </div>
                                  </div>
                               </div>
-                           <? }
+                        <? }
                         } ?>
                      </div>
                   </div>
@@ -1064,6 +1154,7 @@
          .organizacao-div {
             position: relative;
          }
+
          .organizacao-div button[data-parent] {
             position: absolute;
             top: 1rem;
@@ -1073,9 +1164,33 @@
       </style>
 
       <script>
+         // Adicionar Datas
+
+         let datasCount = document.querySelectorAll(".data-div").length
+
+         function adicionarData() {
+            const datasContainer = document.querySelector("#datas-container")
+            const newElement = document.createElement("div")
+            datasCount++
+
+            newElement.classList.add("form-group", "col-xs-12", "col-lg-4", "paddingZeroM", "data-div", "card-content")
+            newElement.innerHTML = `
+               <div class="col-xs-12 col-sm-12">
+                  <label for="data${datasCount}" class="with-btn">
+                     Data 
+                     <button class="btn btn-rounded btn-danger btn-xs" type="button" data-parent="data-div">Excluir</button>
+                  </label>
+                  <input type="date" name="datas[${datasCount}][data]" class="form-control" id="data${datasCount}" value="" placeholder="Escreva..." required>
+
+                  <label for="horario${datasCount}">Horário</label> 
+                  <input type="time" name="datas[${datasCount}][horario]" class="form-control" id="horario${datasCount}" value="" placeholder="Escreva..." required>                              
+               </div>
+            `
+            datasContainer.appendChild(newElement)
+         }
+
          // Adicionar Organizadores
          let organizadoresCount = document.querySelectorAll(".organizacao-div").length
-         
 
          function adicionarOrganizadores() {
             const organizadoresContainer = document.querySelector("#organizadoresContainer")

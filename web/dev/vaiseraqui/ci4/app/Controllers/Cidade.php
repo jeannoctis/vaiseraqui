@@ -10,7 +10,7 @@ class Cidade extends BaseController
       $this->session = \Config\Services::session($config);
       helper(['encrypt', 'text']);
       $this->model = model('App\Models\CidadeModel', false);
-      $this->tabela = "artigo";
+      $this->tabela = "cidade";
       $this->session->set('menuAdmin', '5');
    }
 
@@ -24,9 +24,37 @@ class Cidade extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $this->model->orderBy("titulo ASC");
+      $data['get'] = $get = request()->getGet();
+      $paginate = \is_numeric($get['page_anunciantes']) ? $get['page_anunciantes'] : 1;
 
-      $data['artigos'] = $this->model->findAll();
+      $this->estadoModel = \model('App\Models\EstadoModel', false)
+         ->select("estado.titulo, estado.sigla")
+         ->join("cidade", "cidade.estadoFK = estado.id")
+         ->orderBy("estado.titulo ASC")
+         ->distinct();
+      $data['estados'] = $this->estadoModel->findAll();
+
+      $this->model
+         ->select("cidade.*, estado.titulo estado, estado.sigla")
+         ->join("estado", "cidade.estadoFK = estado.id")
+         ->orderBy("cidade.titulo ASC");
+
+      if (!empty($get)) {
+
+         if (!empty($get['estado'])) {
+            $this->model->where("sigla", $get['estado']);
+         }
+
+         if (!empty($get['procura'])) {
+            $this->model->groupStart()
+               ->like("cidade.titulo", $get['procura'])
+               ->orLike("estado.titulo", $get['procura'])
+               ->orLike("sigla", $get['procura'])
+               ->groupEnd();
+         }
+      }
+      $data['lista'] = $this->model->paginate(25, "cidades", $paginate);
+      $data['pager'] = $this->model->pager;
 
       $data['title'] = 'Cidades';
       $data['tabela'] = "cidade";
@@ -49,10 +77,10 @@ class Cidade extends BaseController
       $data['tabela'] = 'cidade';
       $data['resultado'] = "";
 
-        $estadoModel = model('App\Models\EstadoModel', false);
-        $estadoModel->orderBy('titulo ASC');
+      $estadoModel = model('App\Models\EstadoModel', false);
+      $estadoModel->orderBy('titulo ASC');
       $data['estados'] =  $estadoModel->findAll();
-      
+
       if ($post) {
 
          if ($post['apagararquivo']) {
@@ -89,18 +117,18 @@ class Cidade extends BaseController
 
          if ($id) {
             $post["id"] = $id;
-            $data['salvou'] = $this->model->save($post);            
+            $data['salvou'] = $this->model->save($post);
          } else {
             $post["identificador"] = \arruma_url($post['titulo']);
             $data['salvou'] = $this->model->insert($post);
          }
 
-         $data["erros"] = $this->model->errors();                
+         $data["erros"] = $this->model->errors();
          $post['artigoFK'] = $id;
       }
 
       if ($id) {
-         $data["resultado"] = $this->model->find($id);         
+         $data["resultado"] = $this->model->find($id);
       }
 
       echo view('templates/admin-header', $data);

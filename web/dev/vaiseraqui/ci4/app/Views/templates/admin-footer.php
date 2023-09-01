@@ -157,7 +157,7 @@
     }
   });
 
-  $('select#categorias, select#cidades, select#anunciantes').on('change', function() {
+  $('select#categorias, select#cidades, select#anunciantes, select#estados').on('change', function() {
     $("#formFiltro").submit()
   })
 </script>

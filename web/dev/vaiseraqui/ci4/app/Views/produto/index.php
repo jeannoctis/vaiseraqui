@@ -122,6 +122,11 @@
 							</form>
 						</div>
 					<? } ?>
+
+					<nav class="col-xs-12 navigation-pages ">
+						<?= $pager->links('produtos') ?>
+					</nav>
+
 				</div>
 			</div>
 		</div>

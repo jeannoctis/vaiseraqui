@@ -153,9 +153,14 @@ if ($acesso['usuarioFK'] > 3) {
                                 <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-house-door-fill"></i><span>Home</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'banner' && decode($segments[3]) == 1) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/banner/form/<?= encode(1) ?>">Banner</a></li>
-                                    <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 8) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(8) ?>">Texto Menu</a></li>                                    
+                                    <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 8) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(8) ?>">Texto Menu</a></li>
+                                    <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 15) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(15) ?>">Seção Espaços</a></li>
+                                    <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 16) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(16) ?>">Seção Prestadores de Serviços</a></li>
                                     <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 9) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(9) ?>">Convite anunciante 1</a></li>
                                     <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 10) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(10) ?>">Convite anunciante 2</a></li>                                    
+                                    <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 19) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(19) ?>">Banner ADS</a></li>                                    
+                                    <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 17) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(17) ?>">Seção Calendário</a></li>
+                                    <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 18) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(18) ?>">Seção Blog</a></li>
                                     <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 7) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(7) ?>">Bloco Contato</a></li>
                                 </ul>
                             </li>
@@ -187,13 +192,24 @@ if ($acesso['usuarioFK'] > 3) {
                         </ul>
                     <? } ?>
 
+                    <? if (in_array(7, $aprovados) || $adminMaster) { ?>
+                        <ul class="menu js__accordion">
+                            <li class='<?= ($_SESSION["menuAdmin"] == 7) ? 'current active' : '' ?> '>
+                                <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-hypnotize"></i><span>Anúncios</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                                <ul class="sub-menu js__content">
+                                    <li class='<?= ($segments[1] == 'anuncio') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio/em_alta/"><i class="bi-caret-right-fill"></i> Em Alta</a></li>
+                                    <li class='<?= ($segments[1] == 'anunciante') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anunciante/"><i class="bi-caret-right-fill"></i> Anunciantes</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    <? } ?>
+
                     <? if (in_array(5, $aprovados) || $adminMaster) { ?>
                         <ul class="menu js__accordion">
                             <li class='<?= ($_SESSION["menuAdmin"] == 5) ? 'current active' : '' ?> '>
                                 <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-person-circle"></i><span>Cadastros</span><span class="menu-arrow fa fa-angle-down"></span></a>
                                 <ul class="sub-menu js__content">
-                                    <li class='<?= ($segments[1] == 'cidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cidade/"><i class="bi-caret-right-fill"></i> Cidades</a></li>
-                                    <li class='<?= ($segments[1] == 'anunciante') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anunciante/"><i class="bi-caret-right-fill"></i> Anunciantes</a></li>
+                                    <li class='<?= ($segments[1] == 'cidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cidade/"><i class="bi-caret-right-fill"></i> Cidades</a></li>                                    
                                     <li class='<?= ($segments[1] == 'comodidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/comodidade/"><i class="bi-caret-right-fill"></i> Comodidades</a></li>
                                     <li class='<?= ($segments[1] == 'proximidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/proximidade/"><i class="bi-caret-right-fill"></i> Proximidades</a></li>
                                     <li class='<?= ($segments[1] == 'cardapio') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cardapio/"><i class="bi-caret-right-fill"></i> Cardápio</a></li>
@@ -209,6 +225,7 @@ if ($acesso['usuarioFK'] > 3) {
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=1"><i class="bi-caret-right-fill"></i> Listagem</a></li>
                                     <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=1"><i class="bi-caret-right-fill"></i> Categorias</a></li>
+                                    <li class='<?= ($segments[1] == 'anuncio_tipo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio/tipo/<?=encode(1)?>"><i class="bi-caret-right-fill"></i> Anúncios</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -221,6 +238,7 @@ if ($acesso['usuarioFK'] > 3) {
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=2"><i class="bi-caret-right-fill"></i> Listagem</a></li>
                                     <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=2"><i class="bi-caret-right-fill"></i> Categorias</a></li>
+                                    <li class='<?= ($segments[1] == 'anuncio_tipo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio/tipo/<?=encode(2)?>"><i class="bi-caret-right-fill"></i> Anúncios</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -233,6 +251,7 @@ if ($acesso['usuarioFK'] > 3) {
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=3"><i class="bi-caret-right-fill"></i> Listagem</a></li>
                                     <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=3"><i class="bi-caret-right-fill"></i> Categorias</a></li>
+                                    <li class='<?= ($segments[1] == 'anuncio_tipo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio/tipo/<?=encode(3)?>"><i class="bi-caret-right-fill"></i> Anúncios</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -245,6 +264,7 @@ if ($acesso['usuarioFK'] > 3) {
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=4"><i class="bi-caret-right-fill"></i> Listagem</a></li>
                                     <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=4"><i class="bi-caret-right-fill"></i> Categorias</a></li>
+                                    <li class='<?= ($segments[1] == 'anuncio_tipo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio/tipo/<?=encode(4)?>"><i class="bi-caret-right-fill"></i> Anúncios</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -257,6 +277,7 @@ if ($acesso['usuarioFK'] > 3) {
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=5"><i class="bi-caret-right-fill"></i> Listagem</a></li>
                                     <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=5"><i class="bi-caret-right-fill"></i> Categorias</a></li>
+                                    <li class='<?= ($segments[1] == 'anuncio_tipo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio/tipo/<?=encode(5)?>"><i class="bi-caret-right-fill"></i> Anúncios</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -269,6 +290,7 @@ if ($acesso['usuarioFK'] > 3) {
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'produto') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto?tipo=6"><i class="bi-caret-right-fill"></i> Listagem</a></li>
                                     <li class='<?= ($segments[1] == 'produto_categoria') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/produto_categoria?tipo=6"><i class="bi-caret-right-fill"></i> Categorias</a></li>
+                                    <li class='<?= ($segments[1] == 'anuncio_tipo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio/tipo/<?=encode(6)?>"><i class="bi-caret-right-fill"></i> Anúncios</a></li>
                                 </ul>
                             </li>
                         </ul>

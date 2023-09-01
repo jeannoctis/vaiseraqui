@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use stdClass;
-
 class Produto extends BaseController
 {
 
@@ -30,12 +28,14 @@ class Produto extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $data['get'] = $get = request()->getGet();
+      $data['get'] = $get = request()->getGet();      
+
+      $paginate = \is_numeric($get['page_produtos']) ? $get['page_produtos'] : 1 ;
 
       $this->produtoCategoriaModel
          ->select('id, titulo')
          ->where("tipoFK", $get['tipo']);
-      $IDsCategorias = $data['categorias'] = $this->produtoCategoriaModel->findAll();      
+      $IDsCategorias = $data['categorias'] = $this->produtoCategoriaModel->findAll();
 
       $this->estadoModel = model('App\Models\EstadoModel', false)
          ->select('estado.id AS estado_id, estado.titulo AS estado_titulo, cidade.id AS cidade_id, cidade.titulo AS cidade_titulo')
@@ -57,7 +57,7 @@ class Produto extends BaseController
             'cidade_id' => $item->cidade_id,
             'cidade_titulo' => $item->cidade_titulo
          ];
-      }      
+      }
       $data['estados'] = array_values($estados);
 
       $this->anuncianteModel = \model('App\Models\AnuncianteModel', false);
@@ -67,39 +67,40 @@ class Produto extends BaseController
          ->join("produto p", "anunciante.id = p.anuncianteFK")
          ->findAll();
 
-      if (!empty($IDsCategorias)) {
-         $IDsCategorias = \array_column($IDsCategorias, 'id');
-
-         if (!empty($get['categoria'])) {
-            $this->model->where("categoriaFK", $get['categoria']);
-         } else {
-            $this->model->whereIn("categoriaFK", $IDsCategorias);
-         }
-
-         if (!empty($get['procura'])) {
-            $this->model->groupStart()
-               ->like("titulo", $get['procura'])
-               ->orLike("descricao", $get['procura'])
-               ->orLike("detalhes", $get['procura'])
-               ->groupEnd();
-         }
-
-         if (!empty($get['cidade'])) {
-            $this->model->where("cidadeFK", $get['cidade']);
-         }
-
-         if (!empty($get['anunciante'])) {
-            $this->model->where("anuncianteFK", $get['anunciante']);
-         }
-
-         if (!empty($get['anunciante'])) {
-            $this->model->where("anuncianteFK", $get['anunciante']);
-         }
-
-         $data['lista'] = $this->model->orderBy("titulo ASC")->findAll();
-      } else {
-         $data['lista'] = [];
+      if(empty($IDsCategorias)) {
+         $IDsCategorias[]['id'] = 0;
       }
+      
+      $IDsCategorias = array_column($IDsCategorias, 'id');
+
+      if (!empty($get['categoria'])) {
+         $this->model->where("categoriaFK", $get['categoria']);
+      } else {
+         $this->model->whereIn("categoriaFK", $IDsCategorias);
+      }
+
+      if (!empty($get['procura'])) {
+         $this->model->groupStart()
+            ->like("titulo", $get['procura'])
+            ->orLike("descricao", $get['procura'])
+            ->orLike("detalhes", $get['procura'])
+            ->groupEnd();
+      }
+
+      if (!empty($get['cidade'])) {
+         $this->model->where("cidadeFK", $get['cidade']);
+      }
+
+      if (!empty($get['anunciante'])) {
+         $this->model->where("anuncianteFK", $get['anunciante']);
+      }
+
+      if (!empty($get['anunciante'])) {
+         $this->model->where("anuncianteFK", $get['anunciante']);
+      }
+      
+      $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);         
+      $data['pager'] = $this->model->pager;
 
       $data['tipo'] = \getTipo($get['tipo']);
 
@@ -129,24 +130,14 @@ class Produto extends BaseController
          ->where('EXISTS (SELECT 1 FROM cidade WHERE estado.id = cidade.estadoFK)')
          ->orderBy('titulo ASC')
          ->findAll();
+      
 
       foreach ($data['estados'] as $ind => $estado) {
          $this->cidadeModel->resetQuery();
          $this->cidadeModel->where('estadoFK', $estado->id);
          $this->cidadeModel->orderBy('titulo ASC');
          $data['estados'][$ind]->cidades = $this->cidadeModel->findAll();
-      }
-
-      foreach ($data['estados'] as $estado) {
-         // As cidades estão diretamente associadas aos estados nos resultados
-         $cidadesDoEstado = [];
-         foreach ($data['estados'] as $item) {
-            if ($item->id === $estado->id) {
-               $cidadesDoEstado[] = $item;
-            }
-         }
-         $estado->cidades = $cidadesDoEstado;
-      }
+      }      
 
       $this->anuncianteModel = \model('App\Models\AnuncianteModel', false);
       $data['anunciantes'] = $this->anuncianteModel->orderBy("titulo ASC, id DESC")->findAll();
@@ -161,6 +152,7 @@ class Produto extends BaseController
       $this->produtoPontoDeVendaModel = \model('App\Models\ProdutoPontoDeVendaModel', false);
       $this->produtoCardapioModel = \model('App\Models\ProdutoCardapioModel', false);
       $this->produtoOrganizacaoModel = \model('App\Models\ProdutoOrganizacaoModel', false);
+      $this->produtoDataModel = \model('App\Models\ProdutoDataModel', false);
 
       $this->comodidadeModel = \model('App\Models\ComodidadeModel', false);
       $data['comodidadesDisponiveis'] = $this->comodidadeModel->findAll();
@@ -171,7 +163,7 @@ class Produto extends BaseController
       $this->cardapioModel = \model('App\Models\CardapioModel', false);
       $data['cardapiosDisponiveis'] = $this->cardapioModel->findAll();
 
-      $data['title'] = 'Produto';
+      $data['title'] = 'Anúncio';
       $data['tabela'] = 'produto';
       $data['resultado'] = "";
 
@@ -330,11 +322,6 @@ class Produto extends BaseController
          }
 
          if (!empty($post['setorIngresso'])) {
-
-            // echo '<pre>';
-            // print_r($post['setorIngresso']);
-            // echo '</pre>';
-            // exit();
 
             $IDsReceivedSetor = \array_column($post['setorIngresso'], "id");
             if (!empty($IDsReceivedSetor)) {
@@ -518,6 +505,43 @@ class Produto extends BaseController
             $this->produtoOrganizacaoModel->where("produtoFK", $lastId)->delete();
          }
 
+         if(!empty($post['datas'])) {
+            $IDsReceviedDatas = \array_column($post['datas'], "id");            
+
+            if (!empty($IDsReceviedDatas)) {
+               $this->produtoDataModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceviedDatas)
+                  ->delete();
+            }
+
+            foreach($post['datas'] as $item) {
+               if(!empty($item['id'])) {
+                  $updateDatas[] = [
+                     'id' => $item['id'],
+                     'data' => $item['data'],
+                     'horario' => $item['horario']
+                  ];
+               } else {
+                  $insertDatas[] = [
+                     'produtoFK' => $lastId,
+                     'data' => $item['data'],
+                     'horario' => $item['horario']
+                  ];
+               }
+            }
+
+            if (!empty($updateDatas)) {
+               $this->produtoDataModel->updateBatch($updateDatas, "id");
+            }
+            if (!empty($insertDatas)) {
+               $this->produtoDataModel->insertBatch($insertDatas);
+            }
+
+         } else {
+            $this->produtoDataModel->where("produtoFK", $lastId)->delete();
+         }
+
          $data["erros"] = $this->model->errors();
       }
 
@@ -563,9 +587,9 @@ class Produto extends BaseController
          }
 
          $data['pontosDeVenda'] = $this->produtoPontoDeVendaModel->where("produtoFK", $id)->findAll();
-
          $data['cardapios'] = $this->produtoCardapioModel->where("produtoFK", $id)->findAll();
          $data['organizadores'] = $this->produtoOrganizacaoModel->where("produtoFK", $id)->findAll();
+         $data['datas'] = $this->produtoDataModel->where("produtoFK", $id)->findAll();
       }
 
       echo view('templates/admin-header', $data);

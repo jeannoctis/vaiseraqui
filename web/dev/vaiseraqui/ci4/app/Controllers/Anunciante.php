@@ -11,7 +11,7 @@ class Anunciante extends BaseController
       helper(['encrypt', 'text']);
       $this->model = model('App\Models\AnuncianteModel', false);
       $this->tabela = "anunciante";
-      $this->session->set('menuAdmin', '5');
+      $this->session->set('menuAdmin', '7');
    }
 
    public function index()
@@ -24,9 +24,22 @@ class Anunciante extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $this->model->orderBy("titulo ASC");
+      $data['get'] = $get = request()->getGet();
+      $paginate = \is_numeric($get['page_anunciantes']) ? $get['page_anunciantes'] : 1;
 
-      $data['artigos'] = $this->model->findAll();
+      if (!empty($get['procura'])) {
+         $this->model->groupStart()
+            ->like("titulo", $get['procura'])
+            ->orLike("cpf", $get['procura'])
+            ->orLike("telefone", $get['procura'])
+            ->orLike("telefone2", $get['procura'])
+            ->orLike("telefone3", $get['procura'])
+            ->orLike("email", $get['procura'])
+            ->groupEnd();
+      }
+
+      $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'anunciantes', $paginate);
+      $data['pager'] = $this->model->pager;
 
       $data['title'] = 'Anunciante';
       $data['tabela'] = "anunciante";
@@ -48,7 +61,7 @@ class Anunciante extends BaseController
       $data['title'] = 'Anunciante';
       $data['tabela'] = 'anunciante';
       $data['resultado'] = "";
-      
+
       if ($post) {
 
          if ($post['apagararquivo']) {
@@ -82,34 +95,33 @@ class Anunciante extends BaseController
                }
             }
          }
-         
-         if($post['senha']) {
-         $post['senha'] = sha1($post['senha']);
+
+         if ($post['senha']) {
+            $post['senha'] = sha1($post['senha']);
          }
 
          if ($id) {
             $post["id"] = $id;
-            $data['salvou'] = $this->model->save($post);            
+            $data['salvou'] = $this->model->save($post);
          } else {
             $post["identificador"] = \arruma_url($post['titulo']);
             $data['salvou'] = $this->model->insert($post);
          }
 
-         $data["erros"] = $this->model->errors();                
+         $data["erros"] = $this->model->errors();
          $post['artigoFK'] = $id;
       }
 
       if ($id) {
-         $data["resultado"] = $this->model->find($id);         
+         $data["resultado"] = $this->model->find($id);
       }
 
       echo view('templates/admin-header', $data);
       echo view("{$data['tabela']}/form");
       echo view('templates/admin-footer');
    }
-   
-   public function anunciante() {
-       
+
+   public function anunciante()
+   {
    }
-   
 }

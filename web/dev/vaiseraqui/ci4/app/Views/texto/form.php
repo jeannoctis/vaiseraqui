@@ -11,7 +11,7 @@
  							<div class='form-group col-xs-12 paddingZeroM'>
  								<div class="col-xs-12 col-sm-12">
  									<label for="titulo">Titulo</label>
- 									<input type="text" name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?> " placeholder="Escreva...">
+ 									<input type="text" name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?> " placeholder="Escreva..." <?= in_array($resultado->id, [15, 16, 17]) ? "readonly" : "" ?>>
  								</div>
  							</div>
  							
