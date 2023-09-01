@@ -1,0 +1,14 @@
+<svg  width="27" height="26" viewBox="0 0 27 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M2.82373 17.2353V4.15686C2.82373 3.10458 3.45902 1 6.0002 1C7.05902 1 9.17667 1.63137 9.17667 4.15686C9.17667 6.68235 9.17667 13.9281 9.17667 17.2353" stroke="white" stroke-width="1.2"/>
+  <path d="M0 17.2354H24.0743C24.5201 17.2354 25.4118 17.2354 25.4118 18.0981C25.4118 18.9608 25.4118 23.2746 25.4118 24.1373C25.4118 25.0001 25.1443 25.0001 24.0743 25.0001H0" stroke="white" stroke-width="1.2"/>
+  <path d="M0 20.7646H10.5882" stroke="white" stroke-width="1.2"/>
+  <path d="M13.4115 17.2354L7.05859 25.0001" stroke="white" stroke-width="1.2"/>
+  <path d="M18.3531 17.2354L12.7061 25.0001" stroke="white" stroke-width="1.2"/>
+  <path d="M23.9999 17.2354L17.647 25.0001" stroke="white" stroke-width="1.2"/>
+  <path d="M21.1763 5.94141V17.2355" stroke="white" stroke-width="1.2"/>
+  <path d="M9.17627 9.99498C11.2813 8.48602 14.5666 6.13105 14.5666 6.13105C14.7164 5.98794 15.1057 5.78759 15.465 6.13105C15.8244 6.47451 21.3046 10.8536 23.9998 13.0002" stroke="white" stroke-width="1.2"/>
+  <mask id="path-9-inside-1_1232_5458" fill="white">
+  <rect x="12.7061" y="12.2939" width="4.23529" height="4.94118" rx="1"/>
+  </mask>
+  <rect x="12.7061" y="12.2939" width="4.23529" height="4.94118" rx="1" stroke="white" stroke-width="2.4" mask="url(#path-9-inside-1_1232_5458)"/>
+</svg>

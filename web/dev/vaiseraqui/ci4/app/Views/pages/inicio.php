@@ -2,15 +2,12 @@
  $infoPagina['nomeDaPagina'] = "Informações do anúncio";
           $infoPagina['iconePagina'] = 'icone_informacao.svg';
 
-if($anuncio->tipoFK == 4){
-  $infoPagina['difValidade'] = $anuncio->difInicio;
-  $infoPagina['difDestaque'] = $anuncio->difDestaque;
-  $infoPagina['inicioValidade'] = $anuncio->inicioValidade;
-} else {
+
+
    $infoPagina['difValidade'] = $anuncio->difValidade;
   $infoPagina['difDestaque'] = $anuncio->difDestaque;
     $infoPagina['inicioValidade'] = $anuncio->validade;
-}
+
 
 if($difValidade >= 0 && $anuncio->ativo == '1' ) { 
 $infoPagina['statusAnuncio'] = "ATIVO";

@@ -1,0 +1,105 @@
+.blog-list-categories {
+  .navigation-breadcrumb {
+    margin-top: 3rem;
+    margin-bottom: 2.5rem;
+
+    @media screen and (max-width: 991px) {
+      margin-top: 1rem;
+      margin-bottom: 2rem;
+    }
+  }
+  .header-page {
+    height: 15.625rem;
+    width: 100%;
+    background-color: #ECECEC;
+    .container-medium {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+
+      h1 {
+        color: $gray-300;
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 120.1%;
+        letter-spacing: -0.1rem;
+      }
+
+      .goback {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        background-color: transparent;
+        color: $gray-300;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 120.1%;
+        letter-spacing: -0.04rem;
+        border: 0;        
+      }
+    }
+
+    @media screen and (max-width: 991px) {
+      height: auto;
+      padding-top: 30px;
+      padding-bottom: 30px;
+
+      .container-medium {
+        h1 {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  .s-last {
+    .container-medium {
+      form {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 3.12rem;
+        margin-bottom: 3.13rem;
+
+        span {
+          color: $gray-400;
+          font-size: 0.875rem;
+          font-weight: 500;
+          letter-spacing: -0.02975rem;
+        }
+      }
+      .list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.87rem 1.37rem;
+      }
+
+      @media screen and (max-width: 991px) {
+        form {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+          margin-bottom: 2rem;
+        }
+        .list {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.25rem 1rem;
+        }
+      }
+
+      @media screen and (max-width: 769px) {
+        form {
+          .input-order {
+            width: 100%;
+            label {
+              width: 100%;
+            }
+          }
+        }
+        .list {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}

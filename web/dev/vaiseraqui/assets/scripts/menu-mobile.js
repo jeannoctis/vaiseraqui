@@ -1,100 +1,47 @@
-// Menu mobile
-const btnMenu = document.querySelector('.header .menu')
-const navMobile = document.querySelector('nav.only-mobile')
-const headerContainer = document.querySelector('header.header')
-const mobileNavItems = document.querySelectorAll(".j-button-scroll-section");
+(function() {
+  // Show menu mobile 
+  const btnMenu = document.querySelector('.menu-mobile-button')
+  const menuMobile = document.querySelector('.menu-mobile-modal')
+  const btnMenuMobile = menuMobile.querySelector('.menu-mobile-button-modal')
+  const body = document.querySelector('body')
+  const menuLinks = menuMobile.querySelectorAll('.menu-mobile-links a')
 
-btnMenu.addEventListener('click', (e) => {
-  e.preventDefault()
-  if (btnMenu.classList.contains('active')) {
-    closeMobileNav()
+  if (window.innerWidth < 1140) {
+    btnMenu.addEventListener('click', function() {
+      menuMobile.classList.add('open')
+      btnMenu.classList.add('open')
+      btnMenuMobile.classList.add('open')
+      body.classList.add('no-scroll')
+    })
+    
+    btnMenuMobile.addEventListener('click', function() {
+      menuMobile.classList.remove('open')
+      btnMenu.classList.remove('open')
+      btnMenuMobile.classList.remove('open')
+      body.classList.remove('no-scroll')
+    })
+  
+    menuLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        btnMenuMobile.click()
+        header.classList.add('up')
+        setTimeout(() => {
+          header.classList.add('up')
+        }, 1000)
+      })
+    })
   } else {
-    document.querySelector('body').style.overflow = 'hidden'
-    btnMenu.classList.add('active')
-    navMobile.classList.add('open')
-    headerContainer.style.backgroundColor = '#FFF';
+    const modalFilter = document.querySelector('.moda-filter-container')
+    btnMenu.addEventListener('click', (e) => {
+      btnMenu.classList.add('open')
+      
+      if (modalFilter) {
+        body.classList.add('no-scroll')
+        modalFilter.classList.add('open')
+      }
+      
+    })
   }
-})
 
-mobileNavItems.forEach(item => {
-  item.addEventListener("click", closeMobileNav)
-})
-
-function closeMobileNav() {
-  document.querySelector('body').style.overflow = 'scroll'
-  btnMenu.classList.remove('active')
-  navMobile.classList.remove('open')
-  headerContainer.style.backgroundColor = headerContainer.classList.contains('active') ? '#FFF' : 'transparent';
-}
-
-const avisoCookies = document.querySelector("#aviso-cookies")
-
-function aceitaCookie () {
-  setCookie('aceitou', '1', 30);
-  avisoCookies.classList.add("hideCookie")
-  setTimeout(() => { avisoCookies.style.display = 'none' }, 400)
-}
-function setCookie (cname, cvalue, exdays) {
-  const d = new Date();
-  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-  let expires = "expires=" + d.toUTCString();
-  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-const shown = document.querySelector(".shown")
-const whatsapp = document.querySelector(".whatsapp")
-const ulWhatsapp = document.querySelector(".ul-whatsapp")
-
-function listaWhatsapp () {
-  !shown ? (whatsapp.classList.toggle("shown"), ulWhatsapp.classList.toggle("shown")) : '';
-}
-function visitaPagina (pagina) {
-  $.post(PATHSITE + "utils/visitaPagina/", { pagina: pagina }, function (e) {
-  });
-}
-function contadorWhatsapp (whatsappFK) {
-  $.post(PATHSITE + "utils/contadorWhatsapp/", { whatsappFK: whatsappFK }, function (e) { });
-}
-function cliqueBanner (bannerFK) {
-  $.post(PATHSITE + "utils/contadorBanner/", { bannerFK: bannerFK }, function (e) { });
-}
-
-function callRecaptcha () {
-  grecaptcha.ready(function () {
-    grecaptcha.execute(public_recaptcha, { action: "" }).then(function (e) {
-       //  document.getElementById("g-recaptcha-response").value = e;
-      $(".g-recaptcha-response").val(e);
-    });
-  });
-}
-
-var options = {
-  type: "delay",
-  time: "4000",
-  scripts: ["https://www.google.com/recaptcha/api.js?render=" + public_recaptcha],
-  success: function () {
-
-    visitaPagina(PAGINA_VISITADA);
-
-    callRecaptcha();
-    setInterval(function () {
-      callRecaptcha();
-    }, 1e5);
-     // carregaVideo();    
-   }
- };
-
- $.lazyscript(options);
- 
- function buscaCep(cep)
- {
-     cep  = cep.replace("-","");
-     $.get("https://viacep.com.br/ws/"+  cep +"/json" , {}, function (e) {
-              
-         $('#endereco').val(e.logradouro);
-          $('#bairro').val(e.bairro);
-           $('#cidade').val(e.localidade);
-            $('#estado').val(e.uf);
-        
-  });
- }
+  
+})()
