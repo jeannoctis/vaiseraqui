@@ -23,13 +23,13 @@
                      </div>
 
                      <div class="col-xs-12 form-group">
-                        <label for="arquivo">Imagem/Banner <b>(Tamanho recomendado: )</b></label>
+                        <label for="arquivo">Imagem/Banner <b>(Tamanho recomendado: <?= $resultado->id == 11 ? "1440 x 540" : "427 x 901" ?>) </b></label>
                         <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo ?>' type="file" name='arquivo' id="arquivo" class="dropify" <?= !$resultado->arquivo ? 'required' : '' ?>>
                      </div>
 
                      <? if ($resultado->id == 11) { ?>
                         <div class="col-xs-12 form-group">
-                           <label for="arquivo2">Imagem/Banner <b>(Tamanho recomendado: )</b></label>
+                           <label for="arquivo2">Imagem/Banner <b>(Tamanho recomendado: 335 x 540)</b></label>
                            <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo2 ?>' type="file" name='arquivo2' id="arquivo2" class="dropify" <?= !$resultado->arquivo2 ? 'required' : '' ?>>
                         </div>
                      <? } ?>

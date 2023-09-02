@@ -50,6 +50,10 @@ $routes->group('admin', function ($routes) {
     $routes->add('cidade/form', 'Cidade::form');
     $routes->add('cidade/form/(:any)', 'Cidade::form/$i');
 
+    $routes->add('anuncio_tipo', 'AnuncioTipo::index');
+    $routes->add('anuncio_tipo/form', 'AnuncioTipo::form');
+    $routes->add('anuncio_tipo/form/(:any)', 'AnuncioTipo::form/$i');
+
     $routes->add('anuncio', 'Anuncio::index');
     $routes->add('anuncio/modelos/(:any)', 'Anuncio::modelos');
     $routes->add('anuncio/tipo/(:any)', 'Anuncio::tipo/$i');

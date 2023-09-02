@@ -30,7 +30,7 @@
                               <tr class="ui-state-default sort" rel="<?= $item->id ?>">
                                  <td>
                                     <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/modelos/destaques/">
-                                       Em Alta
+                                       Destaques / Em Alta
                                     </a>
                                  </td>
                                  <td>

@@ -15,19 +15,7 @@ class Anuncio extends BaseController
 
    public function index()
    {
-      if (isset($_POST['excluir'])) {
-         foreach ($_POST['excluir'] as $exc) {
-            $data['excluiu'] =  $this->model->delete(['id' => $exc]);
-         }
-      } else if ($_POST['nexc']) {
-         $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
-      }
-
-      $data['get'] = $get = request()->getGet();
-      $paginate = \is_numeric($get['page_anuncios']) ? $get['page_anuncios'] : 1;
-
-      $data['lista'] = $this->model->paginate(25, 'anuncios', $paginate);
-      $data['pager'] = $this->model->pager;
+      $this->session->set('menuAdmin', 7);
 
       $data['title'] = 'Anúncios Pagos';
       $data['tabela'] = "anuncio";
@@ -36,77 +24,16 @@ class Anuncio extends BaseController
       echo view('templates/admin-header', $data);
       echo view("{$this->tabela}/index", $data);
       echo view('templates/admin-footer');
-   }
-
-   public function form()
-   {
-      helper('form');
-
-      $request = request();
-      $post = $request->getPost();
-      $id = decode($this->request->uri->getSegment(4));
-
-      $data['title'] = 'Anúncio Pago';
-      $data['tabela'] = 'anuncio';
-      $data['resultado'] = "";
-
-      $this->produtoModel = \model('App\Models\ProdutoModel', false)->where("ativo", "1");
-      $data['produtos'] = $this->produtoModel->findAll();
-
-      if ($post) {
-
-         if ($post['tipo'] == "XL") {
-            $search = $this->model->where("tipo", "XL")->where("{$post['inicio']} <= termino", NULL, FALSE);
-
-            if ($search) {
-               $data["erros"] = $this->model->errors();
-            }
-         }
-
-         if ($post['tipo'] == "HSM") {
-            $this->model
-               ->select("anuncio.*, prod.categoriaFK, prod_cat.tipoFK, tipo.id as tipo")
-               ->join("produto prod", "prod.id = anuncio.produtoFK")
-               ->join("produto_categoria prod_cat", "prod.categoriaFK = prod_cat.id")
-               ->join("tipo", "prod_cat.tipoFK = tipo.id")
-               ->where("anuncio.tipo", $post['tipo'])
-               ->where("termino > {$post['inicio']}");
-            $search = $this->model->findAll();
-
-            if (\count($search) < 4) {
-            }
-         }
-
-         if ($id) {
-            $post["id"] = $id;
-            $data['salvou'] = $this->model->save($post);
-         } else {
-            $post["identificador"] = \arruma_url($post['titulo']);
-            $data['salvou'] = $this->model->insert($post);
-         }
-
-         $data["erros"] = $this->model->errors();
-         $post['artigoFK'] = $id;
-      }
-
-      if ($id) {
-         $data["resultado"] = $this->model->find($id);
-      }
-
-      echo view('templates/admin-header', $data);
-      echo view("{$data['tabela']}/form");
-      echo view('templates/admin-footer');
-   }
+   }   
 
    public function modelos()
    {
       $this->session->set('menuAdmin', 7);
       $modelo = $this->request->uri->getSegment(4);
 
-      $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false)
-         ->where("tipo", substr($modelo, 0, -1));
-      $data['lista'] = $this->anuncioTipoModel->findAll();
-      // echo $this->anuncioTipoModel->getLastQuery()->getQuery();
+      $this->model->where("tipo", substr($modelo, 0, -1));
+      $data['lista'] = $this->model->findAll();
+      // echo $this->model->getLastQuery()->getQuery();
       // exit;
 
       $data['title'] = "Anúncios {$modelo}";
@@ -154,20 +81,18 @@ class Anuncio extends BaseController
          ->where("ativo", 1);
       $data['produtos'] = $this->produtoModel->findAll();
 
-      $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false);
-
       $data['title'] = 'Anúncios';
       $data['tabela'] = $this->tabela;
       $data['resultado'] = '';
 
       if ($post) {
          $post["id"] = $id;
-         $data['salvou'] = $this->anuncioTipoModel->save($post);
-         $data["erros"] = $this->anuncioTipoModel->errors();
+         $data['salvou'] = $this->model->save($post);
+         $data["erros"] = $this->model->errors();
       }
 
       if ($id) {
-         $data['resultado'] = $this->anuncioTipoModel->find($id);
+         $data['resultado'] = $this->model->find($id);
       }
 
       echo view('templates/admin-header', $data);
@@ -177,8 +102,7 @@ class Anuncio extends BaseController
 
    public function tipo()
    {
-      $request = \request();
-      $post = $request->getPost();
+      $post = request()->getPost();
       $id = decode($this->request->uri->getSegment(4));
       $this->session->set('menuAdmin', 7);
 
@@ -199,20 +123,18 @@ class Anuncio extends BaseController
          ->where("ativo", 1);
       $data['produtos'] = $this->produtoModel->findAll();
 
-      $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false);
-
       $data['title'] = 'Anúncios';
       $data['tabela'] = $this->tabela;
       $data['resultado'] = '';
 
       if ($post) {
          $post["id"] = $id;
-         $data['salvou'] = $this->anuncioTipoModel->save($post);
-         $data["erros"] = $this->anuncioTipoModel->errors();
+         $data['salvou'] = $this->model->save($post);
+         $data["erros"] = $this->model->errors();
       }
 
       if ($id) {
-         $data['resultado'] = $this->anuncioTipoModel->find($id);
+         $data['resultado'] = $this->model->find($id);
       }
 
       echo view('templates/admin-header', $data);
@@ -233,20 +155,18 @@ class Anuncio extends BaseController
          ->where("ativo", 1);
       $data['produtos'] = $this->produtoModel->findAll();
 
-      $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false);
-
       $data['title'] = 'Anúncios';
       $data['tabela'] = $this->tabela;
       $data['resultado'] = '';
 
       if ($post) {
          $post["id"] = $id;
-         $data['salvou'] = $this->anuncioTipoModel->save($post);
-         $data["erros"] = $this->anuncioTipoModel->errors();
+         $data['salvou'] = $this->model->save($post);
+         $data["erros"] = $this->model->errors();
       }
 
       if ($id) {
-         $data['resultado'] = $this->anuncioTipoModel->find($id);
+         $data['resultado'] = $this->model->find($id);
       }
 
       echo view('templates/admin-header', $data);
