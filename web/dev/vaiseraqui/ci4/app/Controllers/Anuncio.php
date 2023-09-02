@@ -24,7 +24,7 @@ class Anuncio extends BaseController
       }
 
       $data['get'] = $get = request()->getGet();
-      $paginate = \is_numeric($get['page_anuncios']) ? $get['page_anuncios'] : 1;      
+      $paginate = \is_numeric($get['page_anuncios']) ? $get['page_anuncios'] : 1;
 
       $data['lista'] = $this->model->paginate(25, 'anuncios', $paginate);
       $data['pager'] = $this->model->pager;
@@ -55,15 +55,15 @@ class Anuncio extends BaseController
 
       if ($post) {
 
-         if($post['tipo'] == "XL") {
+         if ($post['tipo'] == "XL") {
             $search = $this->model->where("tipo", "XL")->where("{$post['inicio']} <= termino", NULL, FALSE);
 
-            if($search) {
+            if ($search) {
                $data["erros"] = $this->model->errors();
             }
          }
 
-         if($post['tipo'] == "HSM") {
+         if ($post['tipo'] == "HSM") {
             $this->model
                ->select("anuncio.*, prod.categoriaFK, prod_cat.tipoFK, tipo.id as tipo")
                ->join("produto prod", "prod.id = anuncio.produtoFK")
@@ -73,9 +73,8 @@ class Anuncio extends BaseController
                ->where("termino > {$post['inicio']}");
             $search = $this->model->findAll();
 
-            if(\count($search) < 4) {
-
-            } 
+            if (\count($search) < 4) {
+            }
          }
 
          if ($id) {
@@ -91,7 +90,7 @@ class Anuncio extends BaseController
       }
 
       if ($id) {
-         $data["resultado"] = $this->model->find($id);         
+         $data["resultado"] = $this->model->find($id);
       }
 
       echo view('templates/admin-header', $data);
@@ -99,19 +98,51 @@ class Anuncio extends BaseController
       echo view('templates/admin-footer');
    }
 
-   public function tipo()
+   public function modelos()
+   {
+      $this->session->set('menuAdmin', 7);
+      $modelo = $this->request->uri->getSegment(4);
+
+      $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false)
+         ->where("tipo", substr($modelo, 0, -1));
+      $data['lista'] = $this->anuncioTipoModel->findAll();
+      // echo $this->anuncioTipoModel->getLastQuery()->getQuery();
+      // exit;
+
+      $data['title'] = "Anúncios {$modelo}";
+      $data['tabela'] = $this->tabela;
+      $data['resultado'] = '';
+
+      echo view('templates/admin-header', $data);
+      echo view("{$this->tabela}/{$modelo}");
+      echo view('templates/admin-footer');
+   }
+
+   public function destaque()
    {
       $request = \request();
       $post = $request->getPost();
-      $id = decode($this->request->uri->getSegment(4));      
-      $this->session->set('menuAdmin', setMenuAdminTipo($id));
-      
+      $id = decode($this->request->uri->getSegment(4));
+      $this->session->set('menuAdmin', 7);
+
+      switch ($id) {
+         case 7:
+            $tipos = [1, 2, 3, 4];
+            break;
+         case 8:
+            $tipos = [5];
+            break;
+         case 9:
+            $tipos = [6];
+            break;
+      }
+
       $this->produtoCategoriaModel = \model('App\Models\ProdutoCategoriaModel', false)
          ->select('id, titulo')
-         ->where("tipoFK", $id);
+         ->whereIn("tipoFK", $tipos);
       $IDsCategorias = $this->produtoCategoriaModel->findAll();
 
-      if(empty($IDsCategorias)) {
+      if (empty($IDsCategorias)) {
          $IDsCategorias[]['id'] = 0;
       }
       $IDsCategorias = array_column($IDsCategorias, 'id');
@@ -126,36 +157,37 @@ class Anuncio extends BaseController
       $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false);
 
       $data['title'] = 'Anúncios';
+      $data['tabela'] = $this->tabela;
       $data['resultado'] = '';
 
-      if($post) {         
+      if ($post) {
          $post["id"] = $id;
-         $data['salvou'] = $this->anuncioTipoModel->save($post);         
+         $data['salvou'] = $this->anuncioTipoModel->save($post);
          $data["erros"] = $this->anuncioTipoModel->errors();
       }
 
-      if($id) {
+      if ($id) {
          $data['resultado'] = $this->anuncioTipoModel->find($id);
       }
 
       echo view('templates/admin-header', $data);
-      echo view("{$this->tabela}/tipo");
+      echo view("{$this->tabela}/destaque");
       echo view('templates/admin-footer');
    }
 
-   public function emAlta()
+   public function tipo()
    {
       $request = \request();
       $post = $request->getPost();
-      $id = decode($this->request->uri->getSegment(4));      
+      $id = decode($this->request->uri->getSegment(4));
       $this->session->set('menuAdmin', 7);
-      
+
       $this->produtoCategoriaModel = \model('App\Models\ProdutoCategoriaModel', false)
          ->select('id, titulo')
          ->where("tipoFK", $id);
       $IDsCategorias = $this->produtoCategoriaModel->findAll();
 
-      if(empty($IDsCategorias)) {
+      if (empty($IDsCategorias)) {
          $IDsCategorias[]['id'] = 0;
       }
       $IDsCategorias = array_column($IDsCategorias, 'id');
@@ -167,26 +199,58 @@ class Anuncio extends BaseController
          ->where("ativo", 1);
       $data['produtos'] = $this->produtoModel->findAll();
 
-      $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false)
-         ->where("tipo", "alta");
-      $data['lista'] = $this->anuncioTipoModel->findAll();
+      $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false);
 
-
-      $data['title'] = 'Anúncios em alta';
+      $data['title'] = 'Anúncios';
+      $data['tabela'] = $this->tabela;
       $data['resultado'] = '';
 
-      if($post) {         
+      if ($post) {
          $post["id"] = $id;
-         $data['salvou'] = $this->anuncioTipoModel->save($post);         
+         $data['salvou'] = $this->anuncioTipoModel->save($post);
          $data["erros"] = $this->anuncioTipoModel->errors();
       }
 
-      if($id) {
+      if ($id) {
          $data['resultado'] = $this->anuncioTipoModel->find($id);
       }
 
       echo view('templates/admin-header', $data);
-      echo view("{$this->tabela}/em-alta");
+      echo view("{$this->tabela}/tipo");
       echo view('templates/admin-footer');
    }
+
+   public function banner()
+   {
+      $request = \request();
+      $post = $request->getPost();
+      $id = decode($this->request->uri->getSegment(4));
+      $this->session->set('menuAdmin', 7);      
+
+      $this->produtoModel = \model('App\Models\ProdutoModel', false)
+         ->select("produto.id, produto.titulo, produto.anuncianteFK, a.titulo anunciante, a.telefone")
+         ->join("anunciante a", "produto.anuncianteFK = a.id")
+         ->where("ativo", 1);
+      $data['produtos'] = $this->produtoModel->findAll();
+
+      $this->anuncioTipoModel = \model('App\Models\AnuncioTipoModel', false);
+
+      $data['title'] = 'Anúncios';
+      $data['tabela'] = $this->tabela;
+      $data['resultado'] = '';
+
+      if ($post) {
+         $post["id"] = $id;
+         $data['salvou'] = $this->anuncioTipoModel->save($post);
+         $data["erros"] = $this->anuncioTipoModel->errors();
+      }
+
+      if ($id) {
+         $data['resultado'] = $this->anuncioTipoModel->find($id);
+      }
+
+      echo view('templates/admin-header', $data);
+      echo view("{$this->tabela}/banner");
+      echo view('templates/admin-footer');
+   }   
 }

@@ -4,12 +4,12 @@
          <div class="col-lg-12 col-xs-12">
             <form method="post" enctype="multipart/form-data">
                <div class="box-content card white">
-                  <h4 class="box-title"><?= $title ?> - <?= getTipo($resultado->tipoFK) ?></h4>
+                  <h4 class="box-title"><?= $title ?> - <?= $resultado->titulo ?></h4>
                   <!-- /.box-title -->
                   <div class="card-content">
 
                      <div class='col-xs-12 form-group'>
-                        <label for="produtoFK1">Anúncio <?= $resultado->id != 5 ? "Grande" : "" ?></label>
+                        <label for="produtoFK1">Anúncio <?= $resultado->id != 8 ? "Grande" : "" ?></label>
                         <select name="produtoFK1" id="produtoFK1" class="form-control js-example-basic-single">
                            <option>-- selecione o anúncio --</option>
                            <? if ($produtos) { ?>
@@ -23,7 +23,7 @@
                      </div>
 
                      <div class='col-lg-6 form-group'>
-                        <label for="produtoFK2">Anúncio <?= $resultado->id != 5 ? "Pequeno 1" : "" ?></label>
+                        <label for="produtoFK2">Anúncio <?= $resultado->id != 8 ? "Pequeno 1" : "" ?></label>
                         <select name="produtoFK2" id="produtoFK2" class="form-control js-example-basic-single">
                            <option>-- selecione o anúncio --</option>
                            <? if ($produtos) { ?>
@@ -37,7 +37,7 @@
                      </div>
 
                      <div class='col-lg-6 form-group'>
-                        <label for="produtoFK3">Anúncio <?= $resultado->id != 5 ? "Pequeno 2" : "" ?></label>
+                        <label for="produtoFK3">Anúncio <?= $resultado->id != 8 ? "Pequeno 2" : "" ?></label>
                         <select name="produtoFK3" id="produtoFK3" class="form-control js-example-basic-single">
                            <option>-- selecione o anúncio --</option>
                            <? if ($produtos) { ?>
@@ -50,7 +50,7 @@
                         </select>
                      </div>
 
-                     <? if ($resultado->id != 5) { ?>
+                     <? if ($resultado->id != 8) { ?>
 
                         <div class='col-lg-6 form-group'>
                            <label for="produtoFK4">Anúncio Pequeno 3</label>
@@ -80,7 +80,7 @@
                            </select>
                         </div>
 
-                        <? if ($resultado->id == 6) { ?>
+                        <? if ($resultado->id == 9) { ?>
                            <div class='col-lg-6 form-group'>
                               <label for="produtoFK6">Anúncio Pequeno 5</label>
                               <select name="produtoFK6" id="produtoFK6" class="form-control js-example-basic-single">
@@ -113,7 +113,7 @@
                      <? } ?>
                      <!-- Botões -->
                      <div class="col-xs-12 form-group">
-                        <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/modelos/tipos/">
+                        <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/modelos/destaques/">
                            <button type="button" class="btn btn-primary btn-rounded waves-effect mb-1">Voltar</button>
                         </a>
                         <input type="submit" name="salvar" value="Salvar e atualizar" class="btn btn-success btn-rounded waves-effect mb-1">
@@ -127,3 +127,5 @@
          </div>
          <!-- /.box-content -->
       </div>
+   </div>
+</div>

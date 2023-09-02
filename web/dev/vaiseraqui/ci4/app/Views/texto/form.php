@@ -62,7 +62,7 @@
  							<? } ?>
 
  							<? if ($resultado->isFile == 'S') { ?>
- 								<div id='imagem' class="form-group col-xs-12 paddingZeroM mt-5   ">
+ 								<div class="form-group col-xs-12 paddingZeroM mt-5   ">
  									<div class='col-xs-12'>
  										<label for="arquivo">Imagem/Banner <b><?= ($resultado->tamanho) ? '(Tamanho recomendado: ' . $resultado->tamanho . ')' : '' ?></b> </label>
  										<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo ?>' type="file" name='arquivo' id="arquivo" class="dropify">
@@ -73,7 +73,7 @@
  									</div>
  								</div>
  								<? if (in_array($resultado->id, [1])) { ?>
- 									<div id='imagem' class="form-group col-xs-12 paddingZeroM mt-5   ">
+ 									<div class="form-group col-xs-12 paddingZeroM mt-5   ">
  										<div class='col-xs-12'>
  											<label for="arquivo2">Imagem secundária <b>(Tamanho recomendado: 000px)</b></label>
  											<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo2 ?>' type="file" name='arquivo2' id="arquivo2" class="dropify">

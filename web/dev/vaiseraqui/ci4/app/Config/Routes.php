@@ -51,13 +51,11 @@ $routes->group('admin', function ($routes) {
     $routes->add('cidade/form/(:any)', 'Cidade::form/$i');
 
     $routes->add('anuncio', 'Anuncio::index');
-    $routes->add('anuncio/form', 'Anuncio::form');
-    $routes->add('anuncio/form/(:any)', 'Anuncio::form/$i');
-    $routes->add('anuncio/tipo', 'Anuncio::tipo');
+    $routes->add('anuncio/modelos/(:any)', 'Anuncio::modelos');
     $routes->add('anuncio/tipo/(:any)', 'Anuncio::tipo/$i');
-    $routes->add('anuncio/em_alta', 'Anuncio::emAlta');
-    $routes->add('anuncio/em_alta/(:any)', 'Anuncio::emAlta/$i');
-
+    $routes->add('anuncio/destaque/(:any)', 'Anuncio::destaque/$i');
+    $routes->add('anuncio/banner/(:any)', 'Anuncio::banner/$i');
+    
     $routes->add('review', 'Review::index');
     $routes->add('review/form', 'Review::form');
     $routes->add('review/form/(:any)', 'Review::form/$i');

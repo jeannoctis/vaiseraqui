@@ -11,7 +11,7 @@
                      <button type="button" class="btn btn-violet btn-rounded waves-effect waves-light">Adicionar</button>
                   </a>
                   <button onclick='$("#form").submit()' type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Excluir</button>
-               </div>                -->
+               </div> -->
 
                <? if ($lista) { ?>
                   <div class='col-xs-12 paddingZeroM'>
@@ -22,22 +22,22 @@
                               <thead>
                                  <tr>
                                     <th>Nome</th>
-                                    <th>E-mail</th>
+                                    <th>Descrição</th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <? foreach ($lista as $item) { ?>
                                     <tr class="ui-state-default sort" rel="<?= $item->id ?>">
                                        <td>
-                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($item->id) ?>/">
+                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/banner/<?= encode($item->id) ?>/">
                                              <?= $item->titulo ?>
                                           </a>
                                        </td>
                                        <td>
-                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($item->id) ?>/">
-                                             <?= $item->tipo ?>
+                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/banner/<?= encode($item->id) ?>/">
+                                             <?= $item->descricao ?>
                                           </a>
-                                       </td>                                       
+                                       </td>
                                     </tr>
                                  <? } ?>
                               </tbody>
@@ -46,53 +46,19 @@
                         <input type="hidden" name="nexc" value="1">
                      </form>
 
-                     
+
                   </div>
                <? } ?>
+
+               <!-- Botões -->
+               <div class="col-xs-12 form-group">
+                  <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/">
+                     <button type="button" class="btn btn-primary btn-rounded waves-effect mb-1">Voltar</button>
+                  </a>
+                  <input type="submit" name="salvar" value="Salvar e atualizar" class="btn btn-success btn-rounded waves-effect mb-1 hide">
+               </div>
             </div>
          </div>
       </div>
-
-      <style>
-         form.filters,
-         form.filters ul {
-            display: flex;
-            align-items: center;
-         }
-
-         form.filters {
-            gap: 2rem;
-            margin-block: 1rem;
-         }
-
-         form.filters ul {
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 1.75rem;
-            width: 100%;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-         }
-
-         form.filters ul .select2-wrapper {
-            display: flex;
-            flex-direction: column;
-         }
-
-         form.filters ul .submit-wrapper {
-            display: flex;
-            /* gap: 1rem; */
-         }
-
-         form.filters ul .submit-wrapper input {
-            border: 1px solid #aaa;
-            border-radius: 4px !important;
-         }
-
-         form.filters .cleanfilter {
-            display: grid;
-            place-items: center;
-            height: 45px;
-         }
-      </style>
+   </div>
+</div>
