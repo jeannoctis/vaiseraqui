@@ -33,15 +33,16 @@ class Pages extends Controller
 
         $this->textoModel = model('App\Models\TextoModel', false);
 
-        $this->bannerModel = \model('App\Models\BannerModel', false);
-        $data['banner'] = $this->bannerModel->find(1);
-
-        $this->faqModel = \model("App\Models\FaqModel", false);
-        $data['faqs'] = $this->faqModel->findAll(1);
-
-        $this->reviewModel = \model("App\Models\ReviewModel", false);
-        $data['depoimentos'] = $this->reviewModel->findAll(1);
-
+       $cidadeModel = model('App\Models\CidadeModel', false);
+       $cidadeModel->select('cidade.titulo, e.sigla');
+       $cidadeModel->join('estado e', 'e.id =cidade.estadoFK');
+        $cidadeModel->orderBy("cidade.titulo ASC");
+        $data['cidades'] = $cidadeModel->findAll();
+        
+        $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
+        $produtoCategoriaModel->orderBy('titulo ASC');
+        $data['produtoCategorias'] = $produtoCategoriaModel->findAll();
+        
         $removeChars = array("-", "(", ")", " ");
         $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
         $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
@@ -65,133 +66,156 @@ class Pages extends Controller
         return $data;
     }
 
-    public function index()
-    {
-        $data = $this->buscaGeral();
-        $data['pagina'] = 1;
-        $data['bodyClass'] = 'home';
+   
+  public function index() {
+    helper("date");
+    $data = $this->buscaGeral();
 
-        $this->projetoModel = \model("App\Models\ProjetoModel", false);
+    $data["pagina"] = 1;
+    $data['bodyClass'] = 'home';
 
-        $data['txFiltro'] = $this->textoModel->find(8);
+    $bannerModel = model('App\Models\BannerModel', false);    
+    $bannerModel->orderBy("ordem ASC, id DESC");
+    $data['bannerPrincipal'] = $bannerModel->findAll();
+     
+    $cidadeModel = model('App\Models\CidadeModel', false);  
+    $cidadeModel->select("cidade.*,e.sigla");
+$cidadeModel->join("estado e", "e.id = cidade.estadoFK");
+    $cidadeModel->orderBy("titulo ASC");
+   $data["cidades"] = $cidadeModel->findAll();
 
-        $query = $this->projetoModel->select("pavimento, loteminimo, quartos, suites, banheiros, vagas, areautil")->findAll();
-
-        $result = array(
-            'pavimentos' => array(),
-            'loteminimo' => array(),
-            'dormitorios' => array(),
-            'banheiros' => array(),
-            'vagas' => array(),
-            'areautil' => array(),
-        );
-
-        foreach ($query as $row) {
-            if (!in_array($row->pavimento, $result['pavimentos'])) {
-                $result['pavimentos'][] = $row->pavimento;
+    $this->metatagModel = model('App\Models\MetatagModel', false);
+    $data["metatag"] = $this->metatagModel->find($data["pagina"]);
+    
+    $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);    
+    $produtoCategoriaModel->orderBy("titulo ASC");
+    $data["categoriasProduto"] = $produtoCategoriaModel->findAll();
+   
+    $produtoModel = model('App\Models\ProdutoModel', false);  
+   
+   $produtoModel->resetQuery();
+    
+    $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);  
+    $produtoModel->select("produto.id,  produto.titulo, produto.identificador, produto.lazer, produto.itens, produto.categoriaFK");
+    $produtoModel->where("produto.destaque","1");
+    $produtoModel->where("produto.ativo","1");
+//    $produtoModel->where("produto.tipoFK",1);
+    $produtoModel->orderBy("RAND()");
+    $data["espacos"] =  $produtoModel->findAll(10);
+    
+      if($data["categoriasProduto"]) {
+            foreach($data["categoriasProduto"] as $ind => $dProd) {
+              $data["nomeCategoria"][$dProd->id] = $dProd->titulo;
             }
-            if (!in_array($row->loteminimo, $result['loteminimo'])) {
-                $result['loteminimo'][] = $row->loteminimo;
+      }
+    
+        if($data["espacos"]) {
+            foreach($data["espacos"] as $ind => $dProd) {              
+               $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
+              
+              $produtoFotoModel->resetQuery();
+              $produtoFotoModel->where("produtoFK",$dProd->id);
+                 $produtoFotoModel->orderBy("ordem ASC, id DESC");
+              $data["espacos"][$ind]->fotos = $produtoFotoModel->findAll(3);
+              
             }
-            if (!in_array($row->quartos + $row->suites, $result['dormitorios'])) {
-                $result['dormitorios'][] = $row->quartos + $row->suites;
+          }
+    
+    $produtoModel->resetQuery();
+    $produtoModel->select("produto.id, produto.identificador, produto.titulo, produto.categoriaFK, produto.preco, produto.apresentacao ");
+    //$produtoModel->join("produto_quantidade pq","produto.id = pq.produtoFK",'LEFT'); 
+    //$produtoModel->where("tipoFK",2);
+    $produtoModel->where("destaque","1");
+    $produtoModel->where("ativo","1");
+    $produtoModel->groupBy("produto.id");
+    $produtoModel->where("produto.inicioValidade <= NOW() AND produto.validade >= NOW()");
+    $produtoModel->where("produto.inicioDestaque <= NOW() AND produto.validadeDestaque >= NOW()");
+    $produtoModel->orderBy("RAND()");
+    $data["servicos"] =  $produtoModel->findAll(10);
+    
+         if($data["servicos"]) {
+            foreach($data["servicos"] as $ind => $dProd) {
+               $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
+              $produtoFotoModel->resetQuery();
+              $produtoFotoModel->where("produtoFK",$dProd->id);
+              $produtoFotoModel->orderBy("ordem ASC, id DESC");
+              $data["servicos"][$ind]->fotos = $produtoFotoModel->findAll(3);
             }
-            if (!in_array($row->banheiros, $result['banheiros'])) {
-                $result['banheiros'][] = $row->banheiros;
-            }
-            if (!in_array($row->vagas, $result['vagas'])) {
-                $result['vagas'][] = $row->vagas;
-            }
-            if (!in_array($row->areautil, $result['areautil'])) {
-                $result['areautil'][] = $row->areautil;
-            }
-        }
-        $data['filtros'] = $result;
+          }
+    
+    $ArtigoModel = model('App\Models\ArtigoModel', false);  
+    $ArtigoModel->select('artigo.*, ca.titulo as categoria, ca.identificador as identificadorCat');
+    $ArtigoModel->join('categoriaArtigo ca', 'ca.id = artigo.categoriaFK');
+     $ArtigoModel->orderBy("artigo.ordem ASC, artigo.id DESC");
+     $data["blogs"] = $ArtigoModel->findAll(6);
+/*    
+   $itemModel = model('App\Models\ItemModel', false);  
 
-        $data['txPjRecentes'] = $this->textoModel->find(9);
-        $data['txPjRelevantes'] = $this->textoModel->find(10);
+    $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+    $itemModel->where("tipo",1);
+    $itemModel->orderBy("quantidade DESC");
+    $data["comodidades"] = $itemModel->findAll(12);
+      
+    $itemModel->resetQuery();
+    $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+    $itemModel->where("tipo",2);
+    $itemModel->orderBy("quantidade DESC");
+    $data["produtosServidos"] = $itemModel->findAll(12);
+    
+    $itemModel->resetQuery();
+    $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+    $itemModel->where("tipo",3);
+    $itemModel->orderBy("quantidade DESC");
+    $data["atendeEm"] = $itemModel->findAll(12);  
+    
+    $proximidadeModel = model('App\Models\ProximidadeModel', false);  
+    $proximidadeModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.proximidades LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+    $proximidadeModel->where("tipo",1);
+    $proximidadeModel->orderBy("quantidade DESC");
+    $data["proximidades"] = $proximidadeModel->findAll(12);
+    
+    $proximidadeModel->resetQuery();
+    $proximidadeModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.proximidades LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+    $proximidadeModel->where("tipo",2);
+    $proximidadeModel->orderBy("quantidade DESC");
+    $data["showsAoVivo"] = $proximidadeModel->findAll(12);
+    
+    $lazerModel = model('App\Models\LazerModel', false);
+    $lazerModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.lazer LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+    $lazerModel->orderBy("quantidade DESC");
+    $data["lazeres"] = $lazerModel->findAll(12);
+    */
+       if (isset($_POST['enviar'])) {
+            $request = \Config\Services::request();       
+       $post = $request->getPost();
+      $data["contato"] = $this->recebeEmail($data["configs"]->private_recaptcha,$post);
+  
+      if($data["contato"] == 1){
+        $request = \Config\Services::request();       
+        $emailModel = model('App\Models\EmailModel', false);
+        $data["sucesso"] = "Contato enviado com sucesso!";
+        $data["salvou"] = TRUE;
+                
+        $idContato = 1;
+       
+        $result = $emailModel->find($idContato);
+        $dados["mailTo"] = $result->email;
+        $dados["subject"] = $post["assunto"];
+        ob_start();
+        echo View('templates/email-template', $post);
+        $dados["message"] = ob_get_clean();
 
-        $this->pjFotoModel = \model("App\Models\PjFotoModel", false);
+        $emailModel->enviarEmail($dados);
+      } else {
+        $data["erro"] = $data["contato"][0];
+      }
 
-        $data['pjRecentes'] = $this->projetoModel->orderBy("dtCriacao DESC, id ASC")->findAll();
-        foreach ($data['pjRecentes'] as $ind => $projeto) {
-            $this->pjFotoModel->resetQuery();
-            $this->pjFotoModel->where("projetoFK", $projeto->id);
-            $this->pjFotoModel->orderBy("ordem ASC, id DESC");
-            $data['pjRecentes'][$ind]->fotos = $this->pjFotoModel->findAll(1);
-        }
-
-        $data['pjRelevantes'] = $this->projetoModel->orderBy("ordem ASC, id DESC")->findAll(3);
-        foreach ($data['pjRelevantes'] as $ind => $projeto) {
-            $this->pjFotoModel->resetQuery();
-            $this->pjFotoModel->where("projetoFK", $projeto->id);
-            $this->pjFotoModel->orderBy("ordem ASC, id ASC");
-            $data['pjRelevantes'][$ind]->fotos = $this->pjFotoModel->findAll(1);
-        }
-
-        $data['sobreNos'] = $this->textoModel->find(1);
-        $data['txDepoimentos'] = $this->textoModel->find(3);
-
-        $this->reviewModel->resetQuery();
-        $data['depoimentos'] = $this->reviewModel->orderBy("ordem ASC, id ASC")->findAll();
-
-        $data['txBlog'] = $this->textoModel->find(6);
-
-        $this->artigoModel = \model('App\Models\ArtigoModel', false);
-        $data['artigos'] = $this->artigoModel->orderBy("ordem ASC, id ASC")->findAll(3);
-
-        $this->bCategoria = \model('App\Models\BCategoriaModel', false);
-        $this->bCategoria->where("bcategoria.id in (select categoriaFK from artigo WHERE artigo.excluido IS null)");
-        $data['BCategorias'] = $this->bCategoria->findAll();
-
-        if ($data['BCategorias']) {
-            foreach ($data['BCategorias'] as $categoria) {
-                $data['cats'][$categoria->id] = $categoria->titulo;
-            }
-        }
-
-        $data['txFaq'] = $this->textoModel->find(4);
-
-        $this->faqModel->resetQuery();
-        $data['faqs'] = $this->faqModel->orderBy("ordem ASC, id DESC")->findAll();
-
-        $data['txContato'] = $this->textoModel->find(7);
-
-        if (isset($_POST['enviar'])) {
-            $request = request();
-            $post = $request->getPost();
-            $data["contato"] = $this->recebeEmail($data["configs"]->private_recaptcha, $post);
-
-            if ($data["contato"] == 1) {
-                $emailModel = model('App\Models\EmailModel', false);
-                $data["sucesso"] = "Contato enviado com sucesso!";
-                $data["salvou"] = TRUE;
-                $result = $emailModel->find(1);
-                $dados["mailTo"] = $result->email;
-                $dados["subject"] = "Contato";
-                ob_start();
-                echo View('templates/email-template', $post);
-                $dados["message"] = ob_get_clean();
-                $emailModel->enviarEmail($dados);
-            } else {
-                echo "falha no recaptcha";
-                $data["erro"] = $data["contato"][0];
-            }
-        }
-
-        if (!$data["metatag"]) {
-            $this->metatagModel = model('App\Models\MetatagModel', false);
-            $data["metatag"] = $this->metatagModel->find($data["pagina"]);
-        }
-
-        if (!$data['metatag']->description) {
-            $data['metatag']->description = character_limiter(strip_tags($data['metatag']->description), 160);
-        }
-
-        echo view('templates/header', $data);
-        echo view('pages/home', $data);
-        echo view('templates/footer', $data);
     }
+
+    echo view('templates/header', $data);
+    echo view('pages/home', $data);
+    echo view('templates/footer', $data);
+  }
 
     public function redirects($segments)
     {
@@ -232,161 +256,11 @@ class Pages extends Controller
                 $data['txInstagram'] = $this->textoModel->find(5);
                 $data['igInfo'] = $this->redeSocialModel->find(2);
                 $data['bodyClass'] = 'page-about-us';
-                break;
-            case "projetos":
-                $data['bodyClass'] = 'project-list';
-                $data['pagina'] = 3;
-                $segments = $this->request->uri->getSegments();
-                $request = \request();
-                $post = $request->getPost();
-                $data['get'] = $get = $request->getGet();
-
-                if (!is_numeric($get['page_projetos'])) {
-                    $paginate = 1;
-                } else {
-                    $paginate = $get['page_projetos'];
-                }
-                if (!is_numeric($get['page_filtrados'])) {
-                    $paginate = 1;
-                } else {
-                    $paginate = $get['page_filtrados'];
-                }
-
-                $data['txFiltro'] = $this->textoModel->find(8);
-                $data['txPjRecentes'] = $this->textoModel->find(9);
-                $data['txPjRelevantes'] = $this->textoModel->find(10);
-                $data['txOutrosPj'] = $this->textoModel->find(11);
-
-                $this->pjFotoModel = \model("App\Models\PjFotoModel", false);
-                $this->projetoModel = \model("App\Models\ProjetoModel", false);
-
-                $query = $this->projetoModel->select("pavimento, loteminimo, quartos, suites, banheiros, vagas, areautil")->findAll();
-
-                $result = array(
-                    'pavimentos' => array(),
-                    'loteminimo' => array(),
-                    'dormitorios' => array(),
-                    'banheiros' => array(),
-                    'vagas' => array(),
-                    'areautil' => array(),
-                );
-
-                foreach ($query as $row) {
-                    if (!in_array($row->pavimento, $result['pavimentos'])) {
-                        $result['pavimentos'][] = $row->pavimento;
-                    }
-                    if (!in_array($row->loteminimo, $result['loteminimo'])) {
-                        $result['loteminimo'][] = $row->loteminimo;
-                    }
-                    if (!in_array($row->quartos + $row->suites, $result['dormitorios'])) {
-                        $result['dormitorios'][] = $row->quartos + $row->suites;
-                    }
-                    if (!in_array($row->banheiros, $result['banheiros'])) {
-                        $result['banheiros'][] = $row->banheiros;
-                    }
-                    if (!in_array($row->vagas, $result['vagas'])) {
-                        $result['vagas'][] = $row->vagas;
-                    }
-                    if (!in_array($row->areautil, $result['areautil'])) {
-                        $result['areautil'][] = $row->areautil;
-                    }
-                }
-                $data['filtros'] = $result;
-
-                $data['pjRecentes'] = $this->projetoModel->orderBy("dtCriacao DESC, id ASC")->findAll();
-                foreach ($data['pjRecentes'] as $ind => $projeto) {
-                    $this->pjFotoModel->resetQuery();
-                    $this->pjFotoModel->where("projetoFK", $projeto->id);
-                    $this->pjFotoModel->orderBy("ordem ASC, id ASC");
-                    $data['pjRecentes'][$ind]->fotos = $this->pjFotoModel->findAll(1);
-                }
-
-                $data['pjRelevantes'] = $this->projetoModel->orderBy("ordem ASC, id DESC")->findAll(3);
-                foreach ($data['pjRelevantes'] as $ind => $projeto) {
-                    $this->pjFotoModel->resetQuery();
-                    $this->pjFotoModel->where("projetoFK", $projeto->id);
-                    $this->pjFotoModel->orderBy("ordem ASC, id ASC");
-                    $data['pjRelevantes'][$ind]->fotos = $this->pjFotoModel->findAll(1);
-                }
-
-                $data['pjOutros'] = $this->projetoModel->orderBy("ordem ASC, id DESC")->paginate(1, 'projetos', $paginate);
-                foreach ($data['pjOutros'] as $ind => $projeto) {
-                    $this->pjFotoModel->resetQuery();
-                    $this->pjFotoModel->where("projetoFK", $projeto->id);
-                    $this->pjFotoModel->orderBy("ordem ASC, id ASC");
-                    $data['pjOutros'][$ind]->fotos = $this->pjFotoModel->findAll(1);
-                }
-                $data['pager'] = $this->projetoModel->pager;
-
-                $data['lotesMinimos'] = $this->projetoModel->select("dimensoes")->findAll();
-
-                $data['pjAtual'] = $this->projetoModel->where("identificador", $segments[1])->find()[0];
-
-                if ($segments[1] && $data['pjAtual']) {
-                    $data['pagina'] = 4;
-                    $page = 'projetos-interna';
-
-                    $this->pjFotoModel->resetQuery();
-                    $data['pjAtualFotos'] = $this->pjFotoModel->where('projetoFK', $data['pjAtual']->id)->orderBy('ordem ASC, id DESC')->findAll();
-                    $data['pjAtual']->fotos = $data['pjAtualFotos'];
-
-                    $this->pjPlantaModel = \model("App\Models\PjPlantaModel", false);
-                    $data['pjAtualPlantas'] = $this->pjPlantaModel->where('projetoFK', $data['pjAtual']->id)->orderBy('ordem ASC, id DESC')->findAll();
-                    $data['pjAtual']->plantas = $data['pjAtualPlantas'];
-
-                    $this->pjVideoModel = \model("App\Models\PjVideoModel", false);
-                    $data['pjAtualVideos'] = $this->pjVideoModel->where('projetoFK', $data['pjAtual']->id)->orderBy('ordem ASC, id DESC')->findAll();
-                    $data['pjAtual']->videos = $data['pjAtualVideos'];
-
-                    $this->pjAdicionalModel = \model("App\Models\PjAdicionalModel", false);
-                    $data['pjAtualAdicionais'] = $this->pjAdicionalModel->where('projetoFK', $data['pjAtual']->id)->orderBy('ordem ASC, id DESC')->findAll();
-                    $data['pjAtual']->adicionais = $data['pjAtualAdicionais'];
-
-                    $data['txDireitosAutorais'] = $this->textoModel->find(14);
-
-                    $this->projetoModel->resetQuery();
-                    $this->projetoModel->where("pavimento", $data['pjAtual']->pavimento)->where("id != {$data['pjAtual']->id}");
-                    $data['pjRelacionados'] = $this->projetoModel->orderBy("ordem ASC, id DESC")->findAll();
-
-                    foreach ($data['pjRelacionados'] as $ind => $projeto) {
-                        $this->pjFotoModel->resetQuery();
-                        $this->pjFotoModel->where("projetoFK", $projeto->id);
-                        $this->pjFotoModel->orderBy("ordem ASC, id ASC");
-                        $data['pjRelacionados'][$ind]->fotos = $this->pjFotoModel->findAll(1);
-                    }
-                } else if ($segments[1]) {
-                    throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
-                }
-
-                if ($get && !$get['page_projetos']) {
-                    $this->projetoModel->resetQuery();
-
-                    if (isset($get['dormitorios'])) {
-                        $this->projetoModel->whereIn("(quartos + suites)", $get['dormitorios']);
-                        unset($get['dormitorios']);
-                    }
-
-                    if (isset($get['areautil'])) {
-                        $this->projetoModel->groupStart();
-
-                        foreach ($get['areautil'] as $condicao) {
-                            $this->projetoModel->orWhere("areautil {$condicao}");
-                        }
-
-                        $this->projetoModel->groupEnd();
-                        unset($get['areautil']);
-                    }
-
-                    unset($get['page_filtrados']);
-
-                    foreach ($get as $campos => $valores) {
-                        $this->projetoModel->whereIn($campos, $valores);
-                    }
-                    $data['pjFiltrados'] = $this->projetoModel->paginate(10, 'filtrados', $paginate);
-                    $data['pagerFiltro'] = $this->projetoModel->pager;
-                }
-
-                break;
+                break;   
+                case 'eventos':
+                    $data['pagina'] = 3;
+                    $data['bodyClass'] = 'events';
+                    break;
             case "blog":
                 $data['bodyClass'] = 'page-blog-list';
                 $data['pagina'] = 5;
