@@ -4,11 +4,13 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
-class Pages extends Controller {
+class Pages extends Controller
+{
 
-    public function buscaGeral() {
+    public function buscaGeral()
+    {
         helper('text');
-           
+
         $this->session = \Config\Services::session($config);
         $this->redeSocialModel = model('App\Models\RedeSocialModel', false);
         $this->redeSocialModel->where("link != '' AND link IS NOT NULL ");
@@ -63,7 +65,8 @@ class Pages extends Controller {
         return $data;
     }
 
-    public function index() {
+    public function index()
+    {
         $data = $this->buscaGeral();
         $data['pagina'] = 1;
         $data['bodyClass'] = 'home';
@@ -190,31 +193,32 @@ class Pages extends Controller {
         echo view('templates/footer', $data);
     }
 
-    public function redirects($segments) {
-        
+    public function redirects($segments)
+    {
     }
-    
-      public function anunciante($page = 'home') {    
-    $segments = $this->request->uri->getSegments();
-    $anuncianteModel = model('App\Models\AnuncianteModel', false);         
-     $anuncianteModel->verPagina($segments);
-    
-  }
 
-    public function view($page = 'home') {
-    
+    public function anunciante($page = 'home')
+    {
+        $segments = $this->request->uri->getSegments();
+        $anuncianteModel = model('App\Models\AnuncianteModel', false);
+        $anuncianteModel->verPagina($segments);
+    }
+
+    public function view($page = 'home')
+    {
+
         $data = $this->buscaGeral();
         $segments = $this->request->uri->getSegments();
-        $this->redirects($segments);  
+        $this->redirects($segments);
 
         $header = "header";
-        $footer = "footer"; 
+        $footer = "footer";
 
         switch ($page) {
-                case "area-do-anunciante":
-$this->anunciante($page);
-                    exit();
-        break;
+            case "area-do-anunciante":
+                $this->anunciante($page);
+                exit();
+                break;
             case "sobre-nos":
                 $data['pagina'] = 2;
 
@@ -465,7 +469,7 @@ $this->anunciante($page);
                 $this->workshopModel->orderBy("ordem ASC, id DESC");
                 $data['workshops'] = $this->workshopModel->findAll();
                 break;
-                        
+
             case 'esqueci':
                 $data['pagina'] = 18;
 
@@ -548,13 +552,13 @@ $this->anunciante($page);
                 }
 
                 break;
-                
-                case "logout":
-                    unset($_SESSION);
-                    ?>
-                    <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>">
-                   <? exit();
-                    break;
+
+            case "logout":
+                unset($_SESSION);
+                ?>
+                <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>">
+                <? exit();
+                break;
 
             case "area-do-cliente":
                 $this->clienteModel = \model("App\Models\ClienteModel", false);
@@ -623,7 +627,8 @@ $this->anunciante($page);
         echo view("templates/" . $footer, $data);
     }
 
-    public function recebeEmail($private_recaptcha, $post) {
+    public function recebeEmail($private_recaptcha, $post)
+    {
         $token = $_POST['g-recaptcha-response'];
         $secret = $private_recaptcha;
         $ip = $_SERVER["REMOTE_ADDR"];
