@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  max-width: 1880px;
+  padding: 0 40px;
+  margin-inline: auto;
+
+  @media screen and (max-width: 750px) {
+    padding: 0 20px;
+  }
+}
+.container-medium {
+  width: 100%;
+  max-width: 1520px;
+  padding: 0 40px;
+  margin-inline: auto;
+
+  @media screen and (max-width: 1600px) {
+    // padding-inline: 40px;
+  }
+  @media screen and (max-width: 750px) {
+    padding: 0 20px;
+  }
+}

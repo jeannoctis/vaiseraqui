@@ -113,7 +113,7 @@
                      <? } ?>
                      <!-- Botões -->
                      <div class="col-xs-12 form-group">
-                        <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/" class="hide">
+                        <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/modelos/tipos/">
                            <button type="button" class="btn btn-primary btn-rounded waves-effect mb-1">Voltar</button>
                         </a>
                         <input type="submit" name="salvar" value="Salvar e atualizar" class="btn btn-success btn-rounded waves-effect mb-1">

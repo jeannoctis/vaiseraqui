@@ -26,8 +26,7 @@ class Artigo extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $this->bCategoriaModel = \model('App\Models\BCategoriaModel', false);
-      $data['categorias'] = $this->bCategoriaModel->findAll();
+      $this->model->orderBy("ordem ASC, id DESC");
 
       if ($data['categorias']) {
          foreach ($data['categorias'] as $categoria) {
@@ -65,8 +64,8 @@ class Artigo extends BaseController
    {
       helper('form');
 
-      $this->bCategoriaModel = \model('App\Models\BCategoriaModel', false);
-      $data['bCategorias'] = $this->bCategoriaModel->findAll();
+      $this->CategoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
+      $data['bCategorias'] = $this->CategoriaArtigoModel->findAll();
 
       $request = request();
       $post = $request->getPost();

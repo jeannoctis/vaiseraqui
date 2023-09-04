@@ -1,0 +1,55 @@
+.ui-widget-header {
+  border: 1px solid $primary;
+  background: $primary;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default {
+  color: $gray-300;
+}
+
+.ui-datepicker-calendar .ui-state-hover {
+  background: $primary;
+  color: $white;
+  border-color: transparent;
+}
+
+.ui-datepicker-next {
+  .ui-icon{
+    background-image: url(../images/ui-calendar-arrow-right.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+
+.ui-datepicker-prev {
+  .ui-icon{
+    background-image: url(../images/ui-calendar-arrow-left.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+}
+
+.ui-state-active, .ui-widget-content .ui-state-active {
+  border-color: $primary;
+}
+
+.ui-state-highlight, .ui-widget-content .ui-state-highlight {
+  background: $primary;
+  color: $white;
+  border-color: $primary;
+}
+
+.ui-widget-header .ui-state-hover {
+  border: 1px solid transparent;
+  background: $white;
+  cursor: pointer;
+}
+
+.ui-widget-content .ui-state-hover {
+  background-color: $primary;
+  color: $white;
+}

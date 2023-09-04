@@ -68,7 +68,8 @@ class AnuncianteModel extends Model {
                 . "DATEDIFF(validadeDestaque, NOW()) AS difDestaque, DATEDIFF(inicioValidade, NOW()) AS difInicio, pc.tipoFK ");
         $produtoModel->join('produto_categoria pc', 'produto.categoriaFK = pc.id');
         $data['anuncio'] = $produtoModel->find($this->session->get('anuncio'));
-
+        
+   
         $ipooModel = model('App\Models\TipoModel', false);
         $data['tipoAtual'] = $ipooModel->find($data['anuncio']->tipoFK);
 
