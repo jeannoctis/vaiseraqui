@@ -11,7 +11,7 @@
                      <div class='col-xs-12 form-group'>
                         <label for="produtoFK1">Anúncio</label>
                         <select name="produtoFK1" id="produtoFK1" class="form-control js-example-basic-single">
-                           <option>-- selecione o anúncio --</option>
+                           <option value="">-- selecione o anúncio --</option>
                            <? if ($produtos) { ?>
                               <? foreach ($produtos as $produto) { ?>
                                  <option value="<?= $produto->id ?>" <?= $resultado->produtoFK1 == $produto->id ? 'selected' : '' ?>>
@@ -29,7 +29,7 @@
 
                      <? if ($resultado->id == 11) { ?>
                         <div class="col-xs-12 form-group">
-                           <label for="arquivo2">Imagem/Banner <b>(Tamanho recomendado: 335 x 540)</b></label>
+                           <label for="arquivo2">Imagem/Banner mobile <b>(Tamanho recomendado: 335 x 540)</b></label>
                            <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo2 ?>' type="file" name='arquivo2' id="arquivo2" class="dropify" <?= !$resultado->arquivo2 ? 'required' : '' ?>>
                         </div>
                      <? } ?>

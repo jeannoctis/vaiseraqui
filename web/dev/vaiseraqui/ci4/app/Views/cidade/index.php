@@ -46,7 +46,6 @@
 							</li>
 						</ul>
 						<input type="hidden" name="tipo" value="<?= $get['tipo'] ?>">
-
 					</form>
 
 					<? if ($lista) {  ?>
@@ -84,6 +83,9 @@
 								</div>
 								<input type="hidden" name="nexc" value="1">
 							</form>
+							<nav class="col-xs-12 navigation-pages ">
+								<?= $pager->links('cidades') ?>
+							</nav>
 						</div>
 					<? } ?>
 				</div>

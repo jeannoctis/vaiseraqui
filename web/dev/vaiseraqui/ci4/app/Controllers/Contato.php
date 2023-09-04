@@ -24,14 +24,39 @@ class Contato extends BaseController
 			}
 		} else if ($_POST['nexc']) {
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
-      }
-
-		$this->contatoModel->orderBy("id desc");
+      }		
 
 		$request = request();
 		$data['get'] = $get = $request->getGet();
 
-		$data['lista'] = $this->contatoModel->findAll();
+		$paginate = \is_numeric($get['page_contatos']) ? $get['page_contatos'] : 1;
+
+		if (!empty($get['procura'])) {
+         $this->contatoModel->groupStart()
+            ->like("nome", $get['procura'])
+            ->orLike("email", $get['procura'])
+            ->orLike("telefone", $get['procura'])
+            ->orLike("mensagem", $get['procura'])
+            ->orLike("prefContato", $get['procura'])
+            ->groupEnd();
+      }
+
+		$data['lista'] = $this->contatoModel->orderBy("id DESC")->paginate(25, 'contatos', $paginate);
+      $data['pager'] = $this->contatoModel->pager;
+
+		if (isset($_POST["gerar"])) {
+         $f = fopen(PATHHOME . "uploads/contato/tmp.csv", "w");
+
+         $linha['nome'] = 'Nome;Email;Telefone;Mensagem;Preferencia de Contato;Data';
+         fputcsv($f, $linha, "|", " ");
+
+			$todosContatos = $this->contatoModel->resetQuery()->orderBy("id DESC")->findAll();
+         foreach ($todosContatos as $item) {
+            $linha["nome"] = "{$item->nome};{$item->email};{$item->telefone};{$item->mensagem};{$item->prefContato};{$item->dtCriacao}";            
+            fputcsv($f, $linha, "|", " ");            
+         }
+         header("Refresh: 0; URL=" . PATHSITE . "uploads/contato/tmp.csv");
+      }
 
 		$data['title'] = 'Contato';
 		$data['tabela'] = "contato";

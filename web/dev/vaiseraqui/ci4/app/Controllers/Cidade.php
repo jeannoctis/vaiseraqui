@@ -25,7 +25,7 @@ class Cidade extends BaseController
       }
 
       $data['get'] = $get = request()->getGet();
-      $paginate = \is_numeric($get['page_anunciantes']) ? $get['page_anunciantes'] : 1;
+      $paginate = \is_numeric($get['page_cidades']) ? $get['page_cidades'] : 1;
 
       $this->estadoModel = \model('App\Models\EstadoModel', false)
          ->select("estado.titulo, estado.sigla")
@@ -53,7 +53,7 @@ class Cidade extends BaseController
                ->groupEnd();
          }
       }
-      $data['lista'] = $this->model->paginate(25, "cidades", $paginate);
+      $data['lista'] = $this->model->paginate(1, "cidades", $paginate);
       $data['pager'] = $this->model->pager;
 
       $data['title'] = 'Cidades';

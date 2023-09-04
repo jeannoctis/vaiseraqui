@@ -324,7 +324,7 @@ if ($acesso['usuarioFK'] > 3) {
                            <li class='<?= ($segments[1] == 'usuario') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/usuario/">Usuários</a></li>
                         <? } ?>
                         <li class='<?= ($segments[1] == 'config' && $qualPagina == 1) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/config/form/<?= encode(1) ?>/1">Dados da empresa</a></li>
-                        <li class='<?= ($segments[1] == 'endereco') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/endereco/">Endereços</a></li>
+                        <!-- <li class='<?= ($segments[1] == 'endereco') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/endereco/">Endereços</a></li> -->
                         <li class='<?= ($segments[1] == 'rede_social') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/rede_social/">Rede social</a></li>
                         <li class='<?= ($segments[1] == 'whatsapp') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/whatsapp/">Whatsapp</a></li>
                         <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 12) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(12) ?>">Termos de uso</a></li>

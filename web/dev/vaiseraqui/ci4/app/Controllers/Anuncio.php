@@ -33,8 +33,6 @@ class Anuncio extends BaseController
 
       $this->model->where("tipo", substr($modelo, 0, -1));
       $data['lista'] = $this->model->findAll();
-      // echo $this->model->getLastQuery()->getQuery();
-      // exit;
 
       $data['title'] = "Anúncios {$modelo}";
       $data['tabela'] = $this->tabela;
@@ -85,9 +83,16 @@ class Anuncio extends BaseController
       $data['tabela'] = $this->tabela;
       $data['resultado'] = '';
 
-      if ($post) {
+      if ($post) {         
          $post["id"] = $id;
-         $data['salvou'] = $this->model->save($post);
+
+         foreach($post as $key => $item) {
+            if(empty($item)) {
+               $post[$key] = null;
+            }
+         }
+
+         $data['salvou'] = $this->model->save($post);         
          $data["erros"] = $this->model->errors();
       }
 
@@ -129,6 +134,13 @@ class Anuncio extends BaseController
 
       if ($post) {
          $post["id"] = $id;
+
+         foreach($post as $key => $item) {
+            if(empty($item)) {
+               $post[$key] = null;
+            }
+         }
+
          $data['salvou'] = $this->model->save($post);
          $data["erros"] = $this->model->errors();
       }
@@ -161,6 +173,75 @@ class Anuncio extends BaseController
 
       if ($post) {
          $post["id"] = $id;
+
+         foreach($post as $key => $item) {
+            if(empty($item)) {
+               $post[$key] = null;
+            }
+         }
+
+         $img = $this->request->getFile("arquivo");
+         if ($img) {
+            if ($img->isValid() && !$img->hasMoved()) {
+               $newName = date('Y-m-d') . $img->getRandomName();
+               $post["arquivo"] = $newName;
+               $img->move(PATHHOME . "/uploads/{$data['tabela']}/", $newName);
+               try {
+                  echo View('templates/tinypng');
+
+                  $upload_path = "uploads/{$data['tabela']}/";
+                  $upload_path_root = PATHHOME  . $upload_path;
+
+                  $file_name = $img->getName();
+                  $file_path = $upload_path_root . "/" . $file_name;
+
+                  $tinyfile = \Tinify\fromFile($file_path);
+                  $tinyfile->toFile($file_path);
+
+                  $img = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/" . $newName));
+                  imagepalettetotruecolor($img);
+                  imagealphablending($img, true);
+                  imagesavealpha($img, true);
+                  imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
+                  imagedestroy($img);
+               } catch (\Tinify\ClientException $e) {
+               }
+            }
+         }
+         $img = $this->request->getFile("arquivo2");
+         if ($img) {
+            if ($img->isValid() && !$img->hasMoved()) {
+               $newName = date('Y-m-d') . $img->getRandomName();
+               $post["arquivo2"] = $newName;
+               $img->move(PATHHOME . "/uploads/{$data['tabela']}/", $newName);
+               try {
+                  echo View('templates/tinypng');
+
+                  $upload_path = "uploads/{$data['tabela']}/";
+                  $upload_path_root = PATHHOME  . $upload_path;
+
+                  $file_name = $img->getName();
+                  $file_path = $upload_path_root . "/" . $file_name;
+
+                  $tinyfile = \Tinify\fromFile($file_path);
+                  $tinyfile->toFile($file_path);
+
+                  $img = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/" . $newName));
+                  imagepalettetotruecolor($img);
+                  imagealphablending($img, true);
+                  imagesavealpha($img, true);
+                  imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
+                  imagedestroy($img);
+               } catch (\Tinify\ClientException $e) {
+               }
+            }
+         }
+
+         // echo '<pre>';
+         // print_r($post);
+         // echo '</pre>';
+         // exit();
+
          $data['salvou'] = $this->model->save($post);
          $data["erros"] = $this->model->errors();
       }

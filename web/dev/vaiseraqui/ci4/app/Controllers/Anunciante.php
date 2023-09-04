@@ -41,6 +41,21 @@ class Anunciante extends BaseController
       $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'anunciantes', $paginate);
       $data['pager'] = $this->model->pager;
 
+      if (isset($_POST["gerar"])) {
+         $f = fopen(PATHHOME . "uploads/anunciante/tmp.csv", "w");
+
+         $linha['nome'] = 'Nome;Documento;Telefone;Telefone2;Telefone3;Email';
+         fputcsv($f, $linha, "|", " ");
+
+         $todosAnunciantes = $this->model->resetQuery()->findAll();
+         foreach ($todosAnunciantes as $item) {
+
+            $linha["nome"] = "{$item->titulo};{$item->cpf};{$item->telefone};{$item->telefone2};{$item->telefone3};{$item->email}";            
+            fputcsv($f, $linha, "|", " ");            
+         }
+         header("Refresh: 0; URL=" . PATHSITE . "uploads/anunciante/tmp.csv");
+      }
+
       $data['title'] = 'Anunciante';
       $data['tabela'] = "anunciante";
       $data["nomeModel"] = "AnuncianteModel";

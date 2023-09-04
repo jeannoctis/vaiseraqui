@@ -26,10 +26,13 @@ class Artigo extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
+      $this->categoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
+      $data['bCategorias'] = $this->categoriaArtigoModel->findAll();
+
       $this->model->orderBy("ordem ASC, id DESC");
 
-      if ($data['categorias']) {
-         foreach ($data['categorias'] as $categoria) {
+      if ($data['bCategorias']) {
+         foreach ($data['bCategorias'] as $categoria) {
             $data['cats'][$categoria->id] = $categoria->titulo;
          }
       }

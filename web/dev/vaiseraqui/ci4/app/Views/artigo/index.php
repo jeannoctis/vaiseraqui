@@ -24,7 +24,7 @@
 									<label for="categorias">Categoria</label>
 									<select name="categoria" id="categorias" class="form-control js-example-basic-single">
 										<option value="">-- filtre por categoria --</option>
-										<? foreach ($categorias as $categoria) { ?>
+										<? foreach ($bCategorias as $categoria) { ?>
 											<option value="<?= $categoria->id ?>" <?= $get['categoria'] == $categoria->id ? 'selected' : '' ?>>
 												<?= $categoria->titulo ?>
 											</option>
