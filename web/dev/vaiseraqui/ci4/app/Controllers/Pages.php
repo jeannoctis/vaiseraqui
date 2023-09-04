@@ -230,7 +230,7 @@ $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
 
     public function view($page = 'home')
     {
-
+    
         $data = $this->buscaGeral();
         $segments = $this->request->uri->getSegments();
         $this->redirects($segments);

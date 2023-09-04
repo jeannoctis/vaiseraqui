@@ -110,9 +110,9 @@ class Anunciante extends BaseController
                }
             }
          }
-
+         
          if ($post['senha']) {
-            $post['senha'] = sha1($post['senha']);
+         $post['senha'] = sha1($post['senha']);
          }
 
          if ($id) {
@@ -135,7 +135,7 @@ class Anunciante extends BaseController
       echo view("{$data['tabela']}/form");
       echo view('templates/admin-footer');
    }
-
+   
    public function anunciante()
    {
    }
