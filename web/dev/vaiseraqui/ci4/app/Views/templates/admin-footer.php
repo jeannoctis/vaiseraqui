@@ -151,11 +151,15 @@
       let label = ui.tagLabel
       const item = document.querySelector(`.sugestoes li[data-id='${label}'][data-target="principaiscomodidades"]`);
 
-      if(item) {
+      if (item) {
         item.style.display = "inline-block"
       }
     }
   });
+
+  $('select#categorias, select#cidades, select#anunciantes, select#estados').on('change', function() {
+    $("#formFiltro").submit()
+  })
 </script>
 
 

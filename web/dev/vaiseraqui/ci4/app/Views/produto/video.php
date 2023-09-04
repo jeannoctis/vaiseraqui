@@ -11,7 +11,7 @@
                      <div class='form-group col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 col-sm-12">
                            <label for="titulo">Título </label>
-                           <input type="text" name="titulo" class="form-control" id="titulo" value="<?= $video->titulo ?>" placeholder="Escreva...">
+                           <input type="text" name="titulo" class="form-control" id="titulo" value="<?= $video->titulo ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
 
@@ -25,7 +25,7 @@
                      <div class="form-group col-lg-6 paddingZeroM">
                         <div class='col-xs-12'>
                            <label for="video">Vídeo (Youtube)</label>
-                           <input type="text" name="video" class="form-control" id="link" value="<?= $video->video ?>" placeholder="https://www.youtube.com/watch?v=VIDEO">
+                           <input type="text" name="video" class="form-control" id="link" value="<?= $video->video ?>" placeholder="https://www.youtube.com/watch?v=VIDEO" required>
                         </div>
                         <? if ($video->video) { ?>
                            <div class="form-group">

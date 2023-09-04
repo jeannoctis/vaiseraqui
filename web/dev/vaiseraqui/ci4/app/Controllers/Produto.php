@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
-class Produto extends BaseController {
+class Produto extends BaseController
+{
 
-    public function __construct() {
+   public function __construct()
+   {
         $this->db = \Config\Database::connect();
         $this->session = \Config\Services::session($config);
         helper(['encrypt', 'text', 'utils']);
@@ -16,10 +18,11 @@ class Produto extends BaseController {
         $this->session->set('menuAdmin', setMenuAdminTipo($get['tipo']));
     }
 
-    public function index() {
+   public function index()
+   {
         if (isset($_POST['excluir'])) {
             foreach ($_POST['excluir'] as $exc) {
-                $data['excluiu'] = $this->model->delete(['id' => $exc]);
+            $data['excluiu'] =  $this->model->delete(['id' => $exc]);
             }
         } else if ($_POST['nexc']) {
             $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
@@ -27,21 +30,77 @@ class Produto extends BaseController {
 
         $data['get'] = $get = request()->getGet();
 
-        $IDsCategorias = $this->produtoCategoriaModel
-                ->select('id')
-                ->where("tipoFK", $get['tipo'])
+      $paginate = \is_numeric($get['page_produtos']) ? $get['page_produtos'] : 1 ;
+
+      $this->produtoCategoriaModel
+         ->select('id, titulo')
+         ->where("tipoFK", $get['tipo']);
+      $IDsCategorias = $data['categorias'] = $this->produtoCategoriaModel->findAll();
+
+      $this->estadoModel = model('App\Models\EstadoModel', false)
+         ->select('estado.id AS estado_id, estado.titulo AS estado_titulo, cidade.id AS cidade_id, cidade.titulo AS cidade_titulo')
+         ->join('cidade', 'estado.id = cidade.estadoFK', 'inner')
+         ->orderBy('estado_titulo ASC, cidade_titulo ASC');
+      $data['estados'] = $this->estadoModel->findAll();
+
+      $estados = [];
+      foreach ($data['estados'] as $item) {
+         if (!isset($estados[$item->estado_id])) {
+            $estados[$item->estado_id] = (object)[
+               'estado_id' => $item->estado_id,
+               'estado_titulo' => $item->estado_titulo,
+               'cidades' => []
+            ];
+         }
+
+         $estados[$item->estado_id]->cidades[] = (object)[
+            'cidade_id' => $item->cidade_id,
+            'cidade_titulo' => $item->cidade_titulo
+         ];
+      }
+      $data['estados'] = array_values($estados);
+
+      $this->anuncianteModel = \model('App\Models\AnuncianteModel', false);
+      $data['anunciantes'] = $this->anuncianteModel
+         ->distinct()
+         ->select("anunciante.id, anunciante.titulo, anunciante.email, p.anuncianteFK")
+         ->join("produto p", "anunciante.id = p.anuncianteFK")
                 ->findAll();
 
-        if (!empty($IDsCategorias)) {
-            $IDsCategorias = \array_column($IDsCategorias, 'id');
+      if(empty($IDsCategorias)) {
+         $IDsCategorias[]['id'] = 0;
+      }
 
-            $data['lista'] = $this->model
-                    ->whereIn("categoriaFK", $IDsCategorias)
-                    ->orderBy("titulo ASC")
-                    ->findAll();
+      $IDsCategorias = array_column($IDsCategorias, 'id');
+
+      if (!empty($get['categoria'])) {
+         $this->model->where("categoriaFK", $get['categoria']);
         } else {
-            $data['lista'] = [];
+         $this->model->whereIn("categoriaFK", $IDsCategorias);
         }
+
+      if (!empty($get['procura'])) {
+         $this->model->groupStart()
+            ->like("titulo", $get['procura'])
+            ->orLike("descricao", $get['procura'])
+            ->orLike("detalhes", $get['procura'])
+            ->groupEnd();
+      }
+
+      if (!empty($get['cidade'])) {
+         $this->model->where("cidadeFK", $get['cidade']);
+      }
+
+      if (!empty($get['anunciante'])) {
+         $this->model->where("anuncianteFK", $get['anunciante']);
+      }
+
+      if (!empty($get['anunciante'])) {
+         $this->model->where("anuncianteFK", $get['anunciante']);
+      }
+      
+      $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);         
+      $data['pager'] = $this->model->pager;
 
         $data['tipo'] = \getTipo($get['tipo']);
 
@@ -54,7 +113,8 @@ class Produto extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function form() {
+   public function form()
+   {
         $post = request()->getPost();
         $data['get'] = $get = request()->getGet();
         $id = decode($this->request->uri->getSegment(4));
@@ -70,6 +130,7 @@ class Produto extends BaseController {
                 ->where('EXISTS (SELECT 1 FROM cidade WHERE estado.id = cidade.estadoFK)')
                 ->orderBy('titulo ASC')
                 ->findAll();
+
 
         foreach ($data['estados'] as $ind => $estado) {
             $this->cidadeModel->resetQuery();
@@ -91,6 +152,7 @@ class Produto extends BaseController {
         $this->produtoPontoDeVendaModel = \model('App\Models\ProdutoPontoDeVendaModel', false);
         $this->produtoCardapioModel = \model('App\Models\ProdutoCardapioModel', false);
         $this->produtoOrganizacaoModel = \model('App\Models\ProdutoOrganizacaoModel', false);
+      $this->produtoDataModel = \model('App\Models\ProdutoDataModel', false);
 
         $this->comodidadeModel = \model('App\Models\ComodidadeModel', false);
         $data['comodidadesDisponiveis'] = $this->comodidadeModel->findAll();
@@ -101,7 +163,7 @@ class Produto extends BaseController {
         $this->cardapioModel = \model('App\Models\CardapioModel', false);
         $data['cardapiosDisponiveis'] = $this->cardapioModel->findAll();
 
-        $data['title'] = 'Produto';
+      $data['title'] = 'Anúncio';
         $data['tabela'] = 'produto';
         $data['resultado'] = "";
 
@@ -136,7 +198,6 @@ class Produto extends BaseController {
                         imagewebp($pdf, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
                         imagedestroy($pdf);
                     } catch (\Tinify\ClientException $e) {
-                        
                     }
                 }
             }
@@ -261,11 +322,6 @@ class Produto extends BaseController {
             }
 
             if (!empty($post['setorIngresso'])) {
-
-                // echo '<pre>';
-                // print_r($post['setorIngresso']);
-                // echo '</pre>';
-                // exit();
 
                 $IDsReceivedSetor = \array_column($post['setorIngresso'], "id");
                 if (!empty($IDsReceivedSetor)) {
@@ -449,6 +505,43 @@ class Produto extends BaseController {
                 $this->produtoOrganizacaoModel->where("produtoFK", $lastId)->delete();
             }
 
+         if(!empty($post['datas'])) {
+            $IDsReceviedDatas = \array_column($post['datas'], "id");            
+
+            if (!empty($IDsReceviedDatas)) {
+               $this->produtoDataModel
+                  ->where("produtoFK", $lastId)
+                  ->whereNotIn("id", $IDsReceviedDatas)
+                  ->delete();
+            }
+
+            foreach($post['datas'] as $item) {
+               if(!empty($item['id'])) {
+                  $updateDatas[] = [
+                     'id' => $item['id'],
+                     'data' => $item['data'],
+                     'horario' => $item['horario']
+                  ];
+               } else {
+                  $insertDatas[] = [
+                     'produtoFK' => $lastId,
+                     'data' => $item['data'],
+                     'horario' => $item['horario']
+                  ];
+               }
+            }
+
+            if (!empty($updateDatas)) {
+               $this->produtoDataModel->updateBatch($updateDatas, "id");
+            }
+            if (!empty($insertDatas)) {
+               $this->produtoDataModel->insertBatch($insertDatas);
+            }
+
+         } else {
+            $this->produtoDataModel->where("produtoFK", $lastId)->delete();
+         }
+
             $data["erros"] = $this->model->errors();
         }
 
@@ -494,9 +587,9 @@ class Produto extends BaseController {
             }
 
             $data['pontosDeVenda'] = $this->produtoPontoDeVendaModel->where("produtoFK", $id)->findAll();
-
             $data['cardapios'] = $this->produtoCardapioModel->where("produtoFK", $id)->findAll();
             $data['organizadores'] = $this->produtoOrganizacaoModel->where("produtoFK", $id)->findAll();
+         $data['datas'] = $this->produtoDataModel->where("produtoFK", $id)->findAll();
         }
 
         echo view('templates/admin-header', $data);
@@ -504,7 +597,8 @@ class Produto extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function fotos() {
+   public function fotos()
+   {
         $this->produtoFotoModel = \model('App\Models\ProdutoFotoModel', false);
 
         if (isset($_POST['excluir'])) {
@@ -537,7 +631,8 @@ class Produto extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function foto() {
+   public function foto()
+   {
         $this->produtoFotoModel = \model('App\Models\ProdutoFotoModel', false);
 
         $idFK = decode($this->request->uri->getSegment(4));
@@ -592,7 +687,6 @@ class Produto extends BaseController {
                             imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
                             imagedestroy($img);
                         } catch (\Tinify\ClientException $e) {
-                            
                         }
                     }
                 }
@@ -631,7 +725,6 @@ class Produto extends BaseController {
                                 imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
                                 imagedestroy($img);
                             } catch (\Tinify\ClientException $e) {
-                                
                             }
                         }
 
@@ -651,7 +744,8 @@ class Produto extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function videos() {
+   public function videos()
+   {
         $this->produtoVideoModel = \model('App\Models\ProdutoVideoModel', false);
 
         if (isset($_POST['excluir'])) {
@@ -686,7 +780,8 @@ class Produto extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function video() {
+   public function video()
+   {
         $this->produtoVideoModel = \model('App\Models\ProdutoVideoModel', false);
 
         $idFK = decode($this->request->uri->getSegment(4));
@@ -732,7 +827,8 @@ class Produto extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function carregaCalendarios() {
+   public function carregaCalendarios()
+   {
 
         helper("date");
         helper("encrypt");
@@ -763,13 +859,13 @@ class Produto extends BaseController {
                         <td align="center">
                             <table width="100%" border="0" cellpadding="2" cellspacing="2">
                                 <tr class='fonteBlack'>
-                                    <td align="center" ><strong>D</strong></td>
-                                    <td align="center" ><strong>S</strong></td>
-                                    <td align="center" ><strong>T</strong></td>
-                                    <td align="center" ><strong>Q</strong></td>
-                                    <td align="center" ><strong>Q</strong></td>
-                                    <td align="center" ><strong>S</strong></td>
-                                    <td align="center" ><strong>S</strong></td>
+                           <td align="center"><strong>D</strong></td>
+                           <td align="center"><strong>S</strong></td>
+                           <td align="center"><strong>T</strong></td>
+                           <td align="center"><strong>Q</strong></td>
+                           <td align="center"><strong>Q</strong></td>
+                           <td align="center"><strong>S</strong></td>
+                           <td align="center"><strong>S</strong></td>
                                 </tr>
                                 <?php
                                 $timestamp = mktime(0, 0, 0, $cMonth, 1, $cYear);
@@ -850,7 +946,8 @@ class Produto extends BaseController {
         echo json_encode($retorno);
     }
 
-    public function whats() {
+   public function whats()
+   {
         helper('date');
         $request = \Config\Services::request();
         $post = $request->getPost();
@@ -869,7 +966,8 @@ class Produto extends BaseController {
         echo json_encode($retorno);
     }
 
-    public function fone() {
+   public function fone()
+   {
         helper('date');
         $request = \Config\Services::request();
         $post = $request->getPost();
@@ -888,7 +986,8 @@ class Produto extends BaseController {
         echo json_encode($retorno);
     }
 
-    public function excluirFoto() {
+   public function excluirFoto()
+   {
         $request = \Config\Services::request();
         $post = $request->getPost();
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
@@ -907,7 +1006,8 @@ class Produto extends BaseController {
         echo json_encode($retorno);
     }
 
-    public function fotoDestaque() {
+   public function fotoDestaque()
+   {
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
 
         $produtoModel = model('App\Models\ProdutoModel', false);
@@ -921,10 +1021,13 @@ class Produto extends BaseController {
         $save['id'] = $foto->produtoFK;
         $save['fotoFK'] = $post['id'];
 
-        $this->model->save($save);
+      $retorno['ok'] = $this->model->save($save);
+
+      echo json_encode($retorno);
     }
 
-    public function novoVideo() {
+   public function novoVideo()
+   {
         ob_start();
         $token = md5(uniqid(""));
         ?>
@@ -960,7 +1063,8 @@ class Produto extends BaseController {
         echo json_encode($retorno);
     }
 
-    public function excluirVideo() {
+   public function excluirVideo()
+   {
 
         $request = request();
         $post = $request->getPost();
@@ -971,12 +1075,13 @@ class Produto extends BaseController {
         $produtoVideoModel->delete(['id' => $id]);
     }
 
-    public function novaComodidade() {
+   public function novaComodidade()
+   {
         ob_start();
         $token = md5(uniqid(""));
         ?>
         <script>
-            $(document).ready(function () {
+         $(document).ready(function() {
                 $(".mySingleFieldTags").tagit({
                     allowSpaces: true
                 });
@@ -986,7 +1091,7 @@ class Produto extends BaseController {
             <div class="card-header" id="card<?= $token ?>">
                 <h5 class="mb-0">
                     <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
-                        Novo  <img src="<?= PATHSITE ?>images/icone_menu.svg">
+                  Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
                         <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
                             <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
@@ -1006,7 +1111,7 @@ class Produto extends BaseController {
                         </div>
                         <div class='col-12'>
                             <label>Itens</label>
-                            <input data-role="tagsinput" type="text" name="comodidades[]" class="form-control tags-input mySingleFieldTags "  value="" placeholder="Itens">
+                     <input data-role="tagsinput" type="text" name="comodidades[]" class="form-control tags-input mySingleFieldTags " value="" placeholder="Itens">
                         </div>
                     </div>
 
@@ -1018,29 +1123,29 @@ class Produto extends BaseController {
         echo json_encode($retorno);
     }
 
-    public function novoPontoDeVenda() {
+   public function novoPontoDeVenda()
+   {
         ob_start();
         $token = md5(uniqid(""));
         $request = \Config\Services::request();
         $get = $request->getGet();
         ?>
         <script>
-            $(document).ready(function () {
+         $(document).ready(function() {
                 $(".mySingleFieldTags").tagit({
                     allowSpaces: true
                 });
             });
 
-            $(document).ready(function () {
+         $(document).ready(function() {
                 $('.cep').mask('00000-000');
             });
-
         </script>
         <div class="card">
             <div class="card-header" id="tituloAba<?= $token ?>">
                 <h5 class="mb-0">
                     <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
-                        Novo  <img src="<?= PATHSITE ?>images/icone_menu.svg">
+                  Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
                         <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
                             <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
@@ -1055,19 +1160,18 @@ class Produto extends BaseController {
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <label>Título</label>
-                             <input type="hidden" name="tipo[]" value="<?=$get['tipo']?>"
-                            <input type='hidden' name='id[]' value="<?= encode($texto->id) ?>" />
+                     <input type="hidden" name="tipo[]" value="<?= $get['tipo'] ?>" <input type='hidden' name='id[]' value="<?= encode($texto->id) ?>" />
                             <input type="text" name="titulo[]" class="form-control" Value="<?= $texto->titulo ?>">
                         </div>
                         <div class="col-12 col-md-6">
                             <label> <?= ($get['tipo'] == 'fisico') ? 'Endereço' : 'Site' ?> </label>                                              
                             <input type="text" name="endereco[]" class="form-control" Value="<?= $texto->endereco ?>">
                         </div>
-                                 <div class="col-12 col-md-6 <?=($get['tipo'] == 'online') ? 'd-none' : '' ?>">
+                  <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
                                 <label>CEP</label>                                              
                                 <input type="text" name="cep[]" class="form-control cep" Value="<?= $texto->cep ?>">
                             </div>
-                            <div class="col-12 col-md-6 <?=($get['tipo'] == 'online') ? 'd-none' : '' ?>">
+                  <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
                                 <label>Cidade / Estado</label>                                              
                                 <input type="text" name="cidade[]" class="form-control" Value="<?= $texto->cidade ?>">
                             </div>                    
@@ -1081,31 +1185,31 @@ class Produto extends BaseController {
         echo json_encode($retorno);
     }
     
-     public function novaOrganizacao() {
+   public function novaOrganizacao()
+   {
         ob_start();
         $token = md5(uniqid(""));
         $request = \Config\Services::request();
         $get = $request->getGet();
         ?>
         <script>
-            $(document).ready(function () {
+         $(document).ready(function() {
                 $(".mySingleFieldTags").tagit({
                     allowSpaces: true
                 });
             });
 
-            $(document).ready(function () {
+         $(document).ready(function() {
                 $('.cep').mask('00000-000');
             });
-
         </script>
         <div class="card">
             <div class="card-header" id="card<?= $token ?>">
                 <h5 class="mb-0">
                     <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
-                        Novo  <img src="<?= PATHSITE ?>images/icone_menu.svg">
+                  Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
-                        <div onclick="excluirAba('<?= $token?>', 'false', '')" class="excluirAba">
+                  <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
                             <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
                             Excluir
                         </div>
@@ -1118,21 +1222,21 @@ class Produto extends BaseController {
                     <div class="row">
                                             <div class="col-12 col-md-6">
                                                 <label>Título</label>
-                                              <input type='hidden' name='id[]' value="<?=encode($texto->id)?>" />
-                                                <input type="text" name="titulo[]" class="form-control" Value="<?=$texto->titulo?>">
+                     <input type='hidden' name='id[]' value="<?= encode($texto->id) ?>" />
+                     <input type="text" name="titulo[]" class="form-control" Value="<?= $texto->titulo ?>">
                                             </div>
                                            <div class="col-12 col-md-6">
                                                 <label> Endereço</label>                                              
-                                                <input type="text" name="endereco[]" class="form-control" Value="<?=$texto->endereco?>">
+                     <input type="text" name="endereco[]" class="form-control" Value="<?= $texto->endereco ?>">
                                             </div>
                                             
                                               <div class="col-12 col-md-6 ">
                                                 <label>Site</label>                                              
-                                                <input type="text" name="site[]" class="form-control" Value="<?=$texto->site?>">
+                     <input type="text" name="site[]" class="form-control" Value="<?= $texto->site ?>">
                                             </div>
-                                              <div  class="col-12 col-md-6 <?=($texto->tipo == 'online') ? 'd-none' : '' ?>">
+                  <div class="col-12 col-md-6 <?= ($texto->tipo == 'online') ? 'd-none' : '' ?>">
                                                 <label>Cidade / Estado</label>                                              
-                                                <input type="text" name="cidade[]" class="form-control" Value="<?=$texto->cidade?>">
+                     <input type="text" name="cidade[]" class="form-control" Value="<?= $texto->cidade ?>">
                                             </div>
                                            
                                         </div>
@@ -1145,7 +1249,8 @@ class Produto extends BaseController {
         echo json_encode($retorno);
     }
 
-    public function excluirAba() {
+   public function excluirAba()
+   {
         $request = \Config\Services::request();
         $post = $request->getPost();
 
@@ -1156,7 +1261,8 @@ class Produto extends BaseController {
         echo json_decode($retorno);
     }
 
-    public function adicionaData() {
+   public function adicionaData()
+   {
 
         $request = \Config\Services::request();
         $post = $request->getPost();
@@ -1186,15 +1292,18 @@ class Produto extends BaseController {
         }
     }
 
-    public function novoPreco() {
+   public function novoPreco()
+   {
         ob_start();
         $token = md5(uniqid(""));
         ?>
 
         <script>
-            $(document).ready(function () {
-                $('.money2').mask("#.##0,00", {reverse: true});
+         $(document).ready(function() {
+            $('.money2').mask("#.##0,00", {
+               reverse: true
             });
+         });
         </script>
 
         <div class="card">

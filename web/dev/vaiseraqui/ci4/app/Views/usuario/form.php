@@ -26,7 +26,7 @@ $aprovados = explode(";", $resultado->secoes);
 								</div>
 							</div>
 
-							<? if ($resultado->id > 2) { ?>
+							<? if ($resultado->id > 2 || !$resultado->id) { ?>
 								<div class="form-group col-xs-12 paddingZeroM">
 									<label for="categoria" class="col-sm-2 text-left control-label">Seções do site</label>
 									<div class="col-10 col-sm-offset-2">

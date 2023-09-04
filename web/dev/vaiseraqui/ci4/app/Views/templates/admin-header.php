@@ -133,17 +133,6 @@ if ($acesso['usuarioFK'] > 3) {
             </header>
             <!-- /.header -->
             <div class="content">
-                <style>
-                    /* a>i {
-                       margin-left: 5px;
-                    }
-        
-                    /* a:has(> i)::before {
-                       margin-left: 7px !important;
-                    } */
-                    */
-                </style>
-
                 <div class="navigation">
 
                     <!-- /.title -->
@@ -154,8 +143,12 @@ if ($acesso['usuarioFK'] > 3) {
                                 <ul class="sub-menu js__content">
                                     <li class='<?= ($segments[1] == 'banner' && decode($segments[3]) == 1) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/banner/form/<?= encode(1) ?>">Banner</a></li>
                                     <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 8) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(8) ?>">Texto Menu</a></li>                                    
+                        <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 15) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(15) ?>">Seção Espaços</a></li>
+                        <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 16) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(16) ?>">Seção Prestadores de Serviços</a></li>
                                     <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 9) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(9) ?>">Convite anunciante 1</a></li>
                                     <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 10) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(10) ?>">Convite anunciante 2</a></li>                                    
+                        <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 17) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(17) ?>">Seção Calendário</a></li>
+                        <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 18) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(18) ?>">Seção Blog</a></li>
                                     <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 7) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(7) ?>">Bloco Contato</a></li>
                                 </ul>
                             </li>

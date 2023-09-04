@@ -4,9 +4,11 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
-class Pages extends Controller {
+class Pages extends Controller
+{
 
-    public function buscaGeral() {
+    public function buscaGeral()
+    {
         helper('text');
            
         $this->session = \Config\Services::session($config);
@@ -215,18 +217,19 @@ $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
     echo view('templates/footer', $data);
   }
 
-    public function redirects($segments) {
-        
+    public function redirects($segments)
+    {
     }
     
-      public function anunciante($page = 'home') {    
+    public function anunciante($page = 'home')
+    {
     $segments = $this->request->uri->getSegments();
     $anuncianteModel = model('App\Models\AnuncianteModel', false);         
      $anuncianteModel->verPagina($segments);
-    
   }
 
-    public function view($page = 'home') {
+    public function view($page = 'home')
+    {
     
         $data = $this->buscaGeral();
         $segments = $this->request->uri->getSegments();
@@ -498,7 +501,8 @@ $this->anunciante($page);
         echo view("templates/" . $footer, $data);
     }
 
-    public function recebeEmail($private_recaptcha, $post) {
+    public function recebeEmail($private_recaptcha, $post)
+    {
         $token = $_POST['g-recaptcha-response'];
         $secret = $private_recaptcha;
         $ip = $_SERVER["REMOTE_ADDR"];

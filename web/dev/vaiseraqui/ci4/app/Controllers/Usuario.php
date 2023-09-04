@@ -30,7 +30,7 @@ class Usuario extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $data['lista'] = $this->model->findAll();
+      $data['lista'] = $this->model->orderBy("id ASC")->findAll();
 
       $data['title'] = 'Usuaríos';
       $data['tabela'] = "usuario";
@@ -88,7 +88,7 @@ class Usuario extends BaseController
       }
 
       $secaoModel->resetQuery();
-      $data['secoes'] =  $secaoModel->findAll();
+      $data['secoes'] =  $secaoModel->orderBy("ordem ASC, id DESC")->findAll();
 
       echo view('templates/admin-header', $data);
       echo view("{$data['tabela']}/form");

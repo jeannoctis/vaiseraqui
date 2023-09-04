@@ -11,7 +11,7 @@ class Anunciante extends BaseController
       helper(['encrypt', 'text']);
       $this->model = model('App\Models\AnuncianteModel', false);
       $this->tabela = "anunciante";
-      $this->session->set('menuAdmin', '4');
+      $this->session->set('menuAdmin', '7');
    }
 
    public function index()
@@ -24,9 +24,37 @@ class Anunciante extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $this->model->orderBy("titulo ASC");
+      $data['get'] = $get = request()->getGet();
+      $paginate = \is_numeric($get['page_anunciantes']) ? $get['page_anunciantes'] : 1;
 
-      $data['artigos'] = $this->model->findAll();
+      if (!empty($get['procura'])) {
+         $this->model->groupStart()
+            ->like("titulo", $get['procura'])
+            ->orLike("cpf", $get['procura'])
+            ->orLike("telefone", $get['procura'])
+            ->orLike("telefone2", $get['procura'])
+            ->orLike("telefone3", $get['procura'])
+            ->orLike("email", $get['procura'])
+            ->groupEnd();
+      }
+
+      $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'anunciantes', $paginate);
+      $data['pager'] = $this->model->pager;
+
+      if (isset($_POST["gerar"])) {
+         $f = fopen(PATHHOME . "uploads/anunciante/tmp.csv", "w");
+
+         $linha['nome'] = 'Nome;Documento;Telefone;Telefone2;Telefone3;Email';
+         fputcsv($f, $linha, "|", " ");
+
+         $todosAnunciantes = $this->model->resetQuery()->findAll();
+         foreach ($todosAnunciantes as $item) {
+
+            $linha["nome"] = "{$item->titulo};{$item->cpf};{$item->telefone};{$item->telefone2};{$item->telefone3};{$item->email}";            
+            fputcsv($f, $linha, "|", " ");            
+         }
+         header("Refresh: 0; URL=" . PATHSITE . "uploads/anunciante/tmp.csv");
+      }
 
       $data['title'] = 'Anunciante';
       $data['tabela'] = "anunciante";
@@ -83,7 +111,7 @@ class Anunciante extends BaseController
             }
          }
          
-         if($post['senha']) {
+         if ($post['senha']) {
          $post['senha'] = sha1($post['senha']);
          }
 
@@ -108,8 +136,7 @@ class Anunciante extends BaseController
       echo view('templates/admin-footer');
    }
    
-   public function anunciante() {
-       
+   public function anunciante()
+   {
    }
-   
 }

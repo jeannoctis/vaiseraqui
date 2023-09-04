@@ -236,7 +236,6 @@ function fotoDestaque(id) {
     });
 }
 
-
 function novoVideo() {
     $.get(PATHSITE + 'produto/novoVideo/', {}, function (retorno) {
         dados = jQuery.parseJSON(retorno);

@@ -8,7 +8,7 @@ class Comodidade extends BaseController
    {
       $this->db = \Config\Database::connect();
       $this->session = \Config\Services::session($config);
-      helper(['encrypt', 'text']);
+      helper(['encrypt', 'text', 'utils']);
       $this->model = model('App\Models\ComodidadeModel', false);
       $this->tabela = "comodidade";
       $this->session->set('menuAdmin', '5');
@@ -21,12 +21,20 @@ class Comodidade extends BaseController
             $data['excluiu'] =  $this->model->delete(['id' => $exc]);
          }
       } else if ($_POST['nexc']) {
-         $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
+         $data['erros'][] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $this->model->orderBy("ordem ASC");
+      $data['get'] = $get = request()->getGet();
+      $paginate = \is_numeric($get['page_comodidades']) ? $get['page_comodidades'] : 1;
 
-      $data['lista'] = $this->model->findAll();
+      if (!empty($get['procura'])) {
+         $this->model->groupStart()
+            ->like("titulo", $get['procura'])            
+            ->groupEnd();
+      }
+
+      $data['lista'] = $this->model->orderBy("ordem ASC")->paginate(2, 'comodidades', $paginate);
+      $data['pager'] = $this->model->pager;
 
       $data['title'] = 'Comodidades';
       $data['tabela'] = "comodidade";
