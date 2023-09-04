@@ -1,6 +1,6 @@
 <?
  $infoPagina['nomeDaPagina'] = "Organização";
-          $infoPagina['iconePagina'] = 'map-icon.svg';
+          $infoPagina['iconePagina'] = 'icon-crew.svg';
 ?>
 <section class="wrap">
    

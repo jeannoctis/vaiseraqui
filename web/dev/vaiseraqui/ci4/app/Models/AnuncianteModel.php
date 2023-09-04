@@ -73,7 +73,7 @@ class AnuncianteModel extends Model {
         $ipooModel = model('App\Models\TipoModel', false);
         $data['tipoAtual'] = $ipooModel->find($data['anuncio']->tipoFK);
 
-        $data['anunciante'] = $this->find($this->session->get('anunciante')->id);
+        $data['anunciante'] = $this->find($_SESSION['anunciante']);
 
         $data['infoPagina'] = array();
         $data['infoPagina']['fotoAnunciante'] = $data['anunciante']->arquivo;
@@ -198,7 +198,7 @@ class AnuncianteModel extends Model {
                 $data['proximidadesDisponiveis'] = $this->proximidadeModel->orderBy("ordem ASC, id DESC")->findAll();
 
                 $data['nomePagina'] = "Proximidades";
-                $data['iconePagina'] = "icone_local.svg";
+                $data['iconePagina'] = "icon-tree.svg";
                 $data['tipoPagina'] = 'proximidades';
                 $proximidadeModel = model('App\Models\ProximidadeModel', false);
                 $proximidadeModel->orderBy("titulo ASC");
