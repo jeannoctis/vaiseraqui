@@ -5,7 +5,7 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
 <section class="wrap">
     <? echo View("templates/barra-topo", $infoPagina); ?>
 
-    <form class="conteudo" action="">
+    <!-- <form class="conteudo" action="">
 
         <fieldset >
             <legend>Dados Gerais</legend>
@@ -85,7 +85,7 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
             
         </fieldset>
 
-    </form>
+    </form> -->
 
     <div class="conteudo">
         <div class="container-fluid">

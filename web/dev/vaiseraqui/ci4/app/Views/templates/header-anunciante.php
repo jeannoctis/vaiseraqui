@@ -118,8 +118,6 @@
                         <h5>Feriados</h5>
                     </a>
 
-
-
                     <a href="<?= PATHSITE ?>area-do-anunciante/precos" class="itemMenuPainel <?= ($segments[1] == 'precos') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-pricing.svg">
                         <h5>Valores / Ingressos</h5>
