@@ -930,7 +930,7 @@ class AnuncianteModel extends Model {
                 $produtoCategoriaModel->orderBy("titulo ASC");
                 $data["categorias"] = $produtoCategoriaModel->findAll();
 
-                /*    $capacidadeModel = model('App\Models\CapacidadeModel', false);
+                /* $capacidadeModel = model('App\Models\CapacidadeModel', false);
                   $capacidadeModel->where("espaco","S");
                   $capacidadeModel->orderBy("id ASC");
                   $data["capacidades"] = $capacidadeModel->findAll(); */
@@ -945,14 +945,10 @@ class AnuncianteModel extends Model {
 
                     if ($post["inicioAlta"]) {
                         $post["inicioAlta"] = dataFormata($post["inicioAlta"]);
-                    } else {
-                        $post["inicioAlta"] = NULL;
                     }
 
                     if ($post["fimAlta"]) {
                         $post["fimAlta"] = dataFormata($post["fimAlta"]);
-                    } else {
-                        $post["fimAlta"] = NULL;
                     }
 
                     $img = $request->getFile("arquivo");

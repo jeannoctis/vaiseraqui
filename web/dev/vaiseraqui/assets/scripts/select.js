@@ -27,9 +27,9 @@ class Selector {
 
   }
 
-  initEventsItems() {
+  initEventsItems() {    
     this.dropdownListitems.forEach(item => {
-      item.addEventListener('click', (e) => {
+      item.addEventListener('click', (e) => {        
         e.preventDefault()
         this.input.value = e.target.innerHTML
         this.closeDropdown()
@@ -37,12 +37,15 @@ class Selector {
     })
 
     this.label.addEventListener('click', (e) =>{
-      e.preventDefault()
+      e.preventDefault()      
       this.openDropdown()
     })
 
     this.input.addEventListener('click', (e) => {
       e.preventDefault()
+      document.querySelectorAll('.select-list.open').forEach(list => {
+        list.classList.remove('open')
+      })
       this.openDropdown()
     })
   }

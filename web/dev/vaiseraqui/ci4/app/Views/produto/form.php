@@ -1434,6 +1434,9 @@
                </div>
             `
             ingressoContainer.appendChild(newElement)
+            $('.money').mask('#.##0,00', {
+               reverse: true
+            });
          }
 
          // Modal Setor Ingresso

@@ -33,16 +33,16 @@ class Pages extends Controller
 
         $this->textoModel = model('App\Models\TextoModel', false);
 
-       $cidadeModel = model('App\Models\CidadeModel', false);
-       $cidadeModel->select('cidade.titulo, e.sigla');
-       $cidadeModel->join('estado e', 'e.id =cidade.estadoFK');
+        $cidadeModel = model('App\Models\CidadeModel', false);
+        $cidadeModel->select('cidade.titulo, e.sigla');
+        $cidadeModel->join('estado e', 'e.id =cidade.estadoFK');
         $cidadeModel->orderBy("cidade.titulo ASC");
         $data['cidades'] = $cidadeModel->findAll();
-        
+
         $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
         $produtoCategoriaModel->orderBy('titulo ASC');
         $data['produtoCategorias'] = $produtoCategoriaModel->findAll();
-        
+
         $removeChars = array("-", "(", ")", " ");
         $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
         $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
@@ -66,89 +66,89 @@ class Pages extends Controller
         return $data;
     }
 
-   
-  public function index() {
-    helper("date");
-    $data = $this->buscaGeral();
 
-    $data["pagina"] = 1;
-    $data['bodyClass'] = 'home';
+    public function index()
+    {
+        helper("date");
+        $data = $this->buscaGeral();
 
-    $bannerModel = model('App\Models\BannerModel', false);    
-    $bannerModel->orderBy("ordem ASC, id DESC");
-    $data['bannerPrincipal'] = $bannerModel->findAll();
-     
-    $cidadeModel = model('App\Models\CidadeModel', false);  
-    $cidadeModel->select("cidade.*,e.sigla");
-$cidadeModel->join("estado e", "e.id = cidade.estadoFK");
-    $cidadeModel->orderBy("titulo ASC");
-   $data["cidades"] = $cidadeModel->findAll();
+        $data["pagina"] = 1;
+        $data['bodyClass'] = 'home';
 
-    $this->metatagModel = model('App\Models\MetatagModel', false);
-    $data["metatag"] = $this->metatagModel->find($data["pagina"]);
-    
-    $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);    
-    $produtoCategoriaModel->orderBy("titulo ASC");
-    $data["categoriasProduto"] = $produtoCategoriaModel->findAll();
-   
-    $produtoModel = model('App\Models\ProdutoModel', false);  
-   
-   $produtoModel->resetQuery();
-    
-    $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);  
-    $produtoModel->select("produto.id,  produto.titulo, produto.identificador, produto.lazer, produto.itens, produto.categoriaFK");
-    $produtoModel->where("produto.destaque","1");
-    $produtoModel->where("produto.ativo","1");
-//    $produtoModel->where("produto.tipoFK",1);
-    $produtoModel->orderBy("RAND()");
-    $data["espacos"] =  $produtoModel->findAll(10);
-    
-      if($data["categoriasProduto"]) {
-            foreach($data["categoriasProduto"] as $ind => $dProd) {
-              $data["nomeCategoria"][$dProd->id] = $dProd->titulo;
+        $bannerModel = model('App\Models\BannerModel', false);
+        $bannerModel->orderBy("ordem ASC, id DESC");
+        $data['bannerPrincipal'] = $bannerModel->findAll();
+
+        $cidadeModel = model('App\Models\CidadeModel', false);
+        $cidadeModel->select("cidade.*,e.sigla");
+        $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
+        $cidadeModel->orderBy("titulo ASC");
+        $data["cidades"] = $cidadeModel->findAll();
+
+        $this->metatagModel = model('App\Models\MetatagModel', false);
+        $data["metatag"] = $this->metatagModel->find($data["pagina"]);
+
+        $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
+        $produtoCategoriaModel->orderBy("titulo ASC");
+        $data["categoriasProduto"] = $produtoCategoriaModel->findAll();
+
+        $produtoModel = model('App\Models\ProdutoModel', false);
+
+        $produtoModel->resetQuery();
+
+        $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
+        $produtoModel->select("produto.id,  produto.titulo, produto.identificador, produto.lazer, produto.itens, produto.categoriaFK");
+        $produtoModel->where("produto.destaque", "1");
+        $produtoModel->where("produto.ativo", "1");
+        //    $produtoModel->where("produto.tipoFK",1);
+        $produtoModel->orderBy("RAND()");
+        $data["espacos"] =  $produtoModel->findAll(10);
+
+        if ($data["categoriasProduto"]) {
+            foreach ($data["categoriasProduto"] as $ind => $dProd) {
+                $data["nomeCategoria"][$dProd->id] = $dProd->titulo;
             }
-      }
-    
-        if($data["espacos"]) {
-            foreach($data["espacos"] as $ind => $dProd) {              
-               $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
-              
-              $produtoFotoModel->resetQuery();
-              $produtoFotoModel->where("produtoFK",$dProd->id);
-                 $produtoFotoModel->orderBy("ordem ASC, id DESC");
-              $data["espacos"][$ind]->fotos = $produtoFotoModel->findAll(3);
-              
+        }
+
+        if ($data["espacos"]) {
+            foreach ($data["espacos"] as $ind => $dProd) {
+                $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
+
+                $produtoFotoModel->resetQuery();
+                $produtoFotoModel->where("produtoFK", $dProd->id);
+                $produtoFotoModel->orderBy("ordem ASC, id DESC");
+                $data["espacos"][$ind]->fotos = $produtoFotoModel->findAll(3);
             }
-          }
-    
-    $produtoModel->resetQuery();
-    $produtoModel->select("produto.id, produto.identificador, produto.titulo, produto.categoriaFK, produto.preco, produto.apresentacao ");
-    //$produtoModel->join("produto_quantidade pq","produto.id = pq.produtoFK",'LEFT'); 
-    //$produtoModel->where("tipoFK",2);
-    $produtoModel->where("destaque","1");
-    $produtoModel->where("ativo","1");
-    $produtoModel->groupBy("produto.id");
-    $produtoModel->where("produto.inicioValidade <= NOW() AND produto.validade >= NOW()");
-    $produtoModel->where("produto.inicioDestaque <= NOW() AND produto.validadeDestaque >= NOW()");
-    $produtoModel->orderBy("RAND()");
-    $data["servicos"] =  $produtoModel->findAll(10);
-    
-         if($data["servicos"]) {
-            foreach($data["servicos"] as $ind => $dProd) {
-               $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
-              $produtoFotoModel->resetQuery();
-              $produtoFotoModel->where("produtoFK",$dProd->id);
-              $produtoFotoModel->orderBy("ordem ASC, id DESC");
-              $data["servicos"][$ind]->fotos = $produtoFotoModel->findAll(3);
+        }
+
+        $produtoModel->resetQuery();
+        $produtoModel->select("produto.id, produto.identificador, produto.titulo, produto.categoriaFK, produto.preco, produto.apresentacao ");
+        //$produtoModel->join("produto_quantidade pq","produto.id = pq.produtoFK",'LEFT'); 
+        //$produtoModel->where("tipoFK",2);
+        $produtoModel->where("destaque", "1");
+        $produtoModel->where("ativo", "1");
+        $produtoModel->groupBy("produto.id");
+        $produtoModel->where("produto.inicioValidade <= NOW() AND produto.validade >= NOW()");
+        $produtoModel->where("produto.inicioDestaque <= NOW() AND produto.validadeDestaque >= NOW()");
+        $produtoModel->orderBy("RAND()");
+        $data["servicos"] =  $produtoModel->findAll(10);
+
+        if ($data["servicos"]) {
+            foreach ($data["servicos"] as $ind => $dProd) {
+                $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
+                $produtoFotoModel->resetQuery();
+                $produtoFotoModel->where("produtoFK", $dProd->id);
+                $produtoFotoModel->orderBy("ordem ASC, id DESC");
+                $data["servicos"][$ind]->fotos = $produtoFotoModel->findAll(3);
             }
-          }
-    
-    $ArtigoModel = model('App\Models\ArtigoModel', false);  
-    $ArtigoModel->select('artigo.*, ca.titulo as categoria, ca.identificador as identificadorCat');
-    $ArtigoModel->join('categoriaArtigo ca', 'ca.id = artigo.categoriaFK');
-     $ArtigoModel->orderBy("artigo.ordem ASC, artigo.id DESC");
-     $data["blogs"] = $ArtigoModel->findAll(6);
-/*    
+        }
+
+        $ArtigoModel = model('App\Models\ArtigoModel', false);
+        $ArtigoModel->select('artigo.*, ca.titulo as categoria, ca.identificador as identificadorCat');
+        $ArtigoModel->join('categoriaArtigo ca', 'ca.id = artigo.categoriaFK');
+        $ArtigoModel->orderBy("artigo.ordem ASC, artigo.id DESC");
+        $data["blogs"] = $ArtigoModel->findAll(6);
+        /*    
    $itemModel = model('App\Models\ItemModel', false);  
 
     $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
@@ -185,37 +185,36 @@ $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
     $lazerModel->orderBy("quantidade DESC");
     $data["lazeres"] = $lazerModel->findAll(12);
     */
-       if (isset($_POST['enviar'])) {
-            $request = \Config\Services::request();       
-       $post = $request->getPost();
-      $data["contato"] = $this->recebeEmail($data["configs"]->private_recaptcha,$post);
-  
-      if($data["contato"] == 1){
-        $request = \Config\Services::request();       
-        $emailModel = model('App\Models\EmailModel', false);
-        $data["sucesso"] = "Contato enviado com sucesso!";
-        $data["salvou"] = TRUE;
-                
-        $idContato = 1;
-       
-        $result = $emailModel->find($idContato);
-        $dados["mailTo"] = $result->email;
-        $dados["subject"] = $post["assunto"];
-        ob_start();
-        echo View('templates/email-template', $post);
-        $dados["message"] = ob_get_clean();
+        if (isset($_POST['enviar'])) {
+            $request = \Config\Services::request();
+            $post = $request->getPost();
+            $data["contato"] = $this->recebeEmail($data["configs"]->private_recaptcha, $post);
 
-        $emailModel->enviarEmail($dados);
-      } else {
-        $data["erro"] = $data["contato"][0];
-      }
+            if ($data["contato"] == 1) {
+                $request = \Config\Services::request();
+                $emailModel = model('App\Models\EmailModel', false);
+                $data["sucesso"] = "Contato enviado com sucesso!";
+                $data["salvou"] = TRUE;
 
+                $idContato = 1;
+
+                $result = $emailModel->find($idContato);
+                $dados["mailTo"] = $result->email;
+                $dados["subject"] = $post["assunto"];
+                ob_start();
+                echo View('templates/email-template', $post);
+                $dados["message"] = ob_get_clean();
+
+                $emailModel->enviarEmail($dados);
+            } else {
+                $data["erro"] = $data["contato"][0];
+            }
+        }
+
+        echo view('templates/header', $data);
+        echo view('pages/home', $data);
+        echo view('templates/footer', $data);
     }
-
-    echo view('templates/header', $data);
-    echo view('pages/home', $data);
-    echo view('templates/footer', $data);
-  }
 
     public function redirects($segments)
     {
@@ -230,7 +229,7 @@ $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
 
     public function view($page = 'home')
     {
-    
+
         $data = $this->buscaGeral();
         $segments = $this->request->uri->getSegments();
         $this->redirects($segments);
@@ -245,62 +244,80 @@ $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
                 break;
             case "sobre-nos":
                 $data['pagina'] = 2;
+                $data['bodyClass'] = 'about';
 
-                $data['sobreNos'] = $this->textoModel->find(1);
+                $data['txSobreNos'] = $this->textoModel->find(1);
 
                 $this->aspectoModel = \model("App\Models\AspectoModel", false);
                 $data['aspectos'] = $this->aspectoModel->orderBy("ordem ASC, id DESC")->findAll();
 
                 $data['depoimento'] = $this->textoModel->find(2);
-
-                $data['txInstagram'] = $this->textoModel->find(5);
-                $data['igInfo'] = $this->redeSocialModel->find(2);
-                $data['bodyClass'] = 'page-about-us';
-                break;   
-                case 'eventos':
-                    $data['pagina'] = 3;
-                    $data['bodyClass'] = 'events';
-                    break;
+                $data['txContato'] = $this->textoModel->find(7);
+                break;
+            case 'eventos':
+                $data['pagina'] = 3;
+                $data['bodyClass'] = 'events';
+                break;
             case "blog":
-                $data['bodyClass'] = 'page-blog-list';
+                $data['bodyClass'] = 'blog-list';
                 $data['pagina'] = 5;
                 $segments = $this->request->uri->getSegments();
                 $data['get'] = $get = \request()->getGet();
+                $page = "blog-listagem";
 
-                $data['txBlog'] = $this->textoModel->find(6);
-
-                if (!is_numeric($get['page_blog'])) {
-                    $paginate = 1;
-                } else {
-                    $paginate = $get['page_blog'];
-                }
+                $paginate = \is_numeric($get['page_artigos']) ? $get['page_artigos'] : 1 ;
 
                 $this->artigoModel = \model("App\Models\ArtigoModel", false);
-                $data['artigos'] = $this->artigoModel->orderBy("ordem ASC, id DESC")->paginate(10, 'blog', $paginate);
+                $data['artigoDestaque'] = $this->artigoModel
+                    ->where("destaque", "S")
+                    ->first();
+                $data['artigosMaisLidos'] = $this->artigoModel
+                    ->resetQuery()
+                    ->orderBy("ordem ASC, id DESC")
+                    ->findAll(3);
+                $data['artigosRecentes'] = $this->artigoModel
+                    ->resetQuery()
+                    ->orderBy("dtCriacao DESC")
+                    ->paginate(1, "artigos", $paginate);
                 $data['pager'] = $this->artigoModel->pager;
 
-                $this->bCategoria = \model('App\Models\BCategoriaModel', false);
-                $this->bCategoria->where("bcategoria.id in (select categoriaFK from artigo WHERE artigo.excluido IS null)");
-                $data['BCategorias'] = $this->bCategoria->findAll();
+                $this->categoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
+                $this->categoriaArtigoModel->where("categoriaArtigo.id IN (SELECT categoriaFK FROM artigo WHERE artigo.excluido IS NULL)");
+                $data['categorias_artigos'] = $this->categoriaArtigoModel->findAll();
 
-                if ($data['BCategorias']) {
-                    foreach ($data['BCategorias'] as $categoria) {
+                if ($data['categorias_artigos']) {
+                    foreach ($data['categorias_artigos'] as $categoria) {
                         $data['cats'][$categoria->id] = $categoria->titulo;
                     }
                 }
 
-                $data['artigoAtual'] = $this->artigoModel->where("identificador", $segments[1])->find()[0];
+                $data['artigoAtual'] = $this->artigoModel->where("identificador", $segments[1])->first();
 
                 if ($segments[1] && $data['artigoAtual']) {
-                    $page = 'blog-post';
                     \helper("url");
-                    $data['crrUrl'] = \current_url();
+                    $data['crrUrl'] = \current_url(); // Compartilhar: copiar link ?
+                    $page = 'blog-interna';
 
-                    $this->artigoModel->resetQuery();
-                    $this->artigoModel->where("categoriaFK", $data['artigoAtual']->categoriaFK);
-                    $this->artigoModel->where("id != {$data['artigoAtual']->id}");
+                    $this->artigoModel->resetQuery()
+                        ->where("categoriaFK", $data['artigoAtual']->categoriaFK)
+                        ->where("id != {$data['artigoAtual']->id}");
                     $data['artigosRelacionados'] = $this->artigoModel->findAll();
+
+                } else if ($segments[1] == "categoria") {
+                    $page = "blog-categoria";
+                    $data['bodyClass'] = 'blog-list-categories';
+
+                    $data['categoriaAtual'] = $this->categoriaArtigoModel
+                        ->resetQuery()
+                        ->where("identificador", $segments[2])
+                        ->first();
+                    $data['artigosCategoria'] = $this->artigoModel
+                        ->resetQuery()
+                        ->where("categoriaFK", $data['categoriaAtual']->id)
+                        ->paginate(1, "artigos", $paginate);
+                    $data['pager'] = $this->artigoModel->pager;
                 } else if ($segments[1]) {
+
                     throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
                 }
 
@@ -323,6 +340,7 @@ $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
                     }
                     // exit;
                 }
+
                 break;
             case "contato":
                 $data['bodyClass'] = 'page-contact';
@@ -410,9 +428,9 @@ $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
                             $inserir["id"] = $result[0]->id;
                             $data["salvar"] = $model->save($inserir);
                             $data["sucesso"] = "Senha alterada com sucesso!";
-                            ?>
+?>
                             <meta http-equiv="refresh" content="3; url=<?= PATHSITE ?>area-do-cliente/login/">
-                            <?
+                    <?
                         } else {
                             $data["erro"] = "Senha sestão Diferentes";
                         }
@@ -420,7 +438,7 @@ $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
                 } else {
                     ?>
                     <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?><?= $qualLogin ?>/">
-                    <?
+                <?
                     session_write_close();
                     exit();
                 }

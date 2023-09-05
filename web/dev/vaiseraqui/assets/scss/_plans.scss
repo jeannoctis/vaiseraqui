@@ -101,6 +101,7 @@
     }
 
     @media screen and (max-width: 769px) {
+      margin-top: 0;
       .container-medium {
         .content {
           padding-bottom: 0;
@@ -812,16 +813,8 @@
         textarea {
           padding: 1.06rem 1.7rem;
           height: 8.75rem;
-        }
-
-        // select {
-        //   color: $gray-400;
-        //   font-size: 0.875rem;
-        //   font-weight: 500;
-        //   line-height: 0.9375rem;
-        //   letter-spacing: -0.03125rem;
-        // } 
-
+        } 
+        
         .modal-order {
           input {
             color: $gray-400;

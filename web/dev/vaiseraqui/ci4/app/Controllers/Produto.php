@@ -667,11 +667,11 @@ class Produto extends BaseController
                if ($img->isValid() && !$img->hasMoved()) {
                   $newName = date('Y-m-d') . $img->getRandomName();
                   $post["arquivo"] = $newName;
-                  $img->move(PATHHOME . "/uploads/{$data['tabela']}/", $newName);
+                  $img->move(PATHHOME . "/uploads/{$data['tabela']}/{$idFK}/", $newName);
                   try {
                      echo View('templates/tinypng');
 
-                     $upload_path = "uploads/{$data['tabela']}/";
+                     $upload_path = "uploads/{$data['tabela']}/{$idFK}/";
                      $upload_path_root = PATHHOME . $upload_path;
 
                      $file_name = $img->getName();
@@ -680,11 +680,11 @@ class Produto extends BaseController
                      $tinyfile = \Tinify\fromFile($file_path);
                      $tinyfile->toFile($file_path);
 
-                     $img = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/" . $newName));
+                     $img = imagecreatefromstring(file_get_contents(PATHSITE . "uploads/{$data['tabela']}/{$idFK}/" . $newName));
                      imagepalettetotruecolor($img);
                      imagealphablending($img, true);
                      imagesavealpha($img, true);
-                     imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
+                     imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$idFK}/{$newName}.webp", 60);
                      imagedestroy($img);
                   } catch (\Tinify\ClientException $e) {
                   }

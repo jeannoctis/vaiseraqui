@@ -3,6 +3,7 @@
   position: fixed;
   inset: 0;
   z-index: 9;
+  width: 100%;
 
   .menu-mobile-modal-content {
     width: 400px;
@@ -459,11 +460,7 @@
   inset: 0;
   background-color: rgba(0,0,0,0.5);
   z-index: 6;
-  overflow-y: auto;
-
-  &.open {
-    display: block;
-  }
+  overflow-y: auto;  
 
   .presentation-form {
     margin-top: 40px;
@@ -478,16 +475,38 @@
     padding-inline: 7.69rem;
 
     button.open-modal {
-      transform: rotate(180deg);
+      margin-bottom: 50px;
+      svg {
+        display: none;
+        &.active {
+          display: block;
+        }
+      }
     }      
 
     .presentation-form-menu {
-      display: flex;
+      display: none;
     }
     .presentation-form-content {
       display: block;
     }
-    
+  }
+
+  &.open {
+    display: block;
+
+    .presentation-form {
+      button.open-modal {
+        svg {
+          width: 36px;
+          height: 36px;
+          display: none;
+          &.active {
+            display: block;
+          }
+        }
+      }
+    }
   }
 
   @media screen and (max-width: 900px) {
@@ -537,6 +556,15 @@
         }
       }
     }
+
+    &.open {
+      display: flex;
+      align-items: center;
+      background-color: $white;
+      .presentation-form {
+        box-shadow: none;
+      }
+    }
   }
   @media screen and (max-width: 500px) {
     .presentation-form {
@@ -572,10 +600,7 @@
         background-image: url(../images/icon-close.svg);
         background-repeat: no-repeat;
         background-position: center;
-        background-size: 24px;
-        img {
-          display: none;
-        }
+        background-size: 24px;        
       }
 
       .presentation-form-content {
