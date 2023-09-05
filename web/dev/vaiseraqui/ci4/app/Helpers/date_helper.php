@@ -129,3 +129,49 @@ if (!function_exists('formataDataHora')) {
     }
 
 }
+
+if (!function_exists('dataCompleta')) {
+
+    function dataCompleta($data) {
+        $data = explode(" ",$data);
+        $data = $data[0];
+        $data2 = explode("-",$data);
+          
+        return  $data2[2] . ' de ' . mes($data2[1]) . ' de ' . $data2[0] ;
+    }
+
+}
+
+if (!function_exists('semana')) {
+
+    function semana($dia) {
+        $retorno = date('w', strtotime($dia));
+
+        switch ($retorno) {
+            case 0:
+                $semana = 'Domingo';
+                break;
+            case 1:
+                $semana = 'Segunda';
+                break;
+            case 2:
+                $semana = 'Terça';
+                break;
+            case 3:
+                $semana = 'Quarta';
+                break;
+            case 4:
+                $semana = 'Quinta';
+                break;
+            case 5:
+                $semana = 'Sexta';
+                break;
+            case 6:
+                  $semana = 'Sábado';
+                break;
+        }
+
+        return $semana;
+    }
+
+}

@@ -11,7 +11,7 @@ class ProdutoDataModel extends Model {
     protected $primaryKey = 'id';
     protected $returnType = 'object';
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['data', 'horario', 'produtoFK'];
+    protected $allowedFields = ['data', 'horarioInicio','horarioTermino', 'produtoFK'];
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';

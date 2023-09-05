@@ -2,10 +2,13 @@
   // Open Form    
   const buttonOpenFormMenu = document.querySelector('.j-open-form-modal')
   const form = document.querySelector('.presentation-form')
+  const overlayFull = document.querySelector('.overlay-full')
+  const btnFilter = document.querySelector('.form-order .btn-primary')
 
   buttonOpenFormMenu && buttonOpenFormMenu.addEventListener('click', function(e) {
     e.preventDefault()
     form && form.classList.toggle('open-menu-modal')
+    overlayFull && overlayFull.classList.toggle('active')
   })
 
   // Controll visibility of forms in modal
@@ -17,6 +20,9 @@
     controlVisibility(tabMenu, internalforms, formWraper)
   })
 
+  overlayFull && overlayFull.addEventListener('click', () => {
+    buttonOpenFormMenu.click()
+  })  
 
   function controlVisibility(tabMenu, forms, target) {
     tabMenu.forEach(menu => {

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,9 @@
    <title><?= $metatag->titulo ?> - <?= $configs->nome ?></title>
    <meta name="description" content="<?=$metatag->description?>">
  
-
 </head>
 
-<body class="<?=$bodyClass?>">
+<body class="<?= $bodyClass ?>">
 
   <header class="header">
     <div class="container">
@@ -31,7 +31,7 @@
       </a>
       <form action="#" class="">
         <input type="text" name="search" placeholder="O que você está procurando?">
-        <button type="submit"><img src="assets/images/icon-search.svg" alt=""></button>
+        <button type="submit"><img src="<?=PATHSITE?>assets/images/icon-search.svg" alt=""></button>
       </form>
       <div class="header-modal-filter">
         <button class="j-btn-modal-filter">
@@ -52,8 +52,8 @@
         <div class="header-modal-filter-content j-filter-modal-container">
           <nav class="presentation-form-menu">
             <a href="#" class="active" data-form="form1">   
-              <img src="assets/images/icon-tab-1-active-mobile.svg" alt="" class="isActive">
-              <img src="assets/images/icon-tab-1-inactive-mobile.svg" alt="">                                  
+              <img src="<?=PATHSITE?>assets/images/icon-tab-1-active-mobile.svg" alt="" class="isActive">
+              <img src="<?=PATHSITE?>assets/images/icon-tab-1-inactive-mobile.svg" alt="">                                  
               Aluguel para <br>
               temporada
             </a>
@@ -173,11 +173,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -197,11 +197,11 @@
                 <div class="box-select j-box-select">
                   <label for="hospedagem">
                     <div>
-                      <img src="assets/images/icon-hospedagem.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-hospedagem.svg" alt="icon map">
                       Tipo da Hospedagem
                     </div>
                     <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -220,7 +220,7 @@
                 </div>
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="assets/images/icon-keyword.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="">
                     Palavra-chave
                   </label>
                   <input type="text" placeholder="Digite aqui">
@@ -229,14 +229,14 @@
               <div class="input-group-wraper mb-10">
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="assets/images/icon-checkin.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkin.svg" alt="">
                     Check-in
                   </label>
                   <input type="text" placeholder="Data de Entrada" class="dateInput">
                 </div>
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="assets/images/icon-checkout.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkout.svg" alt="">
                     Check-out
                   </label>
                   <input type="text" placeholder="Data de Saída" class="dateInput">
@@ -267,11 +267,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -291,11 +291,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="assets/images/icon-type-space.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-type-space.svg" alt="icon map">
                       Tipo do Espaço
                     </div>
                     <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -312,7 +312,7 @@
                 </div>  
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="assets/images/icon-keyword.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="">
                     Palavra-chave
                   </label>
                   <input type="text" placeholder="Digite aqui">
@@ -321,14 +321,14 @@
               <div class="input-group-wraper mb-10">
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="assets/images/icon-checkin.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkin.svg" alt="">
                     Check-in
                   </label>
                   <input type="text" placeholder="Data de Entrada" class="dateInput">
                 </div>
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="assets/images/icon-checkout.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkout.svg" alt="">
                     Check-out
                   </label>
                   <input type="text" placeholder="Data de Saída" class="dateInput">
@@ -359,11 +359,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -383,11 +383,11 @@
                 <div class="box-select j-box-select">
                   <label for="hospedagem">
                     <div>
-                      <img src="assets/images/icon-loja-temp.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-loja-temp.svg" alt="icon map">
                       Tipo da Loja Temporária
                     </div>
                     <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -404,11 +404,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="assets/images/icon-area-util.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-area-util.svg" alt="icon map">
                       Área Útil
                     </div>
                     <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -427,7 +427,7 @@
               <div class="box-select mb-10">
                 <label for="cities">
                   <div>
-                    <img src="assets/images/icon-keyword.svg" alt="icon keyword">
+                    <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                     Palavra-chave
                   </div>
                 </label>
@@ -454,92 +454,16 @@
               </a>
               <button class="btn-primary" type="submit">Buscar</button>
             </form>
-            <form class="form4">            
-              <div class="box-select mb-10 j-box-select">
-                <label for="cities">
-                  <div>
-                    <img src="assets/images/icon-map-2.svg" alt="icon map">
-                    Cidade
-                  </div>
-                  <button class="j-btn-select">
-                    <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                  </button>
-                </label>
-                <div class="select">
-                  <input type="text" placeholder="Busque por cidade">
-                  <div class="select-list">
-                     <? if($cidades) {?>
-                    <ul class="dropdown-select">
-                        <? foreach($cidades as $cidade) {?>
-                      <li><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
-                        <? } ?>
-                      </ul>
-                      <? } ?>
-                  </div>
-                </div>
-              </div>
-              <div class="input-group-wraper mb-10">              
-                <div class="box-select j-box-select">
-                  <label for="hospedagem">
-                    <div>
-                      <img src="assets/images/icon-prestador-servico.svg" alt="icon map">
-                      Tipo do Prestador de Serviço
-                    </div>
-                    <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                    </button>
-                  </label>
-                  <div class="select">
-                    <input type="text" placeholder="Selecione">
-                    <div class="select-list">
-                      <ul class="dropdown-select">
-                        <li>Hospedagem 1</li>
-                        <li>Hospedagem 2</li>
-                        <li>Hospedagem 3</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div class="box-select">
-                  <label for="cities">
-                    <div>
-                      <img src="assets/images/icon-keyword.svg" alt="icon keyword">
-                      Palavra-chave
-                    </div>
-                  </label>
-                  <input type="text" placeholder="palavra-chave">
-                </div>
-              </div>            
-              <a href="#" class="more-filters">
-                <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8107 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8107 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#C82328"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#C82328"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#C82328"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#C82328"/>
-                </svg>                
-                <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#932327"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#932327"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8106 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8106 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#932327"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#932327"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#932327"/>
-                  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#932327"/>
-                </svg>              
-                Mais filtros
-              </a>
-              <button class="btn-primary" type="submit">Buscar</button>
-            </form>
+            <? echo View("templates/form4") ?>
             <form class="form5">
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -559,11 +483,11 @@
                 <div class="box-select j-box-select">
                   <label for="hospedagem">
                     <div>
-                      <img src="assets/images/icon-hospedagem-2.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-hospedagem-2.svg" alt="icon map">
                       Tipo da Hospedagem
                     </div>
                     <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -580,7 +504,7 @@
                 <div class="box-select">
                   <label for="cities">
                     <div>
-                      <img src="assets/images/icon-keyword.svg" alt="icon keyword">
+                      <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                       Palavra-chave
                     </div>
                   </label>
@@ -590,14 +514,14 @@
               <div class="input-group-wraper mb-10">
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="assets/images/icon-checkin.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkin.svg" alt="">
                     Check-in
                   </label>
                   <input type="text" placeholder="Data de Entrada" class="dateInput">
                 </div>
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="assets/images/icon-checkout.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkout.svg" alt="">
                     Check-out
                   </label>
                   <input type="text" placeholder="Data de Saída" class="dateInput">
@@ -628,11 +552,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -652,11 +576,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="assets/images/icon-venda-aluguel.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-venda-aluguel.svg" alt="icon map">
                       Venda/Aluguel
                     </div>
                     <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -674,7 +598,7 @@
                 <div class="box-select">
                   <label for="cities">
                     <div>
-                      <img src="assets/images/icon-keyword.svg" alt="icon keyword">
+                      <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                       Palavra-chave
                     </div>
                   </label>
@@ -706,11 +630,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -730,11 +654,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="assets/images/icon-evento.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-evento.svg" alt="icon map">
                       Tipo do Evento
                     </div>
                     <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -751,11 +675,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="assets/images/icon-data.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-data.svg" alt="icon map">
                       Data
                     </div>
                     <button class="j-btn-select">
-                      <img src="assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -776,7 +700,7 @@
               <div class="box-select mb-10">
                 <label for="cities">
                   <div>
-                    <img src="assets/images/icon-keyword.svg" alt="icon keyword">
+                    <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                     Palavra-chave
                   </div>
                 </label>
@@ -807,14 +731,14 @@
         </div>
       </div>
       <div class="account">
-        <a href="#" class="login show">
+        <a href="<?=PATHSITE?>" class="login show">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M9.75 9.75C11.0429 9.75 12.2829 9.23639 13.1971 8.32215C14.1114 7.40791 14.625 6.16793 14.625 4.875C14.625 3.58207 14.1114 2.34209 13.1971 1.42785C12.2829 0.513615 11.0429 0 9.75 0C8.45707 0 7.21709 0.513615 6.30285 1.42785C5.38861 2.34209 4.875 3.58207 4.875 4.875C4.875 6.16793 5.38861 7.40791 6.30285 8.32215C7.21709 9.23639 8.45707 9.75 9.75 9.75ZM13 4.875C13 5.73695 12.6576 6.5636 12.0481 7.1731C11.4386 7.78259 10.612 8.125 9.75 8.125C8.88805 8.125 8.0614 7.78259 7.4519 7.1731C6.84241 6.5636 6.5 5.73695 6.5 4.875C6.5 4.01305 6.84241 3.1864 7.4519 2.5769C8.0614 1.96741 8.88805 1.625 9.75 1.625C10.612 1.625 11.4386 1.96741 12.0481 2.5769C12.6576 3.1864 13 4.01305 13 4.875ZM19.5 17.875C19.5 19.5 17.875 19.5 17.875 19.5H1.625C1.625 19.5 0 19.5 0 17.875C0 16.25 1.625 11.375 9.75 11.375C17.875 11.375 19.5 16.25 19.5 17.875ZM17.875 17.8685C17.8734 17.4688 17.6248 16.2662 16.523 15.1645C15.4635 14.105 13.4696 13 9.75 13C6.02875 13 4.0365 14.105 2.977 15.1645C1.87525 16.2662 1.62825 17.4688 1.625 17.8685H17.875Z" fill="#932327"/>
           </svg>            
           Entrar
         </a>
         <div class="box-logged">
-          <img src="assets/images/logged-user.png" alt="" class="avatar">
+          <img src="<?=PATHSITE?>assets/images/logged-user.png" alt="" class="avatar">
           <div>
             <span class="title">Olá, Marlon</span>
             <ul>
@@ -861,7 +785,7 @@
           Entrar
         </a>
         <div class="box-logged">
-          <img src="assets/images/logged-user.png" alt="" class="avatar">
+          <img src="<?=PATHSITE?>assets/images/logged-user.png" alt="" class="avatar">
           <div>
             <span class="title">Olá, Marlon</span>
             <ul>

@@ -1,6 +1,6 @@
 <?
 $infoPagina['nomeDaPagina'] = "Dados do anúncio";
-$infoPagina['iconePagina'] = 'icone_dados.svg';
+$infoPagina['iconePagina'] = 'icon-write.svg';
 ?>
 <section class="wrap">
     <? echo View("templates/barra-topo", $infoPagina); ?>
@@ -13,12 +13,12 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
                 </div>
             </div>
             <hr class="linhaform">
-            <form class="form-horizontal" method="post"  enctype="multipart/form-data"  id="formBusca">
+            <form class="form-horizontal" method="post" enctype="multipart/form-data" id="formBusca">
                 <fieldset>
                     <div class="row">
                         <div class="col-12">
                             <label>Nome</label>
-                            <input type="text"  name="titulo" class="form-control" Value="<?= $anuncio->titulo ?>">
+                            <input type="text" name="titulo" class="form-control" Value="<?= $anuncio->titulo ?>">
                         </div>
                         <div class="col-12">
                             <label>Descrição da Apresentação</label>
@@ -27,7 +27,7 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
                         <div class="col-12">
                             <label>Endereço</label>
                             <input <?= ($anuncio->endereco) ? "disabled" : "" ?> type="text" name="endereco" class="form-control" Value="<?= $anuncio->endereco ?>">
-                        </div>      
+                        </div>
 
 
                         <? /*
@@ -50,7 +50,7 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
                                     <? } ?>
 
                                 </select>
-                            </div> 
+                            </div>
                         <? } ?>
 
                         <? if ($capacidades) { ?>
@@ -63,7 +63,7 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
                                     <? } ?>
 
                                 </select>
-                            </div> 
+                            </div>
                         <? } ?>
 
                         <div class="col-12">
@@ -76,7 +76,7 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
                                 <? } ?>
 
                             </select>
-                        </div> 
+                        </div>
 
                         <? if ($cidades) { ?>
                             <div class="col-12">
@@ -88,7 +88,7 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
                                     <? } ?>
 
                                 </select>
-                            </div> 
+                            </div>
                         <? } ?>
 
 
@@ -104,12 +104,12 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
 
                         <div class='col-12'>
                             <label>Itens disponíveis</label>
-                            <input id="itensdisponiveis" data-role="tagsinput" type="text" name="itensdisponiveis" class="form-control tags-input mySingleFieldTags "  value="<?= $anuncio->itensdisponiveis ?>" placeholder="Itens">
+                            <input id="itensdisponiveis" data-role="tagsinput" type="text" name="itensdisponiveis" class="form-control tags-input mySingleFieldTags " value="<?= $anuncio->itensdisponiveis ?>" placeholder="Itens">
                         </div>
-                        
-                           <div class='col-12'>
+
+                        <div class='col-12'>
                             <label>Condomínio</label>
-                            <input id="condominio" data-role="tagsinput" type="text" name="condominio" class="form-control tags-input mySingleFieldTags "  value="<?= $anuncio->condominio ?>" placeholder="Itens">
+                            <input id="condominio" data-role="tagsinput" type="text" name="condominio" class="form-control tags-input mySingleFieldTags " value="<?= $anuncio->condominio ?>" placeholder="Itens">
                         </div>
 
                         <div class="col-12 mb-3">
@@ -123,19 +123,19 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
                         </div>
                         <div class="col-12 col-md-6">
                             <label>Quartos</label>
-                            <input type="number" min="0" name="quartos" class="form-control" id="quartos" value="<?= $anuncio->quartos ?>" placeholder="Escreva...">                      
+                            <input type="number" min="0" name="quartos" class="form-control" id="quartos" value="<?= $anuncio->quartos ?>" placeholder="Escreva...">
                         </div>
                         <div class="col-12 col-md-6">
                             <label>Banheiros</label>
-                            <input type="number" min="0" name="banheiros" class="form-control" id="quartos" value="<?= $anuncio->banheiros ?>" placeholder="Escreva...">                      
+                            <input type="number" min="0" name="banheiros" class="form-control" id="quartos" value="<?= $anuncio->banheiros ?>" placeholder="Escreva...">
                         </div>
                         <div class="col-12 col-md-6">
                             <label>Vagas</label>
-                            <input type="number" min="0" name="vagas" class="form-control" id="quartos" value="<?= $anuncio->vagas ?>" placeholder="Escreva...">                      
+                            <input type="number" min="0" name="vagas" class="form-control" id="quartos" value="<?= $anuncio->vagas ?>" placeholder="Escreva...">
                         </div>
                         <div class="col-12 col-md-6">
                             <label>Andares</label>
-                            <input type="andar" min="0" name="andar" class="form-control" id="andar" value="<?= $anuncio->andar ?>" placeholder="Escreva...">                      
+                            <input type="andar" min="0" name="andar" class="form-control" id="andar" value="<?= $anuncio->andar ?>" placeholder="Escreva...">
                         </div>
                         <div class="col-12 col-md-6">
                             <label>Animais de estimação?</label>
@@ -172,8 +172,8 @@ $infoPagina['iconePagina'] = 'icone_dados.svg';
                             <label>O que é permitido</label>
                             <textarea type="text" name="pode" class="form-control tinymce_full"><?= $anuncio->pode ?></textarea>
                         </div>
-                        
-                          <div class="col-12">
+
+                        <div class="col-12">
                             <label>O que é permitido</label>
                             <textarea type="text" name="naopode" class="form-control tinymce_full"><?= $anuncio->naopode ?></textarea>
                         </div>

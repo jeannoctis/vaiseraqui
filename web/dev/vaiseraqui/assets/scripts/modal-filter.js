@@ -10,7 +10,7 @@
 
   btnClose.addEventListener('click', () =>{
     closeModalFilter()
-  })
+  })  
 
   modalContainer.addEventListener('click', (e) => {
     const isParent = e.target.classList.contains('moda-filter-container')

@@ -1,6 +1,6 @@
 <?
  $infoPagina['nomeDaPagina'] = "Calendário";
-          $infoPagina['iconePagina'] = 'icone_calendario.svg';
+          $infoPagina['iconePagina'] = 'icon-calendar.svg';
 ?>
 <section class="wrap">
            <? echo View("templates/barra-topo",$infoPagina); ?>

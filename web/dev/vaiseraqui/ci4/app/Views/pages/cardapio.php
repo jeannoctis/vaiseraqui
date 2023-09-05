@@ -1,6 +1,6 @@
 <?
  $infoPagina['nomeDaPagina'] = "Cardápio";
-          $infoPagina['iconePagina'] = 'icone_buffet.svg';
+          $infoPagina['iconePagina'] = 'icon-menu.svg';
 ?>
 <section class="wrap">
    

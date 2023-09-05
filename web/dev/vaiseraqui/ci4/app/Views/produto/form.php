@@ -8,14 +8,14 @@
                   <!-- /.box-title -->
                   <div class="card-content">
 
-                     <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-6 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="titulo">Título do anúncio </label>
                            <input type="text" name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-md-6 paddingZeroM'>
+                     <div class='col-xs-12 col-md-6 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="categoria">Categoria</label>
                            <? if ($categoriasDoTipo) { ?>
@@ -31,7 +31,7 @@
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="ativo">Anúncio ativo?</label>
                            <select name="ativo" id="ativo" class="form-control" required>
@@ -41,21 +41,21 @@
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="inicioValidade">Início validade</label>
                            <input type="date" name="inicioValidade" class="form-control" id="inicioValidade" value="<?= $resultado->inicioValidade ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="validade">Fim validade</label>
                            <input type="date" name="validade" class="form-control" id="validade" value="<?= $resultado->validade ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="destaque">Anúncio destacado?</label>
                            <select name="destaque" id="destaque" class="form-control" required>
@@ -65,14 +65,14 @@
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="inicioDestaque">Início destaque</label>
                            <input type="date" name="inicioDestaque" class="form-control" id="inicioDestaque" value="<?= $resultado->inicioDestaque ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="validadeDestaque">Fim Destaque</label>
                            <input type="date" name="validadeDestaque" class="form-control" id="validadeDestaque" value="<?= $resultado->validadeDestaque ?>" placeholder="Escreva..." required>
@@ -87,21 +87,21 @@
                      Endereço
                   </h4>
                   <div class="card-content">
-                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="endereco">Endereço, número, complemento </label>
                            <input type="text" name="endereco" class="form-control" id="endereco" value="<?= $resultado->endereco ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-lg-4 paddingZeroM'>
+                     <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="bairro">Bairro </label>
                            <input type="text" name="bairro" class="form-control" id="bairro" value="<?= $resultado->bairro ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
 
-                     <div class='col-xm-12 col-md-4 paddingZeroM'>
+                     <div class='col-xs-12 col-md-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="cidadeFK">Cidade</label>
                            <? if ($estados) { ?>
@@ -118,6 +118,13 @@
                                  <? } ?>
                               </select>
                            <? } ?>
+                        </div>
+                     </div>
+
+                     <div class='col-xs-12 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="local">Nome do local </label>
+                           <input type="text" name="local" class="form-control" id="local" value="<?= $resultado->local ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
 
@@ -561,13 +568,13 @@
                         O que fazemos e não fazemos
                      </h4>
                      <div class="card-content">
-                        <div class='col-xm-12 paddingZeroM'>
+                        <div class='col-xs-12 paddingZeroM'>
                            <div class="col-xs-12 form-group">
                               <label for="pode">O que fazemos</label>
                               <input type="text" name="pode" class="form-control" id="pode" value="<?= $resultado->pode ?>" placeholder="Escreva..." required>
                            </div>
                         </div>
-                        <div class='col-xm-12 paddingZeroM'>
+                        <div class='col-xs-12 paddingZeroM'>
                            <div class="col-xs-12 form-group">
                               <label for="naopode">O que não fazemos</label>
                               <input type="text" name="naopode" class="form-control" id="naopode" value="<?= $resultado->naopode ?>" placeholder="Escreva..." required>
@@ -615,13 +622,13 @@
                         Pode & Não Pode
                      </h4>
                      <div class="card-content">
-                        <div class='col-xm-12 paddingZeroM'>
+                        <div class='col-xs-12 paddingZeroM'>
                            <div class="col-xs-12 form-group">
                               <label for="pode">Pode</label>
                               <input type="text" name="pode" class="form-control" id="pode" value="<?= $resultado->pode ?>" placeholder="Escreva..." required>
                            </div>
                         </div>
-                        <div class='col-xm-12 paddingZeroM'>
+                        <div class='col-xs-12 paddingZeroM'>
                            <div class="col-xs-12 form-group">
                               <label for="naopode">Não pode</label>
                               <input type="text" name="naopode" class="form-control" id="naopode" value="<?= $resultado->naopode ?>" placeholder="Escreva..." required>
@@ -644,29 +651,35 @@
                      <div class="card-content" id="datas-container">
                         <? if ($datas) { ?>
                            <? foreach ($datas as $ind => $item) { ?>
-                              <div class='form-group col-xm-12 col-lg-4 paddingZeroM card-content data-div'>
+                              <div class='form-group col-xs-12 col-lg-4 paddingZeroM card-content data-div'>
                                  <div class="col-xs-12 col-sm-12">
 
-                                    <input type="hidden" name="datas[<?= $ind ?>][id]" value="<?= $item->id ?>">                                    
+                                    <input type="hidden" name="datas[<?= $ind ?>][id]" value="<?= $item->id ?>">
                                     <label for="data<?= $ind ?>" class="with-btn">
-                                       Data 
+                                       Data
                                        <button class="btn btn-rounded btn-danger btn-xs" type="button" data-parent="data-div">Excluir</button>
                                     </label>
                                     <input type="date" name="datas[<?= $ind ?>][data]" class="form-control" id="data<?= $ind ?>" value="<?= $item->data ?>" placeholder="Escreva..." required>
 
-                                    <label for="horario<?= $ind ?>">Horário</label>
-                                    <input type="time" name="datas[<?= $ind ?>][horario]" class="form-control" id="horario<?= $ind ?>" value="<?= $item->horario ?>" placeholder="Escreva..." required>
+                                    <label for="horarioI<?= $ind ?>">Horário Início</label>
+                                    <input type="time" name="datas[<?= $ind ?>][horarioInicio]" class="form-control" id="horarioI<?= $ind ?>" value="<?= $item->horarioInicio ?>" placeholder="Escreva..." required>
+
+                                    <label for="horarioT<?= $ind ?>">Horário Término</label>
+                                    <input type="time" name="datas[<?= $ind ?>][horarioTermino]" class="form-control" id="horarioT<?= $ind ?>" value="<?= $item->horarioTermino ?>" placeholder="Escreva..." required>
                                  </div>
                               </div>
                            <? } ?>
                         <? } else { ?>
-                           <div class='form-group col-xm-12 col-lg-4 paddingZeroM card-content data-div'>
+                           <div class='form-group col-xs-12 col-lg-4 paddingZeroM card-content data-div'>
                               <div class="col-xs-12 col-sm-12">
                                  <label for="data0">Data</label>
-                                 <input type="date" name="datas[0][data]" class="form-control" id="data0" value="" placeholder="Escreva..." required>
+                                 <input type="date" name="datas[0][data]" class="form-control" id="data0" placeholder="Escreva..." required>
 
-                                 <label for="horario0">Horário</label>
-                                 <input type="time" name="datas[0][horario]" class="form-control" id="horario0" value="" placeholder="Escreva..." required>
+                                 <label for="horario0">Horário Início</label>
+                                 <input type="time" name="datas[0][horarioInicio]" class="form-control" id="horario0" placeholder="Escreva..." required>
+
+                                 <label for="horario0">Horário Término</label>
+                                 <input type="time" name="datas[0][horarioTermino]" class="form-control" id="horario0" placeholder="Escreva..." required>
                               </div>
                            </div>
                         <? } ?>
@@ -756,8 +769,8 @@
 
                                  <? if ($pdv->tipo == "fisico") { ?>
                                     <label for="pdv<?= $pdv->id ?>-cep" class="col-xs-12 col-lg-6">
-                                       CEP
-                                       <input type="text" name="pdvs[ <?= $ind ?> ][cep]" value="<?= $pdv->cep ?>" class="form-control cep" required minlength="3" placeholder="apenas números">
+                                       Telefone
+                                       <input type="text" name="pdvs[ <?= $ind ?> ][cep]" value="<?= $pdv->cep ?>" class="form-control" required minlength="3" placeholder="Escreva...">
                                     </label>
 
                                     <label for="pdv<?= $pdv->id ?>-cep" class="col-xs-12 col-lg-6">
@@ -789,28 +802,28 @@
                                  <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="organizacao-div"><i class="bi bi-trash"></i></button>
                                  <input type="hidden" name="organizadores[ <?= $key ?> ][id]" value="<?= $item->id ?>">
 
-                                 <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                                 <div class='col-xs-12 col-lg-6 paddingZeroM'>
                                     <div class="col-xs-12 form-group">
                                        <label>Organização <?= $key + 1 ?></label>
                                        <input type="text" name="organizadores[ <?= $key ?> ][titulo]" class="form-control" value="<?= $item->titulo ?>" placeholder="Escreva..." required>
                                     </div>
                                  </div>
 
-                                 <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                                 <div class='col-xs-12 col-lg-6 paddingZeroM'>
                                     <div class="col-xs-12 form-group">
                                        <label>Endereço, número, complemento</label>
                                        <input type="text" name="organizadores[ <?= $key ?> ][endereco]" class="form-control" value="<?= $item->endereco ?>" placeholder="Escreva..." required>
                                     </div>
                                  </div>
 
-                                 <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                                 <div class='col-xs-12 col-lg-6 paddingZeroM'>
                                     <div class="col-xs-12 form-group">
                                        <label>Cidade - UF</label>
                                        <input type="text" name="organizadores[ <?= $key ?> ][cidade]" class="form-control" value="<?= $item->cidade ?>" placeholder="Escreva..." required>
                                     </div>
                                  </div>
 
-                                 <div class='col-xm-12 col-lg-6 paddingZeroM'>
+                                 <div class='col-xs-12 col-lg-6 paddingZeroM'>
                                     <div class="col-xs-12 form-group">
                                        <label>Site</label>
                                        <input type="text" name="organizadores[ <?= $key ?> ][site]" class="form-control" value="<?= $item->site ?>" placeholder="Escreva..." required>
@@ -1165,7 +1178,6 @@
 
       <script>
          // Adicionar Datas
-
          let datasCount = document.querySelectorAll(".data-div").length
 
          function adicionarData() {
@@ -1182,8 +1194,11 @@
                   </label>
                   <input type="date" name="datas[${datasCount}][data]" class="form-control" id="data${datasCount}" value="" placeholder="Escreva..." required>
 
-                  <label for="horario${datasCount}">Horário</label> 
-                  <input type="time" name="datas[${datasCount}][horario]" class="form-control" id="horario${datasCount}" value="" placeholder="Escreva..." required>                              
+                  <label for="horarioI${datasCount}">Horário Início</label> 
+                  <input type="time" name="datas[${datasCount}][horarioInicio]" class="form-control" id="horarioI${datasCount}" value="" placeholder="Escreva..." required>
+                  
+                  <label for="horarioT${datasCount}">Horário Término</label> 
+                  <input type="time" name="datas[${datasCount}][horarioTermino]" class="form-control" id="horarioT${datasCount}" value="" placeholder="Escreva..." required>
                </div>
             `
             datasContainer.appendChild(newElement)
@@ -1202,28 +1217,28 @@
             newElement.innerHTML = `
                <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="organizacao-div"><i class="bi bi-trash"></i></button>
 
-               <div class='col-xm-12 col-lg-6 paddingZeroM'>
+               <div class='col-xs-12 col-lg-6 paddingZeroM'>
                   <div class="col-xs-12 form-group">
                      <label>Organização</label>
                      <input type="text" name="organizadores[${organizadoresCount}][titulo]" class="form-control" value="" placeholder="Escreva..." required>
                   </div>
                </div>
 
-               <div class='col-xm-12 col-lg-6 paddingZeroM'>
+               <div class='col-xs-12 col-lg-6 paddingZeroM'>
                   <div class="col-xs-12 form-group">
                      <label>Endereço, número, complemento</label>
                      <input type="text" name="organizadores[${organizadoresCount}][endereco]" class="form-control" value="" placeholder="Escreva..." required>
                   </div>
                </div>
 
-               <div class='col-xm-12 col-lg-6 paddingZeroM'>
+               <div class='col-xs-12 col-lg-6 paddingZeroM'>
                   <div class="col-xs-12 form-group">
                      <label>Cidade - UF</label>
                      <input type="text" name="organizadores[${organizadoresCount}][cidade]" class="form-control" value="" placeholder="Escreva..." required>
                   </div>
                </div>
 
-               <div class='col-xm-12 col-lg-6 paddingZeroM'>
+               <div class='col-xs-12 col-lg-6 paddingZeroM'>
                   <div class="col-xs-12 form-group">
                      <label>Site</label>
                      <input type="text" name="organizadores[${organizadoresCount}][site]" class="form-control" value="" placeholder="Escreva..." required>
@@ -1350,8 +1365,8 @@
             if (tipo == 'fisico') {
                newElement.innerHTML += `
                   <label class="col-xs-12 col-lg-6">
-                     CEP
-                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control cep" required minlength="3" placeholder="apenas números">
+                     Telefone
+                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control cep" required minlength="3" placeholder="Escreva">
                   </label>
 
                   <label class="col-xs-12 col-lg-6">
@@ -1427,6 +1442,9 @@
                </div>
             `
             ingressoContainer.appendChild(newElement)
+            $('.money').mask('#.##0,00', {
+               reverse: true
+            });
          }
 
          // Modal Setor Ingresso

@@ -10,11 +10,15 @@
 
  							<div class='form-group col-xs-12 paddingZeroM'>
  								<div class="col-xs-12 col-sm-12">
- 									<label for="titulo">Titulo</label>
+ 									<label for="titulo">Titulo
+ 										<? if (in_array($resultado->id, [1])) { ?>
+ 											<i>(destaque palavras com asteriscos *assim*)</i>
+ 										<? } ?>
+ 									</label>
  									<input type="text" name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?> " placeholder="Escreva..." <?= in_array($resultado->id, [15, 16, 17]) ? "readonly" : "" ?>>
  								</div>
  							</div>
- 							
+
  							<? if ($resultado->isDescricao == 'S') { ?>
  								<div class='form-group col-xs-12 paddingZeroM'>
  									<div class="col-xs-12 col-sm-12">
@@ -34,7 +38,7 @@
 
  								<? if (in_array($resultado->id, [1])) { ?>
  									<hr class="col-xs-11" style="padding-inline: 30px;">
-									
+
  									<div class='form-group col-xs-12 paddingZeroM'>
  										<div class="col-xs-12 col-sm-12">
  											<label for="extra4">Título texto 2</label>
@@ -72,6 +76,20 @@
  										</div>
  									</div>
  								</div>
+
+ 								<? if (in_array($resultado->id, [3])) { ?>
+ 									<div class="form-group col-xs-12 paddingZeroM mt-5   ">
+ 										<div class='col-xs-12'>
+ 											<label for="arquivo2">Imagem/banner mobile <b>(Tamanho recomendado: 384 x 491)</b></label>
+ 											<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo2 ?>' type="file" name='arquivo2' id="arquivo2" class="dropify">
+ 											<div class="col-xs-12 switch danger">
+ 												<input id="apagar-arquivo2" type="checkbox" name="apagararquivo2">
+ 												<label for="apagar-arquivo2">Apagar imagem</label>
+ 											</div>
+ 										</div>
+ 									</div>
+ 								<? } ?>
+
  								<? if (in_array($resultado->id, [1])) { ?>
  									<div class="form-group col-xs-12 paddingZeroM mt-5   ">
  										<div class='col-xs-12'>
@@ -111,14 +129,22 @@
 
  								<div class='form-group col-lg-6 paddingZeroM'>
  									<div class="col-xs-12 col-sm-12 form-group">
- 										<label for="extra1">Detalhe 1 </label>
+ 										<label for="extra1">Detalhe 1
+ 											<? if (in_array($resultado->id, [1])) { ?>
+ 												<i>(pule linha com asterisco (*))</i>
+ 											<? } ?>
+ 										</label>
  										<input type="text" name="extra1" class="form-control" id="extra1" value="<?= $resultado->extra1 ?>" placeholder="Escreva...">
  									</div>
  								</div>
 
  								<div class='form-group col-lg-6 paddingZeroM'>
  									<div class="col-xs-12 col-sm-12 form-group">
- 										<label for="extra2">Detalhe 2 </label>
+ 										<label for="extra2">Detalhe 2
+ 											<? if (in_array($resultado->id, [1])) { ?>
+ 												<i>(pule linha com asterisco (*))</i>
+ 											<? } ?>
+ 										</label>
  										<input type="text" name="extra2" class="form-control" id="extra2" value="<?= $resultado->extra2 ?>" placeholder="Escreva...">
  									</div>
  								</div>
@@ -147,7 +173,11 @@
 
  								<div class='form-group col-lg-6 paddingZeroM'>
  									<div class="col-xs-12 col-sm-12 form-group">
- 										<label for="extra3">Detalhe 3 </label>
+ 										<label for="extra3">Detalhe 3
+ 											<? if (in_array($resultado->id, [1])) { ?>
+ 												<i>(pule linha com asterisco (*))</i>
+ 											<? } ?>
+ 										</label>
  										<input type="text" name="extra3" class="form-control" id="extra3" value="<?= $resultado->extra3 ?>" placeholder="Escreva...">
  									</div>
  								</div>

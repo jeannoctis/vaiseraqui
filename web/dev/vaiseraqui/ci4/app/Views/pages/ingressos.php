@@ -14,7 +14,7 @@
 
 <?
 $infoPagina['nomeDaPagina'] = "Preços";
-$infoPagina['iconePagina'] = 'icone_ok.svg';
+$infoPagina['iconePagina'] = 'icon-pricing.svg';
 ?>
 <section class="wrap">
 

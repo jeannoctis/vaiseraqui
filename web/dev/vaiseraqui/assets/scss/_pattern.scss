@@ -78,14 +78,20 @@
 main {
   margin-top: 137.2px;
   margin-bottom: 12.5rem;
-  // overflow-x: hidden;
   @media screen and (max-width: 769px) {
     margin-top: 0;
     margin-bottom: 9.38rem;    
-    padding-top: 175px;
+    padding-top: 95px;
 
     &.modal-filter-open {
       padding-top: 0;
+    }
+  }
+}
+.home {
+  main {
+    @media screen and (max-width: 769px) {
+      padding-top: 175px;
     }
   }
 }
@@ -439,9 +445,6 @@ main {
             }
           }
 
-          // &:hover {
-          //   background-color: $primary;
-          // }
         }
 
         .header-modal-filter-content {
@@ -754,12 +757,7 @@ main {
     div {
       display: flex;
       align-items: center;
-      gap: 0.77rem;
-
-      // img {
-      //   width: 14px;
-      //   height: 14px;
-      // }      
+      gap: 0.77rem;   
     }
   }
 
@@ -1298,7 +1296,6 @@ select {
     line-height: 0.89219rem;
     letter-spacing: -0.02975rem;
     padding-left: 0;
-    // width: calc(100% + 60px);
     width: 100%;
     outline: 0;
     background-color: transparent;
@@ -1476,7 +1473,6 @@ select {
         list-style-image: none;
         color: $gray-300;
         font-size: 0.75rem;
-        // font-size: 0.67rem;
         font-weight: 400;
         line-height: 0.98631rem;
         letter-spacing: -0.03081rem;
@@ -1596,7 +1592,6 @@ select {
       }
     }
 
-    // Provisorio
     @media screen and (max-width: 769px) {
       .swiper-button-prev,
       .swiper-button-next {
@@ -1641,8 +1636,6 @@ select {
       border-radius: 3.375rem;
       border: 0.986px solid $green-300;
       background: $green-500;
-      // width: 7.6875rem;
-      // height: 2.5rem;
       width: 5.75rem;
       height: 1.875rem;
       position: absolute;
@@ -2315,6 +2308,7 @@ select {
         border-radius: 4.875rem;
         background-color: $white;
         transition: 200ms ease-in-out;
+        cursor: pointer;
 
         &:not(.photo) {
           img {
@@ -2345,6 +2339,9 @@ select {
     .item {
       width: 100%;
       height: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      
       img {
         display: block;
         width: 100%;
@@ -2409,7 +2406,6 @@ select {
     margin-inline: auto;
     padding: 0 40px;
     padding-top: 55px;
-    // PROVISORIO
 
     .info {
       .desc {
@@ -2509,12 +2505,8 @@ select {
         position: relative;
         max-height: 600px;
 
-        &::after {
-          content: '';
-          display: block;
-          position: absolute;
-          inset: 0;
-          background-color: rgba(0, 0, 0, 0.60);
+        img.mode-slide {
+          filter: brightness(0.6)
         }
 
         .description {
@@ -3135,8 +3127,6 @@ header.header-bg {
       } 
       
       @media screen and (max-width: 600px) {
-        // width: calc(100% + 2.5rem);
-        // margin-left: -1.25rem;
         .faq-title {
           padding: 2.5rem 1.31rem;
           border-radius: 0;
@@ -3437,31 +3427,7 @@ header.header-bg {
         align-items: center;
         gap: 0.62rem;
         padding: 1.25rem 3.12rem;
-      }
-
-      // .input-order {
-      //   display: flex;
-      //   align-items: center;
-      //   label, select {
-      //     color: $gray-300;
-      //     font-size: 0.875rem;
-      //     font-weight: 500;
-      //     line-height: 0.89219rem;
-      //     letter-spacing: -0.02975rem;
-      //   }
-
-      //   label {
-      //     white-space: nowrap;
-      //     display: flex;
-      //     align-items: center;
-      //     gap: 0.37rem;
-      //   }
-
-      //   select {
-      //     font-weight: 700;
-      //     padding-left: 5px;
-      //   }
-      // }
+      }      
     }
   }
 }
@@ -4639,5 +4605,34 @@ header.header-bg {
         }
       }
     }
+  }
+}
+
+.box-agendar-float {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: $white;
+  border-top: 1px solid #ccc;
+  z-index: 4;
+
+  @media screen and (max-width: 769px) {
+    display: block;
+  }
+}
+
+.btn-agendar {
+  @media screen and (max-width: 769px) {
+    font-size: 1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.69rem;
+    padding: 1.6rem 0;
+    border-radius: 0.5625rem;
   }
 }

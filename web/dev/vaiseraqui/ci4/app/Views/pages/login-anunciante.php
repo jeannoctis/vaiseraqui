@@ -5,15 +5,15 @@
                 
                 <div class="col-12">
                     <div class="marca">
-                        <a href="<?=PATHSITE?>" class="logo">
-                            <img src="<?=PATHSITE?>assets/images/logo.svg" title="Vai ser Aqui">
+                        <a href="<?= PATHSITE ?>" class="logo">
+                            <img src="<?= PATHSITE ?>assets/images/logo.svg" title="Vai ser Aqui">
                         </a> 
                     </div>
 
                     <div class="boxPerfil row">
                         
                          <div class="col-12 col-md-6">
-                                        <img class="img-fluid" src="<?=PATHSITE?>assets/images/capalogin.jpg" />
+                            <img class="img-fluid" src="<?= PATHSITE ?>assets/images/capalogin.jpg" />
                                     </div>
                         <div class="col-12 col-md-5">
                         <h5>
@@ -23,7 +23,7 @@
                             Login
                         </h2>
 
-                        <form class="form-horizontal" method="post" >
+                            <form class="form-horizontal" method="post">
                             <fieldset>
                                 <div class="row">                                   
                                     <div class="col-12">
@@ -45,7 +45,7 @@
                         </form>
 
                         <div class="linkPerfil">
-                            <a href="<?=PATHSITE?>esqueci/anunciante">Esqueci a senha</a>
+                                <a href="<?= PATHSITE ?>esqueci/anunciante">Esqueci a senha</a>
                         </div>    
                         </div>                            
                     </div>

@@ -1,6 +1,6 @@
 <?
  $infoPagina['nomeDaPagina'] = "Vídeo";
-          $infoPagina['iconePagina'] = 'icone_video.svg';
+          $infoPagina['iconePagina'] = 'icon-video.svg';
 ?>
     <section class="wrap">
          <? echo View("templates/barra-topo",$infoPagina); ?>

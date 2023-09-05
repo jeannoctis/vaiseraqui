@@ -1,6 +1,6 @@
 <?
 $infoPagina['nomeDaPagina'] = "Fotos";
-$infoPagina['iconePagina'] = 'icone_fotos.png';
+$infoPagina['iconePagina'] = 'icon-image.svg';
 ?>
 <section class="wrap">
     <? echo View("templates/barra-topo", $infoPagina); ?>

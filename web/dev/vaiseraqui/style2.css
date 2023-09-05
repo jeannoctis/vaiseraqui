@@ -996,32 +996,22 @@ a.ctaDefault2 img{
   .boxFiltroDesativado.boxFiltroAberto{
     height: 500px;
   }
-  .boxFiltroDesativado a{
+	.boxFiltroDesativado a {
     padding: 5px 10px;
   }
 }
 
-@media(max-height: 670px){
-  .boxFiltroDesativado.boxFiltroAberto{
+@media (max-height: 670px) {
+	.boxFiltroDesativado.boxFiltroAberto {
     height: 300px;
   }
-  
 }
 
-@media(max-height: 380px){
-  .conteudoSidebar{
+@media (max-height: 380px) {
+	.conteudoSidebar {
     padding-top: 0;
   }
   .boxFiltroDesativado.boxFiltroAberto{
     height: 210px;
   }
 }
-
-
-
-
-
-
-
-
-
