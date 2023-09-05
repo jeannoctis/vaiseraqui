@@ -259,6 +259,19 @@ class Pages extends Controller
                 $data['bodyClass'] = 'plans';
 
                 $data['txPlanosHero'] = $this->textoModel->find(3);
+                $data['txPlanoLinha'] = $this->textoModel->find(4);
+                $data['txPlanoAnuncio'] = $this->textoModel->find(5);
+
+                $this->planoModel = \model('App\Models\PlanoModel', false);
+                $data['planosLinha'] = $this->planoModel
+                    ->orderBy("ordem DESC, id ASC")
+                    ->findAll();
+                
+                $this->planoAnuncioModel = \model('App\Models\PlanoAnuncioModel', false);
+                $data['planosAnuncio'] = $this->planoAnuncioModel
+                    ->orderBy("ordem ASC, id DESC")
+                    ->findAll();
+                $data['txContatoPlanos'] = $this->textoModel->find(6);
 
                 break;
             case 'eventos':
@@ -353,10 +366,16 @@ class Pages extends Controller
                 $data['pagina'] = 6;
                 $data['txContato'] = $this->textoModel->find(7);
                 break;
-            case "politica-de-privacidade":
-                $data['bodyClass'] = 'home';
-                $data["pagina"] = 2;
-                $data['politica'] = $this->textoModel->find(13);
+            case "politica-de-privacidade-e-termos-de-uso":
+                $data['bodyClass'] = 'privacy-policy';
+                $data["pagina"] = 20;
+                $page = "politicas-e-termos";
+
+                $data['txPoliticaETermos'] = $this->textoModel->find(13);
+
+                $this->politicaTermoTopicosModel = \model('App\Models\PoliticaTermoTopicosModel', false);
+                $data['politicaETermos'] = $this->politicaTermoTopicosModel->orderBy("ordem ASC, id DESC")->findAll();
+
                 break;
             case "termos-de-uso":
                 $data['bodyClass'] = 'home';

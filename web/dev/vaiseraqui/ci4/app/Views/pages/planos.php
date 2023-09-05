@@ -29,7 +29,7 @@
             <h1 data-aos="fade-right"><?= $txPlanosHero->titulo ?></h1>
             <p data-aos="fade-right" class="strong"><?= $txPlanosHero->descricao ?></strong>
 
-            <!-- <h2 data-aos="fade-right">Vantagens de anunciar no Vai Ser Aqui</h2> -->
+               <!-- <h2 data-aos="fade-right">Vantagens de anunciar no Vai Ser Aqui</h2> -->
             <div data-aos="fade-right">
                <?= $txPlanosHero->texto ?>
             </div>
@@ -53,196 +53,38 @@
 
    <section class="s-type-of-plan" id="anuncio-linha">
       <div class="container-medium">
-         <h2 data-aos="fade-up">Plano - Anúncio de Linha</h2>
-         <p data-aos="fade-up">Escolha aqui, qual o melhor plano para divulgar o seu imóvel de lazer</p>
+         <h2 data-aos="fade-up"><?= $txPlanoLinha->titulo ?></h2>
+         <p data-aos="fade-up"><?= $txPlanoLinha->descricao ?></p>
 
-         <div class="box-container" data-aos="fade-up">
-            <div class="swiper priceSwiper">
-               <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                     <article class="box">
-                        <header>
-                           <div>
-                              <h3>Anual</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$960</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$130</span>
-                           <span class="period">/mês</span>
+         <? if ($planosLinha) { ?>
+            <div class="box-container" data-aos="fade-up">
+               <div class="swiper priceSwiper">
+                  <div class="swiper-wrapper">
+                     <? foreach ($planosLinha as $plano) { ?>
+                        <div class="swiper-slide">
+                           <?= view("templates/plano-linha-card", (array)$plano); ?>
                         </div>
-                        <ul>
-                           <li>Anúncio por 12 meses</li>
-                           <li>Publicações de até 100 imagens do imóvel</li>
-                           <li>Publicação de 01 vídeo do imóvel</li>
-                           <li>1 mês de anúncio em destaque (cortesia)</li>
-                           <li>Publicação do imóvel em nossa página no Facebook</li>
-                           <li>Publicação do imóvel em nossa página no instagram</li>
-                           <li>Para pagamento à vista desconto de 10% sobre o valor total do plano</li>
-                        </ul>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </article>
+                     <? } ?>
                   </div>
-                  <div class="swiper-slide">
-                     <article class="box special">
-                        <div class="decoy">
-                           <img src="<?= PATHSITE ?>assets/images/icon-star.svg" alt="">
-                           <span>Mais Contratado</span>
-                        </div>
-                        <header>
-                           <div>
-                              <h3>Semestral</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$720</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$150</span>
-                           <span class="period">/mês</span>
-                        </div>
-                        <ul>
-                           <li>Anúncio por 06 meses</li>
-                           <li>Publicações de até 100 imagens do imóvel</li>
-                           <li>Publicação de 01 vídeo do imóvel</li>
-                           <li>1 mês de anúncio em destaque (cortesia)</li>
-                           <li>Publicação do imóvel em nossa página no Facebook</li>
-                           <li>Publicação do imóvel em nossa página no instagram</li>
-                           <li>Para pagamento à vista desconto de 10% sobre o valor total do plano</li>
-                        </ul>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </article>
-                  </div>
-                  <div class="swiper-slide">
-                     <article class="box">
-                        <header>
-                           <div>
-                              <h3>Quadrimestral</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$480</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$170</span>
-                           <span class="period">/mês</span>
-                        </div>
-                        <ul>
-                           <li>Anúncio por 04 meses</li>
-                           <li>Publicações de até 100 imagens do imóvel</li>
-                           <li class="no-incluse">Publicação de 01 vídeo do imóvel</li>
-                           <li class="no-incluse">1 mês de anúncio em destaque (cortesia)</li>
-                           <li>Publicação do imóvel em nossa página no Facebook</li>
-                           <li>Publicação do imóvel em nossa página no instagram</li>
-                           <li>Para pagamento à vista desconto de 10% sobre o valor total do plano</li>
-                        </ul>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </article>
+
+                  <!-- Corrigir -->
+                  <div class="only-more-1440">
+                     <? foreach ($planosLinha as $plano) {
+                        view("templates/plano-linha-card", (array)$plano);
+                     } ?>
                   </div>
                </div>
             </div>
-            <div class="only-more-1440">
-               <article class="box">
-                  <header>
-                     <div>
-                        <h3>Anual</h3>
-                        <span>
-                           <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                           no boleto
-                        </span>
-                     </div>
-                     <span class="discount">economize R$960</span>
-                  </header>
-                  <div class="price">
-                     <span class="value">R$130</span>
-                     <span class="period">/mês</span>
-                  </div>
-                  <ul>
-                     <li>Anúncio por 12 meses</li>
-                     <li>Publicações de até 100 imagens do imóvel</li>
-                     <li>Publicação de 01 vídeo do imóvel</li>
-                     <li>1 mês de anúncio em destaque (cortesia)</li>
-                     <li>Publicação do imóvel em nossa página no Facebook</li>
-                     <li>Publicação do imóvel em nossa página no instagram</li>
-                     <li>Para pagamento à vista desconto de 10% sobre o valor total do plano</li>
-                  </ul>
-                  <a href="#" class="btn-primary">Contratar</a>
-               </article>
-               <article class="box special">
-                  <div class="decoy">
-                     <img src="<?= PATHSITE ?>assets/images/icon-star.svg" alt="">
-                     <span>Mais Contratado</span>
-                  </div>
-                  <header>
-                     <div>
-                        <h3>Semestral</h3>
-                        <span>
-                           <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                           no boleto
-                        </span>
-                     </div>
-                     <span class="discount">economize R$720</span>
-                  </header>
-                  <div class="price">
-                     <span class="value">R$150</span>
-                     <span class="period">/mês</span>
-                  </div>
-                  <ul>
-                     <li>Anúncio por 06 meses</li>
-                     <li>Publicações de até 100 imagens do imóvel</li>
-                     <li>Publicação de 01 vídeo do imóvel</li>
-                     <li>1 mês de anúncio em destaque (cortesia)</li>
-                     <li>Publicação do imóvel em nossa página no Facebook</li>
-                     <li>Publicação do imóvel em nossa página no instagram</li>
-                     <li>Para pagamento à vista desconto de 10% sobre o valor total do plano</li>
-                  </ul>
-                  <a href="#" class="btn-primary">Contratar</a>
-               </article>
-               <article class="box">
-                  <header>
-                     <div>
-                        <h3>Quadrimestral</h3>
-                        <span>
-                           <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                           no boleto
-                        </span>
-                     </div>
-                     <span class="discount">economize R$480</span>
-                  </header>
-                  <div class="price">
-                     <span class="value">R$170</span>
-                     <span class="period">/mês</span>
-                  </div>
-                  <ul>
-                     <li>Anúncio por 04 meses</li>
-                     <li>Publicações de até 100 imagens do imóvel</li>
-                     <li class="no-incluse">Publicação de 01 vídeo do imóvel</li>
-                     <li class="no-incluse">1 mês de anúncio em destaque (cortesia)</li>
-                     <li>Publicação do imóvel em nossa página no Facebook</li>
-                     <li>Publicação do imóvel em nossa página no instagram</li>
-                     <li>Para pagamento à vista desconto de 10% sobre o valor total do plano</li>
-                  </ul>
-                  <a href="#" class="btn-primary">Contratar</a>
-               </article>
-            </div>
-         </div>
-         <span class="info-about-credit-card" data-aos="fade-up">Vendas com cartão de crédito indisponíveis no momento.
-            Valores válidos para o ano de 2023.</span>
+         <? } ?>
+
+         <span class="info-about-credit-card" data-aos="fade-up"><?= $txPlanoLinha->extra1 ?></span>
       </div>
    </section>
+
    <section class="ads-featured" id="anuncio-destaque">
       <div class="container-medium">
          <h2 data-aos="fade-up">
-            Plano - Anúncio em destaque
-
+            <?= $txPlanoAnuncio->titulo ?>
             <div class="navigation-arrows">
                <button class="prev">
                   <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -262,164 +104,44 @@
                </button>
             </div>
          </h2>
-         <p data-aos="fade-up">Destaque o seu anúncio e deixe que seu imóvel fique visível para milhares de usuários!
-         </p>
+         <p data-aos="fade-up"><?= $txPlanoAnuncio->descricao ?></p>
 
-         <div class="list" data-aos="fade-up">
-            <div class="swiper planSwiper">
-               <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                     <div class="item">
-                        <header>
-                           <div>
-                              <h3>Anual</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$960</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$60</span>
-                           <span class="period">/mês</span>
+         <? if ($planosAnuncio) { ?>
+            <div class="list" data-aos="fade-up">
+               <div class="swiper planSwiper">
+                  <div class="swiper-wrapper">
+                     <? foreach ($planosAnuncio as $plano) { ?>
+                        <div class="swiper-slide">
+                           <?= view("templates/plano-anuncio-card", (array)$plano); ?>
                         </div>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="item">
-                        <header>
-                           <div>
-                              <h3>Semestral</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$960</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$80</span>
-                           <span class="period">/mês</span>
-                        </div>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="item">
-                        <header>
-                           <div>
-                              <h3>Quadrimestral</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$960</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$100</span>
-                           <span class="period">/mês</span>
-                        </div>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="item">
-                        <header>
-                           <div>
-                              <h3>Anual</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$960</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$60</span>
-                           <span class="period">/mês</span>
-                        </div>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="item">
-                        <header>
-                           <div>
-                              <h3>Semestral</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$960</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$80</span>
-                           <span class="period">/mês</span>
-                        </div>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </div>
-                  </div>
-                  <div class="swiper-slide">
-                     <div class="item">
-                        <header>
-                           <div>
-                              <h3>Quadrimestral</h3>
-                              <span>
-                                 <img src="<?= PATHSITE ?>assets/images/icon-barcode.svg" alt="">
-                                 no boleto
-                              </span>
-                           </div>
-                           <span class="discount">economize R$960</span>
-                        </header>
-                        <div class="price">
-                           <span class="value">R$100</span>
-                           <span class="period">/mês</span>
-                        </div>
-                        <a href="#" class="btn-primary">Contratar</a>
-                     </div>
+                     <? } ?>
                   </div>
                </div>
             </div>
-         </div>
+         <? } ?>
 
-         <span class="info-about-credit-card" data-aos="fade-up">Este plano somente poderá ser contratado por
-            anunciantes
-            que já estejam divulgando o seu imóvel de lazer em nosso site.</span>
+         <span class="info-about-credit-card" data-aos="fade-up"><?= $txPlanoAnuncio->extra1 ?></span>
       </div>
    </section>
+
    <section class="s-contact-form" id="contato">
       <div class="container-medium">
+
          <div class="info" data-aos="fade-right">
             <h2>
-               Parabéns!<br>
-               Você acaba de fazer<br>
-               uma ótima escolha!<br>
+               <? $arrayTitulo = explode("*", $txContatoPlanos->titulo);
+               foreach ($arrayTitulo as $value) { ?>
+                  <?= $value ?> <br>
+               <? }
+               ?>
             </h2>
-            <p>Preencha todos os dados no formulário ao lado, <br>
-               que logo entraremos em contato com você!</p>
+            <p><?= $txContatoPlanos->descricao ?></p>
             <div>
-               <p>Nosso horário de atendimento é de</p>
-               <ul>
-                  <li>Segunda a Sexta-Feira, das 09:00h às 11:30h e das 13:30h às 18:00h</li>
-               </ul>
-               <div class="wraper">
-                  <p>Canais de atendimento:</p>
-                  <ul>
-                     <li>(44) 3222-0000</li>
-                     <li>(44) 9 9999-9999</li>
-                     <li>vaiseraqui@vaiseraqui.com.br</li>
-                  </ul>
-               </div>
-               <p>Estaremos no aguardo do envio de seu formulário e qualquer <br> dúvida estamos a disposição nos
-                  telefones
-                  de contato acima.</p>
+               <?= $txContatoPlanos->texto ?>
             </div>
          </div>
-         <form action="#" data-aos="fade-left">
+
+         <form method="post" data-aos="fade-left">
             <div class="input-group">
                <label for="name">Seu nome</label>
                <input type="text" placeholder="ex: João" class="user">
@@ -459,9 +181,9 @@
                      <div class="modal-order-select">
                         <div class="wraper-scroll">
                            <nav class="content">
-                              <a data-select-value="Anúncio de Linha" href="#" class="active">Anúncio de Linha</a>
-                              <a data-select-value="Anúncio de Linha 1" href="#">Anúncio de Linha 1</a>
-                              <a data-select-value="Anúncio de Linha 2" href="#">Anúncio de Linha 2</a>
+                              <? foreach ($planosLinha as $plano) { ?>
+                                 <a data-select-value="<?= $plano->titulo ?>" href="#" class="active"><?= $plano->titulo ?></a>
+                              <? } ?>
                            </nav>
                         </div>
                      </div>
@@ -474,9 +196,9 @@
                      <div class="modal-order-select">
                         <div class="wraper-scroll">
                            <nav class="content">
-                              <a data-select-value="Anual" href="#" class="active">Anual</a>
-                              <a data-select-value="Semestral" href="#">Semestral</a>
-                              <a data-select-value="Quadrimestral" href="#">Quadrimestral</a>
+                              <? foreach ($planosAnuncio as $plano) { ?>
+                                 <a data-select-value="<?= $plano->titulo ?>" href="#" class="active"><?= $plano->titulo ?></a>
+                              <? } ?>
                            </nav>
                         </div>
                      </div>
@@ -495,10 +217,13 @@
                <label for="message">Mensagem</label>
                <textarea name="" id="message" placeholder="Escreva aqui sua mensagem"></textarea>
             </div>
+            <input type="hidden" name="origem" value="planos">
             <button type="submit">Enviar</button>
          </form>
+         
       </div>
    </section>
+
    <div class="modal-plan-container">
       <div class="modal-plan-content">
          <h2>

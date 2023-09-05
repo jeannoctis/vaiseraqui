@@ -7809,6 +7809,17 @@ header.header-bg .group-title span {
   margin-top: 2.69rem;
   margin-bottom: 3.87rem;
   list-style: none;
+
+  overflow-y: scroll;
+  height: 434px;
+}
+.plans .s-type-of-plan .container-medium .box-container .box ul::-webkit-scrollbar {
+  background-color: transparent;
+  width: 4px;
+}
+.plans .s-type-of-plan .container-medium .box-container .box ul::-webkit-scrollbar-thumb {
+  background-color: #932327;
+  border-radius: 2px;
 }
 .plans .s-type-of-plan .container-medium .box-container .box ul li {
   color: #404041;
@@ -7825,6 +7836,7 @@ header.header-bg .group-title span {
 }
 .plans .s-type-of-plan .container-medium .box-container .box ul li.no-incluse {
   background-image: url(../images/icon-li-close-circle.svg);
+  background-position: top 4px left;
 }
 .plans .s-type-of-plan .container-medium .box-container .box ul li + li {
   margin-top: 1.88rem;

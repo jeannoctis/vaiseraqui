@@ -32,10 +32,10 @@
 												<tr class="ui-state-default sort" rel="<?= $elemento->id ?>">
 													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
 													<td>
-														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>">
+														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/">
 															<?= $elemento->titulo ?>
 														</a>
-													</td>
+													</td>                                       
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
 												</tr>
 											<? } ?>
