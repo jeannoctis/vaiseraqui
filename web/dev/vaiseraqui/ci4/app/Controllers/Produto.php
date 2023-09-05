@@ -520,13 +520,15 @@ class Produto extends BaseController
                   $updateDatas[] = [
                      'id' => $item['id'],
                      'data' => $item['data'],
-                     'horario' => $item['horario']
+                     'horarioInicio' => $item['horarioInicio'],
+                     'horarioTermino' => $item['horarioTermino']
                   ];
                } else {
                   $insertDatas[] = [
                      'produtoFK' => $lastId,
                      'data' => $item['data'],
-                     'horario' => $item['horario']
+                     'horarioInicio' => $item['horarioInicio'],
+                     'horarioTermino' => $item['horarioTermino']
                   ];
                }
             }

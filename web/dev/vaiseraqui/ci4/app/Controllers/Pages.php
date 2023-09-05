@@ -254,6 +254,13 @@ class Pages extends Controller
                 $data['depoimento'] = $this->textoModel->find(2);
                 $data['txContato'] = $this->textoModel->find(7);
                 break;
+            case 'planos':
+                $data['pagina'] = 4;
+                $data['bodyClass'] = 'plans';
+
+                $data['txPlanosHero'] = $this->textoModel->find(3);
+
+                break;
             case 'eventos':
                 $data['pagina'] = 3;
                 $data['bodyClass'] = 'events';
@@ -265,7 +272,7 @@ class Pages extends Controller
                 $data['get'] = $get = \request()->getGet();
                 $page = "blog-listagem";
 
-                $paginate = \is_numeric($get['page_artigos']) ? $get['page_artigos'] : 1 ;
+                $paginate = \is_numeric($get['page_artigos']) ? $get['page_artigos'] : 1;
 
                 $this->artigoModel = \model("App\Models\ArtigoModel", false);
                 $data['artigoDestaque'] = $this->artigoModel
@@ -302,7 +309,6 @@ class Pages extends Controller
                         ->where("categoriaFK", $data['artigoAtual']->categoriaFK)
                         ->where("id != {$data['artigoAtual']->id}");
                     $data['artigosRelacionados'] = $this->artigoModel->findAll();
-
                 } else if ($segments[1] == "categoria") {
                     $page = "blog-categoria";
                     $data['bodyClass'] = 'blog-list-categories';
@@ -449,7 +455,7 @@ class Pages extends Controller
                 unset($_SESSION);
                 ?>
                 <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>">
-                <? exit();
+<? exit();
                 break;
 
             case "area-do-cliente":

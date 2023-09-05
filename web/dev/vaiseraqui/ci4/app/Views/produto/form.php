@@ -661,8 +661,11 @@
                                     </label>
                                     <input type="date" name="datas[<?= $ind ?>][data]" class="form-control" id="data<?= $ind ?>" value="<?= $item->data ?>" placeholder="Escreva..." required>
 
-                                    <label for="horario<?= $ind ?>">Horário</label>
-                                    <input type="time" name="datas[<?= $ind ?>][horario]" class="form-control" id="horario<?= $ind ?>" value="<?= $item->horario ?>" placeholder="Escreva..." required>
+                                    <label for="horarioI<?= $ind ?>">Horário Início</label>
+                                    <input type="time" name="datas[<?= $ind ?>][horarioInicio]" class="form-control" id="horarioI<?= $ind ?>" value="<?= $item->horarioInicio ?>" placeholder="Escreva..." required>
+
+                                    <label for="horarioT<?= $ind ?>">Horário Término</label>
+                                    <input type="time" name="datas[<?= $ind ?>][horarioTermino]" class="form-control" id="horarioT<?= $ind ?>" value="<?= $item->horarioTermino ?>" placeholder="Escreva..." required>
                                  </div>
                               </div>
                            <? } ?>
@@ -670,10 +673,13 @@
                            <div class='form-group col-xs-12 col-lg-4 paddingZeroM card-content data-div'>
                               <div class="col-xs-12 col-sm-12">
                                  <label for="data0">Data</label>
-                                 <input type="date" name="datas[0][data]" class="form-control" id="data0" value="" placeholder="Escreva..." required>
+                                 <input type="date" name="datas[0][data]" class="form-control" id="data0" placeholder="Escreva..." required>
 
-                                 <label for="horario0">Horário</label>
-                                 <input type="time" name="datas[0][horario]" class="form-control" id="horario0" value="" placeholder="Escreva..." required>
+                                 <label for="horario0">Horário Início</label>
+                                 <input type="time" name="datas[0][horarioInicio]" class="form-control" id="horario0" placeholder="Escreva..." required>
+
+                                 <label for="horario0">Horário Término</label>
+                                 <input type="time" name="datas[0][horarioTermino]" class="form-control" id="horario0" placeholder="Escreva..." required>
                               </div>
                            </div>
                         <? } ?>
@@ -1172,7 +1178,6 @@
 
       <script>
          // Adicionar Datas
-
          let datasCount = document.querySelectorAll(".data-div").length
 
          function adicionarData() {
@@ -1189,8 +1194,11 @@
                   </label>
                   <input type="date" name="datas[${datasCount}][data]" class="form-control" id="data${datasCount}" value="" placeholder="Escreva..." required>
 
-                  <label for="horario${datasCount}">Horário</label> 
-                  <input type="time" name="datas[${datasCount}][horario]" class="form-control" id="horario${datasCount}" value="" placeholder="Escreva..." required>                              
+                  <label for="horarioI${datasCount}">Horário Início</label> 
+                  <input type="time" name="datas[${datasCount}][horarioInicio]" class="form-control" id="horarioI${datasCount}" value="" placeholder="Escreva..." required>
+                  
+                  <label for="horarioT${datasCount}">Horário Término</label> 
+                  <input type="time" name="datas[${datasCount}][horarioTermino]" class="form-control" id="horarioT${datasCount}" value="" placeholder="Escreva..." required>
                </div>
             `
             datasContainer.appendChild(newElement)

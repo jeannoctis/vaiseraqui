@@ -76,6 +76,20 @@
  										</div>
  									</div>
  								</div>
+
+ 								<? if (in_array($resultado->id, [3])) { ?>
+ 									<div class="form-group col-xs-12 paddingZeroM mt-5   ">
+ 										<div class='col-xs-12'>
+ 											<label for="arquivo2">Imagem/banner mobile <b>(Tamanho recomendado: 384 x 491)</b></label>
+ 											<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo2 ?>' type="file" name='arquivo2' id="arquivo2" class="dropify">
+ 											<div class="col-xs-12 switch danger">
+ 												<input id="apagar-arquivo2" type="checkbox" name="apagararquivo2">
+ 												<label for="apagar-arquivo2">Apagar imagem</label>
+ 											</div>
+ 										</div>
+ 									</div>
+ 								<? } ?>
+
  								<? if (in_array($resultado->id, [1])) { ?>
  									<div class="form-group col-xs-12 paddingZeroM mt-5   ">
  										<div class='col-xs-12'>

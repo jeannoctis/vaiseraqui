@@ -7551,7 +7551,7 @@ header.header-bg .group-title span {
   line-height: 120.1%;
   letter-spacing: -0.15rem;
 }
-.plans .s-presentation-plan .container-medium .content strong {
+.plans .s-presentation-plan .container-medium .content .strong {
   display: block;
   margin-bottom: 6.25rem;
   color: #404041;
@@ -7634,7 +7634,7 @@ header.header-bg .group-title span {
     margin-top: 1.87rem;
     margin-bottom: 0;
   }
-  .plans .s-presentation-plan .container-medium .content strong {
+  .plans .s-presentation-plan .container-medium .content .strong {
     font-size: 1rem;
     letter-spacing: -0.03rem;
     margin-bottom: 3.12rem;
