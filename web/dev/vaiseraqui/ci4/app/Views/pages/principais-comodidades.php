@@ -31,7 +31,7 @@ if ($tipoPagina == 'itens') {
 
                         <div class="col-12">
                             <label>Adicionados</label>
-                            <div class="boxOpcoesAdicionadas">
+                            <div class="boxOpcoesAdicionadas">                               
                                 <input id="campoItens" data-role="tagsinput" type="text" name="principaiscomodidades" class="form-control tags-input mySingleFieldTags " value="<?= $anuncio->principaiscomodidades ?>" placeholder="Itens">
                             </div>
                         </div>

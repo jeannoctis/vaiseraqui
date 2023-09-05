@@ -2193,6 +2193,7 @@ select {
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 @media screen and (max-width: 1700px) {
   .s-text-and-slider .slider .item {
@@ -2775,6 +2776,11 @@ header.header-bg .group-title span {
 .faq .faq-item.open .faq-response .organization .wraper + .wraper {
   margin-top: 1.87rem;
 }
+
+.faq .faq-item.open .faq-response .organization{
+    margin-bottom: 3rem;
+}
+
 .faq .faq-item.open .faq-response .organization .wraper h4 {
   color: #404041;
   font-size: 1.25rem;
@@ -5415,14 +5421,14 @@ header.header-bg .group-title span {
   line-height: 172.1%;
   letter-spacing: -0.035rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:first-of-type > article > p {
+.internal-rent .more-about-2-column .container-medium .column:first-of-type > article  p {
   color: #808080;
   font-size: 1.125rem;
   font-weight: 400;
   line-height: 172.1%;
   letter-spacing: -0.045rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:first-of-type > article > p + p {
+.internal-rent .more-about-2-column .container-medium .column:first-of-type > article  p + p {
   margin-top: 2.5rem;
 }
 .internal-rent .more-about-2-column .container-medium .column:first-of-type > article .list-items {
@@ -5722,7 +5728,7 @@ header.header-bg .group-title span {
   display: block;
   margin-bottom: 1.44rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div ul li {
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div ul li a{
   display: flex;
   align-items: center;
   gap: 0.88rem;

@@ -4,11 +4,9 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 
-class Pages extends Controller
-{
+class Pages extends Controller {
 
-    public function buscaGeral()
-    {
+    public function buscaGeral() {
         helper('text');
 
         $this->session = \Config\Services::session($config);
@@ -66,9 +64,7 @@ class Pages extends Controller
         return $data;
     }
 
-
-    public function index()
-    {
+    public function index() {
         helper("date");
         $data = $this->buscaGeral();
 
@@ -100,9 +96,9 @@ class Pages extends Controller
         $produtoModel->select("produto.id,  produto.titulo, produto.identificador, produto.lazer, produto.itens, produto.categoriaFK");
         $produtoModel->where("produto.destaque", "1");
         $produtoModel->where("produto.ativo", "1");
-        //    $produtoModel->where("produto.tipoFK",1);
+//    $produtoModel->where("produto.tipoFK",1);
         $produtoModel->orderBy("RAND()");
-        $data["espacos"] =  $produtoModel->findAll(10);
+        $data["espacos"] = $produtoModel->findAll(10);
 
         if ($data["categoriasProduto"]) {
             foreach ($data["categoriasProduto"] as $ind => $dProd) {
@@ -131,7 +127,7 @@ class Pages extends Controller
         $produtoModel->where("produto.inicioValidade <= NOW() AND produto.validade >= NOW()");
         $produtoModel->where("produto.inicioDestaque <= NOW() AND produto.validadeDestaque >= NOW()");
         $produtoModel->orderBy("RAND()");
-        $data["servicos"] =  $produtoModel->findAll(10);
+        $data["servicos"] = $produtoModel->findAll(10);
 
         if ($data["servicos"]) {
             foreach ($data["servicos"] as $ind => $dProd) {
@@ -148,43 +144,140 @@ class Pages extends Controller
         $ArtigoModel->join('categoriaArtigo ca', 'ca.id = artigo.categoriaFK');
         $ArtigoModel->orderBy("artigo.ordem ASC, artigo.id DESC");
         $data["blogs"] = $ArtigoModel->findAll(6);
-        /*    
-   $itemModel = model('App\Models\ItemModel', false);  
 
-    $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
-    $itemModel->where("tipo",1);
-    $itemModel->orderBy("quantidade DESC");
-    $data["comodidades"] = $itemModel->findAll(12);
-      
-    $itemModel->resetQuery();
-    $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
-    $itemModel->where("tipo",2);
-    $itemModel->orderBy("quantidade DESC");
-    $data["produtosServidos"] = $itemModel->findAll(12);
-    
-    $itemModel->resetQuery();
-    $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
-    $itemModel->where("tipo",3);
-    $itemModel->orderBy("quantidade DESC");
-    $data["atendeEm"] = $itemModel->findAll(12);  
-    
-    $proximidadeModel = model('App\Models\ProximidadeModel', false);  
-    $proximidadeModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.proximidades LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
-    $proximidadeModel->where("tipo",1);
-    $proximidadeModel->orderBy("quantidade DESC");
-    $data["proximidades"] = $proximidadeModel->findAll(12);
-    
-    $proximidadeModel->resetQuery();
-    $proximidadeModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.proximidades LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
-    $proximidadeModel->where("tipo",2);
-    $proximidadeModel->orderBy("quantidade DESC");
-    $data["showsAoVivo"] = $proximidadeModel->findAll(12);
-    
-    $lazerModel = model('App\Models\LazerModel', false);
-    $lazerModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.lazer LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
-    $lazerModel->orderBy("quantidade DESC");
-    $data["lazeres"] = $lazerModel->findAll(12);
-    */
+        $anuncioModel = model('App\Models\AnuncioModel', false);
+        $emAlta = $anuncioModel->find(7);
+
+        $emAltaAluguel = $anuncioModel->find(1);
+
+        if ($emAlta->produtoFK1) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta1'][0] = $produtoModel->find($emAlta->produtoFK1);
+            $data['emAlta1'][0]->fotos = $produtoModel->fotos($emAlta->produtoFK1, 4);
+        }
+        if ($emAlta->produtoFK2) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta1'][1] = $produtoModel->find($emAlta->produtoFK2);
+            $data['emAlta1'][1]->fotos = $produtoModel->fotos($emAlta->produtoFK2, 4);
+        }
+        if ($emAlta->produtoFK3) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta1'][2] = $produtoModel->find($emAlta->produtoFK3);
+            $data['emAlta1'][2]->fotos = $produtoModel->fotos($emAlta->produtoFK3, 4);
+        }
+        if ($emAlta->produtoFK4) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta1'][3] = $produtoModel->find($emAlta->produtoFK4);
+            $data['emAlta1'][3]->fotos = $produtoModel->fotos($emAlta->produtoFK4, 4);
+        }
+        if ($emAlta->produtoFK5) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta1'][4] = $produtoModel->find($emAlta->produtoFK5);
+            $data['emAlta1'][4]->fotos = $produtoModel->fotos($emAlta->produtoFK5, 4);
+        }
+
+        if ($emAltaAluguel->produtoFK1) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta2'][0] = $produtoModel->find($emAltaAluguel->produtoFK1);
+            $data['emAlta2'][0]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK1, 4);
+        }
+        if ($emAltaAluguel->produtoFK2) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta2'][1] = $produtoModel->find($emAltaAluguel->produtoFK2);
+            $data['emAlta2'][1]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK2, 4);
+        }
+        if ($emAltaAluguel->produtoFK3) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta2'][2] = $produtoModel->find($emAltaAluguel->produtoFK3);
+            $data['emAlta2'][2]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK3, 4);
+        }
+        if ($emAltaAluguel->produtoFK4) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta2'][3] = $produtoModel->find($emAlta->produtoFK4);
+            $data['emAlta2'][3]->fotos = $produtoModel->fotos($emAlta->produtoFK4, 4);
+        }
+        if ($emAltaAluguel->produtoFK5) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $data['emAlta2'][4] = $produtoModel->find($emAltaAluguel->produtoFK5);
+            $data['emAlta2'][4]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK5, 4);
+        }
+        /*
+          $itemModel = model('App\Models\ItemModel', false);
+
+          $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+          $itemModel->where("tipo",1);
+          $itemModel->orderBy("quantidade DESC");
+          $data["comodidades"] = $itemModel->findAll(12);
+
+          $itemModel->resetQuery();
+          $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+          $itemModel->where("tipo",2);
+          $itemModel->orderBy("quantidade DESC");
+          $data["produtosServidos"] = $itemModel->findAll(12);
+
+          $itemModel->resetQuery();
+          $itemModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.itens LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+          $itemModel->where("tipo",3);
+          $itemModel->orderBy("quantidade DESC");
+          $data["atendeEm"] = $itemModel->findAll(12);
+
+          $proximidadeModel = model('App\Models\ProximidadeModel', false);
+          $proximidadeModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.proximidades LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+          $proximidadeModel->where("tipo",1);
+          $proximidadeModel->orderBy("quantidade DESC");
+          $data["proximidades"] = $proximidadeModel->findAll(12);
+
+          $proximidadeModel->resetQuery();
+          $proximidadeModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.proximidades LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+          $proximidadeModel->where("tipo",2);
+          $proximidadeModel->orderBy("quantidade DESC");
+          $data["showsAoVivo"] = $proximidadeModel->findAll(12);
+
+          $lazerModel = model('App\Models\LazerModel', false);
+          $lazerModel->select("titulo, ( SELECT COUNT(id) FROM produto WHERE produto.lazer LIKE CONCAT('%', titulo, '%') ) as quantidade  ");
+          $lazerModel->orderBy("quantidade DESC");
+          $data["lazeres"] = $lazerModel->findAll(12);
+         */
         if (isset($_POST['enviar'])) {
             $request = \Config\Services::request();
             $post = $request->getPost();
@@ -252,32 +345,154 @@ class Pages extends Controller
                 $data['aspectos'] = $this->aspectoModel->orderBy("ordem ASC, id DESC")->findAll();
 
                 $data['depoimento'] = $this->textoModel->find(2);
+
                 $data['txContato'] = $this->textoModel->find(7);
                 break;
-            case 'planos':
-                $data['pagina'] = 4;
-                $data['bodyClass'] = 'plans';
-
-                $data['txPlanosHero'] = $this->textoModel->find(3);
-                $data['txPlanoLinha'] = $this->textoModel->find(4);
-                $data['txPlanoAnuncio'] = $this->textoModel->find(5);
-
-                $this->planoModel = \model('App\Models\PlanoModel', false);
-                $data['planosLinha'] = $this->planoModel
-                    ->orderBy("ordem DESC, id ASC")
-                    ->findAll();
-                
-                $this->planoAnuncioModel = \model('App\Models\PlanoAnuncioModel', false);
-                $data['planosAnuncio'] = $this->planoAnuncioModel
-                    ->orderBy("ordem ASC, id DESC")
-                    ->findAll();
-                $data['txContatoPlanos'] = $this->textoModel->find(6);
-
-                break;
-            case 'eventos':
-                $data['pagina'] = 3;
-                $data['bodyClass'] = 'events';
-                break;
+                case 'planos':
+                    $data['pagina'] = 4;
+                    $data['bodyClass'] = 'plans';
+    
+                    $data['txPlanosHero'] = $this->textoModel->find(3);
+                    $data['txPlanoLinha'] = $this->textoModel->find(4);
+                    $data['txPlanoAnuncio'] = $this->textoModel->find(5);
+    
+                    $this->planoModel = \model('App\Models\PlanoModel', false);
+                    $data['planosLinha'] = $this->planoModel
+                        ->orderBy("ordem DESC, id ASC")
+                        ->findAll();
+                    
+                    $this->planoAnuncioModel = \model('App\Models\PlanoAnuncioModel', false);
+                    $data['planosAnuncio'] = $this->planoAnuncioModel
+                        ->orderBy("ordem ASC, id DESC")
+                        ->findAll();
+                    $data['txContatoPlanos'] = $this->textoModel->find(6);
+    
+                    break;  
+                    case 'eventos':
+                        $data['pagina'] = 3;
+                        $data['bodyClass'] = 'events';
+        
+                        $produtoModel = \model("App\Models\ProdutoModel", false);
+                        $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade');
+                        $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                        $produtoModel->where('pc.tipoFK', 5);
+                        $produtoModel->where('ativo', '1');
+                        $data['destaques'] = $produtoModel->findAll();
+                        if ($data['destaques']) {
+                            foreach ($data['destaques'] as $ind => $destaque) {
+                                $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                                $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
+                            }
+                        }
+        
+                        break;
+                    case 'evento':
+                        helper('date');
+                        $data['bodyClass'] = 'internal-rent events-internal';
+                        $produtoModel = \model("App\Models\ProdutoModel", false);
+                        $produtoModel->select('produto.*, c.titulo as cidade, e.sigla as estado');
+                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                        $produtoModel->join('estado e', 'e.id = c.estadoFK');
+                        $produtoModel->where('identificador', $segments[1]);
+                        $data['metatag'] = $produtoModel->find()[0];
+                        $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999);
+                        $data['datas'] = $produtoModel->datas($data['metatag']->id);
+                        $data['pontosVenda'] = $produtoModel->pontosVenda($data['metatag']->id);
+                        $data['setores'] = $produtoModel->setores($data['metatag']->id);
+                        $data['organizacoes'] = $produtoModel->organizacoes($data['metatag']->id);
+        
+                        $produtoModel->resetQuery();
+                        $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade');
+                        $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                        $produtoModel->where('pc.tipoFK', 5);
+                        $produtoModel->where('ativo', '1');
+                        $data['destaques'] = $produtoModel->findAll();
+                        if ($data['destaques']) {
+                            foreach ($data['destaques'] as $ind => $destaque) {
+                                $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                                $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
+                            }
+                        }
+        
+                        break;
+                    case "prestadores-de-servico":
+                        $data['form4Visible'] = 'visible';
+                        $produtoModel = \model("App\Models\ProdutoModel", false);
+                        $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+                        $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                        $produtoModel->join('estado e', 'e.id = c.estadoFK');
+                        $produtoModel->where('pc.tipoFK', 6);
+                        $produtoModel->where('ativo', '1');
+                        $produtoModel->orderBy('rand()');
+                        $data['destaques'] = $produtoModel->findAll(8);
+                        if ($data['destaques']) {
+                            foreach ($data['destaques'] as $ind => $destaque) {
+                                $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                            }
+                        }
+        
+                        if (!is_numeric($get['page_produto'])) {
+                            $paginate = 1;
+                        } else {
+                            $paginate = $get['page_produto'];
+                        }
+        
+                        $produtoModel->resetQuery();
+                        $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+                        $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                        $produtoModel->join('estado e', 'e.id = c.estadoFK');
+                        $produtoModel->where('pc.tipoFK', 6);
+                        $produtoModel->where('ativo', '1');
+                        $produtoModel->orderBy('rand()');
+                        $data['servicos'] = $produtoModel->paginate(8, 'produto', $paginate);
+                        $data['pager'] = $produtoModel->pager;
+                        
+                        if ($data['servicos']) {
+                            foreach ($data['servicos'] as $ind => $destaque) {
+                                $data['servicos'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                            }
+                        }
+        
+                        $data['pagina'] = 11;
+                        break;
+                        
+                    case 'prestador-de-servico':
+                         helper('date');
+                        $data['bodyClass'] = 'internal-rent';
+                        $produtoModel = \model("App\Models\ProdutoModel", false);
+                        $produtoModel->select('produto.*, c.titulo as cidade, e.sigla as estado');
+                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                        $produtoModel->join('estado e', 'e.id = c.estadoFK');
+                        $produtoModel->where('identificador', $segments[1]);
+                        $data['metatag'] = $produtoModel->find()[0];
+                        $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999);
+                      $data['cardapio'] = $produtoModel->cardapio($data['metatag']->id);
+                      $data['responsavel'] = $produtoModel->responsavel($data['metatag']->anuncianteFK);
+                 
+                     //   $data['pontosVenda'] = $produtoModel->pontosVenda($data['metatag']->id);
+                    //    $data['setores'] = $produtoModel->setores($data['metatag']->id);
+                      //  $data['organizacoes'] = $produtoModel->organizacoes($data['metatag']->id);
+        
+                        $produtoModel->resetQuery();
+                        $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade');
+                        $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                        $produtoModel->where('pc.tipoFK', 6);
+                        $produtoModel->where('ativo', '1');
+                        $data['destaques'] = $produtoModel->findAll();
+                        if ($data['destaques']) {
+                            foreach ($data['destaques'] as $ind => $destaque) {
+                                $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                                $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
+                            }
+                        }
+        
+                        break;
+                        
             case "blog":
                 $data['bodyClass'] = 'blog-list';
                 $data['pagina'] = 5;

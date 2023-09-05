@@ -1,8 +1,8 @@
   <footer class="footer">
     <div class="container-medium">
       <div class="item">
-        <img src="./assets/images/logo-mobile.png" alt="" class="logo only-mobile">
-        <img src="./assets/images/logo-footer.png" alt="Logo" class="logo">
+        <img src="<?=PATHSITE?>assets/images/logo-mobile.png" alt="" class="logo only-mobile">
+        <img src="<?=PATHSITE?>assets/images/logo-footer.png" alt="Logo" class="logo">
         <a href="#" class="btn-primary">Anuncie seu imóvel conosco</a>
       </div>
       <div class="item">
@@ -62,7 +62,7 @@
       </div>
     </div>
     <hr>
-    <img src="./assets/images/logo-footer-uaau.svg" alt="">
+    <img src="<?=PATHSITE?>assets/images/logo-footer-uaau.svg" alt="">
   </footer>  
 
 <!-- Cookies + WhatsApp -->
@@ -147,7 +147,7 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script src="<?=PATHSITE?>assets/scripts/header.js"></script>
-  <script src="<?=PATHSITE?>assets/scripts/header-home.js"></script>
+  <!-- <script src="<?=PATHSITE?>assets/scripts/header-home.js"></script> -->
   <script src="<?=PATHSITE?>assets/scripts/select.js"></script>
   <script src="<?=PATHSITE?>assets/scripts/menu-tabs.js"></script>
     <script src="<?=PATHSITE?>assets/scripts/menu-mobile.js"></script>
@@ -158,7 +158,7 @@
     <script src="<?=PATHSITE?>assets/scripts/modal-filter.js"></script>
   <script src="<?=PATHSITE?>assets/scripts/modal-select-order.js"></script>
 
-  <script type="module" src="<?=PATHSITE?>assets/scripts/controller-agenda.js"></script>
+  <script type="module" src="<?=PATHSITE?>assets/scripts/controller-agenda.js"></script> 
   <script type="module" src="<?=PATHSITE?>assets/scripts/controller-card.js"></script>
   <script type="module" src="<?=PATHSITE?>assets/scripts/controller-blog.js"></script>
   <script src="<?=PATHSITE?>assets/scripts/fslightbox.js"></script>

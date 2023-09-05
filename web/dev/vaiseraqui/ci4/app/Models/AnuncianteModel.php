@@ -120,7 +120,7 @@ class AnuncianteModel extends Model {
             case 'troca-anuncio':
                 $produtoModel = model('App\Models\ProdutoModel', false);
                 $produtoModel->select("id");
-                $produtoModel->where("anuncianteFK", $this->session->get('anunciante')->id);
+                $produtoModel->where("anuncianteFK", $this->session->get('anunciante'));
                 $anuncio = $produtoModel->find(decode($segments[2]));
                 if ($anuncio) {
                     $this->session->set('anuncio', $anuncio->id);
@@ -372,7 +372,7 @@ class AnuncianteModel extends Model {
                 $produtoFotoModel->where("produtoFK", $data['anuncio']->id);
                 $produtoFotoModel->orderBy("ordem ASC, id DESC");
                 $data['fotos'] = $produtoFotoModel->findAll();
-
+     
                 $data['tabela'] = 'produto_foto';
                 $data['nomeModel'] = 'ProdutoFotoModel';
 
