@@ -674,7 +674,7 @@ class Produto extends BaseController
                      echo View('templates/tinypng');
 
                      $upload_path = "uploads/{$data['tabela']}/{$idFK}/";
-                            $upload_path_root = PATHHOME . $upload_path;
+                     $upload_path_root = PATHHOME . $upload_path;
 
                      $file_name = $img->getName();
                      $file_path = $upload_path_root . "/" . $file_name;

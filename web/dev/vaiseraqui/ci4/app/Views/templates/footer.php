@@ -57,7 +57,7 @@
                 </svg>
                 <?= $rede->nome ?>
               </a>
-            <? }
+          <? }
           } ?>
         </nav>
       </div>
@@ -131,7 +131,7 @@
       </div>
     </div>
   <? } ?>
-  
+
   <div onclick="listaWhatsapp();" class="whatsapp fonteBlack" data-aos="fade-down">
     <img alt="" src="<?= PATHSITE ?>assets/images/whatsapp-branco.svg" height="20">
     <span>Fale Conosco</span>
@@ -207,6 +207,45 @@
         }
       })
     })
+
+    <? if ($pagina == 22) { ?>
+      // Controla modal de mapa
+      const btnMaps = document.querySelector('.btn-maps')
+      if (btnMaps) {
+        btnMaps.addEventListener('click', (e) => {
+          e.preventDefault()
+          Fancybox.show([{
+            src: "https://www.google.com/maps/@51.5039653,-0.1246493,14.12z",
+            width: 800,
+            height: 600,
+          }, ]);
+        })
+      }
+
+      // Controla modal de video
+      const btnsVideos = document.querySelectorAll('.btn-videos')
+      if (btnsVideos) {
+        btnsVideos.forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.preventDefault()
+            Fancybox.show([{
+                src: "https://www.youtube.com/watch?v=z2X2HaTvkl8",
+                thumb: "http://i3.ytimg.com/vi/z2X2HaTvkl8/hqdefault.jpg",
+              },
+              {
+                src: "https://www.youtube.com/watch?v=dZRqB0JLizw",
+                thumb: "http://i3.ytimg.com/vi/dZRqB0JLizw/hqdefault.jpg",
+              },
+              {
+                src: "https://vimeo.com/259411563",
+                thumb: "https://f.vimeocdn.com/images_v6/lohp/video1_thumbnail.png",
+              },
+            ]);
+          })
+        })
+      }
+      
+    <? } ?>
   </script>
 
   <script>

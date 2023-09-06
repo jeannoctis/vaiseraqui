@@ -470,8 +470,8 @@ class Pages extends Controller {
                         $produtoModel->where('identificador', $segments[1]);
                         $data['metatag'] = $produtoModel->find()[0];
                         $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999);
-                      $data['cardapio'] = $produtoModel->cardapio($data['metatag']->id);
-                      $data['responsavel'] = $produtoModel->responsavel($data['metatag']->anuncianteFK);
+                        $data['cardapio'] = $produtoModel->cardapio($data['metatag']->id);
+                        $data['responsavel'] = $produtoModel->responsavel($data['metatag']->anuncianteFK);
                  
                      //   $data['pontosVenda'] = $produtoModel->pontosVenda($data['metatag']->id);
                     //    $data['setores'] = $produtoModel->setores($data['metatag']->id);
@@ -492,7 +492,51 @@ class Pages extends Controller {
                         }
         
                         break;
-                        
+            case "aluguel-para-temporada":
+                \helper(['utils']);
+                $data['bodyClass'] = "base-list-map";
+                $data['pagina'] = 12;
+                $segments = $this->request->uri->getSegments();
+                $get = request()->getGet();
+
+                $paginate = \is_numeric($get['page_anuncios']) ? $get['page_anuncios'] : 1;
+
+                $this->produtoModel = \model('App\Models\ProdutoModel', false)
+                    ->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado")
+                    ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
+                    ->join("cidade c", "c.id = produto.cidadeFK")
+                    ->join("estado e", "e.id = c.estadoFK")
+                    ->where("pc.tipoFK", 1)
+                    ->where("ativo", 1);
+                $data['alugueisParaTemporada'] = $this->produtoModel->paginate(8, "anuncios", $paginate);
+                $data['pager'] = $this->produtoModel->pager;
+
+                foreach($data['alugueisParaTemporada'] as $item) {
+                    $item->fotos = $this->produtoModel->fotos($item->id, 5);
+                }
+
+                $data['espacoAtual'] = $this->produtoModel
+                    ->resetQuery()
+                    ->select("produto.*, pc.titulo as categoria, c.titulo as cidade, c.id as cidade_id, e.sigla as estado")
+                    ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
+                    ->join("cidade c", "c.id = produto.cidadeFK")
+                    ->join("estado e", "e.id = c.estadoFK")
+                    ->where("produto.identificador", $segments[1])
+                    ->first();
+                if($segments[1] && $data['espacoAtual']) {
+                    $page = "aluguel-para-temporada-interna";
+                    $data['bodyClass'] = "internal-rent";
+
+                    $data['espacoAtual']->fotos = $this->produtoModel->fotos($data['espacoAtual']->id, 99);
+                    $data['espacoAtual']->valores = $this->produtoModel->valores($data['espacoAtual']->id);
+                    $data['espacoAtual']->fotoDestaque = $this->produtoModel->fotoDestaque($data['espacoAtual']->fotoFK);
+
+                    $total = \array_column($data['espacoAtual']->valores, "valor");
+                    $total = \array_sum($total);
+                    $data['espacoAtual']->total = $total + $data['espacoAtual']->preco;
+                }
+
+                break;
             case "blog":
                 $data['bodyClass'] = 'blog-list';
                 $data['pagina'] = 5;

@@ -11,7 +11,6 @@
             $data['badge'] = "AGUARDANDO PAGAMENTO";
             $data['class'] = "waiting";
             break;
-         
       }
       return $data;
    }
@@ -70,7 +69,20 @@ if (!function_exists('getTipo')) {
             $tipo = 'Prestadores de Serviços';
             break;
       }
-      
+
       return $tipo;
+   }
+}
+
+if (!function_exists('getDateInterval')) {
+
+   function getDateInterval($date)
+   {
+      $hoje = new Datetime('');
+      $dataCriacao = new DateTime($date);
+
+      $interval = $hoje->diff($dataCriacao);
+
+      return $interval;
    }
 }

@@ -11,7 +11,7 @@ class ProdutoModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'object';
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['titulo', 'descricao', 'ordem', 'identificador', 'proximidades', 'video', 'ativo', 'validade', 'anuncianteFK', 'endereco', 'bairro', 'destaque', 'validadeDestaque', 'apresentacao', 'inicioValidade', 'inicioDestaque', 'cidadeFK', 'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'petfriendly', 'capacidadeFK', 'hospedes', 'limpeza', 'latitude', 'longitude', 'captadorFK', 'planoFK', 'calendario', 'preco', 'apartir', 'principaiscomodidades', 'itensdisponiveis', 'areautil', 'quartos', 'banheiros', 'vagas', 'andar', 'animais', 'mobilia', 'transporte', 'condominio', 'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local'];
+    protected $allowedFields = ['titulo', 'descricao', 'ordem', 'identificador', 'proximidades', 'video', 'ativo', 'validade', 'anuncianteFK', 'endereco', 'bairro', 'destaque', 'validadeDestaque', 'apresentacao', 'inicioValidade', 'inicioDestaque', 'cidadeFK', 'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'capacidadeFK', 'hospedes', 'limpeza', 'latitude', 'longitude', 'captadorFK', 'planoFK', 'calendario', 'preco', 'apartir', 'principaiscomodidades', 'itensdisponiveis', 'areautil', 'quartos', 'banheiros', 'vagas', 'andar', 'animais', 'mobilia', 'transporte', 'condominio', 'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local'];
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';
@@ -34,9 +34,16 @@ class ProdutoModel extends Model
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
         $produtoFotoModel->where('produtoFK', $id);
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
-        $produtoFotoModel->limit($limit);
-        $fotos = $produtoFotoModel->findAll();
+        // $produtoFotoModel->limit($limit);
+        $fotos = $produtoFotoModel->findAll($limit);
         return $fotos;
+    }
+
+    public function fotoDestaque($fotoFK) {
+        $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
+        $produtoFotoModel->select("arquivo");
+        $foto = $produtoFotoModel->find($fotoFK);
+        return $foto;
     }
 
     public function datas($id) {
@@ -51,7 +58,7 @@ class ProdutoModel extends Model
         $produtoValorModel = model('App\Models\ProdutoValorModel', false);
         $produtoValorModel->where('produtoFK', $id);
         $produtoValorModel->orderBy('valor ASC');
-        $datas = $produtoValorModel->findAll();
+        $valores = $produtoValorModel->findAll();
         return $valores;
     }
 
