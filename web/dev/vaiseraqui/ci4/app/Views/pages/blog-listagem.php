@@ -129,20 +129,15 @@
    </section>
 </main>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script src="<?=PATHSITE?>assets/scripts/header.js"></script>
 <script src="<?=PATHSITE?>assets/scripts/menu-mobile.js"></script>
 <script src="<?=PATHSITE?>assets/scripts/form-filter.js"></script>
 <script src="<?=PATHSITE?>assets/scripts/select.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/modal-filter.js"></script>
+<script src="<?=PATHSITE?>assets/scripts/modal-filter.js"></script> -->
 
 <script>
-   AOS.init({
-      once: true,
-      duration: 1000
-   });
-
    const btnCategoryModal = document.querySelector('.more-about-modal > a')
    const categoryModal = document.querySelector('.more-about-modal > .modal-more-categories')
    const modalLinks = categoryModal.querySelectorAll('a')
@@ -159,8 +154,8 @@
    })
 
    // Form Select
-   const boxes = document.querySelectorAll('.j-box-select')
-   boxes.forEach((box, key) => {
-      new Selector(box)
-   })
+   // const boxes = document.querySelectorAll('.j-box-select')
+   // boxes.forEach((box, key) => {
+   //    new Selector(box)
+   // })
 </script>

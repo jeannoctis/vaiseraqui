@@ -31,7 +31,7 @@
             <label for="message">Mensagem</label>
             <textarea name="message" id="message" placeholder="Escreva aqui sua mensagem"></textarea>
          </div>
-         <input type="hidden" name="origem" value="sobre nós">
+         <input type="hidden" name="origem" value="<?= $origem ?>">
          <button type="submit">Enviar</button>
       </form>
    </div>

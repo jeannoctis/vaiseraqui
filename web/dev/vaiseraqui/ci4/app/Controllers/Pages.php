@@ -577,7 +577,7 @@ class Pages extends Controller {
 
                 break;
             case "contato":
-                $data['bodyClass'] = 'page-contact';
+                $data['bodyClass'] = 'contact';
                 $data['pagina'] = 6;
                 $data['txContato'] = $this->textoModel->find(7);
                 break;

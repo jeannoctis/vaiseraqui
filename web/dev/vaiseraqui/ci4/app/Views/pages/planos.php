@@ -393,15 +393,6 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/form-filter.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/modal-filter.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/mask-telefone.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/modal-select-order.js"></script>
 
 <script>
    // Swiper Plan

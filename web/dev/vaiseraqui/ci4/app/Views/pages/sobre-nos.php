@@ -84,18 +84,17 @@
     <h2>
       <?= $depoimento->texto ?>
     </h2>
-    <span><?= $depoimento->título ?></span>
+    <span><?= $depoimento->titulo ?></span>
   </article>
-
-  <?= view("templates/contato-form", (array)$txContato) ?>
-
+  <? $txContato->origem = "sobre-nos";
+  echo view("templates/contato-form", (array)$txContato) ?>
 </main>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
 
-<script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
+<!-- <script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
 <script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
 <script src="<?= PATHSITE ?>assets/scripts/form-filter.js"></script>
 <script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
 <script src="<?= PATHSITE ?>assets/scripts/modal-filter.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/mask-telefone.js"></script>
+<script src="<?= PATHSITE ?>assets/scripts/mask-telefone.js"></script> -->
