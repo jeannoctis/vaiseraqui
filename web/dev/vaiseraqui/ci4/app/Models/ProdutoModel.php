@@ -4,8 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProdutoModel extends Model
-{
+class ProdutoModel extends Model {
+
     protected $DBGroup = 'default';
     protected $table = 'produto';
     protected $primaryKey = 'id';
@@ -35,7 +35,7 @@ class ProdutoModel extends Model
         $produtoFotoModel->where('produtoFK', $id);
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
         $produtoFotoModel->limit($limit);
-        $fotos = $produtoFotoModel->findAll();
+        $fotos= $produtoFotoModel->findAll();
         return $fotos;
     }
 
@@ -103,7 +103,7 @@ class ProdutoModel extends Model
         $anuncianteModel = model('App\Models\AnuncianteModel', false);
         $anuncianteModel->select('titulo, telefone, telefone2, telefone3, email, arquivo');
         $anunciante = $anuncianteModel->find($id);
-        
+
         $removeChars = array("-", "(", ")", " ");
         $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
         $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
@@ -120,8 +120,39 @@ class ProdutoModel extends Model
         $anunciante->link2 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone2);
         $anunciante->link3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone3);
 
-
-        
         return $anunciante;
     }
+
+    public function hospedagens($limit) {
+
+        $data['get'] = $get = \request()->getGet();
+        
+           if (!is_numeric($get['page_produto'])) {
+                    $paginate = 1;
+                } else {
+                    $paginate = $get['page_produto'];
+                }
+        
+        $this->resetQuery();
+        $this->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+        $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+        $this->join('cidade c', 'c.id = produto.cidadeFK');
+        $this->join('estado e', 'e.id = c.estadoFK');
+        $this->where('pc.tipoFK', 3);
+        $this->where('ativo', '1');        
+        $data['servicos'] = $this->paginate(8, 'produto', $paginate);
+        $data['pager'] = $this->pager;
+        
+        return $data;
+        
+    }
+    
+    public function comodidades($id){
+          $produtoComodidadeModel = model('App\Models\ProdutoComodidadeModel', false);
+          $produtoComodidadeModel->where('produtoFK', $id);
+          $comodidades = $produtoComodidadeModel->findAll();
+          
+          return $comodidades;
+    }
+    
 }

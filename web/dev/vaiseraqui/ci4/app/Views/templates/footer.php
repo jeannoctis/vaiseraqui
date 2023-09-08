@@ -12,7 +12,7 @@
           <a href="<?=PATHSITE?>saloes-de-festas-e-areas-de-lazer/">Salões de Festa e Áreas de Lazer</a>
           <a href="<?=PATHSITE?>lojas-temporarias/">Lojas Temporárias</a>
           <a href="<?=PATHSITE?>prestadores-de-servico/">Prestadores de Serviços</a>
-          <a href="<?=PATHSITE?>hospedagem/">Hospedagem</a>
+          <a href="<?=PATHSITE?>hospedagens/">Hospedagem</a>
           <a href="<?=PATHSITE?>imobiliarias-e-corretoras/">Imobiliárias e Corretores</a>
           <a href="<?=PATHSITE?>eventos/">Eventos</a>
         </nav>
@@ -162,6 +162,8 @@
   <script type="module" src="<?=PATHSITE?>assets/scripts/controller-card.js"></script>
   <script type="module" src="<?=PATHSITE?>assets/scripts/controller-blog.js"></script>
   <script src="<?=PATHSITE?>assets/scripts/fslightbox.js"></script>
+  
+  <script src="<?=PATHSITE?>assets/scripts/script.js"></script>
 
   <script>         
     AOS.init({
@@ -238,5 +240,10 @@ if ($analytics[3]) {
 ?>
                     }    
   </script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="   crossorigin=""></script>
+  <?
+  echo View('templates/coordenadas');
+  ?>
+  
 </body>
 </html>

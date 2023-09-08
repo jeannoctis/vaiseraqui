@@ -14,6 +14,9 @@
  										<? if (in_array($resultado->id, [1])) { ?>
  											<i>(destaque palavras com asteriscos *assim*)</i>
  										<? } ?>
+ 										<? if (in_array($resultado->id, [6])) { ?>
+ 											<i>(pule linha com asterisco (*))</i>
+ 										<? } ?>
  									</label>
  									<input type="text" name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?> " placeholder="Escreva..." <?= in_array($resultado->id, [15, 16, 17]) ? "readonly" : "" ?>>
  								</div>

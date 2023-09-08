@@ -134,6 +134,10 @@ $routes->group('admin', function ($routes) {
     $routes->add('endereco/form', 'Endereco::form');
     $routes->add('endereco/form/(:any)', 'Endereco::form/$i');
 
+    $routes->add('politicatermo_topico', 'PoliticaTermoTopico::index');
+    $routes->add('politicatermo_topico/form', 'PoliticaTermoTopico::form');
+    $routes->add('politicatermo_topico/form/(:any)', 'PoliticaTermoTopico::form/$i');
+
     $routes->add('email', 'Email::index');
     $routes->add('email/form/(:any)', 'Email::form/$i');
 

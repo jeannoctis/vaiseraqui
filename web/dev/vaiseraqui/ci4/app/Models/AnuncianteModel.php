@@ -198,7 +198,7 @@ class AnuncianteModel extends Model {
                 $data['proximidadesDisponiveis'] = $this->proximidadeModel->orderBy("ordem ASC, id DESC")->findAll();
 
                 $data['nomePagina'] = "Proximidades";
-                $data['iconePagina'] = "icone_local.svg";
+                $data['iconePagina'] = "icon-tree.svg";
                 $data['tipoPagina'] = 'proximidades';
                 $proximidadeModel = model('App\Models\ProximidadeModel', false);
                 $proximidadeModel->orderBy("titulo ASC");
@@ -930,7 +930,7 @@ class AnuncianteModel extends Model {
                 $produtoCategoriaModel->orderBy("titulo ASC");
                 $data["categorias"] = $produtoCategoriaModel->findAll();
 
-                /*    $capacidadeModel = model('App\Models\CapacidadeModel', false);
+                /* $capacidadeModel = model('App\Models\CapacidadeModel', false);
                   $capacidadeModel->where("espaco","S");
                   $capacidadeModel->orderBy("id ASC");
                   $data["capacidades"] = $capacidadeModel->findAll(); */
@@ -943,17 +943,7 @@ class AnuncianteModel extends Model {
                         $post['longitude'] = $coord[1];
                     }
 
-                    if ($post["inicioAlta"]) {
-                        $post["inicioAlta"] = dataFormata($post["inicioAlta"]);
-                    } else {
-                        $post["inicioAlta"] = NULL;
-                    }
-
-                    if ($post["fimAlta"]) {
-                        $post["fimAlta"] = dataFormata($post["fimAlta"]);
-                    } else {
-                        $post["fimAlta"] = NULL;
-                    }
+                   
 
                     $img = $request->getFile("arquivo");
 

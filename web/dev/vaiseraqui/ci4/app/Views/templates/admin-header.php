@@ -327,8 +327,8 @@ if ($acesso['usuarioFK'] > 3) {
                         <!-- <li class='<?= ($segments[1] == 'endereco') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/endereco/">Endereços</a></li> -->
                         <li class='<?= ($segments[1] == 'rede_social') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/rede_social/">Rede social</a></li>
                         <li class='<?= ($segments[1] == 'whatsapp') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/whatsapp/">Whatsapp</a></li>
-                        <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 12) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(12) ?>">Termos de uso</a></li>
-                        <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 13) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(13) ?>">Política de privacidade</a></li>
+                        <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 13) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(13) ?>">Política & Termos - Texto</a></li>
+                        <li class='<?= ($segments[1] == 'politicatermo_topico') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/politicatermo_topico">Política & Termos - Tópicos</a></li>
                      </ul>
                      <!-- /.sub-menu js__content -->
                   </li>
