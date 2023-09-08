@@ -16,6 +16,8 @@ class Cardapio extends BaseController
 
    public function index()
    {
+      $get = \request()->getGet();
+
       if (isset($_POST['excluir'])) {
          foreach ($_POST['excluir'] as $exc) {
             $data['excluiu'] =  $this->model->delete(['id' => $exc]);
@@ -24,9 +26,10 @@ class Cardapio extends BaseController
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
 
-      $this->model->orderBy("ordem ASC");
+      $paginate = \is_numeric($get['page_cardapio']) ? $get['page_cardapio'] : 1 ;
 
-      $data['lista'] = $this->model->findAll();
+      $data['lista'] = $this->model->orderBy("ordem ASC")->paginate(25, "cardapio", $paginate);
+      $data['pager'] = $this->model->pager;
 
       $data['title'] = 'Cardápio';
       $data['tabela'] = "cardapio";

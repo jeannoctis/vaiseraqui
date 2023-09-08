@@ -28,7 +28,10 @@
       </div>
       <div class="box-container" data-aos="fade-left">
         <div class="card-float float-up-down left">
-          <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo4 ?>" alt="ícone">
+          <picture>
+            <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo4 ?>.webp" type="image/webp">
+            <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo4 ?>" alt="ícone" />
+          </picture>
           <div>
             <? $detalhe2 = explode("*", $txSobreNos->extra2)  ?>
             <span class="title"><?= $detalhe2[0] ?></span>
@@ -36,7 +39,10 @@
           </div>
         </div>
         <div class="card-float float-down-up right">
-          <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo3 ?>" alt="ícone">
+          <picture>
+            <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo3 ?>.webp" type="image/webp">
+            <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo3 ?>" alt="ícone" />
+          </picture>
           <div>
             <? $detalhe1 = explode("*", $txSobreNos->extra1)  ?>
             <span class="title"><?= $detalhe1[0] ?></span>
@@ -53,7 +59,10 @@
     <div class="container-medium" data-aos="fade-right">
       <div class="cover" style="background-image: url(<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo5 ?>);">
         <div class="card-float float-up-down">
-          <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo6 ?>" alt="sobre a empresa">
+          <picture>
+            <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo6 ?>.webp" type="image/webp">
+            <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo6 ?>" alt="sobre a empresa" />
+          </picture>
           <div>
             <? $detalhe3 = explode("*", $txSobreNos->extra3)  ?>
             <span class="title"><?= $detalhe3[0] ?></span>
@@ -84,18 +93,17 @@
     <h2>
       <?= $depoimento->texto ?>
     </h2>
-    <span><?= $depoimento->título ?></span>
+    <span><?= $depoimento->titulo ?></span>
   </article>
-
-  <?= view("templates/contato-form", (array)$txContato) ?>
-
+  <? $txContato->origem = "sobre-nos";
+  echo view("templates/contato-form", (array)$txContato) ?>
 </main>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> -->
 
-<script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
+<!-- <script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
 <script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
 <script src="<?= PATHSITE ?>assets/scripts/form-filter.js"></script>
 <script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
 <script src="<?= PATHSITE ?>assets/scripts/modal-filter.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/mask-telefone.js"></script>
+<script src="<?= PATHSITE ?>assets/scripts/mask-telefone.js"></script> -->

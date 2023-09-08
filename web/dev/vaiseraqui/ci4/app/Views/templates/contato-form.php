@@ -1,7 +1,10 @@
 <section class="s-contact" id="contato">
    <div class="container-medium">
       <div class="cover" data-aos="fade-right">
-         <img src="<?= PATHSITE ?>uploads/texto/<?= $arquivo ?>" alt="Barraca de acampamento">
+         <picture>
+            <source srcset="<?= PATHSITE ?>uploads/texto/<?= $arquivo ?>.webp" type="image/webp">
+            <img src="<?= PATHSITE ?>uploads/texto/<?= $arquivo ?>" alt="banner formulário de contato">
+         </picture>
       </div>
       <form method="post" class="form" data-aos="fade-left">
          <h2><?= $titulo ?></h2>
@@ -31,7 +34,7 @@
             <label for="message">Mensagem</label>
             <textarea name="message" id="message" placeholder="Escreva aqui sua mensagem"></textarea>
          </div>
-         <input type="hidden" name="origem" value="sobre nós">
+         <input type="hidden" name="origem" value="<?= $origem ?>">
          <button type="submit">Enviar</button>
       </form>
    </div>

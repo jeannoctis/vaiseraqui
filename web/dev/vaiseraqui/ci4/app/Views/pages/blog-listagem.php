@@ -21,7 +21,10 @@
          <a href="<?= PATHSITE ?>blog/<?= $artigoDestaque->identificador ?>/" class="link-wraper-post">
             <article class="blog-list-article-post" data-aos="fade-up">
                <div class="cover">
-                  <img src="<?= PATHSITE ?>uploads/artigo/<?= $artigoDestaque->arquivo ?>" alt="capa do artigo">
+                  <picture>
+                     <source srcset="<?= PATHSITE ?>uploads/artigo/<?= $artigoDestaque->arquivo ?>.webp" type="image/webp">
+                     <img src="<?= PATHSITE ?>uploads/artigo/<?= $artigoDestaque->arquivo ?>" alt="capa do artigo" />
+                  </picture>
                </div>
                <div class="info">
                   <span class="featured-article">
@@ -77,7 +80,7 @@
             <div class="modal-more-categories">
                <div class="wraper-scroll">
                   <nav class="content">
-                     <? foreach($categorias_artigos as $categorias_artigos) {?>
+                     <? foreach ($categorias_artigos as $categorias_artigos) { ?>
                         <a href="<?= PATHSITE ?>blog/categoria/<?= $categorias_artigos->identificador ?>">
                            <?= $categorias_artigos->titulo ?>
                         </a>
@@ -100,15 +103,23 @@
                } ?>
             </div>
          <? } ?>
-
       </div>
    </section>
 
    <!-- Incluir -->
    <div class="banner-ads" data-aos="fade-up">
       <div class="container-medium">
-         <img src="<?=PATHSITE?>assets/images/banner-ads.png" alt="">
-         <img src="<?=PATHSITE?>assets/images/banner-ads-mobile.png" alt="" class="only-mobile">
+         <!-- <picture>
+            <source srcset="<?= PATHSITE ?>assets/images/banner-ads.png.webp" type="image/webp">
+            <img src="<?= PATHSITE ?>assets/images/banner-ads.png" alt="..." />
+         </picture>
+         <picture class="only-mobile">
+            <source srcset="<?= PATHSITE ?>assets/images/banner-ads-mobile.png.webp" type="image/webp">
+            <img src="<?= PATHSITE ?>assets/images/banner-ads-mobile.png" alt="..." />
+         </picture> -->
+
+         <img src="<?= PATHSITE ?>assets/images/banner-ads.png" alt="">
+         <img src="<?= PATHSITE ?>assets/images/banner-ads-mobile.png" alt="" class="only-mobile">
       </div>
    </div>
 
@@ -129,20 +140,15 @@
    </section>
 </main>
 
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-<script src="<?=PATHSITE?>assets/scripts/header.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/menu-mobile.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/form-filter.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/select.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/modal-filter.js"></script>
+<script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
+<script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
+<script src="<?= PATHSITE ?>assets/scripts/form-filter.js"></script>
+<script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
+<script src="<?= PATHSITE ?>assets/scripts/modal-filter.js"></script> -->
 
 <script>
-   AOS.init({
-      once: true,
-      duration: 1000
-   });
-
    const btnCategoryModal = document.querySelector('.more-about-modal > a')
    const categoryModal = document.querySelector('.more-about-modal > .modal-more-categories')
    const modalLinks = categoryModal.querySelectorAll('a')
@@ -159,8 +165,8 @@
    })
 
    // Form Select
-   const boxes = document.querySelectorAll('.j-box-select')
-   boxes.forEach((box, key) => {
-      new Selector(box)
-   })
+   // const boxes = document.querySelectorAll('.j-box-select')
+   // boxes.forEach((box, key) => {
+   //    new Selector(box)
+   // })
 </script>

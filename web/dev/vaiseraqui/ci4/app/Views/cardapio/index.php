@@ -47,6 +47,10 @@
 							</form>
 						</div>
 					<? } ?>
+
+					<nav class="col-xs-12 navigation-pages">
+						<?= $pager->links('cardapio', 'panel_full') ?>
+					</nav>
 				</div>
 				<!-- /.box-content -->
 			</div>

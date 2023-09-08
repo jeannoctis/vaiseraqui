@@ -123,8 +123,8 @@
 						</div>
 					<? } ?>
 
-					<nav class="col-xs-12 navigation-pages ">
-						<?= $pager->links('produtos') ?>
+					<nav class="col-xs-12 navigation-pages">
+						<?= $pager->links('produtos', 'panel_full') ?>
 					</nav>
 
 				</div>

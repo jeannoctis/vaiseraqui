@@ -16,12 +16,17 @@ class Proximidade extends BaseController
 
    public function index()
    {
+      $get = \request()->getGet();
+
       if (isset($_POST['excluir'])) {
          foreach ($_POST['excluir'] as $exc) {
             $data['excluiu'] =  $this->model->delete(['id' => $exc]);
          }
       }
-      $data['lista'] = $this->model->findAll();
+      
+      $paginate = \is_numeric($get['page_proximidades']) ? $get['page_proximidades'] : 1 ;
+      $data['lista'] = $this->model->paginate(25, "proximidades", $paginate);
+      $data['pager'] = $this->model->pager;
 
       $data['title'] = 'Proximidades';
       $data['tabela'] = "proximidade";

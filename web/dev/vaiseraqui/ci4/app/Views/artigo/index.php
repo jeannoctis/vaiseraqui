@@ -91,7 +91,12 @@
 								<input type="hidden" name="nexc" value="1">
 							</form>
 						</div>
+
 					<? } ?>
+
+					<nav class="col-xs-12 navigation-pages">
+						<?= $pager->links('artigos', 'panel_full') ?>
+					</nav>
 
 				</div>
 			</div>
@@ -151,5 +156,5 @@
 						$(`#btn${id}`).toggleClass("btn-warning")
 					}
 				});
-			}			
+			}
 		</script>

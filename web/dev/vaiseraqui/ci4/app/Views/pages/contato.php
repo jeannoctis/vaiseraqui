@@ -1,3 +1,3 @@
-<main class="page-contact">
-   <?= view("templates/contato") ?>
+<main>
+   <?= view("templates/contato-form", (array)$txContato) ?>
 </main>

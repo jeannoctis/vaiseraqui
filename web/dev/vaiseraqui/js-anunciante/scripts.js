@@ -823,7 +823,6 @@ function contratarAnuncio(e, o) {
 
 function favoritar(id){
   $("#modal-logar").modal('show');  
-  
     $.post(PATHSITE + "cliente/favoritar/", { produtoFK: id }, function (e) {   
         });  
 }

@@ -64,10 +64,10 @@
   window.addEventListener('scroll', highlightOnScroll);
 
   // Form Select
-  const boxes = document.querySelectorAll('.j-box-select')
-  boxes.forEach((box, key) => {
-    new Selector(box)
-  })
+  // const boxes = document.querySelectorAll('.j-box-select')
+  // boxes.forEach((box, key) => {
+  //   new Selector(box)
+  // })
 </script>
 </body>
 
