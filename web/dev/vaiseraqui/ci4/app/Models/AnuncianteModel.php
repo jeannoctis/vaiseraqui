@@ -943,13 +943,7 @@ class AnuncianteModel extends Model {
                         $post['longitude'] = $coord[1];
                     }
 
-                    if ($post["inicioAlta"]) {
-                        $post["inicioAlta"] = dataFormata($post["inicioAlta"]);
-                    }
-
-                    if ($post["fimAlta"]) {
-                        $post["fimAlta"] = dataFormata($post["fimAlta"]);
-                    }
+                   
 
                     $img = $request->getFile("arquivo");
 

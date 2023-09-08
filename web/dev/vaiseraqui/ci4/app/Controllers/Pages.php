@@ -160,7 +160,7 @@ class Pages extends Controller
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta1'][0] = $produtoModel->find($emAlta->produtoFK1);
-            $data['emAlta1'][0]->fotos = $produtoModel->fotos($emAlta->produtoFK1, 4);
+            $data['emAlta1'][0]->fotos = $produtoModel->fotos($emAlta->produtoFK1, 4,true);
         }
         if ($emAlta->produtoFK2) {
             $produtoModel->resetQuery();
@@ -169,7 +169,7 @@ class Pages extends Controller
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta1'][1] = $produtoModel->find($emAlta->produtoFK2);
-            $data['emAlta1'][1]->fotos = $produtoModel->fotos($emAlta->produtoFK2, 4);
+            $data['emAlta1'][1]->fotos = $produtoModel->fotos($emAlta->produtoFK2, 4, true);
         }
         if ($emAlta->produtoFK3) {
             $produtoModel->resetQuery();
@@ -178,7 +178,7 @@ class Pages extends Controller
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta1'][2] = $produtoModel->find($emAlta->produtoFK3);
-            $data['emAlta1'][2]->fotos = $produtoModel->fotos($emAlta->produtoFK3, 4);
+            $data['emAlta1'][2]->fotos = $produtoModel->fotos($emAlta->produtoFK3, 4, true);
         }
         if ($emAlta->produtoFK4) {
             $produtoModel->resetQuery();
@@ -187,7 +187,7 @@ class Pages extends Controller
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta1'][3] = $produtoModel->find($emAlta->produtoFK4);
-            $data['emAlta1'][3]->fotos = $produtoModel->fotos($emAlta->produtoFK4, 4);
+            $data['emAlta1'][3]->fotos = $produtoModel->fotos($emAlta->produtoFK4, 4, true);
         }
         if ($emAlta->produtoFK5) {
             $produtoModel->resetQuery();
@@ -196,7 +196,7 @@ class Pages extends Controller
             $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta1'][4] = $produtoModel->find($emAlta->produtoFK5);
-            $data['emAlta1'][4]->fotos = $produtoModel->fotos($emAlta->produtoFK5, 4);
+            $data['emAlta1'][4]->fotos = $produtoModel->fotos($emAlta->produtoFK5, 4, true);
         }
 
         if ($emAltaAluguel->produtoFK1) {
@@ -206,7 +206,7 @@ class Pages extends Controller
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta2'][0] = $produtoModel->find($emAltaAluguel->produtoFK1);
-            $data['emAlta2'][0]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK1, 4);
+            $data['emAlta2'][0]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK1, 4, true);
         }
         if ($emAltaAluguel->produtoFK2) {
             $produtoModel->resetQuery();
@@ -215,7 +215,7 @@ class Pages extends Controller
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta2'][1] = $produtoModel->find($emAltaAluguel->produtoFK2);
-            $data['emAlta2'][1]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK2, 4);
+            $data['emAlta2'][1]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK2, 4,true);
         }
         if ($emAltaAluguel->produtoFK3) {
             $produtoModel->resetQuery();
@@ -224,7 +224,7 @@ class Pages extends Controller
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta2'][2] = $produtoModel->find($emAltaAluguel->produtoFK3);
-            $data['emAlta2'][2]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK3, 4);
+            $data['emAlta2'][2]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK3, 4,true);
         }
         if ($emAltaAluguel->produtoFK4) {
             $produtoModel->resetQuery();
@@ -233,7 +233,7 @@ class Pages extends Controller
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta2'][3] = $produtoModel->find($emAlta->produtoFK4);
-            $data['emAlta2'][3]->fotos = $produtoModel->fotos($emAlta->produtoFK4, 4);
+            $data['emAlta2'][3]->fotos = $produtoModel->fotos($emAlta->produtoFK4, 4,true);
         }
         if ($emAltaAluguel->produtoFK5) {
             $produtoModel->resetQuery();
@@ -242,7 +242,7 @@ class Pages extends Controller
             $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
             $data['emAlta2'][4] = $produtoModel->find($emAltaAluguel->produtoFK5);
-            $data['emAlta2'][4]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK5, 4);
+            $data['emAlta2'][4]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK5, 4,true);
         }
         /*
           $itemModel = model('App\Models\ItemModel', false);
@@ -312,19 +312,17 @@ class Pages extends Controller
         echo view('templates/footer', $data);
     }
 
-    public function redirects($segments)
-    {
+    public function redirects($segments) {
+        
     }
 
-    public function anunciante($page = 'home')
-    {
+    public function anunciante($page = 'home') {
         $segments = $this->request->uri->getSegments();
         $anuncianteModel = model('App\Models\AnuncianteModel', false);
         $anuncianteModel->verPagina($segments);
     }
 
-    public function view($page = 'home')
-    {
+    public function view($page = 'home') {
 
         $data = $this->buscaGeral();
         $segments = $this->request->uri->getSegments();
@@ -381,6 +379,7 @@ class Pages extends Controller
 
                 break;
             case 'eventos':
+                helper('date');
                 $data['pagina'] = 3;
                 $data['bodyClass'] = 'events';
 
@@ -393,10 +392,18 @@ class Pages extends Controller
                 $data['destaques'] = $produtoModel->findAll();
                 if ($data['destaques']) {
                     foreach ($data['destaques'] as $ind => $destaque) {
-                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4,true);
                         $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
                     }
                 }
+
+                $produtoDataModel = \model("App\Models\ProdutoDataModel", false);
+                $produtoDataModel->select('data');
+                $produtoDataModel->where('data >= NOW()');
+                $produtoDataModel->groupBy('data');
+                $produtoDataModel->orderBy('data ASC');
+                $produtoDataModel->limit(15);
+                $data['diasMes'] = $produtoDataModel->findAll();
 
                 break;
             case 'evento':
@@ -408,7 +415,7 @@ class Pages extends Controller
                 $produtoModel->join('estado e', 'e.id = c.estadoFK');
                 $produtoModel->where('identificador', $segments[1]);
                 $data['metatag'] = $produtoModel->find()[0];
-                $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999);
+                $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999,false);
                 $data['datas'] = $produtoModel->datas($data['metatag']->id);
                 $data['pontosVenda'] = $produtoModel->pontosVenda($data['metatag']->id);
                 $data['setores'] = $produtoModel->setores($data['metatag']->id);
@@ -423,7 +430,7 @@ class Pages extends Controller
                 $data['destaques'] = $produtoModel->findAll();
                 if ($data['destaques']) {
                     foreach ($data['destaques'] as $ind => $destaque) {
-                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4,true);
                         $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
                     }
                 }
@@ -432,19 +439,8 @@ class Pages extends Controller
             case "prestadores-de-servico":
                 $data['form4Visible'] = 'visible';
                 $produtoModel = \model("App\Models\ProdutoModel", false);
-                $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                $produtoModel->join('estado e', 'e.id = c.estadoFK');
-                $produtoModel->where('pc.tipoFK', 6);
-                $produtoModel->where('ativo', '1');
-                $produtoModel->orderBy('rand()');
-                $data['destaques'] = $produtoModel->findAll(8);
-                if ($data['destaques']) {
-                    foreach ($data['destaques'] as $ind => $destaque) {
-                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
-                    }
-                }
+              
+                $data['destaques'] = $produtoModel->destaquePrestadores(8);
 
                 if (!is_numeric($get['page_produto'])) {
                     $paginate = 1;
@@ -459,13 +455,16 @@ class Pages extends Controller
                 $produtoModel->join('estado e', 'e.id = c.estadoFK');
                 $produtoModel->where('pc.tipoFK', 6);
                 $produtoModel->where('ativo', '1');
-                $produtoModel->orderBy('rand()');
                 $data['servicos'] = $produtoModel->paginate(8, 'produto', $paginate);
                 $data['pager'] = $produtoModel->pager;
 
                 if ($data['servicos']) {
                     foreach ($data['servicos'] as $ind => $destaque) {
-                        $data['servicos'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                        $data['servicos'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4,true);
+                           if( $data['produtos'][$ind]->fotos) {
+                        $data['produtos'][$ind]->fotos = $produtoModel->fotoPrincipal( $data['produtos'][$ind]->fotos);
+                        }
+                              
                     }
                 }
 
@@ -481,7 +480,7 @@ class Pages extends Controller
                 $produtoModel->join('estado e', 'e.id = c.estadoFK');
                 $produtoModel->where('identificador', $segments[1]);
                 $data['metatag'] = $produtoModel->find()[0];
-                $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999);
+                $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999,false);
                 $data['cardapio'] = $produtoModel->cardapio($data['metatag']->id);
                 $data['responsavel'] = $produtoModel->responsavel($data['metatag']->anuncianteFK);
 
@@ -498,7 +497,7 @@ class Pages extends Controller
                 $data['destaques'] = $produtoModel->findAll();
                 if ($data['destaques']) {
                     foreach ($data['destaques'] as $ind => $destaque) {
-                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4);
+                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4,true);
                         $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
                     }
                 }
@@ -608,16 +607,16 @@ class Pages extends Controller
 
                 $this->artigoModel = \model("App\Models\ArtigoModel", false);
                 $data['artigoDestaque'] = $this->artigoModel
-                    ->where("destaque", "S")
-                    ->first();
+                        ->where("destaque", "S")
+                        ->first();
                 $data['artigosMaisLidos'] = $this->artigoModel
-                    ->resetQuery()
-                    ->orderBy("ordem ASC, id DESC")
-                    ->findAll(3);
+                        ->resetQuery()
+                        ->orderBy("ordem ASC, id DESC")
+                        ->findAll(3);
                 $data['artigosRecentes'] = $this->artigoModel
-                    ->resetQuery()
-                    ->orderBy("dtCriacao DESC")
-                    ->paginate(1, "artigos", $paginate);
+                        ->resetQuery()
+                        ->orderBy("dtCriacao DESC")
+                        ->paginate(1, "artigos", $paginate);
                 $data['pager'] = $this->artigoModel->pager;
 
                 $this->categoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
@@ -642,12 +641,13 @@ class Pages extends Controller
                     $page = 'blog-interna';
 
                     $this->artigoModel->resetQuery()
-                        ->where("categoriaFK", $data['artigoAtual']->categoriaFK)
-                        ->where("id != {$data['artigoAtual']->id}");
+                            ->where("categoriaFK", $data['artigoAtual']->categoriaFK)
+                            ->where("id != {$data['artigoAtual']->id}");
                     $data['artigosRelacionados'] = $this->artigoModel->findAll();
                 } else if ($segments[1] == "categoria") {
                     // Blog Categoria                    
                     $data['script_list'][] = ['modal-select-order'];
+
                     $page = "blog-categoria";
                     $data['bodyClass'] = 'blog-list-categories';
 
@@ -686,6 +686,93 @@ class Pages extends Controller
                     // exit;
                 }
 
+                break;
+            case 'hospedagens':
+                $data['pagina'] = 23;
+                $data['bodyClass'] = 'base-list-map';
+
+                $produtoModel = model('App\Models\ProdutoModel', false);
+                $retorno = $produtoModel->hospedagens(11);
+                $data['produtos'] = $retorno['servicos'];
+                $data['pager'] = $retorno['pager'];
+                if ($data['produtos']) {
+                    foreach ($data['produtos'] as $ind => $produto) {
+                        $data['produtos'][$ind]->fotos = $produtoModel->fotos($produto->id, 4,true);
+                        
+                        if( $data['produtos'][$ind]->fotos) {
+                        $data['produtos'][$ind]->fotos = $produtoModel->fotoPrincipal( $data['produtos'][$ind]->fotos);
+                        }
+                                              
+                        if ($produto->latitude && $produto->latitude) {
+                            $produto->coordenadas = $produto->latitude . "," . $produto->longitude;
+                        }
+
+                        if ($produto->coordenadas) {
+                            $data["coordenadas"][$ind]["id"] = $produto->id;
+
+                            $data["coordenadas"][$ind]["titulo"] = $produto->titulo;
+                            $data["coordenadas"][$ind]["foto"] = $data['produtos'][$ind]->fotos[0];
+                            $data["coordenadas"][$ind]["preco"] = $produto->preco;
+
+                            $data["coordenadas"][$ind]["pagina"] = "hospedagem";
+
+                            $data["coordenadas"][$ind]["coord"] = $produto->coordenadas;
+                            $data["coordenadas"][$ind]["identificador"] = $produto->identificador;
+                        }
+                    }
+                }
+                
+                $produtoModel = \model("App\Models\ProdutoModel", false);
+                $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+                $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+                $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                $produtoModel->join('estado e', 'e.id = c.estadoFK');
+                $produtoModel->where('pc.tipoFK', 3);
+                $produtoModel->where('ativo', '1');
+                $produtoModel->orderBy('rand()');
+                $data['destaques'] = $produtoModel->findAll(8);
+                if ($data['destaques']) {
+                    foreach ($data['destaques'] as $ind => $destaque) {
+                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4,true);
+                        
+                         if( $data['destaques'][$ind]->fotos) {
+                        $data['destaques'][$ind]->fotos = $produtoModel->fotoPrincipal( $data['produtos'][$ind]->fotos);
+                        }
+                        
+                    }
+                }
+
+                break;
+            case 'hospedagem':
+                $data['pagina'] = 23;
+                $data['bodyClass'] = 'internal-rent';
+
+                helper('date');
+                $produtoModel = \model("App\Models\ProdutoModel", false);
+                $produtoModel->select('produto.*, c.titulo as cidade, e.sigla as estado');
+                $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                $produtoModel->join('estado e', 'e.id = c.estadoFK');
+                $produtoModel->where('identificador', $segments[1]);
+                $data['metatag'] = $produtoModel->find()[0];
+                $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999,false);               
+                $data['responsavel'] = $produtoModel->responsavel($data['metatag']->anuncianteFK);
+                $data['comodidades'] = $produtoModel->comodidades($data['metatag']->id);
+                
+                $produtoModel = \model("App\Models\ProdutoModel", false);
+                $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+                $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+                $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+                $produtoModel->join('estado e', 'e.id = c.estadoFK');
+                $produtoModel->where('pc.tipoFK', 6);
+                $produtoModel->where('ativo', '1');
+                $produtoModel->orderBy('rand()');
+                $data['destaques'] = $produtoModel->findAll(8);
+                if ($data['destaques']) {
+                    foreach ($data['destaques'] as $ind => $destaque) {
+                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4,true);
+                    }
+                }
+                
                 break;
             case "contato":
                 $data['script_list'] = ['mask-telefone', 'modal-filter'];
@@ -751,6 +838,133 @@ class Pages extends Controller
 
                 break;
 
+            case 'login':
+                $data['pagina'] = 7;
+                $header = "header2";
+                $footer = "footer2";
+                $request = \Config\Services::request();
+                $post = $request->getPost();
+
+                if (isset($post["email"])) {
+                    if (!$post["email"]) {
+                        $data["erroLogin"] = "Preencha o e-mail";
+                    } else if (!$post["senha"]) {
+                        $data["erroLogin"] = "Preencha a senha";
+                    } else {
+                        $clienteModel = model('App\Models\ClienteModel', false);
+
+                        $clienteModel->where("email", $post["email"]);
+                        $clienteModel->where("senha", sha1($post["senha"]));
+                        $result = $clienteModel->find()[0];
+
+                        if (!$result) {
+                            $data["erroLogin"] = "E-mail/usu&aacute;rio e/ou senha inv&aacute;lidos";
+                        } else {
+                            $this->session->set('cliente', $result);
+                            session_write_close();
+                            ?>
+                            <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>meu-perfil/'" />         
+                            <?
+                        }
+                    }
+                }
+
+
+                unset($_POST);
+                break;
+
+            case 'meu-perfil';
+                $data['pagina'] = 21;
+                helper('encrypt');
+                if ($this->session->get('cliente')) {
+                    $clienteModel = model('App\Models\ClienteModel', false);
+                    $data["clienteLogado"] = $clienteModel->find($this->session->get('cliente')->id);
+                } else {
+                    ?>
+                    <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>login/'" />         
+                    <?
+                    exit();
+                }
+                $data["tiraContato"] = TRUE;
+
+                $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
+                $produtoCategoriaModel->orderBy("ordem ASC");
+                $data['categorias'] = $produtoCategoriaModel->findAll();
+
+                if ($data["categorias"]) {
+                    foreach ($data["categorias"] as $cat) {
+                        $data["arrayCategorias"][$cat->id] = $cat->titulo;
+                    }
+                }
+
+                $estadoModel = model('App\Models\EstadoModel', false);
+                $estadoModel->orderBy("titulo ASC");
+                $data['estados'] = $estadoModel->findAll();
+                $request = \Config\Services::request();
+                $post = $request->getPost();
+                $clienteInteresseModel = model('App\Models\ClienteInteresseModel', false);
+                if ($post) {
+                    $post['id'] = $data['clienteLogado']->id;
+                    $data['salvou'] = $clienteModel->save($post);
+
+                    $interesse = $post['interesse'];
+                    if ($interesse) {
+
+                        foreach ($interesse as $inte) {
+                            $save['clienteFK'] = $data['clienteLogado']->id;
+                            $save['categoriaFK'] = $inte;
+                            $clienteInteresseModel->save($save);
+                        }
+                    }
+                }
+                $data["clienteLogado"] = $clienteModel->find($this->session->get('cliente')->id);
+
+                $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
+
+                $produtoModel = model('App\Models\ProdutoModel', false);
+
+                if ($data['todosFavoritos']) {
+                    $produtoModel->select("produto.*, produto.menorValor as preco");
+                    $produtoModel->whereIn("id", $data['todosFavoritos']);
+                    $produtoModel->where("tipoFK", 1);
+                    $produtoModel->where("produto.inicioValidade <= NOW() AND produto.validade >= NOW()");
+                    $produtoModel->where('ativo', 1);
+                    $data['favoritos'] = $produtoModel->findAll();
+
+                    $produtoModel->resetQuery();
+                    $produtoModel->select("produto.*,  (SELECT MIN(preco) FROM produto_quantidade WHERE produtoFK = produto.id AND preco != 0 ) as preco");
+                    $produtoModel->whereIn("id", $data['todosFavoritos']);
+                    $produtoModel->where("tipoFK", 2);
+                    $produtoModel->where("produto.inicioValidade <= NOW() AND produto.validade >= NOW()");
+                    $produtoModel->where('ativo', 1);
+                    $data['favoritos2'] = $produtoModel->findAll();
+                }
+                $data["arrayCatProd"] = array();
+                if ($data["favoritos"]) {
+                    foreach ($data["favoritos"] as $ind => $dProd) {
+                        $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
+                        $produtoFotoModel->resetQuery();
+                        $produtoFotoModel->where("produtoFK", $dProd->id);
+                        $produtoFotoModel->orderBy("ordem ASC, id DESC");
+                        $data["favoritos"][$ind]->fotos = $produtoFotoModel->findAll(3);
+                    }
+                }
+                if ($data["favoritos2"]) {
+                    foreach ($data["favoritos2"] as $ind => $dProd) {
+                        $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
+                        $produtoFotoModel->resetQuery();
+                        $produtoFotoModel->where("produtoFK", $dProd->id);
+                        $produtoFotoModel->orderBy("ordem ASC, id DESC");
+                        $data["favoritos2"][$ind]->fotos = $produtoFotoModel->findAll(3);
+                    }
+                }
+
+                $clienteInteresseModel->select('pc.titulo, cliente_interesse.id');
+                $clienteInteresseModel->join('produto_categoria pc', 'pc.id = cliente_interesse.categoriaFK');
+                $clienteInteresseModel->where("clienteFK", $this->session->get('cliente')->id);
+                $data['clientesInteresses'] = $clienteInteresseModel->findAll();
+
+                break;
             case 'novasenha':
                 $data['pagina'] = 19;
                 $request = \Config\Services::request();
@@ -794,25 +1008,95 @@ class Pages extends Controller
                 unset($_SESSION);
                 ?>
                 <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>">
-<? exit();
+                <?
+                exit();
                 break;
 
-            case "area-do-cliente":
-                $this->clienteModel = \model("App\Models\ClienteModel", false);
+            case "cadastro":
+                $header = "header2";
+                $footer = "footer2";
+                $data['pagina'] = 8;
 
-                if ($segments[1] !== "login" && $segments[1] !== "cadastro-1" && $segments[1] !== "cadastro-2") {
-                    $this->clienteModel->isLogged();
+                $request = \Config\Services::request();
+                $post = $request->getPost();
+
+                if ($post) {
+                    if (isset($post["credential"]) && isset($post["g_csrf_token"])) {
+                        //AUTOLOAD
+                        require APPPATH . 'Libraries/googleapi/vendor/autoload.php';
+
+                        $client = new \Google_Client(['client_id' => $data["configs"]->chavegoogle]);
+
+                        $payload = $client->verifyIdToken($post["credential"]);
+                        if ($payload) {
+                            $clienteModel = model('App\Models\ClienteModel', false);
+                            $retornoGoogle = $clienteModel->loginGoogle($payload);
+                            // If request specified a G Suite domain:
+                            //$domain = $payload['hd'];
+                        } else {
+                            // Invalid ID token
+                        }
+
+                        $cookie = $_COOKIE['g_csrf_token'] ?? '';
+
+                        if ($post['g_csrf_token'] != $cookie) {
+                            
+                        }
+                    }
                 }
 
-                $aux = $data['configs'];
 
-                $data = $this->clienteModel->areaRestrita();
+                if (isset($post["email"])) {
 
-                $data['configs'] = $aux;
+                    $interesse = $post['interesse'];
 
-                $header = $data['header'];
-                $page = $data['page'];
-                $footer = $data['footer'];
+                    if (!$post["email"]) {
+                        $data["erroLogin"] = "Digite o seu e-mail";
+                    } else if (!$post["senha"]) {
+                        $data["erroLogin"] = "Digite a sua senha";
+                    } else if (strlen($post["senha"]) < 8) {
+                        $data["erroLogin"] = "Senha deve ter mais de 8 caracteres";
+                    } else if (!$post["titulo"]) {
+                        $data["erroLogin"] = "Digite o seu nome";
+                    } else {
+                        $model = model('App\Models\ClienteModel', false);
+                        $model->where("email", $post["email"]);
+                        $existeCadastro = $model->find();
+                        if ($existeCadastro) {
+                            $data["erroLogin"] = "E-mail já cadastrado";
+                        } else {
+                            $this->session = \Config\Services::session($config);
+                            $post["senha"] = sha1($post["senha"]);
+                            $idCliente = $model->insert($post);
+                            if ($idCliente) {
+
+                                if ($interesse) {
+                                    $clienteInteresseModel = model('App\Models\ClienteInteresseModel', false);
+                                    foreach ($interesse as $inte) {
+                                        $save['clienteFK'] = $idCliente;
+                                        $save['categoriaFK'] = $inte;
+                                        $clienteInteresseModel->save($save);
+                                    }
+                                }
+
+                                $model->resetQuery();
+                                $result = $model->find($idCliente);
+                                $this->session->set('cliente', $result);
+                                $data["sucessoCadastro"] = TRUE;
+                                unset($_POST);
+                            }
+                        }
+                    }
+
+                    if ($data["erroLogin"]) {
+                        $data["post"] = $post;
+                    }
+                }
+
+                $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
+                $produtoCategoriaModel->orderBy("ordem ASC");
+                $data['categorias'] = $produtoCategoriaModel->findAll();
+
                 break;
         }
 
@@ -864,8 +1148,7 @@ class Pages extends Controller
         echo view("templates/" . $footer, $data);
     }
 
-    public function recebeEmail($private_recaptcha, $post)
-    {
+    public function recebeEmail($private_recaptcha, $post) {
         $token = $_POST['g-recaptcha-response'];
         $secret = $private_recaptcha;
         $ip = $_SERVER["REMOTE_ADDR"];

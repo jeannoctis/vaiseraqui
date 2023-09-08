@@ -1201,7 +1201,7 @@ select {
   background-color: #932327;
   position: relative;
 }
-.s-with-maps .column .embed-map iframe {
+.s-with-maps .column .embed-map iframe, .s-with-maps .column .embed-map #map {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -1367,6 +1367,9 @@ select {
   position: relative;
   /* width: 351px; */
   height: 173px;
+}
+.card-item .cover .foto-menor{
+    height: 170px;
 }
 .card-item .cover img {
   display: block;

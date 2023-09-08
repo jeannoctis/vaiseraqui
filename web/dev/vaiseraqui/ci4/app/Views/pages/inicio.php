@@ -10,27 +10,27 @@ $infoPagina['inicioValidade'] = $anuncio->validade;
 
 
 if ($difValidade >= 0 && $anuncio->ativo == '1') {
-  $infoPagina['statusAnuncio'] = "ATIVO";
+$infoPagina['statusAnuncio'] = "ATIVO";
 } else {
   $infoPagina['statusAnuncio'] = "INATIVO";
 }
 
 ?>
-<section class="wrap">
+    <section class="wrap">
   <? echo View("templates/barra-topo", $infoPagina); ?>
 
-  <div class="conteudo">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-12">
-          <h2>
+        <div class="conteudo">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <h2>
             Olá, <?= $anunciante->titulo ?>!
-          </h2>
-          <h6>
-            Seja bem-vindo a plataforma de anunciante do Vai ser Aqui!
-          </h6>
-        </div>
-      </div>
+                        </h2>
+                        <h6>
+                            Seja bem-vindo a plataforma de anunciante do Vai ser Aqui!
+                        </h6>
+                    </div>
+                </div>
 
               <? if($_SESSION['anuncio']) {?>
               

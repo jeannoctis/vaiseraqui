@@ -35,21 +35,72 @@ class ProdutoModel extends Model
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
         $produtoFotoModel->where('produtoFK', $id);
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
-        // $produtoFotoModel->limit($limit);
-        $fotos = $produtoFotoModel->findAll($limit);
+        $produtoFotoModel->limit($limit);
+        $fotos = $produtoFotoModel->findAll();
+
+        $this->select('fotoFK');
+        $principal = $this->find($id);
+
+        if ($fotos) {
+             $achou = false;
+            foreach ($fotos as $ind => $foto) {
+                if ($foto->id == $principal->fotoFK) {
+                    $fotos[$ind]->principal = 1;
+                     $achou = true;
+                }
+            }
+            if(!$achou && $destaque){
+                $produtoFotoModel->resetQuery();
+                $produtoFotoModel->where('produtoFK', $id);
+                $produtoFotoModel->where("id IN ( SELECT fotoFK FROM produto WHERE id = {$id} )");
+                $temDestaque = $produtoFotoModel->find()[0];
+                if($temDestaque){
+                     $fotos[-1] = $temDestaque;
+                }
+            }
+        }
+
         return $fotos;
     }
 
-    public function fotoDestaque($fotoFK)
-    {
-        $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
-        $produtoFotoModel->select("arquivo");
-        $foto = $produtoFotoModel->find($fotoFK);
-        return $foto->arquivo;
+    public function fotoPrincipal($array) {
+       
+        if ($array) {
+            foreach ($array as $ind => $arr) {
+                if ($arr->principal) {
+                    $array['-1'] = $arr;
+                    unset($array[$ind]);                 
+                }
+            }          
+        }
+
+        ksort($array);
+
+        return $array;
     }
 
-    public function datas($id)
-    {
+    public function destaquePrestadores($limit) {
+        $this->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+        $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+        $this->join('cidade c', 'c.id = produto.cidadeFK');
+        $this->join('estado e', 'e.id = c.estadoFK');
+        $this->where('pc.tipoFK', 6);
+        $this->where('ativo', '1');
+        $this->where('destaque', '1');
+        $this->orderBy('rand()');
+        $destaques = $this->findAll(8);
+        if ($destaques) {
+            foreach ($destaques as $ind => $destaque) {
+                $destaques[$ind]->fotos = $this->fotos($destaque->id, 4, true);
+                if(!$destaques[$ind]->fotos[0]->destaque) {
+                $destaques[$ind]->fotos =  $this->fotoPrincipal($destaques[$ind]->fotos);
+                }
+            }
+        }
+        return $destaques;
+    }
+
+    public function datas($id) {
         $produtoDataModel = model('App\Models\ProdutoDataModel', false);
         $produtoDataModel->where('produtoFK', $id);
         $produtoDataModel->orderBy('data ASC');
@@ -151,7 +202,7 @@ class ProdutoModel extends Model
 
         return $comodidades;
     }
-
+    
     public function proximidades($id)
     {
         $produtoProximidadeModel = \model("App\Models\ProdutoProximidadeModel", false)
@@ -159,7 +210,7 @@ class ProdutoModel extends Model
             ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
             ->where("produtoFK", $id);
         $proximidades = $produtoProximidadeModel->findAll();
-
+    
         return $proximidades;
     }
 
@@ -186,5 +237,29 @@ class ProdutoModel extends Model
             ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
             ->join("cidade c", "c.id = produto.cidadeFK")
             ->join("estado e", "e.id = c.estadoFK");        
+}
+
+  public function hospedagens($limit) {
+
+        $data['get'] = $get = \request()->getGet();
+
+        if (!is_numeric($get['page_produto'])) {
+            $paginate = 1;
+        } else {
+            $paginate = $get['page_produto'];
+        }
+
+        $this->resetQuery();
+        $this->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+        $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+        $this->join('cidade c', 'c.id = produto.cidadeFK');
+        $this->join('estado e', 'e.id = c.estadoFK');
+        $this->where('pc.tipoFK', 3);
+        $this->where('ativo', '1');
+        $data['servicos'] = $this->paginate($limit, 'produto', $paginate);
+        $data['pager'] = $this->pager;
+
+        return $data;
     }
+
 }
