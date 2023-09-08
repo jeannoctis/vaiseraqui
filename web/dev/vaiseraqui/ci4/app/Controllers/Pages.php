@@ -648,19 +648,19 @@ class Pages extends Controller
                 } else if ($segments[1] == "categoria") {
                     // Blog Categoria                    
                     $data['script_list'][] = ['modal-select-order'];
-
                     $page = "blog-categoria";
                     $data['bodyClass'] = 'blog-list-categories';
 
                     $data['categoriaAtual'] = $this->categoriaArtigoModel
                         ->resetQuery()
                         ->where("identificador", $segments[2])
-                        ->first();
-                    $data['artigosCategoria'] = $this->artigoModel
-                        ->resetQuery()
-                        ->where("categoriaFK", $data['categoriaAtual']->id)
-                        ->paginate(1, "artigos", $paginate);
+                    ->first();
+
+                    $this->artigoModel->resetQuery()->where("categoriaFK", $data['categoriaAtual']->id);
+                    $this->artigoModel->ordenar($get);
+                    $data['artigosCategoria'] =  $this->artigoModel->paginate(1, "artigos", $paginate);
                     $data['pager'] = $this->artigoModel->pager;
+
                 } else if ($segments[1]) {
 
                     throw new \CodeIgniter\Exceptions\PageNotFoundException($page);

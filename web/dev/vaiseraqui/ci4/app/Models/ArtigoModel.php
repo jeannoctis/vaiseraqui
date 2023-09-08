@@ -29,4 +29,17 @@ class ArtigoModel extends Model
       ],
    ];
    protected $skipValidation = false;
+
+   public function ordenar($get)
+   {
+      if (!$get['ordem'] || $get['ordem'] == "recentes") {         
+         return $this->orderBy("id DESC");
+
+      } else if ($get['ordem'] == "antigos") {
+         return $this->orderBy("id ASC");
+
+      } else if ($get['ordem'] == "maisvistos") {
+         return $this->orderBy("ordem ASC, id DESC");
+      }
+   }
 }
