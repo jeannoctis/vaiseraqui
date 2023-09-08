@@ -553,10 +553,35 @@ class Pages extends Controller
                     ->where("pc.tipoFK", 1)
                     ->where("ativo", 1);
                 $data['alugueisParaTemporada'] = $this->produtoModel->paginate(8, "anuncios", $paginate);
-                $data['pager'] = $this->produtoModel->pager;
+                
+                if ($data['alugueisParaTemporada']) {
+                    foreach ($data['alugueisParaTemporada'] as $ind => $produto) {
+                        $data['alugueisParaTemporada'][$ind]->fotos = $this->produtoModel->fotos($produto->id, 4,true);
+                        
+                                     
+                        if ($produto->latitude && $produto->latitude) {
+                            $produto->coordenadas = $produto->latitude . "," . $produto->longitude;
+                        }
 
+                        if ($produto->coordenadas) {
+                            $data["coordenadas"][$ind]["id"] = $produto->id;
+
+                            $data["coordenadas"][$ind]["titulo"] = $produto->titulo;
+                            $data["coordenadas"][$ind]["foto"] = $data['produtos'][$ind]->fotos[0];
+                            $data["coordenadas"][$ind]["preco"] = $produto->preco;
+
+                            $data["coordenadas"][$ind]["pagina"] = "hospedagem";
+
+                            $data["coordenadas"][$ind]["coord"] = $produto->coordenadas;
+                            $data["coordenadas"][$ind]["identificador"] = $produto->identificador;
+                        }
+                    }
+                }
+                
+                $data['pager'] = $this->produtoModel->pager;
+ 
                 foreach ($data['alugueisParaTemporada'] as $item) {
-                    $item->fotos = $this->produtoModel->fotos($item->id, 5);
+                    $item->fotos = $this->produtoModel->fotos($item->id, 5,true);
                 }
 
                 $data['espacoAtual'] = $this->produtoModel
