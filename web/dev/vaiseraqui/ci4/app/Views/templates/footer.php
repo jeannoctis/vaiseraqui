@@ -147,6 +147,7 @@
   <script src="<?= PATHSITE ?>assets/scripts/jquery/jquery.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/lazyscript.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sticksy/dist/sticksy.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
   <script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
@@ -160,7 +161,10 @@
   <script src="<?= PATHSITE ?>assets/scripts/card-like.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/modal-filter.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/modal-select-order.js"></script>
+  <script src="<?= PATHSITE ?>assets/scripts/faq-dropdown.js"></script>
 
+  <script type="module" src="<?= PATHSITE ?>assets/scripts/controller-page-internal.js"></script>
+  <script type="module" src="<?= PATHSITE ?>assets/scripts/controller-presentation.js"></script>
   <script type="module" src="<?= PATHSITE ?>assets/scripts/controller-agenda.js"></script>
   <script type="module" src="<?= PATHSITE ?>assets/scripts/controller-card.js"></script>
   <script type="module" src="<?= PATHSITE ?>assets/scripts/controller-blog.js"></script>
@@ -209,6 +213,7 @@
     })
 
     <? if ($pagina == 22) { ?>
+      
       // Controla modal de mapa
       const btnMaps = document.querySelector('.btn-maps')
       if (btnMaps) {
@@ -244,11 +249,14 @@
           })
         })
       }
+
+      new Sticksy('.sticky', {topSpacing: 150});
       
     <? } ?>
   </script>
 
   <script>
+    
     <? if ($erro) { ?>
       cSwal.fire({
         title: "Ops,",

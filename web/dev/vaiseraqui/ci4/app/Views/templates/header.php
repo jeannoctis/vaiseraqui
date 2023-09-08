@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.12/dist/sweetalert2.min.css">
-
+  
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css">
   <title><?= $metatag->titulo ?> - <?= $configs->nome ?></title>
   <meta name="description" content="<?= $metatag->description ?>">

@@ -67,7 +67,7 @@
 								<input type="hidden" name="nexc" value="1">
 							</form>
 							<nav class="col-xs-12 navigation-pages ">
-								<?= $pager->links('comodidades') ?>
+								<?= $pager->links('comodidades', 'panel_full') ?>
 							</nav>
 						</div>
 					<? } ?>

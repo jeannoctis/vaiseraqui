@@ -29,8 +29,6 @@ class Artigo extends BaseController
       $this->categoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
       $data['bCategorias'] = $this->categoriaArtigoModel->findAll();
 
-      $this->model->orderBy("ordem ASC, id DESC");
-
       if ($data['bCategorias']) {
          foreach ($data['bCategorias'] as $categoria) {
             $data['cats'][$categoria->id] = $categoria->titulo;
@@ -56,7 +54,9 @@ class Artigo extends BaseController
          }
       }
 
-      $data['artigos'] = $this->model->orderBy("ordem ASC, id DESC")->findAll();
+      $paginate = \is_numeric($get['page_artigos']) ? $get['page_artigos'] : 1 ;
+      $data['artigos'] = $this->model->orderBy("ordem ASC, id DESC")->paginate(25, "artigos", $paginate);
+      $data['pager'] = $this->model->pager;
       
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);

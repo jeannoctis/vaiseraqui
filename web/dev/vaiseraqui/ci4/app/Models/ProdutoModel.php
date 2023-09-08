@@ -30,7 +30,8 @@ class ProdutoModel extends Model
     ];
     protected $skipValidation = false;
 
-    public function fotos($id, $limit) {
+    public function fotos($id, $limit)
+    {
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
         $produtoFotoModel->where('produtoFK', $id);
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
@@ -39,14 +40,16 @@ class ProdutoModel extends Model
         return $fotos;
     }
 
-    public function fotoDestaque($fotoFK) {
+    public function fotoDestaque($fotoFK)
+    {
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
         $produtoFotoModel->select("arquivo");
         $foto = $produtoFotoModel->find($fotoFK);
-        return $foto;
+        return $foto->arquivo;
     }
 
-    public function datas($id) {
+    public function datas($id)
+    {
         $produtoDataModel = model('App\Models\ProdutoDataModel', false);
         $produtoDataModel->where('produtoFK', $id);
         $produtoDataModel->orderBy('data ASC');
@@ -54,7 +57,8 @@ class ProdutoModel extends Model
         return $datas;
     }
 
-    public function valores($id) {
+    public function valores($id)
+    {
         $produtoValorModel = model('App\Models\ProdutoValorModel', false);
         $produtoValorModel->where('produtoFK', $id);
         $produtoValorModel->orderBy('valor ASC');
@@ -62,7 +66,8 @@ class ProdutoModel extends Model
         return $valores;
     }
 
-    public function setores($id) {
+    public function setores($id)
+    {
         $produtoSetorModel = model('App\Models\ProdutoSetorModel', false);
         $produtoSetorModel->where('produtoFK', $id);
         $produtoSetorModel->orderBy('ordem ASC, id DESC');
@@ -81,7 +86,8 @@ class ProdutoModel extends Model
         return $setores;
     }
 
-    public function organizacoes($id) {
+    public function organizacoes($id)
+    {
         $produtoOrganizacaoModel = model('App\Models\ProdutoOrganizacaoModel', false);
         $produtoOrganizacaoModel->where('produtoFK', $id);
         $produtoOrganizacaoModel->orderBy('ordem ASC, id DESC');
@@ -90,7 +96,8 @@ class ProdutoModel extends Model
         return $organizacoes;
     }
 
-    public function pontosVenda($id) {
+    public function pontosVenda($id)
+    {
         $produtoPontoDeVendaModel = model('App\Models\ProdutoPontoDeVendaModel', false);
         $produtoPontoDeVendaModel->where('produtoFK', $id);
         $produtoPontoDeVendaModel->orderBy('ordem ASC, id DESC');
@@ -98,7 +105,8 @@ class ProdutoModel extends Model
         return $pontos;
     }
 
-    public function cardapio($id) {
+    public function cardapio($id)
+    {
         $produtoCardapioModel = model('App\Models\ProdutoCardapioModel', false);
         $produtoCardapioModel->where('produtoFK', $id);
         $produtoCardapioModel->orderBy('ordem ASC, id DESC');
@@ -106,11 +114,12 @@ class ProdutoModel extends Model
         return $cardapio;
     }
 
-    public function responsavel($id) {
+    public function responsavel($id)
+    {
         $anuncianteModel = model('App\Models\AnuncianteModel', false);
         $anuncianteModel->select('titulo, telefone, telefone2, telefone3, email, arquivo');
         $anunciante = $anuncianteModel->find($id);
-        
+
         $removeChars = array("-", "(", ")", " ");
         $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
         $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
@@ -128,7 +137,54 @@ class ProdutoModel extends Model
         $anunciante->link3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone3);
 
 
-        
+
         return $anunciante;
+    }
+
+    public function comodidades($id)
+    {
+        $produtoComodidadeModel = \model("App\Models\ProdutoComodidadeModel", false)
+            ->select("titulo, comodidades")
+            ->where("produtoFK", $id)
+            ->orderBy("titulo ASC");
+        $comodidades = $produtoComodidadeModel->findAll();
+
+        return $comodidades;
+    }
+
+    public function proximidades($id)
+    {
+        $produtoProximidadeModel = \model("App\Models\ProdutoProximidadeModel", false)
+            ->select("produto_proximidade.proximidades, px.arquivo, px.titulo")
+            ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
+            ->where("produtoFK", $id);
+        $proximidades = $produtoProximidadeModel->findAll();
+
+        return $proximidades;
+    }
+
+    public function anunciante($id)
+    {
+        $anuncianteModel = \model("App\Models\AnuncianteModel", false)
+            ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
+        $anunciante = $anuncianteModel->find($id);
+
+        return $anunciante;
+    }
+
+    public function valorTotal($valores, $preco)
+    {        
+        $total = array_column($valores, "valor");
+        $total = array_sum($total);
+        $total += $preco;
+
+        return $total;
+    }
+
+    public function dadosCard() {
+        return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado")
+            ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
+            ->join("cidade c", "c.id = produto.cidadeFK")
+            ->join("estado e", "e.id = c.estadoFK");        
     }
 }

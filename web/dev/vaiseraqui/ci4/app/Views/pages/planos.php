@@ -43,11 +43,19 @@
                </ul>
             <? } ?>
 
-            <img data-aos="fade-left" class="mockup only-mobile" src="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo2 ?>" alt="banner planos mobile">
+            <picture>
+               <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo2 ?>.webp" type="image/webp">
+               <img src="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo2 ?>" class="mockup only-mobile" alt="banner planos mobile" data-aos="fade-left"/>
+            </picture>
 
             <a href="<?= $txPlanosHero->link ?>" class="btn-primary"><?= $txPlanosHero->botao ?></a>
          </div>
-         <img class="mockup" data-aos="fade-left" src="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo ?>" alt="banner planos">
+
+         <picture>
+            <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo ?>.webp" type="image/webp">
+            <img src="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo ?>" class="mockup" alt="banner planos" data-aos="fade-left">
+         </picture>
+
       </div>
    </section>
 
@@ -220,7 +228,7 @@
             <input type="hidden" name="origem" value="planos">
             <button type="submit">Enviar</button>
          </form>
-         
+
       </div>
    </section>
 

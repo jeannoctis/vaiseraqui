@@ -384,12 +384,13 @@
                <? } ?>
 
                <div class="wraper-scroll-cards">
-                  <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>assets/images/slide-rent-2.png"></a>
-                  <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>assets/images/slide-rent-3.png"></a>
+                  <? foreach ($espacoAtual->fotos as $foto) { ?>
+                     <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>uploads/produto_foto/<?= $espacoAtual->id ?>/<?= $foto->arquivo ?>"></a>
+                  <? } ?>
                   <div class="photos-and-video">
 
-                     <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>assets/images/slide-rent-1.png">
-                        <div class="card" style="background-image: url(<?= PATHSITE ?>uploads/produto_foto/<?= $espacoAtual->id ?>/<?= $espacoAtual->fotoDestaque ?>;">
+                     <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>uploads/produto_foto/<?= $espacoAtual->id ?>/<?= $espacoAtual->fotoDestaque ?>">
+                        <div class="card" style="background-image: url(<?= PATHSITE ?>uploads/produto_foto/<?= $espacoAtual->id ?>/<?= $espacoAtual->fotoDestaque ?>">
                            <div class="wraper">
                               <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
                                  <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.33333C0 2.83554 2.83554 0 6.33333 0H31.6667C35.1646 0 38 2.83554 38 6.33333V29.5534V29.5577V31.6667C38 35.1646 35.1646 38 31.6667 38H6.33333C2.83554 38 0 35.1646 0 31.6667V23.2222V6.33333ZM33.7778 6.33333V24.4589L26.8261 17.5072C26.0017 16.6828 24.665 16.6828 23.8406 17.5072L21.1111 20.2367L13.1039 12.2294C12.2794 11.405 10.9428 11.405 10.1183 12.2294L4.22222 18.1256V6.33333C4.22222 5.16741 5.16741 4.22222 6.33333 4.22222H31.6667C32.8326 4.22222 33.7778 5.16741 33.7778 6.33333ZM4.22222 31.6667V24.0966L11.6111 16.7078L19.6183 24.715C20.4427 25.5394 21.7795 25.5394 22.6039 24.715L25.3333 21.9855L33.7778 30.43V31.6667C33.7778 32.8326 32.8326 33.7778 31.6667 33.7778H6.33333C5.16741 33.7778 4.22222 32.8326 4.22222 31.6667ZM24.2778 14.7778C26.0266 14.7778 27.4444 13.36 27.4444 11.6111C27.4444 9.8622 26.0266 8.44444 24.2778 8.44444C22.5289 8.44444 21.1111 9.8622 21.1111 11.6111C21.1111 13.36 22.5289 14.7778 24.2778 14.7778Z" fill="white" />
@@ -414,161 +415,118 @@
                </div>
 
                <div class="faq">
-                  <div class="faq-item" data-aos="fade-right">
-                     <div class="faq-title">
-                        <div class="icon-title">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-1.svg" alt="">
+                  <? if ($espacoAtual->comodidades) { ?>
+                     <div class="faq-item" data-aos="fade-right">
+                        <div class="faq-title">
+                           <div class="icon-title">
+                              <img src="<?= PATHSITE ?>assets/images/icon-faq-1.svg" alt="">
+                           </div>
+                           <div class="group-title">
+                              <h3>Comodidades</h3>
+                              <span>Itens que facilitam o seu dia-a-dia na estadia</span>
+                           </div>
+                           <div class="icon-dropdown">
+                              <img src="<?= PATHSITE ?>assets/images/icon-dropdown.svg" alt="">
+                           </div>
                         </div>
-                        <div class="group-title">
-                           <h3>Comodidades</h3>
-                           <span>Itens que facilitam o seu dia-a-dia na estadia</span>
-                        </div>
-                        <div class="icon-dropdown">
-                           <img src="<?= PATHSITE ?>assets/images/icon-dropdown.svg" alt="">
+
+                        <div class="faq-response">
+                           <? foreach ($espacoAtual->comodidades as $categoria) {
+                              $listaComodidades = explode(";", $categoria->comodidades) ?>
+                              <div class="item">
+                                 <strong><?= $categoria->titulo ?></strong>
+                                 <ul>
+                                    <? foreach ($listaComodidades as $comodidade) { ?>
+                                       <li><?= $comodidade ?></li>
+                                    <? } ?>
+                                 </ul>
+                              </div>
+                           <? } ?>
                         </div>
                      </div>
-                     <div class="faq-response">
-                        <div class="item">
-                           <strong>Quarto</strong>
-                           <ul>
-                              <li>Roupa de cama</li>
-                              <li>Guarda-roupa ou armário</li>
-                           </ul>
+                  <? } ?>
+
+                  <? if ($espacoAtual->proximidades) { ?>
+                     <div class="faq-item" data-aos="fade-right">
+
+                        <div class="faq-title">
+                           <div class="icon-title">
+                              <img src="<?= PATHSITE ?>assets/images/icon-faq-2.svg" alt="">
+                           </div>
+                           <div class="group-title">
+                              <h3>Proximidades</h3>
+                              <span>Conheça os pontos próximos ao local</span>
+                           </div>
+                           <div class="icon-dropdown">
+                              <img src="<?= PATHSITE ?>assets/images/icon-dropdown.svg" alt="">
+                           </div>
                         </div>
-                        <div class="item">
-                           <strong>Banheiro</strong>
-                           <ul>
-                              <li>Papel higiênico</li>
-                              <li>toalhas</li>
-                              <li>Banheiro ou chuveiro</li>
-                              <li>Banheiro privativo</li>
-                              <li>Vaso sanitário</li>
-                              <li>Produtos de higiene pessoal gratuitos</li>
-                              <li>Secador de cabelo</li>
-                              <li>Chuveiro</li>
-                           </ul>
-                        </div>
-                        <div class="item">
-                           <strong>Cozinha</strong>
-                           <ul>
-                              <li>Cozinha compartilhada</li>
-                           </ul>
+
+                        <div class="faq-response">
+                           <? foreach ($espacoAtual->proximidades as $proximidade) { ?>
+                              <div class="topic">
+                                 <img src="<?= PATHSITE ?>uploads/proximidade/<?= $proximidade->arquivo ?>" alt="ícone da proximidade">
+                                 <div>
+                                    <strong><?= $proximidade->titulo ?></strong>
+                                    <span><?= $proximidade->proximidades ?></span>
+                                 </div>
+                              </div>
+                           <? } ?>
                         </div>
                      </div>
-                  </div>
-                  <div class="faq-item" data-aos="fade-right">
-                     <div class="faq-title">
-                        <div class="icon-title">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-2.svg" alt="">
-                        </div>
-                        <div class="group-title">
-                           <h3>Proximidades</h3>
-                           <span>Conheça os pontos próximos ao local</span>
-                        </div>
-                        <div class="icon-dropdown">
-                           <img src="<?= PATHSITE ?>assets/images/icon-dropdown.svg" alt="">
-                        </div>
-                     </div>
-                     <div class="faq-response">
-                        <div class="topic">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-response-1.svg" alt="">
-                           <div>
-                              <strong>Museus, teatros ou arenas de shows</strong>
-                              <span>Teatro Magó e Parque de Exposições Feio Ribeiro ficam nessa região.</span>
+                  <? } ?>
+
+                  <? if ($espacoAtual->condominio) { ?>
+
+                     <div class="faq-item" data-aos="fade-right">
+                        <div class="faq-title">
+                           <div class="icon-title">
+                              <img src="<?= PATHSITE ?>assets/images/icon-faq-3.svg" alt="">
+                           </div>
+                           <div class="group-title">
+                              <h3>Condomínio</h3>
+                              <span>Itens disponíveis relacionados ao condomínio do imóvel</span>
+                           </div>
+                           <div class="icon-dropdown">
+                              <img src="<?= PATHSITE ?>assets/images/icon-dropdown.svg" alt="">
                            </div>
                         </div>
-                        <div class="topic">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-response-2.svg" alt="">
-                           <div>
-                              <strong>Escolas ou colégios</strong>
-                              <span>Escola Ayrton Plaisant e Universidade Estadual de Maringá ficam nessa região.</span>
-                           </div>
-                        </div>
-                        <div class="topic">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-response-3.svg" alt="">
-                           <div>
-                              <strong>Parques ou Áreas Verdes</strong>
-                              <span>Parque do Ingá fica nessa região.</span>
-                           </div>
-                        </div>
-                        <div class="topic">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-response-4.svg" alt="">
-                           <div>
-                              <strong>Transporte Público ou Rodoviárias</strong>
-                              <span>Terminal Interurbano e Rodoviária Municipal ficam nessa região.</span>
-                           </div>
-                        </div>
-                        <div class="topic">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-response-5.svg" alt="">
-                           <div>
-                              <strong>Hospitais</strong>
-                              <span>Hospital Municipal e Hospital Paraná ficam nessa região.</span>
-                           </div>
-                        </div>
-                        <div class="topic">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-response-6.svg" alt="">
-                           <div>
-                              <strong>Supermercados</strong>
-                              <span>Supermercado Bom Dia e Supermercado Amigão ficam nessa região</span>
+                        <div class="faq-response">
+                           <div class="item">
+                              <ul>
+                                 <? $itens = explode(";", $espacoAtual->condominio);
+                                 foreach ($itens as $item) { ?>
+                                    <li><?= $item ?></li>
+                                 <? } ?>
+                              </ul>
                            </div>
                         </div>
                      </div>
-                  </div>
-                  <div class="faq-item" data-aos="fade-right">
-                     <div class="faq-title">
-                        <div class="icon-title">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-3.svg" alt="">
+                  <? } ?>
+
+                  <? if ($espacoAtual->observacoes) { ?>
+                     <div class="faq-item" data-aos="fade-right">
+                        <div class="faq-title">
+                           <div class="icon-title" style="margin-top: 4px;">
+                              <img src="<?= PATHSITE ?>assets/images/icon-faq-4.svg" alt="">
+                           </div>
+                           <div class="group-title">
+                              <h3>Observações</h3>
+                              <span>Alguns pontos que você precisa saber sobre o local</span>
+                           </div>
+                           <div class="icon-dropdown">
+                              <img src="<?= PATHSITE ?>assets/images/icon-dropdown.svg" alt="">
+                           </div>
                         </div>
-                        <div class="group-title">
-                           <h3>Condomínio</h3>
-                           <span>Itens disponíveis relacionados ao condomínio do imóvel</span>
-                        </div>
-                        <div class="icon-dropdown">
-                           <img src="<?= PATHSITE ?>assets/images/icon-dropdown.svg" alt="">
-                        </div>
-                     </div>
-                     <div class="faq-response">
-                        <div class="item">
-                           <ul>
-                              <li>Salão de festas</li>
-                              <li>Vaga de garagem acessível</li>
-                              <li>Corrimão</li>
-                              <li>Elevador</li>
-                              <li>Rampas de acesso</li>
-                           </ul>
+                        <div class="faq-response">
+                           <div class="post">
+                              <?= $espacoAtual->observacoes ?>
+                           </div>
                         </div>
                      </div>
-                  </div>
-                  <div class="faq-item" data-aos="fade-right">
-                     <div class="faq-title">
-                        <div class="icon-title" style="margin-top: 4px;">
-                           <img src="<?= PATHSITE ?>assets/images/icon-faq-4.svg" alt="">
-                        </div>
-                        <div class="group-title">
-                           <h3>Observações</h3>
-                           <span>Alguns pontos que você precisa saber sobre o local</span>
-                        </div>
-                        <div class="icon-dropdown">
-                           <img src="<?= PATHSITE ?>assets/images/icon-dropdown.svg" alt="">
-                        </div>
-                     </div>
-                     <div class="faq-response">
-                        <div class="post">
-                           <p>Estacionamento interno tem capacidade para até 07 veículos, o qual somente será liberado para locações que utilizarem a hospedagem do imóvel.</p>
-                           <p>Acesso até o imóvel todo asfaltado com supermercados, padarias, açougues, bem como demais conveniências próximo do imóvel.</p>
-                           <p>A piscina possui aquecimento.</p>
-                           <p>O imóvel possui som ambiente em toda estrutura.</p>
-                           <p>Playground para as crianças, com amplo espaço verde + casa na árvore com móveis.</p>
-                           <p>Cervejeira que comporta até 06 engradados de cervejas.</p>
-                           <p class="next-ul">O imóvel possui dois tipos de locações:</p>
-                           <ul>
-                              <li><strong>Hospedagem:</strong> Fornecemos a chácara por completo, com toda sua infraestrutura.</li>
-                              <li><strong>Diária de Locação:</strong> Disponibilizamos toda infraestrutura para lazer na parte externa, ficando de fora o quarto para hospedagem e a casa que contém quartos, sala e banheiro.</li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
+                  <? } ?>
                </div>
+
             </article>
          </div>
 
@@ -579,29 +537,23 @@
                      <tbody>
                         <tr>
                            <td>Aluguel</td>
-                           <td>R$2.400</td>
+                           <td>R$<?= number_format($espacoAtual->preco, 2, ",", ".") ?></td>
                         </tr>
-                        <tr>
-                           <td>Condomínio</td>
-                           <td>R$355</td>
-                        </tr>
-                        <tr>
-                           <td>IPTU</td>
-                           <td class="emphasis">R$0</td>
-                        </tr>
-                        <tr>
-                           <td>Seguro incêndio</td>
-                           <td>R$28</td>
-                        </tr>
-                        <tr>
-                           <td>Taxa de serviço</td>
-                           <td>R$56</td>
-                        </tr>
+                        <? if ($espacoAtual->valores) {
+                           foreach ($espacoAtual->valores as $valor) { ?>
+                              <tr>
+                                 <td><?= $valor->titulo ?></td>
+                                 <td class="<?= $valor->valor == 0 ? 'empashis' : '' ?>">
+                                    R$<?= number_format($valor->valor, 2, ",", ".") ?>
+                                 </td>
+                              </tr>
+                           <? } ?>
+                        <? } ?>
                      </tbody>
                      <tfoot>
                         <tr>
                            <td>Total</td>
-                           <td>R$2.839</td>
+                           <td>R$<?= number_format($espacoAtual->total, 2, ",", ".") ?></td>
                         </tr>
                      </tfoot>
                   </table>
@@ -610,316 +562,82 @@
                      Agendar visita
                   </a>
                </aside>
+
                <div class="box-ads">
-                  <img src="<?= PATHSITE ?>assets/images/avatar-anunciante.png" alt="">
+                  <img src="<?= PATHSITE ?>uploads/anunciante/<?= $espacoAtual->anunciante->arquivo ?>" alt="foto do anunciante">
                   <div>
                      <span class="type">Anunciante</span>
-                     <span class="title">Genivaldo ou Rafael</span>
+                     <span class="title"><?= $espacoAtual->anunciante->titulo ?></span>
                      <ul>
                         <li>
                            <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                           <span>(99) 9 9999-9999</span>
+                           <span><?= $espacoAtual->anunciante->telefone ?></span>
                         </li>
-                        <li>
-                           <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                           <span>(99) 9 9999-9999</span>
-                        </li>
-                        <li>
-                           <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                           <span>(99) 9 9999-9999</span>
-                        </li>
+                        <? if ($espacoAtual->anunciante->telefone2) { ?>
+                           <li>
+                              <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
+                              <span><?= $espacoAtual->anunciante->telefone2 ?></span>
+                           </li>
+                        <? } ?>
+                        <? if ($espacoAtual->anunciante->telefone3) { ?>
+                           <li>
+                              <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
+                              <span><?= $espacoAtual->anunciante->telefone3 ?></span>
+                           </li>
+                        <? } ?>
                      </ul>
                   </div>
                </div>
             </div>
          </div>
+
       </div>
    </section>
-   <section class="s-service" id="servicos-destaque">
-      <div class="container-medium">
-         <header data-aos="fade-up">
-            <h2>Prestadores de Serviços em destaque </h2>
-            <p>Prestadores de serviços na sua região que podem ajudar com o seu imóvel</p>
-         </header>
-      </div>
-      <div class="list list-of-swiper">
-         <div class="swiper rent-interna">
-            <div class="swiper-wrapper">
-               <div class="swiper-slide">
-                  <article class="card-services" data-aos="fade-right">
-                     <div class="cover">
-                        <span class="button-category">
-                           <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M4.83741 0.0736048C4.5408 0.252902 3.34138 1.016 2.21221 2.28909C1.08323 3.56197 0 5.37326 0 7.63871H0.785714C0.785714 5.62195 1.74927 3.98208 2.80658 2.79001C3.86371 1.59813 4.99007 0.882493 5.25148 0.724527L4.83741 0.0736048ZM7.67085 2.42566C6.71621 1.09906 5.67545 0.29704 5.40289 0.0983433L4.93232 0.711721C5.16646 0.882378 6.13745 1.62849 7.02766 2.8655L7.67085 2.42566ZM7.85699 2.88172C8.12201 2.54396 8.34405 2.32914 8.44486 2.23767L7.90931 1.67722C7.78148 1.79328 7.52864 2.03955 7.23289 2.41642L7.85699 2.88172ZM8.0542 2.23679C8.40706 2.55692 10.2143 4.35678 10.2143 7.63795H11C11 4.06112 9.02668 2.07279 8.58951 1.67614L8.0542 2.23679ZM10.2143 7.63795V7.63871H11V7.63795H10.2143ZM10.2143 7.63871C10.2143 8.24216 10.0923 8.83979 9.85545 9.39729L10.5814 9.6904C10.8577 9.03992 11 8.3428 11 7.63871H10.2143ZM9.85545 9.39729C9.61848 9.95487 9.27127 10.4614 8.83347 10.8882L9.38905 11.4298C9.89984 10.9319 10.305 10.3409 10.5814 9.6904L9.85545 9.39729ZM8.83347 10.8882C8.39575 11.3149 7.87608 11.6534 7.30408 11.8843L7.60477 12.5919C8.27208 12.3225 8.87833 11.9276 9.38905 11.4298L8.83347 10.8882ZM7.30408 11.8843C6.73208 12.1152 6.11906 12.2341 5.5 12.2341V13C6.22231 13 6.93746 12.8614 7.60477 12.5919L7.30408 11.8843ZM5.5 12.2341C4.88094 12.2341 4.26792 12.1152 3.69592 11.8843L3.39524 12.5919C4.06254 12.8614 4.77769 13 5.5 13V12.2341ZM3.69592 11.8843C3.12396 11.6534 2.60426 11.3149 2.1665 10.8882L1.61091 11.4298C2.12163 11.9276 2.72795 12.3225 3.39524 12.5919L3.69592 11.8843ZM2.1665 10.8882C1.72874 10.4614 1.38148 9.95487 1.14457 9.39729L0.41866 9.6904C0.695066 10.3409 1.10019 10.9319 1.61091 11.4298L2.1665 10.8882ZM1.14457 9.39729C0.907649 8.83979 0.785714 8.24216 0.785714 7.63871H0C0 8.3428 0.142261 9.03992 0.41866 9.6904L1.14457 9.39729ZM8.44486 2.23767C8.34067 2.33227 8.16836 2.34035 8.0542 2.23679L8.58951 1.67614C8.39206 1.49701 8.09679 1.50701 7.90931 1.67722L8.44486 2.23767ZM7.02766 2.8655C7.22857 3.14474 7.64775 3.14843 7.85699 2.88172L7.23289 2.41642C7.34297 2.27611 7.56368 2.27669 7.67085 2.42566L7.02766 2.8655ZM5.25148 0.724527C5.14847 0.786794 5.0204 0.775903 4.93232 0.711721L5.40289 0.0983433C5.24119 -0.0195361 5.01859 -0.0359263 4.83741 0.0736048L5.25148 0.724527Z" fill="#3B9756" />
-                              <path d="M5.16044 5.10489C4.91159 5.27805 4.13434 5.84548 3.41524 6.65769C2.70318 7.46203 2.00001 8.56068 2 9.78899H2.87505C2.87505 8.8338 3.43038 7.91393 4.09444 7.16386C4.75147 6.42166 5.46783 5.89863 5.6892 5.74457L5.16044 5.10489ZM8.99913 9.71778C8.97235 8.50689 8.26999 7.42606 7.56379 6.63409C6.85075 5.83456 6.0861 5.27645 5.83952 5.10489L5.31077 5.74457C5.52995 5.89702 6.23467 6.41155 6.88663 7.14251C7.54532 7.88118 8.10348 8.78892 8.12431 9.73407L8.99913 9.71778ZM8.12431 9.73407C8.12474 9.75206 8.12501 9.77068 8.12501 9.78874H9C9 9.76482 8.99974 9.74154 8.99913 9.71778L8.12431 9.73407ZM8.12501 9.78874C8.12501 11.1189 6.9498 12.1972 5.50003 12.1972V13C7.43297 13 9 11.5623 9 9.78874H8.12501ZM5.50003 12.1972C4.05034 12.1972 2.87517 11.119 2.87505 9.78899H2C2.00017 11.5624 3.56715 13 5.50003 13V12.1972ZM2 9.78899C2 10.0098 2.19489 10.1904 2.43752 10.1904V9.38758C2.68012 9.38758 2.87505 9.56821 2.87505 9.78899H2ZM2.87505 9.78899C2.87503 9.57134 2.68357 9.38758 2.43752 9.38758V10.1904C2.1915 10.1904 2.00002 10.0065 2 9.78899H2.87505ZM5.6892 5.74457C5.57773 5.8222 5.4225 5.82228 5.31077 5.74457L5.83952 5.10489C5.63845 4.96496 5.36134 4.96512 5.16044 5.10489L5.6892 5.74457Z" fill="#3B9756" />
-                           </svg>
-                           Em Alta
-                        </span>
-                        <div class="swiper swiper-card">
-                           <div class="swiper-wrapper">
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery" href="<?= PATHSITE ?>assets/images/card-food-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-food-m.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery" href="<?= PATHSITE ?>assets/images/card-food-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-food-m.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery" href="<?= PATHSITE ?>assets/images/card-food-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-food-m.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery" href="<?= PATHSITE ?>assets/images/card-food-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-food-m.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery" href="<?= PATHSITE ?>assets/images/card-food-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-food-m.png" alt="">
-                                 </a>
-                              </div>
-                           </div>
-                           <div class="swiper-pagination"></div>
 
-                           <div class="swiper-button-prev"></div>
-                           <div class="swiper-button-next"></div>
-                        </div>
+   <? if ($servicosEmAlta) { ?>
+      <section class="s-service" id="servicos-destaque">
+
+         <div class="container-medium">
+            <header data-aos="fade-up">
+               <h2>Prestadores de Serviços em destaque </h2>
+               <p>Prestadores de serviços na sua região que podem ajudar com o seu imóvel</p>
+            </header>
+         </div>
+
+         <div class="list list-of-swiper">
+            <div class="swiper rent-interna">
+               <div class="swiper-wrapper">
+                  <? foreach ($servicosEmAlta as $servico) { ?>
+                     <div class="swiper-slide">
+                        <?= view("templates/services-destaque-card", (array)$servico); ?>
                      </div>
-                     <a href="#">
-                        <div class="info">
-                           <span class="type">alimentação</span>
-                           <strong class="title">Buffet Grande Mesa</strong>
-                           <span class="uf">Maringá e região</span>
-                           <p>Somos uma empresa de buffet especializada em culinária internacional, oferecendo pratos deliciosos.</p>
-
-                           <a href="#" class="icon-heart">
-                              <svg class="heart-main" viewBox="0 0 512 512" width="100" title="heart">
-                                 <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
-                              </svg>
-                              <svg class="heart-background" viewBox="0 0 512 512" width="100" title="heart">
-                                 <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
-                              </svg>
-                           </a>
-                        </div>
-                     </a>
-                  </article>
+                  <? } ?>
                </div>
-               <div class="swiper-slide">
-                  <article class="card-services" data-aos="fade-right">
-                     <div class="cover">
-                        <span class="button-category">
-                           <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M4.83741 0.0736048C4.5408 0.252902 3.34138 1.016 2.21221 2.28909C1.08323 3.56197 0 5.37326 0 7.63871H0.785714C0.785714 5.62195 1.74927 3.98208 2.80658 2.79001C3.86371 1.59813 4.99007 0.882493 5.25148 0.724527L4.83741 0.0736048ZM7.67085 2.42566C6.71621 1.09906 5.67545 0.29704 5.40289 0.0983433L4.93232 0.711721C5.16646 0.882378 6.13745 1.62849 7.02766 2.8655L7.67085 2.42566ZM7.85699 2.88172C8.12201 2.54396 8.34405 2.32914 8.44486 2.23767L7.90931 1.67722C7.78148 1.79328 7.52864 2.03955 7.23289 2.41642L7.85699 2.88172ZM8.0542 2.23679C8.40706 2.55692 10.2143 4.35678 10.2143 7.63795H11C11 4.06112 9.02668 2.07279 8.58951 1.67614L8.0542 2.23679ZM10.2143 7.63795V7.63871H11V7.63795H10.2143ZM10.2143 7.63871C10.2143 8.24216 10.0923 8.83979 9.85545 9.39729L10.5814 9.6904C10.8577 9.03992 11 8.3428 11 7.63871H10.2143ZM9.85545 9.39729C9.61848 9.95487 9.27127 10.4614 8.83347 10.8882L9.38905 11.4298C9.89984 10.9319 10.305 10.3409 10.5814 9.6904L9.85545 9.39729ZM8.83347 10.8882C8.39575 11.3149 7.87608 11.6534 7.30408 11.8843L7.60477 12.5919C8.27208 12.3225 8.87833 11.9276 9.38905 11.4298L8.83347 10.8882ZM7.30408 11.8843C6.73208 12.1152 6.11906 12.2341 5.5 12.2341V13C6.22231 13 6.93746 12.8614 7.60477 12.5919L7.30408 11.8843ZM5.5 12.2341C4.88094 12.2341 4.26792 12.1152 3.69592 11.8843L3.39524 12.5919C4.06254 12.8614 4.77769 13 5.5 13V12.2341ZM3.69592 11.8843C3.12396 11.6534 2.60426 11.3149 2.1665 10.8882L1.61091 11.4298C2.12163 11.9276 2.72795 12.3225 3.39524 12.5919L3.69592 11.8843ZM2.1665 10.8882C1.72874 10.4614 1.38148 9.95487 1.14457 9.39729L0.41866 9.6904C0.695066 10.3409 1.10019 10.9319 1.61091 11.4298L2.1665 10.8882ZM1.14457 9.39729C0.907649 8.83979 0.785714 8.24216 0.785714 7.63871H0C0 8.3428 0.142261 9.03992 0.41866 9.6904L1.14457 9.39729ZM8.44486 2.23767C8.34067 2.33227 8.16836 2.34035 8.0542 2.23679L8.58951 1.67614C8.39206 1.49701 8.09679 1.50701 7.90931 1.67722L8.44486 2.23767ZM7.02766 2.8655C7.22857 3.14474 7.64775 3.14843 7.85699 2.88172L7.23289 2.41642C7.34297 2.27611 7.56368 2.27669 7.67085 2.42566L7.02766 2.8655ZM5.25148 0.724527C5.14847 0.786794 5.0204 0.775903 4.93232 0.711721L5.40289 0.0983433C5.24119 -0.0195361 5.01859 -0.0359263 4.83741 0.0736048L5.25148 0.724527Z" fill="#3B9756" />
-                              <path d="M5.16044 5.10489C4.91159 5.27805 4.13434 5.84548 3.41524 6.65769C2.70318 7.46203 2.00001 8.56068 2 9.78899H2.87505C2.87505 8.8338 3.43038 7.91393 4.09444 7.16386C4.75147 6.42166 5.46783 5.89863 5.6892 5.74457L5.16044 5.10489ZM8.99913 9.71778C8.97235 8.50689 8.26999 7.42606 7.56379 6.63409C6.85075 5.83456 6.0861 5.27645 5.83952 5.10489L5.31077 5.74457C5.52995 5.89702 6.23467 6.41155 6.88663 7.14251C7.54532 7.88118 8.10348 8.78892 8.12431 9.73407L8.99913 9.71778ZM8.12431 9.73407C8.12474 9.75206 8.12501 9.77068 8.12501 9.78874H9C9 9.76482 8.99974 9.74154 8.99913 9.71778L8.12431 9.73407ZM8.12501 9.78874C8.12501 11.1189 6.9498 12.1972 5.50003 12.1972V13C7.43297 13 9 11.5623 9 9.78874H8.12501ZM5.50003 12.1972C4.05034 12.1972 2.87517 11.119 2.87505 9.78899H2C2.00017 11.5624 3.56715 13 5.50003 13V12.1972ZM2 9.78899C2 10.0098 2.19489 10.1904 2.43752 10.1904V9.38758C2.68012 9.38758 2.87505 9.56821 2.87505 9.78899H2ZM2.87505 9.78899C2.87503 9.57134 2.68357 9.38758 2.43752 9.38758V10.1904C2.1915 10.1904 2.00002 10.0065 2 9.78899H2.87505ZM5.6892 5.74457C5.57773 5.8222 5.4225 5.82228 5.31077 5.74457L5.83952 5.10489C5.63845 4.96496 5.36134 4.96512 5.16044 5.10489L5.6892 5.74457Z" fill="#3B9756" />
-                           </svg>
-                           Em Alta
-                        </span>
-                        <div class="swiper swiper-card">
-                           <div class="swiper-wrapper">
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-2" href="<?= PATHSITE ?>assets/images/card-service-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-2" href="<?= PATHSITE ?>assets/images/card-service-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-2" href="<?= PATHSITE ?>assets/images/card-service-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-2" href="<?= PATHSITE ?>assets/images/card-service-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-2" href="<?= PATHSITE ?>assets/images/card-service-m.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m.png" alt="">
-                                 </a>
-                              </div>
-                           </div>
-                           <div class="swiper-pagination"></div>
-
-                           <div class="swiper-button-prev"></div>
-                           <div class="swiper-button-next"></div>
-                        </div>
-                     </div>
-                     <a href="#">
-                        <div class="info">
-                           <span class="type">música</span>
-                           <strong class="title">Senhor Bonifácio</strong>
-                           <span class="uf">Maringá e região</span>
-                           <p>Banda com sons influenciados pelo rock dos anos 60/70 ao contemporâneo.</p>
-
-                           <a href="#" class="icon-heart">
-                              <svg class="heart-main" viewBox="0 0 512 512" width="100" title="heart">
-                                 <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
-                              </svg>
-                              <svg class="heart-background" viewBox="0 0 512 512" width="100" title="heart">
-                                 <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
-                              </svg>
-                           </a>
-                        </div>
-                     </a>
-                  </article>
-               </div>
-               <div class="swiper-slide">
-                  <article class="card-services" data-aos="fade-left">
-                     <div class="cover">
-                        <span class="button-category">
-                           <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M4.83741 0.0736048C4.5408 0.252902 3.34138 1.016 2.21221 2.28909C1.08323 3.56197 0 5.37326 0 7.63871H0.785714C0.785714 5.62195 1.74927 3.98208 2.80658 2.79001C3.86371 1.59813 4.99007 0.882493 5.25148 0.724527L4.83741 0.0736048ZM7.67085 2.42566C6.71621 1.09906 5.67545 0.29704 5.40289 0.0983433L4.93232 0.711721C5.16646 0.882378 6.13745 1.62849 7.02766 2.8655L7.67085 2.42566ZM7.85699 2.88172C8.12201 2.54396 8.34405 2.32914 8.44486 2.23767L7.90931 1.67722C7.78148 1.79328 7.52864 2.03955 7.23289 2.41642L7.85699 2.88172ZM8.0542 2.23679C8.40706 2.55692 10.2143 4.35678 10.2143 7.63795H11C11 4.06112 9.02668 2.07279 8.58951 1.67614L8.0542 2.23679ZM10.2143 7.63795V7.63871H11V7.63795H10.2143ZM10.2143 7.63871C10.2143 8.24216 10.0923 8.83979 9.85545 9.39729L10.5814 9.6904C10.8577 9.03992 11 8.3428 11 7.63871H10.2143ZM9.85545 9.39729C9.61848 9.95487 9.27127 10.4614 8.83347 10.8882L9.38905 11.4298C9.89984 10.9319 10.305 10.3409 10.5814 9.6904L9.85545 9.39729ZM8.83347 10.8882C8.39575 11.3149 7.87608 11.6534 7.30408 11.8843L7.60477 12.5919C8.27208 12.3225 8.87833 11.9276 9.38905 11.4298L8.83347 10.8882ZM7.30408 11.8843C6.73208 12.1152 6.11906 12.2341 5.5 12.2341V13C6.22231 13 6.93746 12.8614 7.60477 12.5919L7.30408 11.8843ZM5.5 12.2341C4.88094 12.2341 4.26792 12.1152 3.69592 11.8843L3.39524 12.5919C4.06254 12.8614 4.77769 13 5.5 13V12.2341ZM3.69592 11.8843C3.12396 11.6534 2.60426 11.3149 2.1665 10.8882L1.61091 11.4298C2.12163 11.9276 2.72795 12.3225 3.39524 12.5919L3.69592 11.8843ZM2.1665 10.8882C1.72874 10.4614 1.38148 9.95487 1.14457 9.39729L0.41866 9.6904C0.695066 10.3409 1.10019 10.9319 1.61091 11.4298L2.1665 10.8882ZM1.14457 9.39729C0.907649 8.83979 0.785714 8.24216 0.785714 7.63871H0C0 8.3428 0.142261 9.03992 0.41866 9.6904L1.14457 9.39729ZM8.44486 2.23767C8.34067 2.33227 8.16836 2.34035 8.0542 2.23679L8.58951 1.67614C8.39206 1.49701 8.09679 1.50701 7.90931 1.67722L8.44486 2.23767ZM7.02766 2.8655C7.22857 3.14474 7.64775 3.14843 7.85699 2.88172L7.23289 2.41642C7.34297 2.27611 7.56368 2.27669 7.67085 2.42566L7.02766 2.8655ZM5.25148 0.724527C5.14847 0.786794 5.0204 0.775903 4.93232 0.711721L5.40289 0.0983433C5.24119 -0.0195361 5.01859 -0.0359263 4.83741 0.0736048L5.25148 0.724527Z" fill="#3B9756" />
-                              <path d="M5.16044 5.10489C4.91159 5.27805 4.13434 5.84548 3.41524 6.65769C2.70318 7.46203 2.00001 8.56068 2 9.78899H2.87505C2.87505 8.8338 3.43038 7.91393 4.09444 7.16386C4.75147 6.42166 5.46783 5.89863 5.6892 5.74457L5.16044 5.10489ZM8.99913 9.71778C8.97235 8.50689 8.26999 7.42606 7.56379 6.63409C6.85075 5.83456 6.0861 5.27645 5.83952 5.10489L5.31077 5.74457C5.52995 5.89702 6.23467 6.41155 6.88663 7.14251C7.54532 7.88118 8.10348 8.78892 8.12431 9.73407L8.99913 9.71778ZM8.12431 9.73407C8.12474 9.75206 8.12501 9.77068 8.12501 9.78874H9C9 9.76482 8.99974 9.74154 8.99913 9.71778L8.12431 9.73407ZM8.12501 9.78874C8.12501 11.1189 6.9498 12.1972 5.50003 12.1972V13C7.43297 13 9 11.5623 9 9.78874H8.12501ZM5.50003 12.1972C4.05034 12.1972 2.87517 11.119 2.87505 9.78899H2C2.00017 11.5624 3.56715 13 5.50003 13V12.1972ZM2 9.78899C2 10.0098 2.19489 10.1904 2.43752 10.1904V9.38758C2.68012 9.38758 2.87505 9.56821 2.87505 9.78899H2ZM2.87505 9.78899C2.87503 9.57134 2.68357 9.38758 2.43752 9.38758V10.1904C2.1915 10.1904 2.00002 10.0065 2 9.78899H2.87505ZM5.6892 5.74457C5.57773 5.8222 5.4225 5.82228 5.31077 5.74457L5.83952 5.10489C5.63845 4.96496 5.36134 4.96512 5.16044 5.10489L5.6892 5.74457Z" fill="#3B9756" />
-                           </svg>
-                           Em Alta
-                        </span>
-                        <div class="swiper swiper-card">
-                           <div class="swiper-wrapper">
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-3" href="<?= PATHSITE ?>assets/images/card-service-m-2.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-2.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-3" href="<?= PATHSITE ?>assets/images/card-service-m-2.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-2.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-3" href="<?= PATHSITE ?>assets/images/card-service-m-2.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-2.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-3" href="<?= PATHSITE ?>assets/images/card-service-m-2.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-2.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-3" href="<?= PATHSITE ?>assets/images/card-service-m-2.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-2.png" alt="">
-                                 </a>
-                              </div>
-                           </div>
-                           <div class="swiper-pagination"></div>
-
-                           <div class="swiper-button-prev"></div>
-                           <div class="swiper-button-next"></div>
-                        </div>
-                     </div>
-                     <a href="#">
-                        <div class="info">
-                           <span class="type">lembranças</span>
-                           <strong class="title">Mimos & Tal</strong>
-                           <span class="uf">Maringá e região</span>
-                           <p>Com requinte e qualidade nós confeccionamos seus produtos com o mais alto padrão.</p>
-
-                           <a href="#" class="icon-heart">
-                              <svg class="heart-main" viewBox="0 0 512 512" width="100" title="heart">
-                                 <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
-                              </svg>
-                              <svg class="heart-background" viewBox="0 0 512 512" width="100" title="heart">
-                                 <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
-                              </svg>
-                           </a>
-                        </div>
-                     </a>
-                  </article>
-               </div>
-               <div class="swiper-slide">
-                  <article class="card-services" data-aos="fade-left">
-                     <div class="cover">
-                        <span class="button-category">
-                           <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M4.83741 0.0736048C4.5408 0.252902 3.34138 1.016 2.21221 2.28909C1.08323 3.56197 0 5.37326 0 7.63871H0.785714C0.785714 5.62195 1.74927 3.98208 2.80658 2.79001C3.86371 1.59813 4.99007 0.882493 5.25148 0.724527L4.83741 0.0736048ZM7.67085 2.42566C6.71621 1.09906 5.67545 0.29704 5.40289 0.0983433L4.93232 0.711721C5.16646 0.882378 6.13745 1.62849 7.02766 2.8655L7.67085 2.42566ZM7.85699 2.88172C8.12201 2.54396 8.34405 2.32914 8.44486 2.23767L7.90931 1.67722C7.78148 1.79328 7.52864 2.03955 7.23289 2.41642L7.85699 2.88172ZM8.0542 2.23679C8.40706 2.55692 10.2143 4.35678 10.2143 7.63795H11C11 4.06112 9.02668 2.07279 8.58951 1.67614L8.0542 2.23679ZM10.2143 7.63795V7.63871H11V7.63795H10.2143ZM10.2143 7.63871C10.2143 8.24216 10.0923 8.83979 9.85545 9.39729L10.5814 9.6904C10.8577 9.03992 11 8.3428 11 7.63871H10.2143ZM9.85545 9.39729C9.61848 9.95487 9.27127 10.4614 8.83347 10.8882L9.38905 11.4298C9.89984 10.9319 10.305 10.3409 10.5814 9.6904L9.85545 9.39729ZM8.83347 10.8882C8.39575 11.3149 7.87608 11.6534 7.30408 11.8843L7.60477 12.5919C8.27208 12.3225 8.87833 11.9276 9.38905 11.4298L8.83347 10.8882ZM7.30408 11.8843C6.73208 12.1152 6.11906 12.2341 5.5 12.2341V13C6.22231 13 6.93746 12.8614 7.60477 12.5919L7.30408 11.8843ZM5.5 12.2341C4.88094 12.2341 4.26792 12.1152 3.69592 11.8843L3.39524 12.5919C4.06254 12.8614 4.77769 13 5.5 13V12.2341ZM3.69592 11.8843C3.12396 11.6534 2.60426 11.3149 2.1665 10.8882L1.61091 11.4298C2.12163 11.9276 2.72795 12.3225 3.39524 12.5919L3.69592 11.8843ZM2.1665 10.8882C1.72874 10.4614 1.38148 9.95487 1.14457 9.39729L0.41866 9.6904C0.695066 10.3409 1.10019 10.9319 1.61091 11.4298L2.1665 10.8882ZM1.14457 9.39729C0.907649 8.83979 0.785714 8.24216 0.785714 7.63871H0C0 8.3428 0.142261 9.03992 0.41866 9.6904L1.14457 9.39729ZM8.44486 2.23767C8.34067 2.33227 8.16836 2.34035 8.0542 2.23679L8.58951 1.67614C8.39206 1.49701 8.09679 1.50701 7.90931 1.67722L8.44486 2.23767ZM7.02766 2.8655C7.22857 3.14474 7.64775 3.14843 7.85699 2.88172L7.23289 2.41642C7.34297 2.27611 7.56368 2.27669 7.67085 2.42566L7.02766 2.8655ZM5.25148 0.724527C5.14847 0.786794 5.0204 0.775903 4.93232 0.711721L5.40289 0.0983433C5.24119 -0.0195361 5.01859 -0.0359263 4.83741 0.0736048L5.25148 0.724527Z" fill="#3B9756" />
-                              <path d="M5.16044 5.10489C4.91159 5.27805 4.13434 5.84548 3.41524 6.65769C2.70318 7.46203 2.00001 8.56068 2 9.78899H2.87505C2.87505 8.8338 3.43038 7.91393 4.09444 7.16386C4.75147 6.42166 5.46783 5.89863 5.6892 5.74457L5.16044 5.10489ZM8.99913 9.71778C8.97235 8.50689 8.26999 7.42606 7.56379 6.63409C6.85075 5.83456 6.0861 5.27645 5.83952 5.10489L5.31077 5.74457C5.52995 5.89702 6.23467 6.41155 6.88663 7.14251C7.54532 7.88118 8.10348 8.78892 8.12431 9.73407L8.99913 9.71778ZM8.12431 9.73407C8.12474 9.75206 8.12501 9.77068 8.12501 9.78874H9C9 9.76482 8.99974 9.74154 8.99913 9.71778L8.12431 9.73407ZM8.12501 9.78874C8.12501 11.1189 6.9498 12.1972 5.50003 12.1972V13C7.43297 13 9 11.5623 9 9.78874H8.12501ZM5.50003 12.1972C4.05034 12.1972 2.87517 11.119 2.87505 9.78899H2C2.00017 11.5624 3.56715 13 5.50003 13V12.1972ZM2 9.78899C2 10.0098 2.19489 10.1904 2.43752 10.1904V9.38758C2.68012 9.38758 2.87505 9.56821 2.87505 9.78899H2ZM2.87505 9.78899C2.87503 9.57134 2.68357 9.38758 2.43752 9.38758V10.1904C2.1915 10.1904 2.00002 10.0065 2 9.78899H2.87505ZM5.6892 5.74457C5.57773 5.8222 5.4225 5.82228 5.31077 5.74457L5.83952 5.10489C5.63845 4.96496 5.36134 4.96512 5.16044 5.10489L5.6892 5.74457Z" fill="#3B9756" />
-                           </svg>
-                           Em Alta
-                        </span>
-                        <div class="swiper swiper-card">
-                           <div class="swiper-wrapper">
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-4" href="<?= PATHSITE ?>assets/images/card-service-m-3.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-3.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-4" href="<?= PATHSITE ?>assets/images/card-service-m-3.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-3.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-4" href="<?= PATHSITE ?>assets/images/card-service-m-3.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-3.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-4" href="<?= PATHSITE ?>assets/images/card-service-m-3.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-3.png" alt="">
-                                 </a>
-                              </div>
-                              <div class="swiper-slide">
-                                 <a data-fslightbox="gallery-4" href="<?= PATHSITE ?>assets/images/card-service-m-3.png">
-                                    <img src="<?= PATHSITE ?>assets/images/card-service-m-3.png" alt="">
-                                 </a>
-                              </div>
-                           </div>
-                           <div class="swiper-pagination"></div>
-
-                           <div class="swiper-button-prev"></div>
-                           <div class="swiper-button-next"></div>
-                        </div>
-                     </div>
-                     <a href="#">
-                        <div class="info">
-                           <span class="type">vestimenta</span>
-                           <strong class="title">Elícia Regi’s Noivas</strong>
-                           <span class="uf">Maringá-PR</span>
-                           <p>Ateliê de alta-costura para locação de vestidos de casamento tradicionais e arrojados.</p>
-
-                           <a href="#" class="icon-heart">
-                              <svg class="heart-main" viewBox="0 0 512 512" width="100" title="heart">
-                                 <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
-                              </svg>
-                              <svg class="heart-background" viewBox="0 0 512 512" width="100" title="heart">
-                                 <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
-                              </svg>
-                           </a>
-                        </div>
-                     </a>
-                  </article>
-               </div>
+               <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="navigation-swiper-blog only-mobile" data-aos="fade-up">
+               <button class="prev">
+                  <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M7 1L1 6.5L7 12" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M7 1L1 6.5L7 12" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+               </button>
+               <button class="next active">
+                  <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M1 12L7 6.5L1 1" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                     <path d="M1 12L7 6.5L1 1" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+               </button>
+            </div>
          </div>
-         <div class="navigation-swiper-blog only-mobile" data-aos="fade-up">
-            <button class="prev">
-               <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 1L1 6.5L7 12" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-               </svg>
-               <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M7 1L1 6.5L7 12" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-               </svg>
-            </button>
-            <button class="next active">
-               <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 12L7 6.5L1 1" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-               </svg>
-               <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M1 12L7 6.5L1 1" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-               </svg>
-            </button>
-         </div>
-      </div>
-   </section>
+
+      </section>
+   <? } ?>
+
 </main>
 
 <div class="box-agendar-float">

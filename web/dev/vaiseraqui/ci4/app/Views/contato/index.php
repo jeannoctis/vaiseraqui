@@ -78,7 +78,7 @@
                         <input type="hidden" name="nexc" value="1">
                      </form>
                      <nav class="col-xs-12 navigation-pages ">
-                        <?= $pager->links('contatos') ?>
+                        <?= $pager->links('contatos', 'panel_full') ?>
                      </nav>
                   </div>
                <? } ?>
@@ -86,8 +86,6 @@
             <!-- /.box-content -->
          </div>
          <!-- /.col-lg-6 col-xs-12 -->
-
-
       </div>
    </div>
    <style>

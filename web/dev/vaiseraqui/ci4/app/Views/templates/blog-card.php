@@ -1,11 +1,16 @@
 <article class="post-article" data-aos="fade-up">
    <a href="<?= PATHSITE ?>blog/<?= $identificador ?>/">
       <div class="cover">
-         <img src="<?= PATHSITE ?>uploads/artigo/<?= $arquivo ?>" alt="capa do artigo">
+
+         <picture>
+            <source srcset="<?= PATHSITE ?>uploads/artigo/<?= $arquivo ?>.webp" type="image/webp">
+            <img src="<?= PATHSITE ?>uploads/artigo/<?= $arquivo ?>" />
+         </picture>
+
          <span class="tagline"><?= $cats[$categoriaFK] ?></span>
       </div>
       <div class="info">
-         <h3><?=$titulo?></h3>
+         <h3><?= $titulo ?></h3>
          <div>
             <?= character_limiter($texto, 255) ?>
          </div>

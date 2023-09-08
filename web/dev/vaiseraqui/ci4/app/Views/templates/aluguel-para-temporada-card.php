@@ -1,5 +1,6 @@
 <article class="card-item" data-aos="fade-right">
    <div class="cover">
+      
       <? if ($fotos) { ?>
          <div class="swiper swiper-card">
             <div class="swiper-wrapper">

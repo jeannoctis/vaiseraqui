@@ -32,5 +32,4 @@ $pager->setSurroundCount(2);
          </svg>
       </a>
    <?php endif ?>
-
 </nav>
