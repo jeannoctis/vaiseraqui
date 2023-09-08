@@ -437,6 +437,10 @@ class Pages extends Controller
 
                 break;
             case "prestadores-de-servico":
+                $data['style_list'] = ['swiper'];
+                $data['cdn_list'] = ['swiper'];
+                $data['script_list'] = ['card-like', 'controller-card', 'controller-imoveis', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
+
                 $data['form4Visible'] = 'visible';
                 $produtoModel = \model("App\Models\ProdutoModel", false);
               
@@ -472,6 +476,10 @@ class Pages extends Controller
                 break;
 
             case 'prestador-de-servico':
+                $data['style_list'] = ['fancybox', 'swiper', 'jquery_ui'];
+                $data['cdn_list'] = ['fancybox', 'swiper', 'jquery', 'jquery_ui'];
+                $data['script_list'] = ['card-like', 'controller-card', 'controller-imoveis', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
+
                 helper('date');
                 $data['bodyClass'] = 'internal-rent';
                 $produtoModel = \model("App\Models\ProdutoModel", false);
@@ -567,7 +575,7 @@ class Pages extends Controller
 
                 if ($segments[1] && $data['espacoAtual']) {
                     // Interna
-                    $data['cdn_list'][] = ['sticksy'];
+                    $data['cdn_list'] = ['fancybox', 'swiper', 'sticksy'];
                     $data['script_list'] = ['card-like', 'controller-card', 'controller-page-internal', 'controler-presentation', 'faq-dropdown',  'fs-lightbox', 'modal-filter'];
 
                     $page = "aluguel-para-temporada-interna";
@@ -575,7 +583,7 @@ class Pages extends Controller
 
                     $data['espacoAtual']->fotos = $this->produtoModel->fotos($data['espacoAtual']->id, 99);
                     $data['espacoAtual']->valores = $this->produtoModel->valores($data['espacoAtual']->id);
-                    $data['espacoAtual']->fotoDestaque = $this->produtoModel->fotoDestaque($data['espacoAtual']->fotoFK);
+                    // $data['espacoAtual']->fotoDestaque = $this->produtoModel->fotoDestaque($data['espacoAtual']->fotoFK);
                     $data['espacoAtual']->comodidades = $this->produtoModel->comodidades($data['espacoAtual']->id);
                     $data['espacoAtual']->proximidades = $this->produtoModel->proximidades($data['espacoAtual']->id);
                     $data['espacoAtual']->anunciante = $this->produtoModel->anunciante($data['espacoAtual']->anuncianteFK);
@@ -688,6 +696,9 @@ class Pages extends Controller
 
                 break;
             case 'hospedagens':
+                $data['style_list'] = ['fancybox', 'swiper'];
+                $data['cdn_list'] = ['fancybox', 'swiper'];
+                $data['script_list'] = ['card-like', 'controller-card', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
                 $data['pagina'] = 23;
                 $data['bodyClass'] = 'base-list-map';
 
@@ -744,6 +755,9 @@ class Pages extends Controller
 
                 break;
             case 'hospedagem':
+                $data['style_list'][] = ['jquery_ui'];
+                $data['cdn_list'] = ['swiper', 'jquery', 'jquery_ui'];
+                $data['script_list'] = ['card-like', 'controller-card', 'controller-imoveis', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
                 $data['pagina'] = 23;
                 $data['bodyClass'] = 'internal-rent';
 
