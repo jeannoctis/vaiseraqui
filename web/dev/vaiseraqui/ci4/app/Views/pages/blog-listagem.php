@@ -139,34 +139,3 @@
       </div>
    </section>
 </main>
-
-<!-- <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/form-filter.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
-<script src="<?= PATHSITE ?>assets/scripts/modal-filter.js"></script> -->
-
-<script>
-   const btnCategoryModal = document.querySelector('.more-about-modal > a')
-   const categoryModal = document.querySelector('.more-about-modal > .modal-more-categories')
-   const modalLinks = categoryModal.querySelectorAll('a')
-
-   btnCategoryModal.addEventListener('click', function(e) {
-      e.preventDefault()
-      categoryModal.classList.toggle('open')
-
-   })
-   modalLinks.forEach(link => {
-      link.addEventListener('click', function(e) {
-         categoryModal.classList.remove('open')
-      })
-   })
-
-   // Form Select
-   // const boxes = document.querySelectorAll('.j-box-select')
-   // boxes.forEach((box, key) => {
-   //    new Selector(box)
-   // })
-</script>

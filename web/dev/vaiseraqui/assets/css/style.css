@@ -5089,7 +5089,7 @@ header.header-bg .group-title span {
   letter-spacing: -0.04375rem;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1250px) {
   .events-internal .s-text-and-slider .info {
     display: flex;
   }
