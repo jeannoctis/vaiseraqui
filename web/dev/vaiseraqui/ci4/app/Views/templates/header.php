@@ -236,7 +236,7 @@
           <a href="<?=PATHSITE?>saloes-de-festas-e-areas-de-lazer/">Salões de Festa e Áreas de Lazer</a>
           <a href="<?=PATHSITE?>lojas-temporarias/">Lojas Temporárias</a>
           <a href="<?=PATHSITE?>prestadores-de-servicos/">Prestadores de Serviços</a>
-          <a href="<?=PATHSITE?>hospedagem/">Hospedagem</a>
+          <a href="<?=PATHSITE?>hospedagens/">Hospedagem</a>
           <a href="<?=PATHSITE?>eventos/">Eventos</a>
         </nav>
       </div>

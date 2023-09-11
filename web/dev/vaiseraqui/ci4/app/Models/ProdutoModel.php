@@ -198,9 +198,9 @@ class ProdutoModel extends Model
     public function comodidades($id)
     {
         $produtoComodidadeModel = \model("App\Models\ProdutoComodidadeModel", false)
-            ->select("titulo, comodidades")
-            ->where("produtoFK", $id)
-            ->orderBy("titulo ASC");
+                ->select("titulo, comodidades")
+                ->where("produtoFK", $id)
+                ->orderBy("titulo ASC");
         $comodidades = $produtoComodidadeModel->findAll();
 
         return $comodidades;
@@ -209,9 +209,9 @@ class ProdutoModel extends Model
     public function proximidades($id)
     {
         $produtoProximidadeModel = \model("App\Models\ProdutoProximidadeModel", false)
-            ->select("produto_proximidade.proximidades, px.arquivo, px.titulo")
-            ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
-            ->where("produtoFK", $id);
+                ->select("produto_proximidade.proximidades, px.arquivo, px.titulo")
+                ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
+                ->where("produtoFK", $id);
         $proximidades = $produtoProximidadeModel->findAll();
 
         return $proximidades;
@@ -220,7 +220,7 @@ class ProdutoModel extends Model
     public function anunciante($id)
     {
         $anuncianteModel = \model("App\Models\AnuncianteModel", false)
-            ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
+                ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
         $anunciante = $anuncianteModel->find($id);
 
         return $anunciante;
@@ -238,9 +238,9 @@ class ProdutoModel extends Model
     public function dadosCard()
     {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado")
-            ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
-            ->join("cidade c", "c.id = produto.cidadeFK")
-            ->join("estado e", "e.id = c.estadoFK");
+                        ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
+                        ->join("cidade c", "c.id = produto.cidadeFK")
+                        ->join("estado e", "e.id = c.estadoFK");
     }
 
     public function hospedagens($limit)
@@ -266,20 +266,103 @@ class ProdutoModel extends Model
 
         return $data;
     }
-
+    
     public function ordernar($ordem)
     {
         if (!$ordem || $ordem == "recentes") {
             return $this->orderBy("id DESC");
-
+    
         } else if ($ordem == "antigos") {
             return $this->orderBy("id ASC");
 
         } else if ($ordem == "maior") {
             return $this->orderBy("preco DESC");
             
-        }else if ($ordem == "menor") {
+          }else if ($ordem == "menor") {
             return $this->orderBy("preco ASC");
         }
+    }            
+             
+    public function eventos($get) {
+
+        $this->select('produto.titulo, produto.id, produto.local, pc.id as categoriaFK, c.titulo as cidade, '
+                . 'e.sigla as estado, produto.identificador');
+        $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+        $this->join('cidade c', 'c.id = produto.cidadeFK');
+        $this->join('estado e', 'e.id = c.estadoFK');
+        $this->where("produto.id IN (SELECT produtoFK FROM produto_data WHERE produto_data.data = '{$get['dia']}')");
+        $this->where('pc.tipoFK', 5);
+        $this->where('ativo', '1');
+        $eventos = $this->findAll();
+
+        $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
+        $produtoCategoriaModel->select('id, titulo');
+        $produtoCategoriaModel->orderBy("ordem ASC, id DESC");
+        $produtoCategoriaModel->where('tipoFK', 5);
+        $categorias = $produtoCategoriaModel->findAll();
+        
+         foreach ($eventos as $ind => $evento) {
+             $eventos[$ind]->fotos = $this->fotos($evento->id,1,false);
+         }
+
+        foreach ($categorias as $ind => $categoria) {
+            if (!$categorias[$ind]->eventos) {
+                $categorias[$ind]->eventos = array();
+            }
+            foreach ($eventos as $evento) {
+                if ($evento->categoriaFK == $categoria->id) {
+                    $categorias[$ind]->eventos[] = $evento;
+                }
+            }
+        }
+
+        ob_start();       
+        ?>
+        <div class="item show" data-modal="">
+            <? if ($categorias) { ?>
+                <div class="events-with-data j-calendar-columns">
+                    <? foreach ($categorias as $categoria) { ?>
+                        <div class="column">
+                            <h3><?= $categoria->titulo ?></h3>
+                            <div class="scroll-h">
+                                <div class="wraper">
+                                    <?
+                                    if ($categoria->eventos) {
+                                        foreach ($categoria->eventos as $evento) {
+                                            ?>
+                                            <div onclick="window.location.href='<?=PATHSITE?>evento/<?=$evento->identificador?>/'" class="item" style="background-image: url('<?= PATHSITE ?>uploads/produto/<?=$evento->id?>/<?=$evento->fotos[0]->arquivo?>');">
+                                                <h4><?= $evento->titulo ?></h4>
+                                                <div class="box-address">
+                                                    <img src="<?= PATHSITE ?>assets/images/icon-map.svg" alt="">
+                                                    <span>
+                                                        <?=$evento->local?> <br>
+                                                        <?=$evento->cidade?>- <?=$evento->estado?>
+                                                    </span>
+                                                </div>
+                                                <a href="<?=PATHSITE?>evento/<?=$evento->identificador?>/">Mais detalhes <img src="<?= PATHSITE ?>assets/images/icon-arrow-right.svg" alt=""></a>
+                                            </div>
+                                        <? }
+                                    } else {
+                                        ?>
+                                        <div class="wraper">
+                                            <div class="empty">
+                                                <img src="<?= PATHSITE ?>assets/images/icon-calendar-not-available.svg" alt="">
+                                                <span>
+                                                    Nenhum evento cadastrado <br>
+                                                    nesta sessão para o dia de hoje.
+                                                </span>
+                                            </div>
+                                        </div>   
+                <? } ?>
+                                </div>
+                            </div>
+                        </div>
+            <? } ?>
+                </div>
+            </div>
+        <? } ?>
+        <?
+        $retorno['html'] = ob_get_clean();
+        echo json_encode($retorno);
     }
 }

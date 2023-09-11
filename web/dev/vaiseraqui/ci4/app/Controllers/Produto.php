@@ -621,12 +621,12 @@ class Produto extends BaseController
 
       $data['idFK'] = $idFK;
 
-      $data['title'] = 'Fotos';
-      $data['view'] = 'fotos';
+        $data['title'] = 'Fotos';
+        $data['view'] = 'fotos';
       $data['tabela'] = 'produto';
-      $data['tabelaFK'] = $this->tabela;
-      $data['tabelaFKF'] = 'foto';
-      $data['nomeModel'] = 'ProdutoFotoModel';
+        $data['tabelaFK'] = $this->tabela;
+        $data['tabelaFKF'] = 'foto';
+        $data['nomeModel'] = 'ProdutoFotoModel';
 
       echo view('templates/admin-header', $data);
       echo view("{$data['tabelaFK']}/{$data['view']}", $data);
@@ -646,14 +646,14 @@ class Produto extends BaseController
          }
       }
 
-      $data['title'] = 'Foto';
-      $data['view'] = "foto";
+        $data['title'] = 'Foto';
+        $data['view'] = "foto";
       $data['tabela'] = 'produto';
-      $data['tabelaFK'] = $this->tabela;
-      $data['tabelaFK2'] = 'fotos';
-      $data["nomeModel"] = "ProdutoFotoModel";
-      $data['idFK'] = $idFK;
-      $data['id'] = $id;
+        $data['tabelaFK'] = $this->tabela;
+        $data['tabelaFK2'] = 'fotos';
+        $data["nomeModel"] = "ProdutoFotoModel";
+        $data['idFK'] = $idFK;
+        $data['id'] = $id;
 
       $post = request()->getPost();
       $data['get'] = request()->getGet();
@@ -662,12 +662,12 @@ class Produto extends BaseController
 
          $post['produtoFK'] = $idFK;
 
-         if ($id) {
-            $img = $this->request->getFile("arquivo");
-            if ($img) {
-               if ($img->isValid() && !$img->hasMoved()) {
-                  $newName = date('Y-m-d') . $img->getRandomName();
-                  $post["arquivo"] = $newName;
+            if ($id) {
+                $img = $this->request->getFile("arquivo");
+                if ($img) {
+                    if ($img->isValid() && !$img->hasMoved()) {
+                        $newName = date('Y-m-d') . $img->getRandomName();
+                        $post["arquivo"] = $newName;
                   $img->move(PATHHOME . "/uploads/{$data['tabela']}/{$idFK}/", $newName);
                   try {
                      echo View('templates/tinypng');
@@ -1337,11 +1337,16 @@ class Produto extends BaseController
                   </div>
                </div>
 
+                </div>
             </div>
-         </div>
-      </div>
-<?
-      $retorno['html'] = ob_get_clean();
-      echo json_encode($retorno);
-   }
+        </div>
+        <?
+        $retorno['html'] = ob_get_clean();
+        echo json_encode($retorno);
+    }
+    
+    public function eventos() {
+         $get = request()->getGet();
+        $this->model->eventos($get);
+    }
 }

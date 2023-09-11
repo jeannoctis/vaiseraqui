@@ -181,6 +181,7 @@ $routes->add('produto/fone', 'Produto::fone');
 $routes->add('produto/novaComodidade', 'Produto::novaComodidade');
 $routes->add('produto/novoPontoDeVenda', 'Produto::novoPontoDeVenda');
 $routes->add('produto/novaOrganizacao', 'Produto::novaOrganizacao');
+$routes->add('produto/eventos', 'Produto::eventos');
 
 $routes->add('utils/ordena', 'Utils::ordena');
 $routes->add('utils/ordena2', 'Utils::ordena2');
