@@ -1345,4 +1345,9 @@ class Produto extends BaseController
         $retorno['html'] = ob_get_clean();
         echo json_encode($retorno);
     }
+    
+    public function eventos() {
+         $get = request()->getGet();
+        $this->model->eventos($get);
+    }
 }

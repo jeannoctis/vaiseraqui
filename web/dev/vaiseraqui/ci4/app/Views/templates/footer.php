@@ -168,6 +168,10 @@
   <script type="module" src="<?= PATHSITE ?>assets/scripts/controller-blog.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/fslightbox.js"></script>
   
+  
+
+  <script type="module" src="<?=PATHSITE?>assets/scripts/controller-imoveis.js"></script>
+  
   <script src="<?=PATHSITE?>assets/scripts/script.js"></script>
 
   <script>         
@@ -252,10 +256,38 @@
 
       new Sticksy('.sticky', {topSpacing: 150});
       
-    <? } ?>
+    <? } else if($pagina == 1 || $pagina == 3) { ?>
+       eventosData('<?=date("Y-m-d")?>');
+   <? } ?>
     </script>
     
-    <script>        
+    <script> 
+        
+        
+    // Date picker
+    $(document).ready(function() {  
+      $(function() {
+        $.datepicker.setDefaults($.datepicker.regional['sv']);
+
+        const config = {
+          dateFormat: 'dd/mm/yy',
+          dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+          dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+          dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+          monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+          monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+          nextText: 'Proximo',
+          prevText: 'Anterior'
+        }
+
+        $("#desktop-table-checkin" ).datepicker(config);
+        $("#desktop-table-checkout" ).datepicker(config);
+
+        $("#mobile-table-checkin" ).datepicker(config);
+        $("#mobile-table-checkout" ).datepicker(config);
+      });
+    })
+
     
 <? if ($erro) { ?>
                         cSwal.fire({
@@ -287,6 +319,7 @@ if ($analytics[3]) {
 }
 ?>
                     }    
+                    
   </script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="   crossorigin=""></script>
   <?

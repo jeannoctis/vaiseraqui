@@ -4,8 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProdutoModel extends Model
-{
+class ProdutoModel extends Model {
+
     protected $DBGroup = 'default';
     protected $table = 'produto';
     protected $primaryKey = 'id';
@@ -30,8 +30,7 @@ class ProdutoModel extends Model
     ];
     protected $skipValidation = false;
 
-    public function fotos($id, $limit)
-    {
+    public function fotos($id, $limit) {
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
         $produtoFotoModel->where('produtoFK', $id);
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
@@ -42,20 +41,20 @@ class ProdutoModel extends Model
         $principal = $this->find($id);
 
         if ($fotos) {
-             $achou = false;
+            $achou = false;
             foreach ($fotos as $ind => $foto) {
                 if ($foto->id == $principal->fotoFK) {
                     $fotos[$ind]->principal = 1;
-                     $achou = true;
+                    $achou = true;
                 }
             }
-            if(!$achou && $destaque){
+            if (!$achou && $destaque) {
                 $produtoFotoModel->resetQuery();
                 $produtoFotoModel->where('produtoFK', $id);
                 $produtoFotoModel->where("id IN ( SELECT fotoFK FROM produto WHERE id = {$id} )");
                 $temDestaque = $produtoFotoModel->find()[0];
-                if($temDestaque){
-                     $fotos[-1] = $temDestaque;
+                if ($temDestaque) {
+                    $fotos[-1] = $temDestaque;
                 }
             }
         }
@@ -64,14 +63,14 @@ class ProdutoModel extends Model
     }
 
     public function fotoPrincipal($array) {
-       
+
         if ($array) {
             foreach ($array as $ind => $arr) {
                 if ($arr->principal) {
                     $array['-1'] = $arr;
-                    unset($array[$ind]);                 
+                    unset($array[$ind]);
                 }
-            }          
+            }
         }
 
         ksort($array);
@@ -92,8 +91,8 @@ class ProdutoModel extends Model
         if ($destaques) {
             foreach ($destaques as $ind => $destaque) {
                 $destaques[$ind]->fotos = $this->fotos($destaque->id, 4, true);
-                if(!$destaques[$ind]->fotos[0]->destaque) {
-                $destaques[$ind]->fotos =  $this->fotoPrincipal($destaques[$ind]->fotos);
+                if (!$destaques[$ind]->fotos[0]->destaque) {
+                    $destaques[$ind]->fotos = $this->fotoPrincipal($destaques[$ind]->fotos);
                 }
             }
         }
@@ -116,8 +115,7 @@ class ProdutoModel extends Model
         return $valores;
     }
 
-    public function setores($id)
-    {
+    public function setores($id) {
         $produtoSetorModel = model('App\Models\ProdutoSetorModel', false);
         $produtoSetorModel->where('produtoFK', $id);
         $produtoSetorModel->orderBy('ordem ASC, id DESC');
@@ -136,8 +134,7 @@ class ProdutoModel extends Model
         return $setores;
     }
 
-    public function organizacoes($id)
-    {
+    public function organizacoes($id) {
         $produtoOrganizacaoModel = model('App\Models\ProdutoOrganizacaoModel', false);
         $produtoOrganizacaoModel->where('produtoFK', $id);
         $produtoOrganizacaoModel->orderBy('ordem ASC, id DESC');
@@ -146,8 +143,7 @@ class ProdutoModel extends Model
         return $organizacoes;
     }
 
-    public function pontosVenda($id)
-    {
+    public function pontosVenda($id) {
         $produtoPontoDeVendaModel = model('App\Models\ProdutoPontoDeVendaModel', false);
         $produtoPontoDeVendaModel->where('produtoFK', $id);
         $produtoPontoDeVendaModel->orderBy('ordem ASC, id DESC');
@@ -155,8 +151,7 @@ class ProdutoModel extends Model
         return $pontos;
     }
 
-    public function cardapio($id)
-    {
+    public function cardapio($id) {
         $produtoCardapioModel = model('App\Models\ProdutoCardapioModel', false);
         $produtoCardapioModel->where('produtoFK', $id);
         $produtoCardapioModel->orderBy('ordem ASC, id DESC');
@@ -164,8 +159,7 @@ class ProdutoModel extends Model
         return $cardapio;
     }
 
-    public function responsavel($id)
-    {
+    public function responsavel($id) {
         $anuncianteModel = model('App\Models\AnuncianteModel', false);
         $anuncianteModel->select('titulo, telefone, telefone2, telefone3, email, arquivo');
         $anunciante = $anuncianteModel->find($id);
@@ -186,44 +180,38 @@ class ProdutoModel extends Model
         $anunciante->link2 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone2);
         $anunciante->link3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone3);
 
-
-
         return $anunciante;
     }
 
-    public function comodidades($id)
-    {
+    public function comodidades($id) {
         $produtoComodidadeModel = \model("App\Models\ProdutoComodidadeModel", false)
-            ->select("titulo, comodidades")
-            ->where("produtoFK", $id)
-            ->orderBy("titulo ASC");
+                ->select("titulo, comodidades")
+                ->where("produtoFK", $id)
+                ->orderBy("titulo ASC");
         $comodidades = $produtoComodidadeModel->findAll();
 
         return $comodidades;
     }
-    
-    public function proximidades($id)
-    {
+
+    public function proximidades($id) {
         $produtoProximidadeModel = \model("App\Models\ProdutoProximidadeModel", false)
-            ->select("produto_proximidade.proximidades, px.arquivo, px.titulo")
-            ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
-            ->where("produtoFK", $id);
+                ->select("produto_proximidade.proximidades, px.arquivo, px.titulo")
+                ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
+                ->where("produtoFK", $id);
         $proximidades = $produtoProximidadeModel->findAll();
-    
+
         return $proximidades;
     }
 
-    public function anunciante($id)
-    {
+    public function anunciante($id) {
         $anuncianteModel = \model("App\Models\AnuncianteModel", false)
-            ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
+                ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
         $anunciante = $anuncianteModel->find($id);
 
         return $anunciante;
     }
 
-    public function valorTotal($valores, $preco)
-    {        
+    public function valorTotal($valores, $preco) {
         $total = array_column($valores, "valor");
         $total = array_sum($total);
         $total += $preco;
@@ -233,12 +221,12 @@ class ProdutoModel extends Model
 
     public function dadosCard() {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado")
-            ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
-            ->join("cidade c", "c.id = produto.cidadeFK")
-            ->join("estado e", "e.id = c.estadoFK");        
-}
+                        ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
+                        ->join("cidade c", "c.id = produto.cidadeFK")
+                        ->join("estado e", "e.id = c.estadoFK");
+    }
 
-  public function hospedagens($limit) {
+    public function hospedagens($limit) {
 
         $data['get'] = $get = \request()->getGet();
 
@@ -261,4 +249,86 @@ class ProdutoModel extends Model
         return $data;
     }
 
+    public function eventos($get) {
+
+        $this->select('produto.titulo, produto.id, produto.local, pc.id as categoriaFK, c.titulo as cidade, '
+                . 'e.sigla as estado, produto.identificador');
+        $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+        $this->join('cidade c', 'c.id = produto.cidadeFK');
+        $this->join('estado e', 'e.id = c.estadoFK');
+        $this->where("produto.id IN (SELECT produtoFK FROM produto_data WHERE produto_data.data = '{$get['dia']}')");
+        $this->where('pc.tipoFK', 5);
+        $this->where('ativo', '1');
+        $eventos = $this->findAll();
+
+        $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
+        $produtoCategoriaModel->select('id, titulo');
+        $produtoCategoriaModel->orderBy("ordem ASC, id DESC");
+        $produtoCategoriaModel->where('tipoFK', 5);
+        $categorias = $produtoCategoriaModel->findAll();
+        
+         foreach ($eventos as $ind => $evento) {
+             $eventos[$ind]->fotos = $this->fotos($evento->id,1,false);
+         }
+
+        foreach ($categorias as $ind => $categoria) {
+            if (!$categorias[$ind]->eventos) {
+                $categorias[$ind]->eventos = array();
+            }
+            foreach ($eventos as $evento) {
+                if ($evento->categoriaFK == $categoria->id) {
+                    $categorias[$ind]->eventos[] = $evento;
+                }
+            }
+        }
+
+        ob_start();       
+        ?>
+        <div class="item show" data-modal="">
+            <? if ($categorias) { ?>
+                <div class="events-with-data j-calendar-columns">
+                    <? foreach ($categorias as $categoria) { ?>
+                        <div class="column">
+                            <h3><?= $categoria->titulo ?></h3>
+                            <div class="scroll-h">
+                                <div class="wraper">
+                                    <?
+                                    if ($categoria->eventos) {
+                                        foreach ($categoria->eventos as $evento) {
+                                            ?>
+                                            <div onclick="window.location.href='<?=PATHSITE?>evento/<?=$evento->identificador?>/'" class="item" style="background-image: url('<?= PATHSITE ?>uploads/produto/<?=$evento->id?>/<?=$evento->fotos[0]->arquivo?>');">
+                                                <h4><?= $evento->titulo ?></h4>
+                                                <div class="box-address">
+                                                    <img src="<?= PATHSITE ?>assets/images/icon-map.svg" alt="">
+                                                    <span>
+                                                        <?=$evento->local?> <br>
+                                                        <?=$evento->cidade?>- <?=$evento->estado?>
+                                                    </span>
+                                                </div>
+                                                <a href="<?=PATHSITE?>evento/<?=$evento->identificador?>/">Mais detalhes <img src="<?= PATHSITE ?>assets/images/icon-arrow-right.svg" alt=""></a>
+                                            </div>
+                                        <? }
+                                    } else {
+                                        ?>
+                                        <div class="wraper">
+                                            <div class="empty">
+                                                <img src="<?= PATHSITE ?>assets/images/icon-calendar-not-available.svg" alt="">
+                                                <span>
+                                                    Nenhum evento cadastrado <br>
+                                                    nesta sessão para o dia de hoje.
+                                                </span>
+                                            </div>
+                                        </div>   
+                <? } ?>
+                                </div>
+                            </div>
+                        </div>
+            <? } ?>
+                </div>
+            </div>
+        <? } ?>
+        <?
+        $retorno['html'] = ob_get_clean();
+        echo json_encode($retorno);
+    }
 }
