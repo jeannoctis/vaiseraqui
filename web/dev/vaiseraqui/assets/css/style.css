@@ -1792,6 +1792,7 @@ select {
   overflow: hidden;
   box-shadow: 0 0 0px rgba(128, 128, 128, 0.5);
   transition: box-shadow 0.2s ease-in-out;
+  height: 554px;
 }
 .card-events .cover {
   height: 15.375rem;
@@ -1877,6 +1878,8 @@ select {
 }
 .card-events .info .desc {
   margin-bottom: 1.25rem;
+  height: 72px;
+  overflow: hidden;
 }
 .card-events .info .desc p {
   color: #404041;

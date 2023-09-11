@@ -18,7 +18,15 @@ $infoPagina['iconePagina'] = $iconePagina;
 
          <div class="row">
             <div class="col-12 instruction">
-               <?= $textoExplicativo->texto ?>               
+               <?= $textoExplicativo->texto ?>
+               <div class="top">
+                  <div class="title"></div>
+                  <button type="button"></button>
+               </div>
+
+               <div class="bottom">
+
+               </div>
             </div>
          </div>
 
