@@ -24,7 +24,7 @@
                         <? foreach ($fotos as $ind => $elemento) { ?>
                            <div class="ui-state-default sort col-md-4 base" rel="<?= $elemento->id ?>">
 
-                              <div style="background-image:url('<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $elemento->arquivo ?>'); filter: <?= $produtoFK->fotoFK == $elemento->id ? "brightness(1)" : "" ?>;" class="base-bg"></div>
+                              <div style="background-image:url('<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $idFK ?>/<?= $elemento->arquivo ?>'); filter: <?= $produtoFK->fotoFK == $elemento->id ? "brightness(1)" : "" ?>;" class="base-bg"></div>
 
                               <div class="hover">
 
@@ -39,7 +39,7 @@
                                     </a>
                                  </div>
                               </div>
-                              
+
                            </div>
                         <? } ?>
                      <? } ?>
@@ -161,7 +161,7 @@
       }, function(data) {
          const retorno = jQuery.parseJSON(data);
 
-         if(retorno.ok) {
+         if (retorno.ok) {
             const icones = document.querySelectorAll(".hover .icones i")
             const textos = document.querySelectorAll(".hover .icones span")
             const bgs = document.querySelectorAll(".base-bg")

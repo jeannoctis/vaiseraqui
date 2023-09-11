@@ -196,12 +196,13 @@ if ($acesso['usuarioFK'] > 3) {
             <? if (in_array(5, $aprovados) || $adminMaster) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 5) ? 'current active' : '' ?> '>
-                     <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-person-circle"></i><span>Cadastros</span><span class="menu-arrow fa fa-angle-down"></span></a>
+                     <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi-ui-checks"></i><span>Cadastros</span><span class="menu-arrow fa fa-angle-down"></span></a>
                      <ul class="sub-menu js__content">
                         <li class='<?= ($segments[1] == 'cidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cidade/"><i class="bi-caret-right-fill"></i> Cidades</a></li>
                         <li class='<?= ($segments[1] == 'comodidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/comodidade/"><i class="bi-caret-right-fill"></i> Comodidades</a></li>
                         <li class='<?= ($segments[1] == 'proximidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/proximidade/"><i class="bi-caret-right-fill"></i> Proximidades</a></li>
                         <li class='<?= ($segments[1] == 'cardapio') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cardapio/"><i class="bi-caret-right-fill"></i> Cardápio</a></li>
+                        <li class='<?= ($segments[1] == 'instrucao') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/instrucao/"><i class="bi-caret-right-fill"></i> Instruções anunciante</a></li>
                      </ul>
                   </li>
                </ul>

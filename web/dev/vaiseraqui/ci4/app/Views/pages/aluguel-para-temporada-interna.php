@@ -174,7 +174,7 @@
 
             <aside class="info-slider" data-aos="fade-up">
                <div class="price">
-                  <span class="total">Total R$????</span>
+                  <span class="total">Total R$<?= number_format($espacoAtual->total, 2, ",", ".") ?></span>
                   <span class="rent">Aluguel R$<?= number_format($espacoAtual->preco, 2, ",", ".") ?></span>
                </div>
                <div class="buttons">

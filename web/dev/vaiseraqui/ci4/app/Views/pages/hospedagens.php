@@ -217,7 +217,7 @@
                                             </div>
                                         </div>
                                         </section>
-    <? if($destaques) {?>
+                    <? if($destaques) {?>
                                         <section class="s-title-and-list-cards" id="servicos">
                                             <div class="container-medium">
                                                 <header data-aos="fade-up">

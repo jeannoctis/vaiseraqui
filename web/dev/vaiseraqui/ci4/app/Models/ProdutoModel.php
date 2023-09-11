@@ -42,20 +42,20 @@ class ProdutoModel extends Model
         $principal = $this->find($id);
 
         if ($fotos) {
-             $achou = false;
+            $achou = false;
             foreach ($fotos as $ind => $foto) {
                 if ($foto->id == $principal->fotoFK) {
                     $fotos[$ind]->principal = 1;
-                     $achou = true;
+                    $achou = true;
                 }
             }
-            if(!$achou && $destaque){
+            if (!$achou && $destaque) {
                 $produtoFotoModel->resetQuery();
                 $produtoFotoModel->where('produtoFK', $id);
                 $produtoFotoModel->where("id IN ( SELECT fotoFK FROM produto WHERE id = {$id} )");
                 $temDestaque = $produtoFotoModel->find()[0];
-                if($temDestaque){
-                     $fotos[-1] = $temDestaque;
+                if ($temDestaque) {
+                    $fotos[-1] = $temDestaque;
                 }
             }
         }
@@ -63,15 +63,16 @@ class ProdutoModel extends Model
         return $fotos;
     }
 
-    public function fotoPrincipal($array) {
-       
+    public function fotoPrincipal($array)
+    {
+
         if ($array) {
             foreach ($array as $ind => $arr) {
                 if ($arr->principal) {
                     $array['-1'] = $arr;
-                    unset($array[$ind]);                 
+                    unset($array[$ind]);
                 }
-            }          
+            }
         }
 
         ksort($array);
@@ -79,7 +80,8 @@ class ProdutoModel extends Model
         return $array;
     }
 
-    public function destaquePrestadores($limit) {
+    public function destaquePrestadores($limit)
+    {
         $this->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
         $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
         $this->join('cidade c', 'c.id = produto.cidadeFK');
@@ -92,15 +94,16 @@ class ProdutoModel extends Model
         if ($destaques) {
             foreach ($destaques as $ind => $destaque) {
                 $destaques[$ind]->fotos = $this->fotos($destaque->id, 4, true);
-                if(!$destaques[$ind]->fotos[0]->destaque) {
-                $destaques[$ind]->fotos =  $this->fotoPrincipal($destaques[$ind]->fotos);
+                if (!$destaques[$ind]->fotos[0]->destaque) {
+                    $destaques[$ind]->fotos =  $this->fotoPrincipal($destaques[$ind]->fotos);
                 }
             }
         }
         return $destaques;
     }
 
-    public function datas($id) {
+    public function datas($id)
+    {
         $produtoDataModel = model('App\Models\ProdutoDataModel', false);
         $produtoDataModel->where('produtoFK', $id);
         $produtoDataModel->orderBy('data ASC');
@@ -202,7 +205,7 @@ class ProdutoModel extends Model
 
         return $comodidades;
     }
-    
+
     public function proximidades($id)
     {
         $produtoProximidadeModel = \model("App\Models\ProdutoProximidadeModel", false)
@@ -210,7 +213,7 @@ class ProdutoModel extends Model
             ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
             ->where("produtoFK", $id);
         $proximidades = $produtoProximidadeModel->findAll();
-    
+
         return $proximidades;
     }
 
@@ -224,7 +227,7 @@ class ProdutoModel extends Model
     }
 
     public function valorTotal($valores, $preco)
-    {        
+    {
         $total = array_column($valores, "valor");
         $total = array_sum($total);
         $total += $preco;
@@ -232,14 +235,16 @@ class ProdutoModel extends Model
         return $total;
     }
 
-    public function dadosCard() {
+    public function dadosCard()
+    {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado")
             ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
             ->join("cidade c", "c.id = produto.cidadeFK")
-            ->join("estado e", "e.id = c.estadoFK");        
-}
+            ->join("estado e", "e.id = c.estadoFK");
+    }
 
-  public function hospedagens($limit) {
+    public function hospedagens($limit)
+    {
 
         $data['get'] = $get = \request()->getGet();
 
@@ -262,4 +267,19 @@ class ProdutoModel extends Model
         return $data;
     }
 
+    public function ordernar($ordem)
+    {
+        if (!$ordem || $ordem == "recentes") {
+            return $this->orderBy("id DESC");
+
+        } else if ($ordem == "antigos") {
+            return $this->orderBy("id ASC");
+
+        } else if ($ordem == "maior") {
+            return $this->orderBy("preco DESC");
+            
+        }else if ($ordem == "menor") {
+            return $this->orderBy("preco ASC");
+        }
+    }
 }

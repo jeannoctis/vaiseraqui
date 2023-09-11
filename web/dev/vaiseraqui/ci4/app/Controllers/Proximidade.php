@@ -77,7 +77,7 @@ class Proximidade extends BaseController
                   imagepalettetotruecolor($img);
                   imagealphablending($img, true);
                   imagesavealpha($img, true);
-                  imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
+                  imagewebp($img, PATHHOME . "uploads/{$data['tabela']}/{$newName}.webp", 60);
                   imagedestroy($img);
                } catch (\Tinify\ClientException $e) {
                }

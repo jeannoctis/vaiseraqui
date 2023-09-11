@@ -23,14 +23,14 @@
   
     options.forEach(option => {
       option.addEventListener('click', function(e) {
-        e.preventDefault()
+        // e.preventDefault()
         e.stopPropagation()
         removeAllOptionActive()
   
         const optionValue = option.dataset.selectValue
         input.value = optionValue
         option.classList.add('active')
-        // window.location = option.href
+        window.location = option.href
         modal.classList.remove('open')
       })
     })
