@@ -9,42 +9,8 @@
                   <a href="<?= PATHSITE ?>aluguel-para-temporada/">Aluguel para Temporada</a>
                </nav>
                <span class="result"><?= count($alugueisParaTemporada) ?> espaços encontrados</span>
-
-               <!-- <form class="form-order">
-                  <a href="#" class="btn-primary">
-                     <img src="<?= PATHSITE ?>assets/images/icon-button-filter.svg" alt="icon filter">
-                     Filtros
-                  </a>
-                  <div class="input-order j-input-order-select">
-                     <label for="order">
-                        <img src="<?= PATHSITE ?>assets/images/icon-order.svg" alt="">
-                        <img class="active" src="<?= PATHSITE ?>assets/images/icon-order-active.svg" alt="">
-                        Ordenar por:
-                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M1 1L5 5L9 1" stroke="#404041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <svg class="active" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                     </label>
-                     <div class="modal-order">
-                        <input type="text" readonly value="Menor preço - Maior preço">
-                        <div class="modal-order-select">
-                           <div class="wraper-scroll">
-                              <nav class="content">
-                                 <a data-select-value="Maior preço - Menor preço" href="#maior-menor">Maior preço - Menor preço</a>
-                                 <a data-select-value="Menor preço - Maior preço" href="#menor-maior" class="active">Menor preço - Maior preço</a>
-                                 <a data-select-value="Entre R$800,00 e R$1.200,00" href="#entre-800-1200">Entre R$800,00 e R$1.200,00</a>
-                                 <a data-select-value="Entre R$1.200,00 e R$1.600,00" href="#entre-1200-1600">Entre R$1.200,00 e R$1.600,00</a>
-                                 <a data-select-value="Acima de R$1.600,00" href="#acima-1600">Acima de R$1.600,00</a>
-                                 <a data-select-value="Mais visto" href="#mais-visto">Mais visto</a>
-                                 <a data-select-value="Mais perto" href="#mais perto">Mais perto</a>
-                              </nav>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </form> -->
+               
+               <!-- Filtro -->
                <?= view("templates/order-filter", $get) ?>
             </div>
          </header>

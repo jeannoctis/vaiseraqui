@@ -444,7 +444,7 @@ class Pages extends Controller
                 }
 
                 break;
-            case "prestadores-de-servico":
+            case "prestadores-de-servicos":
                 $data['style_list'] = ['swiper'];
                 $data['script_list'] = ['swiper', 'card-like', 'controller-card', 'controller-imoveis', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
 
@@ -553,6 +553,7 @@ class Pages extends Controller
                     ->where("ativo", 1)
                     ->ordernar($get['ordem']);
                 $data['alugueisParaTemporada'] = $this->produtoModel->paginate(8, "anuncios", $paginate);
+
                 if ($data['alugueisParaTemporada']) {
                     foreach ($data['alugueisParaTemporada'] as $ind => $produto) {
                         $data['alugueisParaTemporada'][$ind]->fotos = $this->produtoModel->fotos($produto->id, 4,true);                        
@@ -942,8 +943,8 @@ class Pages extends Controller
 
                 $data['txPoliticaETermos'] = $this->textoModel->find(13);
 
-                $this->politicaTermoTopicosModel = \model('App\Models\PoliticaTermoTopicosModel', false);
-                $data['politicaETermos'] = $this->politicaTermoTopicosModel->orderBy("ordem ASC, id DESC")->findAll();
+                $this->politicaTermoTopicoModel = \model('App\Models\PoliticaTermoTopicoModel', false);
+                $data['politicaETermos'] = $this->politicaTermoTopicoModel->orderBy("ordem ASC, id DESC")->findAll();
 
                 break;
             case 'esqueci':

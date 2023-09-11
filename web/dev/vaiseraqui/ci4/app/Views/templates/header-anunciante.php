@@ -98,12 +98,12 @@
                         <h5>Proximidades</h5>
                     </a>
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/condominio" class="itemMenuPainel <?= ($segments[1] == 'proximidades') ? 'menuAtivo' : '' ?>">
+                    <a href="<?= PATHSITE ?>area-do-anunciante/condominio" class="itemMenuPainel <?= ($segments[1] == 'condominio') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-condominio.svg">
                         <h5>Condomínio</h5>
                     </a>
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/obervacoes" class="itemMenuPainel <?= ($segments[1] == 'proximidades') ? 'menuAtivo' : '' ?>">
+                    <a href="<?= PATHSITE ?>area-do-anunciante/obervacoes" class="itemMenuPainel <?= ($segments[1] == 'observacoes') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-observation.svg">
                         <h5>Observações</h5>
                     </a>
@@ -113,7 +113,7 @@
                         <h5>Calendário</h5>
                     </a>
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/feriados" class="itemMenuPainel <?= ($segments[1] == 'calendario') ? 'menuAtivo' : '' ?>">
+                    <a href="<?= PATHSITE ?>area-do-anunciante/feriados" class="itemMenuPainel <?= ($segments[1] == 'feriados') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-vacation.svg">
                         <h5>Feriados</h5>
                     </a>
@@ -123,12 +123,12 @@
                         <h5>Valores / Ingressos</h5>
                     </a>
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/precos" class="itemMenuPainel <?= ($segments[1] == 'precos') ? 'menuAtivo' : '' ?>">
+                    <a href="<?= PATHSITE ?>area-do-anunciante/pontos-de-venda" class="itemMenuPainel <?= ($segments[1] == 'pontos-de-venda') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-sales-point.svg">
                         <h5>Pontos de Venda</h5>
                     </a>
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/precos" class="itemMenuPainel <?= ($segments[1] == 'precos') ? 'menuAtivo' : '' ?>">
+                    <a href="<?= PATHSITE ?>area-do-anunciante/organizacao" class="itemMenuPainel <?= ($segments[1] == 'organizacao') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-crew.svg">
                         <h5>Organização</h5>
                     </a>

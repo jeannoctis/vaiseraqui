@@ -1,6 +1,6 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs'
 
-(function() {
+(function () {
   const swiperPresentation = new Swiper('.presentationSwiper', {
     slidesPerView: 1.5,
     spaceBetween: 15,
@@ -12,10 +12,10 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs
     pagination: {
       el: '.swiper-pagination',
     },
-    breakpoints: { 
+    breakpoints: {
       769: {
         slidesPerView: 1.1,
-      },    
+      },
       // 900: {
       //   slidesPerView: 1.4,
       // },   
@@ -31,19 +31,20 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs
   // Controller swiper presentation
   const buttonNext = document.querySelector('.navigation-swiper-blog > .next')
   const buttonPrev = document.querySelector('.navigation-swiper-blog > .prev')
-  
-  buttonNext.addEventListener('click', function(e) {
-    e.preventDefault()
-    console.log('next')
-    swiperPresentation.slideNext()
-  })
-
-  buttonPrev.addEventListener('click', function(e) {
-    e.preventDefault()
-    console.log('prev')
-    swiperPresentation.slidePrev()
-  })
-
+  if (buttonNext) {
+    buttonNext.addEventListener('click', function (e) {
+      e.preventDefault()
+      console.log('next')
+      swiperPresentation.slideNext()
+    })
+  }
+  if (buttonPrev) {
+    buttonPrev.addEventListener('click', function (e) {
+      e.preventDefault()
+      console.log('prev')
+      swiperPresentation.slidePrev()
+    })
+  }
   swiperPresentation.on('reachBeginning', function () {
     buttonNext.classList.add('active')
     buttonPrev.classList.remove('active')
@@ -58,10 +59,10 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs
     if (!swiperPresentation.isBeginning) {
       buttonPrev.classList.add('active')
     }
-    
+
     if (!swiperPresentation.isEnd) {
       buttonNext.classList.add('active')
     }
-  }) 
+  })
 
 })()

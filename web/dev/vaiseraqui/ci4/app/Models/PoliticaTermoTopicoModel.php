@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class PoliticaTermoTopicosModel extends Model
+class PoliticaTermoTopicoModel extends Model
 {
    protected $DBGroup = 'default';
    protected $table = 'politicatermo_topico';
