@@ -37,38 +37,3 @@
     </div>
   </article>
 </main>
-
-<script>
-  const navigationTermsLinks = document.querySelectorAll('.navigation-terms a')
-
-  function highlightOnScroll() {
-    const headings = document.querySelectorAll('h3[data-title]');
-    headings.forEach(heading => {
-      const rect = heading.getBoundingClientRect();
-      if (rect.top <= 100 && rect.bottom >= 0) {
-        const link = document.querySelector(`.navigation-terms a[data-link=${heading.dataset.title}]`)
-        console.log('remover atives')
-        cleanAllActiveLink()
-        console.log('adicionar ativo')
-        link.classList.add('active')
-      }
-    });
-  }
-
-  function cleanAllActiveLink() {
-    navigationTermsLinks.forEach(link => {
-      link.classList.remove('active')
-    })
-  }
-
-  window.addEventListener('scroll', highlightOnScroll);
-
-  // Form Select
-  // const boxes = document.querySelectorAll('.j-box-select')
-  // boxes.forEach((box, key) => {
-  //   new Selector(box)
-  // })
-</script>
-</body>
-
-</html>

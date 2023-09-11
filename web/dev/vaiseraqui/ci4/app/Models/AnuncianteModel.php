@@ -190,7 +190,6 @@ class AnuncianteModel extends Model {
                 }
                 break;
             case "proximidades":
-
                 $textoModel = model('App\Models\TextoModel', false);
                 $data['textoExplicativo'] = $textoModel->find(58);
 
@@ -202,7 +201,6 @@ class AnuncianteModel extends Model {
                 $data['tipoPagina'] = 'proximidades';
                 $proximidadeModel = model('App\Models\ProximidadeModel', false);
                 $proximidadeModel->orderBy("titulo ASC");
-                //   $proximidadeModel->where("tipo", 1);
                 $data["itens"] = $proximidadeModel->findAll();
 
                 if ($post) {
@@ -1003,6 +1001,10 @@ class AnuncianteModel extends Model {
                 }
                 unset($_POST);
                 break;
+            case "condominio":
+                $data['nomePagina'] = "Condominio";
+                $data['iconePagina'] = "icon-condominio.svg";
+            break;
             default:
                 throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
                 break;

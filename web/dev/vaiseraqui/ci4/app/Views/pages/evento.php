@@ -60,45 +60,30 @@
                             <?
                             if ($datas) {
                                 foreach ($datas as $dia) {
+                                    $horaIni = explode(":", $dia->horarioInicio);
+                                    $horaFim = explode(":", $dia->horarioTermino);
+                                    $diaAtual = explode("-",$dia->data);
                                     ?>
                                     <div class="item">
-                                        <span class="date">24 de agosto</span>
-                                        <span class="day">quinta</span>
-                                        <span class="interval">19:00 - 21:00</span>
+                                        <span class="date"><?=$diaAtual[2]?> de <?=mes($diaAtual[1])?></span>
+                                        <span class="day"><?=semana($dia->data)?></span>
+                                        <span class="interval"><?=$horaIni[0]?>:<?=$horaIni[0]?> <?= ($horaFim) ? (' - ' . $horaFim[0] . ':' . $horaFim[1] )   : ''  ?> </span>
                                     </div>
                                     <?
                                 }
                             }
-                            ?>
-                            <div class="item">
-                                <span class="date">25 de agosto</span>
-                                <span class="day">sexta</span>
-                                <span class="interval">19:00 - 21:00</span>
-                            </div>
-                            <div class="item">
-                                <span class="date">26 de agosto</span>
-                                <span class="day">sábado</span>
-                                <span class="interval">19:00 - 21:00</span>
-                            </div>
-                            <div class="item">
-                                <span class="date">27 de agosto</span>
-                                <span class="day">domingo</span>
-                                <span class="interval">19:00 - 21:00</span>
-                            </div>
-                            <div class="item">
-                                <span class="date">28 de agosto</span>
-                                <span class="day">segunda</span>
-                                <span class="interval">19:00 - 21:00</span>
-                            </div>
+                            ?>          
                         </div>
                         <a href="#">Ver mais detalhes</a>
                     </div>
                 </div>
             </footer>
         </div>
+        <? if($fotos) {?>
         <div class="cover" data-aos="fade-left">
-            <img src="<?= PATHSITE ?>assets/images/events-interna-bg.png" alt="">
+            <img src="<?= PATHSITE ?>uploads/produto/<?=$fotos[0]->produtoFK?>/<?=$fotos[0]->arquivo?>" alt="">
         </div>
+        <? } ?>
     </section>
     <section class="more-about-2-column">
         <div class="container-medium">

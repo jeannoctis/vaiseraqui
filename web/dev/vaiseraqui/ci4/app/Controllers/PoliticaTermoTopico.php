@@ -24,10 +24,8 @@ class PoliticaTermoTopico extends BaseController
       } else if ($_POST['nexc']) {
          $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
       }
-
-      $this->model->orderBy("ordem ASC");
-
-      $data['lista'] = $this->model->findAll();
+      
+      $data['lista'] = $this->model->orderBy("ordem ASC")->findAll();
 
       $data['title'] = 'Políticas de Privacidade e Termos de Uso em Tópicos';
       $data['tabela'] = "politicatermo_topico";

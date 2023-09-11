@@ -945,16 +945,3 @@
    </svg>
    Mapa
 </a>
-
-<script>
-   // Controla modal de mapa
-   const btnMaps = document.querySelector('.btn-maps-mobile')
-   btnMaps.addEventListener('click', (e) => {
-      e.preventDefault()
-      Fancybox.show([{
-         src: "https://www.google.com/maps/@51.5039653,-0.1246493,14.12z",
-         width: 800,
-         height: 600,
-      }, ]);
-   })
-</script>

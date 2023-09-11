@@ -1,4 +1,5 @@
 <article class="card-item" data-aos="fade-right">
+       <a href="<?=PATHSITE?>lojas-temporarias/<?=$identificador?>">
    <? if ($fotos) { ?>
       <div class="cover">
          <div class="swiper swiper-card">
@@ -20,7 +21,7 @@
       </div>
    <? } ?>
 
-   <a href="<?=PATHSITE?>lojas-temporarias/<?=$identificador?>">
+
       <div class="info">
          <span class="type"><?= $categoria ?></span>
          <span class="zona"><?= $titulo ?></span>
