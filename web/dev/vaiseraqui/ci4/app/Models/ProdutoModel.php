@@ -4,8 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProdutoModel extends Model {
-
+class ProdutoModel extends Model
+{
     protected $DBGroup = 'default';
     protected $table = 'produto';
     protected $primaryKey = 'id';
@@ -30,7 +30,8 @@ class ProdutoModel extends Model {
     ];
     protected $skipValidation = false;
 
-    public function fotos($id, $limit) {
+    public function fotos($id, $limit)
+    {
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
         $produtoFotoModel->where('produtoFK', $id);
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
@@ -62,7 +63,8 @@ class ProdutoModel extends Model {
         return $fotos;
     }
 
-    public function fotoPrincipal($array) {
+    public function fotoPrincipal($array)
+    {
 
         if ($array) {
             foreach ($array as $ind => $arr) {
@@ -78,7 +80,8 @@ class ProdutoModel extends Model {
         return $array;
     }
 
-    public function destaquePrestadores($limit) {
+    public function destaquePrestadores($limit)
+    {
         $this->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
         $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
         $this->join('cidade c', 'c.id = produto.cidadeFK');
@@ -92,14 +95,15 @@ class ProdutoModel extends Model {
             foreach ($destaques as $ind => $destaque) {
                 $destaques[$ind]->fotos = $this->fotos($destaque->id, 4, true);
                 if (!$destaques[$ind]->fotos[0]->destaque) {
-                    $destaques[$ind]->fotos = $this->fotoPrincipal($destaques[$ind]->fotos);
+                    $destaques[$ind]->fotos =  $this->fotoPrincipal($destaques[$ind]->fotos);
                 }
             }
         }
         return $destaques;
     }
 
-    public function datas($id) {
+    public function datas($id)
+    {
         $produtoDataModel = model('App\Models\ProdutoDataModel', false);
         $produtoDataModel->where('produtoFK', $id);
         $produtoDataModel->orderBy('data ASC');
@@ -107,15 +111,17 @@ class ProdutoModel extends Model {
         return $datas;
     }
 
-    public function valores($id) {
+    public function valores($id)
+    {
         $produtoValorModel = model('App\Models\ProdutoValorModel', false);
         $produtoValorModel->where('produtoFK', $id);
         $produtoValorModel->orderBy('valor ASC');
-        $datas = $produtoValorModel->findAll();
+        $valores = $produtoValorModel->findAll();
         return $valores;
     }
 
-    public function setores($id) {
+    public function setores($id)
+    {
         $produtoSetorModel = model('App\Models\ProdutoSetorModel', false);
         $produtoSetorModel->where('produtoFK', $id);
         $produtoSetorModel->orderBy('ordem ASC, id DESC');
@@ -134,7 +140,8 @@ class ProdutoModel extends Model {
         return $setores;
     }
 
-    public function organizacoes($id) {
+    public function organizacoes($id)
+    {
         $produtoOrganizacaoModel = model('App\Models\ProdutoOrganizacaoModel', false);
         $produtoOrganizacaoModel->where('produtoFK', $id);
         $produtoOrganizacaoModel->orderBy('ordem ASC, id DESC');
@@ -143,7 +150,8 @@ class ProdutoModel extends Model {
         return $organizacoes;
     }
 
-    public function pontosVenda($id) {
+    public function pontosVenda($id)
+    {
         $produtoPontoDeVendaModel = model('App\Models\ProdutoPontoDeVendaModel', false);
         $produtoPontoDeVendaModel->where('produtoFK', $id);
         $produtoPontoDeVendaModel->orderBy('ordem ASC, id DESC');
@@ -151,7 +159,8 @@ class ProdutoModel extends Model {
         return $pontos;
     }
 
-    public function cardapio($id) {
+    public function cardapio($id)
+    {
         $produtoCardapioModel = model('App\Models\ProdutoCardapioModel', false);
         $produtoCardapioModel->where('produtoFK', $id);
         $produtoCardapioModel->orderBy('ordem ASC, id DESC');
@@ -159,7 +168,8 @@ class ProdutoModel extends Model {
         return $cardapio;
     }
 
-    public function responsavel($id) {
+    public function responsavel($id)
+    {
         $anuncianteModel = model('App\Models\AnuncianteModel', false);
         $anuncianteModel->select('titulo, telefone, telefone2, telefone3, email, arquivo');
         $anunciante = $anuncianteModel->find($id);
@@ -180,10 +190,13 @@ class ProdutoModel extends Model {
         $anunciante->link2 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone2);
         $anunciante->link3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone3);
 
+
+
         return $anunciante;
     }
 
-    public function comodidades($id) {
+    public function comodidades($id)
+    {
         $produtoComodidadeModel = \model("App\Models\ProdutoComodidadeModel", false)
                 ->select("titulo, comodidades")
                 ->where("produtoFK", $id)
@@ -193,7 +206,8 @@ class ProdutoModel extends Model {
         return $comodidades;
     }
 
-    public function proximidades($id) {
+    public function proximidades($id)
+    {
         $produtoProximidadeModel = \model("App\Models\ProdutoProximidadeModel", false)
                 ->select("produto_proximidade.proximidades, px.arquivo, px.titulo")
                 ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
@@ -203,7 +217,8 @@ class ProdutoModel extends Model {
         return $proximidades;
     }
 
-    public function anunciante($id) {
+    public function anunciante($id)
+    {
         $anuncianteModel = \model("App\Models\AnuncianteModel", false)
                 ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
         $anunciante = $anuncianteModel->find($id);
@@ -211,7 +226,8 @@ class ProdutoModel extends Model {
         return $anunciante;
     }
 
-    public function valorTotal($valores, $preco) {
+    public function valorTotal($valores, $preco)
+    {
         $total = array_column($valores, "valor");
         $total = array_sum($total);
         $total += $preco;
@@ -219,14 +235,16 @@ class ProdutoModel extends Model {
         return $total;
     }
 
-    public function dadosCard() {
+    public function dadosCard()
+    {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado")
                         ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
                         ->join("cidade c", "c.id = produto.cidadeFK")
                         ->join("estado e", "e.id = c.estadoFK");
     }
 
-    public function hospedagens($limit) {
+    public function hospedagens($limit)
+    {
 
         $data['get'] = $get = \request()->getGet();
 
@@ -248,7 +266,23 @@ class ProdutoModel extends Model {
 
         return $data;
     }
+    
+    public function ordernar($ordem)
+    {
+        if (!$ordem || $ordem == "recentes") {
+            return $this->orderBy("id DESC");
+    
+        } else if ($ordem == "antigos") {
+            return $this->orderBy("id ASC");
 
+        } else if ($ordem == "maior") {
+            return $this->orderBy("preco DESC");
+            
+          }else if ($ordem == "menor") {
+            return $this->orderBy("preco ASC");
+        }
+    }            
+             
     public function eventos($get) {
 
         $this->select('produto.titulo, produto.id, produto.local, pc.id as categoriaFK, c.titulo as cidade, '

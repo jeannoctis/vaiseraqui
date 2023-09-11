@@ -80,7 +80,7 @@
                             </form>
 
                             <nav class="col-xs-12 navigation-pages ">
-                                <?= $pager->links('anunciantes') ?>
+                                <?= $pager->links('anunciantes', 'panel_full') ?>
                             </nav>
                         </div>
                     <? } ?>

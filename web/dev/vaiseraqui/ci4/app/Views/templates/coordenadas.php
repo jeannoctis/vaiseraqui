@@ -1,8 +1,7 @@
 
 
 <script>
-  
-  <? if($coordenadas) {  
+  <? if ($coordenadas) {
   ?>
   
  var map = new L.Map('map', {

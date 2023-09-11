@@ -12,7 +12,7 @@
 
                      <div class='form-group col-xs-12 paddingZeroM'>
                         <? if ($id) { ?>
-                           <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $foto->arquivo ?>' class='dropify' type="file" name='arquivo' value="upload" />
+                           <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $idFK ?>/<?= $foto->arquivo ?>' class='dropify' type="file" name='arquivo' value="upload" />
                         <? } else { ?>
                            <input class='dropify' multiple type="file" name='arquivo[]' value="upload" />
                         <? } ?>

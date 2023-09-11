@@ -68,14 +68,14 @@
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="inicioDestaque">Início destaque</label>
-                           <input type="date" name="inicioDestaque" class="form-control" id="inicioDestaque" value="<?= $resultado->inicioDestaque ?>" placeholder="Escreva..." required>
+                           <input type="date" name="inicioDestaque" class="form-control" id="inicioDestaque" value="<?= $resultado->inicioDestaque ?>" placeholder="Escreva..." >
                         </div>
                      </div>
 
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="validadeDestaque">Fim Destaque</label>
-                           <input type="date" name="validadeDestaque" class="form-control" id="validadeDestaque" value="<?= $resultado->validadeDestaque ?>" placeholder="Escreva..." required>
+                           <input type="date" name="validadeDestaque" class="form-control" id="validadeDestaque" value="<?= $resultado->validadeDestaque ?>" placeholder="Escreva..." >
                         </div>
                      </div>
 

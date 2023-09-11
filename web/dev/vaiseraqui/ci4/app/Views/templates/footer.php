@@ -1,8 +1,8 @@
   <footer class="footer">
     <div class="container-medium">
       <div class="item">
-        <img src="<?=PATHSITE?>assets/images/logo-mobile.png" alt="" class="logo only-mobile">
-        <img src="<?=PATHSITE?>assets/images/logo-footer.png" alt="Logo" class="logo">
+        <img src="<?= PATHSITE ?>assets/images/logo-mobile.png" alt="" class="logo only-mobile">
+        <img src="<?= PATHSITE ?>assets/images/logo-footer.png" alt="Logo" class="logo">
         <a href="#" class="btn-primary">Anuncie seu imóvel conosco</a>
       </div>
       <div class="item">
@@ -319,11 +319,12 @@ if ($analytics[3]) {
 }
 ?>
                     }    
-                    
   </script>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="   crossorigin=""></script>
-  <?
+    
+    <? if($coordenadas) {
   echo View('templates/coordenadas');
+    }
   ?>
   
 </body>

@@ -1,6 +1,6 @@
 import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs'
 
-(function() {
+(function () {
 
   const swiperAgenda = new Swiper('.swiper-agenda', {
     slidesPerView: 3,
@@ -24,15 +24,19 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs
   const buttonNext = document.querySelector('.calendar-swiper-navigation-wraper > .next')
   const buttonPrev = document.querySelector('.calendar-swiper-navigation-wraper > .prev')
 
-  buttonNext.addEventListener('click', function(e) {
-    e.preventDefault()
-    swiperAgenda.slideNext()
-  })
+  if (buttonNext) {
+    buttonNext.addEventListener('click', function (e) {
+      e.preventDefault()
+      swiperAgenda.slideNext()
+    })
+  }
+  if (buttonPrev) {
+    buttonPrev.addEventListener('click', function (e) {
+      e.preventDefault()
+      swiperAgenda.slidePrev()
+    })
+  }
 
-  buttonPrev.addEventListener('click', function(e) {
-    e.preventDefault()
-    swiperAgenda.slidePrev()
-  })
 
   swiperAgenda.on('reachBeginning', function () {
     buttonNext.classList.add('active')
@@ -44,7 +48,7 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs
     buttonPrev.classList.add('active')
   });
 
-  swiperAgenda.on('slideChange', function() {
+  swiperAgenda.on('slideChange', function () {
     if (!swiperAgenda.isEnd) {
       buttonNext.classList.add('active')
     }
@@ -58,21 +62,21 @@ import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs
   const calendarTitle = document.querySelectorAll('.j-calendar-columns .column h3')
   calendarTitle.forEach(title => {
     title.addEventListener('click', function (e) {
-      e.preventDefault()      
-      const column = this.parentNode 
+      e.preventDefault()
+      const column = this.parentNode
 
-      if (title.classList.contains('show'))  {
+      if (title.classList.contains('show')) {
         title.classList.remove('show')
         column.classList.remove('show')
       } else {
-        closeAllAdsColumn()  
+        closeAllAdsColumn()
         title.classList.add('show')
         column.classList.add('show')
       }
     })
   })
 
-  function closeAllAdsColumn() {
+  function closeAllAdsColumn () {
     calendarTitle.forEach(title => {
       const column = title.parentNode
       column.classList.remove('show')

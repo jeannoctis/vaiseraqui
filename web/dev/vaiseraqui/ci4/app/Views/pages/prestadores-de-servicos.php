@@ -335,3 +335,9 @@
   </div>
 
   
+  <script type="module" src="<?=PATHSITE?>assets/scripts/controller-imoveis.js"></script>
+  
+  
+  
+</body>
+</html>

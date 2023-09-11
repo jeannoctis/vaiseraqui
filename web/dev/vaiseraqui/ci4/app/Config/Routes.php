@@ -94,6 +94,10 @@ $routes->group('admin', function ($routes) {
     $routes->add('faq/form', 'Faq::form');
     $routes->add('faq/form/(:any)', 'Faq::form/$i');
 
+    $routes->add('instrucao', 'Instrucao::index');
+    $routes->add('instrucao/form', 'Instrucao::form');
+    $routes->add('instrucao/form/(:any)', 'Instrucao::form/$i');
+
     $routes->add('aspecto', 'Aspecto::index');
     $routes->add('aspecto/form', 'Aspecto::form');
     $routes->add('aspecto/form/(:any)', 'Aspecto::form/$i');

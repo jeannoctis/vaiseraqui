@@ -1,3 +1,4 @@
+
   <main>
     <section class="s-callendar my-callendar" id="calendar">
       <div class="container-medium">
@@ -8,7 +9,7 @@
               <path d="M1 13L7 7L1 0.999999" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>              
           </a>
-          <a href="<?=PATHSITE?>eventos/">Eventos</a>
+          <a href="#">Eventos</a>
         </nav>
         
       

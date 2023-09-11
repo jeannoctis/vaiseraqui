@@ -1,11 +1,10 @@
 <article class="card-item" data-aos="fade-right">
-   <div class="cover">
-
-      <? if ($fotos) { ?>
+   <? if ($fotos) { ?>
+      <div class="cover">
          <div class="swiper swiper-card">
             <div class="swiper-wrapper">
                <? foreach ($fotos as $foto) { ?>
-                  <div class="swiper-slide">
+                  <div class="swiper-slide">                     
                      <picture>
                         <source srcset="<?= PATHSITE ?>uploads/produto/<?= $id ?>/<?= $foto->arquivo ?>.webp" type="image/webp">
                         <img src="<?= PATHSITE ?>uploads/produto/<?= $id ?>/<?= $foto->arquivo ?>" alt="foto do local">
@@ -18,18 +17,24 @@
             <div class="swiper-button-prev"></div>
             <div class="swiper-button-next"></div>
          </div>
-      <? } ?>
-   </div>
-   <a href="<?= PATHSITE ?>aluguel-para-temporada/<?= $identificador ?>">
+      </div>
+   <? } ?>
+
+   <a href="<?=PATHSITE?>lojas-temporarias/<?=$identificador?>">
       <div class="info">
          <span class="type"><?= $categoria ?></span>
          <span class="zona"><?= $titulo ?></span>
          <strong class="city"><?= $cidade ?> - <?= $estado ?></strong>
-         <ul>
-            <li><?= $quartos ?> quartos</li>
-            <li><?= $banheiros ?> banheiros</li>
-            <li><?= $areautil ?> m²</li>
-         </ul>
+         <? if ($itensdisponiveis) {
+            $itens = explode(";", $itensdisponiveis) ?>
+            <ul>
+               <? foreach ($itens as $key => $item) {
+                  if ($key < 3) { ?>
+                     <li><?= $item ?></li>
+                  <? } ?>
+               <? } ?>
+            </ul>
+         <? } ?>
 
          <p class="price">
             <span class="value">R$<?= number_format($preco, 2, ",", ".") ?></span>
