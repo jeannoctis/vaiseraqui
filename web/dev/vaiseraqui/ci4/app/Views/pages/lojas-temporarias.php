@@ -15,7 +15,6 @@
             </div>
          </header>
           
-     
           
          <div class="left-space" id="lojas-temp">
              <? if($lojasEmAlta[0]) {?>
@@ -83,6 +82,15 @@
             
           </article>
              <? } ?>
+             
+             <div class="list-articles">
+               <?
+               foreach ($lojasEmAlta as  $ind =>$loja) {
+                   if($ind){
+                  echo view("templates/loja-temporaria-card", (array)$loja);
+                   }
+               } ?>
+            </div>
             <div class="list-articles">
                <? foreach ($lojasTemporarias as $loja) {
                   echo view("templates/loja-temporaria-card", (array)$loja);

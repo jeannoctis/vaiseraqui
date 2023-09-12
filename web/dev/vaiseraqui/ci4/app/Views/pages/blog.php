@@ -17,11 +17,11 @@
         </button>        
       </div>      
       <a href="#">
-        <img src="./assets/images/logo.png" alt="Logo" class="logo">
+        <img src="<?=PATHSITE?>assets/images/logo.png" alt="Logo" class="logo">
       </a>
       <form action="#" class="">
         <input type="text" name="search" placeholder="O que você está procurando?">
-        <button type="submit"><img src="./assets/images/icon-search.svg" alt=""></button>
+        <button type="submit"><img src="<?=PATHSITE?>assets/images/icon-search.svg" alt=""></button>
       </form>
       <div class="header-modal-filter">
         <button class="j-btn-modal-filter">
@@ -42,8 +42,8 @@
         <div class="header-modal-filter-content j-filter-modal-container">
           <nav class="presentation-form-menu">
             <a href="#" class="active" data-form="form1">   
-              <img src="./assets/images/icon-tab-1-active-mobile.svg" alt="" class="isActive">
-              <img src="./assets/images/icon-tab-1-inactive-mobile.svg" alt="">                                  
+              <img src="<?=PATHSITE?>assets/images/icon-tab-1-active-mobile.svg" alt="" class="isActive">
+              <img src="<?=PATHSITE?>assets/images/icon-tab-1-inactive-mobile.svg" alt="">                                  
               Aluguel para <br>
               temporada
             </a>
@@ -163,11 +163,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -187,11 +187,11 @@
                 <div class="box-select j-box-select">
                   <label for="hospedagem">
                     <div>
-                      <img src="./assets/images/icon-hospedagem.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-hospedagem.svg" alt="icon map">
                       Tipo da Hospedagem
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -207,7 +207,7 @@
                 </div>
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="./assets/images/icon-keyword.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="">
                     Palavra-chave
                   </label>
                   <input type="text" placeholder="Digite aqui">
@@ -216,14 +216,14 @@
               <div class="input-group-wraper mb-10">
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="./assets/images/icon-checkin.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkin.svg" alt="">
                     Check-in
                   </label>
                   <input type="text" placeholder="Data de Entrada" class="dateInput">
                 </div>
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="./assets/images/icon-checkout.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkout.svg" alt="">
                     Check-out
                   </label>
                   <input type="text" placeholder="Data de Saída" class="dateInput">
@@ -254,11 +254,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -278,11 +278,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="./assets/images/icon-type-space.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-type-space.svg" alt="icon map">
                       Tipo do Espaço
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -299,7 +299,7 @@
                 </div>  
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="./assets/images/icon-keyword.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="">
                     Palavra-chave
                   </label>
                   <input type="text" placeholder="Digite aqui">
@@ -308,14 +308,14 @@
               <div class="input-group-wraper mb-10">
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="./assets/images/icon-checkin.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkin.svg" alt="">
                     Check-in
                   </label>
                   <input type="text" placeholder="Data de Entrada" class="dateInput">
                 </div>
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="./assets/images/icon-checkout.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkout.svg" alt="">
                     Check-out
                   </label>
                   <input type="text" placeholder="Data de Saída" class="dateInput">
@@ -346,11 +346,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -370,11 +370,11 @@
                 <div class="box-select j-box-select">
                   <label for="hospedagem">
                     <div>
-                      <img src="./assets/images/icon-loja-temp.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-loja-temp.svg" alt="icon map">
                       Tipo da Loja Temporária
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -391,11 +391,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="./assets/images/icon-area-util.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-area-util.svg" alt="icon map">
                       Área Útil
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -414,7 +414,7 @@
               <div class="box-select mb-10">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-keyword.svg" alt="icon keyword">
+                    <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                     Palavra-chave
                   </div>
                 </label>
@@ -445,11 +445,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -469,11 +469,11 @@
                 <div class="box-select j-box-select">
                   <label for="hospedagem">
                     <div>
-                      <img src="./assets/images/icon-prestador-servico.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-prestador-servico.svg" alt="icon map">
                       Tipo do Prestador de Serviço
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -490,7 +490,7 @@
                 <div class="box-select">
                   <label for="cities">
                     <div>
-                      <img src="./assets/images/icon-keyword.svg" alt="icon keyword">
+                      <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                       Palavra-chave
                     </div>
                   </label>
@@ -522,11 +522,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -546,11 +546,11 @@
                 <div class="box-select j-box-select">
                   <label for="hospedagem">
                     <div>
-                      <img src="./assets/images/icon-hospedagem-2.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-hospedagem-2.svg" alt="icon map">
                       Tipo da Hospedagem
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -567,7 +567,7 @@
                 <div class="box-select">
                   <label for="cities">
                     <div>
-                      <img src="./assets/images/icon-keyword.svg" alt="icon keyword">
+                      <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                       Palavra-chave
                     </div>
                   </label>
@@ -577,14 +577,14 @@
               <div class="input-group-wraper mb-10">
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="./assets/images/icon-checkin.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkin.svg" alt="">
                     Check-in
                   </label>
                   <input type="text" placeholder="Data de Entrada" class="dateInput">
                 </div>
                 <div class="input-group">
                   <label for="keyword">
-                    <img src="./assets/images/icon-checkout.svg" alt="">
+                    <img src="<?=PATHSITE?>assets/images/icon-checkout.svg" alt="">
                     Check-out
                   </label>
                   <input type="text" placeholder="Data de Saída" class="dateInput">
@@ -615,11 +615,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -639,11 +639,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="./assets/images/icon-venda-aluguel.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-venda-aluguel.svg" alt="icon map">
                       Venda/Aluguel
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -661,7 +661,7 @@
                 <div class="box-select">
                   <label for="cities">
                     <div>
-                      <img src="./assets/images/icon-keyword.svg" alt="icon keyword">
+                      <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                       Palavra-chave
                     </div>
                   </label>
@@ -693,11 +693,11 @@
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-map-2.svg" alt="icon map">
+                    <img src="<?=PATHSITE?>assets/images/icon-map-2.svg" alt="icon map">
                     Cidade
                   </div>
                   <button class="j-btn-select">
-                    <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                    <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
                 <div class="select">
@@ -717,11 +717,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="./assets/images/icon-evento.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-evento.svg" alt="icon map">
                       Tipo do Evento
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -738,11 +738,11 @@
                 <div class="box-select j-box-select">
                   <label for="cities">
                     <div>
-                      <img src="./assets/images/icon-data.svg" alt="icon map">
+                      <img src="<?=PATHSITE?>assets/images/icon-data.svg" alt="icon map">
                       Data
                     </div>
                     <button class="j-btn-select">
-                      <img src="./assets/images/icon-selector.svg" alt="icon dropdown">
+                      <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                     </button>
                   </label>
                   <div class="select">
@@ -763,7 +763,7 @@
               <div class="box-select mb-10">
                 <label for="cities">
                   <div>
-                    <img src="./assets/images/icon-keyword.svg" alt="icon keyword">
+                    <img src="<?=PATHSITE?>assets/images/icon-keyword.svg" alt="icon keyword">
                     Palavra-chave
                   </div>
                 </label>
@@ -801,7 +801,7 @@
           Entrar
         </a>
         <div class="box-logged">
-          <img src="./assets/images/logged-user.png" alt="" class="avatar">
+          <img src="<?=PATHSITE?>assets/images/logged-user.png" alt="" class="avatar">
           <div>
             <span class="title">Olá, Marlon</span>
             <ul>
@@ -827,7 +827,7 @@
             </button>        
           </div>
           <div class="box-logo">          
-            <img src="./assets/images/logo.png" alt="Logo" class="logo">
+            <img src="<?=PATHSITE?>assets/images/logo.png" alt="Logo" class="logo">
           </div>
         </header>
         <h2>Olá! <span>Entre</span> para montar <br> sua festa</h2>
@@ -845,7 +845,7 @@
           Entrar
         </a>
         <div class="box-logged">
-          <img src="./assets/images/logged-user.png" alt="" class="avatar">
+          <img src="<?=PATHSITE?>assets/images/logged-user.png" alt="" class="avatar">
           <div>
             <span class="title">Olá, Marlon</span>
             <ul>
@@ -890,8 +890,8 @@
           <span>48 artigos na categoria Inspirações encontrados</span>
           <div class="input-order j-input-order-select">
             <label for="order">
-              <img src="./assets/images/icon-order.svg" alt="">
-              <img class="active" src="./assets/images/icon-order-active.svg" alt="">
+              <img src="<?=PATHSITE?>assets/images/icon-order.svg" alt="">
+              <img class="active" src="<?=PATHSITE?>assets/images/icon-order-active.svg" alt="">
               Ordenar por:
               <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M1 1L5 5L9 1" stroke="#404041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -922,7 +922,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">
@@ -940,7 +940,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">
@@ -958,7 +958,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">
@@ -976,7 +976,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">
@@ -994,7 +994,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">
@@ -1012,7 +1012,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">
@@ -1030,7 +1030,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">
@@ -1048,7 +1048,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">
@@ -1066,7 +1066,7 @@
           <article class="post-article" data-aos="fade-up">
             <a href="#">
               <div class="cover">
-                <img src="./assets/images/post-blog.png" alt="">
+                <img src="<?=PATHSITE?>assets/images/post-blog.png" alt="">
                 <span class="tagline">Inspirações</span>
               </div>
               <div class="info">

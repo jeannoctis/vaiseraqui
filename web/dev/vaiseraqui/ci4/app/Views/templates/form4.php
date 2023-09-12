@@ -1,4 +1,5 @@
-<form method="get" action="<?=PATHSITE?>prestadores-de-servico/" class="form4 <?=$form4Visible?>">            
+<form method="get" action="<?=PATHSITE?>prestadores-de-servicos/" class="form4 <?=$form4Visible?>">            
+     <input type="hidden" id="cidadeFK4" name="cidadeFK" />
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
@@ -9,13 +10,13 @@
                     <img src="<?=PATHSITE?>assets/images/icon-selector.svg" alt="icon dropdown">
                   </button>
                 </label>
-                <div class="select">
-                  <input type="text" placeholder="Busque por cidade">
+                <div class="select">                   
+                  <input  type="text" placeholder="Busque por cidade">
                   <div class="select-list">
                      <? if($cidades) {?>
                     <ul class="dropdown-select">
                         <? foreach($cidades as $cidade) {?>
-                      <li><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
+                      <li onclick="$('#cidadeFK4').val('<?=$cidade->id?>');"><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
                         <? } ?>
                       </ul>
                       <? } ?>

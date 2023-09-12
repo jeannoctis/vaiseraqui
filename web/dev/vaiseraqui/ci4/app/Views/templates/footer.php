@@ -3,7 +3,7 @@
       <div class="item">
         <img src="<?= PATHSITE ?>assets/images/logo-mobile.png" alt="" class="logo only-mobile">
         <img src="<?= PATHSITE ?>assets/images/logo-footer.png" alt="Logo" class="logo">
-        <a href="#" class="btn-primary">Anuncie seu imóvel conosco</a>
+        <a href="<?=PATHSITE?>planos/" class="btn-primary">Anuncie seu imóvel conosco</a>
       </div>
       <div class="item">
         <h2>Categorias</h2>
@@ -146,7 +146,7 @@
   <!-- Fixos -->
   <script src="<?= PATHSITE ?>assets/scripts/jquery/jquery.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/lazyscript.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="<?=PATHSITE?>assets/scripts/aos/aos.js"></script>
 
   <?= view("templates/script-group", $script_list) ?>
 

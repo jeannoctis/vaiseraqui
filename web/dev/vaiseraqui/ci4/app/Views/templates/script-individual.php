@@ -35,7 +35,9 @@
                window.location = link.href
             }
          })
-      })
+      });
+      
+       eventosData('<?=date("Y-m-d")?>');
    </script>
 <? } else if ($pagina == 2) { ?>
    <!-- Sobre nós -->
@@ -228,7 +230,9 @@
       const MyCallendarMenuTabs = document.querySelectorAll('.my-callendar .menu-abas .swiper-slide > a')
       const MyCallendarItems = document.querySelectorAll('.my-callendar .menu-wraper > .item')
 
-      new MenuTabs(MyCallendarMenuTabs, MyCallendarItems)
+      new MenuTabs(MyCallendarMenuTabs, MyCallendarItems);
+      
+      eventosData('<?=date("Y-m-d")?>');
    </script>
 <? } else if ($segments[0] == "evento") { ?>
    <!-- Evento interna -->

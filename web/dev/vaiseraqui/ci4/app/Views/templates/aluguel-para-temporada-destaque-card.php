@@ -1,4 +1,5 @@
 <article class="card-item" data-aos="fade-right">
+    <a href="<?= PATHSITE ?>aluguel-para-temporada/<?= $identificador ?>">
    <div class="cover">
       <span class="button-category">
          <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,7 +27,7 @@
          </div>
       <? } ?>
    </div>
-   <a href="<?= PATHSITE ?>aluguel-para-temporada/<?= $identificador ?>">
+   
       <div class="info">
          <span class="type"><?= $categoria ?></span>
          <span class="zona"><?= $titulo ?></span>

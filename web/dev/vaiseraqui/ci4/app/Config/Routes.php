@@ -183,6 +183,8 @@ $routes->add('produto/novoPontoDeVenda', 'Produto::novoPontoDeVenda');
 $routes->add('produto/novaOrganizacao', 'Produto::novaOrganizacao');
 $routes->add('produto/eventos', 'Produto::eventos');
 
+$routes->add('produto/chamarWhats', 'Produto::chamarWhats');
+
 $routes->add('utils/ordena', 'Utils::ordena');
 $routes->add('utils/ordena2', 'Utils::ordena2');
 $routes->add('utils/mudaFormato', 'Utils::mudaFormato');

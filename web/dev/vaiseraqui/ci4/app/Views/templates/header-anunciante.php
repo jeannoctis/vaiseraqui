@@ -103,9 +103,24 @@
                         <h5>Condomínio</h5>
                     </a>
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/obervacoes" class="itemMenuPainel <?= ($segments[1] == 'observacoes') ? 'menuAtivo' : '' ?>">
+                    <a href="<?= PATHSITE ?>area-do-anunciante/observacoes" class="itemMenuPainel <?= ($segments[1] == 'observacoes') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-observation.svg">
                         <h5>Observações</h5>
+                    </a>
+
+                    <a href="<?= PATHSITE ?>area-do-anunciante/regras-check-in-out" class="itemMenuPainel <?= ($segments[1] == 'regras-check-in-out') ? 'menuAtivo' : '' ?>">
+                        <img src="<?= PATHSITE ?>images/icon-arrows.svg">
+                        <h5>Regras Check-in e Check-out</h5>
+                    </a>
+
+                    <a href="<?= PATHSITE ?>area-do-anunciante/permitido-proibido" class="itemMenuPainel <?= ($segments[1] == 'permitido-proibido') ? 'menuAtivo' : '' ?>">
+                        <img src="<?= PATHSITE ?>images/icon-check-x.svg">
+                        <h5>Permitido e Proibido</h5>
+                    </a>
+
+                    <a href="<?= PATHSITE ?>area-do-anunciante/itens-disponiveis" class="itemMenuPainel <?= ($segments[1] == 'itens-disponiveis') ? 'menuAtivo' : '' ?>">
+                        <img src="<?= PATHSITE ?>images/icon-alert-white.svg">
+                        <h5>Itens disponíveis</h5>
                     </a>
 
                     <a href="<?= PATHSITE ?>area-do-anunciante/calendario" class="itemMenuPainel <?= ($segments[1] == 'calendario') ? 'menuAtivo' : '' ?>">

@@ -342,7 +342,6 @@ class AnuncianteModel extends Model {
                                 $tinyfile = \Tinify\fromFile($file_path);
                                 $tinyfile->toFile($file_path);
                             } catch (\Tinify\Exception $e) {
-                                
                             }
 
                             try {
@@ -353,7 +352,6 @@ class AnuncianteModel extends Model {
                                 imagewebp($img2, PATHHOME . "uploads/produto/{$data['anuncio']->id}/{$newName}.webp", 80);
                                 imagedestroy($img2);
                             } catch (\ErrorException $e) {
-                                
                             }
                         }
                         if ($save['arquivo']) {
@@ -1005,6 +1003,22 @@ class AnuncianteModel extends Model {
                 $data['nomePagina'] = "Condominio";
                 $data['iconePagina'] = "icon-condominio.svg";
             break;
+            case "observacoes":
+                $data['nomePagina'] = "Observações";
+                $data['iconePagina'] = "icon-observation.svg";
+                break;
+            case "regras-check-in-out":
+                $data['nomePagina'] = "Regras de Check-in & Check-out";
+                $data['iconePagina'] = "icon-arrows.svg";
+                break;
+            case "permitido-proibido":
+                $data['nomePagina'] = "Permitido e Proibido";
+                $data['iconePagina'] = "icon-check-x.svg";
+                break;
+            case "itens-disponiveis":
+                $data['nomePagina'] = "Itens disponíveis";
+                $data['iconePagina'] = "icon-alert-white.svg";
+                break;
             default:
                 throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
                 break;

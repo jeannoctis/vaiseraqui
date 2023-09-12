@@ -1,4 +1,5 @@
 <article class="card-services" data-aos="fade-right">
+       <a href="<?=PATHSITE?>prestador-de-servico/<?=$identificador?>/">
    <div class="cover">
       <span class="button-category">
          <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -7,14 +8,14 @@
          </svg>
          Em Alta
       </span>
-      <? if ($fotos) { ?>
+      <?
+    
+      if ($fotos) { ?>
          <div class="swiper swiper-card">
             <div class="swiper-wrapper">
                <? foreach ($fotos as $foto) { ?>
-                  <div class="swiper-slide">
-                     <a data-fslightbox="gallery" href="<?= PATHSITE ?>uploads/produto_foto/<?= $foto->arquivo ?>">
-                        <img src="<?= PATHSITE ?>uploads/produto_foto/<?= $foto->arquivo ?>" alt="foto do local">
-                     </a>
+                  <div class="swiper-slide">                    
+                        <img src="<?= PATHSITE ?>uploads/produto/<?=$foto->produtoFK?>/<?= $foto->arquivo ?>" alt="foto do local">                    
                   </div>
                <? } ?>
             </div>
@@ -26,11 +27,11 @@
       <? } ?>
 
    </div>
-   <a href="#">
+
       <div class="info">
          <span class="type"><?= $categoria ?></span>
          <strong class="title"><?= $titulo ?></strong>
-         <span class="uf"><?= $cidade ?> e região</span>
+         <span class="uf"><?= $cidade ?></span>
          <p><?= $descricao ?></p>
 
          <span class="icon-heart">

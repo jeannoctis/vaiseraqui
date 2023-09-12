@@ -7,7 +7,9 @@
          </svg>
          Em Alta
       </span>
-      <? if ($fotos) { ?>
+      <?
+
+      if ($fotos) { ?>
          <div class="swiper swiper-card">
             <div class="swiper-wrapper">
                <? foreach ($fotos as $foto) { ?>

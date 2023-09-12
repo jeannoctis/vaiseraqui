@@ -173,6 +173,8 @@ class Produto extends BaseController
                 $post['cardapio'] = NULL;
             }
 
+         $post['preco'] = \str_replace(['.', ','], ['', '.'], $post['preco']);
+
             $pdf = $this->request->getFile("cardapio");
             if ($pdf) {
                 if ($pdf->isValid() && !$pdf->hasMoved()) {
@@ -1349,4 +1351,15 @@ class Produto extends BaseController
          $get = request()->getGet();
         $this->model->eventos($get);
     }
+    
+       
+  public function chamarWhats() {
+     $request = \Config\Services::request();
+     $post = $request->getPost();    
+     $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
+            
+     $id = decode($post['produtoFK']);
+            
+    $produtoWhatsModel->contaClique($id);
+  }
 }

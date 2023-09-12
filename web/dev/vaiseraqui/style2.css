@@ -863,10 +863,95 @@ a.ctaDefault2 img {
 	border-color: #932327;
 }
 /* Instruções */
-.intructions {
-
+.instruction {
+	padding: 44px 55px;
+	border-radius: 20px;
+	background-color: #fff;
+	margin-block-end: 80px;
+}
+.instruction .top {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.instruction .top[aria-expanded="true"] .chevron {
+	transform: rotate(-180deg);
+}
+.instruction .top .chevron {
+	background-color: unset;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	transition: all 200ms ease;
+}
+.instruction .bottom {
+	margin-block-start: 34px;
 }
 
+.has-icon {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.has-del-btn {
+	position: relative;
+}
+
+.has-del-btn .del-btn {
+	position: absolute;
+	top: 18px;
+	right: 18px;
+	border: none;
+	background-color: unset;
+	padding: 0;
+	cursor: pointer;
+	color: #c3363c;
+	font-size: 12px;
+	font-style: normal;
+	font-weight: 500;
+	text-decoration-line: underline;
+}
+
+.add-field-btn {
+	color: #3b9756;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 120.1%; /* 19.216px */
+	letter-spacing: -0.48px;
+	text-decoration-line: underline;
+	background-color: unset;
+	border: none;
+	outline: none;
+	cursor: pointer;
+}
+.setor-item {
+	position: relative;
+}
+.setor-item .chevron {
+	position: absolute;
+	right: 0;
+	top: 0;
+	background-color: unset;
+	outline: none;
+	border: none;
+	cursor: pointer;
+	transition: all 200ms ease;
+}
+
+.setor-item[aria-expanded="true"] .chevron {
+	transform: rotate(-180deg);
+}
+.setor-item .setor-titulo {
+	position: relative;
+}
+.setor-item .setor-titulo .del-btn {
+	top: 0;
+}
+.ingresso-item {
+	position: relative;
+}
 /*		Responsive CSS 		*/
 
 /*Extra small devices (portrait phones, less than 576px)*/

@@ -8,7 +8,7 @@
               <img src="<?=PATHSITE?>assets/images/icon-bread-crumbs.svg" alt="">
               <a href="#">Salões de Festa e Áreas de Lazer</a>
             </nav>
-            <span class="result">48 salões de festa e áreas de lazer encontradas</span>
+            <span class="result"><?=count($saloes)?> salões de festa e áreas de lazer encontradas</span>
             <form class="form-order">
               <a href="#" class="btn-primary">
                 <img src="<?=PATHSITE?>assets/images/icon-button-filter.svg" alt="icon filter">

@@ -4214,13 +4214,11 @@ header.header-bg .group-title span {
   border-top: 1px solid #ccc;
   z-index: 4;
 }
-@media screen and (max-width: 769px) {
+@media screen and (max-width: 1000px) {
   .box-agendar-float {
     display: block;
   }
-}
 
-@media screen and (max-width: 769px) {
   .btn-agendar {
     font-size: 1rem;
     font-weight: 700;
@@ -5098,7 +5096,7 @@ header.header-bg .group-title span {
   letter-spacing: -0.04375rem;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1250px) {
   .events-internal .s-text-and-slider .info {
     display: flex;
   }
@@ -5774,7 +5772,7 @@ header.header-bg .group-title span {
   display: block;
   margin-bottom: 1.44rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div ul li a{
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div ul li{
   display: flex;
   align-items: center;
   gap: 0.88rem;
