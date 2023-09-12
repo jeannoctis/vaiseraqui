@@ -926,13 +926,17 @@ a.ctaDefault2 img {
 	outline: none;
 	cursor: pointer;
 }
+.setor-container {
+	margin-block: 1rem 80px;
+}
 .setor-item {
 	position: relative;
+	border-top: 1px solid #BBB;
 }
 .setor-item .chevron {
 	position: absolute;
+	top: 28px;
 	right: 0;
-	top: 0;
 	background-color: unset;
 	outline: none;
 	border: none;
@@ -940,7 +944,7 @@ a.ctaDefault2 img {
 	transition: all 200ms ease;
 }
 
-.setor-item[aria-expanded="true"] .chevron {
+.setor-item .top[aria-expanded="true"] .chevron {
 	transform: rotate(-180deg);
 }
 .setor-item .setor-titulo {
