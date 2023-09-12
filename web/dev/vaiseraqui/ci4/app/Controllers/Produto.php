@@ -7,12 +7,12 @@ class Produto extends BaseController
 
    public function __construct()
    {
-        $this->db = \Config\Database::connect();
-        $this->session = \Config\Services::session($config);
-        helper(['encrypt', 'text', 'utils']);
-        $this->model = model('App\Models\ProdutoModel', false);
-        $this->produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
-        $this->tabela = "produto";
+      $this->db = \Config\Database::connect();
+      $this->session = \Config\Services::session($config);
+      helper(['encrypt', 'text', 'utils']);
+      $this->model = model('App\Models\ProdutoModel', false);
+      $this->produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
+      $this->tabela = "produto";
 
       $get = request()->getGet();
       $this->session->set('menuAdmin', setMenuAdminTipo($get['tipo']));
@@ -20,17 +20,17 @@ class Produto extends BaseController
 
    public function index()
    {
-        if (isset($_POST['excluir'])) {
-            foreach ($_POST['excluir'] as $exc) {
+      if (isset($_POST['excluir'])) {
+         foreach ($_POST['excluir'] as $exc) {
             $data['excluiu'] =  $this->model->delete(['id' => $exc]);
-            }
-        } else if ($_POST['nexc']) {
-            $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
-        }
+         }
+      } else if ($_POST['nexc']) {
+         $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
+      }
 
-      $data['get'] = $get = request()->getGet();      
+      $data['get'] = $get = request()->getGet();
 
-      $paginate = \is_numeric($get['page_produtos']) ? $get['page_produtos'] : 1 ;
+      $paginate = \is_numeric($get['page_produtos']) ? $get['page_produtos'] : 1;
 
       $this->produtoCategoriaModel
          ->select('id, titulo')
@@ -65,9 +65,9 @@ class Produto extends BaseController
          ->distinct()
          ->select("anunciante.id, anunciante.titulo, anunciante.email, p.anuncianteFK")
          ->join("produto p", "anunciante.id = p.anuncianteFK")
-                ->findAll();
+         ->findAll();
 
-      if(empty($IDsCategorias)) {
+      if (empty($IDsCategorias)) {
          $IDsCategorias[]['id'] = 0;
       }
 
@@ -75,9 +75,9 @@ class Produto extends BaseController
 
       if (!empty($get['categoria'])) {
          $this->model->where("categoriaFK", $get['categoria']);
-        } else {
+      } else {
          $this->model->whereIn("categoriaFK", $IDsCategorias);
-        }
+      }
 
       if (!empty($get['procura'])) {
          $this->model->groupStart()
@@ -98,8 +98,8 @@ class Produto extends BaseController
       if (!empty($get['anunciante'])) {
          $this->model->where("anuncianteFK", $get['anunciante']);
       }
-      
-      $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);         
+
+      $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);
       $data['pager'] = $this->model->pager;
 
       $data['tipo'] = \getTipo($get['tipo']);
@@ -115,9 +115,9 @@ class Produto extends BaseController
 
    public function form()
    {
-        $post = request()->getPost();
-        $data['get'] = $get = request()->getGet();
-        $id = decode($this->request->uri->getSegment(4));
+      $post = request()->getPost();
+      $data['get'] = $get = request()->getGet();
+      $id = decode($this->request->uri->getSegment(4));
 
       $data['categoriasDoTipo'] = $this->produtoCategoriaModel
          ->where("tipoFK", $get['tipo'])
@@ -126,32 +126,32 @@ class Produto extends BaseController
       $this->cidadeModel = \model('App\Models\CidadeModel', false);
       $this->estadoModel = \model('App\Models\EstadoModel', false);
 
-        $data['estados'] = $this->estadoModel
-                ->where('EXISTS (SELECT 1 FROM cidade WHERE estado.id = cidade.estadoFK)')
-                ->orderBy('titulo ASC')
-                ->findAll();
+      $data['estados'] = $this->estadoModel
+         ->where('EXISTS (SELECT 1 FROM cidade WHERE estado.id = cidade.estadoFK)')
+         ->orderBy('titulo ASC')
+         ->findAll();
 
 
-        foreach ($data['estados'] as $ind => $estado) {
-            $this->cidadeModel->resetQuery();
-            $this->cidadeModel->where('estadoFK', $estado->id);
-            $this->cidadeModel->orderBy('titulo ASC');
-            $data['estados'][$ind]->cidades = $this->cidadeModel->findAll();
-        }
+      foreach ($data['estados'] as $ind => $estado) {
+         $this->cidadeModel->resetQuery();
+         $this->cidadeModel->where('estadoFK', $estado->id);
+         $this->cidadeModel->orderBy('titulo ASC');
+         $data['estados'][$ind]->cidades = $this->cidadeModel->findAll();
+      }
 
       $this->anuncianteModel = \model('App\Models\AnuncianteModel', false);
       $data['anunciantes'] = $this->anuncianteModel->orderBy("titulo ASC, id DESC")->findAll();
 
       $data['tipo'] = \getTipo($get['tipo']);
 
-        $this->produtoValorModel = \model('App\Models\ProdutoValorModel', false);
-        $this->produtoComodidadeModel = \model('App\Models\ProdutoComodidadeModel', false);
-        $this->produtoProximidadeModel = \model('App\Models\ProdutoProximidadeModel', false);
-        $this->produtoSetorModel = \model('App\Models\ProdutoSetorModel', false);
-        $this->setorIngressoModel = \model('App\Models\SetorIngressoModel', false);
-        $this->produtoPontoDeVendaModel = \model('App\Models\ProdutoPontoDeVendaModel', false);
-        $this->produtoCardapioModel = \model('App\Models\ProdutoCardapioModel', false);
-        $this->produtoOrganizacaoModel = \model('App\Models\ProdutoOrganizacaoModel', false);
+      $this->produtoValorModel = \model('App\Models\ProdutoValorModel', false);
+      $this->produtoComodidadeModel = \model('App\Models\ProdutoComodidadeModel', false);
+      $this->produtoProximidadeModel = \model('App\Models\ProdutoProximidadeModel', false);
+      $this->produtoSetorModel = \model('App\Models\ProdutoSetorModel', false);
+      $this->setorIngressoModel = \model('App\Models\SetorIngressoModel', false);
+      $this->produtoPontoDeVendaModel = \model('App\Models\ProdutoPontoDeVendaModel', false);
+      $this->produtoCardapioModel = \model('App\Models\ProdutoCardapioModel', false);
+      $this->produtoOrganizacaoModel = \model('App\Models\ProdutoOrganizacaoModel', false);
       $this->produtoDataModel = \model('App\Models\ProdutoDataModel', false);
 
       $this->comodidadeModel = \model('App\Models\ComodidadeModel', false);
@@ -164,14 +164,14 @@ class Produto extends BaseController
       $data['cardapiosDisponiveis'] = $this->cardapioModel->findAll();
 
       $data['title'] = 'Anúncio';
-        $data['tabela'] = 'produto';
-        $data['resultado'] = "";
+      $data['tabela'] = 'produto';
+      $data['resultado'] = "";
 
       if ($post) {
 
-            if ($post['apagarcardapio']) {
-                $post['cardapio'] = NULL;
-            }
+         if ($post['apagarcardapio']) {
+            $post['cardapio'] = NULL;
+         }
 
          $post['preco'] = \str_replace(['.', ','], ['', '.'], $post['preco']);
 
@@ -507,8 +507,8 @@ class Produto extends BaseController
             $this->produtoOrganizacaoModel->where("produtoFK", $lastId)->delete();
          }
 
-         if(!empty($post['datas'])) {
-            $IDsReceviedDatas = \array_column($post['datas'], "id");            
+         if (!empty($post['datas'])) {
+            $IDsReceviedDatas = \array_column($post['datas'], "id");
 
             if (!empty($IDsReceviedDatas)) {
                $this->produtoDataModel
@@ -517,8 +517,8 @@ class Produto extends BaseController
                   ->delete();
             }
 
-            foreach($post['datas'] as $item) {
-               if(!empty($item['id'])) {
+            foreach ($post['datas'] as $item) {
+               if (!empty($item['id'])) {
                   $updateDatas[] = [
                      'id' => $item['id'],
                      'data' => $item['data'],
@@ -541,7 +541,6 @@ class Produto extends BaseController
             if (!empty($insertDatas)) {
                $this->produtoDataModel->insertBatch($insertDatas);
             }
-
          } else {
             $this->produtoDataModel->where("produtoFK", $lastId)->delete();
          }
@@ -623,12 +622,12 @@ class Produto extends BaseController
 
       $data['idFK'] = $idFK;
 
-        $data['title'] = 'Fotos';
-        $data['view'] = 'fotos';
+      $data['title'] = 'Fotos';
+      $data['view'] = 'fotos';
       $data['tabela'] = 'produto';
-        $data['tabelaFK'] = $this->tabela;
-        $data['tabelaFKF'] = 'foto';
-        $data['nomeModel'] = 'ProdutoFotoModel';
+      $data['tabelaFK'] = $this->tabela;
+      $data['tabelaFKF'] = 'foto';
+      $data['nomeModel'] = 'ProdutoFotoModel';
 
       echo view('templates/admin-header', $data);
       echo view("{$data['tabelaFK']}/{$data['view']}", $data);
@@ -648,14 +647,14 @@ class Produto extends BaseController
          }
       }
 
-        $data['title'] = 'Foto';
-        $data['view'] = "foto";
+      $data['title'] = 'Foto';
+      $data['view'] = "foto";
       $data['tabela'] = 'produto';
-        $data['tabelaFK'] = $this->tabela;
-        $data['tabelaFK2'] = 'fotos';
-        $data["nomeModel"] = "ProdutoFotoModel";
-        $data['idFK'] = $idFK;
-        $data['id'] = $id;
+      $data['tabelaFK'] = $this->tabela;
+      $data['tabelaFK2'] = 'fotos';
+      $data["nomeModel"] = "ProdutoFotoModel";
+      $data['idFK'] = $idFK;
+      $data['id'] = $id;
 
       $post = request()->getPost();
       $data['get'] = request()->getGet();
@@ -664,12 +663,12 @@ class Produto extends BaseController
 
          $post['produtoFK'] = $idFK;
 
-            if ($id) {
-                $img = $this->request->getFile("arquivo");
-                if ($img) {
-                    if ($img->isValid() && !$img->hasMoved()) {
-                        $newName = date('Y-m-d') . $img->getRandomName();
-                        $post["arquivo"] = $newName;
+         if ($id) {
+            $img = $this->request->getFile("arquivo");
+            if ($img) {
+               if ($img->isValid() && !$img->hasMoved()) {
+                  $newName = date('Y-m-d') . $img->getRandomName();
+                  $post["arquivo"] = $newName;
                   $img->move(PATHHOME . "/uploads/{$data['tabela']}/{$idFK}/", $newName);
                   try {
                      echo View('templates/tinypng');
@@ -852,16 +851,16 @@ class Produto extends BaseController
       $retorno["mes1"] = $date[1];
       $retorno["ano1"] = $date[0];
 
-        ob_start();
-        for ($iterator = 1; $iterator <= 6; $iterator++) {
-            ?>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
-                <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
-                <table class='table'>
-                    <tr>
-                        <td align="center">
-                            <table width="100%" border="0" cellpadding="2" cellspacing="2">
-                                <tr class='fonteBlack'>
+      ob_start();
+      for ($iterator = 1; $iterator <= 6; $iterator++) {
+         ?>
+         <div class="">
+            <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
+            <table class='table'>
+               <tr>
+                  <td align="center">
+                     <table width="100%" border="0" cellpadding="2" cellspacing="2">
+                        <tr class='fonteBlack'>
                            <td align="center"><strong>D</strong></td>
                            <td align="center"><strong>S</strong></td>
                            <td align="center"><strong>T</strong></td>
@@ -869,12 +868,12 @@ class Produto extends BaseController
                            <td align="center"><strong>Q</strong></td>
                            <td align="center"><strong>S</strong></td>
                            <td align="center"><strong>S</strong></td>
-                                </tr>
-                                <?php
-                                $timestamp = mktime(0, 0, 0, $cMonth, 1, $cYear);
-                                $maxday = date("t", $timestamp);
-                                $thismonth = getdate($timestamp);
-                                $startday = $thismonth['wday'];
+                        </tr>
+                        <?php
+                        $timestamp = mktime(0, 0, 0, $cMonth, 1, $cYear);
+                        $maxday = date("t", $timestamp);
+                        $thismonth = getdate($timestamp);
+                        $startday = $thismonth['wday'];
 
                         $produtoCalendarioModel->where("produtoFK", $chacaraFK);
                         $produtoCalendarioModel->where("( date BETWEEN '{$cYear}-{$cMonth}-01' AND '{$cYear}-{$cMonth}-31' ) ");
@@ -951,9 +950,9 @@ class Produto extends BaseController
 
    public function whats()
    {
-        helper('date');
-        $request = \Config\Services::request();
-        $post = $request->getPost();
+      helper('date');
+      $request = \Config\Services::request();
+      $post = $request->getPost();
 
       $dtIni = dataFormata($post['dtIni']);
       $dtFim = dataFormata($post['dtFim']);
@@ -971,9 +970,9 @@ class Produto extends BaseController
 
    public function fone()
    {
-        helper('date');
-        $request = \Config\Services::request();
-        $post = $request->getPost();
+      helper('date');
+      $request = \Config\Services::request();
+      $post = $request->getPost();
 
       $dtIni = dataFormata($post['dtIni']);
       $dtFim = dataFormata($post['dtFim']);
@@ -991,9 +990,9 @@ class Produto extends BaseController
 
    public function excluirFoto()
    {
-        $request = \Config\Services::request();
-        $post = $request->getPost();
-        $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
+      $request = \Config\Services::request();
+      $post = $request->getPost();
+      $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
 
       $foto = $produtoFotoModel->find(decode($post['id']));
 
@@ -1011,7 +1010,7 @@ class Produto extends BaseController
 
    public function fotoDestaque()
    {
-        $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
+      $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
 
       $produtoModel = model('App\Models\ProdutoModel', false);
 
@@ -1027,25 +1026,25 @@ class Produto extends BaseController
       $retorno['ok'] = $this->model->save($save);
 
       echo json_encode($retorno);
-    }
+   }
 
    public function novoVideo()
    {
-        ob_start();
-        $token = md5(uniqid(""));
-        ?>
-        <div id='card<?= $token ?>' class="card">
-            <div class="card-header" id="tituloAba<?= $token ?>">
-                <h5 class="mb-0">
-                    <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
-                        Novo Vídeo<img src="<?= PATHSITE ?>images/icone_menu.svg">
-                    </div>
-                    <div onclick="excluirVideo('<?= $token ?>', 'false', 'ProdutoComodidadeModel')" class="excluirAba">
-                        <img src="<?= PATHSITE ?>images/lixeira.svg">
-                        Excluir 
-                    </div>
-                </h5>
-            </div>
+      ob_start();
+      $token = md5(uniqid(""));
+      ?>
+      <div id='card<?= $token ?>' class="card">
+         <div class="card-header" id="tituloAba<?= $token ?>">
+            <h5 class="mb-0">
+               <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
+                  Novo Vídeo<img src="<?= PATHSITE ?>images/icone_menu.svg">
+               </div>
+               <div onclick="excluirVideo('<?= $token ?>', 'false', 'ProdutoComodidadeModel')" class="excluirAba">
+                  <img src="<?= PATHSITE ?>images/lixeira.svg">
+                  Excluir
+               </div>
+            </h5>
+         </div>
 
          <div id="aba<?= $token ?>" class="collapse show" aria-labelledby="tituloAba<?= $token ?>" data-parent="#accordion">
             <div class="card-body">
@@ -1080,20 +1079,20 @@ class Produto extends BaseController
 
    public function novaComodidade()
    {
-        ob_start();
-        $token = md5(uniqid(""));
-        ?>
-        <script>
+      ob_start();
+      $token = md5(uniqid(""));
+      ?>
+      <script>
          $(document).ready(function() {
-                $(".mySingleFieldTags").tagit({
-                    allowSpaces: true
-                });
+            $(".mySingleFieldTags").tagit({
+               allowSpaces: true
             });
-        </script>
-        <div class="card">
-            <div class="card-header" id="card<?= $token ?>">
-                <h5 class="mb-0">
-                    <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
+         });
+      </script>
+      <div class="card">
+         <div class="card-header" id="card<?= $token ?>">
+            <h5 class="mb-0">
+               <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
                   Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
                   <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
@@ -1107,47 +1106,47 @@ class Produto extends BaseController
          <div id="aba<?= $token ?>" class="collapse show" aria-labelledby="tituloAba<?= $token ?>" data-parent="#accordion">
             <div class="card-body">
 
-                    <div class="row">
-                        <div class="col-12">
-                            <label>Título</label>
-                            <input type="text" name="titulo[]" class="form-control" Value="">
-                        </div>
-                        <div class='col-12'>
-                            <label>Itens</label>
+               <div class="row">
+                  <div class="col-12">
+                     <label>Título</label>
+                     <input type="text" name="titulo[]" class="form-control" Value="">
+                  </div>
+                  <div class='col-12'>
+                     <label>Itens</label>
                      <input data-role="tagsinput" type="text" name="comodidades[]" class="form-control tags-input mySingleFieldTags " value="" placeholder="Itens">
-                        </div>
-                    </div>
+                  </div>
+               </div>
 
             </div>
          </div>
       </div>
-   <?
+      <?
       $retorno['html'] = ob_get_clean();
       echo json_encode($retorno);
    }
 
    public function novoPontoDeVenda()
    {
-        ob_start();
-        $token = md5(uniqid(""));
-        $request = \Config\Services::request();
-        $get = $request->getGet();
-        ?>
-        <script>
+      ob_start();
+      $token = md5(uniqid(""));
+      $request = \Config\Services::request();
+      $get = $request->getGet();
+   ?>
+      <script>
          $(document).ready(function() {
-                $(".mySingleFieldTags").tagit({
-                    allowSpaces: true
-                });
+            $(".mySingleFieldTags").tagit({
+               allowSpaces: true
             });
+         });
 
          $(document).ready(function() {
-                $('.cep').mask('00000-000');
-            });
-        </script>
-        <div class="card">
-            <div class="card-header" id="tituloAba<?= $token ?>">
-                <h5 class="mb-0">
-                    <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
+            $('.phone_with_ddd').mask('(00) 00000-0000');
+         });
+      </script>
+      <div class="card">
+         <div class="card-header" id="tituloAba<?= $token ?>">
+            <h5 class="mb-0">
+               <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
                   Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
                   <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
@@ -1158,91 +1157,27 @@ class Produto extends BaseController
             </h5>
          </div>
 
-            <div id="aba<?= $token ?>" class="collapse show" aria-labelledby="tituloAba<?= $token ?>" data-parent="#accordion">
-                <div class="card-body">                   
-                    <div class="row">
-                        <div class="col-12 col-md-6">
-                            <label>Título</label>
+         <div id="aba<?= $token ?>" class="collapse show" aria-labelledby="tituloAba<?= $token ?>" data-parent="#accordion">
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-12 col-md-6">
+                     <label>Título</label>
                      <input type="hidden" name="tipo[]" value="<?= $get['tipo'] ?>" <input type='hidden' name='id[]' value="<?= encode($texto->id) ?>" />
-                            <input type="text" name="titulo[]" class="form-control" Value="<?= $texto->titulo ?>">
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label> <?= ($get['tipo'] == 'fisico') ? 'Endereço' : 'Site' ?> </label>                                              
-                            <input type="text" name="endereco[]" class="form-control" Value="<?= $texto->endereco ?>">
-                        </div>
-                  <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
-                                <label>CEP</label>                                              
-                                <input type="text" name="cep[]" class="form-control cep" Value="<?= $texto->cep ?>">
-                            </div>
-                  <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
-                                <label>Cidade / Estado</label>                                              
-                                <input type="text" name="cidade[]" class="form-control" Value="<?= $texto->cidade ?>">
-                            </div>                    
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <?
-        $retorno['html'] = ob_get_clean();
-        echo json_encode($retorno);
-    }
-    
-   public function novaOrganizacao()
-   {
-        ob_start();
-        $token = md5(uniqid(""));
-        $request = \Config\Services::request();
-        $get = $request->getGet();
-        ?>
-        <script>
-         $(document).ready(function() {
-                $(".mySingleFieldTags").tagit({
-                    allowSpaces: true
-                });
-            });
-
-         $(document).ready(function() {
-                $('.cep').mask('00000-000');
-            });
-        </script>
-        <div class="card">
-            <div class="card-header" id="card<?= $token ?>">
-                <h5 class="mb-0">
-                    <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
-                  Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
-
-                  <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
-                            <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
-                            Excluir
-                        </div>
-                    </div>
-                </h5>
-            </div>
-
-            <div id="aba<?= $token ?>" class="collapse show" aria-labelledby="tituloAba<?= $token ?>" data-parent="#accordion">
-                <div class="card-body">                   
-                    <div class="row">
-                                            <div class="col-12 col-md-6">
-                                                <label>Título</label>
-                     <input type='hidden' name='id[]' value="<?= encode($texto->id) ?>" />
                      <input type="text" name="titulo[]" class="form-control" Value="<?= $texto->titulo ?>">
-                                            </div>
-                                           <div class="col-12 col-md-6">
-                                                <label> Endereço</label>                                              
+                  </div>
+                  <div class="col-12 col-md-6">
+                     <label> <?= ($get['tipo'] == 'fisico') ? 'Endereço' : 'Site' ?> </label>
                      <input type="text" name="endereco[]" class="form-control" Value="<?= $texto->endereco ?>">
-                                            </div>
-                                            
-                                              <div class="col-12 col-md-6 ">
-                                                <label>Site</label>                                              
-                     <input type="text" name="site[]" class="form-control" Value="<?= $texto->site ?>">
-                                            </div>
-                  <div class="col-12 col-md-6 <?= ($texto->tipo == 'online') ? 'd-none' : '' ?>">
-                                                <label>Cidade / Estado</label>                                              
+                  </div>
+                  <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
+                     <label>Telefone</label>
+                     <input type="text" name="cep[]" class="form-control phone_with_ddd" Value="<?= $texto->cep ?>">
+                  </div>
+                  <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
+                     <label>Cidade / Estado</label>
                      <input type="text" name="cidade[]" class="form-control" Value="<?= $texto->cidade ?>">
-                                            </div>
-                                           
-                                        </div>
+                  </div>
+               </div>
 
             </div>
          </div>
@@ -1252,10 +1187,122 @@ class Produto extends BaseController
       echo json_encode($retorno);
    }
 
+   public function novaOrganizacao()
+   {
+      ob_start();
+      $token = md5(uniqid(""));
+      $request = \Config\Services::request();
+      $get = $request->getGet();
+   ?>
+      <script>
+         $(document).ready(function() {
+            $(".mySingleFieldTags").tagit({
+               allowSpaces: true
+            });
+         });
+
+         $(document).ready(function() {
+            $('.cep').mask('00000-000');
+         });
+      </script>
+      <div class="card">
+         <div class="card-header" id="card<?= $token ?>">
+            <h5 class="mb-0">
+               <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
+                  Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
+
+                  <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
+                     <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
+                     Excluir
+                  </div>
+               </div>
+            </h5>
+         </div>
+
+         <div id="aba<?= $token ?>" class="collapse show" aria-labelledby="tituloAba<?= $token ?>" data-parent="#accordion">
+            <div class="card-body">
+               <div class="row">
+                  <div class="col-12 col-md-6">
+                     <label>Título</label>
+                     <input type='hidden' name='id[]' value="<?= encode($texto->id) ?>" />
+                     <input type="text" name="titulo[]" class="form-control" Value="<?= $texto->titulo ?>">
+                  </div>
+                  <div class="col-12 col-md-6">
+                     <label> Endereço</label>
+                     <input type="text" name="endereco[]" class="form-control" Value="<?= $texto->endereco ?>">
+                  </div>
+
+                  <div class="col-12 col-md-6 ">
+                     <label>Site</label>
+                     <input type="text" name="site[]" class="form-control" Value="<?= $texto->site ?>">
+                  </div>
+                  <div class="col-12 col-md-6 <?= ($texto->tipo == 'online') ? 'd-none' : '' ?>">
+                     <label>Cidade / Estado</label>
+                     <input type="text" name="cidade[]" class="form-control" Value="<?= $texto->cidade ?>">
+                  </div>
+
+               </div>
+
+            </div>
+         </div>
+      </div>
+   <?
+      $retorno['html'] = ob_get_clean();
+      echo json_encode($retorno);
+   }
+
+   public function novoCardapio()
+   {
+      ob_start();
+      $token = md5(uniqid(""));
+      ?>
+      <script>
+         $(document).ready(function() {
+            $(".mySingleFieldTags").tagit({
+               allowSpaces: true
+            });
+         });
+      </script>
+      <div class="card">
+         <div class="card-header" id="card<?= $token ?>">
+            <h5 class="mb-0">
+               <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
+                  Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
+
+                  <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
+                     <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
+                     Excluir
+                  </div>
+               </div>
+            </h5>
+         </div>
+
+         <div id="aba<?= $token ?>" class="collapse show" aria-labelledby="tituloAba<?= $token ?>" data-parent="#accordion">
+            <div class="card-body">
+
+               <div class="row">
+                  <div class="col-12">
+                     <label>Título</label>
+                     <input type="text" name="titulo[]" class="form-control" Value="">
+                  </div>
+                  <div class='col-12'>
+                     <label>Itens</label>
+                     <input data-role="tagsinput" type="text" name="itens[]" class="form-control tags-input mySingleFieldTags " value="" placeholder="Itens">
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+      <?
+      $retorno['html'] = ob_get_clean();
+      echo json_encode($retorno);
+   }
+
    public function excluirAba()
    {
-        $request = \Config\Services::request();
-        $post = $request->getPost();
+      $request = \Config\Services::request();
+      $post = $request->getPost();
 
       $myModel = $post['model'];
 
@@ -1297,17 +1344,17 @@ class Produto extends BaseController
 
    public function novoPreco()
    {
-        ob_start();
-        $token = md5(uniqid(""));
-        ?>
+      ob_start();
+      $token = md5(uniqid(""));
+   ?>
 
-        <script>
+      <script>
          $(document).ready(function() {
             $('.money2').mask("#.##0,00", {
                reverse: true
             });
          });
-        </script>
+      </script>
 
       <div class="card">
          <div class="card-header" id="tituloAba<?= $token ?>">
@@ -1339,27 +1386,29 @@ class Produto extends BaseController
                   </div>
                </div>
 
-                </div>
             </div>
-        </div>
-        <?
-        $retorno['html'] = ob_get_clean();
-        echo json_encode($retorno);
-    }
-    
-    public function eventos() {
-         $get = request()->getGet();
-        $this->model->eventos($get);
-    }
-    
-       
-  public function chamarWhats() {
-     $request = \Config\Services::request();
-     $post = $request->getPost();    
-     $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
-            
-     $id = decode($post['produtoFK']);
-            
-    $produtoWhatsModel->contaClique($id);
-  }
+         </div>
+      </div>
+<?
+      $retorno['html'] = ob_get_clean();
+      echo json_encode($retorno);
+   }
+
+   public function eventos()
+   {
+      $get = request()->getGet();
+      $this->model->eventos($get);
+   }
+
+
+   public function chamarWhats()
+   {
+      $request = \Config\Services::request();
+      $post = $request->getPost();
+      $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
+
+      $id = decode($post['produtoFK']);
+
+      $produtoWhatsModel->contaClique($id);
+   }
 }

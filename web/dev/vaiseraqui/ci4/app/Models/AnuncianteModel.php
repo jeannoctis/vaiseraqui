@@ -6,7 +6,6 @@ use CodeIgniter\Model;
 
 class AnuncianteModel extends Model
 {
-
     protected $DBGroup = 'default';
     protected $table = 'anunciante';
     protected $primaryKey = 'id';
@@ -33,7 +32,7 @@ class AnuncianteModel extends Model
         $this->session = \Config\Services::session($config);
 
         if (!$this->session->get('anunciante') && $page != 'login') {
-?>
+            ?>
             <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/login'" />
             <?
             exit();
@@ -55,6 +54,8 @@ class AnuncianteModel extends Model
         $produtoModel->where("produto.anuncianteFK", $this->session->get('anunciante'));
         $data['anuncios'] = $produtoModel->findAll();
 
+        $instrucaoModel = \model("App\Models\InstrucaoModel", false);
+
         if ($data['anuncios']) {
             foreach ($data['anuncios'] as $anuncio) {
                 $data['tipos'][$anuncio->tipoFK] = $anuncio->tipo;
@@ -70,7 +71,6 @@ class AnuncianteModel extends Model
             . "DATEDIFF(validadeDestaque, NOW()) AS difDestaque, DATEDIFF(inicioValidade, NOW()) AS difInicio, pc.tipoFK ");
         $produtoModel->join('produto_categoria pc', 'produto.categoriaFK = pc.id');
         $data['anuncio'] = $produtoModel->find($this->session->get('anuncio'));
-
 
         $ipooModel = model('App\Models\TipoModel', false);
         $data['tipoAtual'] = $ipooModel->find($data['anuncio']->tipoFK);
@@ -192,8 +192,8 @@ class AnuncianteModel extends Model
                 }
                 break;
             case "proximidades":
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(58);
+                $data['instrucoes'] = $instrucaoModel->find(5);
+                
 
                 $this->proximidadeModel = \model('App\Models\ProximidadeModel', false);
                 $data['proximidadesDisponiveis'] = $this->proximidadeModel->orderBy("ordem ASC, id DESC")->findAll();
@@ -231,8 +231,7 @@ class AnuncianteModel extends Model
                 break;
             case "perfil":
 
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(53);
+                $data['instrucoes'] = $instrucaoModel->find(1);
 
                 if ($post) {
 
@@ -319,9 +318,7 @@ class AnuncianteModel extends Model
                 $page = 'o-que-tem-no-imovel';
                 break;
             case "fotos":
-
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(54);
+                $data['instrucoes'] = $instrucaoModel->find(2);
 
                 $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
 
@@ -364,8 +361,6 @@ class AnuncianteModel extends Model
                     }
                 }
 
-
-
                 $produtoFotoModel->resetQuery();
                 $produtoFotoModel->where("produtoFK", $data['anuncio']->id);
                 $produtoFotoModel->orderBy("ordem ASC, id DESC");
@@ -407,8 +402,8 @@ class AnuncianteModel extends Model
                 break;
             case "acomodacoes":
 
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(52);
+                $data['instrucoes'] = $instrucaoModel->find(4);
+
 
                 $produtoComodidadeModel = model('App\Models\ProdutoComodidadeModel', false);
                 //     $produtoComodidadeModel->where("produtoFK", $data['anuncio']->id);
@@ -437,8 +432,7 @@ class AnuncianteModel extends Model
 
             case "organizacao":
 
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(52);
+                $data['instrucoes'] = $instrucaoModel->find(17);
 
                 $produtoOrganizacaoModel = \model('App\Models\ProdutoOrganizacaoModel', false);
                 $produtoOrganizacaoModel->where("produtoFK", $data['anuncio']->id);
@@ -466,11 +460,11 @@ class AnuncianteModel extends Model
                         }
                     }
                 }
+                
                 break;
             case "pontos-de-venda":
 
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(52);
+                $data['instrucoes'] = $instrucaoModel->find(14);                
 
                 $produtoPontoDeVendaModel = \model('App\Models\ProdutoPontoDeVendaModel', false);
                 $produtoPontoDeVendaModel->where("produtoFK", $data['anuncio']->id);
@@ -535,81 +529,98 @@ class AnuncianteModel extends Model
 
                 break;
             case "ingressos":
+                $data['instrucoes'] = $instrucaoModel->find(13);
+
+                $lastId = $data['anuncio']->id;
 
                 $textoModel = model('App\Models\TextoModel', false);
                 $data['textoExplicativo'] = $textoModel->find(68);
 
-                $this->setorIngressoModel = \model('App\Models\SetorIngressoModel', false);
                 $this->produtoSetorModel = \model('App\Models\ProdutoSetorModel', false);
+                $this->setorIngressoModel = \model('App\Models\SetorIngressoModel', false);
 
-                if (!empty($post['setorIngresso'])) {
+                if ($post) {
+                    if (!empty($post['setorIngresso'])) {
 
-                    // echo '<pre>';
-                    // print_r($post['setorIngresso']);
-                    // echo '</pre>';
-                    // exit();
+                        $IDsReceivedSetor = \array_column($post['setorIngresso'], "id");
 
-                    $IDsReceivedSetor = \array_column($post['setorIngresso'], "id");
-                    if (!empty($IDsReceivedSetor)) {
-                        $this->produtoSetorModel
-                            ->where("produtoFK", $lastId)
-                            ->whereNotIn("id", $IDsReceivedSetor)
-                            ->delete();
-                    }
+                        if (!empty($IDsReceivedSetor)) {
+                            $this->produtoSetorModel
+                                ->where("produtoFK", $lastId)
+                                ->whereNotIn("id", $IDsReceivedSetor)
+                                ->delete();
+                        }
 
-                    foreach ($post['setorIngresso'] as $item) {
+                        foreach ($post['setorIngresso'] as $item) {
 
-                        if (!empty($item['id'])) {
+                            if (!empty($item['id'])) {
 
-                            foreach ($item['ingressos'] as $ingresso) {
-                                $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
+                                $updateSetor[] = [
+                                    'id' => $item['id'],
+                                    'setor' => $item['setor']
+                                ];
 
-                                if (!empty($ingresso['idIngresso'])) {
+                                foreach ($item['ingressos'] as $ingresso) {
+                                    $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
 
-                                    $updateIngresso[] = [
-                                        'id' => $ingresso['idIngresso'],
-                                        'titulo' => $ingresso['modalidade'],
-                                        'preco' => $ingresso['preco']
-                                    ];
-                                } else {
+                                    if (!empty($ingresso['idIngresso'])) {
+
+                                        $updateIngresso[] = [
+                                            'id' => $ingresso['idIngresso'],
+                                            'titulo' => $ingresso['titulo'],
+                                            'preco' => $ingresso['preco']
+                                        ];
+                                    } else {
+                                        $insertIngressos[] = [
+                                            'setorFK' => $item['id'],
+                                            'titulo' => $ingresso['titulo'],
+                                            'preco' => $ingresso['preco']
+                                        ];
+                                    }
+                                }
+                            } else {
+
+                                $setorData = [
+                                    'produtoFK' => $lastId,
+                                    'setor' => $item['setor']
+                                ];
+
+                                $lastSetorId = $this->produtoSetorModel->insert($setorData);
+
+                                foreach ($item['ingressos'] as $ingresso) {
+                                    $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
 
                                     $insertIngressos[] = [
-                                        'setorFK' => $item['idSetor'],
+                                        'setorFK' => $lastSetorId,
                                         'titulo' => $ingresso['titulo'],
                                         'preco' => $ingresso['preco']
                                     ];
                                 }
                             }
-                        } else {
-                            $setorData = [
-                                'produtoFK' => $lastId,
-                                'setor' => $item['setor']
-                            ];
+                        }
 
-                            $lastSetorId = $this->produtoSetorModel->insert($setorData);
-
-                            foreach ($item['ingressos'] as $ingresso) {
-                                $ingresso['preco'] = \str_replace(['.', ','], ['', '.'], $ingresso['preco']);
-
-                                $insertIngressos[] = [
-                                    'setorFK' => $lastSetorId,
-                                    'titulo' => $ingresso['titulo'],
-                                    'preco' => $ingresso['preco']
-                                ];
+                        if (!empty($updateSetor)) {
+                            $send = $this->produtoSetorModel->updateBatch($updateSetor, "id");
+                            if ($send) {
+                                $data['sucesso'] = "Informações salvas!";
                             }
                         }
-                    }
 
-                    if (!empty($updateIngresso)) {
-                        $this->setorIngressoModel->updateBatch($updateIngresso, "id");
-                    }
+                        if (!empty($updateIngresso)) {
+                            $send = $this->setorIngressoModel->updateBatch($updateIngresso, "id");
+                            if ($send) {
+                            }
 
-                    if (!empty($insertIngressos)) {
-                        $this->setorIngressoModel->insertBatch($insertIngressos);
+                            if (!empty($insertIngressos)) {
+                                $send = $this->setorIngressoModel->insertBatch($insertIngressos);
+                                $data['sucesso'] = "Informações salvas!";
+                            }
+                        } else {
+                            $send = $this->produtoSetorModel->where("produtoFK", $lastId)->delete();
+                        }
                     }
-                } else {
-                    $this->produtoSetorModel->where("produtoFK", $lastId)->delete();
                 }
+
 
                 $data['setores'] = $this->produtoSetorModel
                     ->where("produtoFK", $anuncio->id)
@@ -623,64 +634,41 @@ class AnuncianteModel extends Model
                     $data['setores'][$key]->ingressos = $this->setorIngressoModel->findAll();
                 }
 
-
-                /* if ($post) {
-                  if ($post['titulo']) {
-                  $save['produtoFK'] = $data['anuncio']->id;
-                  foreach ($post['titulo'] as $ind => $titulo) {
-                  if ($post['id'][$ind]) {
-                  $save['id'] = decode($post['id'][$ind]);
-                  } else {
-                  unset($save['id']);
-                  }
-                  $save['titulo'] = $titulo;
-                  $save['descricao'] = $post['descricao'][$ind];
-
-                  $save['valor'] = str_replace(".", "", $post['valor'][$ind]);
-                  $save['valor'] = str_replace(",", ".", $post['valor'][$ind]);
-
-                  $produtoValorModel->resetQuery();
-                  $data['salvou'] = $produtoValorModel->save($save);
-                  if ($data['salvou']) {
-                  $data['sucesso'] = "Salvo com sucesso!";
-                  }
-                  }
-                  }
-                  } */
-
                 break;
             case "cardapio":
+                $data['instrucoes'] = $instrucaoModel->find(16);
 
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(63);
-
-                $produtoAcomodacaoModel = model('App\Models\ProdutoAcomodacaoModel', false);
-                $produtoAcomodacaoModel->where("produtoFK", $data['anuncio']->id);
-                $data['acomodacoes'] = $produtoAcomodacaoModel->findAll();
+                $produtoCardapioModel = model('App\Models\ProdutoCardapioModel', false);
+                $produtoCardapioModel->where("produtoFK", $data['anuncio']->id);
+                $data['cardapios'] = $produtoCardapioModel->findAll();
 
                 if ($post) {
                     if ($post['titulo']) {
                         $save['produtoFK'] = $data['anuncio']->id;
+                        
                         foreach ($post['titulo'] as $ind => $titulo) {
+
                             if ($post['id'][$ind]) {
                                 $save['id'] = decode($post['id'][$ind]);
                             } else {
                                 unset($save['id']);
                             }
+
                             $save['titulo'] = $titulo;
-                            $save['itens'] = $post['itens'][$ind];
-                            $produtoAcomodacaoModel->resetQuery();
-                            $data['salvou'] = $produtoAcomodacaoModel->save($save);
+                            $save['menu'] = $post['itens'][$ind];
+                            $produtoCardapioModel->resetQuery();
+                            $data['salvou'] = $produtoCardapioModel->save($save);
                             if ($data['salvou']) {
                                 $data['sucesso'] = "Salvo com sucesso!";
                             }
                         }
                     }
                 }
+
                 break;
             case "calendario":
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(56);
+                
+                $data['instrucoes'] = $instrucaoModel->find(8);
 
                 break;
             case "dados-servico":
@@ -781,9 +769,7 @@ class AnuncianteModel extends Model
 
                 break;
             case "video":
-
-                $textoModel = model('App\Models\TextoModel', false);
-                $data['textoExplicativo'] = $textoModel->find(58);
+                $data['instrucoes'] = $instrucaoModel->find(2);
 
                 $produtoVideoModel = model('App\Models\ProdutoVideoModel', false);
                 $produtoVideoModel->where("produtoFK", $data['anuncio']->id);
@@ -917,21 +903,29 @@ class AnuncianteModel extends Model
                 $textoModel = model('App\Models\TextoModel', false);
                 $data['textoExplicativo'] = $textoModel->find(51);
 
-                $cidadeModel = model('App\Models\CidadeModel', false);
-                $cidadeModel->select("cidade.id, cidade.titulo, e.sigla ");
-                $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
-                $cidadeModel->orderBy("titulo ASC");
-                $data["cidades"] = $cidadeModel->findAll();
+                $this->cidadeModel = \model('App\Models\CidadeModel', false);
+                $this->estadoModel = \model('App\Models\EstadoModel', false);
 
-                $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
-                $produtoCategoriaModel->where("tipoFK", 1);
-                $produtoCategoriaModel->orderBy("titulo ASC");
-                $data["categorias"] = $produtoCategoriaModel->findAll();
+                $data['estados'] = $this->estadoModel
+                    ->where('EXISTS (SELECT 1 FROM cidade WHERE estado.id = cidade.estadoFK)')
+                    ->orderBy('titulo ASC')
+                    ->findAll();
 
-                /* $capacidadeModel = model('App\Models\CapacidadeModel', false);
-                  $capacidadeModel->where("espaco","S");
-                  $capacidadeModel->orderBy("id ASC");
-                  $data["capacidades"] = $capacidadeModel->findAll(); */
+                foreach ($data['estados'] as $ind => $estado) {
+                    $this->cidadeModel->resetQuery();
+                    $this->cidadeModel->where('estadoFK', $estado->id);
+                    $this->cidadeModel->orderBy('titulo ASC');
+                    $data['estados'][$ind]->cidades = $this->cidadeModel->findAll();
+                }
+
+                $produtoCategoriaModel = \model("App\Models\ProdutoCategoriaModel", false)
+                    ->where("tipoFK", $data['anuncio']->tipoFK);
+                $data['categoriasDoTipo'] = $produtoCategoriaModel->findAll();                
+
+                if ($data['anuncio']->tipoFK == 5) {
+                    $this->produtoDataModel = \model("App\Models\ProdutoDataModel", false);
+                    $data['datas'] = $this->produtoDataModel->where("produtoFK", $data['anuncio']->id)->findAll();
+                }
 
                 if ($post) {
                     if ($post['coordenadas']) {
@@ -941,22 +935,52 @@ class AnuncianteModel extends Model
                         $post['longitude'] = $coord[1];
                     }
 
-
-
-                    $img = $request->getFile("arquivo");
-
-                    if ($img) {
-                        echo View('templates/tinypng');
-
-                        if ($img->isValid() && !$img->hasMoved()) {
-                            $newName = date('Y-m-d') . $img->getRandomName();
-                            $post["arquivo"] = $newName;
-                            $img->move(PATHHOME . '/uploads/produto/' . $data['anuncio']->id . '/', $newName);
-                        }
-                    }
-
                     $post['id'] = $data['anuncio']->id;
                     $data["salvou"] = $produtoModel->save($post);
+
+                    if ($data['anuncio']->tipoFK == 5) {
+
+                        $lastId = $data['anuncio']->id;
+
+                        if (!empty($post['datas'])) {
+
+                            $IDsReceviedDatas = \array_column($post['datas'], "id");
+
+                            if (!empty($IDsReceviedDatas)) {
+                                $this->produtoDataModel
+                                    ->where("produtoFK", $lastId)
+                                    ->whereNotIn("id", $IDsReceviedDatas)
+                                    ->delete();
+                            }
+
+                            foreach ($post['datas'] as $item) {
+                                if (!empty($item['id'])) {
+                                    $updateDatas[] = [
+                                        'id' => $item['id'],
+                                        'data' => $item['data'],
+                                        'horarioInicio' => $item['horarioInicio'],
+                                        'horarioTermino' => $item['horarioTermino']
+                                    ];
+                                } else {
+                                    $insertDatas[] = [
+                                        'produtoFK' => $lastId,
+                                        'data' => $item['data'],
+                                        'horarioInicio' => $item['horarioInicio'],
+                                        'horarioTermino' => $item['horarioTermino']
+                                    ];
+                                }
+                            }
+
+                            if (!empty($updateDatas)) {
+                                $data['salvou'] = $this->produtoDataModel->updateBatch($updateDatas, "id");
+                            }
+                            if (!empty($insertDatas)) {
+                                $data['salvou'] = $this->produtoDataModel->insertBatch($insertDatas);
+                            }
+                        } else {
+                            $data['salvou'] = $this->produtoDataModel->where("produtoFK", $lastId)->delete();
+                        }
+                    }
                 }
 
                 if ($data["anuncio"]->inicioAlta) {
@@ -993,9 +1017,9 @@ class AnuncianteModel extends Model
                         } else {
                             $this->session->set('anunciante', $result->id);
                             session_write_close();
-                ?>
+                        ?>
                             <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />
-<?
+                        <?
                         }
                     }
                 }
@@ -1004,28 +1028,42 @@ class AnuncianteModel extends Model
             case "condominio":
                 $data['nomePagina'] = "Condominio";
                 $data['iconePagina'] = "icon-condominio.svg";
-            break;
+                $data['instrucoes'] = $instrucaoModel->find(6);
+
+
+                break;
             case "observacoes":
                 $data['nomePagina'] = "Observações";
                 $data['iconePagina'] = "icon-observation.svg";
+                $data['instrucoes'] = $instrucaoModel->find(7);
+
                 break;
             case "regras-check-in-out":
                 $data['nomePagina'] = "Regras de Check-in & Check-out";
                 $data['iconePagina'] = "icon-arrows.svg";
+
+                $data['instrucoes'] = $instrucaoModel->find(11);
+
                 break;
             case "permitido-proibido":
                 $data['nomePagina'] = "Permitido e Proibido";
                 $data['iconePagina'] = "icon-check-x.svg";
+                $data['instrucoes'] = $instrucaoModel->find(12);
+
                 break;
             case "itens-disponiveis":
                 $data['nomePagina'] = "Itens disponíveis";
                 $data['iconePagina'] = "icon-alert-white.svg";
+
+                $data['instrucoes'] = $instrucaoModel->find(10);
+
                 break;
             default:
                 throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
                 break;
         }
-        $data['anuncio'] = $produtoModel->find($this->session->get('anuncio'));
+
+        // $data['anuncio'] = $produtoModel->find($this->session->get('anuncio'));
         $data['anunciante'] = $this->find($this->session->get('anunciante')->id);
         if ($header) {
             echo view("templates/{$header}", $data);

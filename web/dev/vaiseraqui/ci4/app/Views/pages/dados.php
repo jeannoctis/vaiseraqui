@@ -6,12 +6,7 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
     <? echo View("templates/barra-topo", $infoPagina); ?>
 
     <div class="conteudo">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <?= $textoExplicativo->texto ?>
-                </div>
-            </div>
+        <div class="container-fluid">            
             <!-- <hr class="linhaform"> -->
             <form class="form-horizontal" method="post" enctype="multipart/form-data" id="formBusca">
                 <fieldset>
@@ -24,43 +19,57 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                             <input type="text" name="titulo" class="form-control" Value="<?= $anuncio->titulo ?>">
                         </div>
 
-                        <? if ($categorias) { ?>
-                            <div class="col-6">
-                                <label>Tipo do Imóvel</label>
-                                <select <?= ($anuncio->categoriaFK) ? "disabled" : "" ?> required type="text" name="categoriaFK" class="form-control" Value="">
-                                    <option value=''>Selecione...</option>
-                                    <? foreach ($categorias as $cat) { ?>
-                                        <option <?= ($anuncio->categoriaFK == $cat->id) ? "selected" : "" ?> value="<?= $cat->id ?>"><?= $cat->titulo ?></option>
+                        <div class="col-6">
+                            <label>Categoria</label>
+                            <? if ($categoriasDoTipo) { ?>
+                                <select name="categoriaFK" required class="form-control js-example-basic-single" id="categoria" disabled>
+                                    <option value="">-- selecione uma categoria --</option>
+                                    <? foreach ($categoriasDoTipo as $categoria) { ?>
+                                        <option <?= $anuncio->categoriaFK == $categoria->id ? 'selected' : '' ?> value="<?= $categoria->id ?>">
+                                            <?= $categoria->titulo ?>
+                                        </option>
                                     <? } ?>
                                 </select>
-                            </div>
-                        <? } ?>
-
-
+                            <? } ?>
+                        </div>
 
                         <h2 class="col-12 mt-5">Endereco</h2>
                         <div class="row col-12">
                             <div class="col-12 col-md-4">
-                                <label>Endereço</label>
-                                <input <?= ($anuncio->endereco) ? "disabled" : "" ?> type="text" name="endereco" class="form-control" Value="<?= $anuncio->endereco ?>">
+                                <label>Rua, número, complemento</label>
+                                <input type="text" name="endereco" class="form-control" Value="<?= $anuncio->endereco ?>">
                             </div>
 
                             <div class="col-12 col-md-4">
                                 <label>Bairro</label>
-                                <input <?= ($anuncio->bairro) ? "disabled" : "" ?> type="text" name="bairro" class="form-control" Value="<?= $anuncio->bairro ?>">
+                                <input type="text" name="bairro" class="form-control" Value="<?= $anuncio->bairro ?>">
                             </div>
 
-                            <? if ($cidades) { ?>
-                                <div class="col-12 col-md-4">
-                                    <label>Cidade</label>
-                                    <select <?= ($anuncio->cidadeFK) ? "disabled" : "" ?> required type="text" name="cidadeFK" class="form-control" Value="">
-                                        <option value=''>Selecione...</option>
-                                        <? foreach ($cidades as $cat) { ?>
-                                            <option <?= ($anuncio->cidadeFK == $cat->id) ? "selected" : "" ?> value="<?= $cat->id ?>"><?= $cat->titulo ?>/<?= $cat->sigla ?></option>
+
+                            <div class="col-12 col-md-4">
+                                <label>Cidade</label>
+
+                                <? if ($estados) { ?>
+                                    <select name="cidadeFK" required class="form-control js-example-basic-single" id="cidadeFK">
+                                        <option value="">-- selecione uma cidade --</option>
+                                        <? foreach ($estados as $estado) { ?>
+                                            <optgroup label="<?= $estado->titulo ?>">
+                                                <? foreach ($estado->cidades as $cidade) { ?>
+                                                    <option <?= $anuncio->cidadeFK == $cidade->id ? 'selected' : '' ?> value="<?= $cidade->id ?>">
+                                                        <?= $cidade->titulo ?>
+                                                    </option>
+                                                <? } ?>
+                                            </optgroup>
                                         <? } ?>
                                     </select>
-                                </div>
-                            <? } ?>
+                                <? } ?>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12">
+                            <label>Nome do local</label>
+                            <input type="text" name="bairro" class="form-control" Value="<?= $anuncio->local ?>">
                         </div>
 
                         <div class="row col-12">
@@ -83,67 +92,37 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
 
                         <div class="col-12">
                             <label>Descrição completa</label>
-                            <textarea rows="3" type="text" name="detalhes" class="form-control"><?= $anuncio->detalhes ?></textarea>
+                            <textarea rows="3" type="text" name="detalhes" class="form-control tinymce_full"><?= $anuncio->detalhes ?></textarea>
                         </div>
-
-                        <!-- <div class='col-12'>
-                            <label>Itens disponíveis</label>
-                            <input id="itensdisponiveis" data-role="tagsinput" type="text" name="itensdisponiveis" class="form-control tags-input mySingleFieldTags " value="<?= $anuncio->itensdisponiveis ?>" placeholder="Itens">
-                        </div> -->
-
-                        <!-- <div class='col-12'>
-                            <label>Condomínio</label>
-                            <input id="condominio" data-role="tagsinput" type="text" name="condominio" class="form-control tags-input mySingleFieldTags " value="<?= $anuncio->condominio ?>" placeholder="Itens">
-                        </div> -->
-
-                        <div class="col-12 mb-3">
-                            <label>Descrição sobre o imóvel</label>
-                            <textarea name="texto" id="inputTexto" class="form-control tinymce_full"><?= $anuncio->texto ?></textarea>
-                        </div>
-
-                        <!-- <div class="col-12">
-                            <label>Observações</label>
-                            <textarea type="text" name="observacoes" class="form-control tinymce_full"><?= $anuncio->observacoes ?></textarea>
-                        </div> -->
-
-                        <!-- <div class="col-12">
-                            <label>Regras de Check-in e Check-out</label>
-                            <textarea type="text" name="regrascheck" class="form-control tinymce_full"><?= $anuncio->regrascheck ?></textarea>
-                        </div> -->
-
-                        <!-- <div class="col-12">
-                            <label>O que é permitido</label>
-                            <textarea type="text" name="pode" class="form-control tinymce_full"><?= $anuncio->pode ?></textarea>
-                        </div> -->
-
-                        <!-- <div class="col-12">
-                            <label>O que é permitido</label>
-                            <textarea type="text" name="naopode" class="form-control tinymce_full"><?= $anuncio->naopode ?></textarea>
-                        </div> -->
 
                         <div class="col-12">
                             <label>Description (SEO)</label>
                             <textarea name="description" class="form-control"><?= $anuncio->description ?></textarea>
                         </div>
 
-                        <!-- Datas Eventos -->
-                        <h2 class="col-12 mt-5">Datas do Evento</h2>
+                        <? if ($anuncio->tipoFK == 5) { ?>
+                            <!-- Datas Eventos -->
+                            <h2 class="col-12 mt-5">Datas do Evento</h2>
+                            <div class="dates-container col-12 row">
+                                <? foreach ($datas as $ind => $data) { ?>
+                                    <label class="has-del-btn py-3 col">
+                                        <input type="hidden" name="datas[<?= $ind ?>][id]" value="">
+                                        Data 1
+                                        <input type="date" name="datas[<?= $ind ?>][data]" value="<?= $data->data ?>" class="form-control mt-3">
+                                        Início
+                                        <input type="time" name="datas[<?= $ind ?>][horarioInicio]" value="<?= $data->horarioInicio ?>" class="form-control mt-3">
+                                        Término
+                                        <input type="time" name="datas[<?= $ind ?>][horarioTermino]" value="<?= $data->horarioTermino ?>" class="form-control mt-3">
+                                    </label>
+                                <? } ?>
+                            </div>
 
-                        <div class="dates-container col-12 row">
-                            <label class="has-del-btn py-3 col">
-                                Data 1                                
-                                <input type="date" name="datas[0][data]" class="form-control mt-3">
-                                Início
-                                <input type="time" name="datas[0][horarioInicio]" class="form-control mt-3">
-                                Término
-                                <input type="time" name="datas[0][horarioTermino]" class="form-control mt-3">
-                            </label>
-                        </div>
+                            <button type="button" class="has-icon add-field-btn" data-add-field="date">
+                                <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
+                                adicionar novo campo de data
+                            </button>
 
-                        <button type="button" class="has-icon add-field-btn" data-add-field="date">
-                            <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
-                            adicionar novo campo de data
-                        </button>
+                        <? } ?>
 
                         <div class="col-12">
                             <button type="submit" class="form-control formsubmit" name="">

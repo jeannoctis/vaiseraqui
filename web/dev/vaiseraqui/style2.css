@@ -271,6 +271,7 @@ a.itemMenuPainel:hover:before {
 .tituloPagina {
 	display: flex;
 	align-items: center;
+	gap: 10px;
 }
 .tituloPagina img {
 	display: inline-flex;
@@ -694,11 +695,19 @@ hr.linhaform {
 #calendario .dia {
 	cursor: pointer;
 	text-align: center;
+   padding: 6px;
 }
 
 #calendario .ocupado {
 	background-color: #932327;
 	color: #fff;
+	border-radius: 50%;
+}
+#calendarios {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(322px, 350px));
+	gap: 2rem;
+	justify-content: space-around;
 }
 .boxOpcoesAdicionadas {
 	background-color: #ffffff;

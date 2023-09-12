@@ -6,13 +6,9 @@ $infoPagina['iconePagina'] = '';
     <? echo View("templates/barra-topo", $infoPagina); ?>
     <div class="conteudo">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-12 col-md-12">
-                    <?= $textoExplicativo->texto ?>
-                </div>
-            </div>
-            <hr class="linhaform">
 
+            <?= view("templates/instrucao-anunciante", (array)$instrucoes) ?>
+            
             <!-- <form class="form-horizontal" method="post" enctype="multipart/form-data" id="formBusca1">
 
                 <div class="foto">
@@ -155,7 +151,7 @@ $infoPagina['iconePagina'] = '';
                     </div>
                 </fieldset>
             </form>
-        
+
         </div>
     </div>
 </section>

@@ -88,8 +88,6 @@
     });
   }
 
-
-
   $(document).ready(function() {
     visitas(<?= $anuncio->id ?>);
     viuWhats(<?= $anuncio->id ?>);
@@ -102,32 +100,28 @@
 </script>
 
 <script>
-  <?
-  if ($erroLogin) { ?>
+  <? if ($erroLogin) { ?>
     swal("Ops,", "<?= $erroLogin ?>", "error");
     if (window.history.replaceState) {
       window.history.replaceState(null, null, window.location.href);
     }
     window.location = window.location.href;
-  <?  } else if ($sucesso) {
-  ?>
+  <? } else if ($sucesso) { ?>
     swal("Sucesso", "<?= $sucesso ? $sucesso : "Salvo com sucesso!" ?>", "success").then((result) => {
-
-      if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-      }
-      window.location = window.location.href;
+      <? if ($_POST) { ?>
+        if (window.history.replaceState) {
+          window.history.replaceState(null, null, window.location.href);
+        }
+        window.location = window.location.href;
+      <? } ?>
     });
-
   <? } else if ($_POST) { ?>
     swal("Ops,", "<?= $erro ?>", "error");
     if (window.history.replaceState) {
       window.history.replaceState(null, null, window.location.href);
     }
     window.location = window.location.href;
-  <?
-  }
-  ?>
+  <? } ?>
 </script>
 
 </body>
