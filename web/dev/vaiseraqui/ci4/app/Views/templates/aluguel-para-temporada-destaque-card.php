@@ -1,5 +1,5 @@
 <article class="card-item" data-aos="fade-right">
-    <a href="<?= PATHSITE ?>aluguel-para-temporada/<?= $identificador ?>">
+    <a href="<?= PATHSITE ?><?=$tipo?>/<?= $identificador ?>">
    <div class="cover">
       <span class="button-category">
          <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,12 +32,23 @@
          <span class="type"><?= $categoria ?></span>
          <span class="zona"><?= $titulo ?></span>
          <strong class="city"><?= $cidade ?> - <?= $estado ?></strong>
+          <? if($tipo == 'aluguel-para-temporada') {?>
          <ul>
             <li><?= $quartos ?> quartos</li>
             <li><?= $banheiros ?> banheiros</li>
             <li><?= $areautil ?> m²</li>
          </ul>
-
+         <? } else { 
+             $explode = explode(";",$principaiscomodidades);
+             ?>
+              <ul>
+                  <? foreach($explode as $ind => $exp) { 
+                      if($ind <= 2) {
+                      ?>
+            <li><?= $exp ?></li>
+                  <? }  } ?>
+         </ul>
+        <? } ?>
          <p class="price">
             <span class="value">R$<?= number_format($preco, 2, ",", ".") ?></span>
             <span class="recurrency">/aluguel</span>

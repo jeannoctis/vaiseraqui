@@ -10,41 +10,6 @@
                </nav>
                <span class="result"><?= count($alugueisParaTemporada) ?> espaços encontrados</span>
 
-               <!-- <form class="form-order">
-                  <a href="#" class="btn-primary">
-                     <img src="<?= PATHSITE ?>assets/images/icon-button-filter.svg" alt="icon filter">
-                     Filtros
-                  </a>
-                  <div class="input-order j-input-order-select">
-                     <label for="order">
-                        <img src="<?= PATHSITE ?>assets/images/icon-order.svg" alt="">
-                        <img class="active" src="<?= PATHSITE ?>assets/images/icon-order-active.svg" alt="">
-                        Ordenar por:
-                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M1 1L5 5L9 1" stroke="#404041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <svg class="active" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                           <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                     </label>
-                     <div class="modal-order">
-                        <input type="text" readonly value="Menor preço - Maior preço">
-                        <div class="modal-order-select">
-                           <div class="wraper-scroll">
-                              <nav class="content">
-                                 <a data-select-value="Maior preço - Menor preço" href="#maior-menor">Maior preço - Menor preço</a>
-                                 <a data-select-value="Menor preço - Maior preço" href="#menor-maior" class="active">Menor preço - Maior preço</a>
-                                 <a data-select-value="Entre R$800,00 e R$1.200,00" href="#entre-800-1200">Entre R$800,00 e R$1.200,00</a>
-                                 <a data-select-value="Entre R$1.200,00 e R$1.600,00" href="#entre-1200-1600">Entre R$1.200,00 e R$1.600,00</a>
-                                 <a data-select-value="Acima de R$1.600,00" href="#acima-1600">Acima de R$1.600,00</a>
-                                 <a data-select-value="Mais visto" href="#mais-visto">Mais visto</a>
-                                 <a data-select-value="Mais perto" href="#mais perto">Mais perto</a>
-                              </nav>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </form> -->
                <?= view("templates/order-filter", $get) ?>
             </div>
          </header>
@@ -53,6 +18,7 @@
 
                <!-- Destaque maior -->
                <? if ($alugueisEmAlta['grande']) {
+                   $alugueisEmAlta['grande']->tipo = 'aluguel-para-temporada';
                   echo view("templates/aluguel-para-temporada-destaque-grande-card.php", (array)$alugueisEmAlta['grande']);
                } ?>
 
@@ -60,12 +26,14 @@
                   <? if ($alugueisEmAlta['comum']) { ?>
                      <!-- Destaque menores -->
                      <? foreach ($alugueisEmAlta['comum'] as $aluguel) {
+                             $aluguel->tipo = 'aluguel-para-temporada';
                         echo view("templates/aluguel-para-temporada-destaque-card.php", (array)$aluguel);
                      } ?>
                   <? } ?>
 
                   <!-- Listagem comumn -->
                   <? foreach ($alugueisParaTemporada as $produto) {
+                         $produto->tipo = 'aluguel-para-temporada';
                      echo view("templates/aluguel-para-temporada-card.php", (array)$produto);
                   } ?>
                </div>
@@ -97,7 +65,8 @@
          <div class="list">
             <div class="swiper rent-interna">
                <div class="swiper-wrapper">
-                  <? foreach ($alugueisEmAlta as $item) { ?>
+                  <? foreach ($alugueisEmAlta as $item) {
+                      ?>
                      <div class="swiper-slide">
                         <?= view("templates/aluguel-para-temporada-destaque-card.php", (array)$item) ?>
                      </div>
@@ -129,12 +98,3 @@
 </main>
 
 
-
-<a href="https://www.google.com/maps/@51.5039653,-0.1246493,14.12z" data-fancybox class="btn-maps-mobile">
-   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1 5.34737C1 4.15952 1 3.5656 1.30539 3.21919C1.41381 3.0962 1.54559 2.99776 1.69245 2.93005C2.1061 2.73932 2.64974 2.92714 3.73701 3.30276C4.56709 3.58954 4.98214 3.73293 5.40152 3.71808C5.55555 3.71263 5.70867 3.69138 5.85866 3.65463C6.26704 3.55459 6.63103 3.30307 7.35911 2.80003L8.43423 2.05712C9.36687 1.41275 9.83314 1.09057 10.3684 1.01628C10.9037 0.941984 11.4353 1.12566 12.4986 1.49301L13.4045 1.80598C14.1745 2.07201 14.5595 2.20502 14.7798 2.52169C15 2.83836 15 3.25898 15 4.10023V10.6527C15 11.8405 15 12.4344 14.6946 12.7808C14.5862 12.9039 14.4544 13.0023 14.3075 13.07C13.8939 13.2607 13.3503 13.0729 12.263 12.6972C11.4329 12.4105 11.0179 12.2671 10.5985 12.2819C10.4445 12.2874 10.2913 12.3086 10.1414 12.3454C9.73297 12.4454 9.36897 12.6969 8.64089 13.2L7.56577 13.9429C6.63313 14.5873 6.16686 14.9095 5.63161 14.9837C5.09635 15.058 4.5647 14.8743 3.5014 14.507L2.59547 14.194C1.82545 13.928 1.44043 13.795 1.22022 13.4783C1 13.1616 1 12.741 1 11.8997V5.34737Z" stroke="white" stroke-width="1.5" />
-      <path d="M5.6665 4.11133V15.0002" stroke="white" stroke-width="1.5" />
-      <path d="M10.3335 1V11.8889" stroke="white" stroke-width="1.5" />
-   </svg>
-   Mapa
-</a>

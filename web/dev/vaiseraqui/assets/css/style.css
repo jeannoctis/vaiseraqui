@@ -1203,7 +1203,9 @@ select {
   max-width: 100%;
   aspect-ratio: 895/953;
   background-color: #932327;
-  position: relative;
+  position: sticky;
+  top: 0;
+  
 }
 .s-with-maps .column .embed-map iframe, .s-with-maps .column .embed-map #map {
   position: absolute;
@@ -5772,7 +5774,7 @@ header.header-bg .group-title span {
   display: block;
   margin-bottom: 1.44rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div ul li{
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div ul li a{
   display: flex;
   align-items: center;
   gap: 0.88rem;

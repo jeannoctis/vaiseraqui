@@ -96,7 +96,7 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
 
                     <div class="setor-container">
 
-                        <div class="setor-item">
+                        <div class="setor-item py-3">
 
                             <div class="top" data-toggle="collapse" data-target="#ingressos1">
                                 <button type="button" class="chevron">
@@ -104,38 +104,45 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                                 </button>
 
                                 <label class="py-3 col">
-                                    Setor: ...
+                                    Setor...
                                 </label>
                             </div>
 
                             <div class="collapse col bottom" id="ingressos1">
 
                                 <div class="setor-titulo has-del-btn">
-                                    Título do setor
-                                    <input type="text" name="" id="" class="form-control mt-3">
+                                    <label class="col-12">
+                                        Título do setor
+                                        <input type="text" name="" class="form-control mt-3">
+                                    </label>
 
                                     <button type="button" class="del-btn has-icon" data-delete-field="label">
                                         <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
-                                        excluir
+                                        excluir setor
                                     </button>
                                 </div>
 
-                                <div class="ingressos">
+                                <div class="ingressos col-12">
                                     <div class="ingresso-item has-del-btn">
                                         <button type="button" class="del-btn has-icon" data-delete-field="label">
                                             <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
-                                            excluir
+                                            excluir ingresso
                                         </button>
-                                        <label for="">
+                                        <label>
                                             Modalidade ingresso
                                             <input type="text" name="" id=" " class="form-control">
                                         </label>
-                                        <label for="">
+                                        <label>
                                             Valor
                                             <input type="text" name="" id=" " class="form-control">
                                         </label>
                                     </div>
                                 </div>
+
+                                <button type="button" class="has-icon add-field-btn col-12" data-add-field="ingresso">
+                                    <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
+                                    adicionar ingresso
+                                </button>
                             </div>
                         </div>
 
@@ -143,7 +150,7 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
 
                     <button type="button" class="has-icon add-field-btn" data-add-field="setor">
                         <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
-                        adicionar novo setor ingressos
+                        adicionar novo setor
                     </button>
 
                     <!-- <div onclick='novoPreco();' class="areaAcomodacao2">
@@ -153,19 +160,91 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                         </div>
                     </div> -->
 
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col-12 col-md-6">
                             <button type="submit" class="form-control formsubmit" name="">
                                 Salvar e atualizar
                             </button>
                         </div>
-                    </div> -->
+                    </div>
                 </fieldset>
             </form>
-
-
-
         </div>
     </div>
-
 </section>
+<script>
+    const addSetorBtn = document.querySelector("[data-add-field=setor]")
+    addSetorBtn.addEventListener("click", () => {
+        const setorContainer = document.querySelector(".setor-container")
+        let setorCount = document.querySelectorAll(".setor-item").length
+        setorCount++
+
+        const newElement = document.createElement("div")
+        newElement.classList.add("setor-item", "py-3")
+        newElement.innerHTML = `
+            <div class="top" data-toggle="collapse" data-target="#setor-${setorCount}">
+                <button type="button" class="chevron">
+                    <img src="<?= PATHSITE ?>assets/images/icon-chevron-up.svg" alt="">
+                </button>
+
+                <label class="py-3 col">
+                    Setor...
+                </label>
+            </div>
+
+            <div class="collapse col bottom" id="setor-${setorCount}" data-setor="${setorCount}">
+                <div class="setor-titulo has-del-btn">
+                    <label class="col-12">
+                        Título do setor
+                        <input type="text" name="setores[${setorCount}][titulo]" class="form-control mt-3">
+                    </label>
+
+                    <button type="button" class="del-btn has-icon" data-delete-field=".setor-item">
+                        <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
+                        excluir setor
+                    </button>
+                </div>
+
+                <div class="ingressos col-12">
+                    
+                </div>
+
+                <button type="button" class="has-icon add-field-btn col-12" data-add-field="ingresso">
+                    <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
+                    adicionar ingresso
+                </button>
+            </div>
+        `
+        setorContainer.appendChild(newElement)
+    })
+
+    const form = document.querySelector("form")
+    form.addEventListener("click", (ev)=>{
+        const element = ev.target
+
+        if(element.matches("[data-add-field=ingresso]")) {
+            const ingressosContainer = element.previousElementSibling
+            const currentSetor = element.closest("[data-setor]").dataset.setor
+            let ingressosCount = ingressosContainer.querySelectorAll(".ingresso-item").length
+            ingressosCount++
+
+            const newElement = document.createElement("div")
+            newElement.classList.add("ingresso-item", "has-del-btn")
+            newElement.innerHTML = `
+                <button type="button" class="del-btn has-icon" data-delete-field=".ingresso-item">
+                    <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
+                    excluir ingresso
+                </button>
+                <label>
+                    Modalidade ingresso
+                    <input type="text" name="setores[${currentSetor}][ingressos][${ingressosCount}][titulo]" class="form-control">
+                </label>
+                <label>
+                    Valor
+                    <input type="text" name="setores[${currentSetor}][ingressos][${ingressosCount}][valor]" class="form-control">
+                </label>
+            `
+            ingressosContainer.appendChild(newElement)
+        }
+    })
+</script>
