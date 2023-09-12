@@ -30,7 +30,7 @@ $infoPagina['iconePagina'] = $iconePagina;
                </div>
 
                <div class="bottom collapse" id="instrucao">
-                  <div class="content" >
+                  <div class="content">
                      Nesta seção, você deverá escolher apenas os itens que correspondam com a estrutura real de seu imóvel, que esta sendo anunciado.
 
 
@@ -58,11 +58,14 @@ $infoPagina['iconePagina'] = $iconePagina;
          <form class="form-horizontal" method="post" enctype="multipart/form-data" id="formBusca1">
             <fieldset>
 
-               <h2 class="col-12 mb-5">Comodidades do condomínio</h2>
+               <div class="col-12 mb-5">
+                  <label>Permitido</label>
+                  <input type="text" name="permitido" class="form-control" value="<?= $anuncio->permitido ?>">
+               </div>
 
-               <div class='col-12'>
-                  <label class="mb-3">Itens disponíveis</label>
-                  <input id="condominio" data-role="tagsinput" type="text" name="condominio" class="form-control tags-input mySingleFieldTags " value="<?= $anuncio->condominio ?>" placeholder="Itens">
+               <div class="col-12">
+                  <label>Proibido</label>
+                  <input type="text" name="proibido" class="form-control" value="<?= $anuncio->proibido ?>">
                </div>
 
                <div class="col-12 border-top pt-3">
@@ -70,6 +73,7 @@ $infoPagina['iconePagina'] = $iconePagina;
                      Salvar e Atualizar
                   </button>
                </div>
+
             </fieldset>
          </form>
       </div>

@@ -146,7 +146,7 @@
   <!-- Fixos -->
   <script src="<?= PATHSITE ?>assets/scripts/jquery/jquery.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/lazyscript.min.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="<?=PATHSITE?>assets/scripts/aos/aos.js"></script>
 
   <?= view("templates/script-group", $script_list) ?>
 

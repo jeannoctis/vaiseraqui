@@ -4,7 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AnuncianteModel extends Model {
+class AnuncianteModel extends Model
+{
 
     protected $DBGroup = 'default';
     protected $table = 'anunciante';
@@ -26,13 +27,14 @@ class AnuncianteModel extends Model {
     ];
     protected $skipValidation = false;
 
-    public function verPagina($segments) {
+    public function verPagina($segments)
+    {
         $page = $segments[1];
         $this->session = \Config\Services::session($config);
 
         if (!$this->session->get('anunciante') && $page != 'login') {
-            ?>
-            <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/login'" /> 
+?>
+            <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/login'" />
             <?
             exit();
         }
@@ -65,11 +67,11 @@ class AnuncianteModel extends Model {
 
         $produtoModel->resetQuery();
         $produtoModel->select("produto.*,  DATEDIFF(validade, NOW()) AS difValidade,  "
-                . "DATEDIFF(validadeDestaque, NOW()) AS difDestaque, DATEDIFF(inicioValidade, NOW()) AS difInicio, pc.tipoFK ");
+            . "DATEDIFF(validadeDestaque, NOW()) AS difDestaque, DATEDIFF(inicioValidade, NOW()) AS difInicio, pc.tipoFK ");
         $produtoModel->join('produto_categoria pc', 'produto.categoriaFK = pc.id');
         $data['anuncio'] = $produtoModel->find($this->session->get('anuncio'));
-        
-   
+
+
         $ipooModel = model('App\Models\TipoModel', false);
         $data['tipoAtual'] = $ipooModel->find($data['anuncio']->tipoFK);
 
@@ -88,7 +90,7 @@ class AnuncianteModel extends Model {
                 break;
 
             case 'login-admin':
-                    unset($_SESSION['anuncio']);
+                unset($_SESSION['anuncio']);
                 if ($_SESSION['admin']) {
 
                     $request = \Config\Services::request();
@@ -99,9 +101,9 @@ class AnuncianteModel extends Model {
 
                     if ($result) {
                         $this->session->set('anunciante', $result->id);
-                        ?>
-                        <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />   
-                        <?
+            ?>
+                        <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />
+                <?
                     }
                     exit();
                 }
@@ -126,7 +128,7 @@ class AnuncianteModel extends Model {
                     $this->session->set('anuncio', $anuncio->id);
                 }
                 ?>
-                <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />   
+                <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />
                 <?
                 exit();
                 break;
@@ -342,7 +344,6 @@ class AnuncianteModel extends Model {
                                 $tinyfile = \Tinify\fromFile($file_path);
                                 $tinyfile->toFile($file_path);
                             } catch (\Tinify\Exception $e) {
-                                
                             }
 
                             try {
@@ -353,7 +354,6 @@ class AnuncianteModel extends Model {
                                 imagewebp($img2, PATHHOME . "uploads/produto/{$data['anuncio']->id}/{$newName}.webp", 80);
                                 imagedestroy($img2);
                             } catch (\ErrorException $e) {
-                                
                             }
                         }
                         if ($save['arquivo']) {
@@ -370,7 +370,7 @@ class AnuncianteModel extends Model {
                 $produtoFotoModel->where("produtoFK", $data['anuncio']->id);
                 $produtoFotoModel->orderBy("ordem ASC, id DESC");
                 $data['fotos'] = $produtoFotoModel->findAll();
-     
+
                 $data['tabela'] = 'produto_foto';
                 $data['nomeModel'] = 'ProdutoFotoModel';
 
@@ -552,9 +552,9 @@ class AnuncianteModel extends Model {
                     $IDsReceivedSetor = \array_column($post['setorIngresso'], "id");
                     if (!empty($IDsReceivedSetor)) {
                         $this->produtoSetorModel
-                                ->where("produtoFK", $lastId)
-                                ->whereNotIn("id", $IDsReceivedSetor)
-                                ->delete();
+                            ->where("produtoFK", $lastId)
+                            ->whereNotIn("id", $IDsReceivedSetor)
+                            ->delete();
                     }
 
                     foreach ($post['setorIngresso'] as $item) {
@@ -612,14 +612,14 @@ class AnuncianteModel extends Model {
                 }
 
                 $data['setores'] = $this->produtoSetorModel
-                        ->where("produtoFK", $anuncio->id)
-                        ->findAll();
+                    ->where("produtoFK", $anuncio->id)
+                    ->findAll();
 
                 foreach ($data['setores'] as $key => $setor) {
                     $this->setorIngressoModel
-                            ->resetQuery()
-                            ->where("setorFK", $setor->id)
-                            ->orderBy("preco ASC, id DESC");
+                        ->resetQuery()
+                        ->where("setorFK", $setor->id)
+                        ->orderBy("preco ASC, id DESC");
                     $data['setores'][$key]->ingressos = $this->setorIngressoModel->findAll();
                 }
 
@@ -731,7 +731,7 @@ class AnuncianteModel extends Model {
                     if ($post["precos"]) {
                         foreach ($post["precos"] as $ind => $preco) {
                             $salvamento['preco'] = str_replace(".", "", $preco);
-                            $salvamento['preco'] = (String) str_replace(",", ".", $salvamento['preco']);
+                            $salvamento['preco'] = (string) str_replace(",", ".", $salvamento['preco']);
 
                             $salvamento["id"] = $post["ids"][$ind];
                             $produtoQuantidadeModel->resetQuery();
@@ -941,7 +941,7 @@ class AnuncianteModel extends Model {
                         $post['longitude'] = $coord[1];
                     }
 
-                   
+
 
                     $img = $request->getFile("arquivo");
 
@@ -993,9 +993,9 @@ class AnuncianteModel extends Model {
                         } else {
                             $this->session->set('anunciante', $result->id);
                             session_write_close();
-                            ?>
-                            <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />         
-                            <?
+                ?>
+                            <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />
+<?
                         }
                     }
                 }
@@ -1004,7 +1004,23 @@ class AnuncianteModel extends Model {
             case "condominio":
                 $data['nomePagina'] = "Condominio";
                 $data['iconePagina'] = "icon-condominio.svg";
-            break;
+                break;
+            case "observacoes":
+                $data['nomePagina'] = "Observações";
+                $data['iconePagina'] = "icon-observation.svg";
+                break;
+            case "regras-check-in-out":
+                $data['nomePagina'] = "Regras de Check-in & Check-out";
+                $data['iconePagina'] = "icon-arrows.svg";
+                break;
+            case "permitido-proibido":
+                $data['nomePagina'] = "Permitido e Proibido";
+                $data['iconePagina'] = "icon-check-x.svg";
+                break;
+            case "itens-disponiveis":
+                $data['nomePagina'] = "Itens disponíveis";
+                $data['iconePagina'] = "icon-alert-white.svg";
+                break;
             default:
                 throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
                 break;

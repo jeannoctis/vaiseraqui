@@ -4950,7 +4950,7 @@ a.ui-button:active,
 		position: absolute;
 		right: 13px;
 		top: -8px;
-		z-index: 10;
+		z-index: 10;		
 	}
 	.propaganda .carousel-item {
 		border-radius: 0;

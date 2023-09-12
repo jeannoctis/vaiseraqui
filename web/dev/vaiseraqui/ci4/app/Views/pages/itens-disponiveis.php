@@ -58,11 +58,11 @@ $infoPagina['iconePagina'] = $iconePagina;
          <form class="form-horizontal" method="post" enctype="multipart/form-data" id="formBusca1">
             <fieldset>
 
-               <h2 class="col-12 mb-5">Comodidades do condomínio</h2>
+               <h2 class="col-12 mb-5">Itens disponíveis</h2>
 
                <div class='col-12'>
                   <label class="mb-3">Itens disponíveis</label>
-                  <input id="condominio" data-role="tagsinput" type="text" name="condominio" class="form-control tags-input mySingleFieldTags " value="<?= $anuncio->condominio ?>" placeholder="Itens">
+                  <input data-role="tagsinput" type="text" name="itensdisponiveis" class="form-control tags-input mySingleFieldTags " value="<?= $anuncio->itensdisponiveis ?>" placeholder="Itens">
                </div>
 
                <div class="col-12 border-top pt-3">

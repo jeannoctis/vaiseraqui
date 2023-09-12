@@ -4,10 +4,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <?= view("templates/styles-group", $style_list)?>
 
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <?= view("templates/styles-group", $style_list) ?>
+
+  <link href="<?= PATHSITE ?>assets/scripts/aos/aos.css" rel="stylesheet">
 
   <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css">
   <title><?= $metatag->titulo ?> - <?= $configs->nome ?></title>

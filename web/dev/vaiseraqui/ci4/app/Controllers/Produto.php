@@ -173,6 +173,8 @@ class Produto extends BaseController
             $post['cardapio'] = NULL;
          }
 
+         $post['preco'] = \str_replace(['.', ','], ['', '.'], $post['preco']);
+
          $pdf = $this->request->getFile("cardapio");
          if ($pdf) {
             if ($pdf->isValid() && !$pdf->hasMoved()) {
