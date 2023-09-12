@@ -90,7 +90,7 @@ class ProdutoModel extends Model
         $this->where('ativo', '1');
         $this->where('destaque', '1');
         $this->orderBy('rand()');
-        $destaques = $this->findAll(8);
+        $destaques = $this->findAll($limit);
         if ($destaques) {
             foreach ($destaques as $ind => $destaque) {
                 $destaques[$ind]->fotos = $this->fotos($destaque->id, 4, true);
@@ -222,6 +222,30 @@ class ProdutoModel extends Model
         $anuncianteModel = \model("App\Models\AnuncianteModel", false)
                 ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
         $anunciante = $anuncianteModel->find($id);
+        
+         $removeChars = array("-", "(", ")", " ");
+        $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+        $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
+        $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
+        $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
+        $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
+
+        if ($iphone || $android || $palmpre || $ipod || $berry == true) {
+            $usaApi = "api";
+        } else {
+            $usaApi = "web";
+        }
+              
+        if($anunciante->telefone) {
+             $anunciante->whatsapp = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "",$anunciante->telefone);
+        }
+        if($anunciante->telefone2) {
+             $anunciante->whatsapp2 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "",$anunciante->telefone2);
+        }
+        
+        if($anunciante->telefone3) {
+             $anunciante->whatsapp3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "",$anunciante->telefone3);
+        }
 
         return $anunciante;
     }

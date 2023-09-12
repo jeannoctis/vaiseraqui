@@ -16,8 +16,7 @@
           <h1><?=$metatag->titulo?></h1>
           <span class="location"><?=$metatag->cidade?>-<?=$metatag->estado?></span>
           <div class="desc">            
-            <p>Influenciados pelo rock, dos anos 60 e 70 ao contemporâneo, a banda Senhor Bonifácio chama a atenção em qualquer lugar por onde passa, pela eletrizante presença de palco, qualidade musical, vontade de fazer música e atitude.</p>
-            <p>A Senhor Bonifácio já dividiu palco com grandes renomes nacionais como Cachorro Grande, Planta e Raiz, Marcelo D2, Monobloco, Gabriel O Pensador, Ludmila, É o Tchan e Molejo, fazendo apresentações memoráveis para públicos de até 30 mil pessoas.</p>
+          <?=$metag->descricao?>
           </div>
         </div>
 

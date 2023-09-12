@@ -1004,7 +1004,7 @@ class AnuncianteModel extends Model
             case "condominio":
                 $data['nomePagina'] = "Condominio";
                 $data['iconePagina'] = "icon-condominio.svg";
-                break;
+            break;
             case "observacoes":
                 $data['nomePagina'] = "Observações";
                 $data['iconePagina'] = "icon-observation.svg";

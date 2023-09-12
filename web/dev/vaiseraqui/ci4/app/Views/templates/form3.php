@@ -1,4 +1,4 @@
- <form class="form3">
+ <form action="<?=PATHSITE?>prestadores-de-servicos/" method="get" class="form3">
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>

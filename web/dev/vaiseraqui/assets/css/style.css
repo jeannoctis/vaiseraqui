@@ -2273,6 +2273,7 @@ select {
 .s-text-and-slider.page-event-internal .cover {
   border-radius: 30px;
   overflow: hidden;
+  z-index: -1;
 }
 @media screen and (max-width: 769px) {
   .s-text-and-slider.page-event-internal {
@@ -3200,14 +3201,16 @@ header.header-bg .group-title span {
 .box-modal-more .box-modal-more-details {
   display: none;
   position: absolute;
-  bottom: 1.56rem;
-  left: 0;
+  bottom: 5.56rem;
+  right: -62px;
+  max-height: 495px;
   width: 26.9375rem;
   border-radius: 1.25rem;
   background-color: #FFFFFF;
   box-shadow: 0px 4px 21px 0px rgba(0, 0, 0, 0.1);
   padding: 4.5rem 4.62rem 3.75rem;
   z-index: 5;
+  overflow-y: scroll;
 }
 .box-modal-more .box-modal-more-details.open {
   display: block;

@@ -169,9 +169,9 @@ class Produto extends BaseController
 
       if ($post) {
 
-         if ($post['apagarcardapio']) {
-            $post['cardapio'] = NULL;
-         }
+            if ($post['apagarcardapio']) {
+                $post['cardapio'] = NULL;
+            }
 
          $post['preco'] = \str_replace(['.', ','], ['', '.'], $post['preco']);
 
@@ -1351,4 +1351,15 @@ class Produto extends BaseController
          $get = request()->getGet();
         $this->model->eventos($get);
     }
+    
+       
+  public function chamarWhats() {
+     $request = \Config\Services::request();
+     $post = $request->getPost();    
+     $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
+            
+     $id = decode($post['produtoFK']);
+            
+    $produtoWhatsModel->contaClique($id);
+  }
 }
