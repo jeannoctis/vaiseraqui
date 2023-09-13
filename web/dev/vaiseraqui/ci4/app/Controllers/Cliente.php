@@ -2,9 +2,11 @@
 
 namespace App\Controllers;
 
-class Cliente extends BaseController {
+class Cliente extends BaseController
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = \Config\Database::connect();
         $this->session = \Config\Services::session($config);
         helper(['encrypt', 'text']);
@@ -17,7 +19,8 @@ class Cliente extends BaseController {
         $this->session->set('menuAdmin', '4');
     }
 
-    public function index() {
+    public function index()
+    {
         \helper('url');
 
         if (isset($_POST['excluir'])) {
@@ -41,7 +44,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function form() {
+    public function form()
+    {
         helper('form');
         helper('url');
 
@@ -79,7 +83,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function pjFotos() {
+    public function pjFotos()
+    {
         if (isset($_POST['excluir'])) {
             foreach ($_POST['excluir'] as $exc) {
                 $data['excluiu'] = $this->pjFotoModel->delete(['id' => $exc]);
@@ -109,7 +114,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function pjFoto() {
+    public function pjFoto()
+    {
         $idProjeto = decode($this->request->uri->getSegment(4));
         $idFoto = decode($this->request->uri->getSegment(5));
 
@@ -162,7 +168,6 @@ class Cliente extends BaseController {
                             imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
                             imagedestroy($img);
                         } catch (\Tinify\ClientException $e) {
-                            
                         }
                     }
                 }
@@ -201,7 +206,6 @@ class Cliente extends BaseController {
                                 imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
                                 imagedestroy($img);
                             } catch (\Tinify\ClientException $e) {
-                                
                             }
                         }
 
@@ -221,7 +225,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function pjPlantas() {
+    public function pjPlantas()
+    {
         if (isset($_POST['excluir'])) {
             foreach ($_POST['excluir'] as $exc) {
                 $data['excluiu'] = $this->pjPlantaModel->delete(['id' => $exc]);
@@ -251,7 +256,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function pjPlanta() {
+    public function pjPlanta()
+    {
         $idProjeto = decode($this->request->uri->getSegment(4));
         $idPlanta = decode($this->request->uri->getSegment(5));
 
@@ -303,7 +309,6 @@ class Cliente extends BaseController {
                             imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
                             imagedestroy($img);
                         } catch (\Tinify\ClientException $e) {
-                            
                         }
                     }
                 }
@@ -342,7 +347,6 @@ class Cliente extends BaseController {
                                 imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
                                 imagedestroy($img);
                             } catch (\Tinify\ClientException $e) {
-                                
                             }
                         }
 
@@ -362,7 +366,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function pjVideos() {
+    public function pjVideos()
+    {
         if (isset($_POST['excluir'])) {
             foreach ($_POST['excluir'] as $exc) {
                 $data['excluiu'] = $this->pjVideoModel->delete(['id' => $exc]);
@@ -392,7 +397,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function pjVideo() {
+    public function pjVideo()
+    {
         $idProjeto = decode($this->request->uri->getSegment(4));
         $idVideo = decode($this->request->uri->getSegment(5));
 
@@ -436,7 +442,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function pjAdicionais() {
+    public function pjAdicionais()
+    {
         if (isset($_POST['excluir'])) {
             foreach ($_POST['excluir'] as $exc) {
                 $data['excluiu'] = $this->pjAdicionalModel->delete(['id' => $exc]);
@@ -466,7 +473,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function pjAdicional() {
+    public function pjAdicional()
+    {
         $idProjeto = decode($this->request->uri->getSegment(4));
         $idAdicional = decode($this->request->uri->getSegment(5));
 
@@ -518,7 +526,6 @@ class Cliente extends BaseController {
                         imagewebp($img, PATHHOME . "uploads/{$data["tabela"]}/{$newName}.webp", 60);
                         imagedestroy($img);
                     } catch (\Tinify\ClientException $e) {
-                        
                     }
                 }
             }
@@ -541,7 +548,8 @@ class Cliente extends BaseController {
         echo view('templates/admin-footer');
     }
 
-    public function loginFacebook() {
+    public function loginFacebook()
+    {
 
         $request = \Config\Services::request();
         $post = $request->getPost();
@@ -570,7 +578,8 @@ class Cliente extends BaseController {
     }
 
     public
-            function loginGoogle() {
+    function loginGoogle()
+    {
 
         $request = \Config\Services::request();
         $post = $request->getPost();
@@ -596,29 +605,28 @@ class Cliente extends BaseController {
                 $cookie = $_COOKIE['g_csrf_token'] ?? '';
 
                 if ($post['g_csrf_token'] != $cookie) {
-                    
                 }
             }
         }
     }
-    
-      public function favoritar() {
-      $request = \Config\Services::request();
-     $post = $request->getPost();
-    
-     $post['clienteFK'] = $this->session->get('cliente')->id;
-    
-      $clienteFavoritoModel = model('App\Models\ClienteFavoritoModel', false);
-    $clienteFavoritoModel->select("id");
-    $clienteFavoritoModel->where("produtoFK", $post['produtoFK']);
-    $clienteFavoritoModel->where("clienteFK", $post['clienteFK'] );
-   $temFavorito = $clienteFavoritoModel->find()[0];   
-   
-    if($temFavorito){
-      $clienteFavoritoModel->delete(['id' => $temFavorito->id ]);
-    } else {    
-    $clienteFavoritoModel->save($post);
-    }      
-  }
-    
+
+    public function favoritar()
+    {
+        $request = \Config\Services::request();
+        $post = $request->getPost();
+
+        $post['clienteFK'] = $this->session->get('cliente')->id;
+
+        $clienteFavoritoModel = model('App\Models\ClienteFavoritoModel', false);
+        $clienteFavoritoModel->select("id");
+        $clienteFavoritoModel->where("produtoFK", $post['produtoFK']);
+        $clienteFavoritoModel->where("clienteFK", $post['clienteFK']);
+        $temFavorito = $clienteFavoritoModel->find()[0];
+
+        if ($temFavorito) {
+            $clienteFavoritoModel->delete(['id' => $temFavorito->id]);
+        } else {
+            $clienteFavoritoModel->save($post);
+        }
+    }
 }

@@ -1,14 +1,14 @@
 function favoritar (id) {
-  $("#modal-logar").modal('show');  
-    $.post(PATHSITE + "cliente/favoritar/", { produtoFK: id }, function (e) {   
-        });  
+  $("#modal-logar").modal('show');
+  $.post(PATHSITE + "cliente/favoritar/", { produtoFK: id }, function (e) {
+  });
 }
 
 function eventosData (dia) {
-    $.get(PATHSITE + "produto/eventos/", { dia: dia }, function (e) {   
-         dados = jQuery.parseJSON(e);
-        $("#categoria-eventos").html(dados.html);
-        });   
+  $.get(PATHSITE + "produto/eventos/", { dia: dia }, function (e) {
+    dados = jQuery.parseJSON(e);
+    $("#categoria-eventos").html(dados.html);
+  });
 }
 
 function callRecaptcha () {
@@ -62,15 +62,15 @@ function contadorWhatsapp (whatsappFK) {
   $.post(PATHSITE + "utils/contadorWhatsapp/", { whatsappFK: whatsappFK }, function (e) { });
 }
 
-function abreWhatsapp(id){
-      $.post(PATHSITE + "produto/chamarWhats/", { produtoFK: id }, function (e) {   
-        });  
+function abreWhatsapp (id) {
+  $.post(PATHSITE + "produto/chamarWhats/", { produtoFK: id }, function (e) {
+  });
 }
 
- function clicaMapa(mapa) {
-         Fancybox.show([{
-            src: mapa,
-            width: 800,
-            height: 600,
-         }, ]);
- }
+function clicaMapa (mapa) {
+  Fancybox.show([{
+    src: mapa,
+    width: 800,
+    height: 600,
+  },]);
+}

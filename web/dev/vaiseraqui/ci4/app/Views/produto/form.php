@@ -68,14 +68,14 @@
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="inicioDestaque">Início destaque</label>
-                           <input type="date" name="inicioDestaque" class="form-control" id="inicioDestaque" value="<?= $resultado->inicioDestaque ?>" placeholder="Escreva..." >
+                           <input type="date" name="inicioDestaque" class="form-control" id="inicioDestaque" value="<?= $resultado->inicioDestaque ?>" placeholder="Escreva...">
                         </div>
                      </div>
 
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="validadeDestaque">Fim Destaque</label>
-                           <input type="date" name="validadeDestaque" class="form-control" id="validadeDestaque" value="<?= $resultado->validadeDestaque ?>" placeholder="Escreva..." >
+                           <input type="date" name="validadeDestaque" class="form-control" id="validadeDestaque" value="<?= $resultado->validadeDestaque ?>" placeholder="Escreva...">
                         </div>
                      </div>
 
@@ -265,7 +265,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1, 3])) { ?>
+               <? if (in_array($get['tipo'], [1])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Informações importantes
@@ -336,6 +336,99 @@
                            <div class="col-xs-12 col-sm-12">
                               <label for="transporte">Transporte Público</label>
                               <input type="text" name="transporte" class="form-control" id="transporte" value="<?= $resultado->transporte ?>" placeholder="Escreva...">
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+               <? } ?>
+
+               <? if (in_array($get['tipo'], [3])) { ?>
+                  <div class="box-content card white">
+                     <h4 class="box-title">
+                        Informações importantes
+                     </h4>
+                     <!-- /.box-title -->
+                     <div class="card-content">
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="cafedamanha">Café da manhã</label>
+                              <select name="cafedamanha" required class="form-control" id="cafedamanha">
+                                 <option <?= $resultado->cafedamanha == "N" ? 'selected' : '' ?> value="N">Não</option>
+                                 <option <?= $resultado->cafedamanha == "S" ? 'selected' : '' ?> value="S">Sim</option>
+                              </select>
+                           </div>
+                        </div>
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="wifi">Wi-fi</label>
+                              <select name="wifi" required class="form-control" id="wifi">
+                                 <option <?= $resultado->wifi == "N" ? 'selected' : '' ?> value="N">Não</option>
+                                 <option <?= $resultado->wifi == "S" ? 'selected' : '' ?> value="S">Sim</option>
+                              </select>
+                           </div>
+                        </div>
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="arcondicionado">Ar condicionado</label>
+                              <select name="arcondicionado" required class="form-control" id="arcondicionado">
+                                 <option <?= $resultado->arcondicionado == "N" ? 'selected' : '' ?> value="N">Não</option>
+                                 <option <?= $resultado->arcondicionado == "S" ? 'selected' : '' ?> value="S">Sim</option>
+                              </select>
+                           </div>
+                        </div>
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="bar">Bar</label>
+                              <select name="bar" required class="form-control" id="bar">
+                                 <option <?= $resultado->bar == "N" ? 'selected' : '' ?> value="N">Não</option>
+                                 <option <?= $resultado->bar == "S" ? 'selected' : '' ?> value="S">Sim</option>
+                              </select>
+                           </div>
+                        </div>
+                        
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="recepcao24">Recepção 24h</label>
+                              <select name="recepcao24" required class="form-control" id="recepcao24">
+                                 <option <?= $resultado->recepcao24 == "N" ? 'selected' : '' ?> value="N">Não</option>
+                                 <option <?= $resultado->recepcao24 == "S" ? 'selected' : '' ?> value="S">Sim</option>
+                              </select>
+                           </div>
+                        </div>
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="animais">Aceita pets</label>
+                              <select name="animais" required class="form-control" id="animais">
+                                 <option <?= $resultado->animais == "N" ? 'selected' : '' ?> value="N">Não</option>
+                                 <option <?= $resultado->animais == "S" ? 'selected' : '' ?> value="S">Sim</option>
+                              </select>
+                           </div>
+                        </div>
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="acessibilidade">Acessibilidade</label>
+                              <select name="acessibilidade" required class="form-control" id="acessibilidade">
+                                 <option <?= $resultado->acessibilidade == "N" ? 'selected' : '' ?> value="N">Não</option>
+                                 <option <?= $resultado->acessibilidade == "S" ? 'selected' : '' ?> value="S">Sim</option>
+                              </select>
+                           </div>
+                        </div>
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="estacionamento">Estacionamento</label>
+                              <select name="estacionamento" required class="form-control" id="estacionamento">
+                                 <option <?= $resultado->estacionamento == "N" ? 'selected' : '' ?> value="N">Não</option>
+                                 <option <?= $resultado->estacionamento == "S" ? 'selected' : '' ?> value="S">Sim</option>
+                              </select>
                            </div>
                         </div>
 

@@ -2,9 +2,8 @@
   // Likes in card
   const likes = document.querySelectorAll('.icon-heart')
   likes.forEach(like => {
-    like.addEventListener('click', (e) => {
+    like.addEventListener('click', (e) => {      
       e.preventDefault()
-      like.classList.toggle('active')
     })
   })
 })()

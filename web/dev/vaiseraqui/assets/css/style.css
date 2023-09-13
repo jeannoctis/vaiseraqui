@@ -2162,13 +2162,13 @@ select {
 .s-text-and-slider .slider .top a > svg.active {
   display: none;
 }
-.s-text-and-slider .slider .top a:hover {
+.s-text-and-slider .slider .top a:is(:hover, .active) {
   background-color: #932327;
 }
-.s-text-and-slider .slider .top a:hover svg {
+.s-text-and-slider .slider .top a:is(:hover, .active) svg {
   display: none;
 }
-.s-text-and-slider .slider .top a:hover svg.active {
+.s-text-and-slider .slider .top a:is(:hover, .active) svg.active {
   display: block;
 }
 .s-text-and-slider .slider .bottom {
@@ -9452,28 +9452,36 @@ header.header-bg .group-title span {
 }
 /* Modal Não Logado */
 .dialog-not-logged {
-  position: relative;
+  position: fixed;
   padding: 0;
   border-radius: 33px;
   background-color: white;
   border: none;
-  display: none;
-}
-.dialog-not-logged.active {
-  position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 10;
+  min-width: 325px;
+  display: none;
+}
+.dialog-not-logged[open] {
+  display: block;
 }
 .dialog-not-logged .content {
-  width: 616px;
-  height: 617px;
+  max-width: 616px;
+  max-height: 617px;
   padding: 80px;
 }
 .dialog-not-logged span {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 2rem;
+  right: 2rem;
+  cursor: pointer;
+}
+.dialog-not-logged span img {
+  width: 18px;
+  aspect-ratio: 1;
+  object-fit: cover;
 }
 .dialog-not-logged .icon-close {
   width: 1rem;
@@ -9481,9 +9489,10 @@ header.header-bg .group-title span {
   object-fit: cover;
 }
 .dialog-not-logged h3 {
+  margin-block: 2rem;
   color: #404041;
   text-align: center;
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
   line-height: 120.1%; /* 28.824px */
   letter-spacing: -0.96px;
@@ -9496,24 +9505,42 @@ header.header-bg .group-title span {
   line-height: 120.1%; /* 21.618px */
   letter-spacing: -0.54px;
 }
-.dialog-not-logged .buttons {
+.dialog-not-logged .buttons-div {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
+  margin-top: 2rem;
 }
-.dialog-not-logged button {
+.dialog-not-logged :is(a, button) {
   display: block;
   border-radius: 9px;
   border: none;
-  background: #932327;
+  background-color: #932327;
   color: #FFF;
   font-size: 20px;
   font-weight: 700;
   line-height: 120.1%; /* 24.02px */
   letter-spacing: -0.8px;
-  width: 302px;
+  max-width: 302px;
+  width: 100%;
   height: 64px;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.dialog-not-logged button:hover {
+  background: #c82328;
+}
+@media (max-width: 880px) {
+  .dialog-not-logged .content {
+    padding: 3rem;
+  }
+  .dialog-not-logged h3 {
+    font-size: 20px;
+  }
+  .dialog-not-logged :is(a, button) {
+    height: 52px;
+  }
 }
 
 /* Cookies */

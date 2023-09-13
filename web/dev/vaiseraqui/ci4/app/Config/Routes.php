@@ -165,6 +165,7 @@ $routes->add('workshop/abrirmodalworkshop', 'Workshop::abrirModalWorkshop');
 
 $routes->add('cliente/loginFacebook', 'Cliente::loginFacebook');
 $routes->add('cliente/loginGoogle', 'Cliente::loginGoogle');
+$routes->add('cliente/favoritar', 'Cliente::favoritar');
 
 $routes->add('produto/carregaCalendarios', 'Produto::carregaCalendarios');
 $routes->add('produto/excluirFoto', 'Produto::excluirFoto');  
