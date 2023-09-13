@@ -121,7 +121,7 @@
 
    </section>
 
-      <? if($destaques) {              
+      <? if($destaques) {          
                 ?>
     <section class="s-title-and-list-cards" id="servicos-destaque">
       <div class="container-medium">

@@ -1,3 +1,4 @@
+ <a href="<?= PATHSITE ?><?=$tipo?>/<?= $identificador ?>">
 <article class="card-item poster">
    <div class="cover">
       <span class="button-category">
@@ -29,17 +30,28 @@
       <? } ?>
 
    </div>
-   <div class="info">
-      <a href="<?= PATHSITE ?>aluguel-para-temporada/<?= $identificador ?>">
+   <div class="info">      
          <div>
             <span class="type"><?= $categoria ?></span>
             <span class="zona"><?= $titulo ?></span>
             <strong class="city"><?= $cidade ?> - <?= $estado ?></strong>
-            <ul>
-               <li><?= $quartos ?> quartos</li>
-               <li><?= $banheiros ?> suites</li>
-               <li><?= $areautil ?> m²</li>
-            </ul>
+           <? if($tipo == 'aluguel-para-temporada') {?>
+         <ul>
+            <li><?= $quartos ?> quartos</li>
+            <li><?= $banheiros ?> banheiros</li>
+            <li><?= $areautil ?> m²</li>
+         </ul>
+         <? } else {
+             $explode = explode(";",$principaiscomodidades);
+             ?>
+              <ul>
+                  <? foreach($explode as $ind => $exp) { 
+                      if($ind <= 2) {
+                      ?>
+            <li><?= $exp ?></li>
+                  <? }  } ?>
+         </ul>
+        <? } ?>
          </div>
 
          <footer>
@@ -57,6 +69,7 @@
                </svg>
             </span>
          </footer>
-      </a>
    </div>
+     
 </article>
+     </a>

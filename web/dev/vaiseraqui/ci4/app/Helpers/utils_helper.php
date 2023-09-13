@@ -82,6 +82,7 @@ if (!function_exists('getDateInterval')) {
       $dataCriacao = new DateTime($date);
 
       $interval = $hoje->diff($dataCriacao);
+      
 
       return $interval;
    }
