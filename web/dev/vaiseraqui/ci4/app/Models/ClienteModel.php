@@ -11,7 +11,7 @@ class ClienteModel extends Model {
     protected $primaryKey = 'id';
     protected $returnType = 'object';
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['nome', 'sobrenome', 'email', 'senha', 'telefone', 'cpf', 'arquivo', 'ordem','recuperar'];
+    protected $allowedFields = ['nome', 'sobrenome', 'email', 'senha', 'telefone', 'cpf', 'arquivo', 'ordem','recuperar', 'cidade', 'estado'];
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';

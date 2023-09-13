@@ -67,7 +67,7 @@ class Produto extends BaseController
          ->join("produto p", "anunciante.id = p.anuncianteFK")
                 ->findAll();
 
-      if(empty($IDsCategorias)) {
+      if (empty($IDsCategorias)) {
          $IDsCategorias[]['id'] = 0;
       }
 
@@ -507,7 +507,7 @@ class Produto extends BaseController
                 $this->produtoOrganizacaoModel->where("produtoFK", $lastId)->delete();
             }
 
-         if(!empty($post['datas'])) {
+         if (!empty($post['datas'])) {
             $IDsReceviedDatas = \array_column($post['datas'], "id");            
 
             if (!empty($IDsReceviedDatas)) {
@@ -517,8 +517,8 @@ class Produto extends BaseController
                   ->delete();
             }
 
-            foreach($post['datas'] as $item) {
-               if(!empty($item['id'])) {
+            foreach ($post['datas'] as $item) {
+               if (!empty($item['id'])) {
                   $updateDatas[] = [
                      'id' => $item['id'],
                      'data' => $item['data'],
@@ -541,7 +541,6 @@ class Produto extends BaseController
             if (!empty($insertDatas)) {
                $this->produtoDataModel->insertBatch($insertDatas);
             }
-
          } else {
             $this->produtoDataModel->where("produtoFK", $lastId)->delete();
          }
@@ -1141,7 +1140,7 @@ class Produto extends BaseController
             });
 
          $(document).ready(function() {
-                $('.cep').mask('00000-000');
+            $('.phone_with_ddd').mask('(00) 00000-0000');
             });
         </script>
         <div class="card">
@@ -1171,8 +1170,8 @@ class Produto extends BaseController
                             <input type="text" name="endereco[]" class="form-control" Value="<?= $texto->endereco ?>">
                         </div>
                   <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
-                                <label>CEP</label>                                              
-                                <input type="text" name="cep[]" class="form-control cep" Value="<?= $texto->cep ?>">
+                     <label>Telefone</label>
+                     <input type="text" name="cep[]" class="form-control phone_with_ddd" Value="<?= $texto->cep ?>">
                             </div>
                   <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
                                 <label>Cidade / Estado</label>                                              
@@ -1251,6 +1250,54 @@ class Produto extends BaseController
         $retorno['html'] = ob_get_clean();
         echo json_encode($retorno);
     }
+
+   public function novoCardapio()
+   {
+      ob_start();
+      $token = md5(uniqid(""));
+      ?>
+      <script>
+         $(document).ready(function() {
+            $(".mySingleFieldTags").tagit({
+               allowSpaces: true
+            });
+         });
+      </script>
+      <div class="card">
+         <div class="card-header" id="card<?= $token ?>">
+            <h5 class="mb-0">
+               <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
+                  Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
+
+                  <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
+                     <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
+                     Excluir
+                  </div>
+               </div>
+            </h5>
+         </div>
+
+         <div id="aba<?= $token ?>" class="collapse show" aria-labelledby="tituloAba<?= $token ?>" data-parent="#accordion">
+            <div class="card-body">
+
+               <div class="row">
+                  <div class="col-12">
+                     <label>Título</label>
+                     <input type="text" name="titulo[]" class="form-control" Value="">
+                  </div>
+                  <div class='col-12'>
+                     <label>Itens</label>
+                     <input data-role="tagsinput" type="text" name="itens[]" class="form-control tags-input mySingleFieldTags " value="" placeholder="Itens">
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+      <?
+      $retorno['html'] = ob_get_clean();
+      echo json_encode($retorno);
+   }
 
    public function excluirAba()
    {
@@ -1347,13 +1394,15 @@ class Produto extends BaseController
         echo json_encode($retorno);
     }
     
-    public function eventos() {
+   public function eventos()
+   {
          $get = request()->getGet();
         $this->model->eventos($get);
     }
     
        
-  public function chamarWhats() {
+   public function chamarWhats()
+   {
      $request = \Config\Services::request();
      $post = $request->getPost();    
      $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);

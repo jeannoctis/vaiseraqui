@@ -3,7 +3,7 @@
       <div class="item">
         <img src="<?= PATHSITE ?>assets/images/logo-mobile.png" alt="" class="logo only-mobile">
         <img src="<?= PATHSITE ?>assets/images/logo-footer.png" alt="Logo" class="logo">
-        <a href="<?=PATHSITE?>planos/" class="btn-primary">Anuncie seu imóvel conosco</a>
+        <a href="<?= PATHSITE ?>planos/" class="btn-primary">Anuncie seu imóvel conosco</a>
       </div>
       <div class="item">
         <h2>Categorias</h2>
@@ -68,6 +68,28 @@
     </a>
         </div>
   </footer>
+
+  <dialog class="dialog-not-logged">
+    <div class="content">
+
+      <span class="dialog-close"></span>
+
+      <img src="" alt="" class="dialog-logo">
+
+      <h3>Você ainda não está logado para curtir os anúncios...</h3>
+
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+
+      <div class="buttons">
+        <a href="">
+          <button type="button">Área de login</button>
+        </a>
+        <a href="">
+          <button type="button">Cadastre-se!</button>
+        </a>
+      </div>
+    </div>
+  </dialog>
 
   <!-- Cookies + WhatsApp -->
 
@@ -148,9 +170,27 @@
   <!-- Fixos -->
   <script src="<?= PATHSITE ?>assets/scripts/jquery/jquery.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/lazyscript.min.js"></script>
-  <script src="<?=PATHSITE?>assets/scripts/aos/aos.js"></script>
+  <script src="<?= PATHSITE ?>assets/scripts/aos/aos.js"></script>
 
   <?= view("templates/script-group", $script_list) ?>
+  <? if ($pagina == 21) { ?>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+      });
+      var valorTabPerfil;
+      $('ul.menuDados li').click(function() {
+        valorTabPerfil = $(this).data('painel');
+        $(".boxTabView").removeClass('ativo');
+        $(valorTabPerfil).addClass('ativo');
+        $('ul.menuDados li').removeClass('ativo');
+        $(this).addClass('ativo');
+      });
+    </script>
+
+  <? } ?>
 
   <!-- Fixos -->
   <script src="<?= PATHSITE ?>assets/scripts/header.js"></script>

@@ -1,5 +1,5 @@
 <style>
-    .input-group-addon{
+    .input-group-addon {
         padding: 6px 12px;
         font-size: 14px;
         font-weight: 400;
@@ -23,75 +23,79 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
     <div class="conteudo">
         <div class="container-fluid">
 
-            <div class="row">                  
-                <div class="col-12 col-md-12">
-                    <?= $textoExplicativo->texto ?>
-                </div>
-            </div>               
-            <hr class="linhaform">
+            <?= view("templates/instrucao-anunciante", (array)$instrucoes) ?>
 
             <form class="form-horizontal" method="post" enctype="multipart/form-data" id="formBusca1">
                 <fieldset>
 
-                    <div class="box-content card white">
-                        <h4 class="box-title with-btn">
-                            Ingressos
-                        </h4>
-                        <div class="card-content" id="setorIngressoContainer">
-                            <?
-                            if ($setores) {
-                                foreach ($setores as $key => $setor) {
-                                    ?>
-                                    <div class="form-group col-12 paddingZeroM setor-ingresso card-content" data-setor-ingresso="<?= $setor->setor ?>" data-setor-numero=<?= $key ?>>
-                                        <div class="box-title with-btn">
-                                            <?= $setor->setor ?>
-                                            <div class="btns-cont">
-                                                <button onclick="$('#modalIngresso').show();" type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="<?= $setor->setor ?>">
-                                                    Adicionar ingresso
-                                                    <i class="ico bi bi-plus-lg"></i>
+                    <div class="setor-container">
+
+                        <? foreach ($setores as $ind => $setor) { ?>
+
+                            <div class="setor-item py-3">
+                                <div class="top" data-toggle="collapse" data-target="#setor-<?= $ind ?>">
+                                    <button type="button" class="chevron">
+                                        <img src="<?= PATHSITE ?>assets/images/icon-chevron-up.svg" alt="">
+                                    </button>
+
+                                    <label class="py-3 col">
+                                        Setor <?= $setor->setor ?>
+                                    </label>
+                                </div>
+
+                                <div class="collapse col bottom" id="setor-<?= $ind ?>" data-setor="<?= $ind ?>">
+                                    <div class="setor-titulo has-del-btn">
+                                        <label class="col-12">
+                                            Título do setor
+                                            <input type="text" name="setorIngresso[<?= $ind ?>][setor]" value="<?= $setor->setor ?>" class="form-control mt-3" required>
+                                        </label>
+                                        <input type="hidden" name="setorIngresso[<?= $ind ?>][id]" value="<?= $setor->id ?>">
+
+                                        <button type="button" class="del-btn has-icon" data-delete-field=".setor-item">
+                                            <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
+                                            excluir setor
+                                        </button>
+                                    </div>
+
+                                    <div class="ingressos col-12">
+
+                                        <? foreach ($setor->ingressos as $ind2 => $ingresso) { ?>
+                                            <div class="ingresso-item has-del-btn">
+                                                <button type="button" class="del-btn has-icon" data-delete-field=".ingresso-item">
+                                                    <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
+                                                    excluir ingresso
                                                 </button>
-
-                                                <div onclick="excluirAba('<?= encode($setor->id) ?>', 'true', 'ProdutoSetorModel')" class="excluirAba">
-                                                    <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
-                                                    Excluir 
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <? foreach ($setor->ingressos as $keyIng => $ingresso) { ?>
-                                            <div class="col-12 paddingZeroM ingresso-div card-content mb-3">
-                                                <div class="input-group">
-                                                    <input type="hidden" name="setorIngresso[<?= $key ?>][id]" value="<?= $setor->id ?>">
-                                                    <input type="hidden" name="setorIngresso[<?= $key ?>][setor]" value="<?= $setor->setor ?>">
-                                                    <input type="hidden" name="setorIngresso[<?= $key ?>][idSetor]" value="<?= $setor->id ?>">
-
-                                                    <span class="input-group-addon">Tipo</span>
-                                                    <input type="hidden" name="setorIngresso[<?= $key ?>][ingressos][ <?= $keyIng ?> ][idIngresso]" value="<?= $ingresso->id ?>">
-                                                    <input type="text" name="setorIngresso[<?= $key ?>][ingressos][ <?= $keyIng ?> ][modalidade]" class="form-control" value="<?= $ingresso->titulo ?>" placeholder="Escreva...">
-                                                    <span class="input-group-addon">R$</span>
-                                                    <input type="text" name="setorIngresso[<?= $key ?>][ingressos][ <?= $keyIng ?> ][preco]" class="form-control money" value="<?= $ingresso->preco ?>" placeholder="Escreva...">
-                                                    <div onclick="excluirAba('<?= encode($setor->id) ?>', 'true', 'SetorIngressoModel')" class="excluirAba">
-                                                        <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
-                                                        Excluir 
-                                                    </div>
-                                                </div>
-
+                                                <label>
+                                                    Modalidade ingresso
+                                                    <input type="text" name="setorIngresso[<?=$ind?>][ingressos][<?=$ind2?>][titulo]" value="<?= $ingresso->titulo ?>" class="form-control" required>
+                                                </label>
+                                                <label>
+                                                    Valor
+                                                    <input type="text" name="setorIngresso[<?=$ind?>][ingressos][<?=$ind2?>][preco]" value="<?= $ingresso->preco ?>" class="form-control money" required>
+                                                </label>
+                                                <input type="hidden" name="setorIngresso[<?= $ind ?>][ingressos][<?=$ind2?>][idIngresso]" value="<?= $ingresso->id ?>">
                                             </div>
                                         <? } ?>
+
                                     </div>
-                                    <?
-                                }
-                            }
-                            ?>
-                        </div>
+
+                                    <button type="button" class="has-icon add-field-btn col-12" data-add-field="ingresso">
+                                        <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
+                                        adicionar ingresso
+                                    </button>
+                                </div>
+                            </div>
+
+
+
+                        <? } ?>
+
                     </div>
 
-                    <div onclick='$("#modalSetorIngresso").modal("show");' class="areaAcomodacao2">
-                        <div  class="d-flex">
-                            <img src="<?= PATHSITE ?>assets/images/plus.svg">
-                            Adicionar ponto de venda
-                        </div>
-                    </div>
+                    <button type="button" class="has-icon add-field-btn" data-add-field="setor">
+                        <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
+                        adicionar novo setor
+                    </button>
 
                     <div class="row">
                         <div class="col-12 col-md-6">
@@ -100,131 +104,87 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                             </button>
                         </div>
                     </div>
+
                 </fieldset>
             </form>
-
-
-
         </div>
     </div>
-
 </section>
 
-
-<div id="modalSetorIngresso" class="modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-
-        <div class="modal-content">
-            <div class="modal-body modalForm">
-                <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
-
-                <h2 class='mt-3 mb-3'>
-                    Adicionar ponto de venda
-                </h2>
-
-                <label for="tituloSetor" class="form-group col-12">
-                    Título
-                    <input type="text" name="titulo" id="tituloSetor" class="form-control" placeholder="pista, vip, camarote...">
-                </label>
-
-                <ul class="tipo-ponto-de-venda">
-                    <li>
-                        <div class="radio info">
-                            <input type="radio" name="tipo-pdv" id="pdv-fisico" value="fisico">
-                            <label for="pdv-fisico">
-                                Ponto de venda físico
-                                <img src="<?= PATHSITE ?>assets2/Group 2310.png" alt="ícone ponto de venda físico">
-                            </label>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="radio info">
-                            <input type="radio" name="tipo-pdv" id="pdv-online" value="online">
-                            <label for="pdv-online">
-                                Ponto de venda online
-                                <img src="<?= PATHSITE ?>assets2/web.png" alt="ícone ponto de venda online">
-                            </label>
-                        </div>
-                    </li>
-                </ul> 
-                <button onclick="conferirModalSetorIngresso();" class="form-control formsubmit" type="button">Adicionar Campo</button>
-                <span class="msgErro text-warning bold"></span>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-<div id="modalIngresso" class="modal fade" role="dialog">
-    <div  class="modal-dialog modal-dialog-centered modal-lg">
-
-        <div class="modal-content">
-            <div class="modal-body modalForm">
-                <!--button type="button" class="close" data-dismiss="modal">&times;</button-->
-
-
-                <label for="ingTitulo" class="form-group col-12">
-                    Tipo
-                    <input type="text" name="titulo" class="form-control" id="ingTitulo" placeholder="inteira, meia...">
-                </label>
-                <label for="preco" class="form-group col-12">
-                    Valor R$
-                    <input type="text" name="preco" class="money form-control" id="preco" placeholder="apenas números">
-                </label>
-
-                <button class="form-control formsubmit" type="button">Adicionar Campo</button>
-                <span id="msgErroIngresso" class="msgErro text-warning bold"></span>
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <script>
-   function conferirModalSetorIngresso() {       
-       var modal = $("#modalSetorIngresso");
-            const tituloSetor = $("#tituloSetor").val();
-            const msg = $("#msgErroIngresso");
+    const addSetorBtn = document.querySelector("[data-add-field=setor]")
+    addSetorBtn.addEventListener("click", () => {
+        const setorContainer = document.querySelector(".setor-container")
+        let setorCount = document.querySelectorAll(".setor-item").length
+        setorCount++
 
-            msg.textContent = ""
-            if (tituloSetor.length <= 2) {
-               msg.textContent = "Título com pelo menos 3 caracteres"
-               return
-            }
+        const newElement = document.createElement("div")
+        newElement.classList.add("setor-item", "py-3")
+        newElement.innerHTML = `
+            <div class="top" data-toggle="collapse" data-target="#setor-${setorCount}">
+                <button type="button" class="chevron">
+                    <img src="<?= PATHSITE ?>assets/images/icon-chevron-up.svg" alt="">
+                </button>
 
-            const titulo = tituloSetor.value
-            tituloSetor.value = ""
+                <label class="py-3 col">
+                    Setor...
+                </label>
+            </div>
 
-            $("#modalSetorIngresso").modal('hide');
-            adicionarCampoSetorIngresso(titulo);
-         }
-         
-         function adicionarCampoSetorIngresso(titulo) {
-            const setorIngressoContainer = document.querySelector("#setorIngressoContainer")
+            <div class="collapse col bottom" id="setor-${setorCount}" data-setor="${setorCount}">
+                <div class="setor-titulo has-del-btn">
+                    <label class="col-12">
+                        Título do setor
+                        <input type="text" name="setorIngresso[${setorCount}][setor]" class="form-control mt-3" required>
+                    </label>
+
+                    <button type="button" class="del-btn has-icon" data-delete-field=".setor-item">
+                        <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
+                        excluir setor
+                    </button>
+                </div>
+
+                <div class="ingressos col-12">
+                    
+                </div>
+
+                <button type="button" class="has-icon add-field-btn col-12" data-add-field="ingresso">
+                    <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
+                    adicionar ingresso
+                </button>
+            </div>
+        `
+        setorContainer.appendChild(newElement)
+    })
+
+    const form = document.querySelector("form")
+    form.addEventListener("click", (ev) => {
+        const element = ev.target
+
+        if (element.matches("[data-add-field=ingresso]")) {
+            const ingressosContainer = element.previousElementSibling
+            const currentSetor = element.closest("[data-setor]").dataset.setor
+            let ingressosCount = ingressosContainer.querySelectorAll(".ingresso-item").length
+            ingressosCount++
+
             const newElement = document.createElement("div")
-            setorIngressoCount++
-
-            newElement.classList.add("form-group", "col-xs-12", "paddingZeroM", "setor-ingresso", "card-content")
-            newElement.setAttribute("data-setor-ingresso", `${titulo}`)
-            newElement.setAttribute("data-setor-numero", `${setorIngressoCount}`)
-
+            newElement.classList.add("ingresso-item", "has-del-btn")
             newElement.innerHTML = `
-               <div class="box-title with-btn">
-                  ${titulo}
-                  <div class="btns-cont">
-                     <button type="button" class="btn btn-icon btn-icon-left btn-xs btn-rounded dialog-btn" data-target="modalIngresso" data-setor="${titulo}">
-                        Adicionar ingresso
-                        <i class="ico bi bi-plus-lg"></i>
-                     </button>
-                     <button type="button" class="btn btn-xs btn-rounded btn-danger" data-parent="setor-ingresso">
-                        <i class="bi bi-trash"></i>
-                     </button>
-                  </div>
-               </div>            
+                <button type="button" class="del-btn has-icon" data-delete-field=".ingresso-item">
+                    <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
+                    excluir ingresso
+                </button>
+                <label>
+                    Modalidade ingresso
+                    <input type="text" name="setorIngresso[${currentSetor}][ingressos][${ingressosCount}][titulo]" class="form-control" required>
+                </label>
+                <label>
+                    Valor
+                    <input type="text" name="setorIngresso[${currentSetor}][ingressos][${ingressosCount}][preco]" class="form-control money" required>
+                </label>
             `
-            setorIngressoContainer.appendChild(newElement)
-         }
-         
-    </script>
+            ingressosContainer.appendChild(newElement)
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
+        }
+    })
+</script>

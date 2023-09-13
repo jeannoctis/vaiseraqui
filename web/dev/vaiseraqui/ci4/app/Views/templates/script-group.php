@@ -21,7 +21,7 @@ $files = [
       "type" => null,
    ],
    "controller-agenda" => [
-      "src" => PATHSITE . "assets/scripts/controller-card.js",
+      "src" => PATHSITE . "assets/scripts/controller-agenda.js",
       "type" => "module",
    ],
    "controller-blog" => [

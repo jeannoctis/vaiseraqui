@@ -27,12 +27,12 @@
             </a>
             <div class="areaEscolha">
                 <div class="filtroSelecao">
+
                     <div class="col-12">
                         <div class="botaoSelecaoFiltro botaoSelecaoFiltroInterno  openBoxFiltro" data-busca=".filtroTipo2">
-                            <img src="<?= PATHSITE ?>" alt="ícone" width="22"> <span id="nomeTipo"> <?= $tipoAtual->titulo ?> </span> <img src="<?= PATHSITE ?>images/icone_menu.svg">
+                            <img src="<?= PATHSITE ?>uploads/tipo/<?=$tipoAtual->arquivo?>" alt="ícone" width="22"> <span id="nomeTipo"> <?= $tipoAtual->titulo ?> </span> <img src="<?= PATHSITE ?>images/icone_menu.svg">
                         </div>
                     </div>
-
 
                     <? if ($tipos) { ?>
                         <div class="boxFiltroDesativado filtroTipo2">
@@ -43,6 +43,7 @@
                             <? } ?>
                         </div>
                     <? } ?>
+
                     <div class="col-12 mb-3 mt-2">
                         <div class="botaoSelecaoFiltro botaoSelecaoFiltroInterno  openBoxFiltro" data-busca=".filtroTipo">
                             <?= $anuncio->titulo ?> <img src="<?= PATHSITE ?>images/icone_menu.svg">
@@ -133,7 +134,7 @@
                         <h5>Feriados</h5>
                     </a>
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/precos" class="itemMenuPainel <?= ($segments[1] == 'precos') ? 'menuAtivo' : '' ?>">
+                    <a href="<?= PATHSITE ?>area-do-anunciante/ingressos" class="itemMenuPainel <?= ($segments[1] == 'ingressos') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-pricing.svg">
                         <h5>Valores / Ingressos</h5>
                     </a>
@@ -153,60 +154,60 @@
                         <h5>Cardápio (somente para buffet)</h5>
                     </a>
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/principais-comodidades" class="itemMenuPainel <?= ($segments[1] == 'principais-comodidades') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/principais-comodidades" class="itemMenuPainel <?= ($segments[1] == 'principais-comodidades') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/map-icon.svg">
                         <h5>Principais comodidades</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/dados-local" class="itemMenuPainel <?= ($segments[1] == 'dados-local') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/dados-local" class="itemMenuPainel <?= ($segments[1] == 'dados-local') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icone_dados.svg">
                         <h5>Dados do local</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/dados-evento" class="itemMenuPainel <?= ($segments[1] == 'dados-evento') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/dados-evento" class="itemMenuPainel <?= ($segments[1] == 'dados-evento') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icone_dados.svg">
                         <h5>Dados do evento</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/dados-servico" class="itemMenuPainel <?= ($segments[1] == 'dados-servico') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/dados-servico" class="itemMenuPainel <?= ($segments[1] == 'dados-servico') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icone_dados.svg">
                         <h5>Dados do serviço</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/o-que-tem-no-imovel" class="itemMenuPainel <?= ($segments[1] == 'o-que-tem-no-imovel') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/o-que-tem-no-imovel" class="itemMenuPainel <?= ($segments[1] == 'o-que-tem-no-imovel') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icone_ok.svg">
                         <h5>Comodidades</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/lazer" class="itemMenuPainel <?= ($segments[1] == 'lazer') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/lazer" class="itemMenuPainel <?= ($segments[1] == 'lazer') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icone_lazer.svg">
                         <h5>Lazer</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/atende-em" class="itemMenuPainel <?= ($segments[1] == 'atende-em') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/atende-em" class="itemMenuPainel <?= ($segments[1] == 'atende-em') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icone_ok.svg">
                         <h5>Atende em</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/o-que-servimos" class="itemMenuPainel <?= ($segments[1] == 'atende-em') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/o-que-servimos" class="itemMenuPainel <?= ($segments[1] == 'atende-em') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon_drink_.svg">
                         <h5>O que servimos</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/shows-ao-vivo" class="itemMenuPainel <?= ($segments[1] == 'atende-em') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/shows-ao-vivo" class="itemMenuPainel <?= ($segments[1] == 'atende-em') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon_show.svg">
                         <h5>Shows ao vivo</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/textos" class="itemMenuPainel <?= ($segments[1] == 'textos') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/textos" class="itemMenuPainel <?= ($segments[1] == 'textos') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icone_abas.svg">
                         <h5>Textos</h5>
-                    </a>
+                    </a> -->
 
-                    <a href="<?= PATHSITE ?>area-do-anunciante/downloads" class="itemMenuPainel <?= ($segments[1] == 'downloads') ? 'menuAtivo' : '' ?>">
+                    <!-- <a href="<?= PATHSITE ?>area-do-anunciante/downloads" class="itemMenuPainel <?= ($segments[1] == 'downloads') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icone_download.svg">
                         <h5>Download</h5>
-                    </a>
+                    </a> -->
                 <? } ?>
                 <a href="<?= PATHSITE ?>logout" class="itemMenuPainel ">
                     <img src="<?= PATHSITE ?>images/icone_download.svg">

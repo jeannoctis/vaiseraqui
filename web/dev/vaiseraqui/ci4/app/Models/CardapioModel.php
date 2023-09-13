@@ -11,7 +11,7 @@ class CardapioModel extends Model
    protected $primaryKey = 'id';
    protected $returnType = 'object';
    protected $useSoftDeletes = true;
-   protected $allowedFields = ['titulo', 'ordem'];
+   protected $allowedFields = ['titulo', 'ordem','itens'];
    protected $useTimestamps = true;
    protected $createdField = 'dtCriacao';
    protected $updatedField = 'dtAlteracao';
