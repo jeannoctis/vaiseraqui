@@ -40,6 +40,24 @@ class Pages extends Controller {
         $produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
         $produtoCategoriaModel->orderBy('titulo ASC');
         $data['produtoCategorias'] = $produtoCategoriaModel->findAll();
+        
+        $data['todosFavoritos'] = array();
+           if($this->session->get('cliente')) {
+     $data["isLogado"] = TRUE;
+     
+     $clienteFavoritoModel = model('App\Models\ClienteFavoritoModel', false); 
+     $clienteFavoritoModel->select("produtoFK");
+     $clienteFavoritoModel->where("clienteFK", $this->session->get('cliente')->id );
+    $todosFavoritos = $clienteFavoritoModel->findAll();
+     
+    
+     if($todosFavoritos){
+       foreach($todosFavoritos as $tFav){
+         $data['todosFavoritos'][] = $tFav->produtoFK;
+       }
+     }
+     
+   }
 
         $removeChars = array("-", "(", ")", " ");
         $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
@@ -56,6 +74,9 @@ class Pages extends Controller {
         $data["whatsapp"] = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $data["configs"]->telefone);
 
         $data["cookies"] = $this->session->get("cookies");
+        
+        $data['segments'] = $segments = $this->request->uri->getSegments();
+        
         if ($_POST["cookies"]) {
             $this->session->set("cookies", TRUE);
             $data["cookies"] = TRUE;
@@ -637,8 +658,10 @@ class Pages extends Controller {
 
                 break;
             case "prestadores-de-servicos":
+                $data['get'] = $get = request()->getGet();
                 $data['style_list'] = ['swiper'];
                 $data['script_list'] = ['swiper', 'card-like', 'controller-card', 'controller-imoveis', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
+                
 
                 $data['form4Visible'] = 'visible';
                 $produtoModel = \model("App\Models\ProdutoModel", false);
@@ -658,6 +681,7 @@ class Pages extends Controller {
                 $produtoModel->join('estado e', 'e.id = c.estadoFK');
                 $produtoModel->where('pc.tipoFK', 6);
                 $produtoModel->where('ativo', '1');
+                $produtoModel->filtros($get);
                 $data['servicos'] = $produtoModel->paginate(8, 'produto', $paginate);
                 $data['pager'] = $produtoModel->pager;
 
@@ -729,10 +753,11 @@ class Pages extends Controller {
                 $data['proximidades'] = $produtoModel->proximidades($data['metatag']->id);
                 $data['anunciante'] = $produtoModel->anunciante($data['metatag']->anuncianteFK);
                 $data['destaques'] = $produtoModel->destaquePrestadores(4);
-               
+                    $data['videos'] = $produtoModel->videos($data['metatag']->id);
+
                 break;
             case 'saloes-de-festas-e-areas-de-lazer':
-
+                $data['form2Visible'] = 'visible';
                 $data['get'] = $get = request()->getGet();
 
                 $anuncioModel = model('App\Models\AnuncioModel', false);
@@ -811,6 +836,7 @@ class Pages extends Controller {
                 $produtoModel->join('estado e', 'e.id = c.estadoFK');
                 $produtoModel->where('pc.tipoFK', 2);
                 $produtoModel->where('ativo', '1');
+                $produtoModel->filtros($get);
                 $data['saloes'] = $produtoModel->paginate(8, 'produto', $paginate);
                 $data['pager'] = $produtoModel->pager;
 
@@ -844,7 +870,7 @@ class Pages extends Controller {
                 \helper(['utils']);
                 $data['bodyClass'] = "base-list-map";
                 $data['pagina'] = 12;
-                $data['segments'] = $segments = $this->request->uri->getSegments();
+                
                 $data['get'] = $get = request()->getGet();
 
                 $paginate = \is_numeric($get['page_anuncios']) ? $get['page_anuncios'] : 1;
@@ -1005,7 +1031,7 @@ class Pages extends Controller {
                     \helper(['utils']);
                     $data['bodyClass'] = "base-list-map";
                     $data['pagina'] = 24;
-                    $data['segments'] = $segments = $this->request->uri->getSegments();
+                    
                     $data['get'] = $get = request()->getGet();
 
                     $paginate = \is_numeric($get['page_anuncios']) ? $get['page_anuncios'] : 1;

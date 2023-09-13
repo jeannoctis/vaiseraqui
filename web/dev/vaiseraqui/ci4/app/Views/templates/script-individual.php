@@ -281,24 +281,7 @@
          }, ]);
       })
 
-      // Controla modal de video
-      const btnVideos = document.querySelector('.btn-videos')
-      btnVideos.addEventListener('click', (e) => {
-         e.preventDefault()
-         Fancybox.show([{
-               src: "https://www.youtube.com/watch?v=z2X2HaTvkl8",
-               thumb: "http://i3.ytimg.com/vi/z2X2HaTvkl8/hqdefault.jpg",
-            },
-            {
-               src: "https://www.youtube.com/watch?v=dZRqB0JLizw",
-               thumb: "http://i3.ytimg.com/vi/dZRqB0JLizw/hqdefault.jpg",
-            },
-            {
-               src: "https://vimeo.com/259411563",
-               thumb: "https://f.vimeocdn.com/images_v6/lohp/video1_thumbnail.png",
-            },
-         ]);
-      })
+     
 
       $(document).ready(function() {
 
@@ -338,8 +321,8 @@
       const btnMaps = document.querySelector('.btn-maps-mobile')
       btnMaps.addEventListener('click', (e) => {
          e.preventDefault()
-         Fancybox.show([{
-            src: "https://www.google.com/maps/@51.5039653,-0.1246493,14.12z",
+         Fancybox.show([{ 
+           src: "https://www.google.com/maps/place/Loja+Claro+Shopping+Avenida+Center/@-23.4295652,-51.9315687,17.21z/data=!4m6!3m5!1s0x94ecd12302b2286f:0x1b4cf783f087c43f!8m2!3d-23.4289559!4d-51.9308936!16s%2Fg%2F11k588zr46?entry=ttu",
             width: 800,
             height: 600,
          }, ]);
@@ -354,38 +337,7 @@
 <? } else if ($segments[0] == "salao-de-festa-e-area-de-lazer") { ?>
    <!-- Saloes de festa e area de lazer interna -->
    <script>
-      // Controla modal de mapa
-      const btnMaps = document.querySelector('.btn-maps')
-      btnMaps.addEventListener('click', (e) => {
-         e.preventDefault()
-         Fancybox.show([{
-            src: "https://www.google.com/maps/@51.5039653,-0.1246493,14.12z",
-            width: 800,
-            height: 600,
-         }, ]);
-      })
-
-      // Controla modal de video
-      const btnsVideos = document.querySelectorAll('.btn-videos')
-
-      btnsVideos.forEach(btn => {
-         btn.addEventListener('click', (e) => {
-            e.preventDefault()
-            Fancybox.show([{
-                  src: "https://www.youtube.com/watch?v=z2X2HaTvkl8",
-                  thumb: "http://i3.ytimg.com/vi/z2X2HaTvkl8/hqdefault.jpg",
-               },
-               {
-                  src: "https://www.youtube.com/watch?v=dZRqB0JLizw",
-                  thumb: "http://i3.ytimg.com/vi/dZRqB0JLizw/hqdefault.jpg",
-               },
-               {
-                  src: "https://vimeo.com/259411563",
-                  thumb: "https://f.vimeocdn.com/images_v6/lohp/video1_thumbnail.png",
-               },
-            ]);
-         })
-      })
+     
 
       // Date picker
       $(document).ready(function() {
@@ -452,28 +404,7 @@
          }, ]);
       })
 
-      // Controla modal de video
-      const btnsVideos = document.querySelectorAll('.btn-videos')
-
-      btnsVideos.forEach(btn => {
-         btn.addEventListener('click', (e) => {
-            e.preventDefault()
-            Fancybox.show([{
-                  src: "https://www.youtube.com/watch?v=z2X2HaTvkl8",
-                  thumb: "http://i3.ytimg.com/vi/z2X2HaTvkl8/hqdefault.jpg",
-               },
-               {
-                  src: "https://www.youtube.com/watch?v=dZRqB0JLizw",
-                  thumb: "http://i3.ytimg.com/vi/dZRqB0JLizw/hqdefault.jpg",
-               },
-               {
-                  src: "https://vimeo.com/259411563",
-                  thumb: "https://f.vimeocdn.com/images_v6/lohp/video1_thumbnail.png",
-               },
-            ]);
-         })
-      })
-
+    
       // Form Select
       const boxes = document.querySelectorAll('.j-box-select')
       boxes.forEach((box, key) => {
@@ -518,28 +449,7 @@
          }, ]);
       })
 
-      // Controla modal de video
-      const btnsVideos = document.querySelectorAll('.btn-videos')
-
-      btnsVideos.forEach(btn => {
-         btn.addEventListener('click', (e) => {
-            e.preventDefault()
-            Fancybox.show([{
-                  src: "https://www.youtube.com/watch?v=z2X2HaTvkl8",
-                  thumb: "http://i3.ytimg.com/vi/z2X2HaTvkl8/hqdefault.jpg",
-               },
-               {
-                  src: "https://www.youtube.com/watch?v=dZRqB0JLizw",
-                  thumb: "http://i3.ytimg.com/vi/dZRqB0JLizw/hqdefault.jpg",
-               },
-               {
-                  src: "https://vimeo.com/259411563",
-                  thumb: "https://f.vimeocdn.com/images_v6/lohp/video1_thumbnail.png",
-               },
-            ]);
-         })
-      })
-
+     
       // Date picker
       $(document).ready(function() {
          $(function() {
@@ -756,28 +666,6 @@
          }, ]);
       })
 
-      // Controla modal de video
-      const btnsVideos = document.querySelectorAll('.btn-videos')
-
-      btnsVideos.forEach(btn => {
-         btn.addEventListener('click', (e) => {
-            e.preventDefault()
-            Fancybox.show([{
-                  src: "https://www.youtube.com/watch?v=z2X2HaTvkl8",
-                  thumb: "http://i3.ytimg.com/vi/z2X2HaTvkl8/hqdefault.jpg",
-               },
-               {
-                  src: "https://www.youtube.com/watch?v=dZRqB0JLizw",
-                  thumb: "http://i3.ytimg.com/vi/dZRqB0JLizw/hqdefault.jpg",
-               },
-               {
-                  src: "https://vimeo.com/259411563",
-                  thumb: "https://f.vimeocdn.com/images_v6/lohp/video1_thumbnail.png",
-               },
-            ]);
-         })
-      })
-
       $(document).ready(function() {
 
          $(function() {
@@ -860,4 +748,29 @@
          new Selector(box)
       })
    </script>
-<? }
+<? } ?>
+
+<? if($videos) {   ?>
+<script>   
+    
+    function verVideos() {
+         Fancybox.show([
+             <? foreach($videos as $video) {
+                  $url_components = parse_url($video->video);
+                        if ($url_components) {
+                           parse_str($url_components['query'], $params);
+                        }
+                 ?>
+            {
+               src: "https://www.youtube.com/watch?v=<?=$params['v']?>",
+               thumb: "http://i3.ytimg.com/vi/<?=$params['v']?>/hqdefault.jpg",
+             }, <? }  ?>      
+       ]);
+    }    
+    <?}?>
+
+
+
+
+
+    </script>

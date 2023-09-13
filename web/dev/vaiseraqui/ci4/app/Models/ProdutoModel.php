@@ -4,8 +4,8 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProdutoModel extends Model
-{
+class ProdutoModel extends Model {
+
     protected $DBGroup = 'default';
     protected $table = 'produto';
     protected $primaryKey = 'id';
@@ -13,8 +13,8 @@ class ProdutoModel extends Model
     protected $useSoftDeletes = true;
     protected $allowedFields = ['titulo', 'descricao', 'ordem', 'identificador', 'proximidades', 'video', 'ativo', 'validade', 'anuncianteFK',
         'endereco', 'bairro', 'destaque', 'validadeDestaque', 'apresentacao', 'inicioValidade', 'inicioDestaque', 'cidadeFK',
-        'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'capacidadeFK', 
-        'hospedes', 'limpeza', 'latitude', 'longitude', 'captadorFK', 'planoFK', 'calendario', 'preco', 'apartir', 'principaiscomodidades', 
+        'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'capacidadeFK',
+        'hospedes', 'limpeza', 'latitude', 'longitude', 'captadorFK', 'planoFK', 'calendario', 'preco', 'apartir', 'principaiscomodidades',
         'itensdisponiveis', 'areautil', 'quartos', 'banheiros', 'vagas', 'andar', 'animais', 'mobilia', 'transporte', 'condominio',
         'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local'];
     protected $useTimestamps = true;
@@ -35,8 +35,7 @@ class ProdutoModel extends Model
     ];
     protected $skipValidation = false;
 
-    public function fotos($id, $limit)
-    {
+    public function fotos($id, $limit) {
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
         $produtoFotoModel->where('produtoFK', $id);
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
@@ -68,8 +67,7 @@ class ProdutoModel extends Model
         return $fotos;
     }
 
-    public function fotoPrincipal($array)
-    {
+    public function fotoPrincipal($array) {
 
         if ($array) {
             foreach ($array as $ind => $arr) {
@@ -85,8 +83,7 @@ class ProdutoModel extends Model
         return $array;
     }
 
-    public function destaquePrestadores($limit)
-    {
+    public function destaquePrestadores($limit) {
         $this->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
         $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
         $this->join('cidade c', 'c.id = produto.cidadeFK');
@@ -100,15 +97,14 @@ class ProdutoModel extends Model
             foreach ($destaques as $ind => $destaque) {
                 $destaques[$ind]->fotos = $this->fotos($destaque->id, 4, true);
                 if (!$destaques[$ind]->fotos[0]->destaque) {
-                    $destaques[$ind]->fotos =  $this->fotoPrincipal($destaques[$ind]->fotos);
+                    $destaques[$ind]->fotos = $this->fotoPrincipal($destaques[$ind]->fotos);
                 }
             }
         }
         return $destaques;
     }
 
-    public function datas($id)
-    {
+    public function datas($id) {
         $produtoDataModel = model('App\Models\ProdutoDataModel', false);
         $produtoDataModel->where('produtoFK', $id);
         $produtoDataModel->orderBy('data ASC');
@@ -116,8 +112,7 @@ class ProdutoModel extends Model
         return $datas;
     }
 
-    public function valores($id)
-    {
+    public function valores($id) {
         $produtoValorModel = model('App\Models\ProdutoValorModel', false);
         $produtoValorModel->where('produtoFK', $id);
         $produtoValorModel->orderBy('valor ASC');
@@ -125,8 +120,7 @@ class ProdutoModel extends Model
         return $valores;
     }
 
-    public function setores($id)
-    {
+    public function setores($id) {
         $produtoSetorModel = model('App\Models\ProdutoSetorModel', false);
         $produtoSetorModel->where('produtoFK', $id);
         $produtoSetorModel->orderBy('ordem ASC, id DESC');
@@ -145,8 +139,7 @@ class ProdutoModel extends Model
         return $setores;
     }
 
-    public function organizacoes($id)
-    {
+    public function organizacoes($id) {
         $produtoOrganizacaoModel = model('App\Models\ProdutoOrganizacaoModel', false);
         $produtoOrganizacaoModel->where('produtoFK', $id);
         $produtoOrganizacaoModel->orderBy('ordem ASC, id DESC');
@@ -155,8 +148,7 @@ class ProdutoModel extends Model
         return $organizacoes;
     }
 
-    public function pontosVenda($id)
-    {
+    public function pontosVenda($id) {
         $produtoPontoDeVendaModel = model('App\Models\ProdutoPontoDeVendaModel', false);
         $produtoPontoDeVendaModel->where('produtoFK', $id);
         $produtoPontoDeVendaModel->orderBy('ordem ASC, id DESC');
@@ -164,8 +156,7 @@ class ProdutoModel extends Model
         return $pontos;
     }
 
-    public function cardapio($id)
-    {
+    public function cardapio($id) {
         $produtoCardapioModel = model('App\Models\ProdutoCardapioModel', false);
         $produtoCardapioModel->where('produtoFK', $id);
         $produtoCardapioModel->orderBy('ordem ASC, id DESC');
@@ -173,8 +164,7 @@ class ProdutoModel extends Model
         return $cardapio;
     }
 
-    public function responsavel($id)
-    {
+    public function responsavel($id) {
         $anuncianteModel = model('App\Models\AnuncianteModel', false);
         $anuncianteModel->select('titulo, telefone, telefone2, telefone3, email, arquivo');
         $anunciante = $anuncianteModel->find($id);
@@ -195,13 +185,10 @@ class ProdutoModel extends Model
         $anunciante->link2 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone2);
         $anunciante->link3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone3);
 
-
-
         return $anunciante;
     }
 
-    public function comodidades($id)
-    {
+    public function comodidades($id) {
         $produtoComodidadeModel = \model("App\Models\ProdutoComodidadeModel", false)
                 ->select("titulo, comodidades")
                 ->where("produtoFK", $id)
@@ -211,8 +198,7 @@ class ProdutoModel extends Model
         return $comodidades;
     }
 
-    public function proximidades($id)
-    {
+    public function proximidades($id) {
         $produtoProximidadeModel = \model("App\Models\ProdutoProximidadeModel", false)
                 ->select("produto_proximidade.proximidades, px.arquivo, px.titulo")
                 ->join("proximidade as px", "produto_proximidade.proximidadeFK = px.id")
@@ -222,13 +208,12 @@ class ProdutoModel extends Model
         return $proximidades;
     }
 
-    public function anunciante($id)
-    {
+    public function anunciante($id) {
         $anuncianteModel = \model("App\Models\AnuncianteModel", false)
                 ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
         $anunciante = $anuncianteModel->find($id);
-        
-         $removeChars = array("-", "(", ")", " ");
+
+        $removeChars = array("-", "(", ")", " ");
         $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
         $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
         $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
@@ -240,23 +225,22 @@ class ProdutoModel extends Model
         } else {
             $usaApi = "web";
         }
-              
-        if($anunciante->telefone) {
-             $anunciante->whatsapp = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "",$anunciante->telefone);
+
+        if ($anunciante->telefone) {
+            $anunciante->whatsapp = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone);
         }
-        if($anunciante->telefone2) {
-             $anunciante->whatsapp2 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "",$anunciante->telefone2);
+        if ($anunciante->telefone2) {
+            $anunciante->whatsapp2 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone2);
         }
-        
-        if($anunciante->telefone3) {
-             $anunciante->whatsapp3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "",$anunciante->telefone3);
+
+        if ($anunciante->telefone3) {
+            $anunciante->whatsapp3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone3);
         }
 
         return $anunciante;
     }
 
-    public function valorTotal($valores, $preco)
-    {
+    public function valorTotal($valores, $preco) {
         $total = array_column($valores, "valor");
         $total = array_sum($total);
         $total += $preco;
@@ -264,16 +248,14 @@ class ProdutoModel extends Model
         return $total;
     }
 
-    public function dadosCard()
-    {
+    public function dadosCard() {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado")
                         ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
                         ->join("cidade c", "c.id = produto.cidadeFK")
                         ->join("estado e", "e.id = c.estadoFK");
     }
 
-    public function hospedagens($limit)
-    {
+    public function hospedagens($limit) {
 
         $data['get'] = $get = \request()->getGet();
 
@@ -295,23 +277,36 @@ class ProdutoModel extends Model
 
         return $data;
     }
-    
-    public function ordernar($ordem)
-    {
+
+    public function ordernar($ordem) {
         if (!$ordem || $ordem == "recentes") {
             return $this->orderBy("id DESC");
-    
         } else if ($ordem == "antigos") {
             return $this->orderBy("id ASC");
-
         } else if ($ordem == "maior") {
             return $this->orderBy("preco DESC");
-            
-          }else if ($ordem == "menor") {
+        } else if ($ordem == "menor") {
             return $this->orderBy("preco ASC");
         }
-    }            
-             
+    }
+
+    public function filtros($get) {
+        if ($get['cidadeFK']) {
+            $this->where('produto.cidadeFK', $get['cidadeFK']);
+        }
+        
+        if ($get['tipoFK']) {
+            $this->where('produto.categoriaFK', $get['tipoFK']);
+        }
+        if ($get['texto']) {
+            $this->groupStart();
+            $this->orLike('produto.titulo', $get['texto']);
+            $this->orLike('produto.descricao', $get['texto']);
+            $this->orLike('produto.principaiscomodidades', $get['texto']);
+            $this->groupEnd();
+        }
+    }
+
     public function eventos($get) {
 
         $this->select('produto.titulo, produto.id, produto.local, pc.id as categoriaFK, c.titulo as cidade, '
@@ -329,10 +324,10 @@ class ProdutoModel extends Model
         $produtoCategoriaModel->orderBy("ordem ASC, id DESC");
         $produtoCategoriaModel->where('tipoFK', 5);
         $categorias = $produtoCategoriaModel->findAll();
-        
-         foreach ($eventos as $ind => $evento) {
-             $eventos[$ind]->fotos = $this->fotos($evento->id,1,false);
-         }
+
+        foreach ($eventos as $ind => $evento) {
+            $eventos[$ind]->fotos = $this->fotos($evento->id, 1, false);
+        }
 
         foreach ($categorias as $ind => $categoria) {
             if (!$categorias[$ind]->eventos) {
@@ -345,34 +340,35 @@ class ProdutoModel extends Model
             }
         }
 
-        ob_start();       
+        ob_start();
         ?>
         <div class="item show" data-modal="">
-            <? if ($categorias) { ?>
+        <? if ($categorias) { ?>
                 <div class="events-with-data j-calendar-columns">
-                    <? foreach ($categorias as $categoria) { ?>
+            <? foreach ($categorias as $categoria) { ?>
                         <div class="column">
                             <h3><?= $categoria->titulo ?></h3>
                             <div class="scroll-h">
                                 <div class="wraper">
-                                    <?
-                                    if ($categoria->eventos) {
-                                        foreach ($categoria->eventos as $evento) {
-                                            ?>
-                                            <div onclick="window.location.href='<?=PATHSITE?>evento/<?=$evento->identificador?>/'" class="item" style="background-image: url('<?= PATHSITE ?>uploads/produto/<?=$evento->id?>/<?=$evento->fotos[0]->arquivo?>');">
+                <?
+                if ($categoria->eventos) {
+                    foreach ($categoria->eventos as $evento) {
+                        ?>
+                                            <div onclick="window.location.href = '<?= PATHSITE ?>evento/<?= $evento->identificador ?>/'" class="item" style="background-image: url('<?= PATHSITE ?>uploads/produto/<?= $evento->id ?>/<?= $evento->fotos[0]->arquivo ?>');">
                                                 <h4><?= $evento->titulo ?></h4>
                                                 <div class="box-address">
                                                     <img src="<?= PATHSITE ?>assets/images/icon-map.svg" alt="">
                                                     <span>
-                                                        <?=$evento->local?> <br>
-                                                        <?=$evento->cidade?>- <?=$evento->estado?>
+                        <?= $evento->local ?> <br>
+                        <?= $evento->cidade ?>- <?= $evento->estado ?>
                                                     </span>
                                                 </div>
-                                                <a href="<?=PATHSITE?>evento/<?=$evento->identificador?>/">Mais detalhes <img src="<?= PATHSITE ?>assets/images/icon-arrow-right.svg" alt=""></a>
+                                                <a href="<?= PATHSITE ?>evento/<?= $evento->identificador ?>/">Mais detalhes <img src="<?= PATHSITE ?>assets/images/icon-arrow-right.svg" alt=""></a>
                                             </div>
-                                        <? }
-                                    } else {
-                                        ?>
+                        <?
+                        }
+                    } else {
+                        ?>
                                         <div class="wraper">
                                             <div class="empty">
                                                 <img src="<?= PATHSITE ?>assets/images/icon-calendar-not-available.svg" alt="">
@@ -386,12 +382,22 @@ class ProdutoModel extends Model
                                 </div>
                             </div>
                         </div>
-            <? } ?>
+                                            <? } ?>
                 </div>
             </div>
         <? } ?>
-        <?
-        $retorno['html'] = ob_get_clean();
-        echo json_encode($retorno);
+                            <?
+                            $retorno['html'] = ob_get_clean();
+                            echo json_encode($retorno);
+                        }
+                        
+                           public function videos($id) {
+        $produtoVideoModel = model('App\Models\ProdutoVideoModel', false);
+        $produtoVideoModel->where('produtoFK', $id);
+        $produtoVideoModel->orderBy('ordem ASC, id DESC');
+        $videos = $produtoVideoModel->findAll();
+        return $videos;
     }
-}
+                        
+                    }
+                    

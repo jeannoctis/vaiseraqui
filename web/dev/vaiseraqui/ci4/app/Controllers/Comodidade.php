@@ -33,7 +33,7 @@ class Comodidade extends BaseController
             ->groupEnd();
       }
 
-      $data['lista'] = $this->model->orderBy("ordem ASC")->paginate(2, 'comodidades', $paginate);
+      $data['lista'] = $this->model->orderBy("ordem ASC")->paginate(10, 'comodidades', $paginate);
       $data['pager'] = $this->model->pager;
 
       $data['title'] = 'Comodidades';

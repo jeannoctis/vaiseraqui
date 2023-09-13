@@ -170,6 +170,7 @@
             </a>
           </nav>
 
+            <? if($pagina == 1) {?>
           <div class="presentation-form-content">
             <? echo View("templates/form1") ?>
             <? echo View("templates/form2") ?>
@@ -179,6 +180,7 @@
             <? echo View("templates/form6") ?>
             <? echo View("templates/form7") ?>
           </div>
+            <? } ?>
         </div>
       </div>
       <div class="account">
