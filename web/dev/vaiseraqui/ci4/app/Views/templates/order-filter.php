@@ -15,7 +15,7 @@
       $filtro = "Mais recentes";
    break;
 } ?>
-<form class="form-order">
+<form method="get" class="form-order">
    <a href="#" class="btn-primary">
       <img src="<?= PATHSITE ?>assets/images/icon-button-filter.svg" alt="icon filter">
       Filtros

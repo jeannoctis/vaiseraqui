@@ -88,16 +88,20 @@
               <img src="<?=PATHSITE?>assets/images/icon-photo.png" alt="">
               <?=count($fotos)?> Fotos
             </a>
-            <a class="btn btn-videos" >
+              <? if($videos) {?>
+            <a onclick="verVideos();" class="btn btn-videos" >
               <img class="active" src="<?=PATHSITE?>assets/images/icon-video-active.png" alt="">
               <img src="<?=PATHSITE?>assets/images/icon-video.png" alt="">
               Vídeos
             </a>
-            <a href="https://www.google.com/maps/@51.5039653,-0.1246493,14.12z" data-fancybox class="btn btn-maps" >
+              <? } ?>
+              <? if($metatag->mapa) {?>
+            <a onclick="clicaMapa('<?=$metatag->mapa?>')" data-fancybox class="btn btn-maps" >
               <img class="active" src="<?=PATHSITE?>assets/images/icon-map-active.png" alt="">
               <img src="<?=PATHSITE?>assets/images/icon-map.png" alt="">
               Mapa
             </a>
+              <? } ?>
           </div>
         </div>
         <div class="box-presentation only-mobile">
@@ -109,7 +113,7 @@
              <? if($fotos) {
                 foreach($fotos as $foto) {
                 ?>
-          <a data-fslightbox="mobile-presentation-1" href="<?=PATHSITE?>uploads/produto/<?=$foto->produtoFK?><?=$foto->arquivo?>">
+          <a data-fslightbox="presentation-1" href="<?=PATHSITE?>uploads/produto/<?=$foto->produtoFK?><?=$foto->arquivo?>">
             <img class="mode-slide" src="<?=PATHSITE?>uploads/produto/<?=$foto->produtoFK?>/<?=$foto->arquivo?>" alt="">
           </a>
             <? } } ?>        
@@ -323,10 +327,8 @@
                <? } ?>
 
             <div class="wraper-scroll-cards">
-              <a data-fslightbox="new-gallery" href="<?=PATHSITE?>assets/images/slide-rent-5.png"></a>
-              <a data-fslightbox="new-gallery" href="<?=PATHSITE?>assets/images/slide-rent-6.png"></a>
               <div class="photos-and-video">
-                <a data-fslightbox="new-gallery" href="<?=PATHSITE?>assets/images/slide-rent-4.png">
+                <a data-fancybox data-fslightbox="presentation-1" >
                   <div class="card" style="background-image: url(<?=PATHSITE?>assets/images/bg-box-photo-and-video-2.png);">
                     <div class="wraper">
                       <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -336,7 +338,7 @@
                     </div>
                   </div>
                 </a>
-                <a href="#" class="btn-videos">
+                <a href="#" class="btn-videos" onclick="verVideos()">
                   <div class="card" style="background-image: url(<?=PATHSITE?>assets/images/bg-box-photo-and-video-2.png);">
                     <div class="wraper">
                       <svg width="34" height="38" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -593,7 +595,7 @@
                 foreach($destaque->fotos as $foto) {
                 ?>
                         <div class="swiper-slide">                     
-                          <img src="<?=PATHSITE?>uploads/produto/<?=$foto->produtoFK?><?=$foto->arquivo?>" alt="">                   
+                          <img src="<?=PATHSITE?>uploads/produto/<?=$foto->produtoFK?>/<?=$foto->arquivo?>" alt="">                   
                       </div>
             <? } } ?>    
                     </div>

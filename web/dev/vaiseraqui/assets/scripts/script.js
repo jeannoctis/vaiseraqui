@@ -66,3 +66,11 @@ function abreWhatsapp(id){
       $.post(PATHSITE + "produto/chamarWhats/", { produtoFK: id }, function (e) {   
         });  
 }
+
+ function clicaMapa(mapa) {
+         Fancybox.show([{
+            src: mapa,
+            width: 800,
+            height: 600,
+         }, ]);
+ }

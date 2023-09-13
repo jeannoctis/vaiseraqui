@@ -53,7 +53,7 @@ class Cidade extends BaseController
                ->groupEnd();
          }
       }
-      $data['lista'] = $this->model->paginate(1, "cidades", $paginate);
+      $data['lista'] = $this->model->paginate(10, "cidades", $paginate);
       $data['pager'] = $this->model->pager;
 
       $data['title'] = 'Cidades';

@@ -62,9 +62,11 @@
       </div>
     </div>
     <hr>
+        <div class="uaau">
     <a href="https://www.uaau.digital/" target="_blank">
       <img src="<?= PATHSITE ?>assets/images/logo-footer-uaau.svg" alt="ícone Uaau Digital">
     </a>
+        </div>
   </footer>
 
   <dialog class="dialog-not-logged">
