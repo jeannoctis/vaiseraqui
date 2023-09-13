@@ -1151,6 +1151,7 @@ class Pages extends Controller {
                         ->resetQuery()
                         ->where("identificador", $segments[2])
                         ->first();
+                    $data['crrUrl'] = \current_url();
 
                     $this->artigoModel->resetQuery()->where("categoriaFK", $data['categoriaAtual']->id);
                     $this->artigoModel->ordenar($get);
@@ -1395,30 +1396,53 @@ class Pages extends Controller {
                     }
                 }
 
+                $tipoModel = \model("App\Models\TipoModel", false);
+                $data['tipos'] = $tipoModel->select("id, titulo")->findAll();
+
+                foreach($data['tipos'] as $ind => $tipo) {
+                    $produtoCategoriaModel->resetQuery()
+                    ->select("id, titulo")
+                    ->where("tipoFK", $tipo->id)
+                    ->orderBy("titulo ASC");
+                    $tipo->categorias = $produtoCategoriaModel->findAll();
+                }
+
                 $estadoModel = model('App\Models\EstadoModel', false);
-                $estadoModel->orderBy("titulo ASC");
+                $estadoModel->orderBy("titulo ASC");            
                 $data['estados'] = $estadoModel->findAll();
+
                 $request = \Config\Services::request();
                 $post = $request->getPost();
                 $clienteInteresseModel = model('App\Models\ClienteInteresseModel', false);
+
                 if ($post) {
                     $post['id'] = $data['clienteLogado']->id;
                     $data['salvou'] = $clienteModel->save($post);
 
-                    $interesse = $post['interesse'];
-                    if ($interesse) {
+                    $interesses = $post['interesse'];
 
-                        foreach ($interesse as $inte) {
-                            $save['clienteFK'] = $data['clienteLogado']->id;
-                            $save['categoriaFK'] = $inte;
-                            $clienteInteresseModel->save($save);
+                    if ($interesses) {
+                        $clienteInteresseModel->resetQuery()
+                            ->where("clienteFK", $data['clienteLogado']->id)
+                            ->whereNotIn("id", $interesses)
+                        ->delete();
+
+                        foreach ($interesses as $inte) {
+                            $updateInteresses[] = [
+                                "clienteFK" => $data['clienteLogado']->id,
+                                "categoriaFK" => $inte
+                            ];
                         }
+
+                        $clienteInteresseModel->insertBatch($updateInteresses);
                     }
                 }
+                $interessesCliente = $clienteInteresseModel->where("clienteFK", $data['clienteLogado']->id)->findAll();
+                $data['interessesClienteIds'] = \array_column($interessesCliente, "categoriaFK");
+
                 $data["clienteLogado"] = $clienteModel->find($this->session->get('cliente')->id);
 
                 $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
-
                 $produtoModel = model('App\Models\ProdutoModel', false);
 
                 if ($data['todosFavoritos']) {
@@ -1506,7 +1530,7 @@ class Pages extends Controller {
                 unset($_SESSION);
                 ?>
                 <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>">
-<?
+                <?
                 exit();
                 break;
 
@@ -1542,7 +1566,6 @@ class Pages extends Controller {
                         }
                     }
                 }
-
 
                 if (isset($post["email"])) {
 

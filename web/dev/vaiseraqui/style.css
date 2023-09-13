@@ -1068,7 +1068,7 @@ form label {
 	padding: 10px 10px 10px 40px;
 }
 .form-control.iconeTelefone {
-	background: url(images/icone_phone.svg) #f5f8ff no-repeat scroll 15px 15px;
+	background: url(images/icone_phone.svg) #f5f8ff no-repeat scroll 16px 20px;
 	padding: 10px 10px 10px 40px;
 }
 select.form-control {
@@ -1112,8 +1112,9 @@ textarea.form-control {
 	position: absolute;
 	top: 2px;
 	left: 0;
-	height: 20px;
-	width: 20px;
+	width: 24px;
+	aspect-ratio: 1;
+	/* height: 20px; */
 	background: #ffffff;
 	border: 1px solid #808080;
 	border-radius: 20px;
@@ -1150,10 +1151,10 @@ textarea.form-control {
 	display: block;
 }
 .control-checkbox .control_indicator:after {
-	left: 7px;
-	top: 3px;
-	width: 3px;
-	height: 8px;
+	left: 9px;
+	top: 5px;
+	width: 4px;
+	height: 9px;
 	border: solid #ffffff;
 	border-width: 0 2px 2px 0;
 	transform: rotate(45deg);
@@ -3536,7 +3537,7 @@ a.postBlogSidebar {
 	min-height: 300px;
 	border-radius: 15px;
 	margin: 45px auto;
-	max-width: 1138px;
+	max-width: 920px;
 	max-height: 704px;
 	gap: 50px;
 }
@@ -3546,7 +3547,7 @@ a.postBlogSidebar {
 	font-style: normal;
 	font-weight: 600;
 	letter-spacing: -0.42px;
-	text-align: left;
+	text-align: center;
 }
 .boxPerfil h2,
 .boxPerfil h1 {
@@ -3558,6 +3559,7 @@ a.postBlogSidebar {
 	margin-bottom: 40px;
 	text-align: left;
 	color: #932327;
+	text-align: center;
 }
 .boxPerfil h2 {
 	margin-bottom: 18px;
@@ -3574,19 +3576,19 @@ a.postBlogSidebar {
 }
 .boxPerfil .form-control {
 	margin-bottom: 28px;
-	padding: 23px;
-	max-width: 361px;
+	padding: 23px 48px;
+	/* max-width: 361px; */
 	height: 60px;
 
 	border-radius: 5px;
-	border: 1px solid #D9DBD0;
+	border: 1px solid #d9dbd0;
 }
 
-.boxPerfil input:not([type=submit]) {
-	background-color: #FFF;
+.boxPerfil input:not([type="submit"]) {
+	background-color: #fff;
 }
 .boxPerfil input::placeholder {
-	color: #BBB;
+	color: #bbb;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 500;
@@ -3602,6 +3604,10 @@ a.postBlogSidebar {
 	flex-direction: column;
 	/* align-items: center; */
 	justify-content: center;
+}
+.boxPerfil .form-horizontal select {
+	padding: 21px 30px;
+	height: 60px !important; 
 }
 
 .linkPerfil {
@@ -3795,6 +3801,7 @@ img.fotoDePerfil {
 	height: 130px;
 	border-radius: 100%;
 	margin-bottom: 20px;
+	object-fit: cover;
 }
 .meuPerfil h6 {
 	font-weight: 500;
@@ -4950,7 +4957,7 @@ a.ui-button:active,
 		position: absolute;
 		right: 13px;
 		top: -8px;
-		z-index: 10;		
+		z-index: 10;
 	}
 	.propaganda .carousel-item {
 		border-radius: 0;
@@ -5455,9 +5462,8 @@ a.ui-button:active,
 	.boxAzulInstitucional {
 		width: 100%;
 	}
-	.boxPerfil > div:first-child{
+	.boxPerfil > div:first-child {
 		display: none;
-
 	}
 
 	.boxPerfil :is(h2, h5) {

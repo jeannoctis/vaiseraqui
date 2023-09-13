@@ -1,4 +1,3 @@
-
 <body>
 
     <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -7,10 +6,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="marca" >
+                    <div class="marca">
                         <a href="<?= PATHSITE ?>" class="logo">
                             <img src="<?= PATHSITE ?>assets/images/logo.svg" title="Vai ser aqui">
-                        </a> 
+                        </a>
                     </div>
 
                     <div class="boxPerfil">
@@ -29,14 +28,15 @@
                                         <label>Seu nome</label>
                                         <input required type="text" name="titulo" value="<?= $post["titulo"] ?>" class="form-control iconeName" placeholder="ex: João">
                                     </div>
+
                                     <div class="col-12 col-md-6">
                                         <label>Sobrenome</label>
-                                        <input  type="text" name="sobrenome"  value="<?= $post["sobrenome"] ?>"  class="form-control" placeholder="ex: Da Silva">
-                                    </div>                                  
+                                        <input type="text" name="sobrenome" value="<?= $post["sobrenome"] ?>" class="form-control" placeholder="ex: Da Silva">
+                                    </div>
 
                                     <div class="col-12">
                                         <label>Telefone</label>
-                                        <input type="text" name="telefone"  value="<?= $post["telefone"] ?>"  class="form-control iconeTelefone phone_with_ddd" placeholder="ex: (00) 9 9999-9999">
+                                        <input type="text" name="telefone" value="<?= $post["telefone"] ?>" class="form-control iconeTelefone phone_with_ddd" placeholder="ex: (00) 9 9999-9999">
                                     </div>
 
                                     <div class="col-12">
@@ -46,75 +46,98 @@
                                     <div class="col-5">
                                         <div class="control-group">
                                             <label class="checkboxDefault control-checkbox ">
-                                                Espaços
-                                                <input type="checkbox" id="campoEspaco" />
+                                                Aluguel para temporada
+                                                <input type="checkbox" id="campoTemporada" />
                                                 <div class="control_indicator control_indicator2"></div>
                                             </label>
                                         </div>
                                     </div>
 
                                     <div class="col-7">
-                                        <select name='interesse[]' disabled class="form-control" id="selectEspaco">
-                                            <option  selected disabled>Subcategoria de interesse</option>
-                                            <?
-                                            if ($categorias) {
+                                        <select name='interesse[]' disabled class="form-control" id="selectTemporada">
+                                            <option selected disabled>Subcategoria de interesse</option>
+                                            <? if ($categorias) {
                                                 foreach ($categorias as $cat) {
-                                                    if ($cat->tipoFK == 1) {
-                                                        ?>
-                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>                                           
-        <? }
-    }
-} ?>
+                                                    if ($cat->tipoFK == 1) { ?>
+                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>
+                                                    <? }
+                                                }
+                                            } ?>
                                         </select>
                                     </div>
 
                                     <div class="col-5">
                                         <div class="control-group">
-                                            <label class="checkboxDefault control-checkbox ">
-                                                Serviços
-                                                <input type="checkbox" id="campoServico" />
+                                            <label class="checkboxDefault control-checkbox">
+                                                Salões e áreas de lazer
+                                                <input type="checkbox" id="campoSaloes" />
                                                 <div class="control_indicator control_indicator2"></div>
                                             </label>
                                         </div>
                                     </div>
 
                                     <div class="col-7">
-                                        <select name='interesse[]' disabled class="form-control" id="selectServico">
+                                        <select name='interesse[]' disabled class="form-control" id="selectSaloes">
                                             <option selected disabled>Subcategoria de interesse</option>
                                             <?
                                             if ($categorias) {
                                                 foreach ($categorias as $cat) {
                                                     if ($cat->tipoFK == 2) {
-                                                        ?>
-                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>                                           
-        <? }
-    }
-} ?>
+                                            ?>
+                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>
+                                            <? }
+                                                }
+                                            } ?>
                                         </select>
                                     </div>
 
                                     <div class="col-5">
                                         <div class="control-group">
                                             <label class="checkboxDefault control-checkbox ">
-                                                Bares e restaurantes
-                                                <input type="checkbox" id="campoBar" />
+                                            Hospedagem
+                                                <input type="checkbox" id="campoHospedagem" />
                                                 <div class="control_indicator control_indicator2"></div>
                                             </label>
                                         </div>
                                     </div>
 
                                     <div class="col-7">
-                                        <select name='interesse[]' disabled class="form-control" id="selectBar">
+                                        <select name='interesse[]' disabled class="form-control" id="selectHospedagem">
                                             <option selected disabled>Subcategoria de interesse</option>
-<?
-if ($categorias) {
-    foreach ($categorias as $cat) {
-        if ($cat->tipoFK == 3) {
-            ?>
-                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>                                           
-        <? }
-    }
-} ?>
+                                            <?
+                                            if ($categorias) {
+                                                foreach ($categorias as $cat) {
+                                                    if ($cat->tipoFK == 3) {
+                                            ?>
+                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>
+                                            <? }
+                                                }
+                                            } ?>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-5">
+                                        <div class="control-group">
+                                            <label class="checkboxDefault control-checkbox ">
+                                                Lojas temporárias
+                                                <input type="checkbox" id="campoTemporarias" />
+                                                <div class="control_indicator control_indicator2"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-7">
+                                        <select name='interesse[]' disabled class="form-control" id="selectTemporarias">
+                                            <option selected disabled>Subcategoria de interesse</option>
+                                            <?
+                                            if ($categorias) {
+                                                foreach ($categorias as $cat) {
+                                                    if ($cat->tipoFK == 4) {
+                                            ?>
+                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>
+                                            <? }
+                                                }
+                                            } ?>
                                         </select>
                                     </div>
 
@@ -122,30 +145,55 @@ if ($categorias) {
                                         <div class="control-group">
                                             <label class="checkboxDefault control-checkbox ">
                                                 Eventos
-                                                <input type="checkbox" id="campoEvento" />
+                                                <input type="checkbox" id="campoEventos" />
                                                 <div class="control_indicator control_indicator2"></div>
                                             </label>
                                         </div>
                                     </div>
 
                                     <div class="col-7">
-                                        <select name='interesse[]' disabled class="form-control" id="selectEvento">
+                                        <select name='interesse[]' disabled class="form-control" id="selectEventos">
                                             <option selected disabled>Subcategoria de interesse</option>
-<?
-if ($categorias) {
-    foreach ($categorias as $cat) {
-        if ($cat->tipoFK == 4) {
-            ?>
-                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>                                           
-        <? }
-    }
-} ?>
+                                            <?
+                                            if ($categorias) {
+                                                foreach ($categorias as $cat) {
+                                                    if ($cat->tipoFK == 5) {
+                                            ?>
+                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>
+                                            <? }
+                                                }
+                                            } ?>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="col-md-5">
+                                        <div class="control-group">
+                                            <label class="checkboxDefault control-checkbox ">
+                                                Prestadores de serviços
+                                                <input type="checkbox" id="campoServicos" />
+                                                <div class="control_indicator control_indicator2"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-7">
+                                        <select name='interesse[]' disabled class="form-control" id="selectServicos">
+                                            <option selected disabled>Subcategoria de interesse</option>
+                                            <?
+                                            if ($categorias) {
+                                                foreach ($categorias as $cat) {
+                                                    if ($cat->tipoFK == 6) {
+                                            ?>
+                                                        <option value="<?= $cat->id ?>"><?= $cat->titulo ?></option>
+                                            <? }
+                                                }
+                                            } ?>
                                         </select>
                                     </div>
 
                                     <div class="col-12">
                                         <label>E-mail</label>
-                                        <input  value="<?= $post["email"] ?>"  type="email" name="email" class="form-control" placeholder="ex: joao@gmail.com">
+                                        <input value="<?= $post["email"] ?>" type="email" name="email" class="form-control" placeholder="ex: joao@gmail.com">
                                     </div>
                                     <div class="col-12 posRelative">
                                         <label>Senha</label>
@@ -176,7 +224,7 @@ if ($categorias) {
                         </form>
 
                         <div class="linkPerfil">
-                            Já tem uma conta? <br>  
+                            Já tem uma conta? <br>
                             <a href="<?= PATHSITE ?>login/">Entrar</a>
                         </div>
 
@@ -185,23 +233,11 @@ if ($categorias) {
                             <hr>
                         </div>
 
-                        <div id="g_id_onload"
-                             data-client_id="<?= $configs->chavegoogle ?>"
-                             data-context="signin"
-                             data-ux_mode="redirect"
-                             data-login_uri="<?= PATHSITE ?>cadastro/"> 
+                        <div id="g_id_onload" data-client_id="<?= $configs->chavegoogle ?>" data-context="signin" data-ux_mode="redirect" data-login_uri="<?= PATHSITE ?>cadastro/">
                         </div>
 
 
-                        <div class="g_id_signin mb-3 ml-auto mr-auto text-center"
-                             data-type="standard" 
-                             data-shape="rectangular"
-                             data-theme="outline"
-                             data-ux_mode="popup" 
-                             data-text="$ {button.text}"
-                             data-size="large"
-                             data-width="250"
-                             data-logo_alignment="left">
+                        <div class="g_id_signin mb-3 ml-auto mr-auto text-center" data-type="standard" data-shape="rectangular" data-theme="outline" data-ux_mode="popup" data-text="$ {button.text}" data-size="large" data-width="250" data-logo_alignment="left" style="display: flex; justify-content: center;">
                         </div>
 
                         <a href="#" class="cta9" onclick='checkLoginState()'>
@@ -250,15 +286,16 @@ if ($categorias) {
 
 
 </body>
+
 </html>
 
 
 <style>
-    .boxPerfil{
+    .boxPerfil {
         max-height: unset;
     }
 </style>
 
- <?
- echo View("templates/logins");
- ?>
+<?
+echo View("templates/logins");
+?>

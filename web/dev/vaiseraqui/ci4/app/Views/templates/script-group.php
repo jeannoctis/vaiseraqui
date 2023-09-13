@@ -44,7 +44,7 @@ $files = [
       "src" => PATHSITE . "assets/scripts/controller-page-internal-3.js",
       "type" => "module",
    ],
-   "controler-presentation" => [
+   "controller-presentation" => [
       "src" => PATHSITE . "assets/scripts/controller-presentation.js",
       "type" => "module",
    ],

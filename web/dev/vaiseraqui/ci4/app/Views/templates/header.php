@@ -8,7 +8,6 @@
   <?= view("templates/styles-group", $style_list) ?>
 
   <link href="<?= PATHSITE ?>assets/scripts/aos/aos.css" rel="stylesheet">
-
   <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css">
   <title><?= $metatag->titulo ?> - <?= $configs->nome ?></title>
   <meta name="description" content="<?= $metatag->description ?>">

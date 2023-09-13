@@ -32,14 +32,12 @@ class ArtigoModel extends Model
 
    public function ordenar($get)
    {
-      if (!$get['ordem'] || $get['ordem'] == "recentes") {         
-         return $this->orderBy("id DESC");
-
+      if (!$get['ordem'] || $get['ordem'] == "relevancia") {         
+         return $this->orderBy("ordem ASC, id DESC");
       } else if ($get['ordem'] == "antigos") {
          return $this->orderBy("id ASC");
-
-      } else if ($get['ordem'] == "maisvistos") {
-         return $this->orderBy("ordem ASC, id DESC");
+      } else if ($get['ordem'] == "recentes") {
+         return $this->orderBy("id DESC");
       }
    }
 }

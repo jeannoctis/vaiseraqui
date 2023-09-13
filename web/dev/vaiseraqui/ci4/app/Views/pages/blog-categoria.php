@@ -1,3 +1,18 @@
+<? switch ($ordem) {
+  case 'relevancia':
+    $filtro = "Relevância";
+    break;
+  case 'recentes':
+    $filtro = "Mais recentes";
+    break;
+  case 'antigos':
+    $filtro = "Mais antigos";
+    break;
+  default:
+    $filtro = "Relevância";
+    break;
+} ?>
+
 <style>
   @media screen and (max-width: 769px) {
     main {
@@ -58,19 +73,9 @@
               <div class="modal-order-select">
                 <div class="wraper-scroll">
                   <nav class="content">
-                    <a data-select-value="Maior preço - Menor preço" href="#maior-menor">Maior preço - Menor preço</a>
-                    <a data-select-value="Menor preço - Maior preço" href="#menor-maior" class="active">Menor preço - Maior preço</a>
-                    <a data-select-value="Entre R$800,00 e R$1.200,00" href="#entre-800-1200">Entre R$800,00 e R$1.200,00</a>
-                    <a data-select-value="Entre R$1.200,00 e R$1.600,00" href="#entre-1200-1600">Entre R$1.200,00 e R$1.600,00</a>
-                    <a data-select-value="Acima de R$1.600,00" href="#acima-1600">Acima de R$1.600,00</a>
-                    <a data-select-value="Mais visto" href="#mais-visto">Mais visto</a>
-                    <a data-select-value="Mais perto" href="#mais perto">Mais perto</a>
-                    <!-- <a href="<?= PATHSITE ?>blog/<?= $categoriaAtual->identificador ?>?ordem=antigos" class="<?= $get['ordem'] == "novos" ? "active" : "" ?>">
-                      Mais antigos
-                    </a>
-                    <a href="<?= PATHSITE ?>blog/<?= $categoriaAtual->identificador ?>?ordem=recentes" class="<?= $get['ordem'] == "recentes" ? "active" : "" ?>">
-                      Mais Recentes
-                    </a> -->
+                    <a data-select-value="Relevância" href="<?= $crrUrl?>?ordem=relevancia" class="<?= $ordem == 'relevancia' ? 'active' : '' ?>">Relevância</a>
+                    <a data-select-value="Mais visto" href="<?= $crrUrl?>?ordem=recentes" class="<?= $ordem == 'recentes' ? 'active' : '' ?>">Mais recentes</a>
+                    <a data-select-value="Mais perto" href="<?= $crrUrl?>?ordem=antigos" class="<?= $ordem == 'antigos' ? 'active' : '' ?>">Mais antigos</a>
                   </nav>
                 </div>
               </div>
