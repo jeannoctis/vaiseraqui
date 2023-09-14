@@ -1487,17 +1487,6 @@ class Pages extends Controller {
                     }
                 }
 
-                $tipoModel = \model("App\Models\TipoModel", false);
-                $data['tipos'] = $tipoModel->select("id, titulo")->findAll();
-
-                foreach($data['tipos'] as $ind => $tipo) {
-                    $produtoCategoriaModel->resetQuery()
-                    ->select("id, titulo")
-                    ->where("tipoFK", $tipo->id)
-                    ->orderBy("titulo ASC");
-                    $tipo->categorias = $produtoCategoriaModel->findAll();
-                }
-
                 $estadoModel = model('App\Models\EstadoModel', false);
                 $estadoModel->orderBy("titulo ASC");            
                 $data['estados'] = $estadoModel->findAll();
@@ -1510,13 +1499,8 @@ class Pages extends Controller {
                     $post['id'] = $data['clienteLogado']->id;
                     $data['salvou'] = $clienteModel->save($post);
 
-                    $interesses = $post['interesse'];
-
-                    if ($interesses) {
-                        $clienteInteresseModel->resetQuery()
-                            ->where("clienteFK", $data['clienteLogado']->id)
-                            ->whereNotIn("id", $interesses)
-                        ->delete();
+                    $interesse = $post['interesse'];
+                    if ($interesse) {
 
                         foreach ($interesses as $inte) {
                             $updateInteresses[] = [

@@ -851,16 +851,16 @@ class Produto extends BaseController
       $retorno["mes1"] = $date[1];
       $retorno["ano1"] = $date[0];
 
-      ob_start();
-      for ($iterator = 1; $iterator <= 6; $iterator++) {
-         ?>
+        ob_start();
+        for ($iterator = 1; $iterator <= 6; $iterator++) {
+            ?>
          <div class="">
-            <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
-            <table class='table'>
-               <tr>
-                  <td align="center">
-                     <table width="100%" border="0" cellpadding="2" cellspacing="2">
-                        <tr class='fonteBlack'>
+                <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
+                <table class='table'>
+                    <tr>
+                        <td align="center">
+                            <table width="100%" border="0" cellpadding="2" cellspacing="2">
+                                <tr class='fonteBlack'>
                            <td align="center"><strong>D</strong></td>
                            <td align="center"><strong>S</strong></td>
                            <td align="center"><strong>T</strong></td>
