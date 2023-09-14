@@ -146,148 +146,40 @@
                     </div>
 
                     <div class="boxTabView boxViewTab2">
-                        <form class="form-horizontal" method="post" enctype="multipart/form-data">
-                            <fieldset>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <h3>
-                                            Meus favoritos
-                                        </h3>
-                                    </div>
-
-                                    
-
-                                </div>
-                            </fieldset>
+                        <h3 class="fav-title">
+                            Meus favoritos
+                        </h3>
                         </form>
 
                         <div class="clearfix"></div>
-                        <? if ($favoritos) {
-                            foreach ($favoritos as $ind => $prod) { ?>
-                                <div class="cardBusca categoria-<?= $prod->categoriaFK ?> ">
-                                    <div id="carouselCard<?= $ind ?>" class="carousel slide" data-ride="carousel">
-                                        <ol class="carousel-indicators">
-                                            <? if ($prod->fotos) {
-                                                foreach ($prod->fotos as $ind2 => $foto) { ?>
-                                                    <li data-target="#carouselCard<?= $ind ?>" data-slide-to="<?= $ind2 ?>" class="<?= ($ind2) ? " " : "active" ?>"></li>
-                                            <? }
-                                            } ?>
-                                        </ol>
-                                        <div onclick='window.location.href="<?= PATHSITE ?>espaco/<?= $prod->identificador ?>/"' class="carousel-inner">
-                                            <? if ($prod->fotos) {
-                                                foreach ($prod->fotos as $ind2 => $foto) {
-                                            ?>
-                                                    <div class="carousel-item carousel-espaco-busca <?= ($ind2) ? "" :  "active" ?>">
-                                                        <img src="<?= PATHSITE ?>uploads/produto/<?= $prod->id ?>/<?= $foto->arquivo ?>">
-                                                    </div>
-                                            <? }
-                                            } ?>
-                                        </div>
-                                        <? if ($prod->fotos && count($prod->fotos) > 1) { ?>
-                                            <a class="carousel-control-prev" href="#carouselCard<?= $ind ?>" role="button" data-slide="prev">
-                                                <img src="<?= PATHSITE ?>images/seta_prev.svg">
-                                            </a>
-                                            <a class="carousel-control-next" href="#carouselCard<?= $ind ?>" role="button" data-slide="next">
-                                                <img src="<?= PATHSITE ?>images/seta_next.svg">
-                                            </a>
-                                        <? } ?>
-                                    </div>
 
-                                    <div class="cardBuscaInfo cardBuscarEspaco">
-                                        <div class="favoritar">
-                                            <input onclick="favoritar(<?= $prod->id ?>)" <?= in_array($prod->id, $todosFavoritos) ? "checked" : "" ?> class='coracaoFavorito' id='coracaobusca<?= $ind ?>' type='checkbox' checked>
-                                            <label for='coracaobusca<?= $ind ?>'></label>
-                                        </div>
-                                        <a href="<?= PATHSITE ?>espaco/<?= $prod->identificador ?>/" class="">
-                                            <h5>
-                                                <?= $arrayCategorias[$prod->categoriaFK] ?>
-                                            </h5>
-                                            <h3>
-                                                <?= $prod->titulo ?>
-                                            </h3>
-                                            <hr />
-                                            <h5 class='d-none'>
-                                                Até 29 hóspedes • 5 treliches • Quarto climatizado • Churrasqueira • Estacionamento • Sala de TV
-                                            </h5>
-                                            <div class="avaliacao d-none">
-                                                <img src="<?= PATHSITE ?>images/icone_estrela.svg"> 4.4 <span>(25)</span>
-                                            </div>
-                                            <h4 class=''>
-                                                <span>A partir de</span> <?= number_format($prod->preco, 2, ',', ' ') ?>
-                                            </h4>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                        <a href="<?= PATHSITE ?>espaco/<?= $prod->identificador ?>/" class="cta3 ">
-                                            Ver mais detalhes
-                                        </a>
-                                    </div>
-                                </div>
-                            <? }
-                        } ?>
-                        <? if ($favoritos2) {
-                            foreach ($favoritos2 as $ind => $prod) { ?>
-                                <div class="cardBusca categoria-<?= $prod->categoriaFK ?> ">
-                                    <div id="carouselCard-<?= $ind ?>" class="carousel slide" data-ride="carousel">
-                                        <ol class="carousel-indicators">
-                                            <? if ($prod->fotos) {
-                                                foreach ($prod->fotos as $ind2 => $foto) { ?>
-                                                    <li data-target="#carouselCard-<?= $ind ?>" data-slide-to="<?= $ind2 ?>" class="<?= ($ind2) ? " " : "active" ?>"></li>
-                                            <? }
-                                            } ?>
-                                        </ol>
-                                        <div onclick='window.location.href="<?= PATHSITE ?>servico/<?= $prod->identificador ?>/"' class="carousel-inner">
-                                            <? if ($prod->fotos) {
-                                                foreach ($prod->fotos as $ind2 => $foto) {
-                                            ?>
-                                                    <div class="carousel-item carousel-espaco-busca <?= ($ind2) ? "" :  "active" ?>">
-                                                        <img src="<?= PATHSITE ?>uploads/produto/<?= $prod->id ?>/<?= $foto->arquivo ?>">
-                                                    </div>
-                                            <? }
-                                            } ?>
-                                        </div>
-                                        <? if ($prod->fotos && count($prod->fotos) > 1) { ?>
-                                            <a class="carousel-control-prev" href="#carouselCard-<?= $ind ?>" role="button" data-slide="prev">
-                                                <img src="<?= PATHSITE ?>images/seta_prev.svg">
-                                            </a>
-                                            <a class="carousel-control-next" href="#carouselCard-<?= $ind ?>" role="button" data-slide="next">
-                                                <img src="<?= PATHSITE ?>images/seta_next.svg">
-                                            </a>
-                                        <? } ?>
-                                    </div>
-
-                                    <div class="cardBuscaInfo cardBuscarEspaco">
-                                        <div class="favoritar">
-                                            <input onclick="favoritar(<?= $prod->id ?>)" <?= in_array($prod->id, $todosFavoritos) ? "checked" : "" ?> class='coracaoFavorito' id='coracaobusca<?= $ind ?>' type='checkbox' checked>
-                                            <label for='coracaobusca<?= $ind ?>'></label>
-                                        </div>
-                                        <a href="<?= PATHSITE ?>servico/<?= $prod->identificador ?>/" class="">
-                                            <h5>
-                                                <?= $arrayCategorias[$prod->categoriaFK] ?>
-                                            </h5>
-                                            <h3>
-                                                <?= $prod->titulo ?>
-                                            </h3>
-                                            <hr />
-                                            <h5 class='d-none'>
-                                                Até 29 hóspedes • 5 treliches • Quarto climatizado • Churrasqueira • Estacionamento • Sala de TV
-                                            </h5>
-                                            <div class="avaliacao d-none">
-                                                <img src="<?= PATHSITE ?>images/icone_estrela.svg"> 4.4 <span>(25)</span>
-                                            </div>
-                                            <h4 class=''>
-                                                <span>A partir de</span> R$ <?= number_format($prod->preco, 2, ',', ' ') ?>
-                                            </h4>
-                                            <div class="clearfix"></div>
-                                        </a>
-                                        <a href="<?= PATHSITE ?>servico/<?= $prod->identificador ?>/" class="cta3 ">
-                                            Ver mais detalhes
-                                        </a>
-                                    </div>
-                                </div>
-                            <? }
-                        } ?>
+                        <? if ($favoritos) { ?>
+                            <div class="favoritos-container">
+                                <? foreach ($favoritos as $ind => $fav) {
+                                    switch ($fav->tipo_id) {
+                                        case 1:
+                                            echo view("templates/aluguel-para-temporada-card", (array)$fav);
+                                            break;
+                                        case 2:
+                                            echo view("templates/aluguel-para-temporada-card", (array)$fav);
+                                            break;
+                                        case 3:
+                                            echo view("templates/hospedagem-card", (array)$fav);
+                                            break;
+                                        case 5:
+                                            echo view("templates/aluguel-para-temporada-card", (array)$fav);
+                                            break;
+                                        case 6:
+                                            echo view("templates/aluguel-para-temporada-card", (array)$fav);
+                                            break;
+                                        case 7:
+                                            echo view("templates/aluguel-para-temporada-card", (array)$fav);
+                                            break;
+                                    } ?>
+                                <? } ?>
+                            </div>
+                        <? } ?>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -350,3 +242,23 @@
         </div>
     </div>
 </div>
+
+<style>
+    .meu-perfil .fav-title {
+        color: #404041;
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 21px;
+        letter-spacing: -0.72px;
+    }
+
+    .favoritos-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .favoritos-container article {
+        width: 547px;
+    }
+</style>

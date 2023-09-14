@@ -72,19 +72,21 @@
   <dialog class="dialog-not-logged">
     <div class="content">
 
-      <span class="dialog-close"></span>
+      <span class="dialog-close">
+        <img src="<?=PATHSITE?>assets/images/icon-close.svg" alt="icone fechar">
+      </span>
 
-      <img src="" alt="" class="dialog-logo">
+      <img src="<?=PATHSITE?>assets/images/logo.png" alt="" class="dialog-logo">
 
-      <h3>Você ainda não está logado para curtir os anúncios...</h3>
+      <h3>Você ainda não está logado...</h3>
 
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+      <p>Faça login ou cadastre-se para poder curtir e salvar os anúncios!</p>
 
-      <div class="buttons">
-        <a href="">
+      <div class="buttons-div">
+        <a href="<?=PATHSITE?>login/">
           <button type="button">Área de login</button>
         </a>
-        <a href="">
+        <a href="<?=PATHSITE?>cadastro/">
           <button type="button">Cadastre-se!</button>
         </a>
       </div>
@@ -92,7 +94,6 @@
   </dialog>
 
   <!-- Cookies + WhatsApp -->
-
   <? if (!$_COOKIE['aceitou']) { ?>
     <div id="aviso-cookies" data-aos="fade-up">
       <p>
@@ -238,6 +239,33 @@
       }
       ?>
     }
+
+    function favoritar (produtoFK) {
+      const isLogado = '<?= $isLogado ?>';
+
+      if(!isLogado) {
+        showLoginModal()
+        return
+      }
+      
+      $.post(PATHSITE + "cliente/favoritar", {
+        produtoFK
+      }, function (data) {        
+        const heartIcon = document.querySelector(`[data-id-heart='${produtoFK}']`)
+        heartIcon.classList.toggle("active")
+      });
+    }
+
+    function showLoginModal(){
+      const modal = document.querySelector(".dialog-not-logged")
+      modal.showModal();
+    }
+
+    document.querySelectorAll(".dialog-close").forEach(btn => {
+      btn.addEventListener("click", (ev) => {
+        ev.target.closest("dialog").close()
+      })
+    })
   </script>
   
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>

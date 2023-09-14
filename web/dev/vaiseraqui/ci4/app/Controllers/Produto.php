@@ -30,7 +30,7 @@ class Produto extends BaseController
 
         $data['get'] = $get = request()->getGet();
 
-      $paginate = \is_numeric($get['page_produtos']) ? $get['page_produtos'] : 1 ;
+      $paginate = \is_numeric($get['page_produtos']) ? $get['page_produtos'] : 1;
 
       $this->produtoCategoriaModel
          ->select('id, titulo')
@@ -854,7 +854,7 @@ class Produto extends BaseController
         ob_start();
         for ($iterator = 1; $iterator <= 6; $iterator++) {
             ?>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+         <div class="">
                 <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
                 <table class='table'>
                     <tr>

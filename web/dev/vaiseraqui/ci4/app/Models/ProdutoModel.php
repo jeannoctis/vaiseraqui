@@ -16,7 +16,7 @@ class ProdutoModel extends Model {
         'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'capacidadeFK',
         'hospedes', 'limpeza', 'latitude', 'longitude', 'captadorFK', 'planoFK', 'calendario', 'preco', 'apartir', 'principaiscomodidades',
         'itensdisponiveis', 'areautil', 'quartos', 'banheiros', 'vagas', 'andar', 'animais', 'mobilia', 'transporte', 'condominio',
-        'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local'];
+        'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local', 'cafedamanha', 'wifi', 'arcondicionado', 'recepcao24', 'bar', 'acessibilidade', 'estacionamento'];
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';
@@ -249,10 +249,12 @@ class ProdutoModel extends Model {
     }
 
     public function dadosCard() {
-        return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado")
+        return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado, t.identificador as tipo, t.id as tipo_id")
                         ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
                         ->join("cidade c", "c.id = produto.cidadeFK")
-                        ->join("estado e", "e.id = c.estadoFK");
+            ->join("estado e", "e.id = c.estadoFK")
+            ->join("tipo t", "t.id = pc.tipoFK");
+
     }
 
     public function hospedagens($limit) {

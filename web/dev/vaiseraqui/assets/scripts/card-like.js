@@ -4,7 +4,6 @@
   likes.forEach(like => {
     like.addEventListener('click', (e) => {
       e.preventDefault()
-      like.classList.toggle('active')
     })
   })
 })()

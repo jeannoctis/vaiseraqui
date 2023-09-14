@@ -37,9 +37,7 @@
                      echo view("templates/aluguel-para-temporada-card.php", (array)$produto);
                   } ?>
                </div>
-
                <?= $pager->links("anuncios") ?>
-
             </div>
          <? } ?>
 

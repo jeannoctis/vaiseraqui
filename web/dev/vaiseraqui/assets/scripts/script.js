@@ -67,10 +67,10 @@ function abreWhatsapp(id){
         });  
 }
 
- function clicaMapa(mapa) {
+function clicaMapa (mapa) {
          Fancybox.show([{
             src: mapa,
             width: 800,
             height: 600,
-         }, ]);
+  },]);
  }

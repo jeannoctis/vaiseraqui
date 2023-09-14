@@ -1455,6 +1455,9 @@ class Pages extends Controller {
 
             case 'meu-perfil';
                 $data['pagina'] = 21;
+                $data['style_list'] = ['swiper'];
+                $data['script_list'] = ['swiper', 'card-like', 'controller-card', 'mask-telefone'];
+
                 helper('encrypt');
                 if ($this->session->get('cliente')) {
                     $clienteModel = model('App\Models\ClienteModel', false);
@@ -1527,40 +1530,13 @@ class Pages extends Controller {
                 $produtoModel = model('App\Models\ProdutoModel', false);
 
                 if ($data['todosFavoritos']) {
-                    $produtoModel->select("produto.*, produto.menorValor as preco");
-                    $produtoModel->whereIn("id", $data['todosFavoritos']);
-                    $produtoModel->where("tipoFK", 1);
-                    $produtoModel->where("produto.inicioValidade <= NOW() AND produto.validade >= NOW()");
-                    $produtoModel->where('ativo', 1);
+                    $produtoModel->dadosCard()                        
+                        ->whereIn("produto.id", $data['todosFavoritos']);
                     $data['favoritos'] = $produtoModel->findAll();
-
-                    $produtoModel->resetQuery();
-                    $produtoModel->select("produto.*,  (SELECT MIN(preco) FROM produto_quantidade WHERE produtoFK = produto.id AND preco != 0 ) as preco");
-                    $produtoModel->whereIn("id", $data['todosFavoritos']);
-                    $produtoModel->where("tipoFK", 2);
-                    $produtoModel->where("produto.inicioValidade <= NOW() AND produto.validade >= NOW()");
-                    $produtoModel->where('ativo', 1);
-                    $data['favoritos2'] = $produtoModel->findAll();
                 }
-                $data["arrayCatProd"] = array();
-                if ($data["favoritos"]) {
-                    foreach ($data["favoritos"] as $ind => $dProd) {
-                        $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
-                        $produtoFotoModel->resetQuery();
-                        $produtoFotoModel->where("produtoFK", $dProd->id);
-                        $produtoFotoModel->orderBy("ordem ASC, id DESC");
-                        $data["favoritos"][$ind]->fotos = $produtoFotoModel->findAll(3);
+                foreach($data['favoritos'] as $ind => $favorito) {
+                    $favorito->fotos = $produtoModel->fotos($favorito->id, 4, true);
                     }
-                }
-                if ($data["favoritos2"]) {
-                    foreach ($data["favoritos2"] as $ind => $dProd) {
-                        $data["arrayCatProd"][$dProd->categoriaFK] = $dProd->categoriaFK;
-                        $produtoFotoModel->resetQuery();
-                        $produtoFotoModel->where("produtoFK", $dProd->id);
-                        $produtoFotoModel->orderBy("ordem ASC, id DESC");
-                        $data["favoritos2"][$ind]->fotos = $produtoFotoModel->findAll(3);
-                    }
-                }
 
                 $clienteInteresseModel->select('pc.titulo, cliente_interesse.id');
                 $clienteInteresseModel->join('produto_categoria pc', 'pc.id = cliente_interesse.categoriaFK');
@@ -1608,7 +1584,7 @@ class Pages extends Controller {
                 break;
 
             case "logout":
-                unset($_SESSION);
+                unset($_SESSION['cliente']);
                 ?>
                 <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>">
                 <?
