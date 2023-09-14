@@ -28,11 +28,11 @@ $infoPagina['iconePagina'] = 'icon-bathtub.svg';
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <label>Banheiros</label>
-                            <input type="number" min="0" name="banheiros" class="form-control" id="quartos" value="<?= $anuncio->banheiros ?>" placeholder="Escreva...">
+                            <input type="number" min="0" name="banheiros" class="form-control" id="banheiros" value="<?= $anuncio->banheiros ?>" placeholder="Escreva...">
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <label>Vagas</label>
-                            <input type="number" min="0" name="vagas" class="form-control" id="quartos" value="<?= $anuncio->vagas ?>" placeholder="Escreva...">
+                            <input type="number" min="0" name="vagas" class="form-control" id="vagas" value="<?= $anuncio->vagas ?>" placeholder="Escreva...">
                         </div>
                         <div class="col-12 col-md-6 col-lg-4">
                             <label>Andares</label>

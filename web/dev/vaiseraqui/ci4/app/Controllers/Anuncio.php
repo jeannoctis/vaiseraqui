@@ -34,7 +34,13 @@ class Anuncio extends BaseController
       $this->model->where("tipo", substr($modelo, 0, -1));
       $data['lista'] = $this->model->findAll();
 
-      $data['title'] = "Anúncios {$modelo}";
+      if($modelo == 'categoriasservicos') {
+         $titulo2 = "Categoria de Prestadores de Serviços";
+      } else {
+         $titulo2 = $modelo;
+      }
+
+      $data['title'] = "Anúncios {$titulo2}";
       $data['tabela'] = $this->tabela;
       $data['resultado'] = '';
 
@@ -86,8 +92,8 @@ class Anuncio extends BaseController
       if ($post) {         
          $post["id"] = $id;
 
-         foreach($post as $key => $item) {
-            if(empty($item)) {
+         foreach ($post as $key => $item) {
+            if (empty($item)) {
                $post[$key] = null;
             }
          }
@@ -135,8 +141,8 @@ class Anuncio extends BaseController
       if ($post) {
          $post["id"] = $id;
 
-         foreach($post as $key => $item) {
-            if(empty($item)) {
+         foreach ($post as $key => $item) {
+            if (empty($item)) {
                $post[$key] = null;
             }
          }
@@ -174,8 +180,8 @@ class Anuncio extends BaseController
       if ($post) {
          $post["id"] = $id;
 
-         foreach($post as $key => $item) {
-            if(empty($item)) {
+         foreach ($post as $key => $item) {
+            if (empty($item)) {
                $post[$key] = null;
             }
          }
@@ -237,11 +243,6 @@ class Anuncio extends BaseController
             }
          }
 
-         // echo '<pre>';
-         // print_r($post);
-         // echo '</pre>';
-         // exit();
-
          $data['salvou'] = $this->model->save($post);
          $data["erros"] = $this->model->errors();
       }
@@ -254,4 +255,42 @@ class Anuncio extends BaseController
       echo view("{$this->tabela}/banner");
       echo view('templates/admin-footer');
    }   
+   
+   public function servicocategoria()
+   {
+      $id = decode($this->request->uri->getSegment(4));
+      $post = \request()->getPost();
+      
+      $anunciosCategoriasServicos = $this->model->where("tipo", "servicocategoria")->findAll();
+      $data['IDsExistentes'] = \array_column($anunciosCategoriasServicos, "categoriaFK");
+
+      $this->produtoCategoriaModel = \model("App\Models\ProdutoCategoriaModel", false);
+      $data['categoriasDisponiveis'] = $this->produtoCategoriaModel->where("tipoFK", "6")->findAll();
+
+      $IDsCatDisponiveis = \array_column($data['categoriasDisponiveis'], "id");
+
+      $this->produtoModel = \model('App\Models\ProdutoModel', false)
+         ->select("produto.id, produto.titulo, produto.anuncianteFK, a.titulo anunciante, a.telefone")
+         ->join("anunciante a", "produto.anuncianteFK = a.id")
+         ->whereIn("categoriaFK", $IDsCatDisponiveis)
+         ->where("ativo", 1);
+      $data['produtos'] = $this->produtoModel->findAll();
+
+      $data['title'] = 'Anúncios categorias de Prestadores de Serviços';
+      $data['tabela'] = "anuncio";
+      $data["nomeModel"] = "AnuncioModel";
+      $data['resultado'] = '';
+
+      if($post) {
+         
+}
+
+      if ($id) {
+         $data['resultado'] = $this->model->find($id);
+      }
+      
+      echo view('templates/admin-header', $data);
+      echo view("anuncio/servicocategoria", $data);
+      echo view('templates/admin-footer');
+   }
 }

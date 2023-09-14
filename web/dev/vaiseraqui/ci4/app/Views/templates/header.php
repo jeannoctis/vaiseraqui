@@ -30,16 +30,17 @@
         <img src="<?= PATHSITE ?>assets/images/logo.png" alt="Logo" class="logo">
       </a>
       <form action="#" class="">
-        <input type="text" name="search" placeholder="O que você está procurando?">
+        <input type="text" name="search" placeholder="<?= $txMenuFiltro->titulo ?>">
         <button type="submit"><img src="<?= PATHSITE ?>assets/images/icon-search.svg" alt=""></button>
       </form>
+
       <div class="header-modal-filter">
         <button class="j-btn-modal-filter">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="12" fill="#932327" />
             <path d="M18 18L15.1046 15.1046M15.1046 15.1046C16.0697 14.1394 16.6667 12.8061 16.6667 11.3333C16.6667 8.38781 14.2789 6 11.3333 6C8.38781 6 6 8.38781 6 11.3333C6 14.2789 8.38781 16.6667 11.3333 16.6667C12.8061 16.6667 14.1394 16.0697 15.1046 15.1046Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
-          <span class="name">O que você está procurando?</span>
+          <span class="name"><?= $txMenuFiltro->titulo ?></span>
           <div class="dropdown">
             <svg width="11" height="6" viewBox="0 0 11 6" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 1L5.5 5L10 1" stroke="#404041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -49,6 +50,7 @@
             </svg>
           </div>
         </button>
+
         <div class="header-modal-filter-content j-filter-modal-container">
           <nav class="presentation-form-menu">
             <a href="#" class="active" data-form="form1">
@@ -182,6 +184,7 @@
             <? } ?>
         </div>
       </div>
+
       <div class="account">
         <a href="<?= PATHSITE ?>login/" class="login <?= !$isLogado ? "show" : '' ?>">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -189,10 +192,11 @@
           </svg>
           Entrar
         </a>
+          <? if($clienteLogado) {?>
         <div class="box-logged <?= $isLogado ? "show" : '' ?>">
-          <img src="<?= PATHSITE ?>assets/images/logged-user.png" alt="" class="avatar">
+          <img src="<?= PATHSITE ?>uploads/cliente/<?=$clienteLogado->arquivo?>" alt="" class="avatar">
           <div>
-            <span class="title">Olá, Marlon</span>
+            <span class="title">Olá, <?=$clienteLogado->nome?></span>
             <ul>
               <li><a href="<?=PATHSITE?>meu-perfil/">Meu perfil</a></li>
               <li>|</li>
@@ -200,6 +204,7 @@
             </ul>
           </div>
         </div>
+          <? } ?>
         <a href="<?= PATHSITE ?>area-do-anunciante/" class="button-primary">Área do anunciante</a>
       </div>
     </div>

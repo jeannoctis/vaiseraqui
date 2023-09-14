@@ -433,4 +433,22 @@ class ClienteModel extends Model {
             exit();
         }
     }
+    
+    public function favoritar($id,$cliente, $cadastro){
+         $clienteFavoritoModel = model('App\Models\ClienteFavoritoModel', false);
+        $clienteFavoritoModel->select("id");
+        $clienteFavoritoModel->where("produtoFK",$id);
+        $clienteFavoritoModel->where("clienteFK", $cliente);
+        $temFavorito = $clienteFavoritoModel->find()[0];
+
+        if ($temFavorito && !$cadastro) {
+            $clienteFavoritoModel->delete(['id' => $temFavorito->id]);
+        } else {
+            $post['clienteFK'] = $cliente;
+            $post['produtoFK'] = $id;
+            $clienteFavoritoModel->save($post);
+        }
+        unset($_SESSION['favoritar']);
+    }
+    
 }

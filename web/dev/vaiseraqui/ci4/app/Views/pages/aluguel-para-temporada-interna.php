@@ -84,18 +84,22 @@
             <div>
                <a href="#" class="btn photo">
                   <img src="<?= PATHSITE ?>assets/images/icon-photo.png" alt="">
-                  <?= count($espacoAtual->fotos) ?> Fotos
+                  <?= count($fotos) ?> Fotos
                </a>
-               <a class="btn btn-videos">
-                  <img class="active" src="<?= PATHSITE ?>assets/images/icon-video-active.png" alt="">
-                  <img src="<?= PATHSITE ?>assets/images/icon-video.png" alt="">
-                  Vídeos
-               </a>
-               <a href="https://www.google.com/maps/@51.5039653,-0.1246493,14.12z" data-fancybox class="btn btn-maps">
-                  <img class="active" src="<?= PATHSITE ?>assets/images/icon-map-active.png" alt="">
-                  <img src="<?= PATHSITE ?>assets/images/icon-map.png" alt="">
-                  Mapa
-               </a>
+                  <? if($videos) {?>
+            <a onclick="verVideos();" class="btn btn-videos" >
+              <img class="active" src="<?=PATHSITE?>assets/images/icon-video-active.png" alt="">
+              <img src="<?=PATHSITE?>assets/images/icon-video.png" alt="">
+              Vídeos
+            </a>
+              <? } ?>
+              <? if($metatag->mapa) {?>
+            <a onclick="clicaMapa('<?=$metatag->mapa?>')" data-fancybox class="btn btn-maps" >
+              <img class="active" src="<?=PATHSITE?>assets/images/icon-map-active.png" alt="">
+              <img src="<?=PATHSITE?>assets/images/icon-map.png" alt="">
+              Mapa
+            </a>
+              <? } ?>
             </div>
          </div>
 
@@ -112,11 +116,11 @@
             <a data-fslightbox="mobile-presentation-1" href="<?= PATHSITE ?>assets/images/slide-rent-3.png"></a>
          </div>
 
-         <? if ($espacoAtual->fotos) { ?>
+         <? if ($fotos) { ?>
             <div class="swiper presentationSwiper">
                <div class="swiper-wrapper">
 
-                  <? foreach ($espacoAtual->fotos as $foto) { ?>
+                  <? foreach ($fotos as $foto) { ?>
                      <div class="swiper-slide">
                         <div class="item">
                            <a data-fslightbox="presetation-1" href="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>">
@@ -126,6 +130,7 @@
                      </div>
                   <? } ?>
 
+               </div>
                   <div class="navigation-swiper-blog">
                      <button class="prev">
                         <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -145,7 +150,6 @@
                      </button>
                   </div>
 
-               </div>
             </div>
          <? } ?>
 
@@ -383,36 +387,36 @@
                   </div>
                <? } ?>
 
-               <div class="wraper-scroll-cards">
-                  <? foreach ($espacoAtual->fotos as $foto) { ?>
-                     <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>uploads/produto/<?= $espacoAtual->id ?>/<?= $foto->arquivo ?>"></a>
-                  <? } ?>
-                  <div class="photos-and-video">
-
-                     <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>uploads/produto/<?= $espacoAtual->id ?>/<?= $espacoAtual->fotoDestaque ?>">
-                        <div class="card" style="background-image: url(<?= PATHSITE ?>uploads/produto/<?= $espacoAtual->id ?>/<?= $espacoAtual->fotoDestaque ?>">
-                           <div class="wraper">
-                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.33333C0 2.83554 2.83554 0 6.33333 0H31.6667C35.1646 0 38 2.83554 38 6.33333V29.5534V29.5577V31.6667C38 35.1646 35.1646 38 31.6667 38H6.33333C2.83554 38 0 35.1646 0 31.6667V23.2222V6.33333ZM33.7778 6.33333V24.4589L26.8261 17.5072C26.0017 16.6828 24.665 16.6828 23.8406 17.5072L21.1111 20.2367L13.1039 12.2294C12.2794 11.405 10.9428 11.405 10.1183 12.2294L4.22222 18.1256V6.33333C4.22222 5.16741 5.16741 4.22222 6.33333 4.22222H31.6667C32.8326 4.22222 33.7778 5.16741 33.7778 6.33333ZM4.22222 31.6667V24.0966L11.6111 16.7078L19.6183 24.715C20.4427 25.5394 21.7795 25.5394 22.6039 24.715L25.3333 21.9855L33.7778 30.43V31.6667C33.7778 32.8326 32.8326 33.7778 31.6667 33.7778H6.33333C5.16741 33.7778 4.22222 32.8326 4.22222 31.6667ZM24.2778 14.7778C26.0266 14.7778 27.4444 13.36 27.4444 11.6111C27.4444 9.8622 26.0266 8.44444 24.2778 8.44444C22.5289 8.44444 21.1111 9.8622 21.1111 11.6111C21.1111 13.36 22.5289 14.7778 24.2778 14.7778Z" fill="white" />
-                              </svg>
-                              <span>Ver todas as fotos</span>
-                           </div>
-                        </div>
-                     </a>
-
-                     <a href="#" class="btn-videos">
-                        <div class="card" style="background-image: url(<?= PATHSITE ?>uploads/produto/<?= $espacoAtual->id ?>/<?= $espacoAtual->fotoDestaque ?>);">
-                           <div class="wraper">
-                              <svg width="34" height="38" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                 <path d="M31.9346 19L2.75001 35.4912L2.75 2.50876L31.9346 19Z" stroke="white" stroke-width="4" />
-                              </svg>
-                              <span>Assistir Vídeos</span>
-                           </div>
-                        </div>
-                     </a>
-
+                  <? if($fotos) {?>
+            <div class="wraper-scroll-cards">
+              <div class="photos-and-video">
+             
+                <a data-fancybox data-fslightbox="presentation-1" >
+                  <div class="card" style="background-image: url(<?=PATHSITE?>uploads/produto/<?=$fotos[0]->produtoFK?>/<?=$fotos[0]->arquivo?>);">
+                    <div class="wraper">
+                      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.33333C0 2.83554 2.83554 0 6.33333 0H31.6667C35.1646 0 38 2.83554 38 6.33333V29.5534V29.5577V31.6667C38 35.1646 35.1646 38 31.6667 38H6.33333C2.83554 38 0 35.1646 0 31.6667V23.2222V6.33333ZM33.7778 6.33333V24.4589L26.8261 17.5072C26.0017 16.6828 24.665 16.6828 23.8406 17.5072L21.1111 20.2367L13.1039 12.2294C12.2794 11.405 10.9428 11.405 10.1183 12.2294L4.22222 18.1256V6.33333C4.22222 5.16741 5.16741 4.22222 6.33333 4.22222H31.6667C32.8326 4.22222 33.7778 5.16741 33.7778 6.33333ZM4.22222 31.6667V24.0966L11.6111 16.7078L19.6183 24.715C20.4427 25.5394 21.7795 25.5394 22.6039 24.715L25.3333 21.9855L33.7778 30.43V31.6667C33.7778 32.8326 32.8326 33.7778 31.6667 33.7778H6.33333C5.16741 33.7778 4.22222 32.8326 4.22222 31.6667ZM24.2778 14.7778C26.0266 14.7778 27.4444 13.36 27.4444 11.6111C27.4444 9.8622 26.0266 8.44444 24.2778 8.44444C22.5289 8.44444 21.1111 9.8622 21.1111 11.6111C21.1111 13.36 22.5289 14.7778 24.2778 14.7778Z" fill="white"/>
+                      </svg>                    
+                      <span>Ver todas as fotos</span>
+                    </div>
                   </div>
-               </div>
+                </a>
+                  <? } ?>
+                  <? if($fotos && $videos) {?>
+                <a href="#" class="btn-videos" onclick="verVideos()">
+                  <div class="card" style="background-image: url(<?=PATHSITE?>uploads/produto/<?=$fotos[0]->produtoFK?>/<?=$fotos[0]->arquivo?>);">
+                    <div class="wraper">
+                      <svg width="34" height="38" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M31.9346 19L2.75001 35.4912L2.75 2.50876L31.9346 19Z" stroke="white" stroke-width="4"/>
+                      </svg>                    
+                      <span>Assistir Vídeos</span>
+                    </div>
+                  </div>
+                </a>
+              
+              </div>
+            </div>
+                <? } ?>
 
                <div class="faq">
                   <? if ($espacoAtual->comodidades) { ?>
@@ -563,37 +567,7 @@
                   </a>
                </aside>
 
-               <div class="box-ads">
-                  <img src="<?= PATHSITE ?>uploads/anunciante/<?= $espacoAtual->anunciante->arquivo ?>" alt="foto do anunciante">
-                  <div>
-                     <span class="type">Anunciante</span>
-                     <span class="title"><?= $espacoAtual->anunciante->titulo ?></span>
-                     <ul>
-                        <li>
-                            <a onclick="abreWhatsapp('<?=encode($espacoAtual->id)?>');" href="<?=$espacoAtual->anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" target="_blank">
-                           <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                           <span><?= $espacoAtual->anunciante->telefone ?></span>
-                            </a>
-                        </li>
-                        <? if ($espacoAtual->anunciante->telefone2) { ?>
-                           <li>
-                                <a onclick="abreWhatsapp('<?=encode($espacoAtual->id)?>');" href="<?=$espacoAtual->anunciante->whatsapp2?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" target="_blank">
-                              <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                              <span><?= $espacoAtual->anunciante->telefone2 ?></span>
-                                </a>
-                           </li>
-                        <? } ?>
-                        <? if ($espacoAtual->anunciante->telefone3) { ?>
-                           <li>
-                                <a onclick="abreWhatsapp('<?=encode($espacoAtual->id)?>');"  href="<?=$espacoAtual->anunciante->whatsapp3?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" target="_blank">
-                              <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                              <span><?= $espacoAtual->anunciante->telefone3 ?></span>
-                                </a>
-                           </li>
-                        <? } ?>
-                     </ul>
-                  </div>
-               </div>
+               <?= View('templates/anunciante') ?> 
             </div>
          </div>
 

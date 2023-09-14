@@ -1,5 +1,5 @@
-<article class="card-services" data-aos="fade-right">
-       <a href="<?=PATHSITE?>prestador-de-servico/<?=$identificador?>/">
+<article class="secundary card-spaces">
+   <a href="<?= PATHSITE ?>espaco/<?= $identificador ?>/">
       <div class="cover">
          <span class="button-category">
             <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -8,40 +8,54 @@
             </svg>
             Em Alta
          </span>
-         <?
-
-         if ($fotos) { ?>
-            <div class="swiper swiper-card">
-               <div class="swiper-wrapper">
+         <div class="swiper swiper-card">
+            <div class="swiper-wrapper">
+               <? if ($fotos) { ?>
                   <? foreach ($fotos as $foto) { ?>
                      <div class="swiper-slide">
-                        <img src="<?= PATHSITE ?>uploads/produto/<?=$foto->produtoFK?>/<?= $foto->arquivo ?>" alt="foto do local">                    
+                        <img src="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>" alt="">
                      </div>
-                  <? } ?>
-               </div>
-
-               <div class="swiper-pagination"></div>
-               <div class="swiper-button-prev"></div>
-               <div class="swiper-button-next"></div>
+               <? }
+               } ?>
             </div>
-         <? } ?>
+            <div class="swiper-pagination"></div>
 
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+         </div>
       </div>
+      <? if ($principaiscomodidades) {
+         $listaCmdd = explode(";", $principaiscomodidades);
+      } else {
+         $listaCmdd = explode(";", $itensdisponiveis);
+      }
 
+      ?>
       <div class="info">
          <span class="type"><?= $categoria ?></span>
          <strong class="title"><?= $titulo ?></strong>
-         <span class="uf"><?= $cidade ?></span>
-         <p><?= $descricao ?></p>
-
-         <span class="icon-heart">
+         <span class="uf"><?= $hospedagemHome[1]->cidade ?></span>
+         <p class="including">
+            <? foreach ($listaCmdd as $ind => $comodi) {
+               if ($ind <= 2) {
+            ?>
+                  <?= $comodi ?> <span> <?= ($ind == 2)  ? '' : '•' ?> </span>
+            <? }
+            } ?>
+         </p>
+         <div class="box-price">
+            <span class="price">R$<?= number_format($preco, 2, ',', '.') ?></span>
+            <span class="per">/diária</span>
+         </div>
+         <a onclick="favoritar(<?= $id ?>)" href="#" class="icon-heart <?= (in_array($id, $todosFavoritos)) ? 'active' : '' ?>" data-id-heart="<?= $id ?>">
             <svg class="heart-main" viewBox="0 0 512 512" width="100" title="heart">
                <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
             </svg>
             <svg class="heart-background" viewBox="0 0 512 512" width="100" title="heart">
                <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
             </svg>
-         </span>
+         </a>
+
       </div>
    </a>
 </article>

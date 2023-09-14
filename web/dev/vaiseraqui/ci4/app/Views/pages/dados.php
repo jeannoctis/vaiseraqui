@@ -69,7 +69,7 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
 
                         <div class="col-12">
                             <label>Nome do local</label>
-                            <input type="text" name="bairro" class="form-control" Value="<?= $anuncio->local ?>">
+                            <input type="text" name="local" class="form-control" Value="<?= $anuncio->local ?>">
                         </div>
 
                         <div class="row col-12">
@@ -83,6 +83,13 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                                 <textarea name="coordenadas" class="form-control"><?= $anuncio->coordenadas ?></textarea>
                             </div>
                         </div>
+
+                        <? if ($anuncio->tipoFK == 4) { ?>
+                            <div class="col-12">
+                                <label>Área útil</label>
+                                <input type="text" name="areautil" class="form-control" Value="<?= $anuncio->areautil ?>">
+                            </div>
+                        <? } ?>
 
                         <h2 class="col-12 mt-5">Descrição</h2>
                         <div class="col-12">

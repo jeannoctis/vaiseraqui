@@ -21,6 +21,7 @@
       }
     }
   </style>
+  
   <main>
     <section class="s-service-providers" id="servicos" data-aos="fade-right">
       <header>
@@ -79,7 +80,7 @@
                 <strong class="title"><?=$destaque->titulo?></strong>
                 <span class="uf"><?=$destaque->cidade?> - <?=$destaque->estado?> </span>
                 <p><?=$destaque->descricao?></p>
-                <a href="#" class="icon-heart">
+                <a href="#" onclick="favoritar(<?= $destaque->id ?>)" class="icon-heart <?= (in_array($destaque->id, $todosFavoritos)) ? 'active' : '' ?>" data-id-heart="<?= $destaque->id ?>">
                   <svg class="heart-main" viewBox="0 0 512 512" width="100" title="heart">
                     <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
                   </svg>
@@ -130,7 +131,7 @@
                 <span class="uf"><?=$servico->cidade?></span>
                 <p><?=$servico->descricao?></p>
   
-                <span href="#" class="icon-heart">
+                <span onclick="favoritar(<?= $servico->id ?>)" class="icon-heart <?= (in_array($servico->id, $todosFavoritos)) ? 'active' : '' ?>" data-id-heart="<?= $servico->id ?>">
                   <svg class="heart-main" viewBox="0 0 512 512" width="100" title="heart">
                     <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
                   </svg>

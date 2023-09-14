@@ -1525,7 +1525,7 @@ select {
 .card-item.poster .info .zona {
   font-size: 1.5rem;
   margin-bottom: 0.63rem;
-  height: 1.5rem;
+  height: 1.8rem;
   overflow: hidden;
 }
 .card-item.poster .info .city {
@@ -5578,7 +5578,21 @@ header.header-bg .group-title span {
   cursor: pointer;
   box-shadow: 0 0 0px rgba(104, 104, 104, 0.5);
   transition: box-shadow 0.2s ease-in-out;
+  position: relative;
+  z-index: 10;
 }
+
+.internal-rent .more-about-2-column .container-medium .column:first-of-type > article .photos-and-video .card:before{
+    background-color: rgba(0,0,0,0.5);
+    content: ' ';
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    position: absolute;
+    z-index: -1;
+}
+
 .internal-rent .more-about-2-column .container-medium .column:first-of-type > article .photos-and-video .card .wraper {
   display: flex;
   flex-direction: column;

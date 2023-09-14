@@ -39,8 +39,8 @@ class ProdutoModel extends Model {
         $produtoFotoModel = model('App\Models\ProdutoFotoModel', false);
         $produtoFotoModel->where('produtoFK', $id);
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
-        $produtoFotoModel->limit($limit);
-        $fotos = $produtoFotoModel->findAll();
+        // $produtoFotoModel->limit($limit);
+        $fotos = $produtoFotoModel->findAll($limit);
 
         $this->select('fotoFK');
         $principal = $this->find($id);
@@ -252,8 +252,8 @@ class ProdutoModel extends Model {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado, t.identificador as tipo, t.id as tipo_id")
                         ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
                         ->join("cidade c", "c.id = produto.cidadeFK")
-            ->join("estado e", "e.id = c.estadoFK")
-            ->join("tipo t", "t.id = pc.tipoFK");
+                        ->join("estado e", "e.id = c.estadoFK")
+                        ->join("tipo t", "t.id = pc.tipoFK");
 
     }
 
@@ -296,7 +296,7 @@ class ProdutoModel extends Model {
         if ($get['cidadeFK']) {
             $this->where('produto.cidadeFK', $get['cidadeFK']);
         }
-        
+
         if ($get['tipoFK']) {
             $this->where('produto.categoriaFK', $get['tipoFK']);
         }
@@ -345,32 +345,32 @@ class ProdutoModel extends Model {
         ob_start();
         ?>
         <div class="item show" data-modal="">
-        <? if ($categorias) { ?>
+            <? if ($categorias) { ?>
                 <div class="events-with-data j-calendar-columns">
-            <? foreach ($categorias as $categoria) { ?>
+                    <? foreach ($categorias as $categoria) { ?>
                         <div class="column">
                             <h3><?= $categoria->titulo ?></h3>
                             <div class="scroll-h">
                                 <div class="wraper">
-                <?
-                if ($categoria->eventos) {
-                    foreach ($categoria->eventos as $evento) {
-                        ?>
+                                    <?
+                                    if ($categoria->eventos) {
+                                        foreach ($categoria->eventos as $evento) {
+                                            ?>
                                             <div onclick="window.location.href = '<?= PATHSITE ?>evento/<?= $evento->identificador ?>/'" class="item" style="background-image: url('<?= PATHSITE ?>uploads/produto/<?= $evento->id ?>/<?= $evento->fotos[0]->arquivo ?>');">
                                                 <h4><?= $evento->titulo ?></h4>
                                                 <div class="box-address">
                                                     <img src="<?= PATHSITE ?>assets/images/icon-map.svg" alt="">
                                                     <span>
-                        <?= $evento->local ?> <br>
-                        <?= $evento->cidade ?>- <?= $evento->estado ?>
+                                                        <?= $evento->local ?> <br>
+                                                        <?= $evento->cidade ?>- <?= $evento->estado ?>
                                                     </span>
                                                 </div>
                                                 <a href="<?= PATHSITE ?>evento/<?= $evento->identificador ?>/">Mais detalhes <img src="<?= PATHSITE ?>assets/images/icon-arrow-right.svg" alt=""></a>
                                             </div>
-                        <?
-                        }
-                    } else {
-                        ?>
+                                            <?
+                                        }
+                                    } else {
+                                        ?>
                                         <div class="wraper">
                                             <div class="empty">
                                                 <img src="<?= PATHSITE ?>assets/images/icon-calendar-not-available.svg" alt="">
@@ -380,26 +380,34 @@ class ProdutoModel extends Model {
                                                 </span>
                                             </div>
                                         </div>   
-                <? } ?>
+                                    <? } ?>
                                 </div>
                             </div>
                         </div>
-                                            <? } ?>
+                    <? } ?>
                 </div>
             </div>
         <? } ?>
-                            <?
-                            $retorno['html'] = ob_get_clean();
-                            echo json_encode($retorno);
-                        }
-                        
-                           public function videos($id) {
+        <?
+        $retorno['html'] = ob_get_clean();
+        echo json_encode($retorno);
+    }
+
+    public function videos($id) {
         $produtoVideoModel = model('App\Models\ProdutoVideoModel', false);
         $produtoVideoModel->where('produtoFK', $id);
         $produtoVideoModel->orderBy('ordem ASC, id DESC');
         $videos = $produtoVideoModel->findAll();
         return $videos;
     }
-                        
-                    }
-                    
+    
+    public function datasOcupacao($id){
+           $produtoCalendarioModel = model('App\Models\ProdutoCalendarioModel', false);
+           $produtoCalendarioModel->select("DATE_FORMAT(date, '%d/%m/%Y') as dataConcat");
+           $produtoCalendarioModel->where('produtoFK', $id);
+           $produtoCalendarioModel->where('date > NOW()');
+         $datas =  $produtoCalendarioModel->findAll();
+         return $datas;
+    }
+    
+}
