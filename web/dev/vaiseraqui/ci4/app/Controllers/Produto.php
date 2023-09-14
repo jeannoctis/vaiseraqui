@@ -508,7 +508,7 @@ class Produto extends BaseController
          }
 
          if (!empty($post['datas'])) {
-            $IDsReceviedDatas = \array_column($post['datas'], "id");
+            $IDsReceviedDatas = \array_column($post['datas'], "id");            
 
             if (!empty($IDsReceviedDatas)) {
                $this->produtoDataModel
@@ -1243,13 +1243,13 @@ class Produto extends BaseController
 
                </div>
 
+                </div>
             </div>
-         </div>
-      </div>
-   <?
-      $retorno['html'] = ob_get_clean();
-      echo json_encode($retorno);
-   }
+        </div>
+        <?
+        $retorno['html'] = ob_get_clean();
+        echo json_encode($retorno);
+    }
 
    public function novoCardapio()
    {
@@ -1386,29 +1386,29 @@ class Produto extends BaseController
                   </div>
                </div>
 
+                </div>
             </div>
-         </div>
-      </div>
-<?
-      $retorno['html'] = ob_get_clean();
-      echo json_encode($retorno);
-   }
-
+        </div>
+        <?
+        $retorno['html'] = ob_get_clean();
+        echo json_encode($retorno);
+    }
+    
    public function eventos()
    {
-      $get = request()->getGet();
-      $this->model->eventos($get);
-   }
-
-
+         $get = request()->getGet();
+        $this->model->eventos($get);
+    }
+    
+       
    public function chamarWhats()
    {
-      $request = \Config\Services::request();
-      $post = $request->getPost();
-      $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
-
-      $id = decode($post['produtoFK']);
-
-      $produtoWhatsModel->contaClique($id);
-   }
+     $request = \Config\Services::request();
+     $post = $request->getPost();    
+     $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
+            
+     $id = decode($post['produtoFK']);
+            
+    $produtoWhatsModel->contaClique($id);
+  }
 }

@@ -12,7 +12,7 @@
       <div class="info">
          <h3><?= $titulo ?></h3>
          <div>
-            <?= character_limiter($texto, 255) ?>
+            <p class="chamada"> <?=$chamada ?> </p>
          </div>
          <a href="<?= PATHSITE ?>blog/<?= $identificador ?>/" class="more">
             Ler artigo

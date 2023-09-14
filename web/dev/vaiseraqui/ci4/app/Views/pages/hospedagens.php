@@ -8,7 +8,7 @@
                         <img src="<?= PATHSITE ?>assets/images/icon-bread-crumbs.svg" alt="">
                         <a href="#">Hospedagem</a>
                     </nav>
-                    <span class="result">48 hospedagens encontrados</span>
+                    <span class="result"><?=count($produtos)?> hospedagens encontrados</span>
                     <form class="form-order">
                         <a href="#" class="btn-primary">
                             <img src="<?= PATHSITE ?>assets/images/icon-button-filter.svg" alt="icon filter">

@@ -1,49 +1,49 @@
  <style>
-   main {
-     overflow-x: hidden;
-   }
- </style>
+    main {
+      overflow-x: hidden;
+    }
+    
+    @media(max-width: 991px){        
+    }
+    
+  </style>
 
- <main>
-   <div class="overlay-full"></div>
-   <div class="presentation">
-     <div action="#" class="presentation-form j-filter-modal-container">
-       <header>
-         <h2>
-           <div class="wraper-icon">
-             <img src="assets/images/icon-search-box.svg" alt="icon search">
-           </div>
-           O que você está procurando?
-         </h2>
-         <button class="open-modal j-open-form-modal">
-           <svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M2 2L15.5 14L29 2" stroke="#404041" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-           </svg>
-           <svg class="active" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
-             <g fill="#404041" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
-               <g transform="scale(10.66667,10.66667)">
-                 <path d="M4.99023,3.99023c-0.40692,0.00011 -0.77321,0.24676 -0.92633,0.62377c-0.15312,0.37701 -0.06255,0.80921 0.22907,1.09303l6.29297,6.29297l-6.29297,6.29297c-0.26124,0.25082 -0.36647,0.62327 -0.27511,0.97371c0.09136,0.35044 0.36503,0.62411 0.71547,0.71547c0.35044,0.09136 0.72289,-0.01388 0.97371,-0.27511l6.29297,-6.29297l6.29297,6.29297c0.25082,0.26124 0.62327,0.36648 0.97371,0.27512c0.35044,-0.09136 0.62411,-0.36503 0.71547,-0.71547c0.09136,-0.35044 -0.01388,-0.72289 -0.27512,-0.97371l-6.29297,-6.29297l6.29297,-6.29297c0.29576,-0.28749 0.38469,-0.72707 0.22393,-1.10691c-0.16075,-0.37985 -0.53821,-0.62204 -0.9505,-0.60988c-0.2598,0.00774 -0.50638,0.11632 -0.6875,0.30273l-6.29297,6.29297l-6.29297,-6.29297c-0.18827,-0.19353 -0.4468,-0.30272 -0.7168,-0.30273z"></path>
-               </g>
-             </g>
-           </svg>
-         </button>
-       </header>
-       <nav class="presentation-form-menu">
-         <a href="#" class="active" data-form="form1">
-           <svg class="isActive" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M4 24V5.47222C4 3.98148 4.9 1 8.5 1C10 1 13 1.89444 13 5.47222C13 9.05 13 19.3148 13 24" stroke="white" stroke-width="1.5" />
-             <path d="M0 24H34.1053C34.7368 24 36 24.0001 36 25.2222C36 26.4444 36 32.5556 36 33.7778C36 35 35.6211 35 34.1053 35H0" stroke="white" stroke-width="1.5" />
-             <path d="M0 29H15" stroke="white" stroke-width="1.5" />
-             <path d="M19 24L10 35" stroke="white" stroke-width="1.5" />
-             <path d="M26 24L18 35" stroke="white" stroke-width="1.5" />
-             <path d="M34 24L25 35" stroke="white" stroke-width="1.5" />
-             <path d="M30 8V24" stroke="white" stroke-width="1.5" />
-             <path d="M13 13.7426C15.9822 11.6049 20.6364 8.26866 20.6364 8.26866C20.8485 8.06592 21.4 7.78209 21.9091 8.26866C22.4182 8.75523 30.1818 14.959 34 18" stroke="white" stroke-width="1.5" />
-             <mask id="path-9-inside-1_1084_2733" fill="white">
-               <rect x="18" y="17" width="6" height="7" rx="1" />
-             </mask>
-             <rect x="18" y="17" width="6" height="7" rx="1" stroke="white" stroke-width="3" mask="url(#path-9-inside-1_1084_2733)" />
-           </svg>
+  <main>
+      <div class="overlay-full"></div>
+    <div style="background-image:url('<?=PATHSITE?>uploads/banner/<?=$banner1->arquivo?>')" class="presentation">
+      <div action="#" class="presentation-form j-filter-modal-container">
+        <header>
+          <h2>
+            <div class="wraper-icon">
+              <img src="assets/images/icon-search-box.svg" alt="icon search">
+            </div>
+            O que você está procurando?
+          </h2>
+          <button class="open-modal j-open-form-modal">
+                <svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 2L15.5 14L29 2" stroke="#404041" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>              
+            <svg class="active" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
+              <g fill="#404041" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><g transform="scale(10.66667,10.66667)"><path d="M4.99023,3.99023c-0.40692,0.00011 -0.77321,0.24676 -0.92633,0.62377c-0.15312,0.37701 -0.06255,0.80921 0.22907,1.09303l6.29297,6.29297l-6.29297,6.29297c-0.26124,0.25082 -0.36647,0.62327 -0.27511,0.97371c0.09136,0.35044 0.36503,0.62411 0.71547,0.71547c0.35044,0.09136 0.72289,-0.01388 0.97371,-0.27511l6.29297,-6.29297l6.29297,6.29297c0.25082,0.26124 0.62327,0.36648 0.97371,0.27512c0.35044,-0.09136 0.62411,-0.36503 0.71547,-0.71547c0.09136,-0.35044 -0.01388,-0.72289 -0.27512,-0.97371l-6.29297,-6.29297l6.29297,-6.29297c0.29576,-0.28749 0.38469,-0.72707 0.22393,-1.10691c-0.16075,-0.37985 -0.53821,-0.62204 -0.9505,-0.60988c-0.2598,0.00774 -0.50638,0.11632 -0.6875,0.30273l-6.29297,6.29297l-6.29297,-6.29297c-0.18827,-0.19353 -0.4468,-0.30272 -0.7168,-0.30273z"></path></g></g>
+            </svg>
+          </button>
+        </header>
+        <nav class="presentation-form-menu">
+          <a href="#" class="active" data-form="form1">
+            <svg class="isActive" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 24V5.47222C4 3.98148 4.9 1 8.5 1C10 1 13 1.89444 13 5.47222C13 9.05 13 19.3148 13 24" stroke="white" stroke-width="1.5"/>
+              <path d="M0 24H34.1053C34.7368 24 36 24.0001 36 25.2222C36 26.4444 36 32.5556 36 33.7778C36 35 35.6211 35 34.1053 35H0" stroke="white" stroke-width="1.5"/>
+              <path d="M0 29H15" stroke="white" stroke-width="1.5"/>
+              <path d="M19 24L10 35" stroke="white" stroke-width="1.5"/>
+              <path d="M26 24L18 35" stroke="white" stroke-width="1.5"/>
+              <path d="M34 24L25 35" stroke="white" stroke-width="1.5"/>
+              <path d="M30 8V24" stroke="white" stroke-width="1.5"/>
+              <path d="M13 13.7426C15.9822 11.6049 20.6364 8.26866 20.6364 8.26866C20.8485 8.06592 21.4 7.78209 21.9091 8.26866C22.4182 8.75523 30.1818 14.959 34 18" stroke="white" stroke-width="1.5"/>
+              <mask id="path-9-inside-1_1084_2733" fill="white">
+              <rect x="18" y="17" width="6" height="7" rx="1"/>
+              </mask>
+              <rect x="18" y="17" width="6" height="7" rx="1" stroke="white" stroke-width="3" mask="url(#path-9-inside-1_1084_2733)"/>
+            </svg>
 
            <svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
              <path d="M4 24V5.47222C4 3.98148 4.9 1 8.5 1C10 1 13 1.89444 13 5.47222C13 9.05 13 19.3148 13 24" stroke="#808080" stroke-width="1.5" />
@@ -168,661 +168,37 @@
              <path d="M31.0136 35.6679L19.9199 24.5742" stroke="white" stroke-width="2" stroke-linecap="round" />
            </svg>
 
-           <svg width="57" height="55" viewBox="0 0 57 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M14.6832 42.1065C13.8829 42.4011 13.1047 41.623 13.3993 40.8227L21.3765 19.1515C21.6286 18.4665 22.5059 18.2737 23.0221 18.7899L36.716 32.4838C37.2321 32.9999 37.0393 33.8772 36.3543 34.1294L14.6832 42.1065Z" stroke="#808080" stroke-width="2" />
-             <path d="M29.1642 15.3293C31.3213 12.4018 34.1564 5.43747 28.2397 1" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-             <path d="M35.1738 18.5649C37.485 18.719 42.3847 17.6404 43.4941 12.0936C44.8808 5.16005 45.8053 1.46216 52.2766 1.46216" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-             <path d="M40.2583 25.9608C42.7236 23.8037 49.1332 21.246 55.0499 28.272" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-             <circle cx="46.7293" cy="32.8944" r="1.84895" fill="#808080" />
-             <circle cx="22.6932" cy="8.85798" r="1.84895" fill="#808080" />
-             <path d="M31.0136 35.6679L19.9199 24.5742" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-           </svg>
-           Eventos
-         </a>
-       </nav>
-       <div class="presentation-form-content">
-         <form class="form1 visible">
-           <div class="box-select mb-10 j-box-select">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-map-2.svg" alt="icon map">
-                 Cidade
-               </div>
-               <button class="j-btn-select">
-                 <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-               </button>
-             </label>
-             <div class="select">
-               <input type="text" placeholder="Busque por cidade">
-               <div class="select-list">
-                 <? if ($cidades) { ?>
-                   <ul class="dropdown-select">
-                     <? foreach ($cidades as $cidade) { ?>
-                       <li><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
-                     <? } ?>
-                   </ul>
-                 <? } ?>
-               </div>
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="box-select j-box-select">
-               <label for="hospedagem">
-                 <div>
-                   <img src="assets/images/icon-hospedagem.svg" alt="icon map">
-                   Tipo da Hospedagem
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Selecione">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>Hospedagem 1</li>
-                     <li>Hospedagem 2</li>
-                     <li>Hospedagem 3</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-             <div class="input-group">
-               <label for="keyword">
-                 <img src="assets/images/icon-keyword.svg" alt="">
-                 Palavra-chave
-               </label>
-               <input type="text" placeholder="Digite aqui">
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="input-group">
-               <label for="keyword">
-                 <img src="assets/images/icon-checkin.svg" alt="">
-                 Check-in
-               </label>
-               <input type="text" placeholder="Data de Entrada" class="dateInput">
-             </div>
-             <div class="input-group">
-               <label for="keyword">
-                 <img src="assets/images/icon-checkout.svg" alt="">
-                 Check-out
-               </label>
-               <input type="text" placeholder="Data de Saída" class="dateInput">
-             </div>
-           </div>
-           <a href="#" class="more-filters">
-             <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8107 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8107 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#C82328" />
-             </svg>
-             <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8106 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8106 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#932327" />
-             </svg>
-             Mais filtros
-           </a>
-           <button class="btn-primary" type="submit">Buscar</button>
-         </form>
-         <form class="form2">
-           <div class="box-select mb-10 j-box-select">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-map-2.svg" alt="icon map">
-                 Cidade
-               </div>
-               <button class="j-btn-select">
-                 <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-               </button>
-             </label>
-             <div class="select">
-               <input type="text" placeholder="Busque por cidade">
-               <div class="select-list">
-                 <? if ($cidades) { ?>
-                   <ul class="dropdown-select">
-                     <? foreach ($cidades as $cidade) { ?>
-                       <li><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
-                     <? } ?>
-                   </ul>
-                 <? } ?>
-               </div>
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="box-select j-box-select">
-               <label for="cities">
-                 <div>
-                   <img src="assets/images/icon-type-space.svg" alt="icon map">
-                   Tipo do Espaço
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Selecione">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>Espaço 1</li>
-                     <li>Espaço 2</li>
-                     <li>Espaço 3</li>
-                     <li>Espaço 4</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-             <div class="input-group">
-               <label for="keyword">
-                 <img src="assets/images/icon-keyword.svg" alt="">
-                 Palavra-chave
-               </label>
-               <input type="text" placeholder="Digite aqui">
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="input-group">
-               <label for="keyword">
-                 <img src="assets/images/icon-checkin.svg" alt="">
-                 Check-in
-               </label>
-               <input type="text" placeholder="Data de Entrada" class="dateInput">
-             </div>
-             <div class="input-group">
-               <label for="keyword">
-                 <img src="assets/images/icon-checkout.svg" alt="">
-                 Check-out
-               </label>
-               <input type="text" placeholder="Data de Saída" class="dateInput">
-             </div>
-           </div>
-           <a href="#" class="more-filters">
-             <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8107 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8107 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#C82328" />
-             </svg>
-             <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8106 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8106 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#932327" />
-             </svg>
-             Mais filtros
-           </a>
-           <button class="btn-primary" type="submit">Buscar</button>
-         </form>
-         <form class="form3">
-           <div class="box-select mb-10 j-box-select">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-map-2.svg" alt="icon map">
-                 Cidade
-               </div>
-               <button class="j-btn-select">
-                 <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-               </button>
-             </label>
-             <div class="select">
-               <input type="text" placeholder="Busque por cidade">
-               <div class="select-list">
-                 <? if ($cidades) { ?>
-                   <ul class="dropdown-select">
-                     <? foreach ($cidades as $cidade) { ?>
-                       <li><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
-                     <? } ?>
-                   </ul>
-                 <? } ?>
-               </div>
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="box-select j-box-select">
-               <label for="hospedagem">
-                 <div>
-                   <img src="assets/images/icon-loja-temp.svg" alt="icon map">
-                   Tipo da Loja Temporária
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Selecione">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>Hospedagem 1</li>
-                     <li>Hospedagem 2</li>
-                     <li>Hospedagem 3</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-             <div class="box-select j-box-select">
-               <label for="cities">
-                 <div>
-                   <img src="assets/images/icon-area-util.svg" alt="icon map">
-                   Área Útil
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Selecione">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>200 m²</li>
-                     <li>250 m²</li>
-                     <li>340 m²</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-
-           </div>
-           <div class="box-select mb-10">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-keyword.svg" alt="icon keyword">
-                 Palavra-chave
-               </div>
-             </label>
-             <input type="text" placeholder="palavra-chave">
-           </div>
-           <a href="#" class="more-filters">
-             <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8107 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8107 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#C82328" />
-             </svg>
-             <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8106 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8106 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#932327" />
-             </svg>
-             Mais filtros
-           </a>
-           <button class="btn-primary" type="submit">Buscar</button>
-         </form>
-         <form class="form4">
-           <div class="box-select mb-10 j-box-select">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-map-2.svg" alt="icon map">
-                 Cidade
-               </div>
-               <button class="j-btn-select">
-                 <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-               </button>
-             </label>
-             <div class="select">
-               <input type="text" placeholder="Busque por cidade">
-               <div class="select-list">
-                 <? if ($cidades) { ?>
-                   <ul class="dropdown-select">
-                     <? foreach ($cidades as $cidade) { ?>
-                       <li><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
-                     <? } ?>
-                   </ul>
-                 <? } ?>
-               </div>
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="box-select j-box-select">
-               <label for="hospedagem">
-                 <div>
-                   <img src="assets/images/icon-prestador-servico.svg" alt="icon map">
-                   Tipo do Prestador de Serviço
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Selecione">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>Hospedagem 1</li>
-                     <li>Hospedagem 2</li>
-                     <li>Hospedagem 3</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-             <div class="box-select">
-               <label for="cities">
-                 <div>
-                   <img src="assets/images/icon-keyword.svg" alt="icon keyword">
-                   Palavra-chave
-                 </div>
-               </label>
-               <input type="text" placeholder="palavra-chave">
-             </div>
-           </div>
-           <a href="#" class="more-filters">
-             <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8107 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8107 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#C82328" />
-             </svg>
-             <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8106 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8106 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#932327" />
-             </svg>
-             Mais filtros
-           </a>
-           <button class="btn-primary" type="submit">Buscar</button>
-         </form>
-         <form class="form5">
-           <div class="box-select mb-10 j-box-select">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-map-2.svg" alt="icon map">
-                 Cidade
-               </div>
-               <button class="j-btn-select">
-                 <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-               </button>
-             </label>
-             <div class="select">
-               <input type="text" placeholder="Busque por cidade">
-               <div class="select-list">
-                 <? if ($cidades) { ?>
-                   <ul class="dropdown-select">
-                     <? foreach ($cidades as $cidade) { ?>
-                       <li><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
-                     <? } ?>
-                   </ul>
-                 <? } ?>
-               </div>
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="box-select j-box-select">
-               <label for="hospedagem">
-                 <div>
-                   <img src="assets/images/icon-hospedagem-2.svg" alt="icon map">
-                   Tipo da Hospedagem
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Selecione">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>Hospedagem 1</li>
-                     <li>Hospedagem 2</li>
-                     <li>Hospedagem 3</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-             <div class="box-select">
-               <label for="cities">
-                 <div>
-                   <img src="assets/images/icon-keyword.svg" alt="icon keyword">
-                   Palavra-chave
-                 </div>
-               </label>
-               <input type="text" placeholder="palavra-chave">
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="input-group">
-               <label for="keyword">
-                 <img src="assets/images/icon-checkin.svg" alt="">
-                 Check-in
-               </label>
-               <input type="text" placeholder="Data de Entrada" class="dateInput">
-             </div>
-             <div class="input-group">
-               <label for="keyword">
-                 <img src="assets/images/icon-checkout.svg" alt="">
-                 Check-out
-               </label>
-               <input type="text" placeholder="Data de Saída" class="dateInput">
-             </div>
-           </div>
-           <a href="#" class="more-filters">
-             <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8107 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8107 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#C82328" />
-             </svg>
-             <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8106 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8106 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#932327" />
-             </svg>
-             Mais filtros
-           </a>
-           <button class="btn-primary" type="submit">Buscar</button>
-         </form>
-         <form class="form6">
-           <div class="box-select mb-10 j-box-select">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-map-2.svg" alt="icon map">
-                 Cidade
-               </div>
-               <button class="j-btn-select">
-                 <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-               </button>
-             </label>
-             <div class="select">
-               <input type="text" placeholder="Busque por cidade">
-               <div class="select-list">
-                 <? if ($cidades) { ?>
-                   <ul class="dropdown-select">
-                     <? foreach ($cidades as $cidade) { ?>
-                       <li><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
-                     <? } ?>
-                   </ul>
-                 <? } ?>
-               </div>
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="box-select j-box-select">
-               <label for="cities">
-                 <div>
-                   <img src="assets/images/icon-venda-aluguel.svg" alt="icon map">
-                   Venda/Aluguel
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Selecione">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>Aluguel 1</li>
-                     <li>Aluguel 2</li>
-                     <li>Venda 1</li>
-                     <li>Venda 1</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-             <div class="box-select">
-               <label for="cities">
-                 <div>
-                   <img src="assets/images/icon-keyword.svg" alt="icon keyword">
-                   Palavra-chave
-                 </div>
-               </label>
-               <input type="text" placeholder="palavra-chave">
-             </div>
-           </div>
-           <a href="#" class="more-filters">
-             <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8107 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8107 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#C82328" />
-             </svg>
-             <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8106 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8106 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#932327" />
-             </svg>
-             Mais filtros
-           </a>
-           <button class="btn-primary" type="submit">Buscar</button>
-         </form>
-         <form class="form7">
-           <div class="box-select mb-10 j-box-select">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-map-2.svg" alt="icon map">
-                 Cidade
-               </div>
-               <button class="j-btn-select">
-                 <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-               </button>
-             </label>
-             <div class="select">
-               <input type="text" placeholder="Busque por cidade">
-               <div class="select-list">
-                 <? if ($cidades) { ?>
-                   <ul class="dropdown-select">
-                     <? foreach ($cidades as $cidade) { ?>
-                       <li><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
-                     <? } ?>
-                   </ul>
-                 <? } ?>
-               </div>
-             </div>
-           </div>
-           <div class="input-group-wraper mb-10">
-             <div class="box-select j-box-select">
-               <label for="cities">
-                 <div>
-                   <img src="assets/images/icon-evento.svg" alt="icon map">
-                   Tipo do Evento
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Busque por cidade">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>Evento 1</li>
-                     <li>Evento 2</li>
-                     <li>Evento 3</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-             <div class="box-select j-box-select">
-               <label for="cities">
-                 <div>
-                   <img src="assets/images/icon-data.svg" alt="icon map">
-                   Data
-                 </div>
-                 <button class="j-btn-select">
-                   <img src="assets/images/icon-selector.svg" alt="icon dropdown">
-                 </button>
-               </label>
-               <div class="select">
-                 <input type="text" placeholder="Selecione">
-                 <div class="select-list">
-                   <ul class="dropdown-select">
-                     <li>04/08/2023</li>
-                     <li>05/08/2023</li>
-                     <li>06/08/2023</li>
-                     <li>07/08/2023</li>
-                     <li>08/08/2023</li>
-                     <li>09/08/2023</li>
-                   </ul>
-                 </div>
-               </div>
-             </div>
-           </div>
-           <div class="box-select mb-10">
-             <label for="cities">
-               <div>
-                 <img src="assets/images/icon-keyword.svg" alt="icon keyword">
-                 Palavra-chave
-               </div>
-             </label>
-             <input type="text" placeholder="palavra-chave">
-           </div>
-           <a href="#" class="more-filters">
-             <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8107 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8107 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#C82328" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#C82328" />
-             </svg>
-             <svg width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M17.0625 12.1249C17.0625 11.8142 16.8106 11.5624 16.5 11.5624H9.75C9.43935 11.5624 9.1875 11.8142 9.1875 12.1249C9.1875 12.4355 9.43935 12.6874 9.75 12.6874H16.5C16.8106 12.6874 17.0625 12.4355 17.0625 12.1249Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M0.9375 3.87488C0.9375 3.56422 1.18934 3.31238 1.5 3.31238H8.25C8.56065 3.31238 8.8125 3.56422 8.8125 3.87488C8.8125 4.18554 8.56065 4.43738 8.25 4.43738H1.5C1.18934 4.43738 0.9375 4.18554 0.9375 3.87488Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M7.5 10.3623C8.43195 10.3623 9.1875 11.1179 9.1875 12.0498C9.1875 12.9818 8.43195 13.7373 7.5 13.7373C6.56802 13.7373 5.8125 12.9818 5.8125 12.0498C5.8125 11.1179 6.56802 10.3623 7.5 10.3623ZM10.3125 12.0498C10.3125 10.4965 9.05332 9.2373 7.5 9.2373C5.9467 9.2373 4.6875 10.4965 4.6875 12.0498C4.6875 13.6031 5.9467 14.8623 7.5 14.8623C9.05332 14.8623 10.3125 13.6031 10.3125 12.0498Z" fill="#932327" />
-               <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 2.1123C9.56805 2.1123 8.8125 2.86782 8.8125 3.7998C8.8125 4.73178 9.56805 5.4873 10.5 5.4873C11.4319 5.4873 12.1875 4.73178 12.1875 3.7998C12.1875 2.86782 11.4319 2.1123 10.5 2.1123ZM7.6875 3.7998C7.6875 2.2465 8.94667 0.987305 10.5 0.987305C12.0533 0.987305 13.3125 2.2465 13.3125 3.7998C13.3125 5.35311 12.0533 6.6123 10.5 6.6123C8.94667 6.6123 7.6875 5.35311 7.6875 3.7998Z" fill="#932327" />
-             </svg>
-             Mais filtros
-           </a>
-           <button class="btn-primary" type="submit">Buscar</button>
-         </form>
-       </div>
-     </div>
-     <div class="cover only-mobile">
-       <img src="assets/images/home-cover-mobile.png" alt="">
-     </div>
-   </div>
-   <section class="s-spaces my-spaces" id="espacos">
-     <div class="container-medium">
-       <header data-aos="fade-up">
-         <h2>Espaços</h2>
-         <strong>Os melhores espaços da região estão aqui!</strong>
+            <svg width="57" height="55" viewBox="0 0 57 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.6832 42.1065C13.8829 42.4011 13.1047 41.623 13.3993 40.8227L21.3765 19.1515C21.6286 18.4665 22.5059 18.2737 23.0221 18.7899L36.716 32.4838C37.2321 32.9999 37.0393 33.8772 36.3543 34.1294L14.6832 42.1065Z" stroke="#808080" stroke-width="2"/>
+              <path d="M29.1642 15.3293C31.3213 12.4018 34.1564 5.43747 28.2397 1" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+              <path d="M35.1738 18.5649C37.485 18.719 42.3847 17.6404 43.4941 12.0936C44.8808 5.16005 45.8053 1.46216 52.2766 1.46216" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+              <path d="M40.2583 25.9608C42.7236 23.8037 49.1332 21.246 55.0499 28.272" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="46.7293" cy="32.8944" r="1.84895" fill="#808080"/>
+              <circle cx="22.6932" cy="8.85798" r="1.84895" fill="#808080"/>
+              <path d="M31.0136 35.6679L19.9199 24.5742" stroke="#808080" stroke-width="2" stroke-linecap="round"/>
+            </svg>              
+            Eventos
+          </a>
+        </nav>
+        <div class="presentation-form-content">
+           <? echo View('templates/form1') ?>
+             <? echo View('templates/form2') ?>
+            <? echo View('templates/form3') ?>
+            <? echo View('templates/form4') ?>
+            <? echo View('templates/form5') ?>
+            <? echo View('templates/form6') ?>  
+         <? echo View('templates/form7') ?>
+        </div>        
+      </div>
+      <div class="cover only-mobile">
+        <img src="<?=PATHSITE?>uploads/banner/<?=$banner1->arquivo2?>" alt="">
+      </div>
+    </div>
+    <section class="s-spaces my-spaces" id="espacos">
+      <div class="container-medium">
+        <header data-aos="fade-up">
+          <h2>Espaços</h2>
+          <strong>Os melhores espaços da região estão aqui!</strong>
 
          <div class="wraper-scroll">
            <nav class="menu-abas">
@@ -1716,150 +1092,150 @@
          <div class="swiper box-days menu-abas swiper-agenda">
            <div class="swiper-wrapper">
              <div class="swiper-slide">
-               <a onclick="eventosData('<?= date("Y-m-d") ?>')" href="#" class="active" data-btn="<?= $dia->data ?>">
-                 <span class="name"><?= semana(date("Y-m-d")) ?></span>
-                 <span class="day"><?= date("d") ?></span>
-                 <span class="month"><?= mes(date("m")) ?></span>
-               </a>
-             </div>
-             <? foreach ($diasMes as $ind => $dia) {
-                $diaAtual =  explode("-", $dia->data);
-              ?>
-               <div class="swiper-slide">
-                 <a onclick="eventosData('<?= $dia->data ?>')" href="#" class="" data-btn="<?= $dia->data ?>">
-                   <span class="name"><?= semana($dia->data) ?></span>
-                   <span class="day"><?= $diaAtual[2] ?></span>
-                   <span class="month"><?= mes($diaAtual[1]) ?></span>
-                 </a>
-               </div>
-             <? } ?>
-           </div>
-           <div class="swiper-button-prev"></div>
-           <div class="swiper-button-next"></div>
-         </div>
-         <button class="prev">
-           <svg class="active" width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M12 2L2 13.5L12 25" stroke="#932327" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-           </svg>
-           <svg width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M12 2L2 13.5L12 25" stroke="#BBBBBB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-           </svg>
-         </button>
-         <button class="next active">
-           <svg class="active" width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M2 25L12 13.5L2 2" stroke="#932327" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-           </svg>
-           <svg width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M2 25L12 13.5L2 2" stroke="#BBBBBB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-           </svg>
-         </button>
-       </div>
-       <a style="display: none;" href="#" class="btn-primary d-none" data-aos="fade-up">
-         <img src="assets/images/icon-calendar.svg" alt="Icon calendar">
-         visualizar calendário
-       </a>
-       <div id="categoria-eventos" class="menu-wraper" data-aos="fade-up">
-       </div>
-     </div>
-   </section>
-   <? if ($blogs) { ?>
-     <section class="s-blog">
-       <div class="container-medium">
-         <header data-aos="fade-up">
-           <h2>Blog</h2>
-           <p>Melhore a organização da sua festa com nossas dicas!</p>
-         </header>
-       </div>
-       <div class="list-posts list-of-swiper" data-aos="fade-up">
-         <div class="swiper blogSwiper">
-           <div class="swiper-wrapper">
-             <? foreach ($blogs as $blog) { ?>
-               <div class="swiper-slide">
-                 <article onclick="location.href=<?= PATHSITE ?>blog/<?= $blog->identificador ?>/" class="blog-post-medium">
-                   <div class="cover">
-                     <img src="<?= PATHSITE ?>uploads/blog/<?= $blog->arquivo ?>" alt="">
-                     <a href="#" class="category"><?= $blog->categoria ?></a>
-                   </div>
-                   <div class="info">
-                     <h3><?= $blog->titulo ?></h3>
-                     <p><?= $blog->chamada ?></p>
-                     <a href="<?= PATHSITE ?>blog/<?= $blog->identificador ?>/" class="more">
-                       Ler artigo
-                       <svg class="active" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M1 10L5 5.5L1 0.999999" stroke="#C82328" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                       </svg>
-                       <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                         <path d="M1 10L5 5.5L1 0.999999" stroke="#932327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                       </svg>
-                     </a>
-                   </div>
-                 </article>
-               </div>
-             <? } ?>
-           </div>
-           <div class="swiper-pagination"></div>
-         </div>
-         <div class="navigation-swiper-blog only-mobile">
-           <button class="prev">
-             <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M7 1L1 6.5L7 12" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-             </svg>
-             <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M7 1L1 6.5L7 12" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-             </svg>
-           </button>
-           <button class="next active">
-             <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M1 12L7 6.5L1 1" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-             </svg>
-             <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-               <path d="M1 12L7 6.5L1 1" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-             </svg>
-           </button>
-         </div>
-       </div>
-       <a href="<?= PATHSITE ?>blog/" class="btn-primary" data-aos="fade-up">Ver todos os artigos</a>
-     </section>
-   <? } ?>
-   <section class="s-contact">
-     <div class="container-medium">
-       <div class="cover" data-aos="fade-right">
-         <img src="assets/images/bg-contact.png" alt="Barraca de acampamento">
-       </div>
-       <form action="#" class="form" data-aos="fade-left">
-         <h2>Fale conosco, nós queremos <br> te escutar!</h2>
-         <div class="input-group">
-           <label for="name">Seu nome</label>
-           <input type="text" name="name" id="name" placeholder="ex: João" class="username">
-         </div>
-         <div class="wraper-input-group-2">
-           <div class="input-group">
-             <label for="email">E-mail</label>
-             <input type="email" name="email" id="email" placeholder="ex: joao@gmail.com" class="email">
-           </div>
-           <div class="input-group">
-             <label for="tel">Telefone</label>
-             <input type="text" name="tel" id="tel" placeholder="ex: (00) 9 9999-9999" maxlength="16" class="tel">
-           </div>
-         </div>
-         <div class="input-group-prefer">
-           <label for="contact">Preferência de Contato</label>
-           <div class="wraper">
-             <label><input type="radio" name="prefer-contact" value="whatsapp"> Whatsapp</label>
-             <label><input type="radio" name="prefer-contact" value="call"> Ligação</label>
-             <label><input type="radio" name="prefer-contact" value="email"> E-mail</label>
-           </div>
-         </div>
-         <div class="input-group">
-           <label for="message">Mensagem</label>
-           <textarea name="message" id="message" placeholder="Escreva aqui sua mensagem"></textarea>
-         </div>
-         <button type="submit">Enviar</button>
-       </form>
-     </div>
-   </section>
- </main>
- <a href="#" class="btn-whatsapp-float">
-   <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
-   Fale conosco
- </a>
+                <a onclick="eventosData('<?=date("Y-m-d")?>')" href="#" class="active" data-btn="<?=$dia->data?>">
+                  <span class="name"><?=semana(date("Y-m-d"))?></span>
+                  <span class="day"><?= date("d") ?></span>
+                  <span class="month"><?=mes(date("m"))?></span>
+                </a>
+              </div>
+               <? foreach($diasMes as $ind => $dia) {
+                  $diaAtual =  explode("-",$dia->data);
+                    ?> 
+              <div class="swiper-slide">
+                <a onclick="eventosData('<?=$dia->data?>')" href="#" class="" data-btn="<?=$dia->data?>">
+                  <span class="name"><?=semana($dia->data)?></span>
+                  <span class="day"><?=$diaAtual[2]?></span>
+                  <span class="month"><?=mes($diaAtual[1])?></span>
+                </a>
+              </div>
+                <? } ?>  
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>                  
+          </div>
+          <button class="prev">
+            <svg class="active" width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 13.5L12 25" stroke="#932327" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>              
+            <svg width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 13.5L12 25" stroke="#BBBBBB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>              
+          </button>
+          <button class="next active">
+            <svg class="active" width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 25L12 13.5L2 2" stroke="#932327" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>  
+            <svg width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 25L12 13.5L2 2" stroke="#BBBBBB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                          
+          </button>
+        </div>
+        <a style="display: none;" href="#" class="btn-primary d-none" data-aos="fade-up">
+          <img src="assets/images/icon-calendar.svg" alt="Icon calendar">
+          visualizar calendário
+        </a>
+          <div id="categoria-eventos" class="menu-wraper" data-aos="fade-up">          
+        </div>
+      </div>
+    </section>
+      <? if($blogs) {?>
+    <section class="s-blog ">
+      <div class="container-medium">
+        <header data-aos="fade-up">
+          <h2>Blog</h2>
+          <p>Melhore a organização da sua festa com nossas dicas!</p>          
+        </header>
+      </div>
+      <div class="list-posts list-of-swiper" data-aos="fade-up">            
+        <div class="swiper blogSwiper">
+          <div class="swiper-wrapper">
+              <? foreach($blogs as $blog) {?>
+            <div class="swiper-slide">
+              <article onclick="location.href=<?=PATHSITE?>blog/<?=$blog->identificador?>/" class="blog-post-medium">
+                <div class="cover">
+                  <img src="<?=PATHSITE?>uploads/blog/<?=$blog->arquivo?>" alt="">
+                  <a href="#" class="category"><?=$blog->categoria?></a>
+                </div>
+                <div class="info">
+                  <h3><?=$blog->titulo?></h3>
+                  <p class="chamada"><?=$blog->chamada?></p>
+                  <a href="<?=PATHSITE?>blog/<?=$blog->identificador?>/" class="more">
+                    Ler artigo 
+                    <svg class="active" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 10L5 5.5L1 0.999999" stroke="#C82328" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>                  
+                    <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 10L5 5.5L1 0.999999" stroke="#932327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>                                    
+                  </a>
+                </div>
+              </article>
+            </div>        
+              <? } ?>      
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <div class="navigation-swiper-blog only-mobile">
+          <button class="prev">
+            <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 1L1 6.5L7 12" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>              
+            <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7 1L1 6.5L7 12" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>              
+          </button>
+          <button class="next active">
+            <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 12L7 6.5L1 1" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>              
+            <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 12L7 6.5L1 1" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>              
+          </button>
+        </div>
+      </div>
+      <a href="<?=PATHSITE?>blog/" class="btn-primary" data-aos="fade-up">Ver todos os artigos</a>
+    </section>
+      <? } ?>
+    <section class="s-contact">
+      <div class="container-medium">
+        <div class="cover" data-aos="fade-right">
+          <img src="assets/images/bg-contact.png" alt="Barraca de acampamento">
+        </div>
+        <form action="#" class="form" data-aos="fade-left">
+          <h2>Fale conosco, nós queremos <br> te escutar!</h2>
+          <div class="input-group">
+            <label for="name">Seu nome</label>
+            <input type="text" name="name" id="name" placeholder="ex: João" class="username">
+          </div>
+          <div class="wraper-input-group-2">
+            <div class="input-group">
+              <label for="email">E-mail</label>
+              <input type="email" name="email" id="email" placeholder="ex: joao@gmail.com" class="email">
+            </div>
+            <div class="input-group">
+              <label for="tel">Telefone</label>
+              <input type="text" name="tel" id="tel" placeholder="ex: (00) 9 9999-9999" maxlength="16" class="tel">
+            </div>
+          </div>
+          <div class="input-group-prefer">
+            <label for="contact">Preferência de Contato</label>
+            <div class="wraper">
+              <label><input type="radio" name="prefer-contact" value="whatsapp"> Whatsapp</label>
+              <label><input type="radio" name="prefer-contact" value="call"> Ligação</label>
+              <label><input type="radio" name="prefer-contact" value="email"> E-mail</label>                            
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="message">Mensagem</label>
+            <textarea name="message" id="message" placeholder="Escreva aqui sua mensagem"></textarea>
+          </div>
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
+    </section>    
+  </main>    
+  <a href="#" class="btn-whatsapp-float">
+    <img src="<?=PATHSITE?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
+    Fale conosco
+  </a> 

@@ -38,6 +38,6 @@ class ArtigoModel extends Model
          return $this->orderBy("id ASC");
       } else if ($get['ordem'] == "recentes") {
          return $this->orderBy("id DESC");
-      }
+}
    }
 }

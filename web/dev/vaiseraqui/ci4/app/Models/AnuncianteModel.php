@@ -937,7 +937,7 @@ class AnuncianteModel extends Model
 
                     $post['id'] = $data['anuncio']->id;
                     $data["salvou"] = $produtoModel->save($post);
-
+                   
                     if ($data['anuncio']->tipoFK == 5) {
 
                         $lastId = $data['anuncio']->id;
@@ -951,7 +951,7 @@ class AnuncianteModel extends Model
                                     ->where("produtoFK", $lastId)
                                     ->whereNotIn("id", $IDsReceviedDatas)
                                     ->delete();
-                            }
+                        }
 
                             foreach ($post['datas'] as $item) {
                                 if (!empty($item['id'])) {
@@ -968,12 +968,12 @@ class AnuncianteModel extends Model
                                         'horarioInicio' => $item['horarioInicio'],
                                         'horarioTermino' => $item['horarioTermino']
                                     ];
-                                }
+                    }
                             }
 
                             if (!empty($updateDatas)) {
                                 $data['salvou'] = $this->produtoDataModel->updateBatch($updateDatas, "id");
-                            }
+                }
                             if (!empty($insertDatas)) {
                                 $data['salvou'] = $this->produtoDataModel->insertBatch($insertDatas);
                             }
@@ -1031,7 +1031,7 @@ class AnuncianteModel extends Model
                 $data['instrucoes'] = $instrucaoModel->find(6);
 
 
-                break;
+            break;
             case "observacoes":
                 $data['nomePagina'] = "Observações";
                 $data['iconePagina'] = "icon-observation.svg";
