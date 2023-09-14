@@ -2290,10 +2290,43 @@ select {
   margin-top: 0rem;
 }
 .s-text-and-slider.page-event-internal .cover {
+  position: relative;
   border-radius: 30px;
   overflow: hidden;
-  z-index: -1;
+  z-index: 0;
   max-height: 600px;
+}
+.s-text-and-slider.page-event-internal .cover .top {
+  display: flex;
+  align-items: center;
+  gap: 0.62rem;
+  position: absolute;
+  left: 1.88rem;
+  top: 1.88rem;
+  z-index: 3;
+}
+.s-text-and-slider.page-event-internal .cover .top a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.312rem;
+  height: 3.312rem;
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  transition: 200ms;
+}
+
+.s-text-and-slider.page-event-internal .cover .top a > svg.active {
+  display: none;
+}
+.s-text-and-slider.page-event-internal .cover .top a:is(:hover, .active) {
+  background-color: #932327;
+}
+.s-text-and-slider.page-event-internal .cover .top a:is(:hover, .active) svg {
+  display: none;
+}
+.s-text-and-slider.page-event-internal .cover .top a:is(:hover, .active) svg.active {
+  display: block;
 }
 @media screen and (max-width: 769px) {
   .s-text-and-slider.page-event-internal {
