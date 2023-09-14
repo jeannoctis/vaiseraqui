@@ -22,22 +22,18 @@
                               <thead>
                                  <tr>
                                     <th>Categoria</th>
-                                    <th>Descrição</th>
+                                    <th></th>
                                  </tr>
                               </thead>
                               <tbody>
                                  <? foreach ($lista as $item) { ?>
                                     <tr class="ui-state-default sort" rel="<?= $item->id ?>">
                                        <td>
-                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/categoriaserv/">
-                                             Destaques / Em Alta
+                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/servicocategoria/<?= encode($item->id) ?>">
+                                             <?= $item->titulo ?>
                                           </a>
                                        </td>
-                                       <td>
-                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/categoriaserv/">
-                                             Descrição...
-                                          </a>
-                                       </td>
+                                       <td></td>                                  
                                     </tr>
                                  <? } ?>
                               </tbody>

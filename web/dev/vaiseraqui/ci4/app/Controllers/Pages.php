@@ -444,9 +444,13 @@ class Pages extends Controller
             $hosp->fotos = $produtoModel->fotos($hosp->id, 5, true);
         }
 
-        $data['anuncioBannerH'] = $anuncioModel->find(11);
+        $data['anuncioBannerH'] = $anuncioModel->find(11);        
         
-
+        $categoriasComAnuncio = $produtoCategoriaModel->resetQuery()
+            ->select("produto_categoria.id, produto_categoria.titulo, produto_categoria.arquivo, a.produtoFK1")
+            ->join("anuncio a", "a.categoriaFK = produto_categoria.id")
+            ->where("a.tipo", "servicocategoria")
+        ->findAll();
         /*
           $itemModel = model('App\Models\ItemModel', false);
 
