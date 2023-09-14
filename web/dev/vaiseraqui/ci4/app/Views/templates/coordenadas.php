@@ -1,7 +1,7 @@
 
 
 <script>
-  <? if ($coordenadas) { ?>
+  <? if (is_array($coordenadas)) { ?>
 
     var map = new L.Map('map', {
       center: [0, 0],

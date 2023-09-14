@@ -74,7 +74,7 @@
           <div class="wraper-icon">
             <img src="<?= PATHSITE ?>assets/images/icon-search-box.svg" alt="icon search">
           </div>
-          O que você está procurando?
+          <?= $txMenuFiltro ?>
         </h2>
         <button class="open-modal j-open-form-modal">
           <svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">

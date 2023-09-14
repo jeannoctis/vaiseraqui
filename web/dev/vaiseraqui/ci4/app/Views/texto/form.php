@@ -219,6 +219,36 @@
  								</div>
  							<? } ?>
 
+ 							<? if (in_array($resultado->id, [15])) { ?>
+ 								<div class='form-group col-lg-6 paddingZeroM'>
+ 									<div class="col-xs-12 col-sm-12">
+ 										<label for="extra1">Texto Botão Aluguel para temporada </label>
+ 										<input type="text" name="extra1" class="form-control" id="extra1" value="<?= $resultado->extra1 ?>" placeholder="Escreva...">
+ 									</div>
+ 								</div>
+
+ 								<div class='form-group col-lg-6 paddingZeroM'>
+ 									<div class="col-xs-12 col-sm-12">
+ 										<label for="extra2">Texto Botão Salões de Festas e Áreas de Lazer </label>
+ 										<input type="text" name="extra2" class="form-control" id="extra2" value="<?= $resultado->extra2 ?>" placeholder="Escreva...">
+ 									</div>
+ 								</div>
+
+ 								<div class='form-group col-lg-6 paddingZeroM'>
+ 									<div class="col-xs-12 col-sm-12">
+ 										<label for="extra3">Texto Botão Hospedagem</label>
+ 										<input type="text" name="extra3" class="form-control" id="extra3" value="<?= $resultado->extra3 ?>" placeholder="Escreva...">
+ 									</div>
+ 								</div>
+
+ 								<div class='form-group col-lg-6 paddingZeroM'>
+ 									<div class="col-xs-12 col-sm-12">
+ 										<label for="extra4">Texto Botão Lojas Temporárias</label>
+ 										<input type="text" name="extra4" class="form-control" id="extra4" value="<?= $resultado->extra4 ?>" placeholder="Escreva...">
+ 									</div>
+ 								</div>
+ 							<? } ?>
+
  							<? if ($resultado->isLink == 'S') { ?>
  								<div class='form-group col-lg-6 paddingZeroM'>
  									<div class="col-xs-12 col-sm-12">

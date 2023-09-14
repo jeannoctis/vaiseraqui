@@ -4577,6 +4577,7 @@ header.header-bg .group-title span {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.62rem;
+  align-items: start;
 }
 .home .s-spaces .container-medium a.btn-primary {
   font-size: 1.25rem;
@@ -4851,6 +4852,7 @@ header.header-bg .group-title span {
   line-height: 120.1%;
   letter-spacing: -0.125rem;
   margin-bottom: 10px;
+  max-width: 453px;
 }
 .home .plan-and-ads .container-medium .item p {
   color: #FFFFFF;
@@ -4905,9 +4907,15 @@ header.header-bg .group-title span {
 }
 .home .banner-ads {
   margin-bottom: 12.5rem;
+  height: 540px;
 }
 .home .banner-ads img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.home .banner-ads .container-medium {
+  height: 100%;
 }
 .home .banner-ads img:not(.only-mobile) {
   display: block;

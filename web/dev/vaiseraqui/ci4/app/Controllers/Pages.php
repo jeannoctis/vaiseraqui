@@ -99,6 +99,15 @@ class Pages extends Controller
         $bannerModel = model('App\Models\BannerModel', false);
         $data['banner1'] = $bannerModel->find(1);
 
+        $data['txMenuFiltro'] = $this->textoModel->find(8);
+        $data['txSecaoEspacos'] = $this->textoModel->find(15);
+        $data['txSecaoPrestServicos'] = $this->textoModel->find(16);
+        $data['txConviteAnunciante1'] = $this->textoModel->find(9);
+        $data['txConviteAnunciante2'] = $this->textoModel->find(10);
+        $data['txSecaoEventos'] = $this->textoModel->find(17);
+        $data['txSecaoBlog'] = $this->textoModel->find(18);
+        $data['txSecaoContato'] = $this->textoModel->find(7);
+
         $cidadeModel = model('App\Models\CidadeModel', false);
         $cidadeModel->select("cidade.*,e.sigla");
         $cidadeModel->join("estado e", "e.id = cidade.estadoFK");
@@ -120,11 +129,9 @@ class Pages extends Controller
         $produtoModel->select("produto.id,  produto.titulo, produto.identificador, produto.lazer, produto.itens, produto.categoriaFK");
         $produtoModel->where("produto.destaque", "1");
         $produtoModel->where("produto.ativo", "1");
-        //    $produtoModel->where("produto.tipoFK",1);
+        // $produtoModel->where("produto.tipoFK",1);
         $produtoModel->orderBy("RAND()");
         $data["espacos"] = $produtoModel->findAll(10);
-
-
 
         if ($data["categoriasProduto"]) {
             foreach ($data["categoriasProduto"] as $ind => $dProd) {
@@ -427,8 +434,18 @@ class Pages extends Controller
             $data['emAlta5'][6]->fotos = $produtoModel->fotos($emAltaServicos->produtoFK7, 4, true);
         }
 
-        //
+        $hospedagemHome = $anuncioModel->resetQuery()->select("produtoFK1, produtoFK2, produtoFK3, produtoFK4, produtoFK5")->find(3);
+        $hospedagemHome = (array)$hospedagemHome;
 
+        $produtoModel->resetQuery()->dadosCard()->whereIn("produto.id", $hospedagemHome);
+        $data['hospedagemHome'] = $produtoModel->findAll();
+
+        foreach ($data['hospedagemHome'] as $hosp) {
+            $hosp->fotos = $produtoModel->fotos($hosp->id, 5, true);
+        }
+
+        $data['anuncioBannerH'] = $anuncioModel->find(11);
+        
 
         /*
           $itemModel = model('App\Models\ItemModel', false);

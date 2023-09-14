@@ -21,6 +21,7 @@
       }
     }
   </style>
+  
   <main>
     <section class="s-service-providers" id="servicos" data-aos="fade-right">
       <header>
@@ -153,7 +154,7 @@
          } ?>
   </main>
 
-<? //echo View("templates/filtros-prestadores"); ?>
+  <? //echo View("templates/filtros-prestadores"); ?>
 
   <div class="moda-filter-container">
     <div action="#" class="presentation-form j-filter-modal-container">

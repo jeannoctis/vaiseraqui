@@ -68,12 +68,12 @@
 
                               <tr class="ui-state-default sort" rel="<?= $item->id ?>">
                                  <td>
-                                    <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/modelos/categoriasservicos/">
+                                    <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/modelos/servicocategorias/">
                                        Categoria Serviços
                                     </a>
                                  </td>
                                  <td>
-                                    <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/modelos/categoriasservicos/">
+                                    <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/modelos/servicocategorias/">
                                        Descrição...
                                     </a>
                                  </td>

@@ -59,6 +59,9 @@ $routes->group('admin', function ($routes) {
     $routes->add('anuncio/tipo/(:any)', 'Anuncio::tipo/$i');
     $routes->add('anuncio/destaque/(:any)', 'Anuncio::destaque/$i');
     $routes->add('anuncio/banner/(:any)', 'Anuncio::banner/$i');
+
+    $routes->add('anuncio/servicocategoria', 'Anuncio::servicocategoria');
+    $routes->add('anuncio/servicocategoria/(:any)', 'Anuncio::servicocategoria/$i');
     
     $routes->add('review', 'Review::index');
     $routes->add('review/form', 'Review::form');
