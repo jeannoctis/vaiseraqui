@@ -508,7 +508,7 @@ class Produto extends BaseController
          }
 
          if (!empty($post['datas'])) {
-            $IDsReceviedDatas = \array_column($post['datas'], "id");
+            $IDsReceviedDatas = \array_column($post['datas'], "id");            
 
             if (!empty($IDsReceviedDatas)) {
                $this->produtoDataModel
@@ -851,16 +851,16 @@ class Produto extends BaseController
       $retorno["mes1"] = $date[1];
       $retorno["ano1"] = $date[0];
 
-      ob_start();
-      for ($iterator = 1; $iterator <= 6; $iterator++) {
-         ?>
+        ob_start();
+        for ($iterator = 1; $iterator <= 6; $iterator++) {
+            ?>
          <div class="">
-            <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
-            <table class='table'>
-               <tr>
-                  <td align="center">
-                     <table width="100%" border="0" cellpadding="2" cellspacing="2">
-                        <tr class='fonteBlack'>
+                <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
+                <table class='table'>
+                    <tr>
+                        <td align="center">
+                            <table width="100%" border="0" cellpadding="2" cellspacing="2">
+                                <tr class='fonteBlack'>
                            <td align="center"><strong>D</strong></td>
                            <td align="center"><strong>S</strong></td>
                            <td align="center"><strong>T</strong></td>
@@ -1141,12 +1141,12 @@ class Produto extends BaseController
 
          $(document).ready(function() {
             $('.phone_with_ddd').mask('(00) 00000-0000');
-         });
-      </script>
-      <div class="card">
-         <div class="card-header" id="tituloAba<?= $token ?>">
-            <h5 class="mb-0">
-               <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
+            });
+        </script>
+        <div class="card">
+            <div class="card-header" id="tituloAba<?= $token ?>">
+                <h5 class="mb-0">
+                    <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
                   Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
                   <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
@@ -1172,7 +1172,7 @@ class Produto extends BaseController
                   <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
                      <label>Telefone</label>
                      <input type="text" name="cep[]" class="form-control phone_with_ddd" Value="<?= $texto->cep ?>">
-                  </div>
+                            </div>
                   <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
                      <label>Cidade / Estado</label>
                      <input type="text" name="cidade[]" class="form-control" Value="<?= $texto->cidade ?>">
@@ -1243,13 +1243,13 @@ class Produto extends BaseController
 
                </div>
 
+               </div>
             </div>
-         </div>
-      </div>
-   <?
-      $retorno['html'] = ob_get_clean();
-      echo json_encode($retorno);
-   }
+        </div>
+        <?
+        $retorno['html'] = ob_get_clean();
+        echo json_encode($retorno);
+    }
 
    public function novoCardapio()
    {
@@ -1386,29 +1386,29 @@ class Produto extends BaseController
                   </div>
                </div>
 
+                </div>
             </div>
-         </div>
-      </div>
-<?
-      $retorno['html'] = ob_get_clean();
-      echo json_encode($retorno);
-   }
-
+        </div>
+        <?
+        $retorno['html'] = ob_get_clean();
+        echo json_encode($retorno);
+    }
+    
    public function eventos()
    {
-      $get = request()->getGet();
-      $this->model->eventos($get);
-   }
-
-
+         $get = request()->getGet();
+        $this->model->eventos($get);
+    }
+    
+       
    public function chamarWhats()
    {
-      $request = \Config\Services::request();
-      $post = $request->getPost();
-      $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
-
-      $id = decode($post['produtoFK']);
-
-      $produtoWhatsModel->contaClique($id);
-   }
+     $request = \Config\Services::request();
+     $post = $request->getPost();    
+     $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
+            
+     $id = decode($post['produtoFK']);
+            
+    $produtoWhatsModel->contaClique($id);
+  }
 }

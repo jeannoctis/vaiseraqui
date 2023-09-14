@@ -61,27 +61,27 @@
                                 foreach ($datas as $dia) {
                                     $horaIni = explode(":", $dia->horarioInicio);
                                     $horaFim = explode(":", $dia->horarioTermino);
-                                    $diaAtual = explode("-",$dia->data);
-                                    ?>
+                                    $diaAtual = explode("-", $dia->data);
+                            ?>
                                     <div class="item">
-                                        <span class="date"><?=$diaAtual[2]?> de <?=mes($diaAtual[1])?></span>
-                                        <span class="day"><?=semana($dia->data)?></span>
-                                        <span class="interval"><?=$horaIni[0]?>:<?=$horaIni[0]?> <?= ($horaFim) ? (' - ' . $horaFim[0] . ':' . $horaFim[1] )   : ''  ?> </span>
+                                        <span class="date"><?= $diaAtual[2] ?> de <?= mes($diaAtual[1]) ?></span>
+                                        <span class="day"><?= semana($dia->data) ?></span>
+                                        <span class="interval"><?= $horaIni[0] ?>:<?= $horaIni[0] ?> <?= ($horaFim) ? (' - ' . $horaFim[0] . ':' . $horaFim[1])   : ''  ?> </span>
                                     </div>
                             <?
                                 }
                             }
-                            ?>          
+                            ?>
                         </div>
                         <a href="#">Ver mais detalhes</a>
                     </div>
                 </div>
             </footer>
         </div>
-        <? if($fotos) {?>
-        <div class="cover" data-aos="fade-left">
-            <img src="<?= PATHSITE ?>uploads/produto/<?=$fotos[0]->produtoFK?>/<?=$fotos[0]->arquivo?>" alt="">
-        </div>
+        <? if ($fotos) { ?>
+            <div class="cover" data-aos="fade-left">
+                <img src="<?= PATHSITE ?>uploads/produto/<?= $fotos[0]->produtoFK ?>/<?= $fotos[0]->arquivo ?>" alt="">
+            </div>
         <? } ?>
     </section>
     <section class="more-about-2-column">
