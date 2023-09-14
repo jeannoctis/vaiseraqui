@@ -1270,22 +1270,24 @@ class Pages extends Controller {
 
                 break;
             case 'hospedagem':
-                $data['style_list'] = ['jquery_ui'];
+                $data['style_list'] = ['jquery_ui', 'swiper'];
                 $data['script_list'] = ['swiper', 'jquery', 'jquery_ui', 'card-like', 'controller-card', 'controller-imoveis', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
                 $data['pagina'] = 23;
                 $data['bodyClass'] = 'internal-rent';
 
-                helper('date');
+                helper(['date', 'utils']);
                 $produtoModel = \model("App\Models\ProdutoModel", false);
                 $produtoModel->select('produto.*, c.titulo as cidade, e.sigla as estado');
                 $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
                 $produtoModel->join('estado e', 'e.id = c.estadoFK');
                 $produtoModel->where('identificador', $segments[1]);
                 $data['metatag'] = $produtoModel->find()[0];
+                $data['metatag']->valores = $produtoModel->valores($data['metatag']->id);
+                $data['metatag']->proximidades = $produtoModel->proximidades($data['metatag']->id);
                 $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999, false);
                 $data['responsavel'] = $produtoModel->responsavel($data['metatag']->anuncianteFK);
                 $data['comodidades'] = $produtoModel->comodidades($data['metatag']->id);
-
+                
                 $produtoModel = \model("App\Models\ProdutoModel", false);
                 $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
                 $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
@@ -1300,7 +1302,7 @@ class Pages extends Controller {
                         $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4, true);
                     }
                 }
-
+                $data['coordenadas'] = array();
                 break;
             case "contato":
                 $data['script_list'] = ['mask-telefone', 'modal-filter'];
