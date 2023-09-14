@@ -243,12 +243,12 @@ body {
 	font-size: 14px;
 }
 header {
-	position: fixed;
+	/* position: fixed;
 	padding: 20px 40px;
 	width: 100%;
 	z-index: 1000;
 	background-color: #fefcff;
-	transition: all 0.2s;
+	transition: all 0.2s; */
 }
 header.menufixo {
 	padding: 10px 0 0 0;
@@ -3797,6 +3797,9 @@ button.cta8:hover {
 }
 .areaFoto {
 	position: relative;
+	width: 130px;
+    aspect-ratio: 1;
+    margin: 0 auto;
 }
 img.fotoDePerfil {
 	width: 130px;
@@ -3920,8 +3923,8 @@ ul.menuDados li:after {
 	width: 36px;
 	height: 36px;
 	position: absolute;
-	bottom: 15px;
-	left: 250px;
+	bottom: 17px;
+   right: 0;
 	padding: 3px 7px;
 	cursor: pointer;
 	transition: all 0.2s;

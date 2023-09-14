@@ -20,17 +20,10 @@
                         <? } ?>
 
                         <form class="old-input" method="post" enctype="multipart/form-data">
-                            <input accept="image/*" mudartexto="label-file" class="d-none files" id="file2" type="file" value="" name="arquivo">
                         </form>
-
-                        <label for='file2'>
-                            <div class="editarFoto">
-                                <div class="editarFotoFechado">
-                                    <img src="<?= PATHSITE ?>images/perfil_editar.svg">
-                                </div>
-                            </div>
-                        </label>
-
+                        <div class="editarFoto">                            
+                            <img src="<?= PATHSITE ?>assets/images/icon-pencil.svg">                            
+                        </div>
                     </div>
                     <h3>
                         <?= $clienteLogado->nome ?> <?= $clienteLogado->sobrenome ?>
@@ -61,6 +54,8 @@
                     <div class="boxTabView boxViewTab1 ativo">
                         <form class="form-horizontal" method="post" enctype="multipart/form-data">
                             <fieldset>
+                                <input class="d-none files" id="file2" type="file" name="arquivo">
+
                                 <div class="row">
                                     <div class="col-12">
                                         <h3>
@@ -86,12 +81,11 @@
                                         <select name="estado" class="form-control">
                                             <option value="">Selecione seu estado</option>
                                             <? foreach ($estados as $estado) { ?>
-                                                <option value="<?= $estado->sigla ?>">
+                                                <option value="<?= $estado->sigla ?>" <?= $clienteLogado->estado == $estado->sigla ? "selected" : "" ?>>
                                                     <?= $estado->titulo ?>
                                                 </option>
                                             <? } ?>
-                                        </select>
-                                        <input type="text" name="estado" value="<?= $clienteLogado->estado ?>" class="form-control" placeholder="ex: Catanduva">
+                                        </select>                                        
                                     </div>
 
                                     <div class="col-12">
@@ -262,3 +256,17 @@
         width: 547px;
     }
 </style>
+
+<script>
+    const editPicture = document.querySelector(".editarFoto")
+    const fileInput = document.querySelector("#file2")
+    const profilePic = document.querySelector(".fotoDePerfil")
+    editPicture.addEventListener("click", ()=>{
+        fileInput.click()
+    })
+    fileInput.addEventListener("change", (ev)=>{
+        const file = ev.target.files[0]
+        if (!file) return
+        profilePic.src = URL.createObjectURL(file)
+    })
+</script>
