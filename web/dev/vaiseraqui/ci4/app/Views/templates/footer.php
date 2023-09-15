@@ -110,7 +110,7 @@
     </div>
   <? } ?>
   <? if ($whatsapps3) { ?>
-    <div class="ul-whatsapp">
+    <!-- <div class="ul-whatsapp">
       <div class="topo-whats">Ainda tem dúvidas? Fale conosco!</div>
       <div class="cont-wpp">
         <ul>
@@ -153,7 +153,7 @@
           <? } ?>
         </ul>
       </div>
-    </div>
+    </div> -->
   <? } ?>
 
   <div onclick="listaWhatsapp();" class="whatsapp fonteBlack" data-aos="fade-down">

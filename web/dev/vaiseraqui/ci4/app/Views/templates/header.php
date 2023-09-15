@@ -29,8 +29,8 @@
       <a href="<?= PATHSITE ?>">
         <img src="<?= PATHSITE ?>assets/images/logo.png" alt="Logo" class="logo">
       </a>
-      <form action="#" class="">
-        <input type="text" name="search" placeholder="<?= $txMenuFiltro->titulo ?>">
+      <form action="<?=PATHSITE?>busca/" method="get">
+        <input type="text" name="busca" placeholder="<?= $txMenuFiltro->titulo ?>">
         <button type="submit"><img src="<?= PATHSITE ?>assets/images/icon-search.svg" alt=""></button>
       </form>
 
