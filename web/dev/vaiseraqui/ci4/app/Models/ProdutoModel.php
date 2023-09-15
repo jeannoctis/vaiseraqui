@@ -41,9 +41,7 @@ class ProdutoModel extends Model {
         $produtoFotoModel->orderBy('ordem ASC, id DESC');
         // $produtoFotoModel->limit($limit);
         $fotos = $produtoFotoModel->findAll($limit);
-        // $produtoFotoModel->limit($limit);
-        $fotos = $produtoFotoModel->findAll($limit);
-
+        
         $this->select('fotoFK');
         $principal = $this->find($id);
 

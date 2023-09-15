@@ -32,22 +32,22 @@
    <section class="s-last" data-aos="fade-up">
       <div class="container-medium">
 
-         <div class="list">
+         <div class="list busca-resultados">
 
             <? if ($buscaProduto) { ?>
-               <div class="container-busca">
-                  <? foreach($buscaProduto as $produto) { 
-                     echo view("templates/cards/comum-card", (array)$produto);
-                  } ?>
-               </div>
+               
+               <? foreach($buscaProduto as $produto) { 
+                  echo view("templates/cards/comum-card", (array)$produto);
+               } ?>
+               
             <? } ?>
 
             <? if ($buscaArtigo) { ?>
-               <div class="container-busca">
-                  <? foreach($buscaArtigo as $artigo) {
-                     echo view("templates/blog-card", (array)$artigo);
-                  } ?>
-               </div>
+               
+               <? foreach($buscaArtigo as $artigo) {
+                  echo view("templates/blog-card", (array)$artigo);
+               } ?>
+               
             <? } ?>
 
             <? if (empty($buscaProduto) && empty($buscaArtigo)) { ?>

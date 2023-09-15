@@ -96,6 +96,7 @@ class Pages extends Controller
 
         $data['style_list'] = ['swiper'];
         $data['script_list'] = ['swiper', 'card-like', 'controller-agenda', 'controller-blog', 'controller-card', 'fs-lightbox', 'mask-date', 'mask-telefone', 'menu-tabs'];
+        $data['origem'] = "Home Page";
 
         $data["pagina"] = 1;
         $data['bodyClass'] = 'home';
@@ -1428,6 +1429,7 @@ class Pages extends Controller
                 break;
             case "contato":
                 $data['script_list'] = ['mask-telefone', 'modal-filter'];
+                $data['origem'] = "Página Contato";
 
                 $data['bodyClass'] = 'contact';
                 $data['pagina'] = 6;
@@ -1786,6 +1788,9 @@ class Pages extends Controller
 
             break;
             case "busca":
+                $data['style_list'] = ['swiper'];
+                $data['script_list'] = ['swiper', 'card-like', 'controller-card'];
+
                 $data['pagina'] = 26;
                 $data['bodyClass'] = 'blog-list-categories';
 
@@ -1809,7 +1814,7 @@ class Pages extends Controller
                 $data['cats'] = $categoriaArtigoModel->categorias();
 
                 // busca produtos
-                $produtoModel->dadosCard()
+                $produtoModel->dadosCard()                    
                     ->like("produto.titulo", $get['busca'])
                     ->orLike("produto.descricao", $get['busca'])
                     ->orLike("produto.detalhes", $get['busca'])
@@ -1823,19 +1828,8 @@ class Pages extends Controller
                     ->orLike("cd.titulo", $get['busca'])
                     ->orLike("cd.menu", $get['busca'])
                     ->orLike("pc.titulo", $get['busca'])
-                    ->orLike("pcmdd.comodidades", $get['busca'])
-                    ->orLike("pcmdd.comodidades", $get['busca'])
-                    // ->join("cidade c", "c.id = produto.cidadeFK")
-                    // ->join("estado e", "e.id = c.estadoFK")
-                    ->join("produto_cardapio cd", "cd.produtoFK = produto.id")
-                    // ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
-                    ->join("produto_comodidade pcmdd", "pcmdd.produtoFK = produto.id");
+                    ->join("produto_cardapio cd", "cd.produtoFK = produto.id");
                 $data['buscaProduto'] = $produtoModel->findAll();
-                
-                echo '<pre>';
-                print_r($data['buscaProduto']);
-                echo '</pre>';
-                exit();
 
                 if($data['buscaProduto']) {
                     foreach($data['buscaProduto'] as $produto) {

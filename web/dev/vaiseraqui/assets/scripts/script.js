@@ -47,8 +47,26 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function listaWhatsapp() {
-    $(".shown").length <= 0 ? ($(".whatsapp2").addClass("shown"), $(".ul-whatsapp").addClass("shown")) : ($(".whatsapp2").removeClass("shown"), $(".ul-whatsapp").removeClass("shown"));
+// function listaWhatsapp() {
+//     $(".shown").length <= 0 ? ($(".whatsapp2").addClass("shown"), $(".ul-whatsapp").addClass("shown")) : ($(".whatsapp2").removeClass("shown"), $(".ul-whatsapp").removeClass("shown"));
+// }
+
+function toggleFormWpp () {
+    const formWpp = document.querySelector(".form-wpp")
+    formWpp.classList.toggle("active")
+}
+const sendWhatsApp = document.querySelector(".form-wpp button")
+sendWhatsApp.addEventListener("click", startWpp)
+
+function startWpp () {
+    console.log(this)
+
+    const formWpp = document.querySelector(".form-wpp form")
+
+    $.post(PATHSITE + "utils/startWpp/", formWpp.serialize(), function (data) {
+        const response = jQuery.parseJSON(data);
+        console.log(response)
+    })
 }
 
 function visitaPagina(pagina) {

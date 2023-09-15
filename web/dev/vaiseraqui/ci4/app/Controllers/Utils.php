@@ -379,4 +379,15 @@ class Utils extends BaseController
       }
       echo \json_encode($response);
    }
+
+   public function startWpp(){
+      $post = \request()->getPost();
+
+      if($post) {
+         $this->contatoModel = \model("App\Models\ContatoModel", false);
+         $response['success'] = $this->contatoModel->save($post);
+      }
+
+      return \json_encode($response);
+   }
 }

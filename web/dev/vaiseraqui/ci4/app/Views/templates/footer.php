@@ -62,31 +62,31 @@
       </div>
     </div>
     <hr>
-        <div class="uaau">
-    <a href="https://www.uaau.digital/" target="_blank">
-      <img src="<?= PATHSITE ?>assets/images/logo-footer-uaau.svg" alt="ícone Uaau Digital">
-    </a>
-        </div>
+    <div class="uaau">
+      <a href="https://www.uaau.digital/" target="_blank">
+        <img src="<?= PATHSITE ?>assets/images/logo-footer-uaau.svg" alt="ícone Uaau Digital">
+      </a>
+    </div>
   </footer>
 
   <dialog class="dialog-not-logged">
     <div class="content">
 
       <span class="dialog-close">
-        <img src="<?=PATHSITE?>assets/images/icon-close.svg" alt="icone fechar">
+        <img src="<?= PATHSITE ?>assets/images/icon-close.svg" alt="icone fechar">
       </span>
 
-      <img src="<?=PATHSITE?>assets/images/logo.png" alt="" class="dialog-logo">
+      <img src="<?= PATHSITE ?>assets/images/logo.png" alt="" class="dialog-logo">
 
       <h3>Você ainda não está logado...</h3>
 
       <p>Faça login ou cadastre-se para poder curtir e salvar os anúncios!</p>
 
       <div class="buttons-div">
-        <a href="<?=PATHSITE?>login/">
+        <a href="<?= PATHSITE ?>login/">
           <button type="button">Área de login</button>
         </a>
-        <a href="<?=PATHSITE?>cadastro/">
+        <a href="<?= PATHSITE ?>cadastro/">
           <button type="button">Cadastre-se!</button>
         </a>
       </div>
@@ -109,57 +109,33 @@
       </button>
     </div>
   <? } ?>
-  <? if ($whatsapps3) { ?>
-    <!-- <div class="ul-whatsapp">
-      <div class="topo-whats">Ainda tem dúvidas? Fale conosco!</div>
-      <div class="cont-wpp">
-        <ul>
-          <?
-          $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
-          $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
-          $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
-          $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
-          $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
+  <? if ($whatsapps) { ?>
 
-          if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-            $usaApi = "api";
-          } else {
-            $usaApi = "web";
-          }
-          $removeChars = array("-", "(", ")", " ");
+    <div class="form-wpp">
 
-          foreach ($whatsapps as $unidade) {
-
-            $linkwhatsapp = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $unidade->telefone);
-          ?>
-            <li>
-              <a onclick="contadorWhatsapp(<?= $unidade->id ?>); cliqueWhatsapp();" aria-label="Whatsapp" href="<?= $linkwhatsapp ?>" title="Enviar mensagem para <?= $unidade->titulo ?>" rel="noopener nofollow" target="_blank">
-                <div class="foto">
-                  <picture>
-                    <source srcset="<?= PATHSITE ?>uploads/whatsapp/<?= $unidade->arquivo ?>.webp" type="image/webp">
-                    <img height="30" src="<?= PATHSITE ?>uploads/whatsapp/<?= $unidade->arquivo ?>" />
-                  </picture>
-                </div>
-                <div class="info-wpp">
-                  <p>
-                    <?= $unidade->categoria ?>
-                  </p>
-                  <p>
-                    <?= $unidade->titulo ?>
-                  </p>
-                </div>
-              </a>
-            </li>
-          <? } ?>
-        </ul>
+      <div class="fw-header">
+        <img src="<?=PATHSITE?>uploads/whatsapp/<?=$whatsapps[0]->arquivo?>" alt="">
+        <span>Name da Silva</span>
       </div>
-    </div> -->
-  <? } ?>
 
-  <div onclick="listaWhatsapp();" class="whatsapp fonteBlack" data-aos="fade-down">
-    <img alt="" src="<?= PATHSITE ?>assets/images/whatsapp-branco.svg" height="20">
-    <span>Fale Conosco</span>
-  </div>
+      <form action="" class="fw-content">
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <input type="text" name="telefone" placeholder="DDD + WhatsApp" required>
+        <input type="hidden" name="origem" value="Botão WhatsApp">
+
+        <button type="submit">
+          <a href="#">Iniciar conversa no WhatsApp</a>
+        </button>
+
+      </form>
+    </div>
+
+    <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
+      <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
+      Fale conosco
+    </button>
+
+  <? } ?>
 
   <script>
     var public_recaptcha = "<?= $configs->public_recaptcha ?>";
@@ -240,23 +216,23 @@
       ?>
     }
 
-    function favoritar (produtoFK) {
+    function favoritar(produtoFK) {
       const isLogado = '<?= $isLogado ?>';
 
-      if(!isLogado) {
+      if (!isLogado) {
         showLoginModal()
         return
       }
-      
+
       $.post(PATHSITE + "cliente/favoritar", {
         produtoFK
-      }, function (data) {        
+      }, function(data) {
         const heartIcon = document.querySelector(`[data-id-heart='${produtoFK}']`)
         heartIcon.classList.toggle("active")
       });
     }
 
-    function showLoginModal(){
+    function showLoginModal() {
       const modal = document.querySelector(".dialog-not-logged")
       modal.showModal();
     }
@@ -274,6 +250,6 @@
     echo View('templates/coordenadas');
   } ?>
 
-</body>
+  </body>
 
-</html>
+  </html>

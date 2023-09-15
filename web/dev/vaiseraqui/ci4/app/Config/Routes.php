@@ -200,6 +200,7 @@ $routes->add('utils/visitaPagina', 'Utils::visitaPagina');
 $routes->add('utils/upload', 'Utils::upload');
 $routes->add('utils/instagram', 'Utils::instagram');
 $routes->add('utils/deleteCard', 'Utils::deleteCard');
+$routes->add('utils/startWpp', 'Utils::startWpp');
 $routes->add('review/reviewInfo', 'Review::reviewInfo');
 $routes->add('(:any)', 'Pages::view/$1');
 

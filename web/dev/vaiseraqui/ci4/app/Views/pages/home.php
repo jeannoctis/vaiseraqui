@@ -1254,46 +1254,6 @@
     </section>
   <? } ?>
 
-  <section class="s-contact">
-    <div class="container-medium">
-      <div class="cover" data-aos="fade-right">
-        <img src="<?= PATHSITE ?>uploads/texto/<?= $txSecaoContato->arquivo ?>" alt="capa da seção contato">
-      </div>
-      <form action="#" class="form" data-aos="fade-left">
-        <h2><?= $txSecaoContato->titulo ?></h2>
-        <div class="input-group">
-          <label for="name">Seu nome</label>
-          <input type="text" name="name" id="name" placeholder="ex: João" class="username">
-        </div>
-        <div class="wraper-input-group-2">
-          <div class="input-group">
-            <label for="email">E-mail</label>
-            <input type="email" name="email" id="email" placeholder="ex: joao@gmail.com" class="email">
-          </div>
-          <div class="input-group">
-            <label for="tel">Telefone</label>
-            <input type="text" name="tel" id="tel" placeholder="ex: (00) 9 9999-9999" maxlength="16" class="tel">
-          </div>
-        </div>
-        <div class="input-group-prefer">
-          <label for="contact">Preferência de Contato</label>
-          <div class="wraper">
-            <label><input type="radio" name="prefer-contact" value="whatsapp"> Whatsapp</label>
-            <label><input type="radio" name="prefer-contact" value="call"> Ligação</label>
-            <label><input type="radio" name="prefer-contact" value="email"> E-mail</label>
-          </div>
-        </div>
-        <div class="input-group">
-          <label for="message">Mensagem</label>
-          <textarea name="message" id="message" placeholder="Escreva aqui sua mensagem"></textarea>
-        </div>
-        <button type="submit">Enviar</button>
-      </form>
-    </div>
-  </section>
+  <?= view("templates/contato-form", (array)$txSecaoContato) ?>
 
 </main>
-<a href="#" class="btn-whatsapp-float">
-  <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
-  Fale conosco
-</a>
