@@ -612,21 +612,18 @@ class Cliente extends BaseController
 
     public function favoritar()
     {
+        if($_SESSION['cliente']) {
         $request = \Config\Services::request();
         $post = $request->getPost();
 
         $post['clienteFK'] = $this->session->get('cliente')->id;
 
-        $clienteFavoritoModel = model('App\Models\ClienteFavoritoModel', false);
-        $clienteFavoritoModel->select("id");
-        $clienteFavoritoModel->where("produtoFK", $post['produtoFK']);
-        $clienteFavoritoModel->where("clienteFK", $post['clienteFK']);
-        $temFavorito = $clienteFavoritoModel->find()[0];
-
-        if ($temFavorito) {
-            $clienteFavoritoModel->delete(['id' => $temFavorito->id]);
-        } else {
-            $clienteFavoritoModel->save($post);
-        }
+        $this->model->favoritar($post['produtoFK'], $post['clienteFK'],false);
+       
+    
+    } else {
+        $_SESSION['favoritar'] = $post['id'];
     }
+    }
+
 }

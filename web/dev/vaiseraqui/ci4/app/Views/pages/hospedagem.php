@@ -540,110 +540,88 @@
       </div>
 
       <div class="column">
-        <div class="sticky">
-          <aside class="box-checkin">
-            <div class="price">
-              <strong>R$243</strong>
-              <span>diária</span>
-            </div>
-            <div class="table-checkin">
-              <div class="tr">
-                <div class="td">
-                  <strong>Check-in</strong>
-                  <input readonly type="text" id="desktop-table-checkin" value="15/08/2023">
-                </div>
-                <div class="td">
-                  <strong>Checkout</strong>
-                  <input readonly type="text" id="desktop-table-checkout" value="20/08/2023">
-                </div>
+          <div class="sticky">
+            <aside class="box-checkin">
+              <div class="price">
+                  <input type="hidden" id="diaria" value="<?=$metatag->preco?>" />
+                <strong><?=number_format($metatag->preco,2,',','.')?></strong>
+                <span>diária</span>
               </div>
-              <div class="tr">
-                <div class="td j-input-order-select" colspan="2">
-                  <div class="colspan">
-                    <div>
-                      <strong>Hóspedes</strong>
-                      <div class="modal-order">
-                        <input readonly type="text" value="1 hóspede">
-                        <div class="modal-order-select">
-                          <div class="wraper-scroll">
-                            <div class="content">
-                              <a href="#" data-select-value="1 hóspede">1 hóspede</a>
-                              <a href="#" data-select-value="2 hóspedes">2 hóspede</a>
-                              <a href="#" data-select-value="3 hóspedes">3 hóspede</a>
-                              <a href="#" data-select-value="4 hóspedes">4 hóspede</a>
-                              <a href="#" data-select-value="5 hóspedes">5 hóspede</a>
+              <div class="table-checkin">
+                <div class="tr">
+                  <div class="td">
+                    <strong>Check-in</strong>
+                    <input readonly="" type="text" id="desktop-table-checkin" value="Selecione uma data">
+                  </div>
+                  <div class="td">
+                    <strong>Checkout</strong>
+                    <input disabled type="text" id="desktop-table-checkout" value="Selecione uma data">
+                  </div>
+                </div>
+                <div class="tr">
+                  <div class="td j-input-order-select" colspan="2">
+                    <div class="colspan">
+                      <div>
+                        <strong>Hóspedes</strong>
+                        <div class="modal-order">
+                          <input readonly="" type="text" value="1 hóspede">
+                          <div class="modal-order-select">
+                            <div class="wraper-scroll">
+                              <div class="content">
+                                  <? 
+                                  $i = 1;
+                                  while($i <= 5) { ?>
+                                <a onclick="$('#campoHospede').val(<?=$i?>);  " href="javascript:void();" data-select-value="<?=$i?> hóspede"><?=$i?> hóspede(s)</a>
+                                  <? $i++; } ?>                              
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <button>
-                      <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 1L7 7L13 1" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </button>
+                        <input type="hidden" id="campoHospede" value="1" />
+                      <button>
+                        <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 1L7 7L13 1" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>                      
+                      </button> 
+                    </div>                
                   </div>
                 </div>
               </div>
-            </div>
-
-            <a href="#" class="btn-primary">
-              <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="">
-              Agendar
-            </a>
-            <table class="resume">
-              <tr>
-                <td><span>R$243 x 5 diárias</span></td>
-                <td>R$1.215</td>
-              </tr>
-              <tr>
-                <td><span>Taxa de limpeza</span></td>
-                <td>R$75</td>
-              </tr>
-            </table>
-            <hr>
-            <div class="total">
-              <span>Total</span>
-              <span>R$1.290</span>
-            </div>
-          </aside>
-          <? if ($responsavel) { ?>
-            <div class="box-ads">
-              <img src="<?= PATHSITE ?>uploads/anunciante/<?= $responsavel->arquivo ?>" alt="">
-              <div>
-                <span class="type">Responsável pelo anúncio</span>
-                <span class="title"><?= $responsavel->titulo ?></span>
-                <ul>
-                  <? if ($responsavel->telefone) { ?>
-                    <li>
-                      <a target="_blank" href="<?= $responsavel->link1 ?>">
-                        <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                        <span><?= $responsavel->telefone ?></span>
-                      </a>
-                    </li>
-                  <? } ?>
-                  <? if ($responsavel->telefone2) { ?>
-                    <li>
-                      <a target="_blank" href="<?= $responsavel->link2 ?>">
-                        <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                        <span><?= $responsavel->telefone2 ?></span>
-                      </a>
-                    </li>
-                  <? } ?>
-                  <? if ($responsavel->telefone3) { ?>
-                    <li>
-                      <a target="_blank" href="<?= $responsavel->link3 ?>">
-                        <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                        <span><?= $responsavel->telefone3 ?></span>
-                      </a>
-                    </li>
-                  <? } ?>
-                </ul>
+           
+                <? if($anunciante->whatsapp) {?>
+              <a onclick="abreWhatsapp('<?=encode($metatag->id)?>'); agendar('hospedagem','<?= PATHSITE . 'hospedagem/' . $metatag->identificador .'/' ?>', '<?=$anunciante->whatsapp?>','desktop'); " class="btn-primary">
+                <img src="<?=PATHSITE?>assets/images/icon-whatsapp.svg" alt="">
+                Agendar
+              </a>
+                <? } ?>
+              <table class="resume">
+                <tr>
+                    <td><span><?=number_format($metatag->preco,2,',','.')?> x <spantss id="quantidadeDias1">1</spantss> diária(s)</span></td>
+                  <td id="totalDiarias1"><?=number_format($metatag->preco,2,',','.')?></td>
+                </tr>
+                  <?
+                  $soma = $metatag->preco;
+                  if($valores) {
+                      foreach($valores as $valor) {
+                          $soma+= $valor->valor;
+                      ?>
+                <tr>
+                  <td><span><?=$valor->titulo?></span></td>
+                  <td class="<?=($valor->valor != '0.00') ? '' : 'featured' ?>"><?=($valor->valor != '0.00') ? number_format($valor->valor,2,',','.') : 'Grátis' ?></td>
+                </tr>
+                  <? } } ?>
+              </table>
+              <hr>
+              <div class="total">
+                  <input type="hidden" id="totalDiaria" value="<?=($soma - $metatag->preco)?>" />
+                <span>Total</span>
+                <span id="spanTotal1"><?=number_format($soma,2,',','.')?></span>
               </div>
-            </div>
-          <? } ?>
+            </aside>
+                        <?= View('templates/anunciante')?>           
+          </div>
         </div>
-      </div>
     </div>
   </section>
 

@@ -192,10 +192,11 @@
           </svg>
           Entrar
         </a>
+          <? if($clienteLogado) {?>
         <div class="box-logged <?= $isLogado ? "show" : '' ?>">
-          <img src="<?= PATHSITE ?>assets/images/logged-user.png" alt="" class="avatar">
+          <img src="<?= PATHSITE ?>uploads/cliente/<?=$clienteLogado->arquivo?>" alt="" class="avatar">
           <div>
-            <span class="title">Olá, Marlon</span>
+            <span class="title">Olá, <?=$clienteLogado->nome?></span>
             <ul>
               <li><a href="<?=PATHSITE?>meu-perfil/">Meu perfil</a></li>
               <li>|</li>
@@ -203,6 +204,7 @@
             </ul>
           </div>
         </div>
+          <? } ?>
         <a href="<?= PATHSITE ?>area-do-anunciante/" class="button-primary">Área do anunciante</a>
       </div>
 

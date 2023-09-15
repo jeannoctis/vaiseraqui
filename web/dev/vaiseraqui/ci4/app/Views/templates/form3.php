@@ -1,4 +1,28 @@
- <form action="<?=PATHSITE?>prestadores-de-servicos/" method="get" class="form3">
+
+           <?
+                  if($get['cidadeFK']) {
+                      foreach($cidades as $cidade) {
+                          if($cidade->id == $get['cidadeFK']) {
+                              $nomeCidade = $cidade->titulo . '-' . $cidade->sigla;
+                              $idCidade = $cidade->id;
+                          }
+                      }
+                  }
+                    if($get['tipoFK']) {
+                       foreach($produtoCategorias as $prodCat){
+                          if($prodCat->id == $get['tipoFK']) {
+                              $nomeTipo = $prodCat->titulo;
+                              $idTipo = $prodCat->id;
+                          }
+                      }
+                  }
+                  ?>
+
+
+<form action="<?=PATHSITE?>/lojas-temporarias" method="get" class="form3 <?=$form3Visible?>">
+     <input type="hidden" id="cidadeFK3" name="cidadeFK" value="<?=$idCidade?>" />
+     <input type="hidden" id="tipoFK3" name="tipoFK" value="<?=$idTipo?>" />
+     <input type="hidden"  name="ordem" value="<?=$get['ordem']?>" />
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
@@ -10,7 +34,7 @@
                   </button>
                 </label>
                 <div class="select">
-                  <input type="text" placeholder="Busque por cidade">
+                  <input  type="text" placeholder="Busque por cidade"value="<?=$nomeCidade?>" >
                   <div class="select-list">
                       <? if($cidades) {?>
                     <ul class="dropdown-select">
@@ -34,13 +58,16 @@
                     </button>
                   </label>
                   <div class="select">
-                    <input type="text" placeholder="Selecione">
+                    <input type="text" placeholder="Selecione" value="<?=$nomeTipo?>">
                     <div class="select-list">
+                          <? if($produtoCategorias){?>
                       <ul class="dropdown-select">
-                        <li>Hospedagem 1</li>
-                        <li>Hospedagem 2</li>
-                        <li>Hospedagem 3</li>
-                      </ul>
+                          <? foreach($produtoCategorias as $prodCat){
+                              if($prodCat->tipoFK == 4) {
+                              ?>
+                        <li onclick="$('#tipoFK3').val('<?=$prodCat->id?>');"><?=$prodCat->titulo?></li>
+                          <? } } ?>                      </ul>
+                        <? } ?>
                     </div>
                   </div>
                 </div>              
@@ -55,12 +82,12 @@
                     </button>
                   </label>
                   <div class="select">
-                    <input type="text" placeholder="Selecione">
+                    <input id="areaUtil3" type="text" placeholder="Selecione" name="areaUtil" value="<?=$areaUtil?>">
                     <div class="select-list">
                       <ul class="dropdown-select">
-                        <li>200 m²</li>
-                        <li>250 m²</li>
-                        <li>340 m²</li>
+                        <li onclick="$('#areaUtil3').val('0-60')">Até 60m²</li>
+                        <li onclick="$('#areaUtil3').val('61-100')">De 61m² a 100m²</li>
+                        <li onclick="$('#areaUtil3').val('101-99999999')">Acima de 100m²</li>
                       </ul>
                     </div>
                   </div>
@@ -74,9 +101,9 @@
                     Palavra-chave
                   </div>
                 </label>
-                <input type="text" placeholder="palavra-chave">
+                <input name="texto" type="text" placeholder="palavra-chave" value="<?=$get['texto']?>" >
               </div>
-              <a href="#" class="more-filters">
+              <a style="display: none;" href="#" class="more-filters">
                 <svg class="active" width="18" height="15" viewBox="0 0 18 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M5.8125 12.1249C5.8125 11.8142 5.56066 11.5624 5.25 11.5624H1.5C1.18934 11.5624 0.9375 11.8142 0.9375 12.1249C0.9375 12.4355 1.18934 12.6874 1.5 12.6874H5.25C5.56066 12.6874 5.8125 12.4355 5.8125 12.1249Z" fill="#C82328"/>
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1875 3.87488C12.1875 3.56422 12.4393 3.31238 12.75 3.31238H16.5C16.8106 3.31238 17.0625 3.56422 17.0625 3.87488C17.0625 4.18554 16.8106 4.43738 16.5 4.43738H12.75C12.4393 4.43738 12.1875 4.18554 12.1875 3.87488Z" fill="#C82328"/>
