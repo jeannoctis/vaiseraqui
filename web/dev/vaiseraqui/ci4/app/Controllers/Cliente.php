@@ -12,17 +12,12 @@ class Cliente extends BaseController
         helper(['encrypt', 'text']);
 
         $this->model = model('App\Models\ClienteModel', false);
-        $this->clPagamentoModel = model('App\Models\ClPagamentoModel', false);
-        $this->clEnderecoModel = model('App\Models\ClEnderecoModel', false);
-
         $this->tabela = "cliente";
-        $this->session->set('menuAdmin', '4');
+        $this->session->set('menuAdmin', '5');
     }
 
     public function index()
     {
-        \helper('url');
-
         if (isset($_POST['excluir'])) {
             foreach ($_POST['excluir'] as $exc) {
                 $data['excluiu'] = $this->model->delete(['id' => $exc]);
@@ -31,13 +26,42 @@ class Cliente extends BaseController
             $data['naoExc'] = "Selecione 1 ou mais itens para Excluir";
         }
 
-        $this->model->orderBy("ordem ASC");
+        $data['get'] = $get = request()->getGet();
+        $paginate = \is_numeric($get['page_clientes']) ? $get['page_clientes'] : 1;
 
-        $data['projetos'] = $this->model->findAll();
+        if (!empty($get['procura'])) {
+            $this->model->groupStart()
+                ->like("nome", $get['procura'])
+                ->orLike("sobrenome", $get['procura'])
+                ->orLike("cpf", $get['procura'])
+                ->orLike("telefone", $get['procura'])
+                ->orLike("cidade", $get['procura'])
+                ->orLike("estado", $get['procura'])
+                ->orLike("email", $get['procura'])
+                ->groupEnd();
+        }
 
-        $data['title'] = 'Projetos';
+        $data['lista'] = $this->model->orderBy("nome ASC")->paginate(25, 'clientes', $paginate);
+        $data['pager'] = $this->model->pager;
+
+        if (isset($_POST["gerar"])) {
+            $f = fopen(PATHHOME . "uploads/cliente/tmp.csv", "w");
+
+            $linha['nome'] = 'Nome;Sobrenome;Documento;Telefone;Cidade;Estado;Email';
+            fputcsv($f, $linha, "|", " ");
+
+            $todosClientes = $this->model->resetQuery()->findAll();
+            foreach ($todosClientes as $item) {
+
+                $linha["nome"] = "{$item->nome};{$item->sobrenome};{$item->cpf};{$item->telefone};{$item->cidade};{$item->estado};{$item->email}";
+                fputcsv($f, $linha, "|", " ");
+            }
+            header("Refresh: 0; URL=" . PATHSITE . "uploads/cliente/tmp.csv");
+        }
+
+        $data['title'] = 'Clientes';
         $data['tabela'] = $this->tabela;
-        $data["nomeModel"] = "ProjetoModel";
+        $data["nomeModel"] = "ClienteModel";
 
         echo view('templates/admin-header', $data);
         echo view("{$data["tabela"]}/index", $data);
@@ -612,18 +636,15 @@ class Cliente extends BaseController
 
     public function favoritar()
     {
-        if($_SESSION['cliente']) {
-        $request = \Config\Services::request();
-        $post = $request->getPost();
+        if ($_SESSION['cliente']) {
+            $request = \Config\Services::request();
+            $post = $request->getPost();
 
-        $post['clienteFK'] = $this->session->get('cliente')->id;
+            $post['clienteFK'] = $this->session->get('cliente')->id;
 
-        $this->model->favoritar($post['produtoFK'], $post['clienteFK'],false);
-       
-    
-    } else {
-        $_SESSION['favoritar'] = $post['id'];
+            $this->model->favoritar($post['produtoFK'], $post['clienteFK'], false);
+        } else {
+            $_SESSION['favoritar'] = $post['id'];
+        }
     }
-    }
-
 }
