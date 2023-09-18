@@ -30,11 +30,21 @@
                         </div>
                      </li>
                      <li>
-                        <a href="<?= PATHSITE ?>admin/anunciante/" class="btn btn-primary btn-rounded cleanfilter">Limpar Filtro</a>
+								<div class="select2-wrapper">
+									<label for="origem">Origem</label>
+									<select name="origem" id="origem" class="form-control js-example-basic-single">
+										<option value="">-- filtre por origem --</option>
+										<option value="home" <?=$get['origem'] == 'home' ? 'selected' : '' ?>>Página inicial</option>
+										<option value="contato" <?=$get['origem'] == 'contato' ? 'selected' : '' ?>>Página de contato</option>
+										<option value="whatsapp" <?=$get['origem'] == 'whatsapp' ? 'selected' : '' ?>>Balão WhatsApp</option>
+									</select>
+								</div>
+							</li>
+                     <li>
+                        <a href="<?= PATHSITE ?>admin/contato/" class="btn btn-primary btn-rounded cleanfilter">Limpar Filtro</a>
                      </li>
                   </ul>
                   <input type="hidden" name="tipo" value="<?= $get['tipo'] ?>">
-
                </form>
 
                <? if ($lista) {  ?>
@@ -62,7 +72,7 @@
                                        </td>
                                        <td>
                                           <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>">
-                                             <?= $elemento->email ?>
+                                             <?= $elemento->email ?? "(formulário WhatsApp) " ?>
                                           </a>
                                        </td>
                                        <td>

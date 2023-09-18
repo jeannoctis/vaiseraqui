@@ -170,9 +170,9 @@ ul {
 .btn-whatsapp-float:hover {
   background: #30C96B;
 }
-@media screen and (max-width: 750px) {
-  .btn-whatsapp-float {
-    display: none;
+@media screen and (max-width: 1000px) {
+  .internal-rent .btn-whatsapp-float {
+    bottom: 130px;
   }
 }
 
@@ -7190,9 +7190,13 @@ header.header-bg .group-title span {
 .blog-list .banner-ads {
   margin-top: 9.38rem;
   margin-bottom: 9.38rem;
+  height: 540px;
 }
 .blog-list .banner-ads .only-mobile {
   display: none;
+}
+.blog-list .banner-ads .container-medium {
+  height: 100%;
 }
 .blog-list .banner-ads .container-medium img.only-mobile {
   display: none;
@@ -7200,6 +7204,8 @@ header.header-bg .group-title span {
 .blog-list .banner-ads .container-medium img {
   display: block;
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 @media screen and (max-width: 769px) {
   .blog-list .banner-ads {
@@ -9712,7 +9718,7 @@ header.header-bg .group-title span {
   right: -40px;
   opacity: 0;
   border-radius: 8px;
-  width: 25%;
+  width: max(350px, 30%);
   overflow: hidden;
   z-index: 10;
   background-image: url("../images/wpp-wallpaper.jpg");
@@ -9763,6 +9769,16 @@ header.header-bg .group-title span {
   outline: none;
   font-size: 14px;
 }
+.form-wpp h5 {
+  color: #404041;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+}
+.form-wpp h5 a {
+  text-decoration: underline;
+  font-weight: 600;
+}
 
 .form-wpp button {
   background: linear-gradient(158deg, #30C96B 0%, #3CA765 100%) #30C96B;
@@ -9774,6 +9790,13 @@ header.header-bg .group-title span {
   background-color: #30C96B;
 }
 
-.form-wpp button a {
+.form-wpp a {
   color: inherit;
+}
+
+@media (max-width: 450px) {
+  .form-wpp.active {
+    right: 50%;
+    transform: translateX(50%);
+  }
 }

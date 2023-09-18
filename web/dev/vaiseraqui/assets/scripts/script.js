@@ -47,25 +47,26 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-// function listaWhatsapp() {
-//     $(".shown").length <= 0 ? ($(".whatsapp2").addClass("shown"), $(".ul-whatsapp").addClass("shown")) : ($(".whatsapp2").removeClass("shown"), $(".ul-whatsapp").removeClass("shown"));
-// }
-
 function toggleFormWpp () {
     const formWpp = document.querySelector(".form-wpp")
     formWpp.classList.toggle("active")
 }
-const sendWhatsApp = document.querySelector(".form-wpp button")
-sendWhatsApp.addEventListener("click", startWpp)
 
 function startWpp () {
-    console.log(this)
+    const formContent = document.querySelector(".form-wpp .fw-content")
+    const inputs = formContent.querySelectorAll("input")
+    const dataSerialized = {};
 
-    const formWpp = document.querySelector(".form-wpp form")
+    inputs.forEach(input => {
+        dataSerialized[input.name] = input.value
+    })
 
-    $.post(PATHSITE + "utils/startWpp/", formWpp.serialize(), function (data) {
+    $.post(PATHSITE + "utils/startWpp/", dataSerialized, function (data) {
         const response = jQuery.parseJSON(data);
-        console.log(response)
+        if (response.success) {
+            const formWpp = document.querySelector(".form-wpp")            
+            formWpp.classList.toggle("active")
+        }
     })
 }
 

@@ -38,8 +38,12 @@ class Contato extends BaseController
             ->orLike("telefone", $get['procura'])
             ->orLike("mensagem", $get['procura'])
             ->orLike("prefContato", $get['procura'])
-            ->groupEnd();
+         ->groupEnd();
       }
+		if (!empty($get['origem'])) {
+         $this->contatoModel->where("origem", $get['origem']);
+      }
+
 
 		$data['lista'] = $this->contatoModel->orderBy("id DESC")->paginate(25, 'contatos', $paginate);
       $data['pager'] = $this->contatoModel->pager;

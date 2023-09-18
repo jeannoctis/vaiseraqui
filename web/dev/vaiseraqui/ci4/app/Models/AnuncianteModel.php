@@ -78,8 +78,8 @@ class AnuncianteModel extends Model
         $data['anunciante'] = $this->find($_SESSION['anunciante']);
 
         $data['infoPagina'] = array();
-        $data['infoPagina']['fotoAnunciante'] = $data['anunciante']->arquivo;
-
+        $data['infoPagina']['fotoAnunciante'] = $data['anunciante']->arquivo;        
+        
         switch ($page) {
 
             case "inicio":
@@ -101,9 +101,9 @@ class AnuncianteModel extends Model
 
                     if ($result) {
                         $this->session->set('anunciante', $result->id);
-            ?>
+                        ?>
                         <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/inicio/'" />
-                <?
+                        <?
                     }
                     exit();
                 }

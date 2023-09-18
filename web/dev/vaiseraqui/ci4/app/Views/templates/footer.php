@@ -11,7 +11,7 @@
           <a href="<?= PATHSITE ?>aluguel-para-temporada/">Aluguel para temporada</a>
           <a href="<?= PATHSITE ?>saloes-de-festas-e-areas-de-lazer/">Salões de Festa e Áreas de Lazer</a>
           <a href="<?= PATHSITE ?>lojas-temporarias/">Lojas Temporárias</a>
-          <a href="<?= PATHSITE ?>prestadores-de-servico/">Prestadores de Serviços</a>
+          <a href="<?= PATHSITE ?>prestadores-de-servicos/">Prestadores de Serviços</a>
           <a href="<?= PATHSITE ?>hospedagens/">Hospedagem</a>
           <a href="<?= PATHSITE ?>eventos/">Eventos</a>
         </nav>
@@ -114,27 +114,55 @@
     <div class="form-wpp">
 
       <div class="fw-header">
-        <img src="<?=PATHSITE?>uploads/whatsapp/<?=$whatsapps[0]->arquivo?>" alt="">
-        <span>Name da Silva</span>
+        <picture>
+          <source srcset="<?= PATHSITE ?>uploads/whatsapp/<?= $whatsapps[0]->arquivo ?>.webp" type="image/webp">
+          <img src="<?= PATHSITE ?>uploads/whatsapp/<?= $whatsapps[0]->arquivo ?>" />
+        </picture>
+        <span><?= $whatsapps[0]->titulo ?></span>
       </div>
 
-      <form action="" class="fw-content">
+      <div class="fw-content">
+
         <input type="text" name="nome" placeholder="Seu nome" required>
-        <input type="text" name="telefone" placeholder="DDD + WhatsApp" required>
-        <input type="hidden" name="origem" value="Botão WhatsApp">
+        <input type="text" name="telefone" placeholder="DDD + WhatsApp" required class="tel" maxlength="16">
+        <input type="hidden" name="origem" value="whatsapp">
 
-        <button type="submit">
-          <a href="#">Iniciar conversa no WhatsApp</a>
-        </button>
+        <h5 class="recaptcha-label">
+          Este site é protegido por reCAPTCHA e Google <br>
+          <a rel="nofollow" target="_blank" href="https://policies.google.com/privacy">Política de Privacidade</a> e
+          <a rel="nofollow" target="_blank" href="https://policies.google.com/terms">Termos de serviço </a>.
+        </h5>
 
-      </form>
+        <?
+        $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+        $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
+        $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
+        $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
+        $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
+
+        if ($iphone || $android || $palmpre || $ipod || $berry == true) {
+          $usaApi = "api";
+        } else {
+          $usaApi = "web";
+        }
+        $removeChars = array("-", "(", ")", " ");
+
+        $linkwhatsapp = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $whatsapps[0]->telefone);
+        ?>
+
+        <a href="<?= $linkwhatsapp ?>" target="_blank">
+          <button onclick="contadorWhatsapp(<?= $whatsapps[0]->id ?>); cliqueWhatsapp(); startWpp()">
+            Iniciar conversa no WhatsApp
+          </button>
+        </a>
+
+      </div>
     </div>
 
     <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
       <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
       Fale conosco
     </button>
-
   <? } ?>
 
   <script>

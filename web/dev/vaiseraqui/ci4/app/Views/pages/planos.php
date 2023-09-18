@@ -45,7 +45,7 @@
 
             <picture>
                <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo2 ?>.webp" type="image/webp">
-               <img src="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo2 ?>" class="mockup only-mobile" alt="banner planos mobile" data-aos="fade-left"/>
+               <img src="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo2 ?>" class="mockup only-mobile" alt="banner planos mobile" data-aos="fade-left" />
             </picture>
 
             <a href="<?= $txPlanosHero->link ?>" class="btn-primary"><?= $txPlanosHero->botao ?></a>
@@ -74,17 +74,14 @@
                         </div>
                      <? } ?>
                   </div>
-
-                  <!-- Corrigir -->
-                  <div class="only-more-1440">
-                     <? foreach ($planosLinha as $plano) {
-                        view("templates/plano-linha-card", (array)$plano);
-                     } ?>
-                  </div>
+               </div>
+               <div class="only-more-1440">
+                  <? foreach ($planosLinha as $plano) {
+                     echo view("templates/plano-linha-card", (array)$plano);
+                  } ?>
                </div>
             </div>
          <? } ?>
-
          <span class="info-about-credit-card" data-aos="fade-up"><?= $txPlanoLinha->extra1 ?></span>
       </div>
    </section>

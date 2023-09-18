@@ -109,17 +109,24 @@
    <!-- Incluir -->
    <div class="banner-ads" data-aos="fade-up">
       <div class="container-medium">
-         <!-- <picture>
-            <source srcset="<?= PATHSITE ?>assets/images/banner-ads.png.webp" type="image/webp">
-            <img src="<?= PATHSITE ?>assets/images/banner-ads.png" alt="..." />
-         </picture>
-         <picture class="only-mobile">
-            <source srcset="<?= PATHSITE ?>assets/images/banner-ads-mobile.png.webp" type="image/webp">
-            <img src="<?= PATHSITE ?>assets/images/banner-ads-mobile.png" alt="..." />
-         </picture> -->
 
-         <img src="<?= PATHSITE ?>assets/images/banner-ads.png" alt="">
-         <img src="<?= PATHSITE ?>assets/images/banner-ads-mobile.png" alt="" class="only-mobile">
+         <a href="<?= $anuncioBannerH->link ?>">
+            <div class="banner-ads" data-aos="fade-up">
+               <div class="container-medium">
+
+                  <picture>
+                     <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>.webp" type="image/webp">
+                     <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>" class="only-mobile">
+                  </picture>
+
+                  <picture>
+                     <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>.webp" type="image/webp">
+                     <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>">
+                  </picture>
+
+               </div>
+            </div>
+         </a>
       </div>
    </div>
 

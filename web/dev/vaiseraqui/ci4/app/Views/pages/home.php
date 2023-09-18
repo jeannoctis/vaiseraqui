@@ -199,6 +199,7 @@
       <img src="<?= PATHSITE ?>uploads/banner/<?= $banner1->arquivo2 ?>" alt="">
     </div>
   </div>
+
   <section class="s-spaces my-spaces" id="espacos">
     <div class="container-medium">
       <header data-aos="fade-up">
@@ -1127,11 +1128,18 @@
     </div>
   </div>
 
-  <a href="<?= $anuncioBanner->link ?>">
+  <a href="<?= $anuncioBannerH->link ?>">
     <div class="banner-ads" data-aos="fade-up">
       <div class="container-medium">
-        <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>" alt="" class="only-mobile">
-        <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>" alt="Banner Ads">
+        <picture>
+          <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>.webp" type="image/webp">
+          <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>" class="only-mobile">
+        </picture>
+
+        <picture>
+          <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>.webp" type="image/webp">
+          <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>">
+        </picture>
       </div>
     </div>
   </a>

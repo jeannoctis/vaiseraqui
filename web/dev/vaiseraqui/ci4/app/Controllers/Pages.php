@@ -96,7 +96,7 @@ class Pages extends Controller
 
         $data['style_list'] = ['swiper'];
         $data['script_list'] = ['swiper', 'card-like', 'controller-agenda', 'controller-blog', 'controller-card', 'fs-lightbox', 'mask-date', 'mask-telefone', 'menu-tabs'];
-        $data['origem'] = "Home Page";
+        $data['origem'] = "home";
 
         $data["pagina"] = 1;
         $data['bodyClass'] = 'home';
@@ -1011,7 +1011,6 @@ class Pages extends Controller
                 $this->produtoModel->filtros($get);
                 $this->produtoModel->ordernar($get['ordem']);
 
-
                 $data['alugueisParaTemporada'] = $this->produtoModel->paginate(8, "anuncios", $paginate);
                 if ($data['alugueisParaTemporada']) {
                     foreach ($data['alugueisParaTemporada'] as $ind => $produto) {
@@ -1062,7 +1061,7 @@ class Pages extends Controller
 
                     $data['fotos'] = $this->produtoModel->fotos($data['metatag']->id, 99);
                     $data['espacoAtual']->valores = $this->produtoModel->valores($data['metatag']->id);
-                    // $data['espacoAtual']->fotoDestaque = $this->produtoModel->fotoDestaque($data['espacoAtual']->fotoFK);
+                    $data['responsavel'] = $this->produtoModel->responsavel($data['espacoAtual']->anuncianteFK);
                     $data['espacoAtual']->comodidades = $this->produtoModel->comodidades($data['metatag']->id);
                     $data['espacoAtual']->proximidades = $this->produtoModel->proximidades($data['metatag']->id);
                     $data['anunciante'] = $this->produtoModel->anunciante($data['metatag']->anuncianteFK);
@@ -1243,12 +1242,14 @@ class Pages extends Controller
                 break;
             case "blog":
                 $data['script_list'] = ['modal-filter'];
-
                 $data['bodyClass'] = 'blog-list';
                 $data['pagina'] = 5;
                 $data['get'] = $get = \request()->getGet();
                 $page = "blog-listagem";
 
+                $anuncioModel = \model("App\Models\AnuncioModel", false);
+                
+                $data['anuncioBannerH'] = $anuncioModel->find(11);
                 $paginate = \is_numeric($get['page_artigos']) ? $get['page_artigos'] : 1;
 
                 $this->artigoModel = \model("App\Models\ArtigoModel", false);
@@ -1275,6 +1276,7 @@ class Pages extends Controller
                     // Blog Interna
                     $data['style_list'] = ['swiper'];
                     $data['script_list'] = ['swiper'];
+                    $data['anuncioBannerV'] = $anuncioModel->find(12);
 
                     \helper("url");
                     $data['crrUrl'] = \current_url(); // Compartilhar: copiar link ?
@@ -1332,6 +1334,8 @@ class Pages extends Controller
                 $data['script_list'] = ['fancybox', 'swiper', 'card-like', 'controller-card', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
                 $data['pagina'] = 23;
                 $data['bodyClass'] = 'base-list-map';
+                $data['get'] = request()->getGet();
+                $data['form5Visible'] = "visible";
 
                 $produtoModel = model('App\Models\ProdutoModel', false);
                 $retorno = $produtoModel->hospedagens(11);
@@ -1429,7 +1433,7 @@ class Pages extends Controller
                 break;
             case "contato":
                 $data['script_list'] = ['mask-telefone', 'modal-filter'];
-                $data['origem'] = "Página Contato";
+                $data['origem'] = "contato";
 
                 $data['bodyClass'] = 'contact';
                 $data['pagina'] = 6;
