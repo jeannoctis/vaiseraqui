@@ -11,7 +11,7 @@
           <a href="<?= PATHSITE ?>aluguel-para-temporada/">Aluguel para temporada</a>
           <a href="<?= PATHSITE ?>saloes-de-festas-e-areas-de-lazer/">Salões de Festa e Áreas de Lazer</a>
           <a href="<?= PATHSITE ?>lojas-temporarias/">Lojas Temporárias</a>
-          <a href="<?= PATHSITE ?>prestadores-de-servico/">Prestadores de Serviços</a>
+          <a href="<?= PATHSITE ?>prestadores-de-servicos/">Prestadores de Serviços</a>
           <a href="<?= PATHSITE ?>hospedagens/">Hospedagem</a>
           <a href="<?= PATHSITE ?>eventos/">Eventos</a>
         </nav>
@@ -109,57 +109,61 @@
       </button>
     </div>
   <? } ?>
-  <? if ($whatsapps3) { ?>
-    <div class="ul-whatsapp">
-      <div class="topo-whats">Ainda tem dúvidas? Fale conosco!</div>
-      <div class="cont-wpp">
-        <ul>
-          <?
-          $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
-          $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
-          $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
-          $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
-          $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
+  <? if ($whatsapps) { ?>
 
-          if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-            $usaApi = "api";
-          } else {
-            $usaApi = "web";
-          }
-          $removeChars = array("-", "(", ")", " ");
+    <div class="form-wpp">
 
-          foreach ($whatsapps as $unidade) {
-
-            $linkwhatsapp = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $unidade->telefone);
-          ?>
-            <li>
-              <a onclick="contadorWhatsapp(<?= $unidade->id ?>); cliqueWhatsapp();" aria-label="Whatsapp" href="<?= $linkwhatsapp ?>" title="Enviar mensagem para <?= $unidade->titulo ?>" rel="noopener nofollow" target="_blank">
-                <div class="foto">
-                  <picture>
-                    <source srcset="<?= PATHSITE ?>uploads/whatsapp/<?= $unidade->arquivo ?>.webp" type="image/webp">
-                    <img height="30" src="<?= PATHSITE ?>uploads/whatsapp/<?= $unidade->arquivo ?>" />
-                  </picture>
-                </div>
-                <div class="info-wpp">
-                  <p>
-                    <?= $unidade->categoria ?>
-                  </p>
-                  <p>
-                    <?= $unidade->titulo ?>
-                  </p>
-                </div>
-              </a>
-            </li>
-          <? } ?>
-        </ul>
+      <div class="fw-header">
+        <picture>
+          <source srcset="<?= PATHSITE ?>uploads/whatsapp/<?= $whatsapps[0]->arquivo ?>.webp" type="image/webp">
+          <img src="<?= PATHSITE ?>uploads/whatsapp/<?= $whatsapps[0]->arquivo ?>" />
+        </picture>
+        <span><?= $whatsapps[0]->titulo ?></span>
       </div>
-    </div>
-  <? } ?>
 
-  <div onclick="listaWhatsapp();" class="whatsapp fonteBlack" data-aos="fade-down">
-    <img alt="" src="<?= PATHSITE ?>assets/images/whatsapp-branco.svg" height="20">
-    <span>Fale Conosco</span>
-  </div>
+      <div class="fw-content">
+
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <input type="text" name="telefone" placeholder="DDD + WhatsApp" required class="tel" maxlength="16">
+        <input type="hidden" name="origem" value="whatsapp">
+
+        <h5 class="recaptcha-label">
+          Este site é protegido por reCAPTCHA e Google <br>
+          <a rel="nofollow" target="_blank" href="https://policies.google.com/privacy">Política de Privacidade</a> e
+          <a rel="nofollow" target="_blank" href="https://policies.google.com/terms">Termos de serviço </a>.
+        </h5>
+
+        <?
+        $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
+        $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
+        $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
+        $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
+        $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
+
+        if ($iphone || $android || $palmpre || $ipod || $berry == true) {
+          $usaApi = "api";
+        } else {
+          $usaApi = "web";
+        }
+        $removeChars = array("-", "(", ")", " ");
+
+        $linkwhatsapp = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $whatsapps[0]->telefone);
+        ?>
+
+        <a href="<?= $linkwhatsapp ?>" target="_blank">
+          <button onclick="contadorWhatsapp(<?= $whatsapps[0]->id ?>); cliqueWhatsapp(); startWpp()">
+            Iniciar conversa no WhatsApp
+        </button>
+        </a>
+
+                </div>
+    </div>
+
+    <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
+      <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
+      Fale conosco
+    </button>
+          <? } ?>
 
   <script>
     var public_recaptcha = "<?= $configs->public_recaptcha ?>";

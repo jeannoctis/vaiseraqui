@@ -8,43 +8,10 @@
                         <img src="<?= PATHSITE ?>assets/images/icon-bread-crumbs.svg" alt="">
                             <a href="#">Hospedagem</a>
                     </nav>
-                    <span class="result"><?=count($produtos)?> hospedagens encontrados</span>
-                    <form class="form-order">
-                        <a href="#" class="btn-primary">
-                            <img src="<?= PATHSITE ?>assets/images/icon-button-filter.svg" alt="icon filter">
-                                Filtros
-                        </a>
-                        <div class="input-order j-input-order-select">
-                            <label for="order">
-                                <img src="<?= PATHSITE ?>assets/images/icon-order.svg" alt="">
-                                    <img class="active" src="<?= PATHSITE ?>assets/images/icon-order-active.svg" alt="">
-                                        Ordenar por:
-                                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 1L5 5L9 1" stroke="#404041" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>                    
-                                        <svg class="active" width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M1 1L5 5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>                    
-                                        </label>
-                                        <div class="modal-order">
-                                            <input type="text" readonly="" value="Menor preço - Maior preço">                
-                                                <div class="modal-order-select">
-                                                    <div class="wraper-scroll">
-                                                        <nav class="content">
-                                                            <a data-select-value="Maior preço - Menor preço" href="#maior-menor">Maior preço - Menor preço</a>
-                                                            <a data-select-value="Menor preço - Maior preço" href="#menor-maior" class="active">Menor preço - Maior preço</a>
-                                                            <a data-select-value="Entre R$800,00 e R$1.200,00" href="#entre-800-1200">Entre R$800,00 e R$1.200,00</a>
-                                                            <a data-select-value="Entre R$1.200,00 e R$1.600,00" href="#entre-1200-1600">Entre R$1.200,00 e R$1.600,00</a>
-                                                            <a data-select-value="Acima de R$1.600,00" href="#acima-1600">Acima de R$1.600,00</a>
-                                                            <a data-select-value="Mais visto" href="#mais-visto">Mais visto</a>
-                                                            <a data-select-value="Mais perto" href="#mais perto">Mais perto</a>
-                                                        </nav>
+                    <span class="result"><?= count($produtos) ?> hospedagens encontrados</span>
+
+                    <?= view("templates/order-filter", $get) ?>
                                                     </div>
-                                                </div>
-                                        </div>
-                                        </div>
-                                        </form>
-                                        </div>
                                         </header>
                                         <? if ($produtos) { ?>
                                             <div class="left-space" id="hospedagem">
@@ -52,7 +19,7 @@
                                                     <article class="card-item poster" data-aos="fade-up">
 
                                                         <div class="cover">
-                                                             <? if($produtos[0]->destaque == 1) {?>
+                                <? if ($produtos[0]->destaque == 1) { ?>
                                                             <span class="button-category">
                                                                 <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                     <path d="M6.1567 0.0905905C5.7792 0.311263 4.25266 1.25046 2.81554 2.81734C1.37866 4.38397 0 6.61324 0 9.40149H1C1 6.91932 2.22635 4.90103 3.57201 3.43386C4.91745 1.96693 6.351 1.08615 6.6837 0.891725L6.1567 0.0905905ZM9.7629 2.98543C8.5479 1.35269 7.2233 0.365588 6.8764 0.121038L6.2775 0.875964C6.5755 1.086 7.8113 2.0043 8.9443 3.52677L9.7629 2.98543ZM9.9998 3.54673C10.3371 3.13103 10.6197 2.86664 10.748 2.75405L10.0664 2.06427C9.9037 2.20711 9.5819 2.51022 9.2055 2.97405L9.9998 3.54673ZM10.2508 2.75297C10.6999 3.14697 13 5.3622 13 9.40055H14C14 4.99831 11.4885 2.55113 10.9321 2.06294L10.2508 2.75297ZM13 9.40055V9.40149H14V9.40055H13ZM13 9.40149C13 10.1442 12.8448 10.8797 12.5433 11.5659L13.4672 11.9266C13.8189 11.1261 14 10.2681 14 9.40149H13ZM12.5433 11.5659C12.2417 12.2521 11.7998 12.8756 11.2426 13.4008L11.9497 14.0674C12.5998 13.4547 13.1154 12.7272 13.4672 11.9266L12.5433 11.5659ZM11.2426 13.4008C10.6855 13.926 10.0241 14.3426 9.2961 14.6269L9.6788 15.4978C10.5281 15.1661 11.2997 14.6801 11.9497 14.0674L11.2426 13.4008ZM9.2961 14.6269C8.5681 14.9111 7.7879 15.0574 7 15.0574V16C7.9193 16 8.8295 15.8294 9.6788 15.4978L9.2961 14.6269ZM7 15.0574C6.2121 15.0574 5.4319 14.9111 4.7039 14.6269L4.32122 15.4978C5.1705 15.8294 6.0807 16 7 16V15.0574ZM4.7039 14.6269C3.97595 14.3426 3.31451 13.926 2.75736 13.4008L2.05025 14.0674C2.70026 14.6801 3.47194 15.1661 4.32122 15.4978L4.7039 14.6269ZM2.75736 13.4008C2.20021 12.8756 1.75825 12.2521 1.45672 11.5659L0.53284 11.9266C0.88463 12.7272 1.40024 13.4547 2.05025 14.0674L2.75736 13.4008ZM1.45672 11.5659C1.15519 10.8797 1 10.1442 1 9.40149H0C0 10.2681 0.18106 11.1261 0.53284 11.9266L1.45672 11.5659ZM10.748 2.75405C10.6154 2.87049 10.3961 2.88043 10.2508 2.75297L10.9321 2.06294C10.6808 1.84248 10.305 1.85478 10.0664 2.06427L10.748 2.75405ZM8.9443 3.52677C9.2 3.87045 9.7335 3.87499 9.9998 3.54673L9.2055 2.97405C9.3456 2.80137 9.6265 2.80208 9.7629 2.98543L8.9443 3.52677ZM6.6837 0.891725C6.5526 0.968362 6.3896 0.954958 6.2775 0.875964L6.8764 0.121038C6.6706 -0.0240444 6.3873 -0.044217 6.1567 0.0905905L6.6837 0.891725Z" fill="#3B9756"></path>
@@ -98,9 +65,6 @@
                                                                 <? } ?>
                                                             </div>
 
-                                                            <?
-                                                            ?>
-
                                                             <div>
                                                                 <p class="price">
                                                                     <span class="value">R$ <?= number_format($produtos[0]->preco, 2, ',', '.') ?></span> 
@@ -115,9 +79,7 @@
                                                                         <path d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z" />
                                                                     </svg>
                                                                 </span>
-
                                                             </div>
-
                                                         </div>
                                                     </article>
                                                 </a>
@@ -127,7 +89,7 @@
                                                             <article class="card-item" data-aos="fade-right">
                                                                 <a href="<?= PATHSITE ?>hospedagem/<?= $produto->identificador ?>/">
                                                                     <div class="cover">
-                                                                        <? if($produto->destaque == 1) {?>
+                                            <? if ($produto->destaque == 1) { ?>
                                                                         <span class="button-category">
                                                                             <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                                 <path d="M6.1567 0.0905905C5.7792 0.311263 4.25266 1.25046 2.81554 2.81734C1.37866 4.38397 0 6.61324 0 9.40149H1C1 6.91932 2.22635 4.90103 3.57201 3.43386C4.91745 1.96693 6.351 1.08615 6.6837 0.891725L6.1567 0.0905905ZM9.7629 2.98543C8.5479 1.35269 7.2233 0.365588 6.8764 0.121038L6.2775 0.875964C6.5755 1.086 7.8113 2.0043 8.9443 3.52677L9.7629 2.98543ZM9.9998 3.54673C10.3371 3.13103 10.6197 2.86664 10.748 2.75405L10.0664 2.06427C9.9037 2.20711 9.5819 2.51022 9.2055 2.97405L9.9998 3.54673ZM10.2508 2.75297C10.6999 3.14697 13 5.3622 13 9.40055H14C14 4.99831 11.4885 2.55113 10.9321 2.06294L10.2508 2.75297ZM13 9.40055V9.40149H14V9.40055H13ZM13 9.40149C13 10.1442 12.8448 10.8797 12.5433 11.5659L13.4672 11.9266C13.8189 11.1261 14 10.2681 14 9.40149H13ZM12.5433 11.5659C12.2417 12.2521 11.7998 12.8756 11.2426 13.4008L11.9497 14.0674C12.5998 13.4547 13.1154 12.7272 13.4672 11.9266L12.5433 11.5659ZM11.2426 13.4008C10.6855 13.926 10.0241 14.3426 9.2961 14.6269L9.6788 15.4978C10.5281 15.1661 11.2997 14.6801 11.9497 14.0674L11.2426 13.4008ZM9.2961 14.6269C8.5681 14.9111 7.7879 15.0574 7 15.0574V16C7.9193 16 8.8295 15.8294 9.6788 15.4978L9.2961 14.6269ZM7 15.0574C6.2121 15.0574 5.4319 14.9111 4.7039 14.6269L4.32122 15.4978C5.1705 15.8294 6.0807 16 7 16V15.0574ZM4.7039 14.6269C3.97595 14.3426 3.31451 13.926 2.75736 13.4008L2.05025 14.0674C2.70026 14.6801 3.47194 15.1661 4.32122 15.4978L4.7039 14.6269ZM2.75736 13.4008C2.20021 12.8756 1.75825 12.2521 1.45672 11.5659L0.53284 11.9266C0.88463 12.7272 1.40024 13.4547 2.05025 14.0674L2.75736 13.4008ZM1.45672 11.5659C1.15519 10.8797 1 10.1442 1 9.40149H0C0 10.2681 0.18106 11.1261 0.53284 11.9266L1.45672 11.5659ZM10.748 2.75405C10.6154 2.87049 10.3961 2.88043 10.2508 2.75297L10.9321 2.06294C10.6808 1.84248 10.305 1.85478 10.0664 2.06427L10.748 2.75405ZM8.9443 3.52677C9.2 3.87045 9.7335 3.87499 9.9998 3.54673L9.2055 2.97405C9.3456 2.80137 9.6265 2.80208 9.7629 2.98543L8.9443 3.52677ZM6.6837 0.891725C6.5526 0.968362 6.3896 0.954958 6.2775 0.875964L6.8764 0.121038C6.6706 -0.0240444 6.3873 -0.044217 6.1567 0.0905905L6.6837 0.891725Z" fill="#3B9756"></path>
@@ -314,98 +276,60 @@
                                         </section>
     <? } ?>
                                         </main>
-                                        <a 
-                                            href="https://www.google.com/maps/@51.5039653,-0.1246493,14.12z"
-                                            data-fancybox
-                                            class="btn-maps-mobile"
-                                            >
-                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M1 5.34737C1 4.15952 1 3.5656 1.30539 3.21919C1.41381 3.0962 1.54559 2.99776 1.69245 2.93005C2.1061 2.73932 2.64974 2.92714 3.73701 3.30276C4.56709 3.58954 4.98214 3.73293 5.40152 3.71808C5.55555 3.71263 5.70867 3.69138 5.85866 3.65463C6.26704 3.55459 6.63103 3.30307 7.35911 2.80003L8.43423 2.05712C9.36687 1.41275 9.83314 1.09057 10.3684 1.01628C10.9037 0.941984 11.4353 1.12566 12.4986 1.49301L13.4045 1.80598C14.1745 2.07201 14.5595 2.20502 14.7798 2.52169C15 2.83836 15 3.25898 15 4.10023V10.6527C15 11.8405 15 12.4344 14.6946 12.7808C14.5862 12.9039 14.4544 13.0023 14.3075 13.07C13.8939 13.2607 13.3503 13.0729 12.263 12.6972C11.4329 12.4105 11.0179 12.2671 10.5985 12.2819C10.4445 12.2874 10.2913 12.3086 10.1414 12.3454C9.73297 12.4454 9.36897 12.6969 8.64089 13.2L7.56577 13.9429C6.63313 14.5873 6.16686 14.9095 5.63161 14.9837C5.09635 15.058 4.5647 14.8743 3.5014 14.507L2.59547 14.194C1.82545 13.928 1.44043 13.795 1.22022 13.4783C1 13.1616 1 12.741 1 11.8997V5.34737Z" stroke="white" stroke-width="1.5"/>
-                                                <path d="M5.6665 4.11133V15.0002" stroke="white" stroke-width="1.5"/>
-                                                <path d="M10.3335 1V11.8889" stroke="white" stroke-width="1.5"/>
-                                            </svg>      
-                                            Mapa
-                                        </a>
 
+<div class="moda-filter-container">
+    <div action="#" class="presentation-form j-filter-modal-container">
 
-                                        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+        <header>
+            <h2>
+                <div class="wraper-icon">
+                    <img src="<?= PATHSITE ?>assets/images/icon-search-box.svg" alt="icon search">
+                </div>
+                <?= $txMenuFiltro->titulo ?>
+            </h2>
+            <button class="open-modal j-open-form-modal">
+                <svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 2L15.5 14L29 2" stroke="#404041" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <svg class="active" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0,0,256,256">
+                    <g fill="#404041" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                        <g transform="scale(10.66667,10.66667)">
+                            <path d="M4.99023,3.99023c-0.40692,0.00011 -0.77321,0.24676 -0.92633,0.62377c-0.15312,0.37701 -0.06255,0.80921 0.22907,1.09303l6.29297,6.29297l-6.29297,6.29297c-0.26124,0.25082 -0.36647,0.62327 -0.27511,0.97371c0.09136,0.35044 0.36503,0.62411 0.71547,0.71547c0.35044,0.09136 0.72289,-0.01388 0.97371,-0.27511l6.29297,-6.29297l6.29297,6.29297c0.25082,0.26124 0.62327,0.36648 0.97371,0.27512c0.35044,-0.09136 0.62411,-0.36503 0.71547,-0.71547c0.09136,-0.35044 -0.01388,-0.72289 -0.27512,-0.97371l-6.29297,-6.29297l6.29297,-6.29297c0.29576,-0.28749 0.38469,-0.72707 0.22393,-1.10691c-0.16075,-0.37985 -0.53821,-0.62204 -0.9505,-0.60988c-0.2598,0.00774 -0.50638,0.11632 -0.6875,0.30273l-6.29297,6.29297l-6.29297,-6.29297c-0.18827,-0.19353 -0.4468,-0.30272 -0.7168,-0.30273z"></path>
+                        </g>
+                    </g>
+                </svg>
+            </button>
+        </header>
 
+        <nav class="presentation-form-menu">
+            <a href="#" data-form="form5">
+                <svg class="isActive" width="42" height="34" viewBox="0 0 42 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 23.5C1.4 23.5 1 24.5 1 25V31.5C1 32.3 1.66667 32.5 2 32.5H3.5C4.3 32.5 4.83333 32.1667 5 32L7.5 29.5H34L36.5 32C36.9 32.4 37.6667 32.5 38 32.5H39.5C40.7 32.5 41 31.8333 41 31.5V25C41 23.8 39.6667 23.5 39 23.5H3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3 22.5715V19.1429C3 18.2857 3.19726 17 5.95891 17C8.72057 17 27.1644 17 36.0411 17C38.0138 17 39 17.1714 39 19.5715C39 21.9715 39 22.8572 39 23" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2.5 1V23.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M39.5 1V23.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2.5 5H39.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M9.5 16.5V12.5C9.5 11.8333 10 10.5 12 10.5C14 10.5 17.1667 10.5 18.5 10.5C19.3333 10.5 21 10.9 21 12.5C21 14.1 21 15.8333 21 16.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M21 16.5V12.5C21 11.8333 21.5 10.5 23.5 10.5C25.5 10.5 28.6667 10.5 30 10.5C30.8333 10.5 32.5 10.9 32.5 12.5C32.5 14.1 32.5 15.8333 32.5 16.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
 
+                <svg width="42" height="34" viewBox="0 0 42 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 23.5C1.4 23.5 1 24.5 1 25V31.5C1 32.3 1.66667 32.5 2 32.5H3.5C4.3 32.5 4.83333 32.1667 5 32L7.5 29.5H34L36.5 32C36.9 32.4 37.6667 32.5 38 32.5H39.5C40.7 32.5 41 31.8333 41 31.5V25C41 23.8 39.6667 23.5 39 23.5H3Z" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3 22.5715V19.1429C3 18.2857 3.19726 17 5.95891 17C8.72057 17 27.1644 17 36.0411 17C38.0138 17 39 17.1714 39 19.5715C39 21.9715 39 22.8572 39 23" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2.5 1V23.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M39.5 1V23.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2.5 5H39.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M9.5 16.5V12.5C9.5 11.8333 10 10.5 12 10.5C14 10.5 17.1667 10.5 18.5 10.5C19.3333 10.5 21 10.9 21 12.5C21 14.1 21 15.8333 21 16.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M21 16.5V12.5C21 11.8333 21.5 10.5 23.5 10.5C25.5 10.5 28.6667 10.5 30 10.5C30.8333 10.5 32.5 10.9 32.5 12.5C32.5 14.1 32.5 15.8333 32.5 16.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                Hospedagem
+            </a>
+        </nav>
 
-                                        <script type="module">
-                                                            // Controla modal de mapa
-                                                            const btnMaps = document.querySelector('.btn-maps-mobile')
-                                                            btnMaps.addEventListener('click', (e) => {
-                                                                e.preventDefault()
-                                                                Fancybox.show([
-                                                                    {
-                                                                        src: "https://www.google.com/maps/@51.5039653,-0.1246493,14.12z",
-                                                                        width: 800,
-                                                                        height: 600,
-                                                                    },
-                                                                ]);
-                                                            })
+        <div class="presentation-form-content">
+            <?= view("templates/form5") ?>
+        </div>
 
-                                                            // AOS
-                                                            AOS.init({
-                                                                once: true,
-                                                                duration: 1000
-                                                            });
+    </div>
+</div>
 
-                                                            import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.mjs'
-
-                                                                    const swiperImoveis = new Swiper('.imoveisSwiper', {
-                                                                        slidesPerView: 1.1,
-                                                                        spaceBetween: 12,
-                                                                        cssMode: true,
-                                                                        navigation: {
-                                                                            nextEl: '.swiper-button-next',
-                                                                            prevEl: '.swiper-button-prev',
-                                                                        },
-                                                                        pagination: {
-                                                                            el: '.swiper-pagination',
-                                                                        },
-                                                                        breakpoints: {
-                                                                            650: {
-                                                                                slidesPerView: 1.4,
-                                                                            },
-                                                                            930: {
-                                                                                slidesPerView: 2.4,
-                                                                            },
-                                                                            1120: {
-                                                                                slidesPerView: 4,
-                                                                            }
-                                                                        }
-                                                                    })
-
-                                                            // Controller swiper callendar
-                                                            const buttonNext = document.querySelector('.navigation-swiper-blog > .next')
-                                                            const buttonPrev = document.querySelector('.navigation-swiper-blog > .prev')
-
-                                                            buttonNext.addEventListener('click', function (e) {
-                                                                e.preventDefault()
-                                                                console.log('next')
-                                                                swiperImoveis.slideNext()
-                                                            })
-
-                                                            buttonPrev.addEventListener('click', function (e) {
-                                                                e.preventDefault()
-                                                                console.log('prev')
-                                                                swiperImoveis.slidePrev()
-                                                            })
-
-                                                            swiperImoveis.on('reachBeginning', function () {
-                                                                buttonNext.classList.add('active')
-                                                                buttonPrev.classList.remove('active')
-                                                            });
-                                                            swiperImoveis.on('reachEnd', function () {
-                                                                buttonNext.classList.remove('active')
-                                                                buttonPrev.classList.add('active')
-                                                            });
-
-                                                            // Form Select
-                                                            const boxes = document.querySelectorAll('.j-box-select')
-                                                            boxes.forEach((box, key) => {
-                                                                new Selector(box)
-                                                            })
-                                        </script>

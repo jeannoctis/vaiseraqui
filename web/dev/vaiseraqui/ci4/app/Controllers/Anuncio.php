@@ -267,6 +267,10 @@ class Anuncio extends BaseController
       $this->produtoCategoriaModel = \model("App\Models\ProdutoCategoriaModel", false);
       $data['categoriasDisponiveis'] = $this->produtoCategoriaModel->where("tipoFK", "6")->findAll();
 
+      foreach ($data['categoriasDisponiveis'] as $cat) {
+         $categoriasServicos[$cat->id] = $cat->titulo;
+      }
+
       $IDsCatDisponiveis = \array_column($data['categoriasDisponiveis'], "id");
 
       $this->produtoModel = \model('App\Models\ProdutoModel', false)
@@ -282,8 +286,23 @@ class Anuncio extends BaseController
       $data['resultado'] = '';
 
       if($post) {
+         foreach($post as $key => $item) {
+            if(empty($item)) {
+               $post[$key] = NULL;
+            }
+         }
          
+         $categoriaAtual = $categoriasServicos[$post['categoriaFK']];
+         $post['titulo'] = "Anúncios Serviços - Categoria {$categoriaAtual}";
+         $post['tipo'] = "servicocategoria";
+
+         if ($id) {
+            $post["id"] = $id;
+            $data['salvou'] = $this->model->save($post);
+         } else {
+            $data['salvou'] = $this->model->insert($post);
 }
+      }
 
       if ($id) {
          $data['resultado'] = $this->model->find($id);

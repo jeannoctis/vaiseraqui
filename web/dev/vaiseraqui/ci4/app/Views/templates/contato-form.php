@@ -35,6 +35,8 @@
             <textarea name="message" id="message" placeholder="Escreva aqui sua mensagem"></textarea>
          </div>
          <input type="hidden" name="origem" value="<?= $origem ?>">
+         <input type="hidden" name="g-recaptcha-response" class="g-recaptcha-response" value="">
+
          <button type="submit">Enviar</button>
       </form>
    </div>

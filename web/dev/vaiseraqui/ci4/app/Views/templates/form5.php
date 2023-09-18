@@ -1,4 +1,4 @@
-<form method="get" class="form5">
+<form method="get" class="form5 <?= $form5Visible ?>">
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>

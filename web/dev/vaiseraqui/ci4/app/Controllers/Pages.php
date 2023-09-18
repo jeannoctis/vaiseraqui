@@ -87,12 +87,14 @@ class Pages extends Controller {
         return $data;
     }
 
-    public function index() {
+    public function index()
+    {
         helper("date");
         $data = $this->buscaGeral();
 
         $data['style_list'] = ['swiper'];
         $data['script_list'] = ['swiper', 'card-like', 'controller-agenda', 'controller-blog', 'controller-card', 'fs-lightbox', 'mask-date', 'mask-telefone', 'menu-tabs'];
+        $data['origem'] = "home";
 
         $data["pagina"] = 1;
         $data['bodyClass'] = 'home';
@@ -102,7 +104,7 @@ class Pages extends Controller {
         $bannerModel = model('App\Models\BannerModel', false);
         $data['banner1'] = $bannerModel->find(1);
 
-       
+        $data['txMenuFiltro'] = $this->textoModel->find(8);
         $data['txSecaoEspacos'] = $this->textoModel->find(15);
         $data['txSecaoPrestServicos'] = $this->textoModel->find(16);
         $data['txConviteAnunciante1'] = $this->textoModel->find(9);
@@ -449,7 +451,11 @@ class Pages extends Controller {
 
         $data['anuncioBannerH'] = $anuncioModel->find(11);
         
-
+        $categoriasComAnuncio = $produtoCategoriaModel->resetQuery()
+            ->select("produto_categoria.id, produto_categoria.titulo, produto_categoria.arquivo, a.produtoFK1")
+            ->join("anuncio a", "a.categoriaFK = produto_categoria.id")
+            ->where("a.tipo", "servicocategoria")
+            ->findAll();
         /*
           $itemModel = model('App\Models\ItemModel', false);
 
@@ -526,11 +532,12 @@ class Pages extends Controller {
         echo view('templates/footer', $data);
     }
 
-    public function redirects($segments) {
-        
+    public function redirects($segments)
+    {
     }
 
-    public function anunciante($page = 'home') {
+    public function anunciante($page = 'home')
+    {
         $segments = $this->request->uri->getSegments();
         $anuncianteModel = model('App\Models\AnuncianteModel', false);
         $anuncianteModel->verPagina($segments);
@@ -546,7 +553,6 @@ class Pages extends Controller {
         $footer = "footer";
         $data['style_list'] = [];
         $data['script_list'] = [];
-
         switch ($page) {
             case "area-do-anunciante":
                 $this->anunciante($page);
@@ -690,8 +696,6 @@ class Pages extends Controller {
                     $data['emAlta'][1]->fotos = $produtoModel->fotos($emAlta->produtoFK2, 4, true);
                     $data['emAlta'][1]->datas =  $produtoModel->datas($emAlta->produtoFK2);
                 }
-                
-                    
                 } else {
                     $produtoDataModel = \model("App\Models\ProdutoDataModel", false);
                     $produtoDataModel->select('data');
@@ -1005,7 +1009,6 @@ class Pages extends Controller {
                         $this->produtoModel->filtros($get);
                         $this->produtoModel->ordernar($get['ordem']);
                         
-                        
                 $data['alugueisParaTemporada'] = $this->produtoModel->paginate(8, "anuncios", $paginate);
                 if ($data['alugueisParaTemporada']) {
                     foreach ($data['alugueisParaTemporada'] as $ind => $produto) {
@@ -1040,6 +1043,8 @@ class Pages extends Controller {
                 if ($segments[1] && !is_numeric($segments[1])) {
                     helper('encrypt');
 
+                    unset($data['pagina']);
+                    
                     $data['espacoAtual'] = $data['metatag'] = $this->produtoModel
                             ->resetQuery()
                             ->dadosCard()
@@ -1076,7 +1081,7 @@ class Pages extends Controller {
                     foreach ($data['servicosEmAlta'] as $ind => $emAlta) {
                         $data['servicosEmAlta'][$ind]->fotos = $this->produtoModel->fotos($emAlta->id, 4);
                     }
-                    $data['coordenadas'] = array();
+           
                 }
                 
                 if(!$data['coordenadas']){
@@ -1237,12 +1242,14 @@ class Pages extends Controller {
                 break;
             case "blog":
                 $data['script_list'] = ['modal-filter'];
-
                 $data['bodyClass'] = 'blog-list';
                 $data['pagina'] = 5;
                 $data['get'] = $get = \request()->getGet();
                 $page = "blog-listagem";
 
+                $anuncioModel = \model("App\Models\AnuncioModel", false);
+                
+                $data['anuncioBannerH'] = $anuncioModel->find(11);
                 $paginate = \is_numeric($get['page_artigos']) ? $get['page_artigos'] : 1;
 
                 $this->artigoModel = \model("App\Models\ArtigoModel", false);
@@ -1261,13 +1268,7 @@ class Pages extends Controller {
 
                 $this->categoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
                 $this->categoriaArtigoModel->where("categoriaArtigo.id IN (SELECT categoriaFK FROM artigo WHERE artigo.excluido IS NULL)");
-                $data['categorias_artigos'] = $this->categoriaArtigoModel->findAll();
-
-                if ($data['categorias_artigos']) {
-                    foreach ($data['categorias_artigos'] as $categoria) {
-                        $data['cats'][$categoria->id] = $categoria->titulo;
-                    }
-                }
+                $data['cats'] = $this->categoriaArtigoModel->categorias();                
 
                 $data['artigoAtual'] = $this->artigoModel->where("identificador", $segments[1])->first();
 
@@ -1275,6 +1276,7 @@ class Pages extends Controller {
                     // Blog Interna
                     $data['style_list'] = ['swiper'];
                     $data['script_list'] = ['swiper'];
+                    $data['anuncioBannerV'] = $anuncioModel->find(12);
 
                     \helper("url");
                     $data['crrUrl'] = \current_url(); // Compartilhar: copiar link ?
@@ -1332,6 +1334,8 @@ class Pages extends Controller {
                 $data['script_list'] = ['fancybox', 'swiper', 'card-like', 'controller-card', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
                 $data['pagina'] = 23;
                 $data['bodyClass'] = 'base-list-map';
+                $data['get'] = request()->getGet();
+                $data['form5Visible'] = "visible";
 
                 $produtoModel = model('App\Models\ProdutoModel', false);
                 $retorno = $produtoModel->hospedagens(11);
@@ -1429,6 +1433,7 @@ class Pages extends Controller {
                 break;
             case "contato":
                 $data['script_list'] = ['mask-telefone', 'modal-filter'];
+                $data['origem'] = "contato";
 
                 $data['bodyClass'] = 'contact';
                 $data['pagina'] = 6;
@@ -1514,8 +1519,8 @@ class Pages extends Controller {
                             $data["erroLogin"] = "E-mail/usu&aacute;rio e/ou senha inv&aacute;lidos";
                         } else {
                             $this->session->set('cliente', $result);
-                            if($_SESSION['favoritar']) {
-                            $clienteModel->favoritar($_SESSION['favoritar'], $result->id,true);
+                            if ($_SESSION['favoritar']) {
+                                $clienteModel->favoritar($_SESSION['favoritar'], $result->id, true);
                             }
                             session_write_close();
                             ?>
@@ -1524,7 +1529,6 @@ class Pages extends Controller {
                         }
                     }
                 }
-
 
                 unset($_POST);
                 break;
@@ -1640,7 +1644,7 @@ class Pages extends Controller {
                         ->whereIn("produto.id", $data['todosFavoritos']);
                     $data['favoritos'] = $produtoModel->findAll();
                
-                foreach($data['favoritos'] as $ind => $favorito) {
+                    foreach ($data['favoritos'] as $ind => $favorito) {
                     $favorito->fotos = $produtoModel->fotos($favorito->id, 4, true);
                     }
                      }
@@ -1768,7 +1772,7 @@ class Pages extends Controller {
                                 $this->session->set('cliente', $result);
                                 $data["sucessoCadastro"] = TRUE;
                                 
-                                if($_SESSION['favoritar']) {
+                                if ($_SESSION['favoritar']) {
                                 $clienteModel->favoritar($_SESSION['favoritar'], $result->id, true);
                                 }
                                 
@@ -1787,6 +1791,57 @@ class Pages extends Controller {
                 $data['categorias'] = $produtoCategoriaModel->findAll();
 
                 break;
+            case "busca":
+                $data['style_list'] = ['swiper'];
+                $data['script_list'] = ['swiper', 'card-like', 'controller-card'];
+
+                $data['pagina'] = 26;
+                $data['bodyClass'] = 'blog-list-categories';
+
+                $data['get'] = $get = request()->getGet();
+
+                if($get['busca']) {
+                    $produtoModel = \model("App\Models\ProdutoModel", false);
+                    $artigoModel = \model("App\Models\ArtigoModel", false);
+        }
+
+                // busca artigos
+                $artigoModel->select("artigo.*")
+                    ->like("artigo.titulo", $get['busca'])
+                    ->orLike("chamada", $get['busca'])
+                    ->orLike("texto", $get['busca'])
+                    ->orlike("ca.titulo", $get['busca'])
+                    ->join("categoriaArtigo ca", "artigo.categoriaFK = ca.id");
+                $data['buscaArtigo'] = $artigoModel->findAll();
+
+                $categoriaArtigoModel = \model("App\Models\CategoriaArtigoModel", false);
+                $data['cats'] = $categoriaArtigoModel->categorias();
+
+                // busca produtos
+                $produtoModel->dadosCard()                    
+                    ->like("produto.titulo", $get['busca'])
+                    ->orLike("produto.descricao", $get['busca'])
+                    ->orLike("produto.detalhes", $get['busca'])
+                    ->orLike("produto.endereco", $get['busca'])
+                    ->orLike("produto.bairro", $get['busca'])
+                    ->orLike("c.titulo", $get['busca'])
+                    ->orLike("e.titulo", $get['busca'])
+                    ->orLike("produto.principaiscomodidades", $get['busca'])
+                    ->orLike("produto.itensdisponiveis", $get['busca'])
+                    ->orLike("produto.condominio", $get['busca'])
+                    ->orLike("cd.titulo", $get['busca'])
+                    ->orLike("cd.menu", $get['busca'])
+                    ->orLike("pc.titulo", $get['busca'])
+                    ->join("produto_cardapio cd", "cd.produtoFK = produto.id");
+                $data['buscaProduto'] = $produtoModel->findAll();
+
+                if($data['buscaProduto']) {
+                    foreach($data['buscaProduto'] as $produto) {
+                        $produto->fotos = $produtoModel->fotos($produto->id, 4, true);
+                    }
+                }
+
+            break;
         }
 
         if (!is_file(APPPATH . '/Views/pages/' . $page . '.php')) {
@@ -1837,7 +1892,8 @@ class Pages extends Controller {
         echo view("templates/" . $footer, $data);
     }
 
-    public function recebeEmail($private_recaptcha, $post) {
+    public function recebeEmail($private_recaptcha, $post)
+    {
         $token = $_POST['g-recaptcha-response'];
         $secret = $private_recaptcha;
         $ip = $_SERVER["REMOTE_ADDR"];

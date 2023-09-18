@@ -16,11 +16,11 @@
                <? if ($lista) { ?>
                   <div class='col-xs-12 paddingZeroM'>
                      <form method='post' id='form'>
-
                         <div class="table-responsive">
-                           <table class="table  ">
+                           <table class="table">
                               <thead>
                                  <tr>
+                                    <th class='menorTh'>Excluir</th>
                                     <th>Categoria</th>
                                     <th>Descrição</th>
                                  </tr>
@@ -28,13 +28,14 @@
                               <tbody>
                                  <? foreach ($lista as $item) { ?>
                                     <tr class="ui-state-default sort" rel="<?= $item->id ?>">
+													<td><input type="checkbox" name="excluir[]" value="<?= $item->id ?>" /> </td>
                                        <td>
-                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/categoriaserv/">
-                                             Destaques / Em Alta
+                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/servicocategoria/<?= encode($item->id) ?>">
+                                             <?= $item->titulo ?>
                                           </a>
                                        </td>
                                        <td>
-                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/categoriaserv/">
+                                          <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/servicocategoria/<?= encode($item->id) ?>">
                                              Descrição...
                                           </a>
                                        </td>
@@ -55,7 +56,6 @@
                   </a>
                   <input type="submit" name="salvar" value="Salvar e atualizar" class="btn btn-success btn-rounded waves-effect mb-1">
                </div>
-
             </div>
          </div>
       </div>

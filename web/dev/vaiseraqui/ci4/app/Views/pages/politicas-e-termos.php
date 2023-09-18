@@ -1,6 +1,7 @@
 <main>
   <article>
     <div class="container-medium">
+      
       <nav class="navigation-breadcrumb" data-aos="fade-up">
         <a href="<?= PATHSITE ?>">Início</a>
         <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">

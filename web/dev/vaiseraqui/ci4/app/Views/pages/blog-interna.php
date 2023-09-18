@@ -31,7 +31,7 @@
 
     <div class="content two-columns">
       <div class="column">
-        <a href="<?=PATHSITE?>blog-listagem-categoria.html" class="tagline" data-aos="fade-up"><?= $cats[$artigoAtual->categoriaFK] ?></a>
+        <a href="<?= PATHSITE ?>blog-listagem-categoria.html" class="tagline" data-aos="fade-up"><?= $cats[$artigoAtual->categoriaFK] ?></a>
         <h1 data-aos="fade-up"><?= $artigoAtual->titulo ?></h1>
         <div class="post-main-cover" data-aos="fade-up">
           <img src="<?= PATHSITE ?>uploads/artigo/<?= $artigoAtual->arquivo ?>" alt="capa do artigo">
@@ -67,7 +67,14 @@
 
       <div class="column">
         <aside>
-          <img src="<?=PATHSITE?>assets/images/banner-scroll.png" alt="">
+
+          <a href="<?= $anuncioBannerV->link ?>">
+            <picture>
+              <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerV->arquivo ?>.webp" type="image/webp">
+              <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerV->arquivo ?>">
+            </picture>
+          </a>
+
         </aside>
       </div>
 
@@ -85,7 +92,7 @@
                 <div class="swiper-slide">
                   <?= view("templates/blog-card", (array)$artigo) ?>
                 </div>
-              <? } ?>              
+              <? } ?>
             </div>
             <div class="swiper-pagination"></div>
           </div>
@@ -113,26 +120,3 @@
   <? } ?>
 
 </main>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-<script src="<?=PATHSITE?>assets/scripts/header.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/menu-mobile.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/form-filter.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/select.js"></script>
-<script src="<?=PATHSITE?>assets/scripts/modal-filter.js"></script>
-<script type="module" src="<?=PATHSITE?>assets/scripts/controller-page-internal-3.js"></script> -->
-
-<script>
-  // AOS.init({
-  //   once: true,
-  //   duration: 1000
-  // });
-
-  // // Form Select
-  // const boxes = document.querySelectorAll('.j-box-select')
-  // boxes.forEach((box, key) => {
-  //   new Selector(box)
-  // })
-</script>

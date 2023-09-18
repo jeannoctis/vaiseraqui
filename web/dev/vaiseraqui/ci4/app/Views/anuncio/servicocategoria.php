@@ -9,12 +9,12 @@
                   <div class="card-content">
 
                      <div class='col-xs-12 form-group'>
-                        <label for="categoriaservico">Categoria </label>
-                        <select name="categoriaservico" id="categoriaservico" class="form-control js-example-basic-single">
+                        <label for="categoriaFK">Categoria </label>
+                        <select name="categoriaFK" id="categoriaFK" class="form-control js-example-basic-single">
                            <option value="">-- selecione o categoria de Prestadore de Serviços --</option>
                            <? if ($categoriasDisponiveis) { ?>
                               <? foreach ($categoriasDisponiveis as $categoria) { ?>
-                                 <option value="<?= $categoria->id ?>" <?= in_array($categoria->id, $IDsExistentes) ?> <?= $resultado->categoriaFK == $categoria->id ? 'selected' : '' ?>>
+                                 <option value="<?= $categoria->id ?>" <?= in_array($categoria->id, $IDsExistentes) ? 'disabled' : '' ?> <?= $resultado->categoriaFK == $categoria->id ? 'selected' : '' ?>>
                                     <?= $categoria->titulo ?>
                                  </option>
                               <? } ?>

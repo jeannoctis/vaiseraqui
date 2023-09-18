@@ -33,7 +33,7 @@
 													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
 													<td>
 														<a href="<?= PATHSITE ?>admin/<?= $tabelaFK ?>/<?= $tabelaFKF ?>/<?= encode($idFK) ?>/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=<?= $get['tipo'] ?>">
-															<?= $elemento->titulo ?>
+															<?= $elemento->titulo ? $elemento->titulo : "(vídeo sem título)" ?>
 														</a>
 													</td>
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>

@@ -63,6 +63,9 @@ $routes->group('admin', function ($routes) {
     $routes->add('anuncio/servicocategoria', 'Anuncio::servicocategoria');
     $routes->add('anuncio/servicocategoria/(:any)', 'Anuncio::servicocategoria/$i');
     
+    $routes->add('anuncio/servicocategoria', 'Anuncio::servicocategoria');
+    $routes->add('anuncio/servicocategoria/(:any)', 'Anuncio::servicocategoria/$i');
+    
     $routes->add('review', 'Review::index');
     $routes->add('review/form', 'Review::form');
     $routes->add('review/form/(:any)', 'Review::form/$i');
@@ -197,6 +200,7 @@ $routes->add('utils/visitaPagina', 'Utils::visitaPagina');
 $routes->add('utils/upload', 'Utils::upload');
 $routes->add('utils/instagram', 'Utils::instagram');
 $routes->add('utils/deleteCard', 'Utils::deleteCard');
+$routes->add('utils/startWpp', 'Utils::startWpp');
 $routes->add('review/reviewInfo', 'Review::reviewInfo');
 $routes->add('(:any)', 'Pages::view/$1');
 

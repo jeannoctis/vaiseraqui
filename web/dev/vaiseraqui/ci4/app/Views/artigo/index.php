@@ -48,12 +48,13 @@
 							</li>
 						</ul>
 					</form>
+					
 					<? if ($artigos) {  ?>
 						<div class='col-xs-12 paddingZeroM'>
 							<form method='post' id='form'>
 
 								<div class="table-responsive">
-									<table class="table  sortable">
+									<table class="table sortable">
 										<thead>
 											<tr>
 												<th class='menorTh'>Excluir</th>

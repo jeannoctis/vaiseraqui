@@ -169,13 +169,14 @@ ul {
   background: linear-gradient(158deg, #30C96B 0%, #3CA765 100%) #30C96B;
   transition: background 0.3s ease;
   z-index: 4;
+  border: none;
 }
 .btn-whatsapp-float:hover {
   background: #30C96B;
 }
-@media screen and (max-width: 750px) {
-  .btn-whatsapp-float {
-    display: none;
+@media screen and (max-width: 1000px) {
+  .internal-rent .btn-whatsapp-float {
+    bottom: 130px;
   }
 }
 
@@ -2171,7 +2172,7 @@ select {
 .s-text-and-slider .slider .top a > svg.active {
   display: none;
 }
-.s-text-and-slider .slider .top a:hover {
+.s-text-and-slider .slider .top a:is(:hover, .active) {
   background-color: #932327;
 }
 .s-text-and-slider .slider .top a:is(:hover, .active) svg {
@@ -2294,10 +2295,43 @@ select {
   margin-top: 0rem;
 }
 .s-text-and-slider.page-event-internal .cover {
+  position: relative;
   border-radius: 30px;
   overflow: hidden;
-  z-index: -1;
+  z-index: 0;
   max-height: 600px;
+}
+.s-text-and-slider.page-event-internal .cover .top {
+  display: flex;
+  align-items: center;
+  gap: 0.62rem;
+  position: absolute;
+  left: 1.88rem;
+  top: 1.88rem;
+  z-index: 3;
+}
+.s-text-and-slider.page-event-internal .cover .top a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.312rem;
+  height: 3.312rem;
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  transition: 200ms;
+}
+
+.s-text-and-slider.page-event-internal .cover .top a > svg.active {
+  display: none;
+}
+.s-text-and-slider.page-event-internal .cover .top a:is(:hover, .active) {
+  background-color: #932327;
+}
+.s-text-and-slider.page-event-internal .cover .top a:is(:hover, .active) svg {
+  display: none;
+}
+.s-text-and-slider.page-event-internal .cover .top a:is(:hover, .active) svg.active {
+  display: block;
 }
 @media screen and (max-width: 769px) {
   .s-text-and-slider.page-event-internal {
@@ -3314,6 +3348,7 @@ header.header-bg .group-title span {
   border-radius: 1.25rem;
   border: 1px solid #BBB;
   transition: 200ms ease-in-out;
+  overflow: hidden;
 }
 .post-article .cover {
   height: 19.875rem;
@@ -3323,6 +3358,7 @@ header.header-bg .group-title span {
   display: block;
   width: 100%;
   height: 100%;
+  object-fit: cover;
 }
 .post-article .cover .tagline {
   display: block;
@@ -4548,6 +4584,7 @@ header.header-bg .group-title span {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.62rem;
+  align-items: start;
 }
 .home .s-spaces .container-medium a.btn-primary {
   font-size: 1.25rem;
@@ -4822,6 +4859,7 @@ header.header-bg .group-title span {
   line-height: 120.1%;
   letter-spacing: -0.125rem;
   margin-bottom: 10px;
+  max-width: 453px;
 }
 .home .plan-and-ads .container-medium .item p {
   color: #FFFFFF;
@@ -4876,9 +4914,15 @@ header.header-bg .group-title span {
 }
 .home .banner-ads {
   margin-bottom: 12.5rem;
+  height: 540px;
 }
 .home .banner-ads img {
   width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.home .banner-ads .container-medium {
+  height: 100%;
 }
 .home .banner-ads img:not(.only-mobile) {
   display: block;
@@ -4977,9 +5021,10 @@ header.header-bg .group-title span {
 }
 
 .post-article .info h3, .home .s-blog .list-posts article .info h3{
-    height: 3rem;
+    height: 43px;
     overflow: hidden;
     margin-bottom: 0.5rem;
+    color: #932327;
 }
 
 .home .s-blog .list-posts article .info p {
@@ -7149,9 +7194,13 @@ header.header-bg .group-title span {
 .blog-list .banner-ads {
   margin-top: 9.38rem;
   margin-bottom: 9.38rem;
+  height: 540px;
 }
 .blog-list .banner-ads .only-mobile {
   display: none;
+}
+.blog-list .banner-ads .container-medium {
+  height: 100%;
 }
 .blog-list .banner-ads .container-medium img.only-mobile {
   display: none;
@@ -7159,6 +7208,8 @@ header.header-bg .group-title span {
 .blog-list .banner-ads .container-medium img {
   display: block;
   width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 @media screen and (max-width: 769px) {
   .blog-list .banner-ads {
@@ -7487,6 +7538,41 @@ header.header-bg .group-title span {
   grid-template-columns: repeat(3, 1fr);
   gap: 1.87rem 1.37rem;
 }
+.blog-list-categories .s-last .container-medium .list.busca-resultados {
+  margin-block: 3rem;
+}
+.busca-resultados .card-item .info {
+  padding-top: 0.75rem;
+}
+
+.busca-resultados .post-article {
+  height: 393px;
+}
+
+.busca-resultados .post-article .cover {
+  height: 173px;
+}
+
+.busca-resultados .post-article .cover .tagline {
+  padding: 5px 16px;    
+  bottom: -20px;
+  left: 20px;
+}
+
+.busca-resultados .post-article .info {
+  padding: 2.25rem 1.25rem 1.5rem 1.25rem;
+}
+
+.busca-resultados .post-article .info div {
+  margin-bottom: 16px;
+  -webkit-line-clamp: 3;
+}
+
+.busca-resultados .post-article .info p {
+  height: unset;
+  overflow: unset;
+}
+
 @media screen and (max-width: 991px) {
   .blog-list-categories .s-last .container-medium form {
     flex-direction: column;
@@ -9628,4 +9714,93 @@ header.header-bg .group-title span {
 	#aviso-cookies {
 		flex-direction: column;
 	}
+}
+/* WhatsApp Form */
+.form-wpp {
+  position: fixed;
+  bottom: -125px;
+  right: -40px;
+  opacity: 0;
+  border-radius: 8px;
+  width: max(350px, 30%);
+  overflow: hidden;
+  z-index: 10;
+  background-image: url("../images/wpp-wallpaper.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-blend-mode: lighten;
+  background-color: #d9d9d9;
+  box-shadow: 0 0 25px -5px #8c8c8c;
+  transition: all 250ms ease;
+  transform: scale(0.1);
+}
+.form-wpp.active {
+  transform: scale(1);
+  bottom: 125px;
+  right: 40px;
+  opacity: 1;
+}
+.form-wpp .fw-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: linear-gradient(158deg, #30C96B 0%, #3CA765 100%) #30C96B;
+  padding: 15px 24px 13px;
+  color: white;
+  font-size: 18px;
+  box-shadow: 5px 0px 40px 15px white;
+}
+.form-wpp .fw-header img {
+  width: 75px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.form-wpp .fw-content {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  gap: 16px;
+}
+
+.form-wpp :is(input, textarea, button) {
+  width: 100%;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  border: 1px solid #0dc152;
+  outline: none;
+  font-size: 14px;
+}
+.form-wpp h5 {
+  color: #404041;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 400;
+}
+.form-wpp h5 a {
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.form-wpp button {
+  background: linear-gradient(158deg, #30C96B 0%, #3CA765 100%) #30C96B;
+  color: white;
+  cursor: pointer;
+  transition: all 200ms ease;
+}
+.form-wpp button:is(:hover, :focus-visible) {
+  background-color: #30C96B;
+}
+
+.form-wpp a {
+  color: inherit;
+}
+
+@media (max-width: 450px) {
+  .form-wpp.active {
+    right: 50%;
+    transform: translateX(50%);
+  }
 }

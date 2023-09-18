@@ -1,16 +1,15 @@
-
   <style>    
     @media screen and (max-width: 769px) {
-      .internal-rent .more-about-2-column .container-medium .column:first-of-type > article .list-items {
+    .internal-rent .more-about-2-column .container-medium .column:first-of-type>article .list-items {
           margin-top: 0 !important;
           margin-bottom: 0 !important;
       }
+
       .internal-rent .s-service .list {
         padding-left: 20px;
         width: 100%;
       }
     }
-
   </style>
   
   <main>

@@ -23,7 +23,7 @@
 												<th class='menorTh'>Excluir</th>
 												<th>Nome</th>
 												<th>Número</th>
-												<th>Categoria</th>
+												<th>Setor</th>
 												<th>Ordenar</th>
 											</tr>
 										</thead>
