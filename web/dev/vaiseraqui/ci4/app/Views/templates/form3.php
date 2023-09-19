@@ -19,9 +19,9 @@
                   ?>
 
 
-<form action="<?=PATHSITE?>/lojas-temporarias" method="get" class="form3 <?=$form3Visible?>">
-     <input type="hidden" id="cidadeFK3" name="cidadeFK" value="<?=$idCidade?>" />
-     <input type="hidden" id="tipoFK3" name="tipoFK" value="<?=$idTipo?>" />
+<form action="<?=PATHSITE?><?=$identificador?>" method="get" class="form<?=$id?> <?=$form3Visible?>">
+     <input type="hidden" id="cidadeFK<?=$id?>" name="cidadeFK" value="<?=$idCidade?>" />
+     <input type="hidden" id="tipoFK<?=$id?>" name="tipoFK" value="<?=$idTipo?>" />
      <input type="hidden"  name="ordem" value="<?=$get['ordem']?>" />
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
@@ -58,14 +58,14 @@
                     </button>
                   </label>
                   <div class="select">
-                    <input type="text" placeholder="Selecione" value="<?=$nomeTipo?>">
+                    <input id='tipoFK<?=$id?>' type="text" placeholder="Selecione" value="<?=$nomeTipo?>">
                     <div class="select-list">
                           <? if($produtoCategorias){?>
                       <ul class="dropdown-select">
                           <? foreach($produtoCategorias as $prodCat){
-                              if($prodCat->tipoFK == 4) {
+                              if($prodCat->tipoFK == $id) {
                               ?>
-                        <li onclick="$('#tipoFK3').val('<?=$prodCat->id?>');"><?=$prodCat->titulo?></li>
+                        <li onclick="$('#tipoFK<?=$id?>').val('<?=$prodCat->id?>');"><?=$prodCat->titulo?></li>
                           <? } } ?>                      </ul>
                         <? } ?>
                     </div>

@@ -5,10 +5,10 @@
           <div class="left-space">
             <nav class="box-breadcrumbs">
               <span>Início</span>
-              <img src="<?=PATHSITE?>assets/images/icon-bread-crumbs.svg" alt="">
+              <img src="<?= PATHSITE ?>assets/images/icon-bread-crumbs.svg" alt="">
               <a href="#">Salões de Festa e Áreas de Lazer</a>
             </nav>
-            <span class="result"><?=count($saloes)?> salões de festa e áreas de lazer encontradas</span>
+            <span class="result"><?= count($saloes) ?> salões de festa e áreas de lazer encontradas</span>
              <?= view("templates/order-filter", $get) ?>
           </div>
         </header>
@@ -34,7 +34,9 @@
 
                   <!-- Listagem comumn -->
                   <? foreach ($saloes as $salao) {
-                        $salao->tipo = 'salao-de-festa-e-area-de-lazer';
+
+                      
+                        $salao->tipo =  $segments[0]; // 'salao-de-festa-e-area-de-lazer';
                      echo view("templates/aluguel-para-temporada-card.php", (array)$salao);
                   } ?>
                </div>
@@ -73,7 +75,7 @@
           <div class="wraper-icon">
             <img src="<?= PATHSITE ?>assets/images/icon-search-box.svg" alt="icon search">
           </div>
-          <?= $txMenuFiltro ?>
+          <?= $txMenuFiltro->titulo ?>
         </h2>
         <button class="open-modal j-open-form-modal">
           <svg width="31" height="16" viewBox="0 0 31 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -107,7 +109,7 @@
         
       </nav>
       <div class="presentation-form-content">       
-         <? echo View("templates/form2") ?>        
+         <? echo View("templates/form2", (array) $tipoAtual) ?>        
       </div>        
     </div>
   </div>

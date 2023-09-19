@@ -17,10 +17,10 @@ if ($get['tipoFK']) {
 }
 ?>
 
-<form action="<?=PATHSITE?>aluguel-para-temporada/" class="form1 <?=$form1Visible?>" method="get">    
+<form action="<?=PATHSITE?><?=$identificador?>/" class="form<?=$id?> <?=$form1Visible?>" method="get">    
     
-    <input type="hidden" id="cidadeFK1" name="cidadeFK" value="<?= $idCidade ?>" />
-    <input type="hidden" id="tipoFK1" name="tipoFK" value="<?= $idTipo ?>" />
+    <input type="hidden" id="cidadeFK<?=$id?>" name="cidadeFK" value="<?= $idCidade ?>" />
+    <input type="hidden" id="tipoFK<?=$id?>" name="tipoFK" value="<?= $idTipo ?>" />
     <input type="hidden"  name="ordem" value="<?= $get['ordem'] ?>" />
 
     <div class="box-select mb-10 j-box-select">
@@ -40,7 +40,7 @@ if ($get['tipoFK']) {
                 if ($cidades) { ?>
                     <ul class="dropdown-select">
                         <? foreach ($cidades as $cidade) { ?>
-                            <li onclick="$('#cidadeFK1').val('<?= $cidade->id ?>');"><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
+                            <li onclick="$('#cidadeFK<?=$id?>').val('<?= $cidade->id ?>');"><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>
                         <? } ?>
                     </ul>
                 <? } ?>
@@ -65,9 +65,9 @@ if ($get['tipoFK']) {
                         <ul class="dropdown-select">
                             <?
                             foreach ($produtoCategorias as $prodCat) {
-                                if ($prodCat->tipoFK == 1) {
+                                if ($prodCat->tipoFK == $id) {
                                     ?>
-                                    <li onclick="$('#tipoFK1').val('<?= $prodCat->id ?>');"><?= $prodCat->titulo ?></li>
+                                    <li onclick="$('#tipoFK<?=$id?>').val('<?= $prodCat->id ?>');"><?= $prodCat->titulo ?></li>
                             <? }
                         } ?>                      </ul>
 <? } ?>
@@ -88,14 +88,14 @@ if ($get['tipoFK']) {
                 <img src="<?= PATHSITE ?>assets/images/icon-checkin.svg" alt="">
                 Check-in
             </label>
-            <input type="text" placeholder="Data de Entrada" name="dataIni" value="<?=$get['dataIni']?>" class="dateInput">
+            <input type="text" autocomplete="false" id="desktop-table-checkin<?=$id?>" placeholder="Data de Entrada" name="dataIni" value="<?=$get['dataIni']?>" class="dateInput">
         </div>
         <div class="input-group">
             <label for="keyword">
                 <img src="<?= PATHSITE ?>assets/images/icon-checkout.svg" alt="">
                 Check-out
             </label>
-            <input type="text" placeholder="Data de Saída" name="dataFim" value="<?=$get['dataFim']?>" class="dateInput">
+            <input type="text" autocomplete="false" id="desktop-table-checkout<?=$id?>" placeholder="Data de Saída" name="dataFim" value="<?=$get['dataFim']?>" class="dateInput">
         </div>
     </div>
     <a style="display: none;" href="#" class="more-filters">

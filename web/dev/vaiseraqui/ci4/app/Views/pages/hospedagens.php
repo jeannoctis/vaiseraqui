@@ -15,7 +15,7 @@
                                         </header>
                                         <? if ($produtos) { ?>
                                             <div class="left-space" id="hospedagem">
-                                                <a href="<?= PATHSITE ?>hospedagem/<?= $produtos[0]->identificador ?>/">
+                                                <a href="<?= PATHSITE ?><?=$segments[0]?>/<?= $produtos[0]->identificador ?>/">
                                                     <article class="card-item poster" data-aos="fade-up">
 
                                                         <div class="cover">
@@ -87,7 +87,7 @@
                                                     <div class="list-articles">
                                                         <? foreach ($produtos as $produto) { ?>
                                                             <article class="card-item" data-aos="fade-right">
-                                                                <a href="<?= PATHSITE ?>hospedagem/<?= $produto->identificador ?>/">
+                                                                <a href="<?= PATHSITE ?><?=$segments[0]?>/<?= $produto->identificador ?>/">
                                                                     <div class="cover">
                                             <? if ($produto->destaque == 1) { ?>
                                                                         <span class="button-category">
@@ -191,7 +191,7 @@
                                                         <? foreach($destaques as $destaque) {?>
                                                         <div class="swiper-slide">              
                                                             <article class="card-item" data-aos="fade-right">
-                                                                <a href="<?=PATHSITE?>hospedagens/<?=$destaque->identificador?>/">
+                                                                <a href="<?=PATHSITE?><?=$segments[0]?>/<?=$destaque->identificador?>/">
                                                                     <div class="cover">
                                                                          <? if($destaque->destaque == 1) {?>
                                                                         <span class="button-category">
@@ -327,7 +327,7 @@
         </nav>
 
         <div class="presentation-form-content">
-            <?= view("templates/form5") ?>
+            <?= view("templates/form5", (array) $tipoAtual ) ?>
         </div>
 
     </div>

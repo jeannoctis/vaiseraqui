@@ -144,7 +144,7 @@
       </nav>
 
       <div class="presentation-form-content">
-         <? echo View("templates/form1") ?>
+         <? echo View("templates/form1", (array) $tipoAtual ) ?>
       </div>
 
    </div>

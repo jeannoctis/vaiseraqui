@@ -18,9 +18,9 @@
                   }
                   ?>
 
-<form method="get" action="<?=PATHSITE?>prestadores-de-servicos/" class="form4 <?=$form4Visible?>">            
-     <input type="hidden" id="cidadeFK4" name="cidadeFK" value="<?=$idCidade?>" />
-     <input type="hidden" id="tipoFK4" name="tipoFK" value="<?=$idTipo?>" />
+<form method="get" action="<?=PATHSITE?><?=$identificador?>/" class="form<?=$id?> <?=$form4Visible?>">            
+     <input type="hidden" id="cidadeFK<?=$id?>" name="cidadeFK" value="<?=$idCidade?>" />
+     <input type="hidden" id="tipoFK<?=$id?>" name="tipoFK" value="<?=$idTipo?>" />
      <input type="hidden"  name="ordem" value="<?=$get['ordem']?>" />
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
@@ -40,7 +40,7 @@
                      <? if($cidades) {?>
                     <ul class="dropdown-select">
                         <? foreach($cidades as $cidade) {?>
-                      <li onclick="$('#cidadeFK4').val('<?=$cidade->id?>');"><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
+                      <li onclick="$('#cidadeFK<?=$id?>').val('<?=$cidade->id?>');"><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
                         <? } ?>
                       </ul>
                       <? } ?>
@@ -64,9 +64,9 @@
                           <? if($produtoCategorias){?>
                       <ul class="dropdown-select">
                           <? foreach($produtoCategorias as $prodCat){
-                              if($prodCat->tipoFK == 6) {
+                              if($prodCat->tipoFK == $id) {
                               ?>
-                        <li onclick="$('#tipoFK4').val('<?=$prodCat->id?>');"><?=$prodCat->titulo?></li>
+                        <li onclick="$('#tipoFK<?=$id?>').val('<?=$prodCat->id?>');"><?=$prodCat->titulo?></li>
                           <? } } ?>                      </ul>
                         <? } ?>
                     </div>

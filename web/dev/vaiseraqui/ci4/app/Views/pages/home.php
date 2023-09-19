@@ -31,167 +31,49 @@
         </button>
       </header>
 
+        <? if($tipos) {?>
       <nav class="presentation-form-menu">
-        <a href="#" class="active" data-form="form1">
-          <svg class="isActive" width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 24V5.47222C4 3.98148 4.9 1 8.5 1C10 1 13 1.89444 13 5.47222C13 9.05 13 19.3148 13 24" stroke="white" stroke-width="1.5" />
-            <path d="M0 24H34.1053C34.7368 24 36 24.0001 36 25.2222C36 26.4444 36 32.5556 36 33.7778C36 35 35.6211 35 34.1053 35H0" stroke="white" stroke-width="1.5" />
-            <path d="M0 29H15" stroke="white" stroke-width="1.5" />
-            <path d="M19 24L10 35" stroke="white" stroke-width="1.5" />
-            <path d="M26 24L18 35" stroke="white" stroke-width="1.5" />
-            <path d="M34 24L25 35" stroke="white" stroke-width="1.5" />
-            <path d="M30 8V24" stroke="white" stroke-width="1.5" />
-            <path d="M13 13.7426C15.9822 11.6049 20.6364 8.26866 20.6364 8.26866C20.8485 8.06592 21.4 7.78209 21.9091 8.26866C22.4182 8.75523 30.1818 14.959 34 18" stroke="white" stroke-width="1.5" />
-            <mask id="path-9-inside-1_1084_2733" fill="white">
-              <rect x="18" y="17" width="6" height="7" rx="1" />
-            </mask>
-            <rect x="18" y="17" width="6" height="7" rx="1" stroke="white" stroke-width="3" mask="url(#path-9-inside-1_1084_2733)" />
-          </svg>
+          <? foreach($tipos as $ind => $tipo) {?>
+        <a href="#" class="<?=($ind) ? '' : 'active' ?>" data-form="form<?=$tipo->id?>">
+          
+            <img src='<?=PATHSITE?>uploads/tipo/<?=$tipo->arquivo?>'/>
 
-          <svg width="37" height="36" viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 24V5.47222C4 3.98148 4.9 1 8.5 1C10 1 13 1.89444 13 5.47222C13 9.05 13 19.3148 13 24" stroke="#808080" stroke-width="1.5" />
-            <path d="M0 24H34.1053C34.7368 24 36 24.0001 36 25.2222C36 26.4444 36 32.5556 36 33.7778C36 35 35.6211 35 34.1053 35H0" stroke="#808080" stroke-width="1.5" />
-            <path d="M0 29H15" stroke="#808080" stroke-width="1.5" />
-            <path d="M19 24L10 35" stroke="#808080" stroke-width="1.5" />
-            <path d="M26 24L18 35" stroke="#808080" stroke-width="1.5" />
-            <path d="M34 24L25 35" stroke="#808080" stroke-width="1.5" />
-            <path d="M30 8V24" stroke="#808080" stroke-width="1.5" />
-            <path d="M13 13.7426C15.9822 11.6049 20.6364 8.26866 20.6364 8.26866C20.8485 8.06592 21.4 7.78209 21.9091 8.26866C22.4182 8.75523 30.1818 14.959 34 18" stroke="#808080" stroke-width="1.5" />
-            <mask id="path-9-inside-1_1059_28965" fill="white">
-              <rect x="18" y="17" width="6" height="7" rx="1" />
-            </mask>
-            <rect x="18" y="17" width="6" height="7" rx="1" stroke="#808080" stroke-width="3" mask="url(#path-9-inside-1_1059_28965)" />
-          </svg>
-
-          Aluguel para <br>
-          temporada
+        <?=$tipo->titulo?>
         </a>
-        <a href="#" data-form="form2">
-          <svg class="isActive" width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="12.5" y="2.5" width="7" height="1" rx="0.5" fill="#BBBBBB" stroke="white" />
-            <rect x="15.5" y="3.5" width="3" height="1" rx="0.5" transform="rotate(-90 15.5 3.5)" fill="#BBBBBB" stroke="white" />
-            <path d="M16 3C12.6759 4.48988 6 10.3606 6 19.4985C6 28.6365 16.5541 35.2807 14.3379 33.7908" stroke="white" stroke-width="1.5" />
-            <path d="M16 3C19.1579 4.49001 26.5 10.3613 26.5 19.5C26.5 28.6387 15.3947 35.49 17.5 34" stroke="white" stroke-width="1.5" />
-            <path d="M5.5 8.5C6.5 9.33333 9.9 11.1 15.5 11.5C21.1 11.9 24.8333 9.33333 26 8" stroke="white" stroke-width="1.5" />
-            <path d="M1 16C1 16 6.3 19 15.5 19C24.7 19 31 16 31 16" stroke="white" stroke-width="1.5" />
-            <path d="M1 22.5C1 22.5 7.2 28 16 28C24.8 28 29.6667 23.1667 31 21.5" stroke="white" stroke-width="1.5" />
-            <circle cx="16" cy="19" r="15.25" stroke="white" stroke-width="1.5" />
-            <path d="M16 4.5V34" stroke="white" stroke-width="1.5" />
-          </svg>
-
-          <svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="12.5" y="2.5" width="7" height="1" rx="0.5" fill="#BBBBBB" stroke="#808080" />
-            <rect x="15.5" y="3.5" width="3" height="1" rx="0.5" transform="rotate(-90 15.5 3.5)" fill="#BBBBBB" stroke="#808080" />
-            <path d="M16 3C12.6759 4.48988 6 10.3606 6 19.4985C6 28.6365 16.5541 35.2807 14.3379 33.7908" stroke="#808080" stroke-width="1.5" />
-            <path d="M16 3C19.1579 4.49001 26.5 10.3613 26.5 19.5C26.5 28.6387 15.3947 35.49 17.5 34" stroke="#808080" stroke-width="1.5" />
-            <path d="M5.5 8.5C6.5 9.33333 9.9 11.1 15.5 11.5C21.1 11.9 24.8333 9.33333 26 8" stroke="#808080" stroke-width="1.5" />
-            <path d="M1 16C1 16 6.3 19 15.5 19C24.7 19 31 16 31 16" stroke="#808080" stroke-width="1.5" />
-            <path d="M1 22.5C1 22.5 7.2 28 16 28C24.8 28 29.6667 23.1667 31 21.5" stroke="#808080" stroke-width="1.5" />
-            <circle cx="16" cy="19" r="15.25" stroke="#808080" stroke-width="1.5" />
-            <path d="M16 4.5V34" stroke="#808080" stroke-width="1.5" />
-          </svg>
-          Salões de Festa e <br>
-          Áreas de Lazer
-        </a>
-        <a href="#" data-form="form3">
-          <svg class="isActive" width="38" height="34" viewBox="0 0 38 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 16V28.75C4 30.1667 4.88889 33 8.44444 33C12 33 24.7407 33 30.6667 33C31.7778 33 34 32.15 34 28.75C34 25.35 34 19.1875 34 16.5312" stroke="white" stroke-width="2" />
-            <path d="M14.0197 33V25.2222C13.8446 24.4815 14.8602 23 16.1209 23C17.3816 23 20.4981 23 21.8988 23C22.5992 23 24 23.4444 24 25.2222C24 27 24 31.1481 24 33" stroke="white" stroke-width="2" />
-            <path d="M5.35458 1H31.9287C32.4824 1 33.7003 1.22857 34.1432 2.14286C34.5861 3.05714 36.1732 7.85714 36.9114 10.1429C37.2805 12.4286 36.6899 17 31.3751 17C26.0603 17 24.7316 11.6667 24.7316 9C24.9161 11.4762 24.0672 16.4286 19.1953 16.4286C14.3234 16.4286 13.1054 11.4762 13.1054 9C13.1054 11.4762 11.6659 16.4286 5.90821 16.4286C0.925552 15.8571 0.371923 11.8571 1.47918 9C2.36498 6.71429 3.69358 3.47619 4.24716 2.14286C4.43176 1.7619 4.91167 1 5.35458 1Z" stroke="white" stroke-width="2" stroke-linejoin="round" />
-          </svg>
-
-          <svg width="38" height="34" viewBox="0 0 38 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 16V28.75C4 30.1667 4.88889 33 8.44444 33C12 33 24.7407 33 30.6667 33C31.7778 33 34 32.15 34 28.75C34 25.35 34 19.1875 34 16.5312" stroke="#808080" stroke-width="2" />
-            <path d="M14.0197 33V25.2222C13.8446 24.4815 14.8602 23 16.1209 23C17.3816 23 20.4981 23 21.8988 23C22.5992 23 24 23.4444 24 25.2222C24 27 24 31.1481 24 33" stroke="#808080" stroke-width="2" />
-            <path d="M5.35458 1H31.9287C32.4824 1 33.7003 1.22857 34.1432 2.14286C34.5861 3.05714 36.1732 7.85714 36.9114 10.1429C37.2805 12.4286 36.6899 17 31.3751 17C26.0603 17 24.7316 11.6667 24.7316 9C24.9161 11.4762 24.0672 16.4286 19.1953 16.4286C14.3234 16.4286 13.1054 11.4762 13.1054 9C13.1054 11.4762 11.6659 16.4286 5.90821 16.4286C0.925552 15.8571 0.371923 11.8571 1.47918 9C2.36498 6.71429 3.69358 3.47619 4.24716 2.14286C4.43176 1.7619 4.91167 1 5.35458 1Z" stroke="#808080" stroke-width="2" stroke-linejoin="round" />
-          </svg>
-          Lojas Temporárias
-        </a>
-        <a href="#" data-form="form4">
-          <svg class="isActive" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M29 16H3" stroke="white" stroke-width="2" stroke-linecap="round" />
-            <path d="M26 15.4827C25.7619 12.0984 23.4048 5.26521 15.881 5.00654C8.35714 4.74787 6.15873 12.2277 6 16" stroke="white" stroke-width="2" stroke-linecap="round" />
-            <path d="M10.4915 27.5106H19.1202C19.6069 27.4468 20.5804 26.9745 20.5804 25.5957C20.5804 24.217 19.6069 23.6596 19.1202 23.5532H13.412C12.8367 22.7021 10.757 21 7.04006 21C3.3231 21 1.46462 22.9574 1 23.9362V33H16.2661C17.0626 32.9787 19.1335 32.6681 21.045 31.5957C22.9566 30.5234 29.2312 26.9362 32.1295 25.2766C32.7048 24.9787 33.5765 23.9745 32.4614 22.3404C31.6118 21.166 30.3374 21.383 29.8064 21.6383L20.8459 25.5957" stroke="white" stroke-width="2" stroke-linecap="round" />
-            <rect width="2" height="3" transform="matrix(-1 0 0 1 17 2)" fill="white" />
-            <rect width="6" height="3" rx="1.5" transform="matrix(-1 0 0 1 19 0)" fill="white" />
-          </svg>
-
-          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M29 16H3" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-            <path d="M26 15.4827C25.7619 12.0984 23.4048 5.26521 15.881 5.00654C8.35714 4.74787 6.15873 12.2277 6 16" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-            <path d="M10.4915 27.5106H19.1202C19.6069 27.4468 20.5804 26.9745 20.5804 25.5957C20.5804 24.217 19.6069 23.6596 19.1202 23.5532H13.412C12.8367 22.7021 10.757 21 7.04006 21C3.3231 21 1.46462 22.9574 1 23.9362V33H16.2661C17.0626 32.9787 19.1335 32.6681 21.045 31.5957C22.9566 30.5234 29.2312 26.9362 32.1295 25.2766C32.7048 24.9787 33.5765 23.9745 32.4614 22.3404C31.6118 21.166 30.3374 21.383 29.8064 21.6383L20.8459 25.5957" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-            <rect width="2" height="3" transform="matrix(-1 0 0 1 17 2)" fill="#808080" />
-            <rect width="6" height="3" rx="1.5" transform="matrix(-1 0 0 1 19 0)" fill="#808080" />
-          </svg>
-          Prestadores de <br>
-          Serviços
-        </a>
-        <a href="#" data-form="form5">
-          <svg class="isActive" width="42" height="34" viewBox="0 0 42 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 23.5C1.4 23.5 1 24.5 1 25V31.5C1 32.3 1.66667 32.5 2 32.5H3.5C4.3 32.5 4.83333 32.1667 5 32L7.5 29.5H34L36.5 32C36.9 32.4 37.6667 32.5 38 32.5H39.5C40.7 32.5 41 31.8333 41 31.5V25C41 23.8 39.6667 23.5 39 23.5H3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M3 22.5715V19.1429C3 18.2857 3.19726 17 5.95891 17C8.72057 17 27.1644 17 36.0411 17C38.0138 17 39 17.1714 39 19.5715C39 21.9715 39 22.8572 39 23" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M2.5 1V23.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M39.5 1V23.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M2.5 5H39.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M9.5 16.5V12.5C9.5 11.8333 10 10.5 12 10.5C14 10.5 17.1667 10.5 18.5 10.5C19.3333 10.5 21 10.9 21 12.5C21 14.1 21 15.8333 21 16.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M21 16.5V12.5C21 11.8333 21.5 10.5 23.5 10.5C25.5 10.5 28.6667 10.5 30 10.5C30.8333 10.5 32.5 10.9 32.5 12.5C32.5 14.1 32.5 15.8333 32.5 16.5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-
-          <svg width="42" height="34" viewBox="0 0 42 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 23.5C1.4 23.5 1 24.5 1 25V31.5C1 32.3 1.66667 32.5 2 32.5H3.5C4.3 32.5 4.83333 32.1667 5 32L7.5 29.5H34L36.5 32C36.9 32.4 37.6667 32.5 38 32.5H39.5C40.7 32.5 41 31.8333 41 31.5V25C41 23.8 39.6667 23.5 39 23.5H3Z" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M3 22.5715V19.1429C3 18.2857 3.19726 17 5.95891 17C8.72057 17 27.1644 17 36.0411 17C38.0138 17 39 17.1714 39 19.5715C39 21.9715 39 22.8572 39 23" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M2.5 1V23.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M39.5 1V23.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M2.5 5H39.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M9.5 16.5V12.5C9.5 11.8333 10 10.5 12 10.5C14 10.5 17.1667 10.5 18.5 10.5C19.3333 10.5 21 10.9 21 12.5C21 14.1 21 15.8333 21 16.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M21 16.5V12.5C21 11.8333 21.5 10.5 23.5 10.5C25.5 10.5 28.6667 10.5 30 10.5C30.8333 10.5 32.5 10.9 32.5 12.5C32.5 14.1 32.5 15.8333 32.5 16.5" stroke="#808080" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-          Hospedagem
-        </a>
-        <? /*
-        <a href="#" data-form="form6">
-          <svg class="isActive" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.0567 0.799663L18.2409 0.98099L32 15.1798L30.5243 16.7564L28.6297 14.8016L28.6307 29.7887C28.6307 30.9541 27.7719 31.9093 26.6825 31.9934L26.5256 32H5.47438C4.36498 32 3.45556 31.0978 3.37452 29.9534L3.36925 29.7887L3.3682 14.8027L1.47569 16.7564L0 15.1798L13.7444 0.995363C14.9159 -0.260655 16.8052 -0.33031 18.0567 0.799663ZM15.3348 2.46257L15.2337 2.55876L5.47332 12.6301L5.47438 29.7887L10.7361 29.7876L10.7372 18.7322C10.7372 17.5669 11.5961 16.6116 12.6855 16.5264L12.8423 16.5209H19.1577C20.2671 16.5209 21.1765 17.4231 21.2575 18.5675L21.2628 18.7322L21.2618 29.7876L26.5256 29.7887L26.5246 12.629L16.7368 2.5278C16.3537 2.13308 15.7558 2.10875 15.3348 2.46257ZM19.1577 18.7322H12.8423L12.8413 29.7876H19.1566L19.1577 18.7322Z" fill="white"/>
-          </svg>
-            
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18.0567 0.799663L18.2409 0.98099L32 15.1798L30.5243 16.7564L28.6297 14.8016L28.6307 29.7887C28.6307 30.9541 27.7719 31.9093 26.6825 31.9934L26.5256 32H5.47438C4.36498 32 3.45556 31.0978 3.37452 29.9534L3.36925 29.7887L3.3682 14.8027L1.47569 16.7564L0 15.1798L13.7444 0.995363C14.9159 -0.260655 16.8052 -0.33031 18.0567 0.799663ZM15.3348 2.46257L15.2337 2.55876L5.47332 12.6301L5.47438 29.7887L10.7361 29.7876L10.7372 18.7322C10.7372 17.5669 11.5961 16.6116 12.6855 16.5264L12.8423 16.5209H19.1577C20.2671 16.5209 21.1765 17.4231 21.2575 18.5675L21.2628 18.7322L21.2618 29.7876L26.5256 29.7887L26.5246 12.629L16.7368 2.5278C16.3537 2.13308 15.7558 2.10875 15.3348 2.46257ZM19.1577 18.7322H12.8423L12.8413 29.7876H19.1566L19.1577 18.7322Z" fill="#808080"/>
-          </svg>              
-          Imobiliárias e <br>
-          Corretores
-        </a> */ ?>
-        <a href="#" data-form="form7">
-          <svg class="isActive" width="57" height="55" viewBox="0 0 57 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14.6827 42.1065C13.8824 42.4011 13.1042 41.623 13.3988 40.8227L21.376 19.1515C21.6282 18.4665 22.5054 18.2737 23.0216 18.7899L36.7155 32.4838C37.2316 32.9999 37.0388 33.8772 36.3539 34.1294L14.6827 42.1065Z" stroke="white" stroke-width="2" />
-            <path d="M29.1637 15.3293C31.3208 12.4018 34.1559 5.43747 28.2393 1" stroke="white" stroke-width="2" stroke-linecap="round" />
-            <path d="M35.1738 18.565C37.485 18.7191 42.3847 17.6406 43.4941 12.0937C44.8808 5.16018 45.8053 1.46228 52.2766 1.46228" stroke="white" stroke-width="2" stroke-linecap="round" />
-            <path d="M40.2588 25.9609C42.7241 23.8038 49.1337 21.2461 55.0504 28.2721" stroke="white" stroke-width="2" stroke-linecap="round" />
-            <circle cx="46.7298" cy="32.8944" r="1.84895" fill="white" />
-            <circle cx="22.6927" cy="8.85798" r="1.84895" fill="white" />
-            <path d="M31.0136 35.6679L19.9199 24.5742" stroke="white" stroke-width="2" stroke-linecap="round" />
-          </svg>
-
-          <svg width="57" height="55" viewBox="0 0 57 55" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M14.6832 42.1065C13.8829 42.4011 13.1047 41.623 13.3993 40.8227L21.3765 19.1515C21.6286 18.4665 22.5059 18.2737 23.0221 18.7899L36.716 32.4838C37.2321 32.9999 37.0393 33.8772 36.3543 34.1294L14.6832 42.1065Z" stroke="#808080" stroke-width="2" />
-            <path d="M29.1642 15.3293C31.3213 12.4018 34.1564 5.43747 28.2397 1" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-            <path d="M35.1738 18.5649C37.485 18.719 42.3847 17.6404 43.4941 12.0936C44.8808 5.16005 45.8053 1.46216 52.2766 1.46216" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-            <path d="M40.2583 25.9608C42.7236 23.8037 49.1332 21.246 55.0499 28.272" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-            <circle cx="46.7293" cy="32.8944" r="1.84895" fill="#808080" />
-            <circle cx="22.6932" cy="8.85798" r="1.84895" fill="#808080" />
-            <path d="M31.0136 35.6679L19.9199 24.5742" stroke="#808080" stroke-width="2" stroke-linecap="round" />
-          </svg>
-          Eventos
-        </a>
+          <? } ?>        
       </nav>
+        <? } ?>
 
       <div class="presentation-form-content">
-        <? echo View('templates/form1') ?>
-        <? echo View('templates/form2') ?>
-        <? echo View('templates/form3') ?>
-        <? echo View('templates/form4') ?>
-        <? echo View('templates/form5') ?>
-        <? echo View('templates/form6') ?>
-        <? echo View('templates/form7') ?>
+          <? foreach($tipos as $ind => $tipo) {
+          
+              switch($tipo->tipo ) {
+                  case 'ALUGUEL':
+                      $idForm = 1;
+                      break;
+                  case 'SALOES':
+                      $idForm = 2;
+                      break;
+                  case 'HOSPEDAGEM':
+                      $idForm = 5;
+                      break;
+                  case 'LOJAS':
+                      $idForm = 3;
+                      break;
+                  case 'EVENTOS':
+                      $idForm = 7;
+                      break;
+                  case 'PRESTADORES':
+                      $idForm = 4;
+                      break;
+              }
+              $tipo = (array) $tipo;
+                  if(!$ind){
+                    $tipo["form{$idForm}Visible"] = 'visible';
+              }
+              ?>
+        <? echo View("templates/form{$idForm}",$tipo) ?>
+          <? } ?>    
       </div>
 
     </div>
@@ -1128,7 +1010,7 @@
   </div>
 
   <a href="<?= $anuncioBanner->link ?>">
-    <div class="banner-ads" data-aos="fade-up">
+    <div class="banner-zinho" data-aos="fade-up">
       <div class="container-medium">
         <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>" alt="" class="only-mobile">
         <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>" alt="Banner Ads">

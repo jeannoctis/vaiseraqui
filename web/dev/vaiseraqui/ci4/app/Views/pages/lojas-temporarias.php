@@ -238,7 +238,10 @@
         
       </nav>
       <div class="presentation-form-content">       
-         <? echo View("templates/form3") ?>        
+          <?
+         
+          ?>
+         <? echo View("templates/form3", (array) $tipoAtual) ?>        
       </div>        
     </div>
   </div>

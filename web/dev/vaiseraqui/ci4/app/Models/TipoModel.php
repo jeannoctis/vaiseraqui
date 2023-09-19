@@ -11,7 +11,7 @@ class TipoModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'object';
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['arquivo'];
+    protected $allowedFields = ['arquivo','tipo','titulo','ordem','identificador','identificador2'];
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';

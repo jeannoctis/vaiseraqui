@@ -42,6 +42,10 @@ $routes->group('admin', function ($routes) {
     $routes->add('anunciante/form', 'Anunciante::form');
     $routes->add('anunciante/form/(:any)', 'Anunciante::form/$i');
 
+    $routes->add('cliente', 'Cliente::index');
+    $routes->add('cliente/form', 'Cliente::form');
+    $routes->add('cliente/form/(:any)', 'Cliente::form/$i');
+
     $routes->add('banner', 'Banner::index');
     $routes->add('banner/form', 'Banner::form');
     $routes->add('banner/form/(:any)', 'Banner::form/$i');

@@ -16,7 +16,7 @@
           <h1><?=$metatag->titulo?></h1>
           <span class="location"><?=$metatag->cidade?>-<?=$metatag->estado?></span>
           <div class="desc">            
-          <?=$metag->descricao?>
+          <?=$metatag->descricao?>
           </div>
         </div>
 
@@ -74,10 +74,12 @@
         </div>
         <div class="bottom">
           <div>
+              <? if($fotos){?>
             <a href="#" class="btn photo">
               <img src="<?=PATHSITE?>assets/images/icon-photo.png" alt="">
               <?=count($fotos)?> Fotos
             </a>
+              <? } ?>
             <a class="btn btn-videos"  >
               <img class="active" src="<?=PATHSITE?>assets/images/icon-video-active.png" alt="">
               <img src="<?=PATHSITE?>assets/images/icon-video.png" alt="">
@@ -147,7 +149,7 @@
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 13L7 7L1 0.999999" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>            
-            <a href="<?=PATHSITE?>prestadores-de-servico/">Prestadores de Serviço</a>
+            <a href="<?=PATHSITE?><?=$segments[0]?>/">Prestadores de Serviço</a>
             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 13L7 7L1 0.999999" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>            

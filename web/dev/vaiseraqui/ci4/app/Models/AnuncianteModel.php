@@ -31,7 +31,7 @@ class AnuncianteModel extends Model
         $page = $segments[1];
         $this->session = \Config\Services::session($config);
 
-        if (!$this->session->get('anunciante') && $page != 'login') {
+        if (!$this->session->get('anunciante') && $page != 'login' && $page != 'login-admin') {
             ?>
             <meta http-equiv="refresh" content="0;URL='<?= PATHSITE ?>area-do-anunciante/login'" /> 
             <?
@@ -98,6 +98,7 @@ class AnuncianteModel extends Model
 
                     $id = decode($get['id']);
                     $result = $this->find($id);
+                  
 
                     if ($result) {
                         $this->session->set('anunciante', $result->id);

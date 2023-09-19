@@ -8,12 +8,9 @@
       <div class="item">
         <h2>Categorias</h2>
         <nav>
-          <a href="<?= PATHSITE ?>aluguel-para-temporada/">Aluguel para temporada</a>
-          <a href="<?= PATHSITE ?>saloes-de-festas-e-areas-de-lazer/">Salões de Festa e Áreas de Lazer</a>
-          <a href="<?= PATHSITE ?>lojas-temporarias/">Lojas Temporárias</a>
-          <a href="<?= PATHSITE ?>prestadores-de-servicos/">Prestadores de Serviços</a>
-          <a href="<?= PATHSITE ?>hospedagens/">Hospedagem</a>
-          <a href="<?= PATHSITE ?>eventos/">Eventos</a>
+               <? foreach($tipos as $tipo) {?>
+          <a href="<?= PATHSITE ?><?=$tipo->identificador2?>/"><?=$tipo->titulo?></a>      
+               <? } ?>
         </nav>
       </div>
       <div class="item">

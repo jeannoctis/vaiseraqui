@@ -29,6 +29,8 @@
                     <?
                 } else if (count($datas) == 1) {
                     $dia = explode('-', $datas[0]->data);
+                     $horaIni = explode(":", $datas[0]->horarioInicio);
+                     $horaFim = explode(":", $datas[0]->horarioTermino);
                     ?>
                     <div class="box-individual-date">
                         <svg width="15" height="17" viewBox="0 0 15 17" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -37,7 +39,7 @@
                         <div class="right">
                             <label><?= $dia[2] ?> de <?= mes($dia[1]) ?></label>
                             <span class="day"><?= semana($datas[0]->data) ?></span>
-                            <span class="interval"><?= $datas[0]->horario ?> - 21:00</span>
+                            <span class="interval"><?= $horaIni[0] ?>:<?= $horaIni[1] ?> <?= ($horaFim) ? (' - ' . $horaFim[0] . ':' . $horaFim[1])   : ''  ?> </span>
                         </div>
                     </div>
                 <? } ?>
@@ -66,7 +68,7 @@
                                     <div class="item">
                                         <span class="date"><?= $diaAtual[2] ?> de <?= mes($diaAtual[1]) ?></span>
                                         <span class="day"><?= semana($dia->data) ?></span>
-                                        <span class="interval"><?= $horaIni[0] ?>:<?= $horaIni[0] ?> <?= ($horaFim) ? (' - ' . $horaFim[0] . ':' . $horaFim[1])   : ''  ?> </span>
+                                        <span class="interval"><?= $horaIni[0] ?>:<?= $horaIni[1] ?> <?= ($horaFim) ? (' - ' . $horaFim[0] . ':' . $horaFim[1])   : ''  ?> </span>
                                     </div>
                                     <?
                                 }

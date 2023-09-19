@@ -173,7 +173,7 @@
             </a>
           </nav>
 
-            <? if($pagina == 1) {?>
+            <? if($pagina == FALSE) {?>
           <div class="presentation-form-content">
             <? echo View("templates/form1") ?>
             <? echo View("templates/form2") ?>
@@ -234,13 +234,11 @@
         </h2>
         <hr>
         <nav class="menu-mobile-links">
-          <a href="<?= PATHSITE ?>aluguel-para-temporada/">Aluguel para temporada</a>
-          <a href="<?= PATHSITE ?>saloes-de-festas-e-areas-de-lazer/">Salões de Festa e Áreas de Lazer</a>
-          <a href="<?= PATHSITE ?>lojas-temporarias/">Lojas Temporárias</a>
-          <a href="<?= PATHSITE ?>prestadores-de-servicos/">Prestadores de Serviços</a>
-          <a href="<?= PATHSITE ?>hospedagens/">Hospedagem</a>
-          <a href="<?= PATHSITE ?>eventos/">Eventos</a>
+            <? foreach($tipos as $tipo) {?>
+          <a href="<?= PATHSITE ?><?=$tipo->identificador?>/"><?=$tipo->titulo?></a>      
+            <? } ?>
         </nav>
+        
       </div>
 
       <div class="account">
