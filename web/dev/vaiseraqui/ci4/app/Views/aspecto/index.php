@@ -22,9 +22,9 @@
 									<table class="table  sortable">
 										<thead>
 											<tr>
-												<th class='menorTh'>Excluir</th>												
+												<th class='menorTh'>Excluir</th>
 												<th>Título</th>
-                                    <th>Ordenar</th>
+												<th>Ordenar</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -35,7 +35,7 @@
 														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/">
 															<?= $elemento->titulo ?>
 														</a>
-													</td>                                       
+													</td>
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
 												</tr>
 											<? } ?>
@@ -49,4 +49,6 @@
 				</div>
 			</div>
 		</div>
-      
+		<script>
+			
+		</script>

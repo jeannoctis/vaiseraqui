@@ -407,10 +407,9 @@
                       </div>
                     </a>
                   </article>
-              <? }
+                <? }
                 $i++;
               } ?>
-
             </div>
           </div>
         </div>
@@ -839,7 +838,6 @@
         </div>
 
       </div>
-
     </div>
   </section>
 
@@ -1115,12 +1113,14 @@
 
   <div class="plan-and-ads">
     <div class="container-medium">
-      <div class="item card-clicked" data-aos="fade-right" style="background-image: url(<?= PATHSITE ?>uploads/texto/<?= $txConviteAnunciante1->arquivo ?>);">
+
+      <div class="item card-clicked" data-aos="fade-right" style="background: linear-gradient(1deg, #000 17.47%, rgba(0, 0, 0, 0.00) 69.85%), url(<?= PATHSITE ?>uploads/texto/<?= $txConviteAnunciante1->arquivo ?>);">
         <h2><?= $txConviteAnunciante1->titulo ?></h2>
         <p><?= $txConviteAnunciante1->descricao ?></p>
         <a href="<?= $txConviteAnunciante1->link ?>" class="btn-primary"><?= $txConviteAnunciante1->botao ?></a>
       </div>
-      <div class="item card-clicked" data-aos="fade-left" style="background-image: url(<?= PATHSITE ?>uploads/texto/<?= $txConviteAnunciante2->arquivo ?>);">
+
+      <div class="item card-clicked" data-aos="fade-left" style="background: linear-gradient(1deg, #000 17.47%, rgba(0, 0, 0, 0.00) 69.85%), url(<?= PATHSITE ?>uploads/texto/<?= $txConviteAnunciante2->arquivo ?>);">
         <h2><?= $txConviteAnunciante2->titulo ?></h2>
         <p><?= $txConviteAnunciante2->descricao ?></p>
         <a href="<?= $txConviteAnunciante2->link ?>" class="btn-primary"><?= $txConviteAnunciante2->botao ?></a>
