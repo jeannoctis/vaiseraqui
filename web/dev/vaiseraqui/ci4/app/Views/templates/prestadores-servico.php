@@ -11,7 +11,7 @@
          <? foreach ($destaques as $ind => $destaque) { ?>
            <div class="swiper-slide">
              <article class="card-services" data-aos="fade-right">
-               <a href="<?= PATHSITE ?>prestador-de-servico/<?= $destaque->identificador ?>/">
+               <a href="<?= PATHSITE ?><?=$destaque->identificadorTipo?>/<?= $destaque->identificador ?>/">
                  <div class="cover">
                    <? if ($destaque->destaque == 1) { ?>
                      <span class="button-category">

@@ -1,28 +1,28 @@
-<style>
-  @media screen and (max-width: 769px) {
+  <style>    
+    @media screen and (max-width: 769px) {
     .internal-rent .more-about-2-column .container-medium .column:first-of-type>article .list-items {
-      margin-top: 0 !important;
-      margin-bottom: 0 !important;
-    }
+          margin-top: 0 !important;
+          margin-bottom: 0 !important;
+      }
 
-    .internal-rent .s-service .list {
-      padding-left: 20px;
-      width: 100%;
+      .internal-rent .s-service .list {
+        padding-left: 20px;
+        width: 100%;
+      }
     }
-  }
-</style>
-
-<main>
-  <section class="s-text-and-slider">
-    <div class="info" data-aos="fade-right">
-      <div>
-        <span class="type"><?= $metatag->categoria ?></span>
-        <h1><?= $metatag->titulo ?></h1>
-        <span class="location"><?= $metatag->cidade ?>-<?= $metatag->estado ?></span>
-        <div class="desc">
-          <p><?= $metatag->descricao ?></p>
+  </style>
+  
+  <main>
+    <section class="s-text-and-slider">
+      <div class="info" data-aos="fade-right">
+        <div>
+          <span class="type"><?=$metatag->categoria?></span>
+          <h1><?=$metatag->titulo?></h1>
+          <span class="location"><?=$metatag->cidade?>-<?=$metatag->estado?></span>
+          <div class="desc">
+            <p><?=$metatag->descricao?></p>
+          </div>
         </div>
-      </div>
 
       <footer>
         <div class="price">

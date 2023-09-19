@@ -70,6 +70,9 @@ $routes->group('admin', function ($routes) {
     $routes->add('anuncio/servicocategoria', 'Anuncio::servicocategoria');
     $routes->add('anuncio/servicocategoria/(:any)', 'Anuncio::servicocategoria/$i');
     
+    $routes->add('anuncio/servicocategoria', 'Anuncio::servicocategoria');
+    $routes->add('anuncio/servicocategoria/(:any)', 'Anuncio::servicocategoria/$i');
+    
     $routes->add('review', 'Review::index');
     $routes->add('review/form', 'Review::form');
     $routes->add('review/form/(:any)', 'Review::form/$i');

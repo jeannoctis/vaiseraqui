@@ -10,8 +10,22 @@
 
                      <div class='col-xs-12 form-group'>
                         <label for="titulo">Nome</label>
-                        <input type="text" name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?>" placeholder="Escreva..." readonly>
+                        <input type="text" name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?>" placeholder="Escreva..." >
                      </div>
+                      
+                      <? if(!$resultado->id) { ?>
+                           <div class='col-xs-12 form-group'>
+                        <label for="tipo">Tipo</label>
+                        <select name="tipo" class="form-control" id="tipo"  >
+                            <option value='ALUGUEL'>Aluguel</option>
+                            <option value='SALOES'>Salões de Festas e Áreas de Lazer</option>
+                            <option value='HOSPEDAGEM'>Hospedagens</option>
+                            <option value='LOJAS'>LOjas temporárias</option>
+                            <option value='PRESTADORES'>Prestadores de Serviço</option>
+                        </select>
+                     </div>   
+                     <? }
+                          ?>
 
                      <div class="col-xs-12 form-group">
                         <label for="arquivo">Ícone <b>(Tamanho recomendado: 54 x 54 | 1:1 ) </b></label>

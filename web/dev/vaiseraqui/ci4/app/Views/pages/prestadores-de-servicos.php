@@ -44,7 +44,7 @@
                     if($ind <= 3) {                     
                 ?>
           <article class="card-services poster" data-aos="fade-up">
-                <a href="<?=PATHSITE?>prestador-de-servico/<?=$destaque->identificador?>/">
+                <a href="<?=PATHSITE?><?=$segments[0]?>/<?=$destaque->identificador?>/">
             <div class="cover">
                  <? if($destaque->destaque == 1) {?>
               <span class="button-category">
@@ -97,7 +97,7 @@
         <div class="list-4">
             <? foreach($servicos as $servico) {?>
           <article class="card-services" data-aos="fade-up">
-                <a href="<?=PATHSITE?>prestador-de-servico/<?=$servico->identificador?>/">
+                <a href="<?=PATHSITE?><?=$segments[0]?>/<?=$servico->identificador?>/">
             <div class="cover">
                  <? if($servico->destaque == 1) {?>
               <span class="button-category">
@@ -198,7 +198,7 @@
 
       </nav>
       <div class="presentation-form-content">       
-         <? echo View("templates/form4") ?>        
+         <? echo View("templates/form4", (array) $tipoAtual)  ?>        
       </div>        
     </div>
   </div>

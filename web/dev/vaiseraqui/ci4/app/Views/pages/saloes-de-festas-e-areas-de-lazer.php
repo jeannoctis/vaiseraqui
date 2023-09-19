@@ -9,7 +9,7 @@
               <a href="#">Salões de Festa e Áreas de Lazer</a>
             </nav>
             <span class="result"><?= count($saloes) ?> salões de festa e áreas de lazer encontradas</span>
-            <?= view("templates/order-filter", $get) ?>
+             <?= view("templates/order-filter", $get) ?>
           </div>
         </header>
         <? if ($emAlta) {
@@ -33,12 +33,14 @@
                 } ?>
               <? } ?>
 
-              <!-- Listagem comumn -->
-              <? foreach ($saloes as $salao) {
-                $salao->tipo = 'salao-de-festa-e-area-de-lazer';
-                echo view("templates/aluguel-para-temporada-card.php", (array)$salao);
-              } ?>
-            </div>
+                  <!-- Listagem comumn -->
+                  <? foreach ($saloes as $salao) {
+
+                      
+                        $salao->tipo =  $segments[0]; // 'salao-de-festa-e-area-de-lazer';
+                     echo view("templates/aluguel-para-temporada-card.php", (array)$salao);
+                  } ?>
+               </div>
 
             <?= $pager->links("anuncios") ?>
 
@@ -111,8 +113,8 @@
         </a>
 
       </nav>
-      <div class="presentation-form-content">
-        <? echo View("templates/form2") ?>
-      </div>
+      <div class="presentation-form-content">       
+         <? echo View("templates/form2", (array) $tipoAtual) ?>        
+      </div>        
     </div>
   </div>

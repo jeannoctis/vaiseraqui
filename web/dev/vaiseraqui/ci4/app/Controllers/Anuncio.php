@@ -291,7 +291,7 @@ class Anuncio extends BaseController
                $post[$key] = NULL;
             }
          }
-
+         
          $categoriaAtual = $categoriasServicos[$post['categoriaFK']];
          $post['titulo'] = "Anúncios Serviços - Categoria {$categoriaAtual}";
          $post['tipo'] = "servicocategoria";
@@ -301,7 +301,7 @@ class Anuncio extends BaseController
             $data['salvou'] = $this->model->save($post);
          } else {
             $data['salvou'] = $this->model->insert($post);
-         }
+}
       }
 
       if ($id) {

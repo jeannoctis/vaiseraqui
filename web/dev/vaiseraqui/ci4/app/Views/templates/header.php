@@ -31,8 +31,7 @@
       <a href="<?= PATHSITE ?>">
         <img src="<?= PATHSITE ?>assets/images/logo.png" alt="Logo" class="logo">
       </a>
-
-      <form action="<?= PATHSITE ?>busca/" method="get">
+      <form action="<?=PATHSITE?>busca/" method="get">
         <input type="text" name="busca" placeholder="<?= $txMenuFiltro->titulo ?>">
         <button type="submit"><img src="<?= PATHSITE ?>assets/images/icon-search.svg" alt=""></button>
       </form>
@@ -175,18 +174,17 @@
             </a>
           </nav>
 
-          <? if ($pagina == 1) { ?>
-            <div class="presentation-form-content">
-              <? echo View("templates/form1") ?>
-              <? echo View("templates/form2") ?>
-              <? echo View("templates/form3") ?>
-              <? echo View("templates/form4") ?>
-              <? echo View("templates/form5") ?>
-              <? echo View("templates/form6") ?>
-              <? echo View("templates/form7") ?>
-            </div>
-          <? } ?>
-
+            <? if($pagina == FALSE) {?>
+          <div class="presentation-form-content">
+            <? echo View("templates/form1") ?>
+            <? echo View("templates/form2") ?>
+            <? echo View("templates/form3") ?>
+            <? echo View("templates/form4") ?>
+            <? echo View("templates/form5") ?>
+            <? echo View("templates/form6") ?>
+            <? echo View("templates/form7") ?>
+          </div>
+            <? } ?>
         </div>
       </div>
 
@@ -236,17 +234,15 @@
         </header>
         <h2> <?= $isLogado ? 
           "Vocês está <span>logado!</span>" : 
-          "Olá! <a href='{PATHSITE}login/'><span>Entre</span></a> para montar <br> sua festa" ?>
+          "Olá! <a href='".PATHSITE."login/'><span>Entre</span></a> para montar <br> sua festa" ?>
         </h2>
         <hr>
         <nav class="menu-mobile-links">
-          <a href="<?= PATHSITE ?>aluguel-para-temporada/">Aluguel para temporada</a>
-          <a href="<?= PATHSITE ?>saloes-de-festas-e-areas-de-lazer/">Salões de Festa e Áreas de Lazer</a>
-          <a href="<?= PATHSITE ?>lojas-temporarias/">Lojas Temporárias</a>
-          <a href="<?= PATHSITE ?>prestadores-de-servicos/">Prestadores de Serviços</a>
-          <a href="<?= PATHSITE ?>hospedagens/">Hospedagem</a>
-          <a href="<?= PATHSITE ?>eventos/">Eventos</a>
+            <? foreach($tipos as $tipo) {?>
+          <a href="<?= PATHSITE ?><?=$tipo->identificador?>/"><?=$tipo->titulo?></a>      
+            <? } ?>
         </nav>
+        
       </div>
 
       <div class="account">

@@ -177,18 +177,18 @@
           <button class="prev">
             <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 1L1 6.5L7 12" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            </svg>              
             <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M7 1L1 6.5L7 12" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            </svg>              
           </button>
           <button class="next active">
             <svg class="active" width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 12L7 6.5L1 1" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            </svg>              
             <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M1 12L7 6.5L1 1" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            </svg>              
           </button>
         </div>
       </div>
@@ -237,7 +237,10 @@
         
       </nav>
       <div class="presentation-form-content">       
-         <? echo View("templates/form3") ?>        
+          <?
+         
+          ?>
+         <? echo View("templates/form3", (array) $tipoAtual) ?>        
       </div>        
     </div>
   </div>

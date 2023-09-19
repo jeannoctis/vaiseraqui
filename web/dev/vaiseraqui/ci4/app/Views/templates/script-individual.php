@@ -38,6 +38,10 @@
                 });
         eventosData('<?= date("Y-m-d") ?>');
     </script>
+    
+        <?
+    echo View('templates/checkin-out');
+    ?>    
 <? } else if ($pagina == 2) { ?>
     <!-- Sobre nós -->
     <script>
@@ -297,7 +301,9 @@
     </script>
 <? } else if ($pagina == 25) { ?>
     <!-- Saloes de festa e area de lazer listagem -->
-
+      <?
+    echo View('templates/checkin-out');
+    ?>
     <script>
 
 
@@ -310,9 +316,7 @@
 <? } else if ($segments[0] == "salao-de-festa-e-area-de-lazer") { ?>
     <!-- Saloes de festa e area de lazer interna -->
 
-         <?
-    echo View('templates/checkin-out');
-    ?>
+   
        
     <script>        
         // Form Select
@@ -333,6 +337,11 @@
                 new Selector(box)
                 })
     </script>
+    
+       <?
+    echo View('templates/checkin-out');
+    ?>    
+    
 <? } else if ($pagina == 12 && $segments[1]) { ?>
     <!-- Alguel para temporada interna -->
     <script>
@@ -554,6 +563,11 @@
                 new Selector(box)
                 })
     </script>
+    
+       <?
+    echo View('templates/checkin-out');
+    ?>    
+    
 <? } else if ($segments[0] == "hospedagem") { ?>
     <!-- Hospedagem - interna -->
     
@@ -641,9 +655,4 @@
                 ]);
                 }
 <? } ?>
-
-
-
-
-
 </script>

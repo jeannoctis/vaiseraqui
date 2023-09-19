@@ -386,7 +386,7 @@ class Utils extends BaseController
       if($post) {
          $this->contatoModel = \model("App\Models\ContatoModel", false);
          $response['success'] = $this->contatoModel->save($post);
-      }
+}
 
       return \json_encode($response);
    }

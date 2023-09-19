@@ -31,7 +31,7 @@ class CategoriaArtigoModel extends Model
       
       foreach ($categorias as $categoria) {
          $lista[$categoria->id] = $categoria->titulo;
-      }
+}
 
       return $lista;
    }

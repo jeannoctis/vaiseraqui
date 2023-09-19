@@ -6,12 +6,12 @@
                <div class='col-xs-12 col-md-6'>
                   <h4 class="box-title"><?= $title ?></h4>
                </div>
-               <!-- <div class='col-xs-12 col-md-6 text-right form-group'>
-                  <a href="<?= PATHSITE ?>admin/<?= $tabela ?>/">
+             <div class='col-xs-12 col-md-6 text-right form-group'>
+                  <a href="<?= PATHSITE ?>admin/anuncio_tipo/form/">
                      <button type="button" class="btn btn-violet btn-rounded waves-effect waves-light">Adicionar</button>
                   </a>
                   <button onclick='$("#form").submit()' type="button" class="btn btn-danger btn-rounded waves-effect waves-light">Excluir</button>
-               </div> -->
+               </div> 
                <!-- /.dropdown js__dropdown -->
 
                <? if ($lista) {  ?>
@@ -24,7 +24,7 @@
                                  <tr>
                                     <th class='menorTh'></th>
                                     <th>Nome</th>
-                                    <!-- <th>Ordenar</th> -->
+                                    <th>Ordenar</th> 
                                  </tr>
                               </thead>
                               <tbody>
@@ -36,7 +36,7 @@
                                              <?= $elemento->titulo ?>
                                           </a>
                                        </td>
-                                       <!-- <td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td> -->
+                                       <td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td> 
                                     </tr>
                                  <? } ?>
                               </tbody>

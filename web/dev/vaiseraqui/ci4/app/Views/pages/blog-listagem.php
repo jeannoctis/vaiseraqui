@@ -107,11 +107,11 @@
    </section>
 
    <!-- Incluir -->
-   <div class="banner-ads" data-aos="fade-up">
+   <div class="banner-zinho" data-aos="fade-up">
       <div class="container-medium">
 
          <a href="<?= $anuncioBannerH->link ?>">
-            <div class="banner-ads" data-aos="fade-up">
+            <div class="banner-zinho" data-aos="fade-up">
                <div class="container-medium">
 
                   <picture>

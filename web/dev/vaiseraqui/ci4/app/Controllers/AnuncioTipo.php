@@ -16,7 +16,7 @@ class AnuncioTipo extends BaseController
 
    public function index()
    {
-      $data['lista'] = $this->model->orderBy("id ASC")->findAll();
+      $data['lista'] = $this->model->orderBy("ordem ASC, id ASC")->findAll();
 
       $data['title'] = 'Tipo de Anúncio';
       $data['tabela'] = "tipo";
@@ -72,7 +72,9 @@ class AnuncioTipo extends BaseController
             $post["id"] = $id;
             $data['salvou'] = $this->model->save($post);
          } else {
-            $data['salvou'] =  $this->model->insert($post);
+             $post["identificador"] = \arruma_url($post['titulo']);
+             //$post["identificador2"] = \arruma_url($post['titulo']);
+            $data['salvou'] =  $this->model->insert($post);   
          }
 
          $data["erros"] = $this->model->errors();

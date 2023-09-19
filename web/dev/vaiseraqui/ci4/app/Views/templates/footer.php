@@ -8,12 +8,9 @@
       <div class="item">
         <h2>Categorias</h2>
         <nav>
-          <a href="<?= PATHSITE ?>aluguel-para-temporada/">Aluguel para temporada</a>
-          <a href="<?= PATHSITE ?>saloes-de-festas-e-areas-de-lazer/">Salões de Festa e Áreas de Lazer</a>
-          <a href="<?= PATHSITE ?>lojas-temporarias/">Lojas Temporárias</a>
-          <a href="<?= PATHSITE ?>prestadores-de-servicos/">Prestadores de Serviços</a>
-          <a href="<?= PATHSITE ?>hospedagens/">Hospedagem</a>
-          <a href="<?= PATHSITE ?>eventos/">Eventos</a>
+               <? foreach($tipos as $tipo) {?>
+          <a href="<?= PATHSITE ?><?=$tipo->identificador2?>/"><?=$tipo->titulo?></a>      
+               <? } ?>
         </nav>
       </div>
       <div class="item">
@@ -153,17 +150,17 @@
         <a href="<?= $linkwhatsapp ?>" target="_blank">
           <button onclick="contadorWhatsapp(<?= $whatsapps[0]->id ?>); cliqueWhatsapp(); startWpp()">
             Iniciar conversa no WhatsApp
-          </button>
+        </button>
         </a>
 
-      </div>
+                </div>
     </div>
 
     <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
       <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
       Fale conosco
     </button>
-  <? } ?>
+          <? } ?>
 
   <script>
     var public_recaptcha = "<?= $configs->public_recaptcha ?>";

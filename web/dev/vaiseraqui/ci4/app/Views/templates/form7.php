@@ -17,9 +17,9 @@ if ($get['tipoFK']) {
 }
 ?>    
 
-<form action="<?=PATHSITE?>eventos/" method="get"  class="form7 <?= $form7Visible ?>">
-      <input type="hidden" id="cidadeFK7" name="cidadeFK" value="<?= $idCidade ?>" />
-    <input type="hidden" id="tipoFK7" name="tipoFK" value="<?= $idTipo ?>" />
+<form action="<?=PATHSITE?>eventos/" method="get"  class="form<?=$id?> <?= $form7Visible ?>">
+      <input type="hidden" id="cidadeFK<?=$id?>" name="cidadeFK" value="<?= $idCidade ?>" />
+    <input type="hidden" id="tipoFK<?=$id?>" name="tipoFK" value="<?= $idTipo ?>" />
     <input type="hidden"  name="ordem" value="<?= $get['ordem'] ?>" />
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
@@ -32,12 +32,12 @@ if ($get['tipoFK']) {
                   </button>
                 </label>
                 <div class="select">
-                  <input type="text" placeholder="Busque por cidade">
+                    <input id='cidadeFK<?=$id?>' type="text" placeholder="Busque por cidade"value="<?=$nomeCidade?>" >
                   <div class="select-list">
                       <? if($cidades) {?>
                     <ul class="dropdown-select">
                         <? foreach($cidades as $cidade) {?>
-                      <li><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
+                      <li onclick="$('#cidadeFK<?=$id?>').val('<?=$cidade->id?>');"><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
                         <? } ?>
                       </ul>
                       <? } ?>
@@ -61,7 +61,7 @@ if ($get['tipoFK']) {
                           <? if($produtoCategorias){?>
                       <ul class="dropdown-select">
                           <? foreach($produtoCategorias as $prodCat){
-                              if($prodCat->tipoFK == 5) {
+                              if($prodCat->tipoFK == $id) {
                               ?>
                         <li onclick="$('#tipoFK5').val('<?=$prodCat->id?>');"><?=$prodCat->titulo?></li>
                           <? } } ?>                      </ul>
@@ -80,16 +80,15 @@ if ($get['tipoFK']) {
                     </button>
                   </label>
                   <div class="select">
-                    <input type="text" placeholder="Selecione">
+                    <input id='eventoData<?=$id?>' type="text" name='dataEvento' value='<?=$get['dataEvento']?>' placeholder="Selecione">
                     <div class="select-list">
+                        <? if($diasMes) {?>
                       <ul class="dropdown-select">
-                        <li>04/08/2023</li>
-                        <li>05/08/2023</li>
-                        <li>06/08/2023</li>
-                        <li>07/08/2023</li>
-                        <li>08/08/2023</li>
-                        <li>09/08/2023</li>
+                        <? foreach ($diasMes as $ind => $dia) {?>
+                          <li onclick='$("#eventoData<?=$id?>").val(<?=formataData($dia->data)?>);'><?=formataData($dia->data)?></li>
+                        <? } ?>
                       </ul>
+                        <? } ?>
                     </div>
                   </div>
                 </div>

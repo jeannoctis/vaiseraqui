@@ -3459,8 +3459,6 @@ header.header-bg .group-title span {
   .post-article .info h3 {
     font-size: 1rem;
     font-weight: 800;
-    line-height: 1.12269rem;
-    letter-spacing: -0.05rem;
     margin-bottom: 0.62rem;
   }
   .post-article .info p {
@@ -4055,7 +4053,7 @@ header.header-bg .group-title span {
   display: block;
 }
 .presentation-form-menu a.active svg:not(.isActive), .presentation-form-menu a.active img:not(.isActive) {
-  display: none;
+   filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7500%) hue-rotate(133deg) brightness(124%) contrast(94%);
 }
 
 .presentation-form-content {
@@ -4161,6 +4159,7 @@ header.header-bg .group-title span {
 }
 .presentation-form .presentation-form-menu a svg, .presentation-form .presentation-form-menu a img {
   margin-bottom: 0.62rem;
+  height: 30px;
 }
 .presentation-form .presentation-form-menu a svg.isActive, .presentation-form .presentation-form-menu a img.isActive {
   display: none;
@@ -4173,9 +4172,7 @@ header.header-bg .group-title span {
 .presentation-form .presentation-form-menu a.active svg.isActive, .presentation-form .presentation-form-menu a.active img.isActive {
   display: block;
 }
-.presentation-form .presentation-form-menu a.active svg:not(.isActive), .presentation-form .presentation-form-menu a.active img:not(.isActive) {
-  display: none;
-}
+
 .presentation-form .presentation-form-content {
   width: 100%;
 }
@@ -4913,11 +4910,11 @@ header.header-bg .group-title span {
     margin-inline: auto;
   }
 }
-.home .banner-ads {
+.home .banner-zinho {
   margin-bottom: 12.5rem;
   height: 540px;
 }
-.home .banner-ads img {
+.home .banner-zinho img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -4925,14 +4922,17 @@ header.header-bg .group-title span {
 .home .banner-ads .container-medium {
   height: 100%;
 }
-.home .banner-ads img:not(.only-mobile) {
+.home .banner-zinho .container-medium {
+  height: 100%;
+}
+.home .banner-zinho img:not(.only-mobile) {
   display: block;
 }
 @media screen and (max-width: 800px) {
-  .home .banner-ads {
+  .home .banner-zinho {
     margin-bottom: 10rem;
   }
-  .home .banner-ads img:not(.only-mobile) {
+  .home .banner-zinho img:not(.only-mobile) {
     display: none;
   }
 }
@@ -7195,35 +7195,35 @@ header.header-bg .group-title span {
     margin-bottom: 1.25rem;
   }
 }
-.blog-list .banner-ads {
+.blog-list .banner-zinho {
   margin-top: 9.38rem;
   margin-bottom: 9.38rem;
   height: 540px;
 }
-.blog-list .banner-ads .only-mobile {
+.blog-list .banner-zinho .only-mobile {
   display: none;
 }
-.blog-list .banner-ads .container-medium {
+.blog-list .banner-zinho .container-medium {
   height: 100%;
 }
-.blog-list .banner-ads .container-medium img.only-mobile {
+.blog-list .banner-zinho .container-medium img.only-mobile {
   display: none;
 }
-.blog-list .banner-ads .container-medium img {
+.blog-list .banner-zinho .container-medium img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 @media screen and (max-width: 769px) {
-  .blog-list .banner-ads {
+  .blog-list .banner-zinho {
     margin-top: 6.25rem;
     margin-bottom: 6.25rem;
   }
-  .blog-list .banner-ads .container-medium img:not(.only-mobile) {
+  .blog-list .banner-zinho .container-medium img:not(.only-mobile) {
     display: none;
   }
-  .blog-list .banner-ads .container-medium img.only-mobile {
+  .blog-list .banner-zinho .container-medium img.only-mobile {
     display: block;
   }
 }
@@ -7332,7 +7332,17 @@ header.header-bg .group-title span {
   font-weight: 400;
   line-height: 170%;
   letter-spacing: -0.03125rem;
+  margin-bottom: 1rem;
 }
+
+.blog-list .two-columns .column:first-of-type ol,.blog-list .two-columns .column:first-of-type ul{
+    padding-left: 15px;
+}
+
+.blog-list .two-columns .column:first-of-type li{
+    margin-bottom: 15px;
+}
+
 .blog-list .two-columns .column:first-of-type .cover {
   border-radius: 1.25rem;
   overflow: hidden;
@@ -9351,6 +9361,10 @@ header.header-bg .group-title span {
     width: 5px;
     height: 5px;
   }
+}
+
+.swiper-agenda .swiper-wrapper{
+    justify-content: center;
 }
 
 .swiper-agenda .swiper-wrapper .swiper-slide {
