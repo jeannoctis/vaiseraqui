@@ -39,7 +39,7 @@
                       <? if($cidades) {?>
                     <ul class="dropdown-select">
                         <? foreach($cidades as $cidade) {?>
-                      <li><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
+                      <li onclick="$('#cidadeFK<?=$id?>').val('<?=$cidade->id?>');"><?=$cidade->titulo?> - <?=$cidade->sigla?></li>
                         <? } ?>
                       </ul>
                       <? } ?>
@@ -58,7 +58,7 @@
                     </button>
                   </label>
                   <div class="select">
-                    <input id='tipoFK<?=$id?>' type="text" placeholder="Selecione" value="<?=$nomeTipo?>">
+                    <input id='tipoFK<?=$id?>' type="text" name='tipoFK' placeholder="Selecione" value="<?=$nomeTipo?>">
                     <div class="select-list">
                           <? if($produtoCategorias){?>
                       <ul class="dropdown-select">

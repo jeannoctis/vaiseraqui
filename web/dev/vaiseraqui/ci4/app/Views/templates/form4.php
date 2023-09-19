@@ -35,7 +35,7 @@
                   
                   
                 <div class="select">                   
-                  <input  type="text" placeholder="Busque por cidade"value="<?=$nomeCidade?>" >
+                  <input type="text" placeholder="Busque por cidade"value="<?=$nomeCidade?>" >
                   <div class="select-list">
                      <? if($cidades) {?>
                     <ul class="dropdown-select">

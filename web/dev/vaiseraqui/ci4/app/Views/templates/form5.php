@@ -1,4 +1,6 @@
-           <?
+         
+
+  <?
                   if($get['cidadeFK']) {
                       foreach($cidades as $cidade) {
                           if($cidade->id == $get['cidadeFK']) {
@@ -18,6 +20,11 @@
                   ?>
 
 <form method="get" action="<?=PATHSITE?><?=$identificador?>/"  class="form<?=$id?> <?= $form5Visible ?>">
+    
+     <input type="hidden" id="cidadeFK<?=$id?>" name="cidadeFK" value="<?= $idCidade ?>" />
+    <input type="hidden" id="tipoFK<?=$id?>" name="tipoFK" value="<?= $idTipo ?>" />
+    <input type="hidden"  name="ordem" value="<?= $get['ordem'] ?>" />
+    
               <div class="box-select mb-10 j-box-select">
                 <label for="cities">
                   <div>
@@ -29,7 +36,7 @@
                   </button>
                 </label>
                 <div class="select">
-                     <input  type="text" placeholder="Busque por cidade"value="<?=$nomeCidade?>" >
+                     <input   type="text" placeholder="Busque por cidade"value="<?=$nomeCidade?>" >
                   <div class="select-list">
                      <? if($cidades) {?>
                     <ul class="dropdown-select">
@@ -53,7 +60,7 @@
                     </button>
                   </label>
                   <div class="select">
-                    <input type="text" placeholder="Selecione">
+                    <input type="text" placeholder="Selecione" value="<?=$nomeTipo?>">
                     <div class="select-list">
                           <? if($produtoCategorias){?>
                       <ul class="dropdown-select">

@@ -614,7 +614,7 @@ class Pages extends Controller {
                     $page = 'eventos-listagem';
                     $data['bodyClass'] = '';
                     $data['style_list'] = ['swiper'];
-                    $data['script_list'] = ['swiper', 'card-like', 'controller-agenda', 'controller-card', 'controller-page-internal-3', 'form-filter', 'select','menu-tabs'];
+                    $data['script_list'] = ['swiper', 'card-like', 'controller-agenda', 'controller-card', 'modal-filter', 'fslightbox', 'modal-select-order', 'controller-page-internal-3', 'form-filter', 'select','menu-tabs'];
 
                     if (!is_numeric($get['page_produto'])) {
                         $paginate = 1;

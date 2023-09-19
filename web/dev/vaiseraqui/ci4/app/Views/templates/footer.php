@@ -156,11 +156,13 @@
                 </div>
     </div>
 
+  <? if(!$escondeWhatsapp) {?>
     <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
       <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
       Fale conosco
     </button>
           <? } ?>
+  <? } ?>
 
   <script>
     var public_recaptcha = "<?= $configs->public_recaptcha ?>";

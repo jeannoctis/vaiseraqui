@@ -5826,23 +5826,23 @@ header.header-bg .group-title span {
   line-height: 120.1%;
   letter-spacing: -0.0625rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads {
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-anunciante {
   margin-top: 2.5rem;
   display: flex;
   align-items: flex-start;
   gap: 1.25rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads > img {
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-anunciante > img {
   width: 5.125rem;
   height: 5.125rem;
   border-radius: 999px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div {
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-anunciante div {
   padding-top: 1.5rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div span.type {
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-anunciante div span.type {
   color: #808080;
   font-size: 0.875rem;
   font-weight: 400;
@@ -5851,7 +5851,7 @@ header.header-bg .group-title span {
   display: block;
   margin-bottom: 0.31rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div span.title {
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-anunciante div span.title {
   color: #404041;
   font-size: 1.25rem;
   font-weight: 500;
@@ -5860,7 +5860,7 @@ header.header-bg .group-title span {
   display: block;
   margin-bottom: 1.44rem;
 }
-.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-ads div ul li a{
+.internal-rent .more-about-2-column .container-medium .column:last-of-type .box-anunciante div ul li a{
   display: flex;
   align-items: center;
   gap: 0.88rem;

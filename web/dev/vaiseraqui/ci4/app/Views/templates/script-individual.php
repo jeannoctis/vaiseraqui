@@ -313,11 +313,9 @@
                 new Selector(box)
                 })
     </script>
-<? } else if ($segments[0] == "salao-de-festa-e-area-de-lazer") { ?>
+<? } else if ($segments[0] == "saloes-de-festas-e-areas-de-lazer") { ?>
     <!-- Saloes de festa e area de lazer interna -->
-
-   
-       
+    
     <script>        
         // Form Select
         const boxes = document.querySelectorAll('.j-box-select')
@@ -325,11 +323,13 @@
                 new Selector(box)
                 })
     </script>
+    
+    <?echo View('templates/checkin-out');?>
+    
 <? } else if ($pagina == 12 && !$segments[1]) { ?>
     <!-- Alguel para temporada listagem -->
     <script>
                 // Controla modal de mapa
-
 
                 // Form Select
                 const boxes = document.querySelectorAll('.j-box-select')
@@ -568,7 +568,7 @@
     echo View('templates/checkin-out');
     ?>    
     
-<? } else if ($segments[0] == "hospedagem") { ?>
+<? } else if ($segments[0] == "hospedagens") { ?>
     <!-- Hospedagem - interna -->
     
          <?
