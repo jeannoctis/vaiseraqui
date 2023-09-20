@@ -108,7 +108,6 @@ class Pages extends Controller {
         $data["pagina"] = 1;
         $data['bodyClass'] = 'home';
         
-
         $bannerModel = model('App\Models\BannerModel', false);
         $data['banner1'] = $bannerModel->find(1);
     
@@ -191,13 +190,15 @@ class Pages extends Controller {
         $data["blogs"] = $ArtigoModel->findAll(6);
 
         $anuncioModel = model('App\Models\AnuncioModel', false);
-        $emAlta = $anuncioModel->find(7);
+        $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+        $emAltas = $anuncioModel->findAll();
+        
+        echo "<pre>";
+        print_r($emAltas);
+        echo "</pre>";
+        exit();
 
-        $emAltaAluguel = $anuncioModel->find(1);
-        $emAltaSaloes = $anuncioModel->find(2);
-        $emAltaTemporarias = $anuncioModel->find(4);
-        $emAltaServicos = $anuncioModel->find(9);
-
+        
         if ($emAlta->produtoFK1) {
             $produtoModel->resetQuery();
             $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');

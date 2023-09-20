@@ -12,7 +12,7 @@ class AnuncioModel extends Model
    protected $returnType = 'object';
    protected $useSoftDeletes = true;
    protected $allowedFields = ['tipoFK', 'produtoFK1', 'produtoFK2', 'produtoFK3', 'produtoFK4', 'produtoFK5', 'produtoFK6',
-      'produtoFK7', 'arquivo', "arquivo2", 'tipo', 'link','categoriaFK', 'titulo'];
+      'produtoFK7', 'tipo', 'categoriaFK', 'cidadeFK'];
    protected $updatedField = 'dtAlteracao';
    protected $deletedField = 'excluido';
    protected $validationRules = [];
