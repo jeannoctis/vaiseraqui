@@ -107,9 +107,7 @@
     </div>
   <? } ?>
   <? if ($whatsapps) { ?>
-
     <div class="form-wpp">
-
       <div class="fw-header">
         <picture>
           <source srcset="<?= PATHSITE ?>uploads/whatsapp/<?= $whatsapps[0]->arquivo ?>.webp" type="image/webp">
@@ -156,10 +154,12 @@
       </div>
     </div>
 
-    <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
-      <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
-      Fale conosco
-    </button>
+    <? if(!$escondeWhatsapp) {?>
+        <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
+          <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
+          Fale conosco
+        </button>
+    <? } ?>
   <? } ?>
 
   <script>
@@ -286,8 +286,8 @@
       })
     })
   </script>
-
-  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"  crossorigin=""></script>
 
   <? if ($coordenadas) {
     echo View('templates/coordenadas');

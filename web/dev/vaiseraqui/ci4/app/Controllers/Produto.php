@@ -14,9 +14,9 @@ class Produto extends BaseController
       $this->produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
       $this->tabela = "produto";
 
-      $get = request()->getGet();
-      $this->session->set('menuAdmin', setMenuAdminTipo($get['tipo']));
-   }
+        $get = request()->getGet();
+        $this->session->set('menuAdmin', 7);
+    }
 
    public function index()
    {
@@ -117,9 +117,11 @@ class Produto extends BaseController
 
       $data['tipo'] = \getTipo($get['tipo']);
 
-      $data['title'] = 'Produtos';
-      $data['tabela'] = $this->tabela;
-      $data["nomeModel"] = "ProdutoModel";
+        $data['title'] = 'Produtos';
+        $data['tabela'] = $this->tabela;
+        $data["nomeModel"] = "ProdutoModel";
+        
+       
 
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);

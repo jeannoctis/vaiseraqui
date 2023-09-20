@@ -259,74 +259,50 @@
       })
    </script>
 <? } else if ($pagina == 11) { ?>
-   <!-- prestadores de servicos listagem -->
-   <script>
-      // Form Select
-      const boxes = document.querySelectorAll('.j-box-select')
-      boxes.forEach((box, key) => {
-         new Selector(box)
-      })
-   </script>
-<? } else if ($segments[0] == "prestador de servico") { ?>
-   <!-- prestador de servicos interna -->
-   <script>
-      $(document).ready(function() {
-
-         $(function() {
-            $.datepicker.setDefaults($.datepicker.regional['sv']);
-            const config = {
-               dateFormat: 'dd/mm/yy',
-               dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-               dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-               dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-               monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-               monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-               nextText: 'Proximo',
-               prevText: 'Anterior'
-            }
-
-            $("#desktop-table-checkin").datepicker(config);
-            $("#desktop-table-checkout").datepicker(config);
-            $("#mobile-table-checkin").datepicker(config);
-            $("#mobile-table-checkout").datepicker(config);
-         });
-      })
-
-      // Form Select
-      const boxes = document.querySelectorAll('.j-box-select')
-      boxes.forEach((box, key) => {
-         new Selector(box)
-      })
-   </script>
+    <!-- prestadores de servicos listagem -->
+    <script>
+                // Form Select
+                const boxes = document.querySelectorAll('.j-box-select')
+                boxes.forEach((box, key) => {
+                new Selector(box)
+                })
+    </script>
+<? } else if ($segments[0] == "prestadores-de-servicos") { ?>
+    <!-- prestador de servicos interna -->
+    
+    <?   echo View('templates/checkin-out'); ?>
+    
 <? } else if ($pagina == 25) { ?>
-   <!-- Saloes de festa e area de lazer listagem -->
-   <?
-   echo View('templates/checkin-out');
-   ?>
-   <script>
-      // Form Select
-      const boxes = document.querySelectorAll('.j-box-select')
-      boxes.forEach((box, key) => {
-         new Selector(box)
-      })
-   </script>
-<? } else if ($segments[0] == "salao-de-festa-e-area-de-lazer") { ?>
-   <!-- Saloes de festa e area de lazer interna -->
+    <!-- Saloes de festa e area de lazer listagem -->
+      <?
+    echo View('templates/checkin-out');
+    ?>
+    <script>
 
 
-
-   <script>
-      // Form Select
-      const boxes = document.querySelectorAll('.j-box-select')
-      boxes.forEach((box, key) => {
-         new Selector(box)
-      })
-   </script>
+                // Form Select
+                const boxes = document.querySelectorAll('.j-box-select')
+                boxes.forEach((box, key) => {
+                new Selector(box)
+                })
+    </script>
+<? } else if ($segments[0] == "saloes-de-festas-e-areas-de-lazer") { ?>
+    <!-- Saloes de festa e area de lazer interna -->
+    
+    <script>        
+        // Form Select
+        const boxes = document.querySelectorAll('.j-box-select')
+                boxes.forEach((box, key) => {
+                new Selector(box)
+                })
+    </script>
+    
+    <?echo View('templates/checkin-out');?>
+    
 <? } else if ($pagina == 12 && !$segments[1]) { ?>
-   <!-- Alguel para temporada listagem -->
-   <script>
-      // Controla modal de mapa
-
+    <!-- Alguel para temporada listagem -->
+    <script>
+                // Controla modal de mapa
 
       // Form Select
       const boxes = document.querySelectorAll('.j-box-select')
@@ -539,38 +515,39 @@
          swiperImoveis.slidePrev()
       })
 
-      swiperImoveis.on('reachBeginning', function() {
-         buttonNext.classList.add('active')
-         buttonPrev.classList.remove('active')
-      });
-      swiperImoveis.on('reachEnd', function() {
-         buttonNext.classList.remove('active')
-         buttonPrev.classList.add('active')
-      });
-      // Form Select
-      const boxes = document.querySelectorAll('.j-box-select')
-      boxes.forEach((box, key) => {
-         new Selector(box)
-      })
-   </script>
-
-   <?
-   echo View('templates/checkin-out');
-   ?>
-
-<? } else if ($segments[0] == "hospedagem") { ?>
-   <!-- Hospedagem - interna -->
-
-   <?
-   echo View('templates/checkin-out');
-   ?>
-
-   <script>
-      // Form Select
-      const boxes = document.querySelectorAll('.j-box-select')
-      boxes.forEach((box, key) => {
-         new Selector(box)
-      })
+                swiperImoveis.on('reachBeginning', function() {
+                buttonNext.classList.add('active')
+                        buttonPrev.classList.remove('active')
+                });
+        swiperImoveis.on('reachEnd', function() {
+        buttonNext.classList.remove('active')
+                buttonPrev.classList.add('active')
+        });
+        // Form Select
+        const boxes = document.querySelectorAll('.j-box-select')
+                boxes.forEach((box, key) => {
+                new Selector(box)
+                })
+    </script>
+    
+       <?
+    echo View('templates/checkin-out');
+    ?>    
+    
+<? } else if ($segments[0] == "hospedagens") { ?>
+    <!-- Hospedagem - interna -->
+    
+         <?
+    echo View('templates/checkin-out');
+    ?>
+    
+    <script>
+     
+                // Form Select
+                const boxes = document.querySelectorAll('.j-box-select')
+                boxes.forEach((box, key) => {
+                new Selector(box)
+                })
 
       // Guest
       const orderGuestOptions = document.querySelectorAll('.modal-order-select a')

@@ -1,19 +1,19 @@
-<article class="card-item" data-aos="fade-right">
-   <a href="<?= PATHSITE ?><?= $tipo ?>/<?= $identificador ?>">
-      <div class="cover">
-         <? if ($fotos) { ?>
-            <div class="swiper swiper-card">
-               <div class="swiper-wrapper">
-                  <? foreach ($fotos as $foto) { ?>
-                     <div class="swiper-slide">
-                        <picture>
-                           <source srcset="<?= PATHSITE ?>uploads/produto/<?= $id ?>/<?= $foto->arquivo ?>.webp" type="image/webp">
-                           <img src="<?= PATHSITE ?>uploads/produto/<?= $id ?>/<?= $foto->arquivo ?>" alt="foto do local">
-                        </picture>
-                     </div>
-                  <? } ?>
-               </div>
-               <div class="swiper-pagination"></div>
+<article class="card-item coord-<?=$identificador?>" data-aos="fade-right">
+     <a href="<?= PATHSITE ?><?=$tipo?>/<?= $identificador ?>">
+   <div class="cover">
+      <? if ($fotos) { ?>
+         <div class="swiper swiper-card">
+            <div class="swiper-wrapper">
+               <? foreach ($fotos as $foto) { ?>
+                  <div class="swiper-slide">
+                     <picture>
+                        <source srcset="<?= PATHSITE ?>uploads/produto/<?= $id ?>/<?= $foto->arquivo ?>.webp" type="image/webp">
+                        <img src="<?= PATHSITE ?>uploads/produto/<?= $id ?>/<?= $foto->arquivo ?>" alt="foto do local">
+                     </picture>
+                  </div>
+               <? } ?>
+            </div>
+            <div class="swiper-pagination"></div>
 
                <div class="swiper-button-prev"></div>
                <div class="swiper-button-next"></div>

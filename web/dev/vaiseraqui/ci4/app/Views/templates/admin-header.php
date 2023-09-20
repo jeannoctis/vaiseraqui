@@ -209,7 +209,7 @@ if ($acesso['usuarioFK'] > 3) {
                </ul>
             <? } ?>
 
-            <? if (in_array(4, $aprovados) || $adminMaster) { ?>
+            <? if (in_array(4, $aprovados) || $adminMaster && FALSE) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 4) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-house-heart-fill"></i><span>Aluguel Temporada</span><span class="menu-arrow fa fa-angle-down"></span></a>
@@ -222,7 +222,7 @@ if ($acesso['usuarioFK'] > 3) {
                </ul>
             <? } ?>
 
-            <? if (in_array(11, $aprovados) || $adminMaster) { ?>
+            <? if (in_array(11, $aprovados) || $adminMaster && FALSE) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 11) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-balloon-fill"></i></i><span>Salões e Áreas de Lazer</span><span class="menu-arrow fa fa-angle-down"></span></a>
@@ -235,7 +235,7 @@ if ($acesso['usuarioFK'] > 3) {
                </ul>
             <? } ?>
 
-            <? if (in_array(12, $aprovados) || $adminMaster) { ?>
+            <? if (in_array(12, $aprovados) || $adminMaster && FALSE) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 12) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-houses"></i><span>Hospedagem</span><span class="menu-arrow fa fa-angle-down"></span></a>
@@ -248,7 +248,7 @@ if ($acesso['usuarioFK'] > 3) {
                </ul>
             <? } ?>
 
-            <? if (in_array(13, $aprovados) || $adminMaster) { ?>
+            <? if (in_array(13, $aprovados) || $adminMaster && FALSE) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 13) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-stopwatch-fill"></i><span>Lojas Temporárias</span><span class="menu-arrow fa fa-angle-down"></span></a>
@@ -261,7 +261,7 @@ if ($acesso['usuarioFK'] > 3) {
                </ul>
             <? } ?>
 
-            <? if (in_array(14, $aprovados) || $adminMaster) { ?>
+            <? if (in_array(14, $aprovados) || $adminMaster && FALSE) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 14) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-calendar-event"></i><span>Eventos</span><span class="menu-arrow fa fa-angle-down"></span></a>
@@ -274,7 +274,7 @@ if ($acesso['usuarioFK'] > 3) {
                </ul>
             <? } ?>
 
-            <? if (in_array(15, $aprovados) || $adminMaster) { ?>
+            <? if (in_array(15, $aprovados) || $adminMaster && FALSE) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 15) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-briefcase-fill"></i><span>Prestadores de Serviços</span><span class="menu-arrow fa fa-angle-down"></span></a>

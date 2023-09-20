@@ -24,6 +24,8 @@
                                  <tr>
                                     <th class='menorTh'></th>
                                     <th>Nome</th>
+                                    <th>Categorias</th>
+                                        <th>Anúncios</th>
                                     <th>Ordenar</th> 
                                  </tr>
                               </thead>
@@ -34,6 +36,16 @@
                                        <td>
                                           <a href="<?= PATHSITE ?>admin/anuncio_tipo/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>">
                                              <?= $elemento->titulo ?>
+                                          </a>
+                                       </td>
+                                        <td>
+                                          <a href="<?= PATHSITE ?>admin/produto_categoria?tipo=<?=$elemento->id?>">
+                                           Categorias
+                                          </a>
+                                       </td>
+                                       <td>
+                                          <a href="<?= PATHSITE ?>admin/produto?tipo=<?=$elemento->id?>">
+                                           Anúncios
                                           </a>
                                        </td>
                                        <td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td> 

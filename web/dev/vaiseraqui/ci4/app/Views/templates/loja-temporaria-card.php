@@ -1,4 +1,4 @@
-<article class="card-item" data-aos="fade-right">
+<article class="card-item  coord-<?=$identificador?> " data-aos="fade-right">
    <a href="<?= PATHSITE ?>lojas-temporarias/<?= $identificador ?>">
       <? if ($fotos) { ?>
          <div class="cover">

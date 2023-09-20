@@ -16,13 +16,15 @@
                <span class="value">R$<?= number_format($lojaAtual->preco, 2, ",", ".") ?></span>
             </div>
             <div class="buttons">
+                <? if($anunciante->whatsapp){?>
                <a  onclick="abreWhatsapp('<?=encode($metatag->id)?>');"  href="<?=$anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" class="btn-primary">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5032 3.48779C18.2471 1.23984 15.2467 0.00131836 12.0502 0C5.4635 0 0.102885 5.33481 0.100235 11.8917C0.0993524 13.9878 0.649544 16.0339 1.69532 17.8374L0 24L6.33485 22.3462C8.08037 23.2938 10.0455 23.7932 12.0453 23.7938H12.0503C18.6363 23.7938 23.9975 18.4585 24 11.9013C24.0013 8.72344 22.7595 5.7356 20.5032 3.48779ZM12.0502 21.7853H12.0461C10.2639 21.7846 8.51604 21.3079 6.99087 20.4075L6.62835 20.1932L2.86915 21.1746L3.87253 17.527L3.6363 17.153C2.64204 15.5792 2.11701 13.7602 2.1179 11.8925C2.11996 6.44253 6.57565 2.00859 12.0542 2.00859C14.7071 2.00947 17.2009 3.03896 19.0761 4.90737C20.9513 6.77578 21.9834 9.25928 21.9825 11.9005C21.9801 17.3509 17.5247 21.7853 12.0502 21.7853ZM17.4982 14.3821C17.1997 14.2333 15.7317 13.5146 15.4579 13.4153C15.1844 13.3162 14.9851 13.2668 14.7863 13.5642C14.5871 13.8615 14.015 14.531 13.8407 14.7292C13.6665 14.9275 13.4925 14.9524 13.1938 14.8036C12.8952 14.6549 11.9332 14.341 10.7926 13.3286C9.90506 12.5407 9.30586 11.5676 9.13159 11.2702C8.95761 10.9726 9.13011 10.8272 9.26258 10.6638C9.58581 10.2643 9.90948 9.84551 10.009 9.64732C10.1086 9.44897 10.0587 9.27539 9.98396 9.12671C9.90948 8.97803 9.31233 7.51538 9.06359 6.92022C8.82102 6.34102 8.57507 6.41924 8.39167 6.41016C8.21769 6.40151 8.01855 6.39976 7.8194 6.39976C7.6204 6.39976 7.29688 6.47402 7.02311 6.77168C6.74948 7.06919 5.97822 7.78799 5.97822 9.25064C5.97822 10.7133 7.04813 12.1263 7.19738 12.3246C7.34663 12.523 9.30291 15.5244 12.2981 16.8114C13.0105 17.1179 13.5665 17.3005 14.0003 17.4375C14.7156 17.6637 15.3664 17.6317 15.8809 17.5553C16.4547 17.4699 17.6473 16.8363 17.8964 16.1423C18.1451 15.4481 18.1451 14.8532 18.0704 14.7292C17.9959 14.6052 17.7967 14.531 17.4982 14.3821Z" fill="white" />
                   </svg>
                   Agendar visita
                </a>
-               <a href="#">Ver mais detalhes</a>
+                <? } ?>
+               <a href="#detalhes">Ver mais detalhes</a>
             </div>
          </footer>
       </div>
@@ -71,21 +73,25 @@
             <div>
                <a href="#" class="btn photo">
                   <img src="<?= PATHSITE ?>assets/images/icon-photo.png" alt="">
-                  <?= count($lojaAtual->fotos) ?> Fotos
+                  <?= count($fotos) ?> Fotos
                </a>
-               <a class="btn btn-videos">
-                  <img class="active" src="<?= PATHSITE ?>assets/images/icon-video-active.png" alt="">
-                  <img src="<?= PATHSITE ?>assets/images/icon-video.png" alt="">
-                  Vídeos
-               </a>
-               <a href="https://www.google.com/maps/@51.5039653,-0.1246493,14.12z" data-fancybox class="btn btn-maps">
-                  <img class="active" src="<?= PATHSITE ?>assets/images/icon-map-active.png" alt="">
-                  <img src="<?= PATHSITE ?>assets/images/icon-map.png" alt="">
-                  Mapa
-               </a>
+               <? if($videos) {?>
+            <a onclick="verVideos();" class="btn btn-videos" >
+              <img class="active" src="<?=PATHSITE?>assets/images/icon-video-active.png" alt="">
+              <img src="<?=PATHSITE?>assets/images/icon-video.png" alt="">
+              Vídeos
+            </a>
+              <? } ?>
+                <? if($metatag->mapa) {?>
+            <a onclick="clicaMapa('<?=$metatag->mapa?>')" data-fancybox class="btn btn-maps" >
+              <img class="active" src="<?=PATHSITE?>assets/images/icon-map-active.png" alt="">
+              <img src="<?=PATHSITE?>assets/images/icon-map.png" alt="">
+              Mapa
+            </a>
+              <? } ?>
             </div>
          </div>
-         <? if ($lojaAtual->fotos) { ?>
+         <? if ($fotos) { ?>
             <div class="box-presentation only-mobile">
                <div class="description">
                   <span class="tagline"><?= $lojaAtual->categoria ?></span>
@@ -93,7 +99,7 @@
                   <span class="uf"><?= $lojaAtual->cidade ?> - <?= $lojaAtual->estado ?></span>
                </div>
 
-               <? foreach ($lojaAtual->fotos as $foto) { ?>
+               <? foreach ($fotos as $foto) { ?>
                   <a data-fslightbox="mobile-presentation-1" href="<?= PATHSITE ?>uploads/produto/<?= $lojaAtual->id ?>/<?= $foto->arquivo ?>">
                      <picture>
                         <source srcset="<?= PATHSITE ?>uploads/produto/<?= $lojaAtual->id ?>/<?= $foto->arquivo ?>.webp" type="image/webp">
@@ -105,7 +111,7 @@
             </div>
             <div class="swiper presentationSwiper">
                <div class="swiper-wrapper">
-                  <? foreach ($lojaAtual->fotos as $foto) { ?>
+                  <? foreach ($fotos as $foto) { ?>
                      <div class="swiper-slide">
                         <div class="item">
                            <a data-fslightbox="presetation-1" href="<?= PATHSITE ?>uploads/produto/<?= $lojaAtual->id ?>/<?= $foto->arquivo ?>">
@@ -141,7 +147,7 @@
       </div>
    </section>
 
-   <section class="more-about-2-column">
+   <section id='detalhes' class="more-about-2-column">
       <div class="container-medium">
          <div class="column">
             <nav class="navigation-breadcrumb" data-aos="fade-up">
@@ -272,29 +278,35 @@
                <? } ?>
 
                <div class="wraper-scroll-cards">
-                  <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>assets/images/slide-lojas-2.png"></a>
-                  <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>assets/images/slide-lojas-3.png"></a>
+                   
+                     <? foreach ($fotos as $foto) { ?>
+                        <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>"></a>
+                     <? } ?>
+                  
                   <div class="photos-and-video">
-                     <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>assets/images/slide-lojas-1.png">
-                        <div class="card" style="background-image: url(<?= PATHSITE ?>assets/images/bg-box-loja.png);">
-                           <div class="wraper">
-                              <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.33333C0 2.83554 2.83554 0 6.33333 0H31.6667C35.1646 0 38 2.83554 38 6.33333V29.5534V29.5577V31.6667C38 35.1646 35.1646 38 31.6667 38H6.33333C2.83554 38 0 35.1646 0 31.6667V23.2222V6.33333ZM33.7778 6.33333V24.4589L26.8261 17.5072C26.0017 16.6828 24.665 16.6828 23.8406 17.5072L21.1111 20.2367L13.1039 12.2294C12.2794 11.405 10.9428 11.405 10.1183 12.2294L4.22222 18.1256V6.33333C4.22222 5.16741 5.16741 4.22222 6.33333 4.22222H31.6667C32.8326 4.22222 33.7778 5.16741 33.7778 6.33333ZM4.22222 31.6667V24.0966L11.6111 16.7078L19.6183 24.715C20.4427 25.5394 21.7795 25.5394 22.6039 24.715L25.3333 21.9855L33.7778 30.43V31.6667C33.7778 32.8326 32.8326 33.7778 31.6667 33.7778H6.33333C5.16741 33.7778 4.22222 32.8326 4.22222 31.6667ZM24.2778 14.7778C26.0266 14.7778 27.4444 13.36 27.4444 11.6111C27.4444 9.8622 26.0266 8.44444 24.2778 8.44444C22.5289 8.44444 21.1111 9.8622 21.1111 11.6111C21.1111 13.36 22.5289 14.7778 24.2778 14.7778Z" fill="white" />
-                              </svg>
-                              <span>Ver todas as fotos</span>
-                           </div>
-                        </div>
-                     </a>
-                     <a href="#" class="btn-videos">
-                        <div class="card" style="background-image: url(<?= PATHSITE ?>assets/images/bg-box-loja.png);">
-                           <div class="wraper">
-                              <svg width="34" height="38" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                 <path d="M31.9346 19L2.75001 35.4912L2.75 2.50876L31.9346 19Z" stroke="white" stroke-width="4" />
-                              </svg>
-                              <span>Assistir Vídeos</span>
-                           </div>
-                        </div>
-                     </a>
+                         <a data-fslightbox="new-gallery" href="<?= PATHSITE ?>uploads/produto/<?= $fotos[0]->produtoFK ?>/<?= $fotos[0]->arquivo ?>">
+                           <div class="card" style="background-image: url(<?= PATHSITE ?>uploads/produto/<?= $fotos[0]->produtoFK ?>/<?= $fotos[0]->arquivo ?>);">
+                    <div class="wraper">
+                      <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0 6.33333C0 2.83554 2.83554 0 6.33333 0H31.6667C35.1646 0 38 2.83554 38 6.33333V29.5534V29.5577V31.6667C38 35.1646 35.1646 38 31.6667 38H6.33333C2.83554 38 0 35.1646 0 31.6667V23.2222V6.33333ZM33.7778 6.33333V24.4589L26.8261 17.5072C26.0017 16.6828 24.665 16.6828 23.8406 17.5072L21.1111 20.2367L13.1039 12.2294C12.2794 11.405 10.9428 11.405 10.1183 12.2294L4.22222 18.1256V6.33333C4.22222 5.16741 5.16741 4.22222 6.33333 4.22222H31.6667C32.8326 4.22222 33.7778 5.16741 33.7778 6.33333ZM4.22222 31.6667V24.0966L11.6111 16.7078L19.6183 24.715C20.4427 25.5394 21.7795 25.5394 22.6039 24.715L25.3333 21.9855L33.7778 30.43V31.6667C33.7778 32.8326 32.8326 33.7778 31.6667 33.7778H6.33333C5.16741 33.7778 4.22222 32.8326 4.22222 31.6667ZM24.2778 14.7778C26.0266 14.7778 27.4444 13.36 27.4444 11.6111C27.4444 9.8622 26.0266 8.44444 24.2778 8.44444C22.5289 8.44444 21.1111 9.8622 21.1111 11.6111C21.1111 13.36 22.5289 14.7778 24.2778 14.7778Z" fill="white" />
+                      </svg>                    
+                      <span>Ver todas as fotos</span>
+                    </div>
+                  </div>
+                </a>
+                    
+                        <? if ($videos) { ?>
+                <a href="#" class="btn-videos" onclick="verVideos()">
+                              <div class="card" style="background-image: url(<?= PATHSITE ?>uploads/produto/<?= $fotos[0]->produtoFK ?>/<?= $fotos[0]->arquivo ?>);">
+                    <div class="wraper">
+                      <svg width="34" height="38" viewBox="0 0 34 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                       <path d="M31.9346 19L2.75001 35.4912L2.75 2.50876L31.9346 19Z" stroke="white" stroke-width="4" />
+                      </svg>                    
+                      <span>Assistir Vídeos</span>
+                    </div>
+                  </div>
+                </a>
+                        <? } ?>
                   </div>
                </div>
                <div class="faq">
@@ -351,7 +363,7 @@
          </div>
          <div class="column">
             <div class="sticky">
-               <aside class="box">
+               <aside class="box box-checkin">
                   <table>
                      <tbody>
                         <tr>
@@ -376,37 +388,15 @@
                         </tr>
                      </tfoot>
                   </table>
-                  <a href="<?=$anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" class="btn-primary">
+                  
+                     <? if($anunciante->whatsapp){?>                   
+                  <a  onclick="abreWhatsapp('<?=encode($metatag->id)?>');"  href="<?=$anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" class="btn-primary">
                      <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="">
                      Agendar visita
                   </a>
                </aside>
-
-               <div class="box-ads">
-                  <img src="<?= PATHSITE ?>uploads/anunciante/<?= $lojaAtual->anunciante->arquivo ?>" alt="foto do anunciante">
-                  <div>
-                     <span class="type">Anunciante</span>
-                     <span class="title"><?= $lojaAtual->anunciante->titulo ?></span>
-                     <ul>
-                        <li>
-                           <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                           <span><?= $lojaAtual->anunciante->telefone ?></span>
-                        </li>
-                        <? if ($lojaAtual->anunciante->telefone2) { ?>
-                           <li>
-                              <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                              <span><?= $lojaAtual->anunciante->telefone2 ?></span>
-                           </li>
-                        <? } ?>
-                        <? if ($lojaAtual->anunciante->telefone3) { ?>
-                           <li>
-                              <img src="<?= PATHSITE ?>assets/images/icon-whatsapp-black.svg" alt="">
-                              <span><?= $lojaAtual->anunciante->telefone3 ?></span>
-                           </li>
-                        <? } ?>
-                     </ul>
-                  </div>
-               </div>
+                     <? } ?>
+               <?= View('templates/anunciante')?>           
             </div>
          </div>
       </div>
@@ -454,11 +444,13 @@
    <? } ?>
 </main>
 
+<? if($anunciante->whatsapp){?>
 <div class="box-agendar-float">
-   <a href="#" class="btn-primary btn-agendar">
+   <a target='_blank' onclick="abreWhatsapp('<?=encode($metatag->id)?>');"  href="<?=$anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" class="btn-primary btn-agendar">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
          <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5032 3.48779C18.2471 1.23984 15.2467 0.00131836 12.0502 0C5.4635 0 0.102885 5.33481 0.100235 11.8917C0.0993524 13.9878 0.649544 16.0339 1.69532 17.8374L0 24L6.33485 22.3462C8.08037 23.2938 10.0455 23.7932 12.0453 23.7938H12.0503C18.6363 23.7938 23.9975 18.4585 24 11.9013C24.0013 8.72344 22.7595 5.7356 20.5032 3.48779ZM12.0502 21.7853H12.0461C10.2639 21.7846 8.51604 21.3079 6.99087 20.4075L6.62835 20.1932L2.86915 21.1746L3.87253 17.527L3.6363 17.153C2.64204 15.5792 2.11701 13.7602 2.1179 11.8925C2.11996 6.44253 6.57565 2.00859 12.0542 2.00859C14.7071 2.00947 17.2009 3.03896 19.0761 4.90737C20.9513 6.77578 21.9834 9.25928 21.9825 11.9005C21.9801 17.3509 17.5247 21.7853 12.0502 21.7853ZM17.4982 14.3821C17.1997 14.2333 15.7317 13.5146 15.4579 13.4153C15.1844 13.3162 14.9851 13.2668 14.7863 13.5642C14.5871 13.8615 14.015 14.531 13.8407 14.7292C13.6665 14.9275 13.4925 14.9524 13.1938 14.8036C12.8952 14.6549 11.9332 14.341 10.7926 13.3286C9.90506 12.5407 9.30586 11.5676 9.13159 11.2702C8.95761 10.9726 9.13011 10.8272 9.26258 10.6638C9.58581 10.2643 9.90948 9.84551 10.009 9.64732C10.1086 9.44897 10.0587 9.27539 9.98396 9.12671C9.90948 8.97803 9.31233 7.51538 9.06359 6.92022C8.82102 6.34102 8.57507 6.41924 8.39167 6.41016C8.21769 6.40151 8.01855 6.39976 7.8194 6.39976C7.6204 6.39976 7.29688 6.47402 7.02311 6.77168C6.74948 7.06919 5.97822 7.78799 5.97822 9.25064C5.97822 10.7133 7.04813 12.1263 7.19738 12.3246C7.34663 12.523 9.30291 15.5244 12.2981 16.8114C13.0105 17.1179 13.5665 17.3005 14.0003 17.4375C14.7156 17.6637 15.3664 17.6317 15.8809 17.5553C16.4547 17.4699 17.6473 16.8363 17.8964 16.1423C18.1451 15.4481 18.1451 14.8532 18.0704 14.7292C17.9959 14.6052 17.7967 14.531 17.4982 14.3821Z" fill="white" />
       </svg>
       Agendar visita
    </a>
 </div>
+<? } ?>

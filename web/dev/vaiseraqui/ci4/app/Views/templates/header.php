@@ -174,7 +174,7 @@
             </a>
           </nav>
 
-            <? if($pagina == FALSE) {?>
+            <? if( FALSE) {?>
           <div class="presentation-form-content">
             <? echo View("templates/form1") ?>
             <? echo View("templates/form2") ?>

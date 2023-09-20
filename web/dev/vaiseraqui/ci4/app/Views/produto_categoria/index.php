@@ -46,6 +46,15 @@
 							</form>
 						</div>
 					<? } ?>
+                                           <div class="form-group col-xs-12">
+                        <a href="<?= PATHSITE ?>admin/anuncio_tipo/">
+                           <button type="button" class="btn btn-primary btn-rounded waves-effect mb-1">Voltar</button>
+                        </a>
+                     </div>
 				</div>
+                            
 			</div>
+                    
 		</div>
+            
+            

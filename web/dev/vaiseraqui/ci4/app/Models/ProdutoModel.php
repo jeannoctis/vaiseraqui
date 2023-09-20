@@ -177,31 +177,6 @@ class ProdutoModel extends Model
         return $cardapio;
     }
 
-    public function responsavel($id)
-    {
-        $anuncianteModel = model('App\Models\AnuncianteModel', false);
-        $anuncianteModel->select('titulo, telefone, telefone2, telefone3, email, arquivo');
-        $anunciante = $anuncianteModel->find($id);
-
-        $removeChars = array("-", "(", ")", " ");
-        $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
-        $android = strpos($_SERVER['HTTP_USER_AGENT'], "Android");
-        $palmpre = strpos($_SERVER['HTTP_USER_AGENT'], "webOS");
-        $berry = strpos($_SERVER['HTTP_USER_AGENT'], "BlackBerry");
-        $ipod = strpos($_SERVER['HTTP_USER_AGENT'], "iPod");
-
-        if ($iphone || $android || $palmpre || $ipod || $berry == true) {
-            $usaApi = "api";
-        } else {
-            $usaApi = "web";
-        }
-        $anunciante->link1 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone);
-        $anunciante->link2 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone2);
-        $anunciante->link3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone3);
-
-        return $anunciante;
-    }
-
     public function comodidades($id)
     {
         $produtoComodidadeModel = \model("App\Models\ProdutoComodidadeModel", false)
@@ -269,10 +244,10 @@ class ProdutoModel extends Model
     public function dadosCard()
     {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado, t.identificador as tipo, t.id as tipo_id")
-            ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
-            ->join("cidade c", "c.id = produto.cidadeFK")
-            ->join("estado e", "e.id = c.estadoFK")
-            ->join("tipo t", "t.id = pc.tipoFK");
+                        ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
+                        ->join("cidade c", "c.id = produto.cidadeFK")
+                        ->join("estado e", "e.id = c.estadoFK")
+                        ->join("tipo t", "t.id = pc.tipoFK");
     }
 
     public function hospedagens($limit)
@@ -280,10 +255,10 @@ class ProdutoModel extends Model
 
         $data['get'] = $get = \request()->getGet();
 
-        if (!is_numeric($get['page_produto'])) {
+        if (!is_numeric($get['page_anuncios'])) {
             $paginate = 1;
         } else {
-            $paginate = $get['page_produto'];
+            $paginate = $get['page_anuncios'];
         }
 
         $this->resetQuery();
@@ -315,9 +290,17 @@ class ProdutoModel extends Model
     public function filtros($get)
     {
         helper('date');
+        
+        if($get['cidade']){
+           $_SESSION['cidade'] = $get['cidadeFK']; 
+        } else {
+           $get['cidadeFK'] = $_SESSION['cidade'];
+        }
+        
         if ($get['cidadeFK']) {
             $this->where('produto.cidadeFK', $get['cidadeFK']);
         }
+      
 
         if ($get['dataIni'] && $get['dataFim']) {
             $data1 = dataFormata($get["dataIni"]);
@@ -390,7 +373,7 @@ class ProdutoModel extends Model
                                                 <div class="box-address">
                                                     <img src="<?= PATHSITE ?>assets/images/icon-map.svg" alt="">
                                                     <span>
-                                                        <?= $evento->local ?> <br>
+                        <?= $evento->local ?> <br>
                                                         <?= $evento->cidade ?>- <?= $evento->estado ?>
                                                     </span>
                                                 </div>
@@ -413,7 +396,7 @@ class ProdutoModel extends Model
                                 </div>
                             </div>
                         </div>
-                    <? } ?>
+            <? } ?>
                 </div>
             <? } ?>
         </div>
@@ -460,18 +443,16 @@ class ProdutoModel extends Model
         return $videos;
     }
 
-    public function datasOcupacao($id)
-    {
+    public function datasOcupacao($id) {
         $produtoCalendarioModel = model('App\Models\ProdutoCalendarioModel', false);
         $produtoCalendarioModel->select("DATE_FORMAT(date, '%d/%m/%Y') as dataConcat");
         $produtoCalendarioModel->where('produtoFK', $id);
         $produtoCalendarioModel->where('date > NOW()');
-        $datas =  $produtoCalendarioModel->findAll();
+        $datas = $produtoCalendarioModel->findAll();
         return $datas;
     }
 
-    public function default($data, $page)
-    {
+    public function default($data, $page) {
 
 
 
@@ -502,9 +483,10 @@ class ProdutoModel extends Model
         switch ($page) {
             case "hospedagens":
                 if ($data['segments'][1] && !is_numeric($data['segments'][1])) {
+                    $data['escondeWhatsapp'] = true;
                     helper('encrypt');
-                    $data['style_list'] = ['jquery_ui', 'swiper'];
-                    $data['script_list'] = ['swiper', 'jquery', 'jquery_ui', 'card-like', 'controller-card', 'controller-imoveis', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
+                    $data['style_list'] = ['jquery_ui', 'swiper', 'fancybox'];
+                    $data['script_list'] = ['fancybox', 'swiper', 'jquery', 'jquery_ui', 'card-like', 'controller-card', 'controller-imoveis', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
                     $data['bodyClass'] = 'internal-rent';
 
                     $data['tipopagina'] = 'hospedagem';
@@ -520,13 +502,12 @@ class ProdutoModel extends Model
                     $data['metatag']->valores = $produtoModel->valores($data['metatag']->id);
                     $data['metatag']->proximidades = $produtoModel->proximidades($data['metatag']->id);
                     $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999, false);
-                    $data['responsavel'] = $produtoModel->responsavel($data['metatag']->anuncianteFK);
+                    $data['anunciante'] = $produtoModel->anunciante($data['metatag']->anuncianteFK);
                     $data['comodidades'] = $produtoModel->comodidades($data['metatag']->id);
                     $data['valores'] = $produtoModel->valores($data['metatag']->id);
                     $data['datasOcupada'] = $produtoModel->datasOcupacao($data['metatag']->id);
                     $data['anunciante'] = $produtoModel->anunciante($data['metatag']->anuncianteFK);
-
-
+                    $data['videos'] = $produtoModel->videos($data['metatag']->id);
 
                     $produtoModel = \model("App\Models\ProdutoModel", false);
                     $data['destaques'] = $produtoModel->destaquePrestadores(4);
@@ -541,7 +522,7 @@ class ProdutoModel extends Model
                     $data['form5Visible'] = "visible";
 
                     $produtoModel = model('App\Models\ProdutoModel', false);
-                    $retorno = $produtoModel->hospedagens(11);
+                    $retorno = $produtoModel->hospedagens(32);
                     $data['produtos'] = $retorno['servicos'];
                     $data['pager'] = $retorno['pager'];
                     if ($data['produtos']) {
@@ -570,7 +551,8 @@ class ProdutoModel extends Model
                             }
                         }
                     }
-
+                    
+           
                     $produtoModel = \model("App\Models\ProdutoModel", false);
                     $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
                     $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
@@ -593,6 +575,8 @@ class ProdutoModel extends Model
                 break;
             case "prestadores-de-servicos":
                 if ($data['segments'][1] && !is_numeric($data['segments'][1])) {
+                    $data['escondeWhatsapp'] = true;
+                    helper('encrypt');
                     $page = 'prestador-de-servico';
                     $data['style_list'] = ['fancybox', 'swiper', 'jquery_ui'];
                     $data['script_list'] = ['fancybox', 'swiper', 'jquery', 'jquery_ui', 'card-like', 'controller-card', 'controller-imoveis', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
@@ -607,8 +591,8 @@ class ProdutoModel extends Model
                     $data['metatag'] = $produtoModel->find()[0];
                     $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999, false);
                     $data['cardapio'] = $produtoModel->cardapio($data['metatag']->id);
-                    $data['responsavel'] = $produtoModel->responsavel($data['metatag']->anuncianteFK);
-
+                    $data['anunciante'] = $produtoModel->anunciante($data['metatag']->anuncianteFK);
+                     $data['videos'] = $produtoModel->videos($data['metatag']->id);
                     //  $data['pontosVenda'] = $produtoModel->pontosVenda($data['metatag']->id);
                     //  $data['setores'] = $produtoModel->setores($data['metatag']->id);
                     //  $data['organizacoes'] = $produtoModel->organizacoes($data['metatag']->id);
@@ -649,7 +633,7 @@ class ProdutoModel extends Model
                     $produtoModel->where('pc.tipoFK', $tipo->id);
                     $produtoModel->where('ativo', '1');
                     $produtoModel->filtros($get);
-                    $data['servicos'] = $produtoModel->paginate(8, 'produto', $paginate);
+                    $data['servicos'] = $produtoModel->paginate(32, 'produto', $paginate);
                     $data['pager'] = $produtoModel->pager;
 
                     if ($data['servicos']) {
@@ -672,6 +656,7 @@ class ProdutoModel extends Model
                 $data['get'] = $get = request()->getGet();
 
                 if ($data['segments'][1] && !is_numeric($data['segments'][1])) {
+                    $data['escondeWhatsapp'] = true;
                     helper("utils");
                     helper('encrypt');
                     // Interna
@@ -687,12 +672,15 @@ class ProdutoModel extends Model
                     $data['script_list'] = ['fancybox', 'swiper', 'jquery', 'jquery_ui', 'card-like', 'controller-card', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
                     $page = "lojas-temporarias-interna";
                     $data['bodyClass'] = "internal-rent";
+                    $data['escondeWhatsapp'] = true;
 
-                    $data['lojaAtual']->fotos = $this->produtoModel->fotos($data['lojaAtual']->id, 99, true);
+                    $data['fotos'] = $this->produtoModel->fotos($data['lojaAtual']->id, 99, true);
                     $data['lojaAtual']->valores = $this->produtoModel->valores($data['lojaAtual']->id);
                     $data['lojaAtual']->comodidades = $this->produtoModel->comodidades($data['lojaAtual']->id);
                     $data['lojaAtual']->proximidades = $this->produtoModel->proximidades($data['lojaAtual']->id);
-                    $data['lojaAtual']->anunciante = $this->produtoModel->anunciante($data['lojaAtual']->anuncianteFK);
+                    $data['anunciante'] = $this->produtoModel->anunciante($data['lojaAtual']->anuncianteFK);
+                    $data['videos'] = $this->produtoModel->videos($data['metatag']->id);
+
                     $data['lojaAtual']->total = $this->produtoModel->valorTotal($data['lojaAtual']->valores, $data['lojaAtual']->preco);
 
                     // Serviços em Alta
@@ -745,30 +733,7 @@ class ProdutoModel extends Model
 
 
                     $contador = 0;
-                    if ($data['lojasEmAlta']) {
-                        foreach ($data['lojasEmAlta'] as $ind => $produto) {
-
-                            if ($produto->latitude && $produto->latitude) {
-                                $produto->coordenadas = $produto->latitude . "," . $produto->longitude;
-                            }
-
-                            $data['lojasEmAlta'][$ind]->fotos = $this->produtoModel->fotos($produto->id, 4);
-
-                            if ($produto->coordenadas) {
-                                $data["coordenadas"][$contador]["id"] = $produto->id;
-
-                                $data["coordenadas"][$contador]["titulo"] = $produto->titulo;
-                                $data["coordenadas"][$contador]["foto"] = $produto->fotos[0];
-                                $data["coordenadas"][$contador]["preco"] = $produto->preco;
-
-                                $data["coordenadas"][$contador]["pagina"] = "hospedagem";
-
-                                $data["coordenadas"][$contador]["coord"] = $produto->coordenadas;
-                                $data["coordenadas"][$contador]["identificador"] = $produto->identificador;
-                            }
-                            $contador++;
-                        }
-                    }
+                   
 
                     $this->produtoModel->resetQuery()
                         ->dadosCard()
@@ -776,7 +741,7 @@ class ProdutoModel extends Model
                         ->where("ativo", 1);
                     $this->produtoModel->filtros($get);
                     $this->produtoModel->ordernar($get['ordem']);
-                    $data['lojasTemporarias'] = $this->produtoModel->paginate(8, "anuncios", $paginate);
+                    $data['lojasTemporarias'] = $this->produtoModel->paginate(32, "anuncios", $paginate);
                     $data['pager'] = $this->produtoModel->pager;
 
                     if ($data['lojasTemporarias']) {
@@ -791,7 +756,7 @@ class ProdutoModel extends Model
                                 $data["coordenadas"][$contador]["id"] = $produto->id;
 
                                 $data["coordenadas"][$contador]["titulo"] = $produto->titulo;
-                                $data["coordenadas"][$contador]["foto"] = $data['produtos'][$ind]->fotos[0];
+                                $data["coordenadas"][$contador]["foto"] = $produto->fotos[0];
                                 $data["coordenadas"][$contador]["preco"] = $produto->preco;
 
                                 $data["coordenadas"][$contador]["pagina"] = "hospedagem";
@@ -813,6 +778,7 @@ class ProdutoModel extends Model
                 break;
             case "saloes-de-festas-e-areas-de-lazer":
                 if ($data['segments'][1] && !is_numeric($data['segments'][1])) {
+                    $data['escondeWhatsapp'] = true;
                     $page = 'salao-de-festa-e-area-de-lazer';
                     helper('encrypt');
                     helper('utils');
@@ -922,6 +888,7 @@ class ProdutoModel extends Model
                 }
                 break;
             case "aluguel-para-temporada":
+                $data['escondeWhatsapp'] = true;
                 $data['form1Visible'] = 'visible';
                 $data['style_list'] = ['fancybox', 'swiper', 'jquery_ui'];
                 $data['script_list'] = ['fancybox', 'swiper', 'card-like', 'controller-blog', 'controller-card', 'controller-presentation', 'controller-page-internal', 'fs-lightbox', 'modal-filter', 'modal-select-order', 'jquery_ui'];
@@ -945,11 +912,10 @@ class ProdutoModel extends Model
                 $data['alugueisEmAlta'] = $this->produtoModel->findAll();
                 $contador = 0;
 
-
                 $this->produtoModel->resetQuery()
-                    ->dadosCard()
-                    ->where("pc.tipoFK", $tipo->id)
-                    ->where("ativo", 1);
+                        ->dadosCard()
+                        ->where("pc.tipoFK", $tipo->id)
+                        ->where("ativo", 1);
                 $this->produtoModel->filtros($get);
                 $this->produtoModel->ordernar($get['ordem']);
 
@@ -966,7 +932,7 @@ class ProdutoModel extends Model
                             $data["coordenadas"][$contador]["id"] = $produto->id;
 
                             $data["coordenadas"][$contador]["titulo"] = $produto->titulo;
-                            $data["coordenadas"][$contador]["foto"] = $data['produtos'][$ind]->fotos[0];
+                            $data["coordenadas"][$contador]["foto"] = $produto->fotos[0];
                             $data["coordenadas"][$contador]["preco"] = $produto->preco;
 
                             $data["coordenadas"][$contador]["pagina"] = "hospedagem";
@@ -990,10 +956,10 @@ class ProdutoModel extends Model
                     unset($data['pagina']);
 
                     $data['espacoAtual'] = $data['metatag'] = $this->produtoModel
-                        ->resetQuery()
-                        ->dadosCard()
-                        ->where("produto.identificador", $data['segments'][1])
-                        ->first();
+                            ->resetQuery()
+                            ->dadosCard()
+                            ->where("produto.identificador", $data['segments'][1])
+                            ->first();
 
                     $data['videos'] = $this->produtoModel->videos($data['metatag']->id);
 
