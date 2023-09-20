@@ -84,9 +84,18 @@
                                                     </article>
                                                 </a>
                                                 <? if (count($produtos) > 1) { ?>
-                                                    <div class="list-articles">
-                                                        <? foreach ($produtos as $produto) { ?>
-                                                            <article class="card-item" data-aos="fade-right">
+                                                    <div  class="list-articles  ">
+                                                        <? foreach ($produtos as $produto) {
+                                                            if($produto->coordenadas){
+                                                                $coord = explode(",",$produto->coordenadas);
+                                                                $lat = $coord[0];
+                                                                $long = $coord[1];
+                                                            } else {
+                                                                $lat = 0;
+                                                                $long = 0;
+                                                            }
+                                                            ?>
+                                                            <article  class="card-item coord-<?=$produto->identificador?> " data-aos="fade-right">
                                                                 <a href="<?= PATHSITE ?><?=$segments[0]?>/<?= $produto->identificador ?>/">
                                                                     <div class="cover">
                                             <? if ($produto->destaque == 1) { ?>
@@ -154,20 +163,7 @@
                                                         <? } ?>                           
                                                     </div>
                                                 <? } ?>
-                                                <nav class="navigation" data-aos="fade-up">
-                                                    <a href="#" class="prev">
-                                                        <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M7 1L1 6.5L7 12" stroke="#BBBBBB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                        </svg>                
-                                                    </a>
-                                                    <a href="#" class="active">1</a>
-                                                    <a href="#">2</a>
-                                                    <a href="#" class="next">
-                                                        <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M1 12L7 6.5L1 1" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                        </svg>                
-                                                    </a>
-                                                </nav>          
+                                                <?= $pager->links("anuncios") ?>        
                                             </div>
                                         <? } ?>
                                         </div>

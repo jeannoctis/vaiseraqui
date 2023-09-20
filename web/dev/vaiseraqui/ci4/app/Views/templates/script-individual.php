@@ -265,40 +265,11 @@
                 new Selector(box)
                 })
     </script>
-<? } else if ($segments[0] == "prestador de servico") { ?>
+<? } else if ($segments[0] == "prestadores-de-servicos") { ?>
     <!-- prestador de servicos interna -->
-    <script>
-
-
-
-                $(document).ready(function() {
-
-        $(function() {
-        $.datepicker.setDefaults($.datepicker.regional['sv']);
-        const config = {
-        dateFormat: 'dd/mm/yy',
-                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                nextText: 'Proximo',
-                prevText: 'Anterior'
-        }
-
-        $("#desktop-table-checkin").datepicker(config);
-        $("#desktop-table-checkout").datepicker(config);
-        $("#mobile-table-checkin").datepicker(config);
-        $("#mobile-table-checkout").datepicker(config);
-        });
-        })
-
-                // Form Select
-                const boxes = document.querySelectorAll('.j-box-select')
-                boxes.forEach((box, key) => {
-                new Selector(box)
-                })
-    </script>
+    
+    <?   echo View('templates/checkin-out'); ?>
+    
 <? } else if ($pagina == 25) { ?>
     <!-- Saloes de festa e area de lazer listagem -->
       <?

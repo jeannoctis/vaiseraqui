@@ -126,7 +126,9 @@
 					<nav class="col-xs-12 navigation-pages">
 						<?= $pager->links('produtos', 'panel_full') ?>
 					</nav>
-
+ <a href="<?= PATHSITE ?>admin/anuncio_tipo/">
+                           <button type="button" class="btn btn-primary btn-rounded waves-effect mb-1">Voltar</button>
+                        </a>
 				</div>
 			</div>
 		</div>

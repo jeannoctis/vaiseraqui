@@ -15,7 +15,7 @@ class Produto extends BaseController
         $this->tabela = "produto";
 
         $get = request()->getGet();
-        $this->session->set('menuAdmin', setMenuAdminTipo($get['tipo']));
+        $this->session->set('menuAdmin', 7);
     }
 
    public function index()
@@ -107,6 +107,8 @@ class Produto extends BaseController
         $data['title'] = 'Produtos';
         $data['tabela'] = $this->tabela;
         $data["nomeModel"] = "ProdutoModel";
+        
+       
 
         echo view('templates/admin-header', $data);
         echo view("{$data["tabela"]}/index", $data);

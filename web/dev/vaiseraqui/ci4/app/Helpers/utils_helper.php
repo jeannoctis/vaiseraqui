@@ -49,26 +49,12 @@ if (!function_exists('getTipo')) {
 
    function getTipo($tipo)
    {
-      switch ($tipo) {
-         case 1:
-            $tipo = 'Aluguel para Temporada';
-            break;
-         case 2:
-            $tipo = 'Salões de Festa e Áreas de Lazer';
-            break;
-         case 3:
-            $tipo = 'Hospedagem';
-            break;
-         case 4:
-            $tipo = 'Lojas Temporárias';
-            break;
-         case 5:
-            $tipo = 'Eventos';
-            break;
-         case 6:
-            $tipo = 'Prestadores de Serviços';
-            break;
-      }
+       
+        $tipoModel = \model('App\Models\TipoModel', false);
+        $tipoModel->select('titulo, tipo');
+        $result = $tipoModel->find($tipo);
+     
+           $tipo = $result->titulo;
       
       return $tipo;
    }

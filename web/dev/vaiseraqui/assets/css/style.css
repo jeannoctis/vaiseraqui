@@ -80,6 +80,13 @@ ul {
   padding: 0 40px;
   margin-inline: auto;
 }
+
+.leaflet-popup-content .cobretudo{
+      font-size: 1rem;
+    line-height: 1.2rem;
+    margin-top: 0.5rem;
+}
+
 @media screen and (max-width: 750px) {
   .container {
     padding: 0 20px;

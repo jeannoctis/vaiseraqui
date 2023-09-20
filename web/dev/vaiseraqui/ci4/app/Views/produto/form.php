@@ -130,8 +130,8 @@
 
                      <div class='col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 form-group">
-                           <label for="mapa">iframe do Mapa
-                              <a href='https://www.youtube.com/watch?v=tkDykmlUvYo' target='_blank'>
+                           <label for="mapa">Link do Mapa no Google
+                              <a style='display: none;' href='https://www.youtube.com/watch?v=tkDykmlUvYo' target='_blank'>
                                  <i class='mdi mdi-comment-question-outline'></i>
                               </a>
                            </label>

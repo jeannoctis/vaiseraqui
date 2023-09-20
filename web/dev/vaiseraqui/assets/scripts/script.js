@@ -47,12 +47,12 @@ function setCookie(cname, cvalue, exdays) {
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function toggleFormWpp () {
+function toggleFormWpp() {
     const formWpp = document.querySelector(".form-wpp")
     formWpp.classList.toggle("active")
 }
 
-function startWpp () {
+function startWpp() {
     const formContent = document.querySelector(".form-wpp .fw-content")
     const inputs = formContent.querySelectorAll("input")
     const dataSerialized = {};
@@ -64,7 +64,7 @@ function startWpp () {
     $.post(PATHSITE + "utils/startWpp/", dataSerialized, function (data) {
         const response = jQuery.parseJSON(data);
         if (response.success) {
-            const formWpp = document.querySelector(".form-wpp")            
+            const formWpp = document.querySelector(".form-wpp")
             formWpp.classList.toggle("active")
         }
     })
@@ -86,15 +86,17 @@ function abreWhatsapp(id) {
 
 function agendar(tipo, link, whats, tela) {
     var url = whats + '&text=';
+    var checkin = '';
+    var checkout = '';
     switch (tipo) {
         case 'salao-de-festa':
             var pessoas = $('#campoHospede').val();
             if (tela === 'desktop') {
-                var checkin = $("#desktop-table-checkin").val();
-                var checkout = $("#desktop-table-checkout").val();
+                checkin = $("#desktop-table-checkin").val();
+                checkout = $("#desktop-table-checkout").val();
             } else {
-                var checkin = $("#mobile-table-checkin").val();
-                var checkout = $("#mobile-table-checkout").val();
+                checkin = $("#mobile-table-checkin").val();
+                checkout = $("#mobile-table-checkout").val();
             }
 
             url += 'Olá, vim pelo link ' + link + ' e quero agendar o espaço para ' + pessoas + ' pessoas. Sendo o check-in, no dia ' + checkin + ' e checkout no dia' + checkout;
@@ -102,17 +104,32 @@ function agendar(tipo, link, whats, tela) {
         case 'hospedagem':
             var pessoas = $('#campoHospede').val();
             if (tela === 'desktop') {
-                var checkin = $("#desktop-table-checkin").val();
-                var checkout = $("#desktop-table-checkout").val();
+                checkin = $("#desktop-table-checkin").val();
+                checkout = $("#desktop-table-checkout").val();
             } else {
-                var checkin = $("#mobile-table-checkin").val();
-                var checkout = $("#mobile-table-checkout").val();
+                checkin = $("#mobile-table-checkin").val();
+                checkout = $("#mobile-table-checkout").val();
             }
 
             url += 'Olá, vim pelo link ' + link + ' e quero agendar o espaço para ' + pessoas + ' pessoas. Sendo o check-in, no dia ' + checkin + ' e checkout no dia' + checkout;
             break;
-    }
+        case 'prestadores-de-servicos':
+            var pessoas = $("#quantidadePessoas").val();
+            if (tela === 'desktop') {
+                checkin = $("#desktop-table-checkin").val();
+                checkout = $("#desktop-table-checkout").val();
+            } else {
+                checkin = $("#mobile-table-checkin").val();
+                checkout = $("#mobile-table-checkout").val();
+            }
+            url += 'Olá, vim pelo link ' + link + ' e quero agendar o espaço para ' + pessoas + ' pessoas. Sendo a data do evento no dia ' + checkin;
 
+            if (checkout) {
+                url += ' e a data final do evento no dia' + checkout;
+            }
+            break;
+    }
+    
     window.location.assign(url);
 
 }
@@ -139,24 +156,24 @@ function calcularTotal(tipo, tela) {
             $("#quantidadeDias2").html(diffDays);
 
             var diaria = parseFloat($("#diaria").val());
-            
+
             var totalSemDiaria = parseFloat($("#totalDiaria").val());
-          
+
             totalSemDiaria = totalSemDiaria + diaria * diffDays;
             totalSemDiaria = totalSemDiaria.toFixed(2);
-          
-          totalSemDiaria = '' + totalSemDiaria;
-            
-              diaria = diaria * diffDays;
-                diaria = diaria.toFixed(2);
-              
-            
-            $("#totalDiarias1").html("R$" + diaria.replace('.',','));
-            $("#totalDiarias2").html("R$" + diaria.replace('.',','));            
-       
-            
-            $("#spanTotal1").html("R$" + totalSemDiaria.replace('.',',') );
-            $("#spanTotal2").html("R$" + totalSemDiaria.replace('.',',')  );
+
+            totalSemDiaria = '' + totalSemDiaria;
+
+            diaria = diaria * diffDays;
+            diaria = diaria.toFixed(2);
+
+
+            $("#totalDiarias1").html("R$" + diaria.replace('.', ','));
+            $("#totalDiarias2").html("R$" + diaria.replace('.', ','));
+
+
+            $("#spanTotal1").html("R$" + totalSemDiaria.replace('.', ','));
+            $("#spanTotal2").html("R$" + totalSemDiaria.replace('.', ','));
 
             break;
     }
