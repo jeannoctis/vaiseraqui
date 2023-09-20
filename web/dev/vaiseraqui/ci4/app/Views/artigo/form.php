@@ -8,19 +8,19 @@
                   <!-- /.box-title -->
                   <div class="card-content">
                      
-                     <div class='form-group col-xs-12 paddingZeroM'>
+                     <div class='form-group col-xs-12 col-lg-6 paddingZeroM'>
                         <div class="col-xs-12 col-sm-12">
                            <label for="titulo">Título</label>
                            <input type="text" required  name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?>" placeholder="Escreva...">
                         </div>
                      </div>
 
-                     <div class='form-group col-xs-12 col-lg-6 paddingZeroM'>
+                     <!-- <div class='form-group col-xs-12 col-lg-6 paddingZeroM'>
                         <div class="col-xs-12 col-sm-12">
                            <label for="chamada">Chamada, introdução (opcional)</label>
                            <input type="text" name="chamada" class="form-control" id="chamada" value="<?= $resultado->chamada ?>" placeholder="Escreva...">
                         </div>
-                     </div>
+                     </div> -->
 
                      <div class='form-group col-xs-12 col-lg-6 paddingZeroM'>
                         <div class="col-xs-12 col-sm-12">
@@ -34,14 +34,14 @@
                         </div>
                      </div>
 
-                     <div id='imagem' class="form-group col-xs-12 paddingZeroM mt-5   ">
+                     <div class="form-group col-xs-12 paddingZeroM mt-5   ">
                         <div class='col-xs-12'>
-                           <label for="arquivo">Imagem <b><?= ($resultado->tamanho) ? '(Tamanho recomendado: ' . $resultado->tamanho . ')' : '' ?></b> </label>
-                           <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo ?>' type="file" name='arquivo' id="arquivo" class="dropify">
-                           <div class="col-sm-12 col-lg-6 switch danger" style="display: flex;">
+                           <label for="arquivo">Imagem <b>(Tamanho recomendado: 918 x 506)</b> </label>
+                           <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo ?>' type="file" name='arquivo' id="arquivo" class="dropify" <?= $resultado->id ? "" : "required" ?>>
+                           <!-- <div class="col-sm-12 col-lg-6 switch danger" style="display: flex;">
                               <input style="height: 30px; margin-bottom: 10px; width: 30px; float: left;" id="apagar-arquivo" type="checkbox" name="apagararquivo" class="cb">
                               <label style="float: left; margin-top: 6px; margin-left: -12px;" for="apagar-arquivo" id="lbCheck">Apagar imagem</label>
-                           </div>
+                           </div> -->
                         </div>
                      </div>
                      

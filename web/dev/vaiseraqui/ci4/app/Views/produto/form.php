@@ -86,6 +86,7 @@
                   <h4 class="box-title">
                      Endereço
                   </h4>
+
                   <div class="card-content">
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
@@ -157,13 +158,12 @@
                   <h4 class="box-title">
                      Anunciante
                   </h4>
-                  <!-- /.box-title -->
-                  <div class="card-content">
 
+                  <div class="card-content">
                      <div class='form-group col-xs-12 paddingZeroM'>
                         <div class="col-xs-12">
                            <label for="anuncianteFK">Responsável</label>
-                           <select name="anuncianteFK" id="anuncianteFK" class="js-example-basic-single form-control" required>
+                           <select name="anuncianteFK" id="anuncianteFK" class="js-example-basic-single form-control" <?= $get['tipo'] != 5 ? "required" : "" ?>>
                               <? if ($anunciantes) { ?>
                                  <option value="">-- Selecione a pessoa responsável</option>
                                  <? foreach ($anunciantes as $anunciante) { ?>
@@ -390,7 +390,7 @@
                               </select>
                            </div>
                         </div>
-                        
+
 
                         <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
                            <div class="col-xs-12 col-sm-12">
@@ -863,7 +863,7 @@
                                  <? if ($pdv->tipo == "fisico") { ?>
                                     <label for="pdv<?= $pdv->id ?>-cep" class="col-xs-12 col-lg-6">
                                        Telefone
-                                       <input type="text" name="pdvs[ <?= $ind ?> ][cep]" value="<?= $pdv->cep ?>" class="form-control" required minlength="3" placeholder="Escreva...">
+                                       <input type="text" name="pdvs[ <?= $ind ?> ][cep]" value="<?= $pdv->cep ?>" class="form-control telefone" required minlength="3" placeholder="Escreva...">
                                     </label>
 
                                     <label for="pdv<?= $pdv->id ?>-cep" class="col-xs-12 col-lg-6">
@@ -1091,7 +1091,7 @@
                      <input type="radio" name="tipo-pdv" id="pdv-fisico" value="fisico">
                      <label for="pdv-fisico">
                         Ponto de venda físico
-                        <img src="<?= PATHSITE ?>assets2/Group 2310.png" alt="ícone ponto de venda físico">
+                        <img src="<?= PATHSITE ?>assets/images/icon-map-2.svg" alt="ícone ponto de venda físico">
                      </label>
                   </div>
                </li>
@@ -1100,7 +1100,7 @@
                      <input type="radio" name="tipo-pdv" id="pdv-online" value="online">
                      <label for="pdv-online">
                         Ponto de venda online
-                        <img src="<?= PATHSITE ?>assets2/web.png" alt="ícone ponto de venda online">
+                        <img src="<?= PATHSITE ?>assets/images/icon-www.svg" alt="ícone ponto de venda online">
                      </label>
                   </div>
                </li>
@@ -1459,7 +1459,7 @@
                newElement.innerHTML += `
                   <label class="col-xs-12 col-lg-6">
                      Telefone
-                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control cep" required minlength="3" placeholder="Escreva">
+                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control telefone" required minlength="3" placeholder="Escreva">
                   </label>
 
                   <label class="col-xs-12 col-lg-6">
@@ -1470,7 +1470,16 @@
             }
 
             pdvsContainer.appendChild(newElement);
-            $('.cep').mask('99999-999');
+            
+            var SPMaskBehavior = function(val) {
+                  return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+               },
+               spOptions = {
+                  onKeyPress: function(val, e, field, options) {
+                     field.mask(SPMaskBehavior.apply({}, arguments), options);
+                  }
+               };
+            $('.telefone').mask(SPMaskBehavior, spOptions);
          }
 
          // Modal Adicionar Ingresso

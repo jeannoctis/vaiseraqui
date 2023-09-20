@@ -99,6 +99,10 @@ class Produto extends BaseController
          $this->model->where("anuncianteFK", $get['anunciante']);
       }
 
+      if($get['tipo'] == 5) {
+         
+      }
+
       $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);
       $data['pager'] = $this->model->pager;
 

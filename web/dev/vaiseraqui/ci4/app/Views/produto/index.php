@@ -88,6 +88,9 @@
 											<tr>
 												<th class='menorTh'>Excluir</th>
 												<th>Nome</th>
+												<? if ($get['tipo'] == 5) { ?>
+													<th>Data</th>
+												<? } ?>
 												<th>Galeria</th>
 												<th>Vídeos</th>
 												<th>Ordenar</th>
@@ -102,6 +105,13 @@
 															<?= $elemento->titulo ?>
 														</a>
 													</td>
+													<? if ($get['tipo'] == 5) { ?>
+														<td>
+															<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=<?= $get['tipo'] ?>">
+																<?= $elemento->titulo ?>
+															</a>
+														</td>
+													<? } ?>
 													<td>
 														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/fotos/<?= encode($elemento->id) ?>?tipo=<?= $get['tipo'] ?>" class="subdivisao">
 															Ver Fotos <i class="bi bi-image-fill"></i>

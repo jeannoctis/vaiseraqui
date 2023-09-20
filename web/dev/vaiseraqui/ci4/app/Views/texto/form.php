@@ -96,7 +96,7 @@
  								<? if (in_array($resultado->id, [1])) { ?>
  									<div class="form-group col-xs-12 paddingZeroM mt-5   ">
  										<div class='col-xs-12'>
- 											<label for="arquivo2">Imagem secundária <b>(Tamanho recomendado: 000px)</b></label>
+ 											<label for="arquivo2">Imagem secundária (atrás) <b>(Tamanho recomendado: 385 x 385 | 1:1)</b></label>
  											<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo2 ?>' type="file" name='arquivo2' id="arquivo2" class="dropify">
  											<div class="col-xs-12 switch danger">
  												<input id="apagar-arquivo2" type="checkbox" name="apagararquivo2">
@@ -110,7 +110,7 @@
  							<? if (in_array($resultado->id, [1])) { ?>
  								<div class="form-group col-lg-6 paddingZeroM">
  									<div class="col-xs-12 col-sm-12">
- 										<label for="arquivo3">Ícone 1 <b>(Tamanho Recomendado: )</b> </label>
+ 										<label for="arquivo3">Ícone 1 <b>(Tamanho Recomendado: 48 x 48 | 1:1 )</b> </label>
  										<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo3 ?>' type="file" name='arquivo3' id="arquivo3" class="dropify">
  										<div class="col-xs-12 switch danger">
  											<input id="apagar-arquivo3" type="checkbox" name="apagararquivo3">
@@ -121,7 +121,7 @@
 
  								<div class="form-group col-lg-6 col-lg-6 paddingZeroM">
  									<div class="col-xs-12 col-sm-12">
- 										<label for="arquivo4">Ícone 2 <b>(Tamanho Recomendado: )</b></label>
+ 										<label for="arquivo4">Ícone 2 <b>(Tamanho Recomendado: 48 x 48 | 1:1 )</b></label>
  										<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo4 ?>' type="file" name='arquivo4' id="arquivo4" class="dropify">
  										<div class="col-xs-12 switch danger">
  											<input id="apagar-arquivo4" type="checkbox" name="apagararquivo4">
@@ -154,7 +154,7 @@
 
  								<div class="form-group col-xs-12 paddingZeroM">
  									<div class="col-xs-12 col-sm-12">
- 										<label for="arquivo5">Imagem 3 <b>(Tamanho Recomendado: )</b></label>
+ 										<label for="arquivo5">Imagem 3 <b>(Tamanho Recomendado: 600 x 600 | 1:1)</b></label>
  										<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo5 ?>' type="file" name='arquivo5' id="arquivo5" class="dropify">
  										<div class="col-xs-12 switch danger">
  											<input id="apagar-arquivo5" type="checkbox" name="apagararquivo5">
@@ -165,7 +165,7 @@
 
  								<div class="form-group col-lg-6 col-lg-6 paddingZeroM">
  									<div class="col-xs-12 col-sm-12">
- 										<label for="arquivo6">Ícone 3 <b>(Tamanho Recomendado: )</b></label>
+ 										<label for="arquivo6">Ícone 3 <b>(Tamanho Recomendado: 48x48 | 1:1 )</b></label>
  										<input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo6 ?>' type="file" name='arquivo6' id="arquivo6" class="dropify">
  										<div class="col-xs-12 switch danger">
  											<input id="apagar-arquivo6" type="checkbox" name="apagararquivo6">

@@ -28,10 +28,7 @@
       </div>
       <div class="box-container" data-aos="fade-left">
         <div class="card-float float-up-down left">
-          <picture>
-            <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo4 ?>.webp" type="image/webp">
-            <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo4 ?>" alt="ícone" />
-          </picture>
+          <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo4 ?>" alt="ícone" />
           <div>
             <? $detalhe2 = explode("*", $txSobreNos->extra2)  ?>
             <span class="title"><?= $detalhe2[0] ?></span>
@@ -39,10 +36,7 @@
           </div>
         </div>
         <div class="card-float float-down-up right">
-          <picture>
-            <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo3 ?>.webp" type="image/webp">
-            <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo3 ?>" alt="ícone" />
-          </picture>
+          <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo3 ?>" alt="ícone" />
           <div>
             <? $detalhe1 = explode("*", $txSobreNos->extra1)  ?>
             <span class="title"><?= $detalhe1[0] ?></span>
@@ -58,11 +52,8 @@
   <section class="more-about">
     <div class="container-medium" data-aos="fade-right">
       <div class="cover" style="background-image: url(<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo5 ?>);">
-        <div class="card-float float-up-down">
-          <picture>
-            <source srcset="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo6 ?>.webp" type="image/webp">
-            <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo6 ?>" alt="sobre a empresa" />
-          </picture>
+        <div class="card-float float-up-down">         
+          <img src="<?= PATHSITE ?>uploads/texto/<?= $txSobreNos->arquivo6 ?>" alt="sobre a empresa" />
           <div>
             <? $detalhe3 = explode("*", $txSobreNos->extra3)  ?>
             <span class="title"><?= $detalhe3[0] ?></span>

@@ -3932,10 +3932,11 @@ header.header-bg .group-title span {
   padding: 1.75rem 6.25rem;
   border-radius: 0.5625rem;
   background: #932327;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   transition: 200ms;
   border: 0;
+  margin-block-start: 40px;
 }
 .s-contact .container-medium .form button[type=submit]:hover {
   cursor: pointer;
@@ -4844,11 +4845,15 @@ header.header-bg .group-title span {
 }
 .home .plan-and-ads .container-medium .item:nth-child(1) {
   background-image: url(../images/card-ads-space.png);
+  background-position: 50%;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 .home .plan-and-ads .container-medium .item:nth-child(2) {
   background-image: url(../images/card-ads-service.png);
+  background-position: 50%;
   background-size: cover;
+  background-repeat: no-repeat;
 }
 .home .plan-and-ads .container-medium .item h2 {
   color: #FFFFFF;
@@ -4982,6 +4987,7 @@ header.header-bg .group-title span {
   border-radius: 1.25rem;
   border: 1px solid #BBBBBB;
   overflow: hidden;
+  height: 659px
 }
 .home .s-blog .list-posts article .cover {
   height: 322px;
@@ -6467,6 +6473,11 @@ header.header-bg .group-title span {
   right: 0;
   z-index: 4;
 }
+.about .who .container-medium .box-container .card-float img {
+  width: 48px;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
 @media screen and (max-width: 1350px) {
   .about .who .container-medium {
     align-items: flex-start;
@@ -6503,7 +6514,7 @@ header.header-bg .group-title span {
     padding: 10px;
     gap: 0.5rem;
   }
-  .about .who .container-medium .box-container .card-float > img {
+  .about .who .container-medium .box-container .card-float img {
     width: 48px;
   }
   .about .who .container-medium .box-container .card-float div .title {
@@ -6584,6 +6595,11 @@ header.header-bg .group-title span {
   font-weight: 500;
   line-height: 110.023%;
   letter-spacing: -0.04rem;
+}
+.about .more-about .container-medium .cover .card-float img {
+  width: 48px;
+  aspect-ratio: 1;
+  object-fit: contain;
 }
 @media screen and (max-width: 1500px) {
   .about .more-about .container-medium .cover .card-float {
@@ -6700,8 +6716,15 @@ header.header-bg .group-title span {
 .about .mission .container-medium .item:not(.active):not(:hover) {
   border-color: #404041;
 }
-.about .mission .container-medium .item svg {
+.about .mission .container-medium .item :is(svg, img) {
   margin-bottom: 1.06rem;
+  width: 48px;
+  aspect-ratio: 1;
+  object-fit: cover;
+  transition: all 200ms ease;
+}
+.about .mission .container-medium .item:is(:hover, :focus-visible) img {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%) hue-rotate(195deg) brightness(108%) contrast(101%);
 }
 .about .mission .container-medium .item svg.active {
   display: none;

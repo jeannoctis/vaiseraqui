@@ -25,7 +25,7 @@
 
                      <div id='imagem' class="form-group col-xs-12 col-lg-6 paddingZeroM mt-5">
                         <div class='col-xs-12'>
-                           <label for="arquivo">Foto do cliente <b>(Tamanho recomendado: )</b> </label>
+                           <label for="arquivo">Ícone <b>(Tamanho recomendado: 48 x 48 | 1:1 )</b> </label>
                            <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo ?>' type="file" name='arquivo' id="arquivo" class="dropify">
                            <div class="col-sm-12 col-lg-6 switch danger" style="display: flex;">
                               <input style="height: 30px; margin-bottom: 10px; width: 30px; float: left;" id="apagararquivo" type="checkbox" name="apagararquivo" class="cb">

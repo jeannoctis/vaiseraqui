@@ -26,12 +26,13 @@ class CategoriaArtigoModel extends Model
    ];
    protected $skipValidation = false;
 
-   public function categorias() {
+   public function categorias()
+   {
       $categorias = $this->findAll();
-      
+
       foreach ($categorias as $categoria) {
          $lista[$categoria->id] = $categoria->titulo;
-}
+      }
 
       return $lista;
    }

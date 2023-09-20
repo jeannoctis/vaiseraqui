@@ -31,49 +31,49 @@
         </button>
       </header>
 
-        <? if($tipos) {?>
-      <nav class="presentation-form-menu">
-          <? foreach($tipos as $ind => $tipo) {?>
-        <a href="#" class="<?=($ind) ? '' : 'active' ?>" data-form="form<?=$tipo->id?>">
-          
-            <img src='<?=PATHSITE?>uploads/tipo/<?=$tipo->arquivo?>'/>
+      <? if ($tipos) { ?>
+        <nav class="presentation-form-menu">
+          <? foreach ($tipos as $ind => $tipo) { ?>
+            <a href="#" class="<?= ($ind) ? '' : 'active' ?>" data-form="form<?= $tipo->id ?>">
 
-        <?=$tipo->titulo?>
-        </a>
-          <? } ?>        
-      </nav>
-        <? } ?>
+              <img src='<?= PATHSITE ?>uploads/tipo/<?= $tipo->arquivo ?>' />
+
+              <?= $tipo->titulo ?>
+            </a>
+          <? } ?>
+        </nav>
+      <? } ?>
 
       <div class="presentation-form-content">
-          <? foreach($tipos as $ind => $tipo) {
-          
-              switch($tipo->tipo ) {
-                  case 'ALUGUEL':
-                      $idForm = 1;
-                      break;
-                  case 'SALOES':
-                      $idForm = 2;
-                      break;
-                  case 'HOSPEDAGEM':
-                      $idForm = 5;
-                      break;
-                  case 'LOJAS':
-                      $idForm = 3;
-                      break;
-                  case 'EVENTOS':
-                      $idForm = 7;
-                      break;
-                  case 'PRESTADORES':
-                      $idForm = 4;
-                      break;
-              }
-              $tipo = (array) $tipo;
-                  if(!$ind){
-                    $tipo["form{$idForm}Visible"] = 'visible';
-              }
-              ?>
-        <? echo View("templates/form{$idForm}",$tipo) ?>
-          <? } ?>    
+        <? foreach ($tipos as $ind => $tipo) {
+
+          switch ($tipo->tipo) {
+            case 'ALUGUEL':
+              $idForm = 1;
+              break;
+            case 'SALOES':
+              $idForm = 2;
+              break;
+            case 'HOSPEDAGEM':
+              $idForm = 5;
+              break;
+            case 'LOJAS':
+              $idForm = 3;
+              break;
+            case 'EVENTOS':
+              $idForm = 7;
+              break;
+            case 'PRESTADORES':
+              $idForm = 4;
+              break;
+          }
+          $tipo = (array) $tipo;
+          if (!$ind) {
+            $tipo["form{$idForm}Visible"] = 'visible';
+          }
+        ?>
+          <? echo View("templates/form{$idForm}", $tipo) ?>
+        <? } ?>
       </div>
 
     </div>
@@ -289,7 +289,7 @@
                       </div>
                     </a>
                   </article>
-                <? }
+              <? }
                 $i++;
               } ?>
             </div>
@@ -996,13 +996,13 @@
   <div class="plan-and-ads">
     <div class="container-medium">
 
-      <div class="item card-clicked" data-aos="fade-right" style="background: linear-gradient(1deg, #000 17.47%, rgba(0, 0, 0, 0.00) 69.85%), url(<?= PATHSITE ?>uploads/texto/<?= $txConviteAnunciante1->arquivo ?>);">
+      <div class="item card-clicked" data-aos="fade-right" style="background-image: linear-gradient(1deg, #000 17.47%, rgba(0, 0, 0, 0.00) 69.85%), url(<?= PATHSITE ?>uploads/texto/<?= $txConviteAnunciante1->arquivo ?>);">
         <h2><?= $txConviteAnunciante1->titulo ?></h2>
         <p><?= $txConviteAnunciante1->descricao ?></p>
         <a href="<?= $txConviteAnunciante1->link ?>" class="btn-primary"><?= $txConviteAnunciante1->botao ?></a>
       </div>
 
-      <div class="item card-clicked" data-aos="fade-left" style="background: linear-gradient(1deg, #000 17.47%, rgba(0, 0, 0, 0.00) 69.85%), url(<?= PATHSITE ?>uploads/texto/<?= $txConviteAnunciante2->arquivo ?>);">
+      <div class="item card-clicked" data-aos="fade-left" style="background-image: linear-gradient(1deg, #000 17.47%, rgba(0, 0, 0, 0.00) 69.85%), url(<?= PATHSITE ?>uploads/texto/<?= $txConviteAnunciante2->arquivo ?>);">
         <h2><?= $txConviteAnunciante2->titulo ?></h2>
         <p><?= $txConviteAnunciante2->descricao ?></p>
         <a href="<?= $txConviteAnunciante2->link ?>" class="btn-primary"><?= $txConviteAnunciante2->botao ?></a>
@@ -1097,25 +1097,27 @@
           <div class="swiper-wrapper">
             <? foreach ($blogs as $blog) { ?>
               <div class="swiper-slide">
-                <article onclick="location.href=<?= PATHSITE ?>blog/<?= $blog->identificador ?>/" class="blog-post-medium">
-                  <div class="cover">
-                    <img src="<?= PATHSITE ?>uploads/blog/<?= $blog->arquivo ?>" alt="">
-                    <a href="#" class="category"><?= $blog->categoria ?></a>
-                  </div>
-                  <div class="info">
-                    <h3><?= $blog->titulo ?></h3>
-                    <p class="chamada"><?= $blog->chamada ?></p>
-                    <a href="<?= PATHSITE ?>blog/<?= $blog->identificador ?>/" class="more">
-                      Ler artigo
-                      <svg class="active" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 10L5 5.5L1 0.999999" stroke="#C82328" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                      <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 10L5 5.5L1 0.999999" stroke="#932327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                      </svg>
-                    </a>
-                  </div>
-                </article>
+                <a href="<?= PATHSITE ?>blog/<?= $blog->identificador ?>/">
+                  <article class="blog-post-medium">
+                    <div class="cover">
+                      <img src="<?= PATHSITE ?>uploads/blog/<?= $blog->arquivo ?>" alt="">
+                      <a href="#" class="category"><?= $blog->categoria ?></a>
+                    </div>
+                    <div class="info">
+                      <h3><?= $blog->titulo ?></h3>
+                      <p class="chamada"><?= $blog->chamada ?></p>
+                      <a href="<?= PATHSITE ?>blog/<?= $blog->identificador ?>/" class="more">
+                        Ler artigo
+                        <svg class="active" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 10L5 5.5L1 0.999999" stroke="#C82328" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <svg width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1 10L5 5.5L1 0.999999" stroke="#932327" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </a>
+                    </div>
+                  </article>
+                </a>
               </div>
             <? } ?>
           </div>

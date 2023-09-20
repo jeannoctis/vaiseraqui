@@ -745,7 +745,7 @@ class Pages extends Controller
 
                 $this->categoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
                 $this->categoriaArtigoModel->where("categoriaArtigo.id IN (SELECT categoriaFK FROM artigo WHERE artigo.excluido IS NULL)");
-                $data['cats'] = $this->categoriaArtigoModel->categorias();                
+                $data['categorias_artigo'] = $this->categoriaArtigoModel->findAll();
 
                 $data['artigoAtual'] = $this->artigoModel->where("identificador", $segments[1])->first();
 

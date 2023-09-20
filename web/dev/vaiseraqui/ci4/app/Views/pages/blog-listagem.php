@@ -67,7 +67,8 @@
 
       <div class="more-about-modal">
          <span>Leia sobre</span>
-         <a href="<?= PATHSITE ?>blog/">
+
+         <a href="#">
             todas as categorias
             <svg width="15" height="8" viewBox="0 0 15 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                <path d="M2 2L7.5 6L13 2" stroke="#932327" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
@@ -76,19 +77,21 @@
                <path d="M2 2L7.5 6L13 2" stroke="#c82328" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
          </a>
-         <? if ($categorias_artigos) { ?>
+
+         <? if ($categorias_artigo) { ?>
             <div class="modal-more-categories">
                <div class="wraper-scroll">
                   <nav class="content">
-                     <? foreach ($categorias_artigos as $categorias_artigos) { ?>
-                        <a href="<?= PATHSITE ?>blog/categoria/<?= $categorias_artigos->identificador ?>">
-                           <?= $categorias_artigos->titulo ?>
+                     <? foreach ($categorias_artigo as $categoria) { ?>
+                        <a href="<?= PATHSITE ?>blog/categoria/<?= $categoria->identificador ?>">
+                           <?= $categoria->titulo ?>
                         </a>
                      <? } ?>
                   </nav>
                </div>
             </div>
          <? } ?>
+
       </div>
 
    </div>
