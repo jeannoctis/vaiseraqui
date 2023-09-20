@@ -12,7 +12,7 @@ class ConfigModel extends Model {
     protected $returnType = 'object';
     protected $useSoftDeletes = true;
     protected $allowedFields = ['nome', 'whatsapp', 'telefone','celular','email', 'public_recaptcha',
-        'private_recaptcha','parcelasjuros'];
+        'private_recaptcha','parcelasjuros','cidadeFK'];
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';

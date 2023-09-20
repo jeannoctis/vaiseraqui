@@ -87,6 +87,12 @@ class Pages extends Controller {
         
          $data['txMenuFiltro'] = $this->textoModel->find(8);
 
+         if(!$_SESSION['cidade']) {
+         $_SESSION['cidade'] = $data['configs']->cidadeFK;
+         $data['primeiraVisita'] = true;
+         } 
+
+                 
         return $data;
     }
 

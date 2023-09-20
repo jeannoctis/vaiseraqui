@@ -270,9 +270,17 @@ class ProdutoModel extends Model {
 
     public function filtros($get) {
         helper('date');
+        
+        if($get['cidade']){
+           $_SESSION['cidade'] = $get['cidadeFK']; 
+        } else {
+           $get['cidadeFK'] = $_SESSION['cidade'];
+        }
+        
         if ($get['cidadeFK']) {
             $this->where('produto.cidadeFK', $get['cidadeFK']);
         }
+      
 
         if ($get['dataIni'] && $get['dataFim']) {
             $data1 = dataFormata($get["dataIni"]);
