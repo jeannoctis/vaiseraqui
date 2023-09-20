@@ -185,8 +185,8 @@
                   <div class="card-content">
                      <div class='col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 form-group">
-                           <label for="descricao">Descrição de apresentação</label>
-                           <textarea name='descricao' class="form-control" id="descricao" required><?= $resultado->descricao ?></textarea>
+                           <label for="descricao">Descrição de apresentação (limite de caracteres: 325)</label>
+                           <textarea name='descricao' class="form-control" id="descricao" maxlength="325" required><?= $resultado->descricao ?></textarea>
                         </div>
                      </div>
 
@@ -196,6 +196,16 @@
                            <textarea name='texto' class="tinymce_full" id="detalhes"><?= $resultado->texto ?></textarea>
                         </div>
                      </div>
+
+                     <? if (in_array($get['tipo'], [5])) { ?>
+                        <div class='col-xs-12 paddingZeroM'>
+                           <div class="col-xs-12 form-group">
+                              <label for="link">Link do botão "Comprar ingressos"</label>
+                              <input type="text" name='link' class="form-control" id="link"><?= $resultado->link ?></input>
+                           </div>
+                        </div>
+                     <? } ?>
+
                   </div>
                </div>
 
@@ -1470,7 +1480,7 @@
             }
 
             pdvsContainer.appendChild(newElement);
-            
+
             var SPMaskBehavior = function(val) {
                   return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
                },

@@ -30,7 +30,7 @@
             $arrayNaoInclui = explode(";", $naoInclui);
             foreach ($arrayNaoInclui as $item) { ?>
                <li class="no-incluse"><?= $item ?></li>
-         <? }
+            <? }
          } ?>
       </ul>
    <? } ?>

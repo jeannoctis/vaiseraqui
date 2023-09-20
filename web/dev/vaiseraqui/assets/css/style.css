@@ -3571,8 +3571,8 @@ header.header-bg .group-title span {
   margin-bottom: 3.12rem;
 }
 .s-callendar .container-medium .events-with-data {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  /* display: grid;
+  grid-template-columns: repeat(5, 1fr); */
   gap: 0.69rem;
 }
 .s-callendar .container-medium .events-with-data .column {
@@ -9844,4 +9844,9 @@ header.header-bg .group-title span {
     right: 50%;
     transform: translateX(50%);
   }
+}
+
+/* Swiper eventos */
+.swiper-eventos-home .swiper-slide {
+  max-width: max-content;
 }

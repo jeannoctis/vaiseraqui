@@ -258,6 +258,33 @@
  								</div>
  							<?  } ?>
 
+ 							<? if ($resultado->id == 3) { ?>
+ 								<div class='form-group col-sm-12 col-lg-6 paddingZeroM'>
+ 									<div class="col-xs-12 col-sm-12">
+ 										<label for="inputLink">Selecione a ação do botão </label>
+
+ 										<select name="link" id="heroSelect" class="form-control">
+
+ 											<option disabled><i>(selecione uma opção)</i></option>
+
+ 											<optgroup label="Rolar">
+ 												<option <?= $resultado->link == "#contato" ? "selected" : "" ?> value="#contato">Ir até o formulário</option>
+ 											</optgroup>
+
+ 											<optgroup label="Link">
+ 												<option <?= substr($resultado->link, 0, 1) != "#" ? "selected" : "" ?> value="">-- Digite um link --</option>
+ 											</optgroup>
+
+ 										</select>
+
+ 										<div style="text-align: center;margin: 5px 0;"><i class="bi bi-chevron-double-down"></i></div>
+
+ 										<input <?= substr($resultado->link, 0, 1) == "#" ? "disabled" : "" ?> type="text" name="link" id="inputLink" class="form-control" value="<?= $resultado->link ?>" placeholder="Escreva...">
+
+ 									</div>
+ 								</div>
+ 							<? } ?>
+
  							<? if ($resultado->isVideo == "S") {
 									if ($resultado->video) {
 										$url_components = parse_url($resultado->video);
@@ -299,3 +326,19 @@
  				</form>
  			</div>
  		</div>
+
+ 		<script>
+ 			const heroSelect = document.querySelector("#heroSelect");
+ 			const inputLink = document.querySelector("#inputLink");
+
+ 			heroSelect.addEventListener("change", () => {
+ 				inputLink.value = heroSelect.value;
+
+ 				if (inputLink.value == "") {
+ 					inputLink.removeAttribute("disabled")
+ 				} else {
+ 					inputLink.setAttribute("disabled", "true");
+ 				}
+
+ 			})
+ 		</script>

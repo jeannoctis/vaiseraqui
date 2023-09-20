@@ -108,7 +108,7 @@
 													<? if ($get['tipo'] == 5) { ?>
 														<td>
 															<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=<?= $get['tipo'] ?>">
-																<?= $elemento->titulo ?>
+																<?= $elemento->datas[0]->data ?>
 															</a>
 														</td>
 													<? } ?>

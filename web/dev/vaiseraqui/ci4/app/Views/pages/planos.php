@@ -48,7 +48,7 @@
                <img src="<?= PATHSITE ?>uploads/texto/<?= $txPlanosHero->arquivo2 ?>" class="mockup only-mobile" alt="banner planos mobile" data-aos="fade-left" />
             </picture>
 
-            <a href="<?= $txPlanosHero->link ?>" class="btn-primary"><?= $txPlanosHero->botao ?></a>
+            <a href="<?= $txPlanosHero->link ?>" <?= substr($txPlanosHero->link, 0, 1) != "#" ? "target='_blank'" : "" ?> class="btn-primary"><?= $txPlanosHero->botao ?></a>
          </div>
 
          <picture>
@@ -148,47 +148,46 @@
 
          <form method="post" data-aos="fade-left">
             <div class="input-group">
-               <label for="name">Seu nome</label>
-               <input type="text" placeholder="ex: João" class="user">
+               <label for="nome">Seu nome</label>
+               <input type="text" name="nome" id="nome" placeholder="ex: João" class="user" required>
             </div>
             <div class="wraper-inputs">
                <div class="input-group">
                   <label for="email">E-mail</label>
-                  <input type="email" placeholder="ex: joao@gmail.com" class="email">
+                  <input type="email" name="email" id="email" placeholder="ex: joao@gmail.com" class="email" required>
                </div>
                <div class="input-group">
-                  <label for="email">Telefone</label>
-                  <input type="email" placeholder="ex: (00) 9 9999-9999" maxlength="16" class="tel">
+                  <label for="telefone">Telefone</label>
+                  <input type="text" name="telefone" id="telefone" placeholder="ex: (00) 9 9999-9999" maxlength="16" class="tel" required>
                </div>
             </div>
             <div class="wraper-prefer">
                <label for="#">Preferência de Contato</label>
                <div class="wraper">
                   <div>
-                     <input type="radio" name="form-contact" id="whatsapp">
+                     <input type="radio" name="prefContato" value="whatsapp" id="whatsapp">
                      <label for="whatsapp">WhatsApp</label>
                   </div>
                   <div>
-                     <input type="radio" name="form-contact" id="call">
+                     <input type="radio" name="prefContato" value="ligacao" id="call">
                      <label for="call">Ligação</label>
                   </div>
                   <div>
-                     <input type="radio" name="form-contact" id="email">
+                     <input type="radio" name="prefContato" value="email" id="email">
                      <label for="email">E-mail</label>
                   </div>
                </div>
             </div>
             <div class="wraper-inputs">
                <div class="input-group j-input-order-select">
-                  <label for="email">Plano</label>
+                  <label for="plano">Plano</label>
                   <div class="modal-order">
-                     <input type="text" readonly="" value="Anúncio de Linha">
+                     <input type="text" name="plano" value="Anúncio de Linha">
                      <div class="modal-order-select">
                         <div class="wraper-scroll">
-                           <nav class="content">
-                              <? foreach ($planosLinha as $plano) { ?>
-                                 <a data-select-value="<?= $plano->titulo ?>" href="#" class="active"><?= $plano->titulo ?></a>
-                              <? } ?>
+                           <nav class="content">                              
+                              <a data-select-value="Plano de linha" href="javascript:void();" class="active" data-categoria="p-linha">Anúncio de linha</a>
+                              <a data-select-value="Plano destaque" href="javascript:void();" data-categoria="p-destaque">Anúncio destaque</a>
                            </nav>
                         </div>
                      </div>
@@ -197,12 +196,15 @@
                <div class="input-group j-input-order-select">
                   <label for="email">Duração</label>
                   <div class="modal-order">
-                     <input type="text" readonly="" value="Anual">
+                     <input type="text" name="duracao" value="Anual">
                      <div class="modal-order-select">
                         <div class="wraper-scroll">
                            <nav class="content">
                               <? foreach ($planosAnuncio as $plano) { ?>
-                                 <a data-select-value="<?= $plano->titulo ?>" href="#" class="active"><?= $plano->titulo ?></a>
+                                 <a data-select-value="<?= $plano->titulo ?>" href="javascript:void();" class="p-opcao p-linha"><?= $plano->titulo ?></a>
+                              <? } ?>
+                              <? foreach ($planosLinha as $plano) { ?>
+                                 <a data-select-value="<?= $plano->titulo ?>" href="javascript:void();" class="p-opcao p-destaque"><?= $plano->titulo ?></a>
                               <? } ?>
                            </nav>
                         </div>
@@ -214,15 +216,17 @@
                <label>Localização do anúncio</label>
                <div class="wraper">
                   <label class="button" for="">Selecione Aqui</label>
-                  <input type="hidden" class="modal-value-selected">
+                  <input type="hidden" name="anuncio" class="modal-value-selected">
                   <span class="label-value">Nenhuma opção selecionada</span>
                </div>
             </div>
             <div class="input-group">
-               <label for="message">Mensagem</label>
-               <textarea name="" id="message" placeholder="Escreva aqui sua mensagem"></textarea>
+               <label for="mensagem">Mensagem</label>
+               <textarea name="mensagem" id="mensagem" placeholder="Escreva aqui sua mensagem"></textarea>
             </div>
-            <input type="hidden" name="origem" value="planos">
+            <input type="hidden" name="origem" value="planos">.33333
+            <input type="hidden" name="g-recaptcha-response" class="g-recaptcha-response" value="">
+            <input type="hidden" name="enviar" value="enviar">
             <button type="submit">Enviar</button>
          </form>
 
@@ -390,9 +394,34 @@
                      <img src="<?= PATHSITE ?>assets/images/bg-modal-6.svg" alt="">
                   </div>
                </div>
-            </div>
-            <button type="submit" class="btn-primary">Selecionar</button>
+            </div>            
+            <button type="submit" class="btn-primary">Selecionar</button>            
          </form>
       </div>
    </div>
 </main>
+
+<style>
+   .modal-order .modal-order-select .wraper-scroll {
+      height: auto;
+   }
+</style>
+
+<script>
+   const categoriasPlano = document.querySelectorAll("a[data-categoria]")
+
+   categoriasPlano.forEach(opt => {
+      opt.addEventListener("click", ev => {
+         const categoria = ev.target.dataset.categoria
+         const opcoesPlano = document.querySelectorAll("a.p-opcao")
+
+         opcoesPlano.forEach(opcao => {
+            if(!opcao.classList.contains(categoria)) {
+               opcao.style.display = "none"
+            } else if (opcao.classList.contains(categoria)) {
+               opcao.style.display = "block"
+            }
+         })
+      })
+   })
+</script>

@@ -8,9 +8,9 @@
       <div class="item">
         <h2>Categorias</h2>
         <nav>
-               <? foreach($tipos as $tipo) {?>
-          <a href="<?= PATHSITE ?><?=$tipo->identificador2?>/"><?=$tipo->titulo?></a>      
-               <? } ?>
+          <? foreach ($tipos as $tipo) { ?>
+            <a href="<?= PATHSITE ?><?= $tipo->identificador2 ?>/"><?= $tipo->titulo ?></a>
+          <? } ?>
         </nav>
       </div>
       <div class="item">
@@ -150,17 +150,17 @@
         <a href="<?= $linkwhatsapp ?>" target="_blank">
           <button onclick="contadorWhatsapp(<?= $whatsapps[0]->id ?>); cliqueWhatsapp(); startWpp()">
             Iniciar conversa no WhatsApp
-        </button>
+          </button>
         </a>
 
-                </div>
+      </div>
     </div>
 
     <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
       <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
       Fale conosco
     </button>
-          <? } ?>
+  <? } ?>
 
   <script>
     var public_recaptcha = "<?= $configs->public_recaptcha ?>";
@@ -209,6 +209,24 @@
       once: true,
       duration: 1000
     });
+
+
+    const shareButton = document.querySelector("a.share");
+    if (shareButton) {
+      const titulo = shareButton.dataset.title
+      const url = window.location.href
+      shareButton.addEventListener("click", async () => {
+        try {
+          await navigator.share({
+            title: titulo,
+            url: url
+          });
+          console.log("Data was shared successfully");
+        } catch (err) {
+          console.error("Share failed:", err.message);
+        }
+      });
+    }
 
     <? if ($erro) { ?>
       cSwal.fire({

@@ -36,7 +36,7 @@ class EmailModel extends Model
     $email = \Config\Services::email();
 
     $email->setTo($to);
-    $email->setFrom('site@projetosonlinearq.com.br', "Projetos Online Arq");
+    $email->setFrom('site@vaiseraqui.com.br', "Vai Ser Aqui");
 
     $email->setSubject($subject);
     $email->setMessage($message);

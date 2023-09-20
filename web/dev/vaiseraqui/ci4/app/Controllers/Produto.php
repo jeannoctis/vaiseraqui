@@ -98,12 +98,21 @@ class Produto extends BaseController
       if (!empty($get['anunciante'])) {
          $this->model->where("anuncianteFK", $get['anunciante']);
       }
+      
+      $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);
 
       if($get['tipo'] == 5) {
-         
+         $this->produtoDataModel = \model("App\Models\ProdutoDataModel", false);
+         foreach($data['lista'] as $item) {
+            $this->produtoDataModel->resetQuery();
+            $item->datas = $this->produtoDataModel
+               ->where("produtoFK", $item->id)
+               ->orderBy("DATEDIFF(produto_data.data, CURDATE())", "DEESC")
+               ->findAll();
+         }
+         $this->model->join("produto_data pdata", "pdata.produtoFK = produto.id");
       }
 
-      $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);
       $data['pager'] = $this->model->pager;
 
       $data['tipo'] = \getTipo($get['tipo']);
@@ -1401,7 +1410,7 @@ class Produto extends BaseController
    public function eventos()
    {
          $get = request()->getGet();
-        $this->model->eventos($get);
+         $this->model->eventos($get);
     }
     
        

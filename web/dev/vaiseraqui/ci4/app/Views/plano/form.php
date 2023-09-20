@@ -43,15 +43,15 @@
 
                      <div class="form-group col-xs-12 paddingZeroM">
                         <div class="col-xs-12 col-sm-12 form-group">
-                           <label for="inclui">Inclui</i> </label>
-                           <input type="text" name="inclui" class="form-control tags-input mySingleFieldTags" id="inclui" value="<?= $resultado->inclui ?>" placeholder="Escreva...">
+                           <label for="inclui">Inclui (máximo de 5 itens)</label>
+                           <input type="text" name="inclui" class="form-control tags-input tag-planos-inclui" id="inclui" value="<?= $resultado->inclui ?>" placeholder="Escreva...">
                         </div>
                      </div>
 
                      <div class="form-group col-xs-12 paddingZeroM">
                         <div class="col-xs-12 col-sm-12 form-group">
-                           <label for="naoInclui">Não inclui</label>
-                           <input type="text" name="naoInclui" class="form-control tags-input mySingleFieldTags" id="naoInclui" value="<?= $resultado->naoInclui ?>" placeholder="Escreva...">
+                           <label for="naoInclui">Não inclui (máximo de 2 itens)</label>
+                           <input type="text" name="naoInclui" class="form-control tags-input tag-planos-nao-inclui" id="naoInclui" value="<?= $resultado->naoInclui ?>" placeholder="Escreva...">
                         </div>
                      </div>
                      <!-- Botões -->

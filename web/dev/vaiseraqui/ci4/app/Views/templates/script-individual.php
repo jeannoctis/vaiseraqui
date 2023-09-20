@@ -168,9 +168,11 @@
 
       function setValueInForm(type, params) {
          const formboxModalOpen = document.querySelector('.box-modal-open')
+         const labelButton = formboxModalOpen.querySelector('.button')
          const labelResult = formboxModalOpen.querySelector('.label-value')
          const inputResult = formboxModalOpen.querySelector('input.modal-value-selected')
 
+         labelButton.innerHTML = `Selecionado→`
          labelResult.innerHTML = `${type} <br /> ${params}`
          inputResult.value = `${type} ${params}`
 
