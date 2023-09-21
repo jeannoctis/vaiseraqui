@@ -34,9 +34,7 @@
               <? } ?>
 
                   <!-- Listagem comumn -->
-                  <? foreach ($saloes as $salao) {
-
-                      
+                  <? foreach ($saloes as $salao) {                      
                         $salao->tipo =  $segments[0]; // 'salao-de-festa-e-area-de-lazer';
                      echo view("templates/aluguel-para-temporada-card.php", (array)$salao);
                   } ?>

@@ -14,9 +14,9 @@ class Produto extends BaseController
       $this->produtoCategoriaModel = model('App\Models\ProdutoCategoriaModel', false);
       $this->tabela = "produto";
 
-        $get = request()->getGet();
-        $this->session->set('menuAdmin', 7);
-    }
+      $get = request()->getGet();
+      $this->session->set('menuAdmin', 7);
+   }
 
    public function index()
    {
@@ -98,12 +98,12 @@ class Produto extends BaseController
       if (!empty($get['anunciante'])) {
          $this->model->where("anuncianteFK", $get['anunciante']);
       }
-      
+
       $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);
 
-      if($get['tipo'] == 5) {
+      if ($get['tipo'] == 5) {
          $this->produtoDataModel = \model("App\Models\ProdutoDataModel", false);
-         foreach($data['lista'] as $item) {
+         foreach ($data['lista'] as $item) {
             $this->produtoDataModel->resetQuery();
             $item->datas = $this->produtoDataModel
                ->where("produtoFK", $item->id)
@@ -113,15 +113,73 @@ class Produto extends BaseController
          $this->model->join("produto_data pdata", "pdata.produtoFK = produto.id");
       }
 
+      $anuncioModel = \model("App\Models\AnuncioModel", false);
+      if (!empty($get['tipo']) && !empty($get['cidade'])) {
+         if (\in_array($get['tipo'], [1, 2, 3, 4])) {
+            $busca = $anuncioModel
+               ->where("tipoFK", $get['tipo'])
+               ->where("cidadeFK", $get['cidade'])
+               ->where("tipo", "tipo")
+            ->first();
+
+            $data['produtoFK1'] = [];
+            $data['produtosFKs'] = [];
+            if ($busca) {
+               $data['produtoFK1'] = $busca->produtoFK1;
+               $data['produtosFKs'] = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5];
+            }
+
+            $busca = $anuncioModel->resetQuery()
+               ->where("tipoFK", $get['tipo'])
+               ->where("cidadeFK", $get['cidade'])
+               ->where("tipo", "emalta")
+            ->first();
+
+            $data['altaProdutoFK1'] = [];
+            $data['altaProdutosFKs'] = [];
+            if ($busca) {
+               $data['altaProdutoFK1'] = $busca->produtoFK1;
+               $data['altaProdutosFKs'] = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5];
+            }
+
+         } else if ($get['tipo'] == 6 && !empty($get['categoria'])) {
+
+            $busca = $anuncioModel
+               ->where("tipoFK", $get['tipo'])
+               ->where("cidadeFK", $get['cidade'])
+               ->where("categoriaFK", $get['categoria'])
+               ->where("tipo", "servicocategoria")
+            ->first();
+
+            $data['produtoFK1'] = [];
+            $data['produtosFKs'] = [];
+            if($busca) {
+               $data['produtoFK1'] = $busca->produtoFK1;
+               $data['produtosFKs'] = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5, $busca->produtoFK6, $busca->produtoFK7];
+            }
+
+            $busca = $anuncioModel->resetQuery()
+               ->where("tipoFK", $get['tipo'])
+               ->where("cidadeFK", $get['cidade'])
+               ->where("categoriaFK", $get['categoria'])
+               ->where("tipo", "emalta")
+            ->first();
+
+            $data['altaProdutoFK1'] = [];
+            $data['altaProdutosFKs'] = [];
+            if($busca) {
+               $data['altaProdutoFK1'] = $busca->produtoFK1;
+               $data['altaProdutosFKs'] = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5, $busca->produtoFK6, $busca->produtoFK7];
+            }            
+         }
+      }
+
       $data['pager'] = $this->model->pager;
 
       $data['tipo'] = \getTipo($get['tipo']);
-
-        $data['title'] = 'Produtos';
-        $data['tabela'] = $this->tabela;
-        $data["nomeModel"] = "ProdutoModel";
-        
-       
+      $data['title'] = 'Produtos';
+      $data['tabela'] = $this->tabela;
+      $data["nomeModel"] = "ProdutoModel";
 
       echo view('templates/admin-header', $data);
       echo view("{$data["tabela"]}/index", $data);
@@ -523,7 +581,7 @@ class Produto extends BaseController
          }
 
          if (!empty($post['datas'])) {
-            $IDsReceviedDatas = \array_column($post['datas'], "id");            
+            $IDsReceviedDatas = \array_column($post['datas'], "id");
 
             if (!empty($IDsReceviedDatas)) {
                $this->produtoDataModel
@@ -866,16 +924,16 @@ class Produto extends BaseController
       $retorno["mes1"] = $date[1];
       $retorno["ano1"] = $date[0];
 
-        ob_start();
-        for ($iterator = 1; $iterator <= 6; $iterator++) {
-            ?>
+      ob_start();
+      for ($iterator = 1; $iterator <= 6; $iterator++) {
+?>
          <div class="">
-                <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
-                <table class='table'>
-                    <tr>
-                        <td align="center">
-                            <table width="100%" border="0" cellpadding="2" cellspacing="2">
-                                <tr class='fonteBlack'>
+            <div class="text-center topo"><?= mes($cMonth) ?> de <?= $cYear ?> </div>
+            <table class='table'>
+               <tr>
+                  <td align="center">
+                     <table width="100%" border="0" cellpadding="2" cellspacing="2">
+                        <tr class='fonteBlack'>
                            <td align="center"><strong>D</strong></td>
                            <td align="center"><strong>S</strong></td>
                            <td align="center"><strong>T</strong></td>
@@ -1096,7 +1154,7 @@ class Produto extends BaseController
    {
       ob_start();
       $token = md5(uniqid(""));
-      ?>
+   ?>
       <script>
          $(document).ready(function() {
             $(".mySingleFieldTags").tagit({
@@ -1135,7 +1193,7 @@ class Produto extends BaseController
             </div>
          </div>
       </div>
-      <?
+   <?
       $retorno['html'] = ob_get_clean();
       echo json_encode($retorno);
    }
@@ -1156,12 +1214,12 @@ class Produto extends BaseController
 
          $(document).ready(function() {
             $('.phone_with_ddd').mask('(00) 00000-0000');
-            });
-        </script>
-        <div class="card">
-            <div class="card-header" id="tituloAba<?= $token ?>">
-                <h5 class="mb-0">
-                    <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
+         });
+      </script>
+      <div class="card">
+         <div class="card-header" id="tituloAba<?= $token ?>">
+            <h5 class="mb-0">
+               <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $token ?>" aria-expanded="true" aria-controls="aba<?= $token ?>">
                   Novo <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
                   <div onclick="excluirAba('<?= $token ?>', 'false', '')" class="excluirAba">
@@ -1187,7 +1245,7 @@ class Produto extends BaseController
                   <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
                      <label>Telefone</label>
                      <input type="text" name="cep[]" class="form-control phone_with_ddd" Value="<?= $texto->cep ?>">
-                            </div>
+                  </div>
                   <div class="col-12 col-md-6 <?= ($get['tipo'] == 'online') ? 'd-none' : '' ?>">
                      <label>Cidade / Estado</label>
                      <input type="text" name="cidade[]" class="form-control" Value="<?= $texto->cidade ?>">
@@ -1258,19 +1316,19 @@ class Produto extends BaseController
 
                </div>
 
-               </div>
             </div>
-        </div>
-        <?
-        $retorno['html'] = ob_get_clean();
-        echo json_encode($retorno);
-    }
+         </div>
+      </div>
+   <?
+      $retorno['html'] = ob_get_clean();
+      echo json_encode($retorno);
+   }
 
    public function novoCardapio()
    {
       ob_start();
       $token = md5(uniqid(""));
-      ?>
+   ?>
       <script>
          $(document).ready(function() {
             $(".mySingleFieldTags").tagit({
@@ -1309,7 +1367,7 @@ class Produto extends BaseController
             </div>
          </div>
       </div>
-      <?
+   <?
       $retorno['html'] = ob_get_clean();
       echo json_encode($retorno);
    }
@@ -1401,29 +1459,29 @@ class Produto extends BaseController
                   </div>
                </div>
 
-                </div>
             </div>
-        </div>
-        <?
-        $retorno['html'] = ob_get_clean();
-        echo json_encode($retorno);
-    }
-    
+         </div>
+      </div>
+<?
+      $retorno['html'] = ob_get_clean();
+      echo json_encode($retorno);
+   }
+
    public function eventos()
    {
-         $get = request()->getGet();
-         $this->model->eventos($get);
-    }
-    
-       
+      $get = request()->getGet();
+      $this->model->eventos($get);
+   }
+
+
    public function chamarWhats()
    {
-     $request = \Config\Services::request();
-     $post = $request->getPost();    
-     $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
-            
-     $id = decode($post['produtoFK']);
-            
-    $produtoWhatsModel->contaClique($id);
-  }
+      $request = \Config\Services::request();
+      $post = $request->getPost();
+      $produtoWhatsModel = model('App\Models\ProdutoWhatsModel', false);
+
+      $id = decode($post['produtoFK']);
+
+      $produtoWhatsModel->contaClique($id);
+   }
 }

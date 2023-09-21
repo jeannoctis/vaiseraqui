@@ -92,9 +92,9 @@
                     <strong>Duração:</strong> <?= $duracao ?>
                 </p>
             <? } ?>
-            <? if ($anuncio) { ?>
+            <? if ($modeloAnuncio) { ?>
                 <p>
-                    <strong>Modelo do anúncio</strong> <?= $anuncio ?>
+                    <strong>Modelo do anúncio</strong> <?= $modeloAnuncio ?>
                 </p>
             <? } ?>
         </div>

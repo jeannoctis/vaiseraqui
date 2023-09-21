@@ -205,7 +205,6 @@
                            </div>
                         </div>
                      <? } ?>
-
                   </div>
                </div>
 
@@ -266,7 +265,7 @@
 
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
-                              <label for="itensdisponiveis">Itens</label>
+                              <label for="itensdisponiveis">Itens (separe-os com 'enter' ou 'tab')</label>
                               <input type="text" name="itensdisponiveis" class="form-control mySingleFieldTags" id="itensdisponiveis" value="<?= $resultado->itensdisponiveis ?>" placeholder="Escreva...">
                            </div>
                         </div>
@@ -321,7 +320,6 @@
                            </div>
                         </div>
 
-
                         <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
                            <div class="col-xs-12 col-sm-12">
                               <label for="animais">Animais de estimação?</label>
@@ -360,6 +358,13 @@
                      </h4>
                      <!-- /.box-title -->
                      <div class="card-content">
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="hospedes">Limite de hóspede por acomodação</label>
+                              <input type="number" name="hospedes" id="hospedes" min="0" class="form-control" value="<?= $resultado->hospedes ?>" placeholder="Escreva..." required>
+                           </div>
+                        </div>
 
                         <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
                            <div class="col-xs-12 col-sm-12">
@@ -456,7 +461,7 @@
 
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
-                              <label for="principaiscomodidades">Adicionadas</label>
+                              <label for="principaiscomodidades">Adicionadas (separe-os com 'enter' ou 'tab')</label>
                               <input type="text" name="principaiscomodidades" class="form-control tags-input mySingleFieldTags" id="principaiscomodidades" value="<?= $resultado->principaiscomodidades ?>" placeholder="Escreva...">
                            </div>
                         </div>
@@ -506,7 +511,7 @@
                                  </div>
 
                                  <div class="col-xs-12 form-group">
-                                    <label for="catCmdd<?= $area->titulo ?>">Adicionadas</label>
+                                    <label for="catCmdd<?= $area->titulo ?>">Adicionadas (separe-os com 'enter' ou 'tab')</label>
                                     <input type="text" name="catCmdd[ <?= $ind ?> ][comodidades]" class="form-control tag-it mySingleFieldTags" id="catCmdd<?= str_replace(' ', '', $area->titulo) ?>" value="<?= $area->comodidades ?>" placeholder="Escreva...">
                                  </div>
 
@@ -577,7 +582,7 @@
                      <div class="card-content">
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
-                              <label for="condominio">Comodidades do condomínio</label>
+                              <label for="condominio">Comodidades do condomínio (separe-os com 'enter' ou 'tab')</label>
                               <input type="text" name="condominio" class="form-control mySingleFieldTags" id="condominio" value="<?= $resultado->condominio ?>" placeholder="Escreva...">
                            </div>
                         </div>
@@ -588,7 +593,7 @@
                <? if (in_array($get['tipo'], [6])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title with-btn">
-                        Cardápios
+                        Cardápios (apenas para Buffut e relacionados!)
                         <button type="button" class="btn btn-icon btn-icon-left btn-success btn-xs btn-rounded dialog-btn" data-target="modalCardapio">
                            Adicionar Cardápio
                            <i class="ico bi bi-plus-lg"></i>
@@ -610,7 +615,7 @@
                                  </div>
 
                                  <div class="col-xs-12 form-group">
-                                    <label for="cardapio-menu<?= $item->titulo ?>">Adicionadas</label>
+                                    <label for="cardapio-menu<?= $item->titulo ?>">Adicionadas (separe-os com 'enter' ou 'tab')</label>
                                     <input type="text" name="cardapios[ <?= $ind ?> ][menu]" class="form-control tag-it mySingleFieldTags" id="cardapio-menu<?= str_replace(' ', '', $item->titulo) ?>" value="<?= $item->menu ?>" placeholder="Escreva...">
                                  </div>
 
@@ -631,7 +636,6 @@
                               </div>
                            <? } ?>
                         <? } ?>
-
                      </div>
 
                      <div class="card content">
@@ -695,8 +699,18 @@
 
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
-                              <label for="eventosatendidos">Eventos</label>
+                              <label for="eventosatendidos">Eventos (separe-os com 'enter' ou 'tab')</label>
                               <input type="text" name="eventosatendidos" class="form-control mySingleFieldTags" id="eventosatendidos" value="<?= $resultado->eventosatendidos ?>" placeholder="Escreva...">
+                           </div>
+                        </div>
+
+                        <div class='form-group col-xs-12 paddingZeroM'>
+                           <div class="col-xs-12">
+                              <label for="capacidade">
+                                 Capacidades de atendimento (separe-os com 'enter' ou 'tab')<br>
+                                 <i>100, 500, 1000... pessoas. Apenas números</i>
+                              </label>
+                              <input type="text" name="capacidade" class="form-control mySingleFieldTags" id="capacidade" value="<?= $resultado->capacidade ?>" placeholder="apenas números!" required>
                            </div>
                         </div>
 

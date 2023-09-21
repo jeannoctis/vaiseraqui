@@ -195,11 +195,6 @@ class Pages extends Controller
         $anuncioModel = model('App\Models\AnuncioModel', false);
         $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
         $emAltas = $anuncioModel->findAll();
-        
-        echo "<pre>";
-        print_r($emAltas);
-        echo "</pre>";
-        exit();
 
         
         if ($emAlta->produtoFK1) {
@@ -466,7 +461,7 @@ class Pages extends Controller
             ->select("produto_categoria.id, produto_categoria.titulo, produto_categoria.arquivo, a.produtoFK1")
             ->join("anuncio a", "a.categoriaFK = produto_categoria.id")
             ->where("a.tipo", "servicocategoria")
-            ->findAll();
+        ->findAll();
     
         if (isset($_POST['enviar'])) {
             $request = \Config\Services::request();
@@ -1253,7 +1248,6 @@ class Pages extends Controller
             $data["contato"] = $this->recebeEmail($data["configs"]->private_recaptcha, $post);
 
             if ($data["contato"] == 1) {
-
                 $emailModel = model('App\Models\EmailModel', false);
                 $data["sucesso"] = "Contato enviado com sucesso!";
                 $data["salvou"] = TRUE;

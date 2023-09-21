@@ -154,11 +154,11 @@
       </div>
     </div>
 
-    <? if(!$escondeWhatsapp) {?>
-        <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
-          <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
-          Fale conosco
-        </button>
+    <? if (!$escondeWhatsapp) { ?>
+      <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
+        <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
+        Fale conosco
+      </button>
     <? } ?>
   <? } ?>
 
@@ -199,6 +199,7 @@
   <script src="<?= PATHSITE ?>assets/scripts/form-filter.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
+  <script src="<?= PATHSITE ?>assets/scripts/sweetalert2/swal2.min.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/script.js"></script>
 
   <!-- Scripts Individuais -->
@@ -209,7 +210,6 @@
       once: true,
       duration: 1000
     });
-
 
     const shareButton = document.querySelector("a.share");
     if (shareButton) {
@@ -227,7 +227,12 @@
         }
       });
     }
-
+    const cSwal = Swal.mixin({
+      confirmButtonColor: "#932327",
+      customClass: {
+        popup: 'custom-swal-font',
+      }
+    })
     <? if ($erro) { ?>
       cSwal.fire({
         title: "Ops,",
@@ -286,8 +291,8 @@
       })
     })
   </script>
-  
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"  crossorigin=""></script>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 
   <? if ($coordenadas) {
     echo View('templates/coordenadas');

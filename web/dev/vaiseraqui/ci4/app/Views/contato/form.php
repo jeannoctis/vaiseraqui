@@ -37,19 +37,17 @@
                                 <textarea readonly type="text" class="form-control" id="mensagem"><?= $resultado->mensagem ?></textarea>
                             </div>
 
-                            <? if ($resultado->plano) { ?>
+                            <? if ($resultado->origem == "planos") { ?>
                                 <div class="col-xs-12 col-sm-4 form-group">
                                     <label for="plano">Plano </label>
                                     <input readonly type="text" class="form-control" id="plano" value="<?= $resultado->plano ?>">
                                 </div>
-                            <? } ?>
-                            <? if ($resultado->duracao) { ?>
+
                                 <div class="col-xs-12 col-sm-4 form-group">
                                     <label for="duracao">Duração </label>
                                     <input readonly type="text" class="form-control" id="duracao" value="<?= $resultado->duracao ?>">
                                 </div>
-                            <? } ?>
-                            <? if ($resultado->modeloAnuncio) { ?>
+
                                 <div class="col-xs-12 col-sm-4 form-group">
                                     <label for="modeloAnuncio">Modelo do anúncio </label>
                                     <input readonly type="text" class="form-control" id="modeloAnuncio" value="<?= $resultado->modeloAnuncio ?>">

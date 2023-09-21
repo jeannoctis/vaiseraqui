@@ -15,7 +15,7 @@ class ProdutoModel extends Model
     protected $allowedFields = [
         'titulo', 'descricao', 'ordem', 'identificador', 'proximidades', 'video', 'ativo', 'validade', 'anuncianteFK',
         'endereco', 'bairro', 'destaque', 'validadeDestaque', 'apresentacao', 'inicioValidade', 'inicioDestaque', 'cidadeFK',
-        'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'capacidadeFK',
+        'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'capacidade',
         'hospedes', 'limpeza', 'latitude', 'longitude', 'captadorFK', 'planoFK', 'calendario', 'preco', 'apartir', 'principaiscomodidades',
         'itensdisponiveis', 'areautil', 'quartos', 'banheiros', 'vagas', 'andar', 'animais', 'mobilia', 'transporte', 'condominio',
         'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local', 'cafedamanha', 'wifi', 'arcondicionado', 'recepcao24', 'bar', 'acessibilidade', 'estacionamento'
@@ -244,10 +244,10 @@ class ProdutoModel extends Model
     public function dadosCard()
     {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado, t.identificador as tipo, t.id as tipo_id")
-                        ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
-                        ->join("cidade c", "c.id = produto.cidadeFK")
-                        ->join("estado e", "e.id = c.estadoFK")
-                        ->join("tipo t", "t.id = pc.tipoFK");
+            ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
+            ->join("cidade c", "c.id = produto.cidadeFK")
+            ->join("estado e", "e.id = c.estadoFK")
+            ->join("tipo t", "t.id = pc.tipoFK");
     }
 
     public function hospedagens($limit)
@@ -532,7 +532,7 @@ class ProdutoModel extends Model
                             if ($data['produtos'][$ind]->fotos) {
                                 $data['produtos'][$ind]->fotos = $produtoModel->fotoPrincipal($data['produtos'][$ind]->fotos);
                             }
-
+                            
                             if ($produto->latitude && $produto->latitude) {
                                 $produto->coordenadas = $produto->latitude . "," . $produto->longitude;
                             }
@@ -551,7 +551,6 @@ class ProdutoModel extends Model
                             }
                         }
                     }
-                    
            
                     $produtoModel = \model("App\Models\ProdutoModel", false);
                     $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
@@ -562,6 +561,7 @@ class ProdutoModel extends Model
                     $produtoModel->where('ativo', '1');
                     $produtoModel->orderBy('rand()');
                     $data['destaques'] = $produtoModel->findAll(8);
+
                     if ($data['destaques']) {
                         foreach ($data['destaques'] as $ind => $destaque) {
                             $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4, true);
@@ -730,8 +730,6 @@ class ProdutoModel extends Model
                         $data['lojasEmAlta'][2] = $this->produtoModel->find($emAlta->produtoFK3);
                         $data['lojasEmAlta'][2]->fotos = $this->produtoModel->fotos($emAlta->produtoFK3, 4, true);
                     }
-
-
                     $contador = 0;
                    
 
@@ -831,6 +829,8 @@ class ProdutoModel extends Model
                         $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
                         $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
                         $produtoModel->join('estado e', 'e.id = c.estadoFK');
+                        $produtoModel->where('pc.tipoFK', $tipo->id);
+                        $produtoModel->where('ativo', '1');
                         $data['emAlta'][0] = $produtoModel->find($emAlta->produtoFK1);
                         $data['emAlta'][0]->fotos = $produtoModel->fotos($emAlta->produtoFK1, 4, true);
                     }
@@ -913,9 +913,9 @@ class ProdutoModel extends Model
                 $contador = 0;
 
                 $this->produtoModel->resetQuery()
-                        ->dadosCard()
-                        ->where("pc.tipoFK", $tipo->id)
-                        ->where("ativo", 1);
+                    ->dadosCard()
+                    ->where("pc.tipoFK", $tipo->id)
+                    ->where("ativo", 1);
                 $this->produtoModel->filtros($get);
                 $this->produtoModel->ordernar($get['ordem']);
 

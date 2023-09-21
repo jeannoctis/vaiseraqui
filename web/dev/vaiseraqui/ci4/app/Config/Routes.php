@@ -198,6 +198,11 @@ $routes->add('produto/novaOrganizacao', 'Produto::novaOrganizacao');
 $routes->add('produto/novoCardapio', 'Produto::novoCardapio');
 $routes->add('produto/eventos', 'Produto::eventos');
 
+$routes->add('anuncio/destaqueG', 'Anuncio::destaqueG');
+$routes->add('anuncio/destaqueP', 'Anuncio::destaqueP');
+$routes->add('anuncio/emAltaG', 'Anuncio::emAltaG');
+$routes->add('anuncio/emAltaP', 'Anuncio::emAltaP');
+
 $routes->add('produto/chamarWhats', 'Produto::chamarWhats');
 
 $routes->add('utils/ordena', 'Utils::ordena');

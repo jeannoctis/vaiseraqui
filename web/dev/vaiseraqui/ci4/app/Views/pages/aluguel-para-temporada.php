@@ -15,7 +15,6 @@
          </header>
          <? if ($alugueisParaTemporada) { ?>
             <div class="left-space">
-
                <!-- Destaque maior -->
                <? if ($alugueisEmAlta['grande']) {
                   $alugueisEmAlta['grande']->tipo = 'aluguel-para-temporada';
@@ -30,7 +29,7 @@
                         echo view("templates/aluguel-para-temporada-destaque-card.php", (array)$aluguel);
                      } ?>
                   <? } ?>
-
+                  
                   <!-- Listagem comumn -->
                   <? foreach ($alugueisParaTemporada as $produto) {
                      $produto->tipo = 'aluguel-para-temporada';
@@ -63,8 +62,7 @@
          <div class="list">
             <div class="swiper rent-interna">
                <div class="swiper-wrapper">
-                  <? foreach ($alugueisEmAlta as $item) {
-                  ?>
+                  <? foreach ($alugueisEmAlta as $item) { ?>
                      <div class="swiper-slide">
                         <?= view("templates/aluguel-para-temporada-destaque-card.php", (array)$item) ?>
                      </div>

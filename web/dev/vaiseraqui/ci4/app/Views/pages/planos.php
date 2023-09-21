@@ -182,12 +182,12 @@
                <div class="input-group j-input-order-select">
                   <label for="plano">Plano</label>
                   <div class="modal-order">
-                     <input type="text" name="plano" value="Anúncio de Linha">
+                     <input type="text" name="plano" value="selecione uma modalidade">
                      <div class="modal-order-select">
                         <div class="wraper-scroll">
                            <nav class="content">                              
-                              <a data-select-value="Plano de linha" href="javascript:void();" class="active" data-categoria="p-linha">Anúncio de linha</a>
-                              <a data-select-value="Plano destaque" href="javascript:void();" data-categoria="p-destaque">Anúncio destaque</a>
+                              <a data-select-value="Anúncio de linha" href="javascript:void();" class="active" data-categoria="p-linha">Anúncio de linha</a>
+                              <a data-select-value="Anúncio destaque" href="javascript:void();" data-categoria="p-destaque">Anúncio destaque</a>
                            </nav>
                         </div>
                      </div>
@@ -196,7 +196,7 @@
                <div class="input-group j-input-order-select">
                   <label for="email">Duração</label>
                   <div class="modal-order">
-                     <input type="text" name="duracao" value="Anual">
+                     <input type="text" name="duracao" value="selecione a duração" disabled>
                      <div class="modal-order-select">
                         <div class="wraper-scroll">
                            <nav class="content">
@@ -216,7 +216,7 @@
                <label>Localização do anúncio</label>
                <div class="wraper">
                   <label class="button" for="">Selecione Aqui</label>
-                  <input type="hidden" name="anuncio" class="modal-value-selected">
+                  <input type="hidden" name="modeloAnuncio" class="modal-value-selected">
                   <span class="label-value">Nenhuma opção selecionada</span>
                </div>
             </div>
@@ -224,7 +224,7 @@
                <label for="mensagem">Mensagem</label>
                <textarea name="mensagem" id="mensagem" placeholder="Escreva aqui sua mensagem"></textarea>
             </div>
-            <input type="hidden" name="origem" value="planos">.33333
+            <input type="hidden" name="origem" value="planos">
             <input type="hidden" name="g-recaptcha-response" class="g-recaptcha-response" value="">
             <input type="hidden" name="enviar" value="enviar">
             <button type="submit">Enviar</button>
@@ -414,6 +414,9 @@
       opt.addEventListener("click", ev => {
          const categoria = ev.target.dataset.categoria
          const opcoesPlano = document.querySelectorAll("a.p-opcao")
+         const inputDuracao = document.querySelector("input[name=duracao]")
+
+         inputDuracao.removeAttribute("disabled")
 
          opcoesPlano.forEach(opcao => {
             if(!opcao.classList.contains(categoria)) {

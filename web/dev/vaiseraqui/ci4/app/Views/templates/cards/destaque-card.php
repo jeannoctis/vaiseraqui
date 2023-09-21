@@ -1,5 +1,5 @@
 <article class="secundary card-spaces">
-   <a href="<?= PATHSITE ?>espaco/<?= $identificador ?>/">
+   <a href="<?= PATHSITE ?><?=$tipo?>/<?= $identificador ?>/">
       <div class="cover">
          <span class="button-category">
             <svg width="11" height="13" viewBox="0 0 11 13" fill="none" xmlns="http://www.w3.org/2000/svg">
