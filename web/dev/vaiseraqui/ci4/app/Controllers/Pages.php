@@ -495,14 +495,18 @@ class Pages extends Controller
 
                 $this->categoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
                 $this->categoriaArtigoModel->where("categoriaArtigo.id IN (SELECT categoriaFK FROM artigo WHERE artigo.excluido IS NULL)");
-                $data['categorias_artigo'] = $this->categoriaArtigoModel->findAll();
+                $data['categorias'] = $this->categoriaArtigoModel->findAll();
+                
+                foreach ($data['categorias'] as $categoria) {
+                    $data['cats'][$categoria->id] = $categoria->titulo;
+                }
 
                 $data['artigoAtual'] = $this->artigoModel->where("identificador", $segments[1])->first();
 
                 if ($segments[1] && $data['artigoAtual']) {
                     // Blog Interna
                     $data['style_list'] = ['swiper'];
-                    $data['script_list'] = ['swiper'];
+                    $data['script_list'] = ['swiper', 'controller-page-internal'];
                     $data['anuncioBannerV'] = $anuncioModel->find(12);
 
                     \helper("url");

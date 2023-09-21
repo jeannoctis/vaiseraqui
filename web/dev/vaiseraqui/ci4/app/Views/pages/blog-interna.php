@@ -46,9 +46,9 @@
         <div class="box-social" data-aos="fade-up">
           <span class="title">Compartilhe</span>
           <nav>
-            <a href="#">
+            <!-- <a href="#">
               <img src="<?= PATHSITE ?>assets/images/icon-instagram.svg" alt="ícone">
-            </a>
+            </a> -->
             <a href="#">
               <img src="<?= PATHSITE ?>assets/images/icon-facebook.svg" alt="ícone">
             </a>
@@ -118,5 +118,22 @@
       </div>
     </aside>
   <? } ?>
-
 </main>
+
+<script>
+  const shareButtons = document.querySelectorAll('.box-social a');
+  shareButtons.forEach(btn => {
+    btn.addEventListener("click", async () => {
+    try {
+      await navigator.share({
+        title: "<?= $artigoAtual->titulo ?>",
+        url: "<?= PATHSITE ?>blog/<?= $artigoAtual->identificador ?>/"
+      });
+      console.log("Data was shared successfully");
+    } catch (err) {
+      console.error("Share failed:", err.message);
+    }
+  });
+  })
+  
+</script>
