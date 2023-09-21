@@ -11,7 +11,7 @@ class Anunciante extends BaseController
       helper(['encrypt', 'text']);
       $this->model = model('App\Models\AnuncianteModel', false);
       $this->tabela = "anunciante";
-      $this->session->set('menuAdmin', '7');
+$this->session->set('menuAdmin', '5');
    }
 
    public function index()

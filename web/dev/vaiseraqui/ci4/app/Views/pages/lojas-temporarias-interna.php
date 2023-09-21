@@ -402,7 +402,7 @@
       </div>
    </section>
 
-   <? if ($servicosEmAlta) { ?>
+   <? if ($destaques) { ?>
       <section class="s-service">
          <div class="container-medium">
             <header data-aos="fade-up">
@@ -413,7 +413,7 @@
          <div class="list list-of-swiper">
             <div class="swiper imoveisSwiper">
                <div class="swiper-wrapper">
-                  <? foreach ($servicosEmAlta as $servico) { ?>
+                  <? foreach ($destaques as $servico) { ?>
                      <div class="swiper-slide">
                         <?= view("templates/services-destaque-card", (array)$servico) ?>
                      </div>

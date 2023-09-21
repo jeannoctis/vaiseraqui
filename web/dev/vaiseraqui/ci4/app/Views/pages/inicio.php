@@ -41,7 +41,7 @@ $infoPagina['statusAnuncio'] = "ATIVO";
                                 Meu anúncio
                             </h4>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-12">
                             <div class="boxDestaque">
                                 <h6>
                                     validade do anúncio
@@ -99,7 +99,7 @@ $infoPagina['statusAnuncio'] = "ATIVO";
                               </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-6">
                             <div class="boxDestaque">
                                 <h6>
                                     clicks no Whatsapp
@@ -138,7 +138,7 @@ $infoPagina['statusAnuncio'] = "ATIVO";
                               </div>
                             </div>
                         </div>
-                      <div class="col-12 col-md-4">
+                      <div class="col-12 col-md-4 d-none">
                             <div class="boxDestaque">
                                 <h6>
                                     clicks no Telefone
@@ -177,7 +177,7 @@ $infoPagina['statusAnuncio'] = "ATIVO";
                               </div>
                             </div>
                         </div>
-                      <div class="col-12 col-md-4">
+                      <div class="col-12 col-md-4 d-none">
                             <div class="boxDestaque">
                                 <h6>
                                     validade do destaque

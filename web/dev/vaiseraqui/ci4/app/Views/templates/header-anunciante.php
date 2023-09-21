@@ -53,7 +53,7 @@
                     <? if ($anuncios) { ?>
                         <div class="boxFiltroDesativado filtroTipo">
                             <? foreach ($anuncios as $anun) { ?>
-                                <a class="tipoGeral tipo-<?= $anun->tipoFK ?>" href="<?= PATHSITE ?>area-do-anunciante/troca-anuncio/<?= encode($anun->id) ?>">
+                                <a style="<?=($anun->tipoFK == $anuncio->tipoFK ) ? '' : 'display: none;' ?>" class="tipoGeral tipo-<?= $anun->tipoFK ?>" href="<?= PATHSITE ?>area-do-anunciante/troca-anuncio/<?= encode($anun->id) ?>">
                                     <?= $anun->titulo ?>
                                 </a>
                             <? } ?>

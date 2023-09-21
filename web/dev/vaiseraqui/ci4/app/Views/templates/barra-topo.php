@@ -33,10 +33,16 @@
                   <img src="<?= PATHSITE ?>images/soufesta.svg">
                <? } ?>
             </a>
+             
+             <style>
+                 a.notificacoes::before{
+                     display: none;
+                 }
+                 </style>
 
             <a href="#" class="notificacoes">
                <img src="<?= PATHSITE ?>images/icon-bell.svg" class="bell">
-               <div class="sinalNotificacao d-none"></div>
+              
             </a>
          </div>
       </div>

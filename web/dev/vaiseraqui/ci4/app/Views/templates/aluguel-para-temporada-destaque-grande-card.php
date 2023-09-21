@@ -1,4 +1,4 @@
- <a href="<?= PATHSITE ?><?= $tipo ?>/<?= $identificador ?>">
+ <a href="<?= PATHSITE ?>espaco/<?= $identificador ?>/">
     <article class="card-item poster">
        <div class="cover">
           <span class="button-category">

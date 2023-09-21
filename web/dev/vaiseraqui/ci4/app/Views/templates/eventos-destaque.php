@@ -6,7 +6,8 @@
         <div class="list list-of-swiper" data-aos="fade-up">
           <div class="swiper rent-interna">
             <div class="swiper-wrapper">
-                    <? foreach($destaques as $evento) {?>
+                    <? foreach($destaques as $ind => $evento) {
+                        ?>
               <div class="swiper-slide">
                 <article class="card-events">
                        <a href="<?=PATHSITE?>evento/<?=$evento->identificador?>/">

@@ -46,9 +46,9 @@ class Texto extends BaseController
       if ($post) {
 
          if (strpos($post['link'], "#") === false) {
-            if (\strpos($post['link'], "https://") !== 0) {
-               $post['link'] = "https://" . $post['link'];
-            }
+         if (\strpos($post['link'], "https://") !== 0) {
+            $post['link'] = "https://" . $post['link'];
+         }
          }
 
          if ($post['apagararquivo']) {

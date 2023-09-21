@@ -155,11 +155,11 @@
     </div>
 
     <? if (!$escondeWhatsapp) { ?>
-      <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
-        <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
-        Fale conosco
-      </button>
-    <? } ?>
+    <button type="button" class="btn-whatsapp-float" onclick="toggleFormWpp();" data-aos="fade-down">
+      <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="icon whatsapp">
+      Fale conosco
+    </button>
+          <? } ?>
   <? } ?>
 
   <script>
@@ -291,8 +291,13 @@
       })
     })
   </script>
-
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  
+  <script>
+      carregaDestaques(<?=$destaqueEmAlta->id?>,0);
+      carregaDestaques(<?=$destaqueEmAlta2->id?>,1);
+   </script>
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"  crossorigin=""></script>
 
   <? if ($coordenadas) {
     echo View('templates/coordenadas');

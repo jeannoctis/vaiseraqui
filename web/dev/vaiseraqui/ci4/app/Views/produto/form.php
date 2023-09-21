@@ -40,13 +40,13 @@
                            </select>
                         </div>
                      </div>
-
+                      
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="inicioValidade">Início validade</label>
                            <input type="date" name="inicioValidade" class="form-control" id="inicioValidade" value="<?= $resultado->inicioValidade ?>" placeholder="Escreva..." required>
                         </div>
-                     </div>
+                     </div> 
 
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
@@ -55,6 +55,7 @@
                         </div>
                      </div>
 
+                      <? if(FALSE) {?>
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="destaque">Anúncio destacado?</label>
@@ -64,7 +65,8 @@
                            </select>
                         </div>
                      </div>
-
+                      <?  } ?>
+                      <? if(FALSE) {?>
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="inicioDestaque">Início destaque</label>
@@ -78,6 +80,7 @@
                            <input type="date" name="validadeDestaque" class="form-control" id="validadeDestaque" value="<?= $resultado->validadeDestaque ?>" placeholder="Escreva...">
                         </div>
                      </div>
+                      <? } ?>
 
                   </div>
                </div>
@@ -1237,7 +1240,7 @@
             background-color: aliceblue;
          }
 
-         */ .dialog#modalPontoDeVenda label {
+          .dialog#modalPontoDeVenda label {
             max-width: 50%;
          }
 
@@ -1501,7 +1504,7 @@
                spOptions = {
                   onKeyPress: function(val, e, field, options) {
                      field.mask(SPMaskBehavior.apply({}, arguments), options);
-                  }
+         }
                };
             $('.telefone').mask(SPMaskBehavior, spOptions);
          }

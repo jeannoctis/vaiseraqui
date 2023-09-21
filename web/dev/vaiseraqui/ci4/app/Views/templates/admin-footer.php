@@ -147,7 +147,7 @@
     $(".tag-planos-inclui").tagit({
       allowSpaces: true,
       tagLimit: 5
-    });
+  });
     $(".tag-planos-nao-inclui").tagit({
       allowSpaces: true,
       tagLimit: 2

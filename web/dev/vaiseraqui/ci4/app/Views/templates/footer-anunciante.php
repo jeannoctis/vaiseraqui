@@ -91,7 +91,7 @@
   $(document).ready(function() {
     visitas(<?= $anuncio->id ?>);
     viuWhats(<?= $anuncio->id ?>);
-    viuFone(<?= $anuncio->id ?>);
+    //viuFone(<?= $anuncio->id ?>);
   });
 </script>
 

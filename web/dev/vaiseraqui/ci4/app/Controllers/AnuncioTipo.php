@@ -11,7 +11,7 @@ class AnuncioTipo extends BaseController
       helper(['encrypt', 'text']);
       $this->model = model('App\Models\TipoModel', false);
       $this->tabela = "tipo";
-      $this->session->set('menuAdmin', 7);
+$this->session->set('menuAdmin', '5');
    }
 
    public function index()

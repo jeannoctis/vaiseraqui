@@ -383,7 +383,8 @@ function visitas(id) {
     var dtFim = $("#visitaDepois").val();
     $.post(PATHSITE + "produto/visitas/", {id: id, dtIni: dtIni, dtFim: dtFim}, function (retorno) {
         dados = jQuery.parseJSON(retorno);
-        $('#retornoVisitas').html(dados.visitas);
+        
+        $('#retornoVisitas').html(dados.visita);
     });
 }
 

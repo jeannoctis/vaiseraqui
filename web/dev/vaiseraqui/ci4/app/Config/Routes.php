@@ -73,6 +73,9 @@ $routes->group('admin', function ($routes) {
     $routes->add('anuncio/servicocategoria', 'Anuncio::servicocategoria');
     $routes->add('anuncio/servicocategoria/(:any)', 'Anuncio::servicocategoria/$i');
     
+    $routes->add('anuncio/servicocategoria', 'Anuncio::servicocategoria');
+    $routes->add('anuncio/servicocategoria/(:any)', 'Anuncio::servicocategoria/$i');
+    
     $routes->add('review', 'Review::index');
     $routes->add('review/form', 'Review::form');
     $routes->add('review/form/(:any)', 'Review::form/$i');
@@ -83,6 +86,7 @@ $routes->group('admin', function ($routes) {
 
     $routes->add('produto', 'Produto::index');
     $routes->add('produto/form', 'Produto::form');
+    $routes->add('produto/relatorio', 'Produto::relatorio');
     $routes->add('produto/form/(:any)', 'Produto::form/$i');
     $routes->add('produto/fotos/(:any)', 'Produto::fotos/$i');
     $routes->add('produto/foto/(:any)', 'Produto::foto');
@@ -189,6 +193,7 @@ $routes->add('produto/excluirVideo', 'Produto::excluirVideo');
 $routes->add('produto/excluirAba', 'Produto::excluirAba');
 $routes->add('produto/adicionaData', 'Produto::adicionaData');
 $routes->add('produto/novoPreco', 'Produto::novoPreco');
+$routes->add('produto/destaques', 'Produto::destaques');
 
 $routes->add('produto/visitas', 'Produto::visitas');
 $routes->add('produto/fone', 'Produto::fone');

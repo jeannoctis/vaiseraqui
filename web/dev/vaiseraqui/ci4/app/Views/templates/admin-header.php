@@ -180,24 +180,27 @@ if ($acesso['usuarioFK'] > 3) {
                </ul>
             <? } ?>
 
-            <? if (in_array(7, $aprovados) || $adminMaster) { ?>
+            <? if(FALSE) {
+             if (in_array(7, $aprovados) || $adminMaster) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 7) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-hypnotize"></i><span>Anúncios</span><span class="menu-arrow fa fa-angle-down"></span></a>
                      <ul class="sub-menu js__content">
-                        <li class='<?= ($segments[1] == 'anuncio_tipo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio_tipo/"><i class="bi-caret-right-fill"></i> Tipos</a></li>
+                        
                         <li class='<?= ($segments[1] == 'anuncio') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio/"><i class="bi-caret-right-fill"></i> Anúncios Pagos</a></li>
-                        <li class='<?= ($segments[1] == 'anunciante') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anunciante/"><i class="bi-caret-right-fill"></i> Anunciantes</a></li>
+                        
                      </ul>
                   </li>
                </ul>
-            <? } ?>
+            <? } } ?>
 
             <? if (in_array(5, $aprovados) || $adminMaster) { ?>
                <ul class="menu js__accordion">
                   <li class='<?= ($_SESSION["menuAdmin"] == 5) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi-ui-checks"></i><span>Cadastros</span><span class="menu-arrow fa fa-angle-down"></span></a>
                      <ul class="sub-menu js__content">
+                         <li class='<?= ($segments[1] == 'anuncio_tipo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anuncio_tipo/"><i class="bi-caret-right-fill"></i> Tipos de anúncio</a></li>
+                         <li class='<?= ($segments[1] == 'anunciante') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/anunciante/"><i class="bi-caret-right-fill"></i> Anunciantes</a></li>
                         <li class='<?= ($segments[1] == 'cidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/cidade/"><i class="bi-caret-right-fill"></i> Cidades</a></li>
                         <li class='<?= ($segments[1] == 'comodidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/comodidade/"><i class="bi-caret-right-fill"></i> Comodidades</a></li>
                         <li class='<?= ($segments[1] == 'proximidade') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/proximidade/"><i class="bi-caret-right-fill"></i> Proximidades</a></li>

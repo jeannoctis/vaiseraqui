@@ -193,276 +193,37 @@ class Pages extends Controller
         $data["blogs"] = $ArtigoModel->findAll(6);
 
         $anuncioModel = model('App\Models\AnuncioModel', false);
-        $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
-        $emAltas = $anuncioModel->findAll();
-
-        
-        if ($emAlta->produtoFK1) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta1'][0] = $produtoModel->find($emAlta->produtoFK1);
-            $data['emAlta1'][0]->fotos = $produtoModel->fotos($emAlta->produtoFK1, 4, true);
-        }
-        if ($emAlta->produtoFK2) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta1'][1] = $produtoModel->find($emAlta->produtoFK2);
-            $data['emAlta1'][1]->fotos = $produtoModel->fotos($emAlta->produtoFK2, 4, true);
-        }
-        if ($emAlta->produtoFK3) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta1'][2] = $produtoModel->find($emAlta->produtoFK3);
-            $data['emAlta1'][2]->fotos = $produtoModel->fotos($emAlta->produtoFK3, 4, true);
-        }
-        if ($emAlta->produtoFK4) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta1'][3] = $produtoModel->find($emAlta->produtoFK4);
-            $data['emAlta1'][3]->fotos = $produtoModel->fotos($emAlta->produtoFK4, 4, true);
-        }
-        if ($emAlta->produtoFK5) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta1'][4] = $produtoModel->find($emAlta->produtoFK5);
-            $data['emAlta1'][4]->fotos = $produtoModel->fotos($emAlta->produtoFK5, 4, true);
-        }
-
-        if ($emAltaAluguel->produtoFK1) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta2'][0] = $produtoModel->find($emAltaAluguel->produtoFK1);
-            $data['emAlta2'][0]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK1, 4, true);
-        }
-        if ($emAltaAluguel->produtoFK2) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta2'][1] = $produtoModel->find($emAltaAluguel->produtoFK2);
-            $data['emAlta2'][1]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK2, 4, true);
-        }
-        if ($emAltaAluguel->produtoFK3) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta2'][2] = $produtoModel->find($emAltaAluguel->produtoFK3);
-            $data['emAlta2'][2]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK3, 4, true);
-        }
-        if ($emAltaAluguel->produtoFK4) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta2'][3] = $produtoModel->find($emAltaAluguel->produtoFK4);
-            $data['emAlta2'][3]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK4, 4, true);
-        }
-        if ($emAltaAluguel->produtoFK5) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta2'][4] = $produtoModel->find($emAltaAluguel->produtoFK5);
-            $data['emAlta2'][4]->fotos = $produtoModel->fotos($emAltaAluguel->produtoFK5, 4, true);
-        }
-
-        if ($emAltaSaloes->produtoFK1) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta3'][0] = $produtoModel->find($emAltaSaloes->produtoFK1);
-            $data['emAlta3'][0]->fotos = $produtoModel->fotos($emAltaSaloes->produtoFK1, 4, true);
-        }
-        if ($emAltaSaloes->produtoFK2) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta3'][1] = $produtoModel->find($emAltaSaloes->produtoFK2);
-            $data['emAlta3'][1]->fotos = $produtoModel->fotos($emAltaSaloes->produtoFK2, 4, true);
-        }
-        if ($emAltaSaloes->produtoFK3) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta3'][2] = $produtoModel->find($emAltaSaloes->produtoFK3);
-            $data['emAlta3'][2]->fotos = $produtoModel->fotos($emAltaSaloes->produtoFK3, 4, true);
-        }
-        if ($emAltaSaloes->produtoFK4) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta3'][3] = $produtoModel->find($emAltaSaloes->produtoFK4);
-            $data['emAlta3'][3]->fotos = $produtoModel->fotos($emAltaSaloes->produtoFK4, 4, true);
-        }
-        if ($emAltaSaloes->produtoFK5) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta3'][4] = $produtoModel->find($emAltaSaloes->produtoFK5);
-            $data['emAlta3'][4]->fotos = $produtoModel->fotos($emAltaSaloes->produtoFK5, 4, true);
-        }
-
-        if ($emAltaTemporarias->produtoFK1) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta4'][0] = $produtoModel->find($emAltaTemporarias->produtoFK1);
-            $data['emAlta4'][0]->fotos = $produtoModel->fotos($emAltaTemporarias->produtoFK1, 4, true);
-        }
-        if ($emAltaTemporarias->produtoFK2) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta4'][1] = $produtoModel->find($emAltaTemporarias->produtoFK2);
-            $data['emAlta4'][1]->fotos = $produtoModel->fotos($emAltaTemporarias->produtoFK2, 4, true);
-        }
-        if ($emAltaTemporarias->produtoFK3) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta4'][2] = $produtoModel->find($emAltaTemporarias->produtoFK3);
-            $data['emAlta4'][2]->fotos = $produtoModel->fotos($emAltaTemporarias->produtoFK3, 4, true);
-        }
-        if ($emAltaTemporarias->produtoFK4) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta4'][3] = $produtoModel->find($emAltaTemporarias->produtoFK4);
-            $data['emAlta4'][3]->fotos = $produtoModel->fotos($emAltaTemporarias->produtoFK4, 4, true);
-        }
-        if ($emAltaTemporarias->produtoFK5) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta4'][4] = $produtoModel->find($emAltaTemporarias->produtoFK5);
-            $data['emAlta4'][4]->fotos = $produtoModel->fotos($emAltaTemporarias->produtoFK5, 4, true);
-        }
-
-        if ($emAltaServicos->produtoFK1) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta5'][0] = $produtoModel->find($emAltaServicos->produtoFK1);
-            $data['emAlta5'][0]->fotos = $produtoModel->fotos($emAltaServicos->produtoFK1, 4, true);
-        }
-        if ($emAltaServicos->produtoFK2) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta5'][1] = $produtoModel->find($emAltaServicos->produtoFK2);
-            $data['emAlta5'][1]->fotos = $produtoModel->fotos($emAltaServicos->produtoFK2, 4, true);
-        }
-        if ($emAltaServicos->produtoFK3) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta5'][2] = $produtoModel->find($emAltaServicos->produtoFK3);
-            $data['emAlta5'][2]->fotos = $produtoModel->fotos($emAltaServicos->produtoFK3, 4, true);
-        }
-        if ($emAltaServicos->produtoFK4) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta5'][3] = $produtoModel->find($emAltaServicos->produtoFK4);
-            $data['emAlta5'][3]->fotos = $produtoModel->fotos($emAltaServicos->produtoFK4, 4, true);
-        }
-        if ($emAltaServicos->produtoFK5) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta5'][4] = $produtoModel->find($emAltaServicos->produtoFK5);
-            $data['emAlta5'][4]->fotos = $produtoModel->fotos($emAltaServicos->produtoFK5, 4, true);
-        }
-        if ($emAltaServicos->produtoFK6) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta5'][5] = $produtoModel->find($emAltaServicos->produtoFK6);
-            $data['emAlta5'][5]->fotos = $produtoModel->fotos($emAltaServicos->produtoFK6, 4, true);
-        }
-        if ($emAltaServicos->produtoFK5) {
-            $produtoModel->resetQuery();
-            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-            $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $data['emAlta5'][6] = $produtoModel->find($emAltaServicos->produtoFK7);
-            $data['emAlta5'][6]->fotos = $produtoModel->fotos($emAltaServicos->produtoFK7, 4, true);
-        }
-
-        $hospedagemHome = $anuncioModel->resetQuery()->select("produtoFK1, produtoFK2, produtoFK3, produtoFK4, produtoFK5")->find(3);
-        $hospedagemHome = (array)$hospedagemHome;
-
-        $produtoModel->resetQuery()->dadosCard()->whereIn("produto.id", $hospedagemHome);
-        $data['hospedagemHome'] = $produtoModel->findAll();
-
-        foreach ($data['hospedagemHome'] as $hosp) {
-            $hosp->fotos = $produtoModel->fotos($hosp->id, 5, true);
-        }
-
-        $data['anuncioBannerH'] = $anuncioModel->find(11);
-        
-        $categoriasComAnuncio = $produtoCategoriaModel->resetQuery()
-            ->select("produto_categoria.id, produto_categoria.titulo, produto_categoria.arquivo, a.produtoFK1")
-            ->join("anuncio a", "a.categoriaFK = produto_categoria.id")
-            ->where("a.tipo", "servicocategoria")
-        ->findAll();
+          $data['anuncioBannerH'] = $anuncioModel->find(11);
+          
+          
+          $anuncioModel->resetQuery();
+          $anuncioModel->select('id');
+          $anuncioModel->where('tipo','emalta');
+     $anuncioModel->where('anuncio.cidadeFK',$_SESSION['cidade']);
+    $data['destaqueEmAlta'] = $anuncioModel->find()[0];     
+     
+          $anuncioModel->resetQuery();
+          $anuncioModel->select('anuncio.id, t.titulo, t.arquivo');
+          $anuncioModel->join('tipo t', 't.id = anuncio.tipoFK');
+          $anuncioModel->where(" t.tipo IN ('ALUGUEL','SALOES','HOSPEDAGEM','LOJAS')");
+         $anuncioModel->where('anuncio.tipo','tipo');
+          $anuncioModel->where('anuncio.cidadeFK',$_SESSION['cidade']);
+          $data['destaquesMaiores'] = $anuncioModel->findAll();
+     
+            $anuncioModel->resetQuery();
+          $anuncioModel->select('id');
+          $anuncioModel->where('tipo','emaltaprestador');
+     $anuncioModel->where('anuncio.cidadeFK',$_SESSION['cidade']);
+    $data['destaqueEmAlta2'] = $anuncioModel->find()[0];    
     
+     $anuncioModel->resetQuery();
+          $anuncioModel->select('anuncio.id, pc.titulo, pc.arquivo');
+          $anuncioModel->join('produto_categoria pc', 'pc.id = anuncio.categoriaFK');
+         $anuncioModel->where('anuncio.tipo','servicocategoria');
+          $anuncioModel->where('anuncio.cidadeFK',$_SESSION['cidade']);
+          $data['destaquesPrestadores'] = $anuncioModel->findAll();
+          
+     
         if (isset($_POST['enviar'])) {
             $request = \Config\Services::request();
             $post = $request->getPost();
@@ -639,43 +400,32 @@ class Pages extends Controller
                         $data['eventos'][$ind]->datas = $produtoModel->datas($destaque->id);
                     }
                 }
+                
+                  $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',5);
+                    $emAlta = $anuncioModel->find()[0];                    
+                   
+                   $data['emAlta'] = $anuncioModel->emAlta($emAlta);
+                   $data['destaques'] = array();
+                   if($data['emAlta']) {
+                       foreach($data['emAlta'] as $ind => $emAlta) {
+                           if($ind > 1) {
+                       $data['destaques'][] = $emAlta;
+                           }
+                       }
+                   }
 
-                    $produtoModel = \model("App\Models\ProdutoModel", false);
-                    $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade');
-                    $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                    $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                    $produtoModel->where('pc.tipoFK', 5);
-                    $produtoModel->where('ativo', '1');
-                    $anuncioModel = model('App\Models\AnuncioModel', false);
-                      $emAlta = $anuncioModel->find(5);
-                      
-                        if ($emAlta->produtoFK1) {
-                    $produtoModel->resetQuery();
-                    $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                    $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                    $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                    $produtoModel->join('estado e', 'e.id = c.estadoFK');
-                    $data['emAlta'][0] = $produtoModel->find($emAlta->produtoFK1);
-                    $data['emAlta'][0]->fotos = $produtoModel->fotos($emAlta->produtoFK1, 4, true);
-                    $data['emAlta'][0]->datas =  $produtoModel->datas($emAlta->id);;
-                }
-                if ($emAlta->produtoFK2) {
-                    $produtoModel->resetQuery();
-                    $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                    $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                    $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                    $produtoModel->join('estado e', 'e.id = c.estadoFK');
-                    $data['emAlta'][1] = $produtoModel->find($emAlta->produtoFK2);
-                    $data['emAlta'][1]->fotos = $produtoModel->fotos($emAlta->produtoFK2, 4, true);
-                    $data['emAlta'][1]->datas =  $produtoModel->datas($emAlta->produtoFK2);
-                }
+                 
                 } else {
                     $produtoDataModel = \model("App\Models\ProdutoDataModel", false);
                     $produtoDataModel->select('data');
                     $produtoDataModel->where('data >= NOW()');
                     $produtoDataModel->groupBy('data');
                     $produtoDataModel->orderBy('data ASC');
-                    $produtoDataModel->limit(15);
+                    $produtoDataModel->limit(30);
                     $data['diasMes'] = $produtoDataModel->findAll();
                     $data['pagina'] = 3;
                 }
@@ -701,20 +451,18 @@ class Pages extends Controller
                 $data['pontosVenda'] = $produtoModel->pontosVenda($data['metatag']->id);
                 $data['setores'] = $produtoModel->setores($data['metatag']->id);
                 $data['organizacoes'] = $produtoModel->organizacoes($data['metatag']->id);
+                
+        $produtoVisitaModel =  model('App\Models\ProdutoVisitaModel', false);  
+         $produtoVisitaModel->contaVisita($data['metatag']->id);
 
-                $produtoModel->resetQuery();
-                $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade');
-                $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                $produtoModel->where('pc.tipoFK', 5);
-                $produtoModel->where('ativo', '1');
-                $data['destaques'] = $produtoModel->findAll();
-                if ($data['destaques']) {
-                    foreach ($data['destaques'] as $ind => $destaque) {
-                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4, true);
-                        $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
-                    }
-                }
+               $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',5);
+                    $emAlta = $anuncioModel->find()[0];                    
+                   
+                   $data['destaques'] = $anuncioModel->emAlta($emAlta);
 
                 break;
             
@@ -832,6 +580,8 @@ class Pages extends Controller
                 break;
             case 'esqueci':
                 $data['pagina'] = 18;
+                  $header = "header2";
+                $footer = "footer2";
 
                 $request = \Config\Services::request();
                 $post = $request->getPost();
@@ -1073,6 +823,7 @@ class Pages extends Controller
 
             case "logout":
                 unset($_SESSION['cliente']);
+                unset($_SESSION['anunciante']);
                 ?>
                 <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>">
                 <?
@@ -1195,7 +946,8 @@ class Pages extends Controller
                 $data['cats'] = $categoriaArtigoModel->categorias();
 
                 // busca produtos
-                $produtoModel->dadosCard()                    
+                $produtoModel->dadosCard()   
+                     ->where(" (produto.cidadeFK = {$_SESSION['cidade']} ) ")
                     ->like("produto.titulo", $get['busca'])
                     ->orLike("produto.descricao", $get['busca'])
                     ->orLike("produto.detalhes", $get['busca'])
@@ -1206,12 +958,12 @@ class Pages extends Controller
                     ->orLike("produto.principaiscomodidades", $get['busca'])
                     ->orLike("produto.itensdisponiveis", $get['busca'])
                     ->orLike("produto.condominio", $get['busca'])
-                    ->orLike("cd.titulo", $get['busca'])
-                    ->orLike("cd.menu", $get['busca'])
-                    ->orLike("pc.titulo", $get['busca'])
-                    ->join("produto_cardapio cd", "cd.produtoFK = produto.id");
+                 //   ->orLike("cd.titulo", $get['busca'])
+                  //  ->orLike("cd.menu", $get['busca'])
+                    ->orLike("pc.titulo", $get['busca']);
+                 //   ->join("produto_cardapio cd", "cd.produtoFK = produto.id");
                 $data['buscaProduto'] = $produtoModel->findAll();
-
+               
                 if($data['buscaProduto']) {
                     foreach($data['buscaProduto'] as $produto) {
                         $produto->fotos = $produtoModel->fotos($produto->id, 4, true);

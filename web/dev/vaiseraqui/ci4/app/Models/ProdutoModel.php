@@ -88,26 +88,17 @@ class ProdutoModel extends Model
         return $array;
     }
 
-    public function destaquePrestadores($limit)
-    {
-        $this->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado, t.identificador as identificadorTipo');
-        $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-        $this->join('cidade c', 'c.id = produto.cidadeFK');
-        $this->join('estado e', 'e.id = c.estadoFK');
-        $this->join('tipo t', 't.id = pc.tipoFK');
-        $this->where('t.tipo', 'PRESTADORES');
-        $this->where('ativo', '1');
-        $this->where('destaque', '1');
-        $this->orderBy('rand()');
-        $destaques = $this->findAll($limit);
-        if ($destaques) {
-            foreach ($destaques as $ind => $destaque) {
-                $destaques[$ind]->fotos = $this->fotos($destaque->id, 4, true);
-                if (!$destaques[$ind]->fotos[0]->destaque) {
-                    $destaques[$ind]->fotos = $this->fotoPrincipal($destaques[$ind]->fotos);
-                }
-            }
-        }
+    public function destaquePrestadores() {
+       
+              $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5, anuncio.produtoFK6");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',6);
+                    $emAlta = $anuncioModel->find()[0];
+                    
+               $destaques = $anuncioModel->emAlta($emAlta);
+   
         return $destaques;
     }
 
@@ -250,8 +241,7 @@ class ProdutoModel extends Model
             ->join("tipo t", "t.id = pc.tipoFK");
     }
 
-    public function hospedagens($limit)
-    {
+    public function hospedagens($limit, $tipo) {
 
         $data['get'] = $get = \request()->getGet();
 
@@ -266,7 +256,7 @@ class ProdutoModel extends Model
         $this->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
         $this->join('cidade c', 'c.id = produto.cidadeFK');
         $this->join('estado e', 'e.id = c.estadoFK');
-        $this->where('pc.tipoFK', 3);
+        $this->where('pc.tipoFK', $tipo);
         $this->where('ativo', '1');
         $data['servicos'] = $this->paginate($limit, 'produto', $paginate);
         $data['pager'] = $this->pager;
@@ -291,17 +281,17 @@ class ProdutoModel extends Model
     {
         helper('date');
         
-        if($get['cidade']){
+        if($get['cidadeFK']){
            $_SESSION['cidade'] = $get['cidadeFK']; 
         } else {
            $get['cidadeFK'] = $_SESSION['cidade'];
         }
         
+     
         if ($get['cidadeFK']) {
             $this->where('produto.cidadeFK', $get['cidadeFK']);
         }
       
-
         if ($get['dataIni'] && $get['dataFim']) {
             $data1 = dataFormata($get["dataIni"]);
             $data2 = dataFormata($get["dataFim"]);
@@ -499,6 +489,10 @@ class ProdutoModel extends Model
                     $produtoModel->join('estado e', 'e.id = c.estadoFK');
                     $produtoModel->where('identificador', $data['segments'][1]);
                     $data['metatag'] = $produtoModel->find()[0];
+                    
+                    $produtoVisitaModel =  model('App\Models\ProdutoVisitaModel', false);  
+         $produtoVisitaModel->contaVisita($data['metatag']->id);
+                    
                     $data['metatag']->valores = $produtoModel->valores($data['metatag']->id);
                     $data['metatag']->proximidades = $produtoModel->proximidades($data['metatag']->id);
                     $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999, false);
@@ -510,7 +504,7 @@ class ProdutoModel extends Model
                     $data['videos'] = $produtoModel->videos($data['metatag']->id);
 
                     $produtoModel = \model("App\Models\ProdutoModel", false);
-                    $data['destaques'] = $produtoModel->destaquePrestadores(4);
+                    $data['destaques'] = $produtoModel->destaquePrestadores();
 
                     $data['coordenadas'] = array();
                 } else {
@@ -522,7 +516,7 @@ class ProdutoModel extends Model
                     $data['form5Visible'] = "visible";
 
                     $produtoModel = model('App\Models\ProdutoModel', false);
-                    $retorno = $produtoModel->hospedagens(32);
+                    $retorno = $produtoModel->hospedagens(32,$data['tipoAtual']->id);
                     $data['produtos'] = $retorno['servicos'];
                     $data['pager'] = $retorno['pager'];
                     if ($data['produtos']) {
@@ -551,26 +545,17 @@ class ProdutoModel extends Model
                             }
                         }
                     }
+                    
            
-                    $produtoModel = \model("App\Models\ProdutoModel", false);
-                    $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                    $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                    $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                    $produtoModel->join('estado e', 'e.id = c.estadoFK');
-                    $produtoModel->where('pc.tipoFK', 3);
-                    $produtoModel->where('ativo', '1');
-                    $produtoModel->orderBy('rand()');
-                    $data['destaques'] = $produtoModel->findAll(8);
-
-                    if ($data['destaques']) {
-                        foreach ($data['destaques'] as $ind => $destaque) {
-                            $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4, true);
-
-                            if ($data['destaques'][$ind]->fotos) {
-                                $data['destaques'][$ind]->fotos = $produtoModel->fotoPrincipal($data['produtos'][$ind]->fotos);
-                            }
-                        }
-                    }
+                    $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5, anuncio.produtoFK6");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',$data['tipoAtual']->id);
+                    $emAlta = $anuncioModel->find()[0];
+                    
+                 $data['destaques'] = $anuncioModel->emAlta($emAlta);
+                 
                 }
                 break;
             case "prestadores-de-servicos":
@@ -589,6 +574,10 @@ class ProdutoModel extends Model
                     $produtoModel->join('estado e', 'e.id = c.estadoFK');
                     $produtoModel->where('identificador', $data['segments'][1]);
                     $data['metatag'] = $produtoModel->find()[0];
+                    
+                    $produtoVisitaModel =  model('App\Models\ProdutoVisitaModel', false);  
+         $produtoVisitaModel->contaVisita($data['metatag']->id);
+                    
                     $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999, false);
                     $data['cardapio'] = $produtoModel->cardapio($data['metatag']->id);
                     $data['anunciante'] = $produtoModel->anunciante($data['metatag']->anuncianteFK);
@@ -597,19 +586,8 @@ class ProdutoModel extends Model
                     //  $data['setores'] = $produtoModel->setores($data['metatag']->id);
                     //  $data['organizacoes'] = $produtoModel->organizacoes($data['metatag']->id);
 
-                    $produtoModel->resetQuery();
-                    $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade');
-                    $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                    $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                    $produtoModel->where('pc.tipoFK', $tipo->id);
-                    $produtoModel->where('ativo', '1');
-                    $data['destaques'] = $produtoModel->findAll();
-                    if ($data['destaques']) {
-                        foreach ($data['destaques'] as $ind => $destaque) {
-                            $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4, true);
-                            $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
-                        }
-                    }
+                    $produtoModel = \model("App\Models\ProdutoModel", false);
+                    $data['destaques'] = $produtoModel->destaquePrestadores();
                 } else {
                     $data['get'] = $get = request()->getGet();
                     $data['style_list'] = ['swiper'];
@@ -617,8 +595,25 @@ class ProdutoModel extends Model
 
                     $data['form4Visible'] = 'visible';
                     $produtoModel = \model("App\Models\ProdutoModel", false);
-                    $data['destaques'] = $produtoModel->destaquePrestadores(4);
-
+                 
+                      $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5, anuncio.produtoFK6");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',$data['tipoAtual']->id);
+                    $emAlta = $anuncioModel->find()[0];
+                    
+                 $destaques = $data['destaques2'] = $anuncioModel->emAlta($emAlta);
+                       
+                      if($destaques[0]) {
+                 unset($destaques[0]);
+             }
+             if($destaques[1]) {
+                 unset($destaques[1]);
+             }
+               
+             $data['destaques'] = $destaques;
+                
                     if (!is_numeric($get['page_produto'])) {
                         $paginate = 1;
                     } else {
@@ -667,9 +662,13 @@ class ProdutoModel extends Model
                         ->where("produto.identificador", $data['segments'][1])
                         ->first();
 
+                    $produtoVisitaModel =  model('App\Models\ProdutoVisitaModel', false);  
+         $produtoVisitaModel->contaVisita($data['metatag']->id);
+                    
                     $data['coordenadas'] = NULL;
                     $data['style_list'] = ['fancybox', 'swiper', 'jquery_ui'];
-                    $data['script_list'] = ['fancybox', 'swiper', 'jquery', 'jquery_ui', 'card-like', 'controller-card', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
+                    $data['script_list'] = ['fancybox', 'swiper', 'jquery', 'jquery_ui', 'card-like', 'controller-card', 'controller-presentation', 'faq-dropdown', 'fs-lightbox', 'modal-filter', 'modal-select-order','controller-imoveis'];
+                    
                     $page = "lojas-temporarias-interna";
                     $data['bodyClass'] = "internal-rent";
                     $data['escondeWhatsapp'] = true;
@@ -687,6 +686,10 @@ class ProdutoModel extends Model
                     $this->anuncioModel->resetQuery();
                     $this->anuncioModel->select("produtoFK1, produtoFK2, produtoFK3, produtoFK4, produtoFK5, produtoFK6, produtoFK7");
                     $busca = $this->anuncioModel->find(9);
+                    
+                    $produtoModel = \model("App\Models\ProdutoModel", false);
+                    $data['destaques'] = $produtoModel->destaquePrestadores();
+                    
                 } else {
                     $data['style_list'] = ['fancybox', 'swiper'];
                     $data['script_list'] = ['fancybox', 'swiper', 'card-like', 'controller-card', 'controller-imoveis', 'modal-filter', 'modal-select-order'];
@@ -699,40 +702,17 @@ class ProdutoModel extends Model
 
                     $paginate = \is_numeric($get['page_anuncios']) ? $get['page_anuncios'] : 1;
 
-                    $this->anuncioModel = \model("App\Models\AnuncioModel", false)
-                        ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3");
-                    $emAlta = $this->anuncioModel->find(4);
-
-                    if ($emAlta->produtoFK1) {
-                        $this->produtoModel->resetQuery();
-                        $this->produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                        $this->produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                        $this->produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                        $this->produtoModel->join('estado e', 'e.id = c.estadoFK');
-                        $data['lojasEmAlta'][0] = $this->produtoModel->find($emAlta->produtoFK1);
-                        $data['lojasEmAlta'][0]->fotos = $this->produtoModel->fotos($emAlta->produtoFK1, 4, true);
-                    }
-                    if ($emAlta->produtoFK2) {
-                        $this->produtoModel->resetQuery();
-                        $this->produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                        $this->produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                        $this->produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                        $this->produtoModel->join('estado e', 'e.id = c.estadoFK');
-                        $data['lojasEmAlta'][1] = $this->produtoModel->find($emAlta->produtoFK2);
-                        $data['lojasEmAlta'][1]->fotos = $this->produtoModel->fotos($emAlta->produtoFK2, 4, true);
-                    }
-                    if ($emAlta->produtoFK3) {
-                        $this->produtoModel->resetQuery();
-                        $this->produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                        $this->produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                        $this->produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                        $this->produtoModel->join('estado e', 'e.id = c.estadoFK');
-                        $data['lojasEmAlta'][2] = $this->produtoModel->find($emAlta->produtoFK3);
-                        $data['lojasEmAlta'][2]->fotos = $this->produtoModel->fotos($emAlta->produtoFK3, 4, true);
-                    }
+                    $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',$data['tipoAtual']->id);
+                    $emAlta = $anuncioModel->find()[0];
+                    
+                   $data['lojasEmAlta'] = $anuncioModel->emAlta($emAlta);
+                   
                     $contador = 0;
                    
-
                     $this->produtoModel->resetQuery()
                         ->dadosCard()
                         ->where("pc.tipoFK", $tipo->id)
@@ -742,6 +722,7 @@ class ProdutoModel extends Model
                     $data['lojasTemporarias'] = $this->produtoModel->paginate(32, "anuncios", $paginate);
                     $data['pager'] = $this->produtoModel->pager;
 
+                    
                     if ($data['lojasTemporarias']) {
                         foreach ($data['lojasTemporarias'] as $ind => $produto) {
                             $data['lojasTemporarias'][$ind]->fotos = $this->produtoModel->fotos($produto->id, 4, true);
@@ -770,9 +751,7 @@ class ProdutoModel extends Model
                 if (!$data['coordenadas']) {
                     $data['coordenadas'] = array();
                 }
-
-                $this->produtoModel = \model('App\Models\ProdutoModel', false);
-                $data['destaques'] = $this->produtoModel->destaquePrestadores(4);
+      
                 break;
             case "saloes-de-festas-e-areas-de-lazer":
                 if ($data['segments'][1] && !is_numeric($data['segments'][1])) {
@@ -794,19 +773,31 @@ class ProdutoModel extends Model
                     $produtoModel->where('produto.identificador', $data['segments'][1]);
                     $data['metatag'] = $produtoModel->find()[0];
                     $data['fotos'] = $produtoModel->fotos($data['metatag']->id, 999999, false);
+                    
+                    $produtoVisitaModel =  model('App\Models\ProdutoVisitaModel', false);  
+         $produtoVisitaModel->contaVisita($data['metatag']->id);
+                    
+                    $data['destaques'] = $produtoModel->destaquePrestadores();
+                    
 
                     $data['valores'] = $produtoModel->valores($data['metatag']->id);
                     $data['proximidades'] = $produtoModel->proximidades($data['metatag']->id);
                     $data['anunciante'] = $produtoModel->anunciante($data['metatag']->anuncianteFK);
-                    $data['destaques'] = $produtoModel->destaquePrestadores(4);
+                    $data['destaques'] = $produtoModel->destaquePrestadores();
                     $data['videos'] = $produtoModel->videos($data['metatag']->id);
                     $data['datasOcupada'] = $produtoModel->datasOcupacao($data['metatag']->id);
                 } else {
                     $data['form2Visible'] = 'visible';
                     $data['get'] = $get = request()->getGet();
 
-                    $anuncioModel = model('App\Models\AnuncioModel', false);
-                    $emAlta = $anuncioModel->find(2);
+                  $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',$data['tipoAtual']->id);
+                    $emAlta = $anuncioModel->find()[0];                    
+                   
+                   $data['emAlta'] = $anuncioModel->emAlta($emAlta);
 
                     $data['style_list'] = ['fancybox', 'swiper', 'jquery_ui'];
                     $data['script_list'] = ['fancybox', 'swiper', 'card-like', 'jquery_ui', 'controller-card', 'controller-imoveis', 'fs-lightbox', 'modal-filter', 'modal-select-order'];
@@ -815,43 +806,13 @@ class ProdutoModel extends Model
                     $data['pagina'] = 25;
 
                     $produtoModel = \model("App\Models\ProdutoModel", false);
-
-                    $data['destaques'] = $produtoModel->destaquePrestadores(4);
-
+                    
                     if (!is_numeric($get['page_produto'])) {
                         $paginate = 1;
                     } else {
                         $paginate = $get['page_produto'];
                     }
-                    if ($emAlta->produtoFK1) {
-                        $produtoModel->resetQuery();
-                        $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                        $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                        $produtoModel->join('estado e', 'e.id = c.estadoFK');
-                        $produtoModel->where('pc.tipoFK', $tipo->id);
-                        $produtoModel->where('ativo', '1');
-                        $data['emAlta'][0] = $produtoModel->find($emAlta->produtoFK1);
-                        $data['emAlta'][0]->fotos = $produtoModel->fotos($emAlta->produtoFK1, 4, true);
-                    }
-                    if ($emAlta->produtoFK2) {
-                        $produtoModel->resetQuery();
-                        $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                        $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                        $produtoModel->join('estado e', 'e.id = c.estadoFK');
-                        $data['emAlta'][1] = $produtoModel->find($emAlta->produtoFK2);
-                        $data['emAlta'][1]->fotos = $produtoModel->fotos($emAlta->produtoFK2, 4, true);
-                    }
-                    if ($emAlta->produtoFK3) {
-                        $produtoModel->resetQuery();
-                        $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
-                        $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
-                        $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
-                        $produtoModel->join('estado e', 'e.id = c.estadoFK');
-                        $data['emAlta'][2] = $produtoModel->find($emAlta->produtoFK3);
-                        $data['emAlta'][2]->fotos = $produtoModel->fotos($emAlta->produtoFK3, 4, true);
-                    }
+                 
                     $contador = 0;
 
                     $produtoModel->resetQuery();
@@ -901,15 +862,17 @@ class ProdutoModel extends Model
 
                 $paginate = \is_numeric($get['page_anuncios']) ? $get['page_anuncios'] : 1;
 
-                $this->anuncioModel = \model("App\Models\AnuncioModel", false)
-                    ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3, anuncio.produtoFK4, anuncio.produtoFK5, anuncio.produtoFK7");
-                $busca = (array) $this->anuncioModel->find(1);
-
-                $this->produtoModel = \model('App\Models\ProdutoModel', false)
-                    ->dadosCard()
-                    ->whereIn("produto.id", $busca)
-                    ->where("ativo", 1);
-                $data['alugueisEmAlta'] = $this->produtoModel->findAll();
+                $this->produtoModel = \model('App\Models\ProdutoModel', false);
+                
+                  $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',$data['tipoAtual']->id);
+                    $emAlta = $anuncioModel->find()[0];                    
+                   
+                   $data['emAlta'] = $anuncioModel->emAlta($emAlta);
+                           
                 $contador = 0;
 
                 $this->produtoModel->resetQuery()
@@ -960,6 +923,9 @@ class ProdutoModel extends Model
                             ->dadosCard()
                             ->where("produto.identificador", $data['segments'][1])
                             ->first();
+                    
+                    $produtoVisitaModel =  model('App\Models\ProdutoVisitaModel', false);  
+         $produtoVisitaModel->contaVisita($data['metatag']->id);
 
                     $data['videos'] = $this->produtoModel->videos($data['metatag']->id);
 
@@ -977,20 +943,9 @@ class ProdutoModel extends Model
                     $data['anunciante'] = $this->produtoModel->anunciante($data['metatag']->anuncianteFK);
                     $data['espacoAtual']->total = $this->produtoModel->valorTotal($data['espacoAtual']->valores, $data['metatag']->preco);
 
-                    // Serviços em Alta
-                    $this->anuncioModel->resetQuery()
-                        ->select("produtoFK1, produtoFK2, produtoFK3, produtoFK4, produtoFK5, produtoFK6, produtoFK7");
-                    $busca = $this->anuncioModel->find(9);
-
-                    $this->produtoModel->resetQuery()
-                        ->dadosCard()
-                        ->whereIn("produto.id", (array) $busca)
-                        ->orderBy("rand()");
-                    $this->produtoModel->limit(4);
-                    $data['servicosEmAlta'] = $this->produtoModel->findAll(4);
-                    foreach ($data['servicosEmAlta'] as $ind => $emAlta) {
-                        $data['servicosEmAlta'][$ind]->fotos = $this->produtoModel->fotos($emAlta->id, 4);
-                    }
+                       $produtoModel = \model("App\Models\ProdutoModel", false);
+                    $data['destaques'] = $produtoModel->destaquePrestadores();
+                    
                 }
 
                 if (!$data['coordenadas']) {

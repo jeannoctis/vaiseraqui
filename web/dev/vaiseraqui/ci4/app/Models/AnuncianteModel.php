@@ -28,6 +28,11 @@ class AnuncianteModel extends Model
 
     public function verPagina($segments)
     {
+        
+        if(!$segments[1]){
+            $segments[1] = 'inicio';
+        }
+        
         $page = $segments[1];
         $this->session = \Config\Services::session($config);
 

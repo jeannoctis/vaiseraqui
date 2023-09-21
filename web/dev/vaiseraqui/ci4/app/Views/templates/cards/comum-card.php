@@ -1,5 +1,5 @@
 <article class="card-item" data-aos="fade-right">
-   <a href="<?= PATHSITE ?><?= $tipo ?>/<?= $identificador ?>">
+   <a href="<?= PATHSITE ?>espaco/<?= $identificador ?>">
       <div class="cover">
          <? if ($fotos) { ?>
             <div class="swiper swiper-card">

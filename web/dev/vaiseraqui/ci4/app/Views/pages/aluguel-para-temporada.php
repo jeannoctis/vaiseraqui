@@ -13,12 +13,12 @@
                <?= view("templates/order-filter", $get) ?>
             </div>
          </header>
-         <? if ($alugueisParaTemporada) { ?>
+         <? if ($emAlta) { ?>
             <div class="left-space">
                <!-- Destaque maior -->
-               <? if ($alugueisEmAlta['grande']) {
-                  $alugueisEmAlta['grande']->tipo = 'aluguel-para-temporada';
-                  echo view("templates/aluguel-para-temporada-destaque-grande-card.php", (array)$alugueisEmAlta['grande']);
+               <? if ($emAlta[0]) {
+                  $emAlta[0]->tipo = 'aluguel-para-temporada';
+                  echo view("templates/aluguel-para-temporada-destaque-grande-card.php", (array)$emAlta[0]);
                } ?>
 
                <div class="list-articles">
@@ -51,22 +51,24 @@
    </section>
 
    <!-- Buscar anúncios -->
-   <? if ($alugueisEmAlta) { ?>
+   <? if ($emAlta) { ?>
       <section class="s-title-and-list-cards">
          <div class="container-medium">
             <header data-aos="fade-up">
-               <h2>Imóveis em destaque</h2>
-               <p>Outros imóveis de aluguel para temporada semelhantes na sua região</p>
+               <h2>Mais destaques</h2>
+          <p>Conheça mais destaques na sua região</p>
             </header>
          </div>
          <div class="list">
             <div class="swiper rent-interna">
                <div class="swiper-wrapper">
-                  <? foreach ($alugueisEmAlta as $item) { ?>
+                  <? foreach ($emAlta as $ind => $item) {
+                      if($ind) {
+                  ?>
                      <div class="swiper-slide">
                         <?= view("templates/aluguel-para-temporada-destaque-card.php", (array)$item) ?>
                      </div>
-                  <? } ?>
+                  <? } } ?>
                </div>
                <div class="swiper-pagination"></div>
             </div>
