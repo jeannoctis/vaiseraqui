@@ -324,19 +324,19 @@ class Anuncio extends BaseController
             ->where("tipoFK", $post['tipoFK'])
             ->where("cidadeFK", $post['cidadeFK'])
             ->where("tipo", $post['tipo'])
-         ->first();
+            ->first();
 
          if ($busca) {
             $post['id'] = $busca->id;
 
             $produtosFKs = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5];
-            if(\in_array($post['produtoFK1'], $produtosFKs)) {
+            if (\in_array($post['produtoFK1'], $produtosFKs)) {
                $return['produtoEmAltaMenor'] = true;
                echo \json_encode($return);
                return;
             }
 
-            if($busca->produtoFK1 == $post['produtoFK1']) {
+            if ($busca->produtoFK1 == $post['produtoFK1']) {
                $post['produtoFK1'] = NULL;
 
                $return['remove'] = $this->model->save($post);
@@ -359,41 +359,63 @@ class Anuncio extends BaseController
       if ($post) {
          $post['produtoFK'] = \decode($post['produtoFK']);
 
-         $busca = $this->model
+         $this->model
             ->where("tipoFK", $post['tipoFK'])
-            ->where("cidadeFK", $post['cidadeFK'])
-            ->where("tipo", $post['tipo'])
-         ->first();
+            ->where("cidadeFK", $post['cidadeFK']);
+         if ($post['tipoFK'] == 6) {
+            $this->model->where("categoriaFK", $post['categoriaFK']);
+         }
+         $busca = $this->model->where("tipo", $post['tipo'])->first();
 
          if ($busca) {
             $post['id'] = $busca->id;
 
-            if($busca->produtoFK1 == $post['produtoFK']) {
-               $return['produtoEmAltaMaior'] = true;
+            if ($busca->produtoFK1 == $post['produtoFK']) {
+               $return['produtoNoMaior'] = true;
                echo \json_encode($return);
                return;
             }
 
             $posicao = \array_search($post['produtoFK'], (array)$busca);
-            if($posicao) {
-               $post[$posicao] = NULL;               
+            if ($posicao) {
+               $post[$posicao] = NULL;
                $return['save'] = $this->model->save($post);
                echo \json_encode($return);
                return;
             }
 
-            if (empty($busca->produtoFK2)) {
-               $post['produtoFK2'] = $post['produtoFK'];
-            } else if (empty($busca->produtoFK3)) {
-               $post['produtoFK3'] = $post['produtoFK'];
-            } else if (empty($busca->produtoFK4)) {
-               $post['produtoFK4'] = $post['produtoFK'];            
-            } else if (empty($busca->produtoFK5)) {
-               $post['produtoFK5'] = $post['produtoFK'];            
+            if ($post['tipoFK'] != 6) {
+               if (empty($busca->produtoFK2)) {
+                  $post['produtoFK2'] = $post['produtoFK'];
+               } else if (empty($busca->produtoFK3)) {
+                  $post['produtoFK3'] = $post['produtoFK'];
+               } else if (empty($busca->produtoFK4)) {
+                  $post['produtoFK4'] = $post['produtoFK'];
+               } else if (empty($busca->produtoFK5)) {
+                  $post['produtoFK5'] = $post['produtoFK'];
+               } else {
+                  $return['noEmptySlots'] = true;
+                  echo \json_encode($return);
+                  return;
+               }
             } else {
-               $return['noEmptySlots'] = true;
-               echo \json_encode($return);
-               return;
+               if (empty($busca->produtoFK2)) {
+                  $post['produtoFK2'] = $post['produtoFK'];
+               } else if (empty($busca->produtoFK3)) {
+                  $post['produtoFK3'] = $post['produtoFK'];
+               } else if (empty($busca->produtoFK4)) {
+                  $post['produtoFK4'] = $post['produtoFK'];
+               } else if (empty($busca->produtoFK5)) {
+                  $post['produtoFK5'] = $post['produtoFK'];
+               } else if (empty($busca->produtoFK6)) {
+                  $post['produtoFK6'] = $post['produtoFK'];
+               } else if (empty($busca->produtoFK7)) {
+                  $post['produtoFK7'] = $post['produtoFK'];
+               } else {
+                  $return['noEmptySlots'] = true;
+                  echo \json_encode($return);
+                  return;
+               }
             }
 
             $return['save'] = $this->model->save($post);
@@ -414,7 +436,7 @@ class Anuncio extends BaseController
          $this->model
             ->where("tipoFK", $post['tipoFK'])
             ->where("cidadeFK", $post['cidadeFK']);
-         if($post['tipoFK'] == 6) {
+         if ($post['tipoFK'] == 6) {
             $this->model->where("categoriaFK", $post['categoriaFK']);
          }
          $busca = $this->model->where("tipo", $post['tipo'])->first();
@@ -423,17 +445,17 @@ class Anuncio extends BaseController
             $post['id'] = $busca->id;
 
             $produtosFKs = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5];
-            if($post['tipo'] == 6) {
+            if ($post['tipo'] == 6) {
                $produtosFKs[] = [$busca->produtoFK6, $busca->produtoFK7];
             }
-            
-            if(\in_array($post['produtoFK1'], $produtosFKs)) {
+
+            if (\in_array($post['produtoFK1'], $produtosFKs)) {
                $return['produtoEmDestaqueMenor'] = true;
                echo \json_encode($return);
                return;
             }
 
-            if($busca->produtoFK1 == $post['produtoFK1']) {
+            if ($busca->produtoFK1 == $post['produtoFK1']) {
                $post['produtoFK1'] = NULL;
 
                $return['remove'] = $this->model->save($post);
@@ -457,42 +479,39 @@ class Anuncio extends BaseController
          $post['produtoFK'] = \decode($post['produtoFK']);
 
          $this->model
-         ->where("tipoFK", $post['tipoFK'])
-         ->where("cidadeFK", $post['cidadeFK']);
-         if($post['tipoFK'] == 6) {
-            $this->model
-               ->where("categoriaFK", $post['categoriaFK']);
+            ->where("tipoFK", $post['tipoFK'])
+            ->where("cidadeFK", $post['cidadeFK']);
+         if ($post['tipoFK'] == 6) {
+            $this->model->where("categoriaFK", $post['categoriaFK']);
          }
-         $busca = $this->model
-            ->where("tipo", $post['tipo'])
-            ->first();
+         $busca = $this->model->where("tipo", $post['tipo'])->first();
 
          if ($busca) {
             $post['id'] = $busca->id;
 
-            if($busca->produtoFK1 == $post['produtoFK']) {
+            if ($busca->produtoFK1 == $post['produtoFK']) {
                $return['produtoEmDestaqueMaior'] = true;
                echo \json_encode($return);
                return;
             }
 
             $posicao = \array_search($post['produtoFK'], (array)$busca);
-            if($posicao) {
-               $post[$posicao] = NULL;               
+            if ($posicao) {
+               $post[$posicao] = NULL;
                $return['save'] = $this->model->save($post);
                echo \json_encode($return);
                return;
             }
 
-            if($post['tipoFK'] != 6) {
+            if ($post['tipoFK'] != 6) {
                if (empty($busca->produtoFK2)) {
                   $post['produtoFK2'] = $post['produtoFK'];
                } else if (empty($busca->produtoFK3)) {
                   $post['produtoFK3'] = $post['produtoFK'];
                } else if (empty($busca->produtoFK4)) {
-                  $post['produtoFK4'] = $post['produtoFK'];            
+                  $post['produtoFK4'] = $post['produtoFK'];
                } else if (empty($busca->produtoFK5)) {
-                  $post['produtoFK5'] = $post['produtoFK'];            
+                  $post['produtoFK5'] = $post['produtoFK'];
                } else {
                   $return['noEmptySlots'] = true;
                   echo \json_encode($return);
@@ -504,19 +523,19 @@ class Anuncio extends BaseController
                } else if (empty($busca->produtoFK3)) {
                   $post['produtoFK3'] = $post['produtoFK'];
                } else if (empty($busca->produtoFK4)) {
-                  $post['produtoFK4'] = $post['produtoFK'];            
+                  $post['produtoFK4'] = $post['produtoFK'];
                } else if (empty($busca->produtoFK5)) {
-                  $post['produtoFK5'] = $post['produtoFK'];            
+                  $post['produtoFK5'] = $post['produtoFK'];
                } else if (empty($busca->produtoFK6)) {
-                  $post['produtoFK6'] = $post['produtoFK'];            
+                  $post['produtoFK6'] = $post['produtoFK'];
                } else if (empty($busca->produtoFK7)) {
-                  $post['produtoFK7'] = $post['produtoFK'];            
+                  $post['produtoFK7'] = $post['produtoFK'];
                } else {
                   $return['noEmptySlots'] = true;
                   echo \json_encode($return);
                   return;
                }
-            }            
+            }
 
             $return['save'] = $this->model->save($post);
          } else {

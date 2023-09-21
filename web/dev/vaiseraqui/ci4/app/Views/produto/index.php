@@ -129,35 +129,25 @@
 													</td>
 													<? if (!empty($get['cidade']) && (($get['tipo'] == 6 && !empty($get['categoria'])) || $get['tipo'] != 6)) { ?>
 														<td>
-															<button type="button" 
-															class="btn btn-md btn-rounded <?= $elemento->id == $altaProdutoFK1 ? "btn-warning" : "" ?>" 
-															onclick="emAltaG('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, 'emalta', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)"
-															data-emalta-g>
+															<button type="button" class="btn btn-md btn-rounded <?= $elemento->id == $altaProdutoFK1 ? "btn-warning" : "" ?>" onclick="emAltaG('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'emaltaprestador' : 'emalta' ?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)" data-emalta-g>
 																<i class="bi bi-fire"></i>
 															</button>
 														</td>
 														<td>
-															<button type="button" 
-															class="btn btn-md btn-rounded <?= in_array($elemento->id, $altaProdutosFKs) ? 'btn-info' : '' ?>" 
-															onclick="emAltaP('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, 'emalta', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)">
+															<button type="button" class="btn btn-md btn-rounded <?= in_array($elemento->id, $altaProdutosFKs) ? 'btn-info' : '' ?>" onclick="emAltaP('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'emaltaprestador' : 'emalta' ?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)">
 																<i class="bi bi-fire"></i>
 															</button>
 														</td>
 														<td>
-															<button type="button" 
-															class="btn btn-md btn-rounded <?= $elemento->id == $produtoFK1 ? "btn-danger" : "" ?>" 
-															onclick="destaqueG('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'servicocategoria':'tipo'?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)"
-															data-destaque-g>
+															<button type="button" class="btn btn-md btn-rounded <?= $elemento->id == $produtoFK1 ? "btn-danger" : "" ?>" onclick="destaqueG('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'servicocategoria' : 'tipo' ?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)" data-destaque-g>
 																<i class="bi bi-star-fill"></i>
 															</button>
 														</td>
 														<td>
-															<button type="button" 
-															class="btn btn-md btn-rounded <?= in_array($elemento->id, $produtosFKs) ? 'btn-primary' : '' ?>" 
-															onclick="destaqueP('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'servicocategoria':'tipo'?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)">
+															<button type="button" class="btn btn-md btn-rounded <?= in_array($elemento->id, $produtosFKs) ? 'btn-primary' : '' ?>" onclick="destaqueP('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'servicocategoria' : 'tipo' ?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)">
 																<i class="bi bi-star-fill"></i>
 															</button>
-														</td>														
+														</td>
 													<? } ?>
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
 												</tr>
@@ -231,7 +221,7 @@
 					cidadeFK,
 					tipo,
 					categoriaFK
-				}, function (retorno) {
+				}, function(retorno) {
 					const response = jQuery.parseJSON(retorno)
 
 					if (response.save || response.insert) {
