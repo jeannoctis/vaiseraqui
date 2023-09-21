@@ -144,6 +144,14 @@
     $(".mySingleFieldTags").tagit({
       allowSpaces: true
     });
+    $(".tag-planos-inclui").tagit({
+      allowSpaces: true,
+      tagLimit: 5
+  });
+    $(".tag-planos-nao-inclui").tagit({
+      allowSpaces: true,
+      tagLimit: 2
+    });
   });
 
   $("#principaiscomodidades").tagit({    
@@ -160,6 +168,28 @@
   $('select#categorias, select#cidades, select#anunciantes, select#estados, select#origem').on('change', function() {
     $("#formFiltro").submit()
   })
+
+  // Alternar DISABLE botões EXCLUIR
+  const checkboxesDelete = document.querySelectorAll("tbody input[type=checkbox]")
+  if (checkboxesDelete) {
+    checkboxesDelete.forEach(input => {
+      input.addEventListener("change", toggleDisabledDeleteBtn)
+    })
+    toggleDisabledDeleteBtn()
+  }
+
+  function toggleDisabledDeleteBtn() {
+    const checkboxSelected = document.querySelectorAll("tbody input[type=checkbox]:checked")
+    const btn = document.querySelector("button.btn-danger")
+
+    if (checkboxSelected && btn) {
+      if (checkboxSelected.length > 0) {
+        btn.removeAttribute("disabled")
+      } else {
+        btn.setAttribute("disabled", "")
+      }
+    }
+  }
 </script>
 
 

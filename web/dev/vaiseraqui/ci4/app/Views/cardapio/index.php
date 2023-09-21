@@ -4,7 +4,7 @@
 			<div class="col-xs-12">
 				<div class="box-content">
 					<div class='col-xs-12 col-md-6'>
-						<h4 class="box-title"><?= $title ?></h4>
+						<h4 class="box-title"><?= $title ?>: sugestões para o anunciante</h4>
 					</div>
 					<div class='col-xs-12 col-md-6 text-right form-group'>
 						<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/">

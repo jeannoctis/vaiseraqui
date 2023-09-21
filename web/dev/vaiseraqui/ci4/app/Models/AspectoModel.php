@@ -17,11 +17,15 @@ class AspectModel extends Model
    protected $updatedField = 'dtAlteracao';
    protected $deletedField = 'excluido';
    protected $validationRules = [
-      'autor' => 'required',
+      'titulo' => 'required',
+      'texto' => 'required',
    ];
    protected $validationMessages = [
-      'autor' => [
-         'required' => 'Autor obrigatório'
+      'titulo' => [
+         'required' => 'titulo obrigatório'
+      ],
+      'texto' => [
+         'required' => 'texto obrigatório'
       ]
    ];
    protected $skipValidation = false;

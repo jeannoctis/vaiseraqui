@@ -25,23 +25,23 @@
 
                      <div id='imagem' class="form-group col-xs-12 col-lg-6 paddingZeroM mt-5">
                         <div class='col-xs-12'>
-                           <label for="arquivo">Banner Mobile <b>(Tamanho recomendado: 000 x 000 )</b> </label>
+                           <label for="arquivo">Banner Desktop <b>(Tamanho recomendado: 1920 x 782 )</b></label>
                            <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo ?>' type="file" name='arquivo' id="arquivo" class="dropify" >
-                           <div class="col-sm-12 col-lg-6 switch danger" style="display: flex;">
+                           <!-- <div class="col-sm-12 col-lg-6 switch danger" style="display: flex;">
                               <input style="height: 30px; margin-bottom: 10px; width: 30px; float: left;" id="apagar-arquivo" type="checkbox" name="apagararquivo" class="cb">
                               <label style="float: left; margin-top: 6px; margin-left: -12px;" for="apagar-arquivo" id="lbCheck">Apagar imagem</label>
-                           </div>
+                           </div> -->
                         </div>
                      </div>
 
                      <div id='imagem' class="form-group col-xs-12 col-lg-6 paddingZeroM mt-5">
                         <div class='col-xs-12'>
-                           <label for="arquivo2">Banner Desktop <b>(Tamanho recomendado: 000 x 000 )</b> </label>
+                           <label for="arquivo2">Banner Mobile <b>(Tamanho recomendado: 335 x 450 )</b></label>
                            <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $resultado->arquivo2 ?>' type="file" name='arquivo2' id="arquivo2" class="dropify" >
-                           <div class="col-sm-12 col-lg-6 switch danger" style="display: flex;">
+                           <!-- <div class="col-sm-12 col-lg-6 switch danger" style="display: flex;">
                               <input style="height: 30px; margin-bottom: 10px; width: 30px; float: left;" id="apagar-arquivo2" type="checkbox" name="apagararquivo2" class="cb">
                               <label style="float: left; margin-top: 6px; margin-left: -12px;" for="apagar-arquivo2" id="lbCheck">Apagar imagem</label>
-                           </div>
+                           </div> -->
                         </div>
                      </div>                     
                      

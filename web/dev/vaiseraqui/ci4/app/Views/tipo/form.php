@@ -21,7 +21,6 @@
                             <option value='SALOES'>Salões de Festas e Áreas de Lazer</option>
                             <option value='HOSPEDAGEM'>Hospedagens</option>
                             <option value='LOJAS'>LOjas temporárias</option>
-                            <option value='PRESTADORES'>Prestadores de Serviço</option>
                         </select>
                      </div>   
                      <? }

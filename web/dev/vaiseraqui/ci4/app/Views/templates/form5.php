@@ -1,6 +1,8 @@
-         
-
   <?
+  if(!$get['cidadeFK']) {
+   $get['cidadeFK'] = $_SESSION['cidade'];
+}
+  
                   if($get['cidadeFK']) {
                       foreach($cidades as $cidade) {
                           if($cidade->id == $get['cidadeFK']) {

@@ -40,13 +40,13 @@
                            </select>
                         </div>
                      </div>
-
+                      
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="inicioValidade">Início validade</label>
                            <input type="date" name="inicioValidade" class="form-control" id="inicioValidade" value="<?= $resultado->inicioValidade ?>" placeholder="Escreva..." required>
                         </div>
-                     </div>
+                     </div> 
 
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
@@ -55,6 +55,7 @@
                         </div>
                      </div>
 
+                      <? if(FALSE) {?>
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="destaque">Anúncio destacado?</label>
@@ -64,7 +65,8 @@
                            </select>
                         </div>
                      </div>
-
+                      <?  } ?>
+                      <? if(FALSE) {?>
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="inicioDestaque">Início destaque</label>
@@ -78,6 +80,7 @@
                            <input type="date" name="validadeDestaque" class="form-control" id="validadeDestaque" value="<?= $resultado->validadeDestaque ?>" placeholder="Escreva...">
                         </div>
                      </div>
+                      <? } ?>
 
                   </div>
                </div>
@@ -86,6 +89,7 @@
                   <h4 class="box-title">
                      Endereço
                   </h4>
+
                   <div class="card-content">
                      <div class='col-xs-12 col-lg-4 paddingZeroM'>
                         <div class="col-xs-12 form-group">
@@ -157,13 +161,12 @@
                   <h4 class="box-title">
                      Anunciante
                   </h4>
-                  <!-- /.box-title -->
-                  <div class="card-content">
 
+                  <div class="card-content">
                      <div class='form-group col-xs-12 paddingZeroM'>
                         <div class="col-xs-12">
                            <label for="anuncianteFK">Responsável</label>
-                           <select name="anuncianteFK" id="anuncianteFK" class="js-example-basic-single form-control" required>
+                           <select name="anuncianteFK" id="anuncianteFK" class="js-example-basic-single form-control" <?= $get['tipo'] != 5 ? "required" : "" ?>>
                               <? if ($anunciantes) { ?>
                                  <option value="">-- Selecione a pessoa responsável</option>
                                  <? foreach ($anunciantes as $anunciante) { ?>
@@ -185,8 +188,8 @@
                   <div class="card-content">
                      <div class='col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 form-group">
-                           <label for="descricao">Descrição de apresentação</label>
-                           <textarea name='descricao' class="form-control" id="descricao" required><?= $resultado->descricao ?></textarea>
+                           <label for="descricao">Descrição de apresentação (limite de caracteres: 325)</label>
+                           <textarea name='descricao' class="form-control" id="descricao" maxlength="325" required><?= $resultado->descricao ?></textarea>
                         </div>
                      </div>
 
@@ -196,6 +199,15 @@
                            <textarea name='texto' class="tinymce_full" id="detalhes"><?= $resultado->texto ?></textarea>
                         </div>
                      </div>
+
+                     <? if (in_array($get['tipo'], [5])) { ?>
+                        <div class='col-xs-12 paddingZeroM'>
+                           <div class="col-xs-12 form-group">
+                              <label for="link">Link do botão "Comprar ingressos"</label>
+                              <input type="text" name='link' class="form-control" id="link"><?= $resultado->link ?></input>
+                  </div>
+               </div>
+                     <? } ?>
                   </div>
                </div>
 
@@ -256,7 +268,7 @@
 
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
-                              <label for="itensdisponiveis">Itens</label>
+                              <label for="itensdisponiveis">Itens (separe-os com 'enter' ou 'tab')</label>
                               <input type="text" name="itensdisponiveis" class="form-control mySingleFieldTags" id="itensdisponiveis" value="<?= $resultado->itensdisponiveis ?>" placeholder="Escreva...">
                            </div>
                         </div>
@@ -311,7 +323,6 @@
                            </div>
                         </div>
 
-
                         <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
                            <div class="col-xs-12 col-sm-12">
                               <label for="animais">Animais de estimação?</label>
@@ -350,6 +361,13 @@
                      </h4>
                      <!-- /.box-title -->
                      <div class="card-content">
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="hospedes">Limite de hóspede por acomodação</label>
+                              <input type="number" name="hospedes" id="hospedes" min="0" class="form-control" value="<?= $resultado->hospedes ?>" placeholder="Escreva..." required>
+                           </div>
+                        </div>
 
                         <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
                            <div class="col-xs-12 col-sm-12">
@@ -496,7 +514,7 @@
                                  </div>
 
                                  <div class="col-xs-12 form-group">
-                                    <label for="catCmdd<?= $area->titulo ?>">Adicionadas</label>
+                                    <label for="catCmdd<?= $area->titulo ?>">Adicionadas (separe-os com 'enter' ou 'tab')</label>
                                     <input type="text" name="catCmdd[ <?= $ind ?> ][comodidades]" class="form-control tag-it mySingleFieldTags" id="catCmdd<?= str_replace(' ', '', $area->titulo) ?>" value="<?= $area->comodidades ?>" placeholder="Escreva...">
                                  </div>
 
@@ -567,7 +585,7 @@
                      <div class="card-content">
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
-                              <label for="condominio">Comodidades do condomínio</label>
+                              <label for="condominio">Comodidades do condomínio (separe-os com 'enter' ou 'tab')</label>
                               <input type="text" name="condominio" class="form-control mySingleFieldTags" id="condominio" value="<?= $resultado->condominio ?>" placeholder="Escreva...">
                            </div>
                         </div>
@@ -578,7 +596,7 @@
                <? if (in_array($get['tipo'], [6])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title with-btn">
-                        Cardápios
+                        Cardápios (apenas para Buffut e relacionados!)
                         <button type="button" class="btn btn-icon btn-icon-left btn-success btn-xs btn-rounded dialog-btn" data-target="modalCardapio">
                            Adicionar Cardápio
                            <i class="ico bi bi-plus-lg"></i>
@@ -600,7 +618,7 @@
                                  </div>
 
                                  <div class="col-xs-12 form-group">
-                                    <label for="cardapio-menu<?= $item->titulo ?>">Adicionadas</label>
+                                    <label for="cardapio-menu<?= $item->titulo ?>">Adicionadas (separe-os com 'enter' ou 'tab')</label>
                                     <input type="text" name="cardapios[ <?= $ind ?> ][menu]" class="form-control tag-it mySingleFieldTags" id="cardapio-menu<?= str_replace(' ', '', $item->titulo) ?>" value="<?= $item->menu ?>" placeholder="Escreva...">
                                  </div>
 
@@ -621,7 +639,6 @@
                               </div>
                            <? } ?>
                         <? } ?>
-
                      </div>
 
                      <div class="card content">
@@ -685,10 +702,20 @@
 
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
-                              <label for="eventosatendidos">Eventos</label>
+                              <label for="eventosatendidos">Eventos (separe-os com 'enter' ou 'tab')</label>
                               <input type="text" name="eventosatendidos" class="form-control mySingleFieldTags" id="eventosatendidos" value="<?= $resultado->eventosatendidos ?>" placeholder="Escreva...">
                            </div>
                         </div>
+
+                        <div class='form-group col-xs-12 paddingZeroM'>
+                           <div class="col-xs-12">
+                              <label for="capacidade">
+                                 Capacidades de atendimento (separe-os com 'enter' ou 'tab')<br>
+                                 <i>100, 500, 1000... pessoas. Apenas números</i>
+                              </label>
+                              <input type="text" name="capacidade" class="form-control mySingleFieldTags" id="capacidade" value="<?= $resultado->capacidade ?>" placeholder="apenas números!" required>
+                     </div>
+                  </div>
 
                      </div>
                   </div>
@@ -863,7 +890,7 @@
                                  <? if ($pdv->tipo == "fisico") { ?>
                                     <label for="pdv<?= $pdv->id ?>-cep" class="col-xs-12 col-lg-6">
                                        Telefone
-                                       <input type="text" name="pdvs[ <?= $ind ?> ][cep]" value="<?= $pdv->cep ?>" class="form-control" required minlength="3" placeholder="Escreva...">
+                                       <input type="text" name="pdvs[ <?= $ind ?> ][cep]" value="<?= $pdv->cep ?>" class="form-control telefone" required minlength="3" placeholder="Escreva...">
                                     </label>
 
                                     <label for="pdv<?= $pdv->id ?>-cep" class="col-xs-12 col-lg-6">
@@ -1091,7 +1118,7 @@
                      <input type="radio" name="tipo-pdv" id="pdv-fisico" value="fisico">
                      <label for="pdv-fisico">
                         Ponto de venda físico
-                        <img src="<?= PATHSITE ?>assets2/Group 2310.png" alt="ícone ponto de venda físico">
+                        <img src="<?= PATHSITE ?>assets/images/icon-map-2.svg" alt="ícone ponto de venda físico">
                      </label>
                   </div>
                </li>
@@ -1100,7 +1127,7 @@
                      <input type="radio" name="tipo-pdv" id="pdv-online" value="online">
                      <label for="pdv-online">
                         Ponto de venda online
-                        <img src="<?= PATHSITE ?>assets2/web.png" alt="ícone ponto de venda online">
+                        <img src="<?= PATHSITE ?>assets/images/icon-www.svg" alt="ícone ponto de venda online">
                      </label>
                   </div>
                </li>
@@ -1213,7 +1240,7 @@
             background-color: aliceblue;
          }
 
-         */ .dialog#modalPontoDeVenda label {
+          .dialog#modalPontoDeVenda label {
             max-width: 50%;
          }
 
@@ -1459,7 +1486,7 @@
                newElement.innerHTML += `
                   <label class="col-xs-12 col-lg-6">
                      Telefone
-                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control cep" required minlength="3" placeholder="Escreva">
+                     <input type="text" name="pdvs[${pdvCount}][cep]" value="" class="form-control telefone" required minlength="3" placeholder="Escreva">
                   </label>
 
                   <label class="col-xs-12 col-lg-6">
@@ -1470,7 +1497,16 @@
             }
 
             pdvsContainer.appendChild(newElement);
-            $('.cep').mask('99999-999');
+
+            var SPMaskBehavior = function(val) {
+                  return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+               },
+               spOptions = {
+                  onKeyPress: function(val, e, field, options) {
+                     field.mask(SPMaskBehavior.apply({}, arguments), options);
+         }
+               };
+            $('.telefone').mask(SPMaskBehavior, spOptions);
          }
 
          // Modal Adicionar Ingresso

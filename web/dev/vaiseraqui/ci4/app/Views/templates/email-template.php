@@ -24,7 +24,7 @@
         .email-header {
             text-align: center;
             margin-bottom: 20px;
-            background-color: #668aa2;
+            background-color: #932327;
             padding: 10px;
         }
 
@@ -82,10 +82,25 @@
                     <strong>Mensagem:</strong> <?= $mensagem ?>
                 </p>
             <? } ?>
+            <? if ($plano) { ?>
+                <p>
+                    <strong>Plano:</strong> <?= $plano ?>
+                </p>
+            <? } ?>
+            <? if ($duracao) { ?>
+                <p>
+                    <strong>Duração:</strong> <?= $duracao ?>
+                </p>
+            <? } ?>
+            <? if ($modeloAnuncio) { ?>
+                <p>
+                    <strong>Modelo do anúncio</strong> <?= $modeloAnuncio ?>
+                </p>
+            <? } ?>
         </div>
         <div class="email-footer">
             <p>Atenciosamente,</p>
-            <p>Projetos Online Arq <a href="<?= PATHSITE ?>">projetosonlinearq.com.br</a></p>
+            <p>Vai Ser Aqui <a href="<?= PATHSITE ?>">vaiseraqui.com.br</a></p>
         </div>
     </div>
 </body>

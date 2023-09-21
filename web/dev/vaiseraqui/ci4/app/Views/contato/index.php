@@ -36,6 +36,7 @@
 										<option value="">-- filtre por origem --</option>
 										<option value="home" <?=$get['origem'] == 'home' ? 'selected' : '' ?>>Página inicial</option>
 										<option value="contato" <?=$get['origem'] == 'contato' ? 'selected' : '' ?>>Página de contato</option>
+										<option value="planos" <?=$get['origem'] == 'planos' ? 'selected' : '' ?>>Página de Planos</option>
 										<option value="whatsapp" <?=$get['origem'] == 'whatsapp' ? 'selected' : '' ?>>Balão WhatsApp</option>
 									</select>
 								</div>

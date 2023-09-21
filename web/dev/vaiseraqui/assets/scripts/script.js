@@ -21,7 +21,7 @@ var options = {
     time: "4000",
     scripts: ["https://www.google.com/recaptcha/api.js?render=" + public_recaptcha],
     success: function () {
-
+        
         visitaPagina(PAGINA_VISITADA);
 
         callRecaptcha();
@@ -31,6 +31,9 @@ var options = {
         //    carregaVideo();    
     }
 };
+
+$.lazyscript(options);
+
 
 function aceitaCookie() {
     setCookie('aceitou', '1', 30);
@@ -194,4 +197,11 @@ function clicaMapa(mapa) {
             width: 800,
             height: 600,
         }, ]);
+}
+
+function carregaDestaques(id,index){
+     $.get(PATHSITE + "produto/destaques/", {id: id, index: index}, function (e) {
+        dados = jQuery.parseJSON(e);
+        $("#conteudoAlta"+index).html(dados.html);
+    });
 }

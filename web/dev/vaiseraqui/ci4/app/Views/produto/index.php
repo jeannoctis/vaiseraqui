@@ -77,7 +77,6 @@
 						<input type="hidden" name="tipo" value="<?= $get['tipo'] ?>">
 
 					</form>
-
 					<? if ($lista) {  ?>
 						<div class='col-xs-12 paddingZeroM'>
 							<form method='post' id='form'>
@@ -88,8 +87,17 @@
 											<tr>
 												<th class='menorTh'>Excluir</th>
 												<th>Nome</th>
+												<? if ($get['tipo'] == 5) { ?>
+													<th>Data</th>
+												<? } ?>
 												<th>Galeria</th>
 												<th>Vídeos</th>
+												<? if (!empty($get['cidade']) && (($get['tipo'] == 6 && !empty($get['categoria'])) || $get['tipo'] != 6)) { ?>
+													<th>Em alta G</th>
+													<th>Em alta P</th>
+													<th>Destaque G</th>
+													<th>Destaque P</th>
+												<? } ?>
 												<th>Ordenar</th>
 											</tr>
 										</thead>
@@ -99,9 +107,16 @@
 													<td><input type="checkbox" name="excluir[]" value="<?= $elemento->id ?>" /> </td>
 													<td>
 														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=<?= $get['tipo'] ?>">
-															<?= $elemento->titulo ?>
+															<?= $elemento->titulo ?> <?= $elemento->id ?>
 														</a>
 													</td>
+													<? if ($get['tipo'] == 5) { ?>
+														<td>
+															<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>?tipo=<?= $get['tipo'] ?>">
+																<?= $elemento->datas[0]->data ?>
+															</a>
+														</td>
+													<? } ?>
 													<td>
 														<a href="<?= PATHSITE ?>admin/<?= $tabela ?>/fotos/<?= encode($elemento->id) ?>?tipo=<?= $get['tipo'] ?>" class="subdivisao">
 															Ver Fotos <i class="bi bi-image-fill"></i>
@@ -112,6 +127,38 @@
 															Vídeos <i class="bi bi-collection-play-fill"></i>
 														</a>
 													</td>
+													<? if (!empty($get['cidade']) && (($get['tipo'] == 6 && !empty($get['categoria'])) || $get['tipo'] != 6)) { ?>
+														<td>
+															<button type="button" 
+															class="btn btn-md btn-rounded <?= $elemento->id == $altaProdutoFK1 ? "btn-warning" : "" ?>" 
+															onclick="emAltaG('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, 'emalta', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)"
+															data-emalta-g>
+																<i class="bi bi-fire"></i>
+															</button>
+														</td>
+														<td>
+															<button type="button" 
+															class="btn btn-md btn-rounded <?= in_array($elemento->id, $altaProdutosFKs) ? 'btn-info' : '' ?>" 
+															onclick="emAltaP('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, 'emalta', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)">
+																<i class="bi bi-fire"></i>
+															</button>
+														</td>
+														<td>
+															<button type="button" 
+															class="btn btn-md btn-rounded <?= $elemento->id == $produtoFK1 ? "btn-danger" : "" ?>" 
+															onclick="destaqueG('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'servicocategoria':'tipo'?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)"
+															data-destaque-g>
+																<i class="bi bi-star-fill"></i>
+															</button>
+														</td>
+														<td>
+															<button type="button" 
+															class="btn btn-md btn-rounded <?= in_array($elemento->id, $produtosFKs) ? 'btn-primary' : '' ?>" 
+															onclick="destaqueP('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'servicocategoria':'tipo'?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)">
+																<i class="bi bi-star-fill"></i>
+															</button>
+														</td>														
+													<? } ?>
 													<td><img src="<?= PATHSITE ?>admins/assets/images/ordenar.png" /> </td>
 												</tr>
 											<? } ?>
@@ -126,9 +173,9 @@
 					<nav class="col-xs-12 navigation-pages">
 						<?= $pager->links('produtos', 'panel_full') ?>
 					</nav>
- <a href="<?= PATHSITE ?>admin/anuncio_tipo/">
-                           <button type="button" class="btn btn-primary btn-rounded waves-effect mb-1">Voltar</button>
-                        </a>
+					<a href="<?= PATHSITE ?>admin/anuncio_tipo/">
+						<button type="button" class="btn btn-primary btn-rounded waves-effect mb-1">Voltar</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -175,3 +222,92 @@
 				height: 45px;
 			}
 		</style>
+
+		<script>
+			function emAltaG(produtoFK1, tipoFK, cidadeFK, tipo, categoriaFK, el) {
+				$.post('<?= PATHSITE ?>anuncio/emAltaG', {
+					produtoFK1,
+					tipoFK,
+					cidadeFK,
+					tipo,
+					categoriaFK
+				}, function (retorno) {
+					const response = jQuery.parseJSON(retorno)
+
+					if (response.save || response.insert) {
+						const destaqueGBtns = document.querySelectorAll("[data-emalta-g]").forEach(
+							btn => btn.classList.remove("btn-warning")
+						)
+						el.classList.toggle("btn-warning")
+					} else if (response.remove) {
+						el.classList.toggle("btn-warning")
+					} else if (response.produtoEmAltaMenor) {
+						swal("Produto já destacado", "Este produto está destacado como em alta P", "warning")
+					}
+				})
+			}
+
+			function emAltaP(produtoFK, tipoFK, cidadeFK, tipo, categoriaFK, el) {
+				$.post('<?= PATHSITE ?>anuncio/emAltaP', {
+					produtoFK,
+					tipoFK,
+					cidadeFK,
+					tipo,
+					categoriaFK
+				}, function(retorno) {
+					const response = jQuery.parseJSON(retorno)
+					if (response.save || response.insert) {
+						el.classList.toggle("btn-info")
+					} else if (response.noEmptySlots) {
+						swal("Limite de 4 em alta pequenos para a categoria e cidade", "Desmarque itens para adicionar outros", "warning")
+					} else if (response.produtoEmAltaMaior) {
+						swal("Produto já destacado", "Este produto está destacado como em alta G", "warning")
+					}
+				});
+			}
+
+			function destaqueG(produtoFK1, tipoFK, cidadeFK, tipo, categoriaFK, el) {
+				$.post('<?= PATHSITE ?>anuncio/destaqueG', {
+					produtoFK1,
+					tipoFK,
+					cidadeFK,
+					tipo,
+					categoriaFK
+				}, function(retorno) {
+
+					const response = jQuery.parseJSON(retorno)
+
+					if (response.save || response.insert) {
+						const destaqueGBtns = document.querySelectorAll("[data-destaque-g]").forEach(
+							btn => btn.classList.remove("btn-danger")
+						)
+						el.classList.toggle("btn-danger")
+					} else if (response.remove) {
+						el.classList.toggle("btn-danger")
+					} else if (response.produtoEmDestaqueMenor) {
+						swal("Produto já destacado", "Este produto está destacado como destaque P", "warning")
+					}
+				});
+			}
+
+			function destaqueP(produtoFK, tipoFK, cidadeFK, tipo, categoriaFK, el) {
+				$.post('<?= PATHSITE ?>anuncio/destaqueP', {
+					produtoFK,
+					tipoFK,
+					cidadeFK,
+					tipo,
+					categoriaFK
+				}, function(retorno) {
+					const response = jQuery.parseJSON(retorno)
+					const limit = tipo == "tipo" ? 4 : 6
+
+					if (response.save || response.insert) {
+						el.classList.toggle("btn-primary")
+					} else if (response.noEmptySlots) {
+						swal(`Limite de ${limit} destaque pequenos para a categoria e cidade`, "Desmarque itens para adicionar outros", "warning")
+					} else if (response.produtoEmDestaqueMaior) {
+						swal("Produto já destacado", "Este produto está destacado como destaque G", "warning")
+					}
+				});
+			}
+		</script>

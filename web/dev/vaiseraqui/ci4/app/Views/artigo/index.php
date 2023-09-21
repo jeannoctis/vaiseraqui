@@ -152,10 +152,10 @@
 				}, function(retorno) {
 
 					const response = jQuery.parseJSON(retorno)
-
-					if (response.ok) {
-						$(`#btn${id}`).toggleClass("btn-warning")
-					}
+					console.log(response)
+					// if (response.ok) {
+					// 	$(`#btn${id}`).toggleClass("btn-warning")
+					// }
 				});
 			}
 		</script>

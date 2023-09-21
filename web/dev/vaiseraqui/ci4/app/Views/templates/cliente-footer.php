@@ -284,7 +284,7 @@
       once: true
    });
    const cSwal = Swal.mixin({
-      confirmButtonColor: "#7191A7",
+      confirmButtonColor: "#932327",
       customClass: {
          popup: 'custom-swal-font',
       }

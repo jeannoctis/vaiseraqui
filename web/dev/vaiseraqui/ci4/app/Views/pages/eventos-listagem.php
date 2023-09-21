@@ -14,7 +14,9 @@
                                     <section class="events-list-poster">
                                         <div class="container-medium">
                                             <div class="wraper">
-                                                <? foreach ($emAlta as $alta) { ?>
+                                                <? foreach ($emAlta as $ind => $alta) {
+                                                    if($ind <= 1) {
+                                                    ?>
                                                     <article class="card-events poster" data-aos="fade-up">
                                                            <a href="<?=PATHSITE?>evento/<?=$alta->identificador?>/">
                                                         <div class="cover">
@@ -74,11 +76,11 @@
                                                             </div>
                                                         </a>
                                                     </article>
-                                                <? } ?>                                                
+                                                <? } } ?>                                                
                                             </div>
                                         </div>
                                     </section>
-                                <? } ?>
+                                <? }  ?>
                                 <? if ($eventos) { ?>
                                     <section class="events-list-card">
                                         <div class="container-medium">

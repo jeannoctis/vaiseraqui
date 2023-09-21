@@ -7,9 +7,11 @@
                   <h4 class="box-title">
                      <?= $produtoFK->titulo ?> - <?= $title ?>
                   </h4>
-                  <!-- /.box-title -->
+                  
+                  
                   <div class="card-content">
-
+                     <b>(Tamanho recomendado: 1225px x 637px)</b>
+                       
                      <div class='form-group col-xs-12 paddingZeroM'>
                         <? if ($id) { ?>
                            <input data-default-file='<?= PATHSITE ?>uploads/<?= $tabela ?>/<?= $idFK ?>/<?= $foto->arquivo ?>' class='dropify' type="file" name='arquivo' value="upload" />
