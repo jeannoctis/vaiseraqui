@@ -169,6 +169,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<style>
 			form.filters,
 			form.filters ul {

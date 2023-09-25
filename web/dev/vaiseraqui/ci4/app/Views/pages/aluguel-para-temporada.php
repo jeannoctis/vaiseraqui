@@ -56,15 +56,14 @@
          <div class="container-medium">
             <header data-aos="fade-up">
                <h2>Mais destaques</h2>
-          <p>Conheça mais destaques na sua região</p>
+               <p>Conheça mais destaques na sua região</p>
             </header>
          </div>
          <div class="list">
             <div class="swiper rent-interna">
                <div class="swiper-wrapper">
                   <? foreach ($emAlta as $ind => $item) {
-                      if($ind) {
-                  ?>
+                      if($ind) { ?>
                      <div class="swiper-slide">
                         <?= view("templates/aluguel-para-temporada-destaque-card.php", (array)$item) ?>
                      </div>
@@ -98,7 +97,6 @@
 
 <div class="moda-filter-container">
    <div action="#" class="presentation-form j-filter-modal-container">
-
       <header>
          <h2>
             <div class="wraper-icon">

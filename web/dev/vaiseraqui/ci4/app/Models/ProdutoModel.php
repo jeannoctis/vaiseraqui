@@ -139,7 +139,7 @@ class ProdutoModel extends Model
         }
         return $setores;
     }
-
+    
     public function organizacoes($id)
     {
         $produtoOrganizacaoModel = model('App\Models\ProdutoOrganizacaoModel', false);
@@ -235,10 +235,10 @@ class ProdutoModel extends Model
     public function dadosCard()
     {
         return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado, t.identificador as tipo, t.id as tipo_id")
-            ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
-            ->join("cidade c", "c.id = produto.cidadeFK")
-            ->join("estado e", "e.id = c.estadoFK")
-            ->join("tipo t", "t.id = pc.tipoFK");
+        ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
+        ->join("cidade c", "c.id = produto.cidadeFK")
+        ->join("estado e", "e.id = c.estadoFK")
+        ->join("tipo t", "t.id = pc.tipoFK");
     }
 
     public function hospedagens($limit, $tipo) {
@@ -345,7 +345,7 @@ class ProdutoModel extends Model
         }
 
         ob_start();
-?>
+        ?>
         <div class="item show swiper-eventos-home" data-modal="">
             <? if ($categorias) { ?>
                 <div class="events-with-data j-calendar-columns swiper-wrapper">

@@ -276,7 +276,6 @@ class Pages extends Controller
 
     public function view($page = 'home')
     {
-
         $data = $this->buscaGeral();
         $data['segments'] = $segments = $this->request->uri->getSegments();
 
@@ -452,8 +451,8 @@ class Pages extends Controller
                 $data['setores'] = $produtoModel->setores($data['metatag']->id);
                 $data['organizacoes'] = $produtoModel->organizacoes($data['metatag']->id);
                 
-        $produtoVisitaModel =  model('App\Models\ProdutoVisitaModel', false);  
-         $produtoVisitaModel->contaVisita($data['metatag']->id);
+            $produtoVisitaModel =  model('App\Models\ProdutoVisitaModel', false);  
+            $produtoVisitaModel->contaVisita($data['metatag']->id);
 
                $anuncioModel = \model("App\Models\AnuncioModel", false)
                             ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5");
@@ -518,7 +517,7 @@ class Pages extends Controller
                         ->where("id != {$data['artigoAtual']->id}");
                     $data['artigosRelacionados'] = $this->artigoModel->findAll();
                 } else if ($segments[1] == "categoria") {
-                    // Blog Categoria                    
+                    // Blog Categoria
                     $data['script_list'] = ['modal-filter', 'modal-select-order'];
 
                     $page = "blog-categoria";
@@ -556,7 +555,6 @@ class Pages extends Controller
                         $data['artigos'] = $this->artigoModel->where("categoriaFK", $get['categoria'])->paginate(9, 'blog', $paginate);
                         $data['pager'] = $this->artigoModel->pager;
                     }
-                    // exit;
                 }
 
                 break;
