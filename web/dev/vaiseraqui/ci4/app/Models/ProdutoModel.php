@@ -16,7 +16,8 @@ class ProdutoModel extends Model {
         'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'capacidadeFK',
         'hospedes', 'limpeza', 'latitude', 'longitude', 'captadorFK', 'planoFK', 'calendario', 'preco', 'apartir', 'principaiscomodidades',
         'itensdisponiveis', 'areautil', 'quartos', 'banheiros', 'vagas', 'andar', 'animais', 'mobilia', 'transporte', 'condominio',
-        'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local', 'cafedamanha', 'wifi', 'arcondicionado', 'recepcao24', 'bar', 'acessibilidade', 'estacionamento'];
+        'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local', 
+        'cafedamanha', 'wifi', 'arcondicionado', 'recepcao24', 'bar', 'acessibilidade', 'estacionamento', 'title','description'];
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';
@@ -179,7 +180,7 @@ class ProdutoModel extends Model {
 
     public function anunciante($id) {
         $anuncianteModel = \model("App\Models\AnuncianteModel", false)
-                ->select("titulo, telefone, telefone2, telefone3, email, arquivo");
+                ->select("titulo, telefone, telefone2, telefone3, email, arquivo,pago");
         $anunciante = $anuncianteModel->find($id);
 
         $removeChars = array("-", "(", ")", " ");
@@ -260,7 +261,8 @@ class ProdutoModel extends Model {
         }
     }
 
-    public function filtros($get) {
+    public function filtros($get)
+    {
         helper('date');
         
         if($get['cidadeFK']){
@@ -292,7 +294,8 @@ class ProdutoModel extends Model {
         }
     }
 
-    public function eventos($get) {
+    public function eventos($get)
+    {
 
         $this->select('produto.titulo, produto.id, produto.local, pc.id as categoriaFK, c.titulo as cidade, '
                 . 'e.sigla as estado, produto.identificador');
@@ -327,11 +330,11 @@ class ProdutoModel extends Model {
 
         ob_start();
         ?>
-        <div class="item show" data-modal="">
+        <div class="item show swiper-eventos-home" data-modal="">
         <? if ($categorias) { ?>
-                <div class="events-with-data j-calendar-columns">
+                <div class="events-with-data j-calendar-columns swiper-wrapper">
                 <? foreach ($categorias as $categoria) { ?>
-                        <div class="column">
+                        <div class="column swiper-slide">
                             <h3><?= $categoria->titulo ?></h3>
                             <div class="scroll-h">
                                 <div class="wraper">
@@ -369,14 +372,63 @@ class ProdutoModel extends Model {
                         </div>
             <? } ?>
                 </div>
+            <? } ?>
             </div>
-        <? } ?>
+        <script>
+            new Swiper(".swiper-eventos-home", {
+            slidesPerView: 5,
+            allowTouchMove: true,
+    spaceBetween: 2,
+      breakpoints: {
+          0: {
+          slidesPerView: 1,
+        spaceBetween: 1,     
+          },
+        650: {
+        slidesPerView: 2,
+        spaceBetween: 2,
+      },
+      950: {
+        slidesPerView: 3,
+        spaceBetween: 3,
+      },
+      1320: {
+        slidesPerView: 5,
+      }
+    }
+            })
+
+            // dropdown callendar
+            var calendarTitle2 = document.querySelectorAll('.j-calendar-columns .column h3')
+            calendarTitle2.forEach(title => {
+                title.addEventListener('click', function(e) {
+                    e.preventDefault()                    
+
+                    const columns = this.parentNode.parentNode.querySelectorAll(".column")
+                    columns.forEach(column => {
+                        column.classList.toggle("show")
+                    })
+                    calendarTitle2.forEach(title => {
+                        title.classList.toggle("show")
+                    })
+                })
+            })
+
+            function closeAllAdsColumn() {
+                calendarTitle2.forEach(title => {
+                    const column = title.parentNode
+                    column.classList.remove('show')
+                    title.classList.remove('show')
+                })
+            }
+        </script>
         <?
         $retorno['html'] = ob_get_clean();
         echo json_encode($retorno);
     }
 
-    public function videos($id) {
+    public function videos($id)
+    {
         $produtoVideoModel = model('App\Models\ProdutoVideoModel', false);
         $produtoVideoModel->where('produtoFK', $id);
         $produtoVideoModel->orderBy('ordem ASC, id DESC');
@@ -400,6 +452,12 @@ class ProdutoModel extends Model {
         $tipoModel = \model("App\Models\TipoModel", false);
         $tipoModel->where('identificador', $data['segments'][0]);
         $tipo = $tipoModel->find()[0];
+        
+        if($data['segments'][1]) {
+            $data['canonical'] = PATHSITE . $data['segments'][0] . '/' . $data['segments'][1] . '/';
+        } else {
+            $data['canonical'] = PATHSITE . $data['segments'][0] . '/';
+        }
 
         $data['tipoAtual'] = $tipo;
 
@@ -705,6 +763,7 @@ class ProdutoModel extends Model {
       
                 break;
             case "saloes-de-festas-e-areas-de-lazer":
+                              
                 if ($data['segments'][1] && !is_numeric($data['segments'][1])) {
                     $data['escondeWhatsapp'] = true;
                     $page = 'salao-de-festa-e-area-de-lazer';
@@ -776,6 +835,7 @@ class ProdutoModel extends Model {
                     $produtoModel->filtros($get);
                     $data['saloes'] = $produtoModel->paginate(32, 'produto', $paginate);
                     $data['pager'] = $produtoModel->pager;
+          
 
                     foreach ($data['saloes'] as $ind => $produto) {
                         $data['saloes'][$ind]->fotos = $produtoModel->fotos($produto->id, 4, true);

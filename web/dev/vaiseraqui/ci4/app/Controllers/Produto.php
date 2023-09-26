@@ -98,7 +98,10 @@ class Produto extends BaseController {
 
         $data['lista'] = $this->model->orderBy("titulo ASC")->paginate(25, 'produtos', $paginate);
 
-      if ($get['tipo'] == 5) {
+        $tipoModel = \model('App\Models\TipoModel', false);
+        $data['tipoAtual'] = $tipoModel->find($get['tipo']);
+        
+      if ( $data['tipoAtual']->tipo ==  'EVENTOS') {
          $this->produtoDataModel = \model("App\Models\ProdutoDataModel", false);
          foreach ($data['lista'] as $item) {
             $this->produtoDataModel->resetQuery();
@@ -112,7 +115,7 @@ class Produto extends BaseController {
 
       $anuncioModel = \model("App\Models\AnuncioModel", false);
       if (!empty($get['tipo']) && !empty($get['cidade'])) {
-         if (\in_array($get['tipo'], [1, 2, 3, 4])) {
+         if (\in_array($data['tipoAtual']->tipo, ['ALUGUEL', 'SALOES', 'HOSPEDAGEM', 'LOJAS'])) {
             $busca = $anuncioModel
                ->where("tipoFK", $get['tipo'])
                ->where("cidadeFK", $get['cidade'])
@@ -139,7 +142,7 @@ class Produto extends BaseController {
                $data['altaProdutosFKs'] = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5];
             }
 
-         } else if ($get['tipo'] == 6 && !empty($get['categoria'])) {
+         } else if ($data['tipoAtual']->tipo == 'PRESTADORES' && !empty($get['categoria'])) {
 
             $busca = $anuncioModel
                ->where("tipoFK", $get['tipo'])
@@ -212,6 +215,9 @@ class Produto extends BaseController {
         $data['anunciantes'] = $this->anuncianteModel->orderBy("titulo ASC, id DESC")->findAll();
 
         $data['tipo'] = \getTipo($get['tipo']);
+        
+        $tipoModel = \model('App\Models\TipoModel', false);
+        $data['tipoAtual'] = $tipoModel->find($get['tipo']);
 
         $this->produtoValorModel = \model('App\Models\ProdutoValorModel', false);
         $this->produtoComodidadeModel = \model('App\Models\ProdutoComodidadeModel', false);
@@ -1314,14 +1320,17 @@ class Produto extends BaseController {
     public function novoCardapio() {
         ob_start();
         $token = md5(uniqid(""));
+        
+        $request = \Config\Services::request();
+        $get = $request->getGet();
+
+    
+        
+         $this->cardapioModel = \model('App\Models\CardapioModel', false);
+        $cardapiosDisponiveis = $this->cardapioModel->findAll();
+        
         ?>
-        <script>
-            $(document).ready(function () {
-                $(".mySingleFieldTags").tagit({
-                    allowSpaces: true
-                });
-            });
-        </script>
+      
         <div class="card">
             <div class="card-header" id="card<?= $token ?>">
                 <h5 class="mb-0">
@@ -1346,13 +1355,34 @@ class Produto extends BaseController {
                         </div>
                         <div class='col-12'>
                             <label>Itens</label>
-                            <input data-role="tagsinput" type="text" name="itens[]" class="form-control tags-input mySingleFieldTags " value="" placeholder="Itens">
+                            <input id="campoItens<?=$token?>" data-role="tagsinput" type="text" name="itens[]" class="form-control tags-input mySingleFieldTags<?=$token?> " value="" placeholder="Itens">
+                            <div class="container-cardapio" id="fieldTag-<?= $get['contador'] + 1?>"></div>
                         </div>
                     </div>
 
                 </div>
             </div>
         </div>
+        
+        <script>
+            
+              var country_list = [<? if($cardapiosDisponiveis){
+        foreach($cardapiosDisponiveis as $card){ 
+      ?>"<?=$card->titulo?>",<? 
+    } } ?>];
+            
+             $(document).ready(function () {
+              $("#campoItens<?=$token?>").tagit({
+          availableTags: country_list,
+            autocomplete: {},
+        allowSpaces: true,
+        showAutocompleteOnFocus: true,
+       // appendTo: "#fieldTag<?=$token?>"
+    }); 
+         $("#fieldTag-<?=$get['contador']+1?>").append( $("#ui-id-<?=$get['contador'] + 1?>") );
+         });
+ 
+            </script>
         <?
         $retorno['html'] = ob_get_clean();
         echo json_encode($retorno);
@@ -1867,5 +1897,4 @@ class Produto extends BaseController {
         echo view("{$data["tabela"]}/relatorio", $data);
         echo view('templates/admin-footer');
     }
-    
 }

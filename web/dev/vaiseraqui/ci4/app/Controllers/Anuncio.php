@@ -410,11 +410,14 @@ class Anuncio extends BaseController
 
       if ($post) {
          $post['produtoFK1'] = \decode($post['produtoFK1']);
+         
+         $tipoModel = \model('App\Models\TipoModel', false);
+        $tipoAtual = $tipoModel->find($post['tipoFK']);
 
          $this->model
             ->where("tipoFK", $post['tipoFK'])
             ->where("cidadeFK", $post['cidadeFK']);
-         if($post['tipoFK'] == 6) {
+         if($tipoAtual->tipo == 'PRESTADORES') {
             $this->model->where("categoriaFK", $post['categoriaFK']);
          }
          $busca = $this->model->where("tipo", $post['tipo'])->first();
@@ -423,7 +426,7 @@ class Anuncio extends BaseController
             $post['id'] = $busca->id;
 
             $produtosFKs = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5];
-            if($post['tipo'] == 6) {
+           if($tipoAtual->tipo == 'PRESTADORES') {
                $produtosFKs[] = [$busca->produtoFK6, $busca->produtoFK7];
             }
             
@@ -455,11 +458,14 @@ class Anuncio extends BaseController
 
       if ($post) {
          $post['produtoFK'] = \decode($post['produtoFK']);
+         
+          $tipoModel = \model('App\Models\TipoModel', false);
+        $tipoAtual = $tipoModel->find($post['tipoFK']);
 
          $this->model
          ->where("tipoFK", $post['tipoFK'])
          ->where("cidadeFK", $post['cidadeFK']);
-         if($post['tipoFK'] == 6) {
+        if($tipoAtual->tipo == 'PRESTADORES') {
             $this->model
                ->where("categoriaFK", $post['categoriaFK']);
          }
@@ -484,7 +490,7 @@ class Anuncio extends BaseController
                return;
             }
 
-            if($post['tipoFK'] != 6) {
+            if($tipoAtual->tipo != 'PRESTADORES') {
                if (empty($busca->produtoFK2)) {
                   $post['produtoFK2'] = $post['produtoFK'];
                } else if (empty($busca->produtoFK3)) {

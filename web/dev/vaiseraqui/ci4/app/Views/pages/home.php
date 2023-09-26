@@ -224,7 +224,7 @@
             <path d="M12 2L2 13.5L12 25" stroke="#BBBBBB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
-        <button class="next active">
+        <button class="next ">
           <svg class="active" width="14" height="27" viewBox="0 0 14 27" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 25L12 13.5L2 2" stroke="#932327" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
@@ -237,7 +237,7 @@
         <img src="assets/images/icon-calendar.svg" alt="Icon calendar">
         visualizar calendário
       </a>
-      <div id="categoria-eventos" class="menu-wraper" data-aos="fade-up">
+      <div id="categoria-eventos" class="menu-wraper" >
       </div>
     </div>
   </section>
@@ -255,14 +255,14 @@
           <div class="swiper-wrapper">
             <? foreach ($blogs as $blog) { ?>
               <div class="swiper-slide">
-                <article onclick="location.href=<?= PATHSITE ?>blog/<?= $blog->identificador ?>/" class="blog-post-medium">
+                <article  onclick="location.href='<?= PATHSITE ?>blog/<?= $blog->identificador ?>/'" class="blog-post-medium">
                   <div class="cover">
-                    <img src="<?= PATHSITE ?>uploads/blog/<?= $blog->arquivo ?>" alt="">
+                    <img src="<?= PATHSITE ?>uploads/artigo/<?= $blog->arquivo ?>" alt="">
                     <a href="#" class="category"><?= $blog->categoria ?></a>
                   </div>
                   <div class="info">
                     <h3><?= $blog->titulo ?></h3>
-                    <p class="chamada"><?= $blog->chamada ?></p>
+                    <p class="chamada"><?= character_limiter(strip_tags($blog->texto),300) ?></p>
                     <a href="<?= PATHSITE ?>blog/<?= $blog->identificador ?>/" class="more">
                       Ler artigo
                       <svg class="active" width="6" height="11" viewBox="0 0 6 11" fill="none" xmlns="http://www.w3.org/2000/svg">

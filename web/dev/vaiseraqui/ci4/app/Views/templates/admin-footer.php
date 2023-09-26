@@ -177,13 +177,21 @@
     })
     toggleDisabledDeleteBtn()
   }
+  const checkboxesPhotosToDelete = document.querySelectorAll(".hover input.excluir")
+  if(checkboxesPhotosToDelete) {
+    checkboxesPhotosToDelete.forEach(input => { 
+      input.addEventListener("change", toggleDisabledDeleteBtn)
+    })
+    toggleDisabledDeleteBtn()
+  }
 
   function toggleDisabledDeleteBtn() {
     const checkboxSelected = document.querySelectorAll("tbody input[type=checkbox]:checked")
     const btn = document.querySelector("button.btn-danger")
+    const photosToDelete = document.querySelectorAll("input.excluir:checked")
 
-    if (checkboxSelected && btn) {
-      if (checkboxSelected.length > 0) {
+    if (btn && checkboxSelected || photosToDelete) {
+      if (checkboxSelected.length > 0 || photosToDelete.length > 0 ) {
         btn.removeAttribute("disabled")
       } else {
         btn.setAttribute("disabled", "")

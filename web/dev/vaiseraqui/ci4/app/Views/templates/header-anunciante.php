@@ -11,7 +11,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="<?= PATHSITE ?>images/favicon.ico">
     <link rel="stylesheet" href="<?= PATHSITE ?>admins/assets/plugin/sweet-alert/sweetalert.css">
 
-    <link href="https://code.jquery.com/ui/1.10.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
+    <link href="https://code.jquery.com/ui/1.11.3/themes/redmond/jquery-ui.css" rel="stylesheet" media="screen">
     <title>Área do Anunciante - Vai Ser Aqui</title>
 </head>
 
@@ -71,7 +71,7 @@
 
                     <a href="<?= PATHSITE ?>area-do-anunciante/dados" class="itemMenuPainel <?= ($segments[1] == 'dados') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-write.svg">
-                        <h5>Dados do imóvel</h5>
+                        <h5>Dados do anúncio</h5>
                     </a>
 
                     <a href="<?= PATHSITE ?>area-do-anunciante/perfil/" class="itemMenuPainel <?= ($segments[1] == 'contatos' || $segments[1] == 'perfil') ? 'menuAtivo' : '' ?>">
@@ -94,36 +94,46 @@
                         <h5>Comodidades</h5>
                     </a>
 
+                    <? if (in_array($tipoAtual->tipo, ['SALOES'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/proximidades" class="itemMenuPainel <?= ($segments[1] == 'proximidades') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-tree.svg">
                         <h5>Proximidades</h5>
                     </a>
+                    <? } ?>
 
                     <a href="<?= PATHSITE ?>area-do-anunciante/condominio" class="itemMenuPainel <?= ($segments[1] == 'condominio') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-condominio.svg">
                         <h5>Condomínio</h5>
                     </a>
 
+                  <? if (in_array($tipoAtual->tipo, ['SALOES', 'LOJAS'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/observacoes" class="itemMenuPainel <?= ($segments[1] == 'observacoes') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-observation.svg">
                         <h5>Observações</h5>
                     </a>
+                  <? } ?>
 
+                 <? if (in_array($tipoAtual->tipo, ['SALOES'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/regras-check-in-out" class="itemMenuPainel <?= ($segments[1] == 'regras-check-in-out') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-arrows.svg">
                         <h5>Regras Check-in e Check-out</h5>
                     </a>
+                 <? } ?>
 
+                 <? if (in_array($tipoAtual->tipo, ['SALOES'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/permitido-proibido" class="itemMenuPainel <?= ($segments[1] == 'permitido-proibido') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-check-x.svg">
                         <h5>Permitido e Proibido</h5>
                     </a>
-
+                 <? } ?>
+                
+                  <? if (in_array($tipoAtual->tipo, ['LOJAS','SALOES'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/itens-disponiveis" class="itemMenuPainel <?= ($segments[1] == 'itens-disponiveis') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-alert-white.svg">
                         <h5>Itens disponíveis</h5>
                     </a>
-
+                  <? } ?>
+                
                     <a href="<?= PATHSITE ?>area-do-anunciante/calendario" class="itemMenuPainel <?= ($segments[1] == 'calendario') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-calendar.svg">
                         <h5>Calendário</h5>
@@ -134,10 +144,19 @@
                         <h5>Feriados</h5>
                     </a>
 
+               <? if (in_array($tipoAtual->tipo, ['EVENTOS'])) {?>               
                     <a href="<?= PATHSITE ?>area-do-anunciante/ingressos" class="itemMenuPainel <?= ($segments[1] == 'ingressos') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-pricing.svg">
-                        <h5>Valores / Ingressos</h5>
+                        <h5>Ingressos</h5>
                     </a>
+               <? } ?>
+                
+                 <? if (in_array($tipoAtual->tipo, ['ALUGUEL', 'SALOES', 'HOSPEDAGEM', 'LOJAS','EVENTOS'])) {?>               
+                    <a href="<?= PATHSITE ?>area-do-anunciante/precos" class="itemMenuPainel <?= ($segments[1] == 'precos') ? 'menuAtivo' : '' ?>">
+                        <img src="<?= PATHSITE ?>images/icon-pricing.svg">
+                        <h5>Valores</h5>
+                    </a>
+               <? } ?>
 
                     <a href="<?= PATHSITE ?>area-do-anunciante/pontos-de-venda" class="itemMenuPainel <?= ($segments[1] == 'pontos-de-venda') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-sales-point.svg">

@@ -21,6 +21,7 @@
                    $emAlta[0]->tipo = 'salao-de-festa-e-area-de-lazer';
                   echo view("templates/aluguel-para-temporada-destaque-grande-card.php", (array)$emAlta[0]);
                } ?>
+               <? } ?>
                <div class="list-articles">               
                   <!-- Listagem comumn -->
                   <? foreach ($saloes as $salao) {
@@ -31,7 +32,7 @@
                </div>
                <?= $pager->links("anuncios") ?>
             </div>
-         <? } ?>
+         
       </div>
       <div class="column">
          <div class="embed-map">

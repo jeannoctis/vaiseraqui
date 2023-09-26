@@ -24,7 +24,20 @@ $infoPagina['iconePagina'] = $iconePagina;
                         <h6 class="ml-2">ocultaremos no anúncio os campos vazios ;)</h6>
                     </div>
 
-                    <? foreach ($proximidadesDisponiveis as $ind => $proximidade) { ?>
+                    <? foreach ($proximidadesDisponiveis as $ind => $proximidade) {
+                        
+                        $proximidadesExistentes = '';
+                        $idUpdate = '';
+                        if($todasProximidades) {
+                            foreach($todasProximidades as $tProx) {                       
+                               if($tProx->proximidadeFK == $proximidade->id){
+                                   $proximidadesExistentes = $tProx->proximidades; 
+                                   $idUpdate = $tProx->id;
+                               }
+                        }
+                        }
+                        
+                        ?>
                         <div class="card border-top py-3">
                             <div class="card-header pt-0" id="tituloAba<?= $ind ?>">
                                 <h5 class="mb-0">
@@ -46,8 +59,10 @@ $infoPagina['iconePagina'] = $iconePagina;
                                     <div class="row">
                                         <div class="col-12">
                                             <label>Nas proximidades</label>
-                                            <input type='hidden' name='id[]' value="<?= encode($proximidade->id) ?>" />
-                                            <input type="text" name="proximidades[]" class="form-control" Value="<?= $proximidade->proximidades ?>">
+                                            
+                                            <input type='hidden' name='id[]' value="<?= encode($idUpdate) ?>" />
+                                            <input type='hidden' name='proximidadeFK[]' value="<?= $proximidade->id ?>" />
+                                            <input type="text" name="proximidades[]" class="form-control" Value="<?= $proximidadesExistentes?>">
                                         </div>
                                     </div>
                                 </div>

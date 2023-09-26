@@ -48,9 +48,7 @@
           <? if ($redes) {
             foreach ($redes as $rede) { ?>
               <a target="_blank" rel="me" href="<?= $rede->link ?>">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M13.2 21.5256C15.6207 21.2176 17.8334 19.9994 19.3882 18.1185C20.943 16.2377 21.7233 13.8354 21.5705 11.4C21.4176 8.96449 20.3432 6.67859 18.5655 5.00686C16.7878 3.33513 14.4403 2.40303 12 2.4C9.55675 2.39818 7.20474 3.32801 5.42321 5.00001C3.64168 6.67202 2.56469 8.96039 2.41169 11.3988C2.2587 13.8373 3.0412 16.2423 4.59977 18.1239C6.15834 20.0055 8.37569 21.222 10.8 21.5256V14.4H8.4V12H10.8V10.0152C10.8 8.4108 10.968 7.8288 11.28 7.242C11.5873 6.66142 12.0624 6.18683 12.6432 5.88C13.1016 5.634 13.6716 5.4864 14.6676 5.4228C15.0624 5.3976 15.5736 5.4288 16.2012 5.5188V7.7988H15.6C14.4996 7.7988 14.0448 7.8504 13.7736 7.9956C13.6118 8.07883 13.48 8.21058 13.3968 8.3724C13.2528 8.6436 13.2 8.9124 13.2 10.014V12H16.2L15.6 14.4H13.2V21.5256ZM12 24C5.3724 24 0 18.6276 0 12C0 5.3724 5.3724 0 12 0C18.6276 0 24 5.3724 24 12C24 18.6276 18.6276 24 12 24Z" fill="#932327" />
-                </svg>
+                <img src="<?=PATHSITE?>uploads/rede_social/<?=$rede->imagem?>" />
                 <?= $rede->nome ?>
               </a>
           <? }
@@ -200,7 +198,7 @@
   <script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/sweetalert2/swal2.min.js"></script>
-  <script src="<?= PATHSITE ?>assets/scripts/script.js"></script>
+  <script src="<?= PATHSITE ?>assets/scripts/script.js?v=1.0.0"></script>
 
   <!-- Scripts Individuais -->
   <?= view("templates/script-individual") ?>
@@ -293,8 +291,10 @@
   </script>
   
   <script>
+      <? if($pagina == 1) {?>
       carregaDestaques(<?=$destaqueEmAlta->id?>,0);
       carregaDestaques(<?=$destaqueEmAlta2->id?>,1);
+      <? } ?>
    </script>
   
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"  crossorigin=""></script>

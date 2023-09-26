@@ -125,12 +125,14 @@
                         </div>
                      </div>
 
+                       <? if (in_array($tipoAtual->tipo, ['EVENTOS'])) { ?>
                      <div class='col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 form-group">
                            <label for="local">Nome do local </label>
                            <input type="text" name="local" class="form-control" id="local" value="<?= $resultado->local ?>" placeholder="Escreva..." required>
                         </div>
                      </div>
+                       <? } ?>
 
                      <div class='col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 form-group">
@@ -150,7 +152,7 @@
                                  <i class='mdi mdi-comment-question-outline'></i>
                               </a>
                            </label>
-                           <textarea name='coordenadas' class="form-control" id="coordenadas"><?= $resultado->coordenadas ?></textarea>
+                           <input type="text" name='coordenadas' class="form-control" id="coordenadas" value="<?= $resultado->coordenadas ?>"  />
                         </div>
                      </div>
 
@@ -166,7 +168,7 @@
                      <div class='form-group col-xs-12 paddingZeroM'>
                         <div class="col-xs-12">
                            <label for="anuncianteFK">Responsável</label>
-                           <select name="anuncianteFK" id="anuncianteFK" class="js-example-basic-single form-control" <?= $get['tipo'] != 5 ? "required" : "" ?>>
+                           <select name="anuncianteFK" id="anuncianteFK" class="js-example-basic-single form-control" <?= $tipoAtual->tipo != 'EVENTOS' ? "required" : "" ?>>
                               <? if ($anunciantes) { ?>
                                  <option value="">-- Selecione a pessoa responsável</option>
                                  <? foreach ($anunciantes as $anunciante) { ?>
@@ -200,7 +202,7 @@
                         </div>
                      </div>
 
-                     <? if (in_array($get['tipo'], [5])) { ?>
+                     <? if (in_array($tipoAtual->tipo, ['EVENTOS'])) { ?>
                         <div class='col-xs-12 paddingZeroM'>
                            <div class="col-xs-12 form-group">
                               <label for="link">Link do botão "Comprar ingressos"</label>
@@ -211,7 +213,7 @@
                   </div>
                </div>
 
-               <? if (in_array($get['tipo'], [1, 2, 3, 4])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['ALUGUEL', 'SALOES', 'HOSPEDAGEM', 'LOJAS'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title with-btn">
                         Valores
@@ -258,7 +260,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [2, 4])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['SALOES', 'LOJAS'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Itens disponíveis
@@ -277,7 +279,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['ALUGUEL'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Informações importantes
@@ -354,7 +356,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [3])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['HOSPEDAGEM'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Informações importantes
@@ -454,7 +456,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1, 3])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['ALUGUEL', 'HOSPEDAGEM'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Principais Comodidades
@@ -464,7 +466,7 @@
 
                         <div class='form-group col-xs-12 paddingZeroM'>
                            <div class="col-xs-12">
-                              <label for="principaiscomodidades">Adicionadas</label>
+                              <label for="principaiscomodidades">Adicionadas (separe-os com 'enter' ou 'tab')</label>
                               <input type="text" name="principaiscomodidades" class="form-control tags-input mySingleFieldTags" id="principaiscomodidades" value="<?= $resultado->principaiscomodidades ?>" placeholder="Escreva...">
                            </div>
                         </div>
@@ -489,7 +491,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1, 3])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['ALUGUEL','HOSPEDAGEM'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title with-btn">
                         Comodidades por área
@@ -539,7 +541,26 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1, 2, 3])) { ?>
+                <? if (in_array($tipoAtual->tipo, ['SALOES','PRESTADORES'] ) ) { ?>
+                    <div class="box-content card white">
+                     <h4 class="box-title">
+                      Quantidade de hóspedes
+                     </h4>
+                     <!-- /.box-title -->
+                     <div class="card-content">
+
+                        <div class='form-group col-sm-12 col-md-3 paddingZeroM'>
+                           <div class="col-xs-12 col-sm-12">
+                              <label for="hospedes">Limite de hóspedes</label>
+                              <input type="number" name="hospedes" id="hospedes" min="0" class="form-control" value="<?= $resultado->hospedes ?>" placeholder="Escreva..." required>
+                           </div>
+                        </div>
+
+                     </div>
+                  </div>
+               <? } ?>
+                
+               <? if (in_array($tipoAtual->tipo, ['ALUGUEL', 'SALOES', 'HOSPEDAGEM'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title with-btn">
                         Proximidades
@@ -576,7 +597,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1, 4])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['ALUGUEL', 'LOJAS'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Condomínio
@@ -593,7 +614,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [6])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['PRESTADORES'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title with-btn">
                         Cardápios (apenas para Buffut e relacionados!)
@@ -656,7 +677,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [1, 2, 3, 4, 6])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['ALUGUEL', 'SALOES', 'HOSPEDAGEM', 'LOJAS', 'PRESTADORES'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Observações
@@ -672,7 +693,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [6])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['PRESTADORES'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         O que fazemos e não fazemos
@@ -722,7 +743,7 @@
 
                <? } ?>
 
-               <? if (in_array($get['tipo'], [2, 3])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['SALOES', 'HOSPEDAGEM'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title">
                         Check-in & Check-out
@@ -758,7 +779,7 @@
                   </div>
                <? } ?>
 
-               <? if (in_array($get['tipo'], [5])) { ?>
+               <? if (in_array($tipoAtual->tipo, ['EVENTOS'])) { ?>
                   <div class="box-content card white">
                      <h4 class="box-title with-btn">
                         Datas
@@ -988,6 +1009,26 @@
                   </div>
                </div> -->
 
+                  <div class="box-content card white">
+                        <h4 class="box-title">
+                        SEO
+                     </h4>
+               			<div class="card-content">
+            <div class='form-group col-xs-12 paddingZeroM'>                                                  
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="title">Title</label>                               
+                                    <input type="text" name="title" class="form-control" id="title" value="<?= $resultado->title ?>" placeholder="Escreva...">                              
+                            </div>
+                <div class="col-xs-12 col-sm-4">
+                                <label for="description">Description</label>                               
+                  <textarea maxlength='160' type="text" name="description" class="form-control validaTamanho" id="description"  placeholder="Escreva..."><?= $resultado->description ?></textarea>                             
+                            </div>
+                            </div>
+                                    
+            
+          </div>
+                  </div>
+               
                <div class="box-content card white">
                   <h4 class="box-title">
                      Salvar alterações?

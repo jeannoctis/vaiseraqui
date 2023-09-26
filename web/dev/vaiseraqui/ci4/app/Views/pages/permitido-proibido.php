@@ -23,12 +23,12 @@ $infoPagina['iconePagina'] = $iconePagina;
 
                <div class="col-12 mb-5">
                   <label>Permitido</label>
-                  <input type="text" name="permitido" class="form-control" value="<?= $anuncio->permitido ?>">
+                  <input type="text" name="pode" class="form-control" value="<?= $anuncio->pode ?>">
                </div>
 
                <div class="col-12">
                   <label>Proibido</label>
-                  <input type="text" name="proibido" class="form-control" value="<?= $anuncio->proibido ?>">
+                  <input type="text" name="naopode" class="form-control" value="<?= $anuncio->naopode ?>">
                </div>
 
                <div class="col-12 border-top pt-3">

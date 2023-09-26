@@ -3474,18 +3474,7 @@ header.header-bg .group-title span {
     position: relative;
     padding: 2.58rem 1.87rem 2.5rem 1.56rem;
   }
-  .post-article .info h3 {
-    font-size: 1rem;
-    font-weight: 800;
-    margin-bottom: 0.62rem;
-  }
-  .post-article .info p {
-    font-size: 0.75rem;
-    font-weight: 400;
-    line-height: 1.125rem;
-    letter-spacing: -0.03125rem;
-    margin-bottom: 1.25rem;
-  }
+
   .post-article .info a.more {
     font-size: 0.875rem;
     font-weight: 700;
@@ -6738,7 +6727,7 @@ header.header-bg .group-title span {
   margin-bottom: 1.06rem;
   width: 48px;
   aspect-ratio: 1;
-  object-fit: cover;
+  object-fit: contain;
   transition: all 200ms ease;
 }
 .about .mission .container-medium .item:is(:hover, :focus-visible) img {
@@ -9858,6 +9847,10 @@ header.header-bg .group-title span {
   color: inherit;
 }
 
+#categoria-eventos{
+    overflow: hidden;
+}
+
 @media (max-width: 450px) {
   .form-wpp.active {
     right: 50%;
@@ -9865,7 +9858,3 @@ header.header-bg .group-title span {
   }
 }
 
-/* Swiper eventos */
-.swiper-eventos-home .swiper-slide {
-  max-width: max-content;
-}

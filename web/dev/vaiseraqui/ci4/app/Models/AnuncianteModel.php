@@ -11,7 +11,7 @@ class AnuncianteModel extends Model
     protected $primaryKey = 'id';
     protected $returnType = 'object';
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['titulo', 'cpf', 'telefone', 'telefone2', 'telefone3', 'email', 'senha', 'arquivo', 'recuperar'];
+    protected $allowedFields = ['titulo', 'cpf', 'telefone', 'telefone2', 'telefone3', 'email', 'senha', 'arquivo', 'recuperar','pago'];
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';
@@ -200,9 +200,12 @@ class AnuncianteModel extends Model
             case "proximidades":
                 $data['instrucoes'] = $instrucaoModel->find(5);
 
-
                 $this->proximidadeModel = \model('App\Models\ProximidadeModel', false);
                 $data['proximidadesDisponiveis'] = $this->proximidadeModel->orderBy("ordem ASC, id DESC")->findAll();
+                
+                $produtoProximidadeModel = \model('App\Models\ProdutoProximidadeModel', false);
+                $produtoProximidadeModel->where('produtoFK',$data['anuncio']->id);
+                $data['todasProximidades'] = $produtoProximidadeModel->findAll();
 
                 $data['nomePagina'] = "Proximidades";
                 $data['iconePagina'] = "icon-tree.svg";
@@ -212,9 +215,24 @@ class AnuncianteModel extends Model
                 $data["itens"] = $proximidadeModel->findAll();
 
                 if ($post) {
-                    $post['id'] = $data['anuncio']->id;
-                    $data["salvou"] = $produtoModel->save($post);
+                    
+                    if($post['id']) {
+                        foreach($post['id'] as $ind => $pid) {
+                            $id = decode($pid);
+                            if($id){
+                                $save['id'] = $id;
+                            } else {
+                                unset($save['id']);
+                            }
+                            $save['proximidadeFK'] = $post['proximidadeFK'][$ind];
+                            $save['produtoFK'] = $data['anuncio']->id;
+                            $save['proximidades'] = $post['proximidades'][$ind];
+                        $data['salvou'] = $produtoProximidadeModel->save($save);
+                 
+                        }
+                    }
                 }
+               
                 break;
             case "lazer":
 
@@ -648,6 +666,9 @@ class AnuncianteModel extends Model
                 $produtoCardapioModel->where("produtoFK", $data['anuncio']->id);
                 $data['cardapios'] = $produtoCardapioModel->findAll();
 
+                $this->cardapioModel = \model('App\Models\CardapioModel', false);
+        $data['cardapiosDisponiveis'] = $this->cardapioModel->findAll();
+                
                 if ($post) {
                     if ($post['titulo']) {
                         $save['produtoFK'] = $data['anuncio']->id;
@@ -1036,6 +1057,10 @@ class AnuncianteModel extends Model
                 $data['iconePagina'] = "icon-condominio.svg";
                 $data['instrucoes'] = $instrucaoModel->find(6);
 
+                 if ($post) {
+                    $post['id'] = $data['anuncio']->id;
+                    $data["salvou"] = $produtoModel->save($post);
+                }
 
             break;
             case "observacoes":
@@ -1043,12 +1068,22 @@ class AnuncianteModel extends Model
                 $data['iconePagina'] = "icon-observation.svg";
                 $data['instrucoes'] = $instrucaoModel->find(7);
 
+                 if ($post) {
+                    $post['id'] = $data['anuncio']->id;
+                    $data["salvou"] = $produtoModel->save($post);
+                }
+                
                 break;
             case "regras-check-in-out":
                 $data['nomePagina'] = "Regras de Check-in & Check-out";
                 $data['iconePagina'] = "icon-arrows.svg";
 
                 $data['instrucoes'] = $instrucaoModel->find(11);
+                                
+                if ($post) {
+                    $post['id'] = $data['anuncio']->id;
+                    $data["salvou"] = $produtoModel->save($post);
+                }
 
                 break;
             case "permitido-proibido":
@@ -1056,6 +1091,11 @@ class AnuncianteModel extends Model
                 $data['iconePagina'] = "icon-check-x.svg";
                 $data['instrucoes'] = $instrucaoModel->find(12);
 
+                    if ($post) {
+                    $post['id'] = $data['anuncio']->id;
+                    $data["salvou"] = $produtoModel->save($post);
+                }
+                
                 break;
             case "itens-disponiveis":
                 $data['nomePagina'] = "Itens disponíveis";
@@ -1063,6 +1103,11 @@ class AnuncianteModel extends Model
 
                 $data['instrucoes'] = $instrucaoModel->find(10);
 
+                 if ($post) {
+                    $post['id'] = $data['anuncio']->id;
+                    $data["salvou"] = $produtoModel->save($post);
+                }
+                
                 break;
             default:
                 throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
@@ -1071,6 +1116,11 @@ class AnuncianteModel extends Model
 
         // $data['anuncio'] = $produtoModel->find($this->session->get('anuncio'));
         $data['anunciante'] = $this->find($this->session->get('anunciante')->id);
+        
+        if($data['salvou']) {
+            $data['sucesso'] = true;
+        }
+        
         if ($header) {
             echo view("templates/{$header}", $data);
         }

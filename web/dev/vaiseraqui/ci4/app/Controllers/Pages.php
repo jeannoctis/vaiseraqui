@@ -41,12 +41,14 @@ class Pages extends Controller {
         $produtoCategoriaModel->orderBy('titulo ASC');
         $data['produtoCategorias'] = $produtoCategoriaModel->findAll();
 
+        
         $data['todosFavoritos'] = array();
         if ($this->session->get('cliente')) {
             $data["isLogado"] = TRUE;
             $clienteModel = model('App\Models\ClienteModel', false);
             $data['clienteLogado'] = $clienteModel->find($this->session->get('cliente')->id);
-
+            
+         
             $clienteFavoritoModel = model('App\Models\ClienteFavoritoModel', false);
             $clienteFavoritoModel->select("produtoFK");
             $clienteFavoritoModel->where("clienteFK", $this->session->get('cliente')->id);
@@ -98,9 +100,11 @@ class Pages extends Controller {
 
     public function index()
     {
+     
         helper("date");
         $data = $this->buscaGeral();
-
+   $data['canonical'] = PATHSITE;  
+        
         $data['style_list'] = ['swiper','jquery_ui'];
         $data['script_list'] = ['swiper', 'card-like', 'controller-agenda', 'controller-blog', 'controller-card', 'fs-lightbox', 'mask-date', 'mask-telefone', 'menu-tabs','jquery_ui'];
         $data['origem'] = "home";
@@ -309,6 +313,7 @@ class Pages extends Controller {
                 exit();
                 break;
             case "sobre-nos":
+                  $data['canonical'] = PATHSITE . 'sobre-nos/';  
                 $data['script_list'] = ['mask-telefone', 'modal-filter'];
 
                 $data['pagina'] = 2;
@@ -324,6 +329,7 @@ class Pages extends Controller {
                 $data['txContato'] = $this->textoModel->find(7);
                 break;
             case 'planos':
+                 $data['canonical'] = PATHSITE . 'planos/';  
                 $post = \request()->getPost();
                 $data['style_list'] = ['swiper'];
                 $data['script_list'] = ['swiper', 'mask-telefone', 'modal-filter', 'modal-select-order'];
@@ -468,6 +474,7 @@ class Pages extends Controller {
                 $data['script_list'] = ['modal-filter'];
                 $data['bodyClass'] = 'blog-list';
                 $data['pagina'] = 5;
+                 $data['canonical'] = PATHSITE . 'blog/';  
                 $data['get'] = $get = \request()->getGet();
                 $page = "blog-listagem";
 
@@ -487,24 +494,30 @@ class Pages extends Controller {
                 $data['artigosRecentes'] = $this->artigoModel
                         ->resetQuery()
                         ->orderBy("dtCriacao DESC")
-                        ->paginate(1, "artigos", $paginate);
+                        ->paginate(9, "artigos", $paginate);
                 $data['pager'] = $this->artigoModel->pager;
 
                 $this->categoriaArtigoModel = \model('App\Models\CategoriaArtigoModel', false);
                 $this->categoriaArtigoModel->where("categoriaArtigo.id IN (SELECT categoriaFK FROM artigo WHERE artigo.excluido IS NULL)");
-                $data['cats'] = $this->categoriaArtigoModel->categorias();                
+                $data['categorias'] = $this->categoriaArtigoModel->findAll();
+
+                foreach ($data['categorias'] as $categoria) {
+                    $data['cats'][$categoria->id] = $categoria->titulo;
+                }
 
                 $data['artigoAtual'] = $this->artigoModel->where("identificador", $segments[1])->first();
 
                 if ($segments[1] && $data['artigoAtual']) {
                     // Blog Interna
                     $data['style_list'] = ['swiper'];
-                    $data['script_list'] = ['swiper'];
+                    $data['script_list'] = ['swiper','header','form-filter','select','modal-filter','controller-page-internal-3'];
                     $data['anuncioBannerV'] = $anuncioModel->find(12);
 
                     \helper("url");
                     $data['crrUrl'] = \current_url(); // Compartilhar: copiar link ?
                     $page = 'blog-interna';
+                    
+                     $data['canonical'] = PATHSITE . 'blog/'. $data['metatag']->identificador . '/';  
 
                     $this->artigoModel->resetQuery()
                             ->where("categoriaFK", $data['artigoAtual']->categoriaFK)
@@ -555,6 +568,7 @@ class Pages extends Controller {
                 break;
        
             case "contato":
+                  $data['canonical'] = PATHSITE . 'contato/';  
                 $data['script_list'] = ['mask-telefone', 'modal-filter'];
                 $data['origem'] = "contato";
 
@@ -563,6 +577,7 @@ class Pages extends Controller {
                 $data['txContato'] = $this->textoModel->find(7);
                 break;
             case "politica-de-privacidade-e-termos-de-uso":
+                $data['canonical'] = PATHSITE . 'politica-de-privacidade-e-termos-de-uso/';  
                 $data['script_list'] = ['modal-filter'];
 
                 $data['bodyClass'] = 'privacy-policy';
@@ -1057,7 +1072,7 @@ class Pages extends Controller {
             $retorno = json_decode($response);
         }
 
-        //  $retorno->score = 1;
+         $retorno->score = 1;
 
         if ($retorno->score < 0.7) {
             $erro[] = "Falha na verificação do google recaptcha";

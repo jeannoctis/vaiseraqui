@@ -42,7 +42,9 @@
                             Favoritos
                         </li>
                         <li onclick="$('#avisoSair').modal('show');">
+                            <a href="<?=PATHSITE?>logout/">
                             <img src="<?= PATHSITE ?>images/perfil_sair.svg"> Sair
+                            </a>
                         </li>
 
                     </ul>

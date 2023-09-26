@@ -168,9 +168,11 @@
 
         function setValueInForm(type, params) {
         const formboxModalOpen = document.querySelector('.box-modal-open')
+         const labelButton = formboxModalOpen.querySelector('.button')
                 const labelResult = formboxModalOpen.querySelector('.label-value')
                 const inputResult = formboxModalOpen.querySelector('input.modal-value-selected')
 
+         labelButton.innerHTML = `Selecionado→`
                 labelResult.innerHTML = `${type} <br /> ${params}`
                 inputResult.value = `${type} ${params}`
 
@@ -270,7 +272,8 @@
     
     <?   echo View('templates/checkin-out'); ?>
     
-<? } else if ($pagina == 25) { ?>
+<? } else if ($pagina == 25) {
+    ?>
     <!-- Saloes de festa e area de lazer listagem -->
       <?
     echo View('templates/checkin-out');
@@ -284,7 +287,7 @@
                 new Selector(box)
                 })
     </script>
-<? } else if ($segments[0] == "saloes-de-festas-e-areas-de-lazer") { ?>
+<? } else if ($tipopagina == "salao-de-festa") { ?>
     <!-- Saloes de festa e area de lazer interna -->
     
     <script>        
@@ -297,7 +300,8 @@
     
     <?echo View('templates/checkin-out');?>
     
-<? } else if ($pagina == 12 && !$segments[1]) { ?>
+<? } else if ($pagina == 12 && !$segments[1]) {
+    ?>
     <!-- Alguel para temporada listagem -->
     <script>
                 // Controla modal de mapa
@@ -316,9 +320,6 @@
 <? } else if ($pagina == 12 && $segments[1]) { ?>
     <!-- Alguel para temporada interna -->
     <script>
-
-
-
                 // Form Select
                 const boxes = document.querySelectorAll('.j-box-select')
                 boxes.forEach((box, key) => {
@@ -332,8 +333,6 @@
 <? } else if ($pagina == 24 && !$segments[1]) { ?>
     <!-- Lojas temporarias listagem -->
     <script>
-
-
         // Form Select
         const boxes = document.querySelectorAll('.j-box-select')
                 boxes.forEach((box, key) => {
@@ -343,8 +342,6 @@
 <? } else if ($pagina == 24 && $segments[1]) { ?>
     <!-- Lojas temporarias interna -->
     <script>
-
-
                 // Date picker
                 $(document).ready(function() {
         $(function() {
@@ -609,7 +606,6 @@
 
 <? if ($videos) { ?>
     <script>
-
                 function verVideos() {
                 Fancybox.show([
     <?

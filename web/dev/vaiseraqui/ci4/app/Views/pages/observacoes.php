@@ -24,9 +24,7 @@ $infoPagina['iconePagina'] = $iconePagina;
 
                <h2 class="col-12 mb-3">Observações</h2>
                <div class='col-12'>
-                  <textarea name="observacoes" id="" cols="30" rows="10" class="form-control tinymce_full">
-
-                  </textarea>
+                  <textarea name="observacoes" id="" cols="30" rows="10" class="form-control tinymce_full"><?=$anuncio->observacoes?></textarea>
                </div>
 
                <div class="col-12 border-top pt-3">

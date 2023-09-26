@@ -117,7 +117,7 @@ class Artigo extends BaseController
             $data['salvou'] = $this->model->save($post);
          } else {
              
-            $post["identificador2"] = \arruma_url($post['titulo']);
+            $post["identificador"] = \arruma_url($post['titulo']);
             $data['salvou'] = $this->model->insert($post);
          }
 
