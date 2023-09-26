@@ -3561,6 +3561,9 @@ header.header-bg .group-title span {
 .s-callendar .container-medium .box-days a.active span, .s-callendar .container-medium .box-days a:hover span {
   color: #FFFFFF;
 }
+.s-callendar .container-medium .box-days .swiper-wrapper {
+  width: unset;
+}
 .s-callendar .container-medium > .btn-primary {
   display: flex;
   align-items: center;
@@ -3584,7 +3587,7 @@ header.header-bg .group-title span {
   border-radius: 0.9375rem;
   border: 1px solid #BBBBBB;
   height: 488px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   padding-bottom: 20px;
   outline: 5px solid white;
 }
