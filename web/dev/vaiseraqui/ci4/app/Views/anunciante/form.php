@@ -9,15 +9,27 @@
                         <div class="card-content">
 
                             <div class='form-group col-xs-12 paddingZeroM'>
-                                <div class="col-xs-12 col-sm-6">
+                                <div class="col-xs-12 col-sm-12">
                                     <label for="titulo">Nome</label>
                                     <input type="text" required  name="titulo" class="form-control" id="titulo" value="<?= $resultado->titulo ?>" placeholder="Escreva...">
                                 </div>
+                             
+                            </div>
+                            
+                                <div class='form-group col-xs-12 paddingZeroM'>                                
                                 <div class="col-xs-12 col-sm-6">
                                     <label for="email">E-mail</label>
                                     <input type="email" required  name="email" class="form-control" id="email" value="<?= $resultado->email ?>" placeholder="Escreva...">
                                 </div>
+                                  <div class="col-xs-12 col-sm-6">
+                                    <label for="pago">Pagante?</label>
+                                    <select type="pago" required  name="pago" class="form-control" id="pago" >
+                                        <option <?=($resultado->pago == 'S') ? 'selected' : '' ?> value="S">Sim</option>
+                                        <option <?=($resultado->pago == 'N') ? 'selected' : '' ?> value="N">Não</option>
+                                    </select>
+                                </div>
                             </div>
+                            
  
                             <div class='form-group col-xs-12 col-lg-12 paddingZeroM'>
                                <div class="col-xs-12 col-sm-6">

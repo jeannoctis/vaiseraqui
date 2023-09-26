@@ -244,8 +244,9 @@ function novoVideo() {
 }
 
 function novoCardapio() {
-    $.get(PATHSITE + 'produto/novoCardapio/', {}, function (retorno) {
+    $.get(PATHSITE + 'produto/novoCardapio/', {contador:contador}, function (retorno) {
         dados = jQuery.parseJSON(retorno);
+        contador++;
         $("#accordion").append(dados.html);
     });
 }
@@ -279,7 +280,8 @@ function novoPreco() {
 }
 
 function excluirAba(index, tipo, model) {
-   
+    console.log(tipo);
+    console.log(index);
     if (tipo == 'false') {
         $('#card' + index).remove();
     } else {

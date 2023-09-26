@@ -24,7 +24,7 @@ $infoPagina['iconePagina'] = 'icon-menu.svg';
                                                 <?= $item->titulo ?> <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
                                                 <div onclick="excluirAba('<?= encode($item->id) ?>','true', 'ProdutoAcomodacaoModel')" class="excluirAba">
-                                                    <img src="<?= PATHSITE ?>images/icone_excluir1.svg">
+                                                    <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
                                                     Excluir
                                                 </div>
                                             </div>
@@ -42,10 +42,10 @@ $infoPagina['iconePagina'] = 'icon-menu.svg';
                                                 </div>
                                                 <div class='col-12'>
                                                     <label>Itens</label>
-                                                    <input id="campoItens" data-role="tagsinput" type="text" name="itens[]" class="form-control tags-input mySingleFieldTags " value="<?= $item->menu ?>" placeholder="Itens">
-                                                </div>
+                                                    <input id="campoItens<?=$item->id?>" data-role="tagsinput" type="text" name="itens[]" class="form-control tags-input mySingleFieldTags2 " value="<?= $item->menu ?>" placeholder="Itens">
+                                                    <div class="container-cardapio" id="fieldTag<?=$item->id?>"></div>
+                                                </div>                                   
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -72,3 +72,17 @@ $infoPagina['iconePagina'] = 'icon-menu.svg';
     </div>
 
 </section>
+
+<style>
+    .container-cardapio{
+    display: block; 
+    position:relative
+} 
+.ui-autocomplete {
+    position: absolute;
+}
+    </style>
+    
+    <script>
+        var contador = <?=count($cardapios)?>
+        </script>

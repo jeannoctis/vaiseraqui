@@ -179,7 +179,7 @@
   }
   const checkboxesPhotosToDelete = document.querySelectorAll(".hover input.excluir")
   if(checkboxesPhotosToDelete) {
-    checkboxesPhotosToDelete.forEach(input => {
+    checkboxesPhotosToDelete.forEach(input => { 
       input.addEventListener("change", toggleDisabledDeleteBtn)
     })
     toggleDisabledDeleteBtn()

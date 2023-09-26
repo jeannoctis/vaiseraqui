@@ -50,7 +50,7 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                                 <label>Cidade</label>
 
                                 <? if ($estados) { ?>
-                                    <select name="cidadeFK" required class="form-control js-example-basic-single" id="cidadeFK">
+                                    <select disabled name="cidadeFK" required class="form-control js-example-basic-single" id="cidadeFK">
                                         <option value="">-- selecione uma cidade --</option>
                                         <? foreach ($estados as $estado) { ?>
                                             <optgroup label="<?= $estado->titulo ?>">
@@ -66,25 +66,39 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                             </div>
 
                         </div>
-
+                        
+                        <? if ($tipoAtual->tipo == 'EVENTOS') { ?>
                         <div class="col-12">
                             <label>Nome do local</label>
                             <input type="text" name="local" class="form-control" Value="<?= $anuncio->local ?>">
                         </div>
+                        <? } ?>
 
                         <div class="row col-12">
                             <div class="col-12 col-md-6">
-                                <label>Iframe do mapa</label>
-                                <textarea name="mapa" class="form-control"><?= $anuncio->mapa ?></textarea>
+                                <label>Link do mapa</label>
+                                <input type="text" name="mapa" class="form-control" value="<?= $anuncio->mapa ?>" />
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <label>Coordenadas </label>
-                                <textarea name="coordenadas" class="form-control"><?= $anuncio->coordenadas ?></textarea>
+                                <label>Coordenadas
+                                <a style="color: #932327;"  href="https://support.google.com/maps/answer/18539?hl=pt-BR&amp;co=GENIE.Platform%3DDesktop&amp;oco=0" target="_blank">
+                                 ?
+                              </a>
+                                </label>
+                                <input type="text" name="coordenadas" class="form-control" value="<?= $anuncio->coordenadas ?>" />
                             </div>
+                            
+                             <? if ( $tipoAtual->tipo ==  'SALOES' || $tipoAtual->tipo == 'PRESTADORES' ) { ?>
+                             <div class="col-12 col-md-6">
+                                <label>Limite de Hóspedes/pessoas</label>
+                                <input type="number" name="hospedes" class="form-control" value="<?= $anuncio->hospedes ?>" />
+                            </div>
+                             <? } ?>
+                            
                         </div>
 
-                        <? if ($anuncio->tipoFK == 4) { ?>
+                        <? if ($tipoAtual->tipo == 'ALUGUEL') { ?>
                             <div class="col-12">
                                 <label>Área útil</label>
                                 <input type="text" name="areautil" class="form-control" Value="<?= $anuncio->areautil ?>">
@@ -94,20 +108,27 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                         <h2 class="col-12 mt-5">Descrição</h2>
                         <div class="col-12">
                             <label>Descrição da Apresentação</label>
-                            <textarea rows="3" type="text" name="descricao" class="form-control"><?= $anuncio->descricao ?></textarea>
+                            <textarea maxlength="325" rows="3" type="text" name="descricao" class="form-control"><?= $anuncio->descricao ?></textarea>
                         </div>
 
                         <div class="col-12">
                             <label>Descrição completa</label>
-                            <textarea rows="3" type="text" name="detalhes" class="form-control tinymce_full"><?= $anuncio->detalhes ?></textarea>
+                            <textarea rows="3" type="text" name="texto" class="form-control tinymce_full"><?= $anuncio->texto ?></textarea>
                         </div>
+                        
+                        <h2 class="col-12 mt-5">SEO</h2>
 
-                        <div class="col-12">
-                            <label>Description (SEO)</label>
+                        <div class="col-12 mt-3">
+                            <label>Title </label>
+                             <input type="text" name="title" class="form-control" Value="<?= $anuncio->title ?>">
+                        </div>
+                        
+                        <div class="col-12 mt-3">
+                            <label>Description </label>
                             <textarea name="description" class="form-control"><?= $anuncio->description ?></textarea>
                         </div>
 
-                        <? if ($anuncio->tipoFK == 5) { ?>
+                        <? if ($tipoAtual->tipo == 'EVENTOS') { ?>
                             <!-- Datas Eventos -->
                             <h2 class="col-12 mt-5">Datas do Evento</h2>
                             <div class="dates-container col-12 row">

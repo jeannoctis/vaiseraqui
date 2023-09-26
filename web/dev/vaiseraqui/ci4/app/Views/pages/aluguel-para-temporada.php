@@ -20,6 +20,7 @@
                   $emAlta[0]->tipo = 'aluguel-para-temporada';
                   echo view("templates/aluguel-para-temporada-destaque-grande-card.php", (array)$emAlta[0]);
                } ?>
+                <? } ?>
 
                <div class="list-articles">
                   <? if ($alugueisEmAlta['comum']) { ?>
@@ -38,7 +39,7 @@
                </div>
                <?= $pager->links("anuncios") ?>
             </div>
-         <? } ?>
+        
 
       </div>
       <div class="column">

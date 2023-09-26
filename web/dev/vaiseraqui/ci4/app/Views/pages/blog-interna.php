@@ -70,7 +70,9 @@
 
           <a href="<?= $anuncioBannerV->link ?>">
             <picture>
+                <? if(FALSE) {?>
               <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerV->arquivo ?>.webp" type="image/webp">
+                <? } ?>
               <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerV->arquivo ?>">
             </picture>
           </a>

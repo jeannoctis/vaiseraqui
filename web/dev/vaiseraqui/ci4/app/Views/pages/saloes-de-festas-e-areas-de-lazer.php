@@ -16,23 +16,13 @@
         ?>
           <div class="left-space">
 
-            <!-- Destaque maior -->
-            <? if ($emAlta[0]) {
-              $emAlta[0]->tipo = 'salao-de-festa-e-area-de-lazer';
-              echo view("templates/aluguel-para-temporada-destaque-grande-card.php", (array)$emAlta[0]);
-            } ?>
-
-            <div class="list-articles">
-              <? if ($emAlta) { ?>
-                <!-- Destaque menores -->
-                <? foreach ($emAlta as $ind => $alta) {
-                  if ($ind) {
-                    $alta->tipo = 'salao-de-festa-e-area-de-lazer';
-                    echo view("templates/aluguel-para-temporada-destaque-card.php", (array)$alta);
-                  }
-                } ?>
-              <? } ?>
-
+               <!-- Destaque maior -->
+               <? if ($emAlta[0]) {
+                   $emAlta[0]->tipo = 'salao-de-festa-e-area-de-lazer';
+                  echo view("templates/aluguel-para-temporada-destaque-grande-card.php", (array)$emAlta[0]);
+               } ?>
+               <? } ?>
+               <div class="list-articles">               
                   <!-- Listagem comumn -->
                   <? foreach ($saloes as $salao) {
 
@@ -42,7 +32,7 @@
                </div>
                <?= $pager->links("anuncios") ?>
             </div>
-         <? } ?>
+         
       </div>
       <div class="column">
          <div class="embed-map">

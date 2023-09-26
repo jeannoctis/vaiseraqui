@@ -22,9 +22,7 @@ $infoPagina['iconePagina'] = $iconePagina;
             <fieldset>
                <h2 class="col-12 mb-3">Regras de Check-in e Check-out</h2>
                <div class='col-12'>
-                  <textarea name="regrascheck" id="" cols="30" rows="10" class="form-control tinymce_full">
-
-                  </textarea>
+                  <textarea name="regrascheck" id="" cols="30" rows="10" class="form-control tinymce_full"><?=$anuncio->regrascheck?></textarea>
                </div>
 
                <div class="col-12 border-top pt-3">

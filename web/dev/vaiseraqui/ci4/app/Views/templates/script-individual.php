@@ -166,15 +166,15 @@
          })
       }
 
-      function setValueInForm(type, params) {
-         const formboxModalOpen = document.querySelector('.box-modal-open')
+        function setValueInForm(type, params) {
+        const formboxModalOpen = document.querySelector('.box-modal-open')
          const labelButton = formboxModalOpen.querySelector('.button')
-         const labelResult = formboxModalOpen.querySelector('.label-value')
-         const inputResult = formboxModalOpen.querySelector('input.modal-value-selected')
+                const labelResult = formboxModalOpen.querySelector('.label-value')
+                const inputResult = formboxModalOpen.querySelector('input.modal-value-selected')
 
          labelButton.innerHTML = `Selecionado→`
-         labelResult.innerHTML = `${type} <br /> ${params}`
-         inputResult.value = `${type} ${params}`
+                labelResult.innerHTML = `${type} <br /> ${params}`
+                inputResult.value = `${type} ${params}`
 
          btnClose.click()
       }
@@ -272,7 +272,8 @@
     
     <?   echo View('templates/checkin-out'); ?>
     
-<? } else if ($pagina == 25) { ?>
+<? } else if ($pagina == 25) {
+    ?>
     <!-- Saloes de festa e area de lazer listagem -->
       <?
     echo View('templates/checkin-out');
@@ -286,7 +287,7 @@
                 new Selector(box)
                 })
     </script>
-<? } else if ($segments[0] == "saloes-de-festas-e-areas-de-lazer") { ?>
+<? } else if ($tipopagina == "salao-de-festa") { ?>
     <!-- Saloes de festa e area de lazer interna -->
     
     <script>        
@@ -299,7 +300,8 @@
     
     <?echo View('templates/checkin-out');?>
     
-<? } else if ($pagina == 12 && !$segments[1]) { ?>
+<? } else if ($pagina == 12 && !$segments[1]) {
+    ?>
     <!-- Alguel para temporada listagem -->
     <script>
                 // Controla modal de mapa
@@ -316,44 +318,44 @@
    ?>
 
 <? } else if ($pagina == 12 && $segments[1]) { ?>
-   <!-- Alguel para temporada interna -->
-   <script>
-      // Form Select
-      const boxes = document.querySelectorAll('.j-box-select')
-      boxes.forEach((box, key) => {
-         new Selector(box)
-      })
+    <!-- Alguel para temporada interna -->
+    <script>
+                // Form Select
+                const boxes = document.querySelectorAll('.j-box-select')
+                boxes.forEach((box, key) => {
+                new Selector(box)
+                })
 
       new Sticksy('.sticky', {
          topSpacing: 150
       });
    </script>
 <? } else if ($pagina == 24 && !$segments[1]) { ?>
-   <!-- Lojas temporarias listagem -->
-   <script>
-      // Form Select
-      const boxes = document.querySelectorAll('.j-box-select')
-      boxes.forEach((box, key) => {
-         new Selector(box)
-      })
-   </script>
+    <!-- Lojas temporarias listagem -->
+    <script>
+        // Form Select
+        const boxes = document.querySelectorAll('.j-box-select')
+                boxes.forEach((box, key) => {
+                new Selector(box)
+                })
+    </script>
 <? } else if ($pagina == 24 && $segments[1]) { ?>
-   <!-- Lojas temporarias interna -->
-   <script>
-      // Date picker
-      $(document).ready(function() {
-         $(function() {
-            $.datepicker.setDefaults($.datepicker.regional['sv']);
-            const config = {
-               dateFormat: 'dd/mm/yy',
-               dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-               dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
-               dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
-               monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-               monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-               nextText: 'Proximo',
-               prevText: 'Anterior'
-            }
+    <!-- Lojas temporarias interna -->
+    <script>
+                // Date picker
+                $(document).ready(function() {
+        $(function() {
+        $.datepicker.setDefaults($.datepicker.regional['sv']);
+        const config = {
+        dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                nextText: 'Proximo',
+                prevText: 'Anterior'
+        }
 
             $("#desktop-table-checkin").datepicker(config);
             $("#desktop-table-checkout").datepicker(config);
@@ -603,21 +605,21 @@
 <? } ?>
 
 <? if ($videos) { ?>
-   <script>
-      function verVideos() {
-         Fancybox.show([
-            <?
-            foreach ($videos as $video) {
-               $url_components = parse_url($video->video);
-               if ($url_components) {
-                  parse_str($url_components['query'], $params);
-               }
-            ?> {
-                  src: "https://www.youtube.com/watch?v=<?= $params['v'] ?>",
-                  thumb: "http://i3.ytimg.com/vi/<?= $params['v'] ?>/hqdefault.jpg",
-               },
-            <? } ?>
-         ]);
-      }
-      <? } ?>
-   </script>
+    <script>
+                function verVideos() {
+                Fancybox.show([
+    <?
+    foreach ($videos as $video) {
+        $url_components = parse_url($video->video);
+        if ($url_components) {
+            parse_str($url_components['query'], $params);
+        }
+        ?>
+                    {
+                    src: "https://www.youtube.com/watch?v=<?= $params['v'] ?>",
+                            thumb: "http://i3.ytimg.com/vi/<?= $params['v'] ?>/hqdefault.jpg",
+                    }, <? } ?>
+                ]);
+                }
+<? } ?>
+</script>

@@ -102,7 +102,7 @@ $infoPagina['statusAnuncio'] = "ATIVO";
                         <div class="col-12 col-md-6">
                             <div class="boxDestaque">
                                 <h6>
-                                    clicks no Whatsapp
+                                    clicks no Whatsapp/e-mail
                                 </h6>
                                 <h3 id='retornoWhats'>
                                     0

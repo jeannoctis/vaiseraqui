@@ -8,9 +8,13 @@
   <?= view("templates/styles-group", $style_list) ?>
 
   <link href="<?= PATHSITE ?>assets/scripts/aos/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css">
-  <title><?= $metatag->titulo ?> - <?= $configs->nome ?></title>
-  <meta name="description" content="<?= $metatag->description ?>">
+  <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css?v=1.0.0">
+  <title><?= ($metatag->title) ? $metatag->title : $metatag->description  ?> - <?= $configs->nome ?></title>
+  <meta name="description" content="<?= ($metatag->description) ? $metatag->description : character_limiter(strip_tags($metatag->texto),160); ?>">
+  
+  <? if($canonical){ ?>
+  <link rel="canonical" href="<?=$canonical?>" />      
+ <? }?>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
 </head>
@@ -32,7 +36,7 @@
         <img src="<?= PATHSITE ?>assets/images/logo.png" alt="Logo" class="logo">
       </a>
       <form action="<?=PATHSITE?>busca/" method="get">
-        <input type="text" name="busca" placeholder="<?= $txMenuFiltro->titulo ?>">
+        <input value="<?=$get['busca']?>" type="text" name="busca" placeholder="<?= $txMenuFiltro->titulo ?>">
         <button type="submit"><img src="<?= PATHSITE ?>assets/images/icon-search.svg" alt=""></button>
       </form>
 

@@ -8,12 +8,17 @@
 <script type="text/javascript" src="<?= PATHSITE ?>js2/jquery.mask.js"></script>
 <script src="https://cdn.tiny.cloud/1/1r8cx3i7ili64dicaol4mmsetzsypxpd2bjkpthxjsu6mbfu/tinymce/5/tinymce.min.js" referrerpolicy="origin" />
 </script>
-<script src="<?= PATHSITE ?>admins/assets/scripts/jquery-ui.js"></script>
+<!-- <script src="<?= PATHSITE ?>admins/assets/scripts/jquery-ui.js"></script> -->
+
+<script src="<?= PATHSITE ?>js2/jquery-ui-min.js"></script> 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 <script src="<?= PATHSITE ?>admins/assets/plugin/tagit/tag-it.min.js"></script>
 <script src="https://www.uaau.digital/dev/vaiseraqui/admins/assets/plugin/sweet-alert/sweetalert.min.js"></script>
 <script type="text/javascript" src="<?= PATHSITE ?>js2/scripts.js?v=1.0.6"></script>
+
+ <link rel="stylesheet" type="text/css"
+    href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css" />
 
 <script>
   function carregaCalendarios(mes, ano, id) {
@@ -98,6 +103,31 @@
 <script>
   $('.ui-sortable-handle').draggable();
 </script>
+
+<script>
+    
+    $(document).ready(function () {
+    var country_list = [<? if($cardapiosDisponiveis){
+        foreach($cardapiosDisponiveis as $card){ 
+      ?>"<?=$card->titulo?>",<? 
+    } } ?>];
+    <? if ($cardapios) {
+        foreach($cardapios as $ind => $cardapio) {
+        ?>
+    $("#campoItens<?=$cardapio->id?>").tagit({
+          availableTags: country_list,
+            autocomplete: {},
+        allowSpaces: true,
+        showAutocompleteOnFocus: true,
+       // appendTo: "#fieldTag<?=$cardapio->id?>"
+    }); 
+       
+       $("#fieldTag<?=$cardapio->id?>").append( $("#ui-id-<?=$ind+1?>") );
+       <? } ?>
+    <? } ?>
+});
+ 
+    </script>
 
 <script>
   <? if ($erroLogin) { ?>
