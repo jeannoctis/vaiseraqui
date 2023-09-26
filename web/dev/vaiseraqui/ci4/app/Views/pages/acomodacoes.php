@@ -67,7 +67,7 @@ $infoPagina['iconePagina'] = 'icon-bathtub.svg';
                         <h2>Principais comodidades</h2>
                     </legend>
 
-                    <input id="campoItens" data-role="tagsinput" type="text" name="comodidades[]" class="form-control tags-input mySingleFieldTags col-12" value="<?= $texto->comodidades ?>" placeholder="Itens">
+                    <input id="campoItens" data-role="tagsinput" type="text" name="principaiscomodidades" class="form-control tags-input mySingleFieldTags col-12" value="<?= $anuncio->principaiscomodidades ?>" placeholder="Itens">
                 </fieldset>
 
                 <fieldset class="col-12 mt-5">

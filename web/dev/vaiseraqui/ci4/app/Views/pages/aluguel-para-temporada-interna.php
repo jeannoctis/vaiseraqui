@@ -27,16 +27,26 @@
                <span class="value">R$<?= number_format($espacoAtual->preco, 2, ",", ".") ?></span>
             </div>
             <div class="buttons">
-                <? if($anunciante->whatsapp) {?>
+               <? if($anunciante->whatsapp && $anunciante->pago == 'S'){?>
                <a  onclick="abreWhatsapp('<?=encode($espacoAtual->id)?>');" target="_blank" href="<?= $anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" class="btn-primary">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                      <path fill-rule="evenodd" clip-rule="evenodd" d="M20.5032 3.48779C18.2471 1.23984 15.2467 0.00131836 12.0502 0C5.4635 0 0.102885 5.33481 0.100235 11.8917C0.0993524 13.9878 0.649544 16.0339 1.69532 17.8374L0 24L6.33485 22.3462C8.08037 23.2938 10.0455 23.7932 12.0453 23.7938H12.0503C18.6363 23.7938 23.9975 18.4585 24 11.9013C24.0013 8.72344 22.7595 5.7356 20.5032 3.48779ZM12.0502 21.7853H12.0461C10.2639 21.7846 8.51604 21.3079 6.99087 20.4075L6.62835 20.1932L2.86915 21.1746L3.87253 17.527L3.6363 17.153C2.64204 15.5792 2.11701 13.7602 2.1179 11.8925C2.11996 6.44253 6.57565 2.00859 12.0542 2.00859C14.7071 2.00947 17.2009 3.03896 19.0761 4.90737C20.9513 6.77578 21.9834 9.25928 21.9825 11.9005C21.9801 17.3509 17.5247 21.7853 12.0502 21.7853ZM17.4982 14.3821C17.1997 14.2333 15.7317 13.5146 15.4579 13.4153C15.1844 13.3162 14.9851 13.2668 14.7863 13.5642C14.5871 13.8615 14.015 14.531 13.8407 14.7292C13.6665 14.9275 13.4925 14.9524 13.1938 14.8036C12.8952 14.6549 11.9332 14.341 10.7926 13.3286C9.90506 12.5407 9.30586 11.5676 9.13159 11.2702C8.95761 10.9726 9.13011 10.8272 9.26258 10.6638C9.58581 10.2643 9.90948 9.84551 10.009 9.64732C10.1086 9.44897 10.0587 9.27539 9.98396 9.12671C9.90948 8.97803 9.31233 7.51538 9.06359 6.92022C8.82102 6.34102 8.57507 6.41924 8.39167 6.41016C8.21769 6.40151 8.01855 6.39976 7.8194 6.39976C7.6204 6.39976 7.29688 6.47402 7.02311 6.77168C6.74948 7.06919 5.97822 7.78799 5.97822 9.25064C5.97822 10.7133 7.04813 12.1263 7.19738 12.3246C7.34663 12.523 9.30291 15.5244 12.2981 16.8114C13.0105 17.1179 13.5665 17.3005 14.0003 17.4375C14.7156 17.6637 15.3664 17.6317 15.8809 17.5553C16.4547 17.4699 17.6473 16.8363 17.8964 16.1423C18.1451 15.4481 18.1451 14.8532 18.0704 14.7292C17.9959 14.6052 17.7967 14.531 17.4982 14.3821Z" fill="white" />
                   </svg>
                   Agendar visita
                </a>
+                  <? } else { ?>
+  <a  onclick="abreWhatsapp('<?=encode($metatag->id)?>');"  href="mailto:<?=$anunciante->email?>" class="btn-primary btn-agendar">
+                  <svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.6 2H25.4C26.83 2 28 3.125 28 4.5V19.5C28 20.875 26.83 22 25.4 22H4.6C3.17 22 2 20.875 2 19.5V4.5C2 3.125 3.17 2 4.6 2Z" stroke="#FFF" stroke-width="2.37838" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M28 4.30859L15 13.5395L2 4.30859" stroke="#FFF" stroke-width="2.37838" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+                  Agendar
+               </a>                    
+<?                  }
+?>
                 <a onclick="abreWhatsapp('<?=encode($espacoAtual->id)?>');" target="_blank" href="<?= $anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>">
                     Fazer proposta</a>
-               <? }?>
+             
             </div>
          </footer>
 
@@ -85,10 +95,12 @@
          </div>
          <div class="bottom">
             <div>
-               <a href="#" class="btn photo">
+                <? if($fotos) {?>
+               <a data-fslightbox="presentation-1" href="<?=PATHSITE?>uploads/produto/<?=$fotos[0]->produtoFK?>/<?=$fotos[0]->arquivo?>" class="btn photo">
                   <img src="<?= PATHSITE ?>assets/images/icon-photo.png" alt="">
                   <?= count($fotos) ?> Fotos
                </a>
+                <? } ?>
                   <? if($videos) {?>
             <a onclick="verVideos();" class="btn btn-videos" >
               <img class="active" src="<?=PATHSITE?>assets/images/icon-video-active.png" alt="">
@@ -106,19 +118,7 @@
             </div>
          </div>
 
-         <div class="box-presentation only-mobile">
-            <div class="description">
-               <span class="tagline"><?= $espacoAtual->categoria ?></span>
-               <strong class="title"><?= $espacoAtual->titulo ?></strong>
-               <span class="uf"><?= $espacoAtual->cidade ?> - <?= $espacoAtual->estado ?></span>
-            </div>
-            <a data-fslightbox="mobile-presentation-1" href="<?= PATHSITE ?>assets/images/slide-rent-1.png">
-               <img class="mode-slide" src="<?= PATHSITE ?>assets/images/slide-rent-1.png" alt="">
-            </a>
-            <a data-fslightbox="mobile-presentation-1" href="<?= PATHSITE ?>assets/images/slide-rent-2.png"></a>
-            <a data-fslightbox="mobile-presentation-1" href="<?= PATHSITE ?>assets/images/slide-rent-3.png"></a>
-         </div>
-
+   
          <? if ($fotos) { ?>
             <div class="swiper presentationSwiper">
                <div class="swiper-wrapper">
@@ -126,7 +126,7 @@
                   <? foreach ($fotos as $foto) { ?>
                      <div class="swiper-slide">
                         <div class="item">
-                           <a data-fslightbox="presetation-1" href="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>">
+                           <a data-fslightbox="presentation-1" href="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>">
                               <img src="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>" alt="foto do espaço">
                            </a>
                         </div>
@@ -176,7 +176,7 @@
                <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M1 13L7 7L1 0.999999" stroke="#404041" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                </svg>
-               <a href="<?= PATHSITE ?>aluguel-para-temporada/<?= $espacoAtual->identificador ?>/"><?= $espacoAtual->título ?></a>
+               <a href=#"><?= $espacoAtual->titulo ?></a>
             </nav>
 
             <aside class="info-slider" data-aos="fade-up">
@@ -222,6 +222,7 @@
                      Publicado há <?= getDateInterval($espacoAtual->dtCriacao)->days ?> dias...
                   </span>
                </h2>
+            
                <table>
                   <tbody>
                      <tr>
@@ -265,7 +266,7 @@
                      Publicado há <?= getDateInterval($espacoAtual->dtCriacao)->days ?> dias
                   </span>
                </h2>
-               <p><?= $espacoAtual->detalhes ?></p>
+               <div><?= $espacoAtual->texto ?></div>
 
                <div class="list-items">
                   <div class="item">
@@ -569,12 +570,20 @@
                         </tr>
                      </tfoot>
                   </table>
-                   <? if($anunciante->whatsapp) {?>
+                      <? if($anunciante->whatsapp && $anunciante->pago == 'S'){?>
                   <a onclick="abreWhatsapp('<?=encode($espacoAtual->id)?>');" target="_blank" href="<?=$anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>" class="btn-primary">
                      <img src="<?= PATHSITE ?>assets/images/icon-whatsapp.svg" alt="">
                      Agendar visita
                   </a>
-                   <? } ?>
+                   <? } else { ?>
+                   <a  onclick="abreWhatsapp('<?=encode($metatag->id)?>');"  href="mailto:<?=$anunciante->email?>" class="btn-primary btn-agendar">
+                  <svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.6 2H25.4C26.83 2 28 3.125 28 4.5V19.5C28 20.875 26.83 22 25.4 22H4.6C3.17 22 2 20.875 2 19.5V4.5C2 3.125 3.17 2 4.6 2Z" stroke="#FFF" stroke-width="2.37838" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M28 4.30859L15 13.5395L2 4.30859" stroke="#FFF" stroke-width="2.37838" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+                  Agendar
+               </a>         
+                  <? } ?>
                </aside>
 
                <?= View('templates/anunciante') ?>
@@ -630,7 +639,7 @@
 
 </main>
 
-<? if($anunciante->Whatsapp) {?>
+<? if($anunciante->whatsapp && $anunciante->pago == 'S'){?>
 <div class="box-agendar-float">
    <a  onclick="abreWhatsapp('<?=encode($espacoAtual->id)?>');" target="_blank" href="<?=$anunciante->whatsapp?>&text=Olá, vim pelo site vaiseraqui.com.br e tenho interesse no anúncio: <?=$metatag->titulo?>"  class="btn-primary btn-agendar">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -640,4 +649,33 @@
    </a>
 </div>
 
+<? } else { ?>
+<div class="box-agendar-float">
+   <a  onclick="abreWhatsapp('<?=encode($metatag->id)?>');"  href="mailto:<?=$anunciante->email?>" class="btn-primary btn-agendar">
+                  <svg width="30" height="24" viewBox="0 0 30 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.6 2H25.4C26.83 2 28 3.125 28 4.5V19.5C28 20.875 26.83 22 25.4 22H4.6C3.17 22 2 20.875 2 19.5V4.5C2 3.125 3.17 2 4.6 2Z" stroke="#FFF" stroke-width="2.37838" stroke-linecap="round" stroke-linejoin="round"></path>
+              <path d="M28 4.30859L15 13.5395L2 4.30859" stroke="#FFF" stroke-width="2.37838" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+                  Agendar
+               </a>       
+</div>
 <? } ?>
+
+
+<script>
+  const shareButtons = document.querySelectorAll('.share');
+  shareButtons.forEach(btn => {
+    btn.addEventListener("click", async () => {
+    try {
+      await navigator.share({
+        title: "<?= $metatag->titulo ?>",
+        url: "<?= PATHSITE ?>espaco/<?= $metatag->identificador ?>/"
+      });
+      console.log("Data was shared successfully");
+    } catch (err) {
+      console.error("Share failed:", err.message);
+    }
+  });
+  })
+  
+</script>

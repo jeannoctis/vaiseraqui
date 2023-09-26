@@ -150,10 +150,49 @@ function calcularTotal(tipo, tela) {
                 checkout = $("#mobile-table-checkout").val();
             }
 
-            const date1 = new Date(FormataStringData(checkin));
-            const date2 = new Date(FormataStringData(checkout));
-            const diffTime = Math.abs(date2 - date1);
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            var date1 = new Date(FormataStringData(checkin));
+            var date2 = new Date(FormataStringData(checkout));
+            var diffTime = Math.abs(date2 - date1);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+            $("#quantidadeDias1").html(diffDays);
+            $("#quantidadeDias2").html(diffDays);
+
+            var diaria = parseFloat($("#diaria").val());
+
+            var totalSemDiaria = parseFloat($("#totalDiaria").val());
+
+            totalSemDiaria = totalSemDiaria + diaria * diffDays;
+            totalSemDiaria = totalSemDiaria.toFixed(2);
+
+            totalSemDiaria = '' + totalSemDiaria;
+
+            diaria = diaria * diffDays;
+            diaria = diaria.toFixed(2);
+
+            $("#totalDiarias1").html("R$" + diaria.replace('.', ','));
+            $("#totalDiarias2").html("R$" + diaria.replace('.', ','));
+
+            $("#spanTotal1").html("R$" + totalSemDiaria.replace('.', ','));
+            $("#spanTotal2").html("R$" + totalSemDiaria.replace('.', ','));
+
+            break;
+            
+             case 'hospedagem':
+            var checkin = '';
+            var checkout = '';
+            if (tela === 'desktop') {
+                checkin = $("#desktop-table-checkin").val();
+                checkout = $("#desktop-table-checkout").val();
+            } else {
+                checkin = $("#mobile-table-checkin").val();
+                checkout = $("#mobile-table-checkout").val();
+            }
+
+            var date1 = new Date(FormataStringData(checkin));
+            var date2 = new Date(FormataStringData(checkout));
+            var diffTime = Math.abs(date2 - date1);
+            var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
             $("#quantidadeDias1").html(diffDays);
             $("#quantidadeDias2").html(diffDays);
@@ -179,6 +218,7 @@ function calcularTotal(tipo, tela) {
             $("#spanTotal2").html("R$" + totalSemDiaria.replace('.', ','));
 
             break;
+            
     }
 }
 

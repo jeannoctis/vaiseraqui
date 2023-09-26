@@ -32,6 +32,13 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                                 </select>
                             <? } ?>
                         </div>
+                        
+                        <? if ($tipoAtual->tipo == 'EVENTOS') { ?>
+                           <div class="col-6">
+                            <label>Link (Comprar Ingresso)</label>
+                            <input type="text" name="link" class="form-control" Value="<?= $anuncio->link ?>">
+                        </div>
+                        <? } ?>
 
                         <h2 class="col-12 mt-5">Endereco</h2>
                         <div class="row col-12">
@@ -75,6 +82,7 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                         <? } ?>
 
                         <div class="row col-12">
+                             <? if ( $tipoAtual->tipo !=  'EVENTOS' ) { ?>
                             <div class="col-12 col-md-6">
                                 <label>Link do mapa</label>
                                 <input type="text" name="mapa" class="form-control" value="<?= $anuncio->mapa ?>" />
@@ -88,20 +96,20 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                                 </label>
                                 <input type="text" name="coordenadas" class="form-control" value="<?= $anuncio->coordenadas ?>" />
                             </div>
+                             <? } ?>
                             
-                             <? if ( $tipoAtual->tipo ==  'SALOES' || $tipoAtual->tipo == 'PRESTADORES' ) { ?>
+                             <? if ( $tipoAtual->tipo ==  'SALOES' || $tipoAtual->tipo == 'PRESTADORES' || $tipoAtual->tipo == 'HOSPEDAGEM' ) { ?>
                              <div class="col-12 col-md-6">
                                 <label>Limite de Hóspedes/pessoas</label>
                                 <input type="number" name="hospedes" class="form-control" value="<?= $anuncio->hospedes ?>" />
                             </div>
-                             <? } ?>
-                            
+                             <? } ?>                            
                         </div>
 
                         <? if ($tipoAtual->tipo == 'ALUGUEL') { ?>
                             <div class="col-12">
-                                <label>Área útil</label>
-                                <input type="text" name="areautil" class="form-control" Value="<?= $anuncio->areautil ?>">
+                                <label>Área útil (m²)</label>
+                                <input type="number" name="areautil" class="form-control" Value="<?= $anuncio->areautil ?>">
                             </div>
                         <? } ?>
 

@@ -8,7 +8,7 @@
   <?= view("templates/styles-group", $style_list) ?>
 
   <link href="<?= PATHSITE ?>assets/scripts/aos/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css?v=1.0.0">
+  <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css?v=1.0.4">
   <title><?= ($metatag->title) ? $metatag->title : $metatag->description  ?> - <?= $configs->nome ?></title>
   <meta name="description" content="<?= ($metatag->description) ? $metatag->description : character_limiter(strip_tags($metatag->texto),160); ?>">
   
@@ -40,7 +40,7 @@
         <button type="submit"><img src="<?= PATHSITE ?>assets/images/icon-search.svg" alt=""></button>
       </form>
 
-      <div class="header-modal-filter">
+      <div style="display: none;" class="header-modal-filter">
         <button class="j-btn-modal-filter">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="12" fill="#932327" />

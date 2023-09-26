@@ -94,6 +94,8 @@ ul {
     margin-top: 0.5rem;
 }
 
+
+
 @media screen and (max-width: 750px) {
   .container {
     padding: 0 20px;
@@ -221,7 +223,7 @@ main {
 
 @media screen and (max-width: 769px) {
   .home main {
-    padding-top: 175px;
+    padding-top: 115px;
   }
 }
 
@@ -2289,6 +2291,9 @@ select {
 .s-text-and-slider .slider .swiper .navigation-swiper-blog button.active svg.active {
   display: block;
 }
+
+
+
 @media screen and (max-width: 1920px) {
   .s-text-and-slider .slider .swiper .navigation-swiper-blog {
     right: 40px;
@@ -2465,6 +2470,7 @@ select {
   }
   .s-text-and-slider .slider {
     overflow: hidden;
+    z-index: 999;
   }
   .s-text-and-slider .slider .top {
     left: unset;
@@ -3565,6 +3571,9 @@ header.header-bg .group-title span {
 .s-callendar .container-medium .box-days a.active span, .s-callendar .container-medium .box-days a:hover span {
   color: #FFFFFF;
 }
+.s-callendar .container-medium .box-days .swiper-wrapper {
+  width: unset;
+}
 .s-callendar .container-medium > .btn-primary {
   display: flex;
   align-items: center;
@@ -3588,7 +3597,7 @@ header.header-bg .group-title span {
   border-radius: 0.9375rem;
   border: 1px solid #BBBBBB;
   height: 488px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
   padding-bottom: 20px;
   outline: 5px solid white;
 }
@@ -4488,9 +4497,23 @@ header.header-bg .group-title span {
     background-image: none !important;
     margin-bottom: 100px;
   }
-  .home .presentation .presentation-form {
-    display: none;
+  .home .presentation .presentation-form { 
+  padding: 0 !important;
+  font-size: 1rem !important;
   }
+  .home .presentation .presentation-form h2 .wraper-icon{
+      height: 30px;
+      width: 30px;
+  }
+  
+  .home .presentation .presentation-form .presentation-form-menu a{
+      width: 43%;
+  }
+  
+  .home .presentation .presentation-form h2 .wraper-icon img{
+      height: 25px;
+  }
+  
   .home .presentation > .cover {
     width: 100%;
     padding-top: 10px;
@@ -5357,6 +5380,7 @@ header.header-bg .group-title span {
 @media screen and (max-width: 600px) {
   .internal-rent main {
     margin-bottom: 6.25rem;
+    padding-top: 0;
   }
 }
 .internal-rent .s-service header h2 {
@@ -7363,6 +7387,12 @@ header.header-bg .group-title span {
   line-height: 170%;
   letter-spacing: -0.03125rem;
   margin-bottom: 1rem;
+}
+
+.blog-list .two-columns .column:first-of-type img{
+    height: auto !important;
+    width: 100% !important;
+        max-width: 100%;
 }
 
 .blog-list .two-columns .column:first-of-type ol,.blog-list .two-columns .column:first-of-type ul{
@@ -9632,6 +9662,11 @@ header.header-bg .group-title span {
   min-width: 325px;
   display: none;
 }
+
+.dialog-cidade{
+    max-width: 700px;
+}
+
 .dialog-not-logged[open] {
   display: block;
 }

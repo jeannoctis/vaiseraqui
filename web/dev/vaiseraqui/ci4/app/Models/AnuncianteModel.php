@@ -256,7 +256,7 @@ class AnuncianteModel extends Model
             case "perfil":
 
                 $data['instrucoes'] = $instrucaoModel->find(1);
-
+          
                 if ($post) {
 
                     if (!$post["senha"]) {
@@ -292,7 +292,6 @@ class AnuncianteModel extends Model
                             $img->move(PATHHOME . '/uploads/anunciante/', $newName);
                         }
                     }
-
 
                     $post['id'] = $data['anunciante']->id;
                     $data["salvou"] = $this->save($post);
@@ -647,8 +646,9 @@ class AnuncianteModel extends Model
 
 
                 $data['setores'] = $this->produtoSetorModel
-                        ->where("produtoFK", $anuncio->id)
+                        ->where("produtoFK", $data['anuncio']->id)
                         ->findAll();
+        
 
                 foreach ($data['setores'] as $key => $setor) {
                     $this->setorIngressoModel
@@ -1115,10 +1115,10 @@ class AnuncianteModel extends Model
         }
 
         // $data['anuncio'] = $produtoModel->find($this->session->get('anuncio'));
-        $data['anunciante'] = $this->find($this->session->get('anunciante')->id);
+        $data['anunciante'] = $this->find($this->session->get('anunciante'));
         
         if($data['salvou']) {
-            $data['sucesso'] = true;
+            $data['sucesso'] = 'Salvo com sucesso';
         }
         
         if ($header) {

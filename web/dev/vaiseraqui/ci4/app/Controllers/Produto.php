@@ -17,6 +17,7 @@ class Produto extends BaseController {
     }
 
     public function index() {
+        helper('date');
         if (isset($_POST['excluir'])) {
             foreach ($_POST['excluir'] as $exc) {
                 $data['excluiu'] = $this->model->delete(['id' => $exc]);

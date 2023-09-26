@@ -890,7 +890,7 @@
                               <div class="col-xs-12 paddingZeroM pdv-div card-content">
                                  <label for="pdv<?= $pdv->id ?>-titulo" class="with-btn">
                                     <div>
-                                       <img src="<?= PATHSITE ?>assets2/<?= $pdv->tipo == "fisico" ? "Group 2310" : "web" ?>.png" alt="ícone de ponto de venda <?= $pdv->tipo ?>">
+                                       <img src="<?= PATHSITE ?>assets/images/<?= $pdv->tipo == "fisico" ? "icon-map-2" : "icon-www" ?>.svg" alt="ícone de ponto de venda <?= $pdv->tipo ?>">
                                        Ponto de Venda <?= $pdv->tipo == "fisico" ? "Físico" : "Online" ?>
                                     </div>
                                     <button type="button" class="btn btn-danger btn-xs btn-rounded" data-parent="pdv-div">Excluir</button>

@@ -198,6 +198,11 @@ a.itemMenuPainel:hover:before {
 	gap: 9px;
 	height: 58px;
 }
+
+.botaoSelecaoFiltroInterno img{
+    filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(37%) hue-rotate(287deg) brightness(109%) contrast(110%);
+}
+
 #nomeTipo {
 	white-space: nowrap; /* Impede que o texto quebre em várias linhas */
 	overflow: hidden; /* Esconde qualquer conteúdo que não caiba na div */

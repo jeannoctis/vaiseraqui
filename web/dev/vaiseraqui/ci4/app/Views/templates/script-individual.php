@@ -468,7 +468,7 @@
     <!-- Hospedagens - listagem -->
     <script type="module">
                 // Controla modal de mapa
-
+         
 
                 // AOS
                 AOS.init({
@@ -536,7 +536,7 @@
     echo View('templates/checkin-out');
     ?>    
     
-<? } else if ($segments[0] == "hospedagens") { ?>
+<? } else if ($internaHospedagem) { ?>
     <!-- Hospedagem - interna -->
     
          <?

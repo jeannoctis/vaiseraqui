@@ -61,8 +61,8 @@ class Pages extends Controller {
             }
         }
         
-                      $tipoModel = \model("App\Models\TipoModel", false);
-                $data['tipos'] = $tipoModel->select("id, arquivo, titulo,identificador,identificador2,tipo")->orderBy('ordem ASC, id DESC')->findAll();
+         $tipoModel = \model("App\Models\TipoModel", false);
+         $data['tipos'] = $tipoModel->select("id, arquivo, titulo,identificador,identificador2,tipo")->where('status','ATIVO')->orderBy('ordem ASC, id DESC')->findAll();
 
         $removeChars = array("-", "(", ")", " ");
         $iphone = strpos($_SERVER['HTTP_USER_AGENT'], "iPhone");
@@ -93,6 +93,8 @@ class Pages extends Controller {
          $_SESSION['cidade'] = $data['configs']->cidadeFK;
          $data['primeiraVisita'] = true;
          } 
+         
+         $data['cidadeAtual'] = $cidadeModel->find($data['configs']->cidadeFK);
 
                  
         return $data;
@@ -290,6 +292,15 @@ class Pages extends Controller {
                 $this->anunciante($page);
                 exit();
                 break;
+            case 'muda-cidade':
+                $get = \request()->getGet();
+                $_SESSION['cidade'] = $get['id'];
+                
+                Header("HTTP/1.1 301 Moved Permanently");
+                    Header("Location:" . $_SESSION['_ci_previous_url']);
+                    exit();
+                
+                break;
             case "espaco":
                 $produtoModel = \model("App\Models\ProdutoModel", false);
                 $produtoModel->select('categoriaFK');
@@ -466,10 +477,16 @@ class Pages extends Controller {
                     $emAlta = $anuncioModel->find()[0];                    
                    
                    $data['destaques'] = $anuncioModel->emAlta($emAlta);
+                   
+                           if ($data['destaques']) {
+                    foreach ($data['destaques'] as $ind => $destaque) {
+                        $data['destaques'][$ind]->fotos = $produtoModel->fotos($destaque->id, 4, true);
+                        $data['destaques'][$ind]->datas = $produtoModel->datas($destaque->id);
+                    }
+                }
 
                 break;
-            
-     
+                 
             case "blog":
                 $data['script_list'] = ['modal-filter'];
                 $data['bodyClass'] = 'blog-list';

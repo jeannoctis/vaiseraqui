@@ -31,7 +31,7 @@
                               </thead>
                               <tbody>
                                  <? foreach ($lista as $elemento) { ?>
-                                    <tr class="ui-state-default sort" rel="<?= $elemento->id ?>">
+                                    <tr class="ui-state-default sort <?=($elemento->status == 'INATIVO') ? 'inativo'  : '' ?> " rel="<?= $elemento->id ?>">
                                        <td></td>
                                        <td>
                                           <a href="<?= PATHSITE ?>admin/anuncio_tipo/form/<?= encode($elemento->id) ?>/<?= arruma_url($elemento->titulo) ?>">

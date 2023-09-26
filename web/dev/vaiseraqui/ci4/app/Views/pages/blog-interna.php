@@ -31,13 +31,13 @@
 
     <div class="content two-columns">
       <div class="column">
-        <a href="<?= PATHSITE ?>blog-listagem-categoria.html" class="tagline" data-aos="fade-up"><?= $cats[$artigoAtual->categoriaFK] ?></a>
+        <a href="#" class="tagline" data-aos="fade-up"><?= $cats[$artigoAtual->categoriaFK] ?></a>
         <h1 data-aos="fade-up"><?= $artigoAtual->titulo ?></h1>
         <div class="post-main-cover" data-aos="fade-up">
           <img src="<?= PATHSITE ?>uploads/artigo/<?= $artigoAtual->arquivo ?>" alt="capa do artigo">
         </div>
 
-        <div data-aos="fade-up">
+        <div data-aos="fade-up textoGeral">
           <?= $artigoAtual->texto ?>
         </div>
 
@@ -46,9 +46,9 @@
         <div class="box-social" data-aos="fade-up">
           <span class="title">Compartilhe</span>
           <nav>
-            <a href="#">
+            <!-- <a href="#">
               <img src="<?= PATHSITE ?>assets/images/icon-instagram.svg" alt="ícone">
-            </a>
+            </a> -->
             <a href="#">
               <img src="<?= PATHSITE ?>assets/images/icon-facebook.svg" alt="ícone">
             </a>
@@ -120,5 +120,22 @@
       </div>
     </aside>
   <? } ?>
-
 </main>
+
+<script>
+  const shareButtons = document.querySelectorAll('.box-social a');
+  shareButtons.forEach(btn => {
+    btn.addEventListener("click", async () => {
+    try {
+      await navigator.share({
+        title: "<?= $artigoAtual->titulo ?>",
+        url: "<?= PATHSITE ?>blog/<?= $artigoAtual->identificador ?>/"
+      });
+      console.log("Data was shared successfully");
+    } catch (err) {
+      console.error("Share failed:", err.message);
+    }
+  });
+  })
+  
+</script>

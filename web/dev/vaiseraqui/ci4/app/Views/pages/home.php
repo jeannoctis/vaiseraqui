@@ -46,7 +46,8 @@
 
       <div class="presentation-form-content">
           <? foreach($tipos as $ind => $tipo) {
-          
+
+              
               switch($tipo->tipo ) {
                   case 'ALUGUEL':
                       $idForm = 1;

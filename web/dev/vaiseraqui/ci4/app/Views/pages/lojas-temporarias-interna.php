@@ -9,9 +9,7 @@
                <?= $lojaAtual->descricao ?>
             </div>
          </div>
-      
-
-         <footer>
+               <footer>
             <div class="price">
                <span>diárias a partir de</span>
                <span class="value">R$<?= number_format($lojaAtual->preco, 2, ",", ".") ?></span>
@@ -37,7 +35,7 @@
             </div>
          </footer>
       </div>
-      <div class="slider" data-aos="fade-left">
+      <div  class="slider" data-aos="fade-left">
          <div class="top">
             <a href="#" class="goback">
                <svg class="active" width="7" height="13" viewBox="0 0 7 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,10 +78,12 @@
          </div>
          <div class="bottom">
             <div>
-               <a href="#" class="btn photo">
+                <? if($fotos){?>
+                 <a data-fslightbox="presentation-1" href="<?=PATHSITE?>uploads/produto/<?=$fotos[0]->produtoFK?>/<?=$fotos[0]->arquivo?>" class="btn photo">
                   <img src="<?= PATHSITE ?>assets/images/icon-photo.png" alt="">
                   <?= count($fotos) ?> Fotos
                </a>
+                <? } ?>
                <? if($videos) {?>
             <a onclick="verVideos();" class="btn btn-videos" >
               <img class="active" src="<?=PATHSITE?>assets/images/icon-video-active.png" alt="">
@@ -100,6 +100,8 @@
               <? } ?>
             </div>
          </div>
+          
+                   
          <? if ($fotos) { ?>
             <div class="box-presentation only-mobile">
                <div class="description">
@@ -123,7 +125,7 @@
                   <? foreach ($fotos as $foto) { ?>
                      <div class="swiper-slide">
                         <div class="item">
-                           <a data-fslightbox="presetation-1" href="<?= PATHSITE ?>uploads/produto/<?= $lojaAtual->id ?>/<?= $foto->arquivo ?>">
+                           <a data-fslightbox="presentation-1" href="<?= PATHSITE ?>uploads/produto/<?= $lojaAtual->id ?>/<?= $foto->arquivo ?>">
                               <picture>
                                  <source srcset="<?= PATHSITE ?>uploads/produto/<?= $lojaAtual->id ?>/<?= $foto->arquivo ?>.webp" type="image/webp">
                                  <img class="mode-slide" src="<?= PATHSITE ?>uploads/produto/<?= $lojaAtual->id ?>/<?= $foto->arquivo ?>" alt="imagem do local">
@@ -481,3 +483,22 @@
                </a>
  <?   } ?>
 </div>
+
+
+<script>
+  const shareButtons = document.querySelectorAll('.share');
+  shareButtons.forEach(btn => {
+    btn.addEventListener("click", async () => {
+    try {
+      await navigator.share({
+        title: "<?= $metatag->titulo ?>",
+        url: "<?= PATHSITE ?>espaco/<?= $metatag->identificador ?>/"
+      });
+      console.log("Data was shared successfully");
+    } catch (err) {
+      console.error("Share failed:", err.message);
+    }
+  });
+  })
+  
+</script>

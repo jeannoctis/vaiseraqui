@@ -15,7 +15,7 @@ class ProdutoModel extends Model {
         'endereco', 'bairro', 'destaque', 'validadeDestaque', 'apresentacao', 'inicioValidade', 'inicioDestaque', 'cidadeFK',
         'mapa', 'acomodacao', 'permitido', 'proibido', 'texto', 'itens', 'lazer', 'categoriaFK', 'arquivo', 'capacidadeFK',
         'hospedes', 'limpeza', 'latitude', 'longitude', 'captadorFK', 'planoFK', 'calendario', 'preco', 'apartir', 'principaiscomodidades',
-        'itensdisponiveis', 'areautil', 'quartos', 'banheiros', 'vagas', 'andar', 'animais', 'mobilia', 'transporte', 'condominio',
+        'itensdisponiveis', 'areautil', 'quartos', 'banheiros', 'vagas', 'andar', 'animais', 'mobilia', 'transporte', 'condominio', 'link',
         'observacoes', 'pode', 'naopode', 'cardapio', 'eventosatendidos', 'coordenadas', 'regrascheck', 'detalhes', 'fotoFK', 'local', 
         'cafedamanha', 'wifi', 'arcondicionado', 'recepcao24', 'bar', 'acessibilidade', 'estacionamento', 'title','description'];
     protected $useTimestamps = true;
@@ -195,7 +195,9 @@ class ProdutoModel extends Model {
         } else {
             $usaApi = "web";
         }
-
+        
+        
+        if($anunciante->pago == 'S') {
         if ($anunciante->telefone) {
             $anunciante->whatsapp = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone);
         }
@@ -205,6 +207,11 @@ class ProdutoModel extends Model {
 
         if ($anunciante->telefone3) {
             $anunciante->whatsapp3 = "https://" . $usaApi . ".whatsapp.com/send?phone=55" . str_replace($removeChars, "", $anunciante->telefone3);
+        }
+        } else {
+            $anunciante->telefone = '';
+            $anunciante->telefone2 = '';
+            $anunciante->telefone3 = '';
         }
 
         return $anunciante;
@@ -447,8 +454,6 @@ class ProdutoModel extends Model {
 
     public function default($data, $page) {
 
-
-
         $tipoModel = \model("App\Models\TipoModel", false);
         $tipoModel->where('identificador', $data['segments'][0]);
         $tipo = $tipoModel->find()[0];
@@ -482,6 +487,7 @@ class ProdutoModel extends Model {
         switch ($page) {
             case "hospedagens":
                 if ($data['segments'][1] && !is_numeric($data['segments'][1])) {
+                    $data['internaHospedagem'] = true;
                     $data['escondeWhatsapp'] = true;
                     helper('encrypt');
                     $data['style_list'] = ['jquery_ui', 'swiper', 'fancybox'];

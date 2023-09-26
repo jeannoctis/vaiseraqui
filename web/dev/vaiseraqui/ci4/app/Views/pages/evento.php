@@ -13,7 +13,7 @@
             <div>
                 <span class="type"><?= $metatag->categoria ?></span>
                 <h1><?= $metatag->titulo ?></h1>
-                <span class="location"><?= $metatag->estado ?></span>
+                <span class="location"><?=$metatag->local?> - <?=$metatag->cidade?> - <?= $metatag->estado ?></span>                
                 <div class="desc">
                     <p><?= $metatag->descricao ?></p>
                 </div>
@@ -47,9 +47,11 @@
 
             <footer>          
                 <div class="buttons">
+                    <? if($metatag->link) {?>
                     <a href="<?= $metatag->link ?>" target="_blank" class="btn-primary">
                         Comprar ingressos
                     </a>
+                    <? } ?>
                     <div class="box-modal-more">
                         <div class="box-modal-more-details">
                             <button class="close">
@@ -171,7 +173,9 @@
                                 </ul>
                             <? } ?> 
 
+                                  <? if($metatag->link) {?>
                         <a href="<?= $metatag->link ?>" target="_blank" class="btn-primary">Comprar ingressos</a>
+                                  <? } ?>
                     </aside>
                 <? } ?>
                 <article>
@@ -342,8 +346,9 @@
                                                                             </ul>
                                                                         <? } ?>
                                                                     <? } ?>
-
+                                                                        <? if($metatag->link) {?>
                         <a href="<?= $metatag->link ?>" target="_blank" class="btn-primary">Comprar ingressos</a>
+                                                                        <? } ?>
                                                             </aside>
                                                         </div>
                                                     <? } ?>
@@ -355,3 +360,22 @@
                                                         </section>
                                                     <? } ?>
                                                     </main>
+
+
+<script>
+  const shareButtons = document.querySelectorAll('.share');
+  shareButtons.forEach(btn => {
+    btn.addEventListener("click", async () => {
+    try {
+      await navigator.share({
+        title: "<?= $metatag->titulo ?>",
+        url: "<?= PATHSITE ?>espaco/<?= $metatag->identificador ?>/"
+      });
+      console.log("Data was shared successfully");
+    } catch (err) {
+      console.error("Share failed:", err.message);
+    }
+  });
+  })
+  
+</script>

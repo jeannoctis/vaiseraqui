@@ -64,7 +64,7 @@
         </div>
   </footer>
 
-  <dialog class="dialog-not-logged">
+  <dialog class="dialog-not-logged dialog-not-logged2">
     <div class="content">
 
       <span class="dialog-close">
@@ -84,6 +84,31 @@
         <a href="<?=PATHSITE?>cadastro/">
           <button type="button">Cadastre-se!</button>
         </a>
+      </div>
+    </div>
+  </dialog>
+
+<dialog class="dialog-not-logged dialog-cidade">
+    <div class="content">
+
+      <span class="dialog-close">
+        <img src="<?=PATHSITE?>assets/images/icon-close.svg" alt="icone fechar">
+      </span>
+
+      <img src="<?=PATHSITE?>assets/images/logo.png" alt="" class="dialog-logo">
+
+          <h3>Você está em  <b><?=$cidadeAtual->titulo?> </b> </h3>
+          
+          <p>Caso não esteja em Maringá, selecione a sua cidade aqui!</p>
+     
+      <div class="buttons-div">
+          <? if($cidades) {
+              foreach($cidades as $cidade) {
+              ?>
+        <a href="<?=PATHSITE?>muda-cidade?id=<?=$cidade->id?>">
+          <button type="button"><?=$cidade->titulo?> - <?=$cidade->sigla?> </button>
+        </a>
+          <? } } ?>
       </div>
     </div>
   </dialog>
@@ -188,9 +213,16 @@
         $('ul.menuDados li').removeClass('ativo');
         $(this).addClass('ativo');
       });
-    </script>
-
+    </script>    
   <? } ?>
+    
+    <? if($primeiraVisita) { ?>
+    <script>
+          $(document).ready(function() {
+        showCidadeModal();
+      });
+        </script>
+   <? } ?>
 
   <!-- Fixos -->
   <script src="<?= PATHSITE ?>assets/scripts/header.js"></script>
@@ -198,7 +230,7 @@
   <script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/sweetalert2/swal2.min.js"></script>
-  <script src="<?= PATHSITE ?>assets/scripts/script.js?v=1.0.0"></script>
+  <script src="<?= PATHSITE ?>assets/scripts/script.js?v=1.0.1"></script>
 
   <!-- Scripts Individuais -->
   <?= view("templates/script-individual") ?>
@@ -279,7 +311,12 @@
     }
 
     function showLoginModal(){
-      const modal = document.querySelector(".dialog-not-logged")
+      const modal = document.querySelector(".dialog-not-logged2")
+      modal.showModal();
+    }
+
+ function showCidadeModal(){
+      const modal = document.querySelector(".dialog-cidade")
       modal.showModal();
     }
 

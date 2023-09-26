@@ -7,7 +7,6 @@
     }
 </style>
 
-
 <main>
     <section class="s-text-and-slider">
         <div class="info" data-aos="fade-right">
@@ -87,7 +86,7 @@
             <div class="bottom">
                 <div>
                     <? if ($fotos) { ?>
-                        <a href="#" class="btn photo">
+                         <a data-fslightbox="presentation-1" href="<?=PATHSITE?>uploads/produto/<?=$fotos[0]->produtoFK?>/<?=$fotos[0]->arquivo?>" class="btn photo">
                             <img src="<?= PATHSITE ?>assets/images/icon-photo.png" alt="">
                                 <?= count($fotos) ?> Fotos
                         </a>
@@ -131,7 +130,7 @@
     <? foreach ($fotos as $foto) { ?>
                                                             <div class="swiper-slide">
                                                                 <div class="item"> 
-                                                                    <a data-fslightbox="presetation-1" href="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>">
+                                                                    <a data-fslightbox="presentation-1" href="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>">
                                                                         <img src="<?= PATHSITE ?>uploads/produto/<?= $foto->produtoFK ?>/<?= $foto->arquivo ?>" alt="">
                                                                     </a>           
                                                                 </div>
@@ -210,16 +209,16 @@
                                                                     <div class="input-group j-input-order-select">
                                                                         <label for="select-people">Quantidade de pessoas</label>
                                                                         <div class="modal-order">
-                                                                            <input readonly="" type="text" value="Até 100 pessoas">
+                                                                            <input readonly="" type="text" value="Selecione">
                                                                                 <div class="modal-order-select">
                                                                                     <div class="wraper-scroll">
                                                                                         <div class="content">
                                                                                             <?
-                                                                                            $i = 100;
-                                                                                            while ($i <= 600) {
+                                                                                            $i = 10;
+                                                                                            while ($i <= $metatag->hospedes) {
                                                                                                 ?>
                                                                                                 <a onclick='$("#quantidadePessoas").val(<?= $i ?>)' href="#" class="active" data-select-value="Até <?= $i ?> pessoas">Até <?= $i ?> pessoas</a>
-    <? $i = $i + 100;
+    <? $i = $i + 10;
 }
 ?>                          
                                                                                         </div>
@@ -426,16 +425,18 @@
                                                                         <label for="select-people">Quantidade de pessoas</label>
                                                                         <input type='hidden' id='quantidadePessoas' />
                                                                         <div class="modal-order">
-                                                                            <input readonly="" type="text" value="Até 200 pessoas">
+                                                                            <input readonly="" type="text" value="Selecione">
                                                                                 <div class="modal-order-select">
                                                                                     <div class="wraper-scroll">
                                                                                         <div class="content">
                                                                                             <?
-                                                                                            $i = 100;
-                                                                                            while ($i <= 600) {
+                                                                                            $i = 10;
+                                                                                            while ($i <= $metatag->hospedes) {
+                                                                                               
                                                                                                 ?>
                                                                                                 <a onclick='$("#quantidadePessoas").val(<?= $i ?>)' href="#" class="active" data-select-value="Até <?= $i ?> pessoas">Até <?= $i ?> pessoas</a>
-    <? $i = $i + 100;
+    <? 
+     $i = $i+10;
 }
 ?>                          
                                                                                         </div>
@@ -495,3 +496,21 @@
                </a>    
  </div>
 <? } ?>
+
+<script>
+  const shareButtons = document.querySelectorAll('.share');
+  shareButtons.forEach(btn => {
+    btn.addEventListener("click", async () => {
+    try {
+      await navigator.share({
+        title: "<?= $metatag->titulo ?>",
+        url: "<?= PATHSITE ?>espaco/<?= $metatag->identificador ?>/"
+      });
+      console.log("Data was shared successfully");
+    } catch (err) {
+      console.error("Share failed:", err.message);
+    }
+  });
+  })
+  
+</script>

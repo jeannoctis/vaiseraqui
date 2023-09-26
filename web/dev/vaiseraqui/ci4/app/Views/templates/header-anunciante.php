@@ -84,43 +84,49 @@
                         <h5>Fotos</h5>
                     </a>
 
+                 <? if (!in_array($tipoAtual->tipo, ['EVENTOS'])) {?> 
                     <a href="<?= PATHSITE ?>area-do-anunciante/video/" class="itemMenuPainel <?= ($segments[1] == 'video') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-video.svg">
                         <h5>Vídeos </h5>
                     </a>
+                 <? } ?>
 
+                  <? if (in_array($tipoAtual->tipo, ['ALUGUEL'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/acomodacoes" class="itemMenuPainel <?= ($segments[1] == 'acomodacoes') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-bathtub.svg">
                         <h5>Comodidades</h5>
                     </a>
+                  <? } ?>
 
-                    <? if (in_array($tipoAtual->tipo, ['SALOES'])) {?>  
+                    <? if (in_array($tipoAtual->tipo, ['SALOES','HOSPEDAGEM'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/proximidades" class="itemMenuPainel <?= ($segments[1] == 'proximidades') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-tree.svg">
                         <h5>Proximidades</h5>
                     </a>
                     <? } ?>
 
+                   <? if (in_array($tipoAtual->tipo, ['ALUGUEL'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/condominio" class="itemMenuPainel <?= ($segments[1] == 'condominio') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-condominio.svg">
                         <h5>Condomínio</h5>
                     </a>
-
-                  <? if (in_array($tipoAtual->tipo, ['SALOES', 'LOJAS'])) {?>  
+                   <? } ?>
+                
+                  <? if (in_array($tipoAtual->tipo, ['SALOES', 'LOJAS','ALUGUEL','HOSPEDAGEM'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/observacoes" class="itemMenuPainel <?= ($segments[1] == 'observacoes') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-observation.svg">
                         <h5>Observações</h5>
                     </a>
                   <? } ?>
 
-                 <? if (in_array($tipoAtual->tipo, ['SALOES'])) {?>  
+                 <? if (in_array($tipoAtual->tipo, ['SALOES', 'HOSPEDAGEM'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/regras-check-in-out" class="itemMenuPainel <?= ($segments[1] == 'regras-check-in-out') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-arrows.svg">
                         <h5>Regras Check-in e Check-out</h5>
                     </a>
                  <? } ?>
 
-                 <? if (in_array($tipoAtual->tipo, ['SALOES'])) {?>  
+                 <? if (in_array($tipoAtual->tipo, ['SALOES','HOSPEDAGEM'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/permitido-proibido" class="itemMenuPainel <?= ($segments[1] == 'permitido-proibido') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-check-x.svg">
                         <h5>Permitido e Proibido</h5>
@@ -134,15 +140,19 @@
                     </a>
                   <? } ?>
                 
+                <? if (in_array($tipoAtual->tipo, ['SALOES','PRESTADORES'])) {?>  
                     <a href="<?= PATHSITE ?>area-do-anunciante/calendario" class="itemMenuPainel <?= ($segments[1] == 'calendario') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-calendar.svg">
                         <h5>Calendário</h5>
                     </a>
+                <? } ?>
 
+                <? if(FALSE) {?>
                     <a href="<?= PATHSITE ?>area-do-anunciante/feriados" class="itemMenuPainel <?= ($segments[1] == 'feriados') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-vacation.svg">
                         <h5>Feriados</h5>
                     </a>
+                <? } ?>
 
                <? if (in_array($tipoAtual->tipo, ['EVENTOS'])) {?>               
                     <a href="<?= PATHSITE ?>area-do-anunciante/ingressos" class="itemMenuPainel <?= ($segments[1] == 'ingressos') ? 'menuAtivo' : '' ?>">
@@ -158,6 +168,7 @@
                     </a>
                <? } ?>
 
+                <? if (in_array($tipoAtual->tipo, ['EVENTOS'])) {?>               
                     <a href="<?= PATHSITE ?>area-do-anunciante/pontos-de-venda" class="itemMenuPainel <?= ($segments[1] == 'pontos-de-venda') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-sales-point.svg">
                         <h5>Pontos de Venda</h5>
@@ -167,11 +178,14 @@
                         <img src="<?= PATHSITE ?>images/icon-crew.svg">
                         <h5>Organização</h5>
                     </a>
+                <? }?>
 
+                     <? if (in_array($tipoAtual->tipo, ['PRESTADORES'])) {?>               
                     <a href="<?= PATHSITE ?>area-do-anunciante/cardapio" class="itemMenuPainel <?= ($segments[1] == 'cardapio') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-menu.svg">
                         <h5>Cardápio (somente para buffet)</h5>
                     </a>
+                     <? } ?>
 
                     <!-- <a href="<?= PATHSITE ?>area-do-anunciante/principais-comodidades" class="itemMenuPainel <?= ($segments[1] == 'principais-comodidades') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/map-icon.svg">

@@ -1236,6 +1236,11 @@ Version 2.0
   line-height: 15px;
   margin: 0;
 }
+
+.inativo{
+    opacity: 0.5;
+}
+
 .user .status {
   position: absolute;
   bottom: 5px;
