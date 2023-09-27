@@ -52,6 +52,15 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
 
             <form class="form-horizontal" method="post" enctype="multipart/form-data" id="formBusca1">
                 <fieldset>
+                    
+                    <div class="row">
+                                                <div class='col-12'>
+                                                    <label>Preço base</label>
+                                                    <input type="text" name="preco" class="form-control money2" Value="<?= $anuncio->preco ?>">
+                                                </div>
+
+                                            </div>
+                    
                     <? if ($precos) { ?>
                         <div id="accordion">
                             <? foreach ($precos as $ind => $texto) { ?>
@@ -61,7 +70,7 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                                             <div class="btn btn-link" data-toggle="collapse" data-target="#aba<?= $ind ?>" aria-expanded="true" aria-controls="aba<?= $ind ?>">
                                                 <?= $texto->titulo ?> <img src="<?= PATHSITE ?>images/icone_menu.svg">
 
-                                                <div onclick="excluirAba('<?= encode($texto->id) ?>','true', 'ProdutoPrecoModel')" class="excluirAba">
+                                                <div onclick="excluirAba('<?= encode($texto->id) ?>','true', 'ProdutoValorModel')" class="excluirAba">
                                                     <img style="filter: unset;" src="<?= PATHSITE ?>images/lixeira.svg">
                                                     Excluir
                                                 </div>

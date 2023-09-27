@@ -328,10 +328,17 @@
   </script>
   
   <script>
+      $(document).ready(function() {     
+
       <? if($pagina == 1) {?>
+          <? if($destaqueEmAlta->id) {?>
       carregaDestaques(<?=$destaqueEmAlta->id?>,0);
+          <? } ?>
+              <? if($destaqueEmAlta2->id){?>
       carregaDestaques(<?=$destaqueEmAlta2->id?>,1);
+              <? } ?>
       <? } ?>
+          });
    </script>
   
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"  crossorigin=""></script>

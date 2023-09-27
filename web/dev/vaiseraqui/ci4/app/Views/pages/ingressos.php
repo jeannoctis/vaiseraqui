@@ -13,7 +13,7 @@
 </style>
 
 <?
-$infoPagina['nomeDaPagina'] = "Preços";
+$infoPagina['nomeDaPagina'] = "Ingressos";
 $infoPagina['iconePagina'] = 'icon-pricing.svg';
 ?>
 <section class="wrap">
@@ -33,7 +33,7 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                         <? foreach ($setores as $ind => $setor) { ?>
 
                             <div class="setor-item py-3">
-                                <div class="top" data-toggle="collapse" data-target="#setor-<?= $ind ?>">
+                                <div class="top" data-toggle="collapse show" data-target="#setor-<?= $ind ?>">
                                     <button type="button" class="chevron">
                                         <img src="<?= PATHSITE ?>assets/images/icon-chevron-up.svg" alt="">
                                     </button>
@@ -43,7 +43,7 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                                     </label>
                                 </div>
 
-                                <div class="collapse col bottom" id="setor-<?= $ind ?>" data-setor="<?= $ind ?>">
+                                <div class="collapse show col bottom" id="setor-<?= $ind ?>" data-setor="<?= $ind ?>">
                                     <div class="setor-titulo has-del-btn">
                                         <label class="col-12">
                                             Título do setor
@@ -51,7 +51,7 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                                         </label>
                                         <input type="hidden" name="setorIngresso[<?= $ind ?>][id]" value="<?= $setor->id ?>">
 
-                                        <button type="button" class="del-btn has-icon" data-delete-field=".setor-item">
+                                        <button onclick="excluirAba('<?= encode($setor->id) ?>','true', 'ProdutoSetorModel')" type="button" class="del-btn has-icon" data-delete-field=".setor-item">
                                             <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
                                             excluir setor
                                         </button>
@@ -61,7 +61,7 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
 
                                         <? foreach ($setor->ingressos as $ind2 => $ingresso) { ?>
                                             <div class="ingresso-item has-del-btn">
-                                                <button type="button" class="del-btn has-icon" data-delete-field=".ingresso-item">
+                                                <button onclick="excluirAba('<?= encode($ingresso->id) ?>','true', 'SetorIngressoModel')" type="button" class="del-btn has-icon" data-delete-field=".ingresso-item">
                                                     <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
                                                     excluir ingresso
                                                 </button>
@@ -121,7 +121,8 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
         const newElement = document.createElement("div")
         newElement.classList.add("setor-item", "py-3")
         newElement.innerHTML = `
-            <div class="top" data-toggle="collapse" data-target="#setor-${setorCount}">
+        <div id="cardsetor-${setorCount}">
+            <div class="top" data-toggle="collapse show" data-target="#setor-${setorCount}">
                 <button type="button" class="chevron">
                     <img src="<?= PATHSITE ?>assets/images/icon-chevron-up.svg" alt="">
                 </button>
@@ -131,14 +132,14 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                 </label>
             </div>
 
-            <div class="collapse col bottom" id="setor-${setorCount}" data-setor="${setorCount}">
+            <div class="collapse show col bottom" id="setor-${setorCount}" data-setor="${setorCount}">
                 <div class="setor-titulo has-del-btn">
                     <label class="col-12">
                         Título do setor
                         <input type="text" name="setorIngresso[${setorCount}][setor]" class="form-control mt-3" required>
                     </label>
 
-                    <button type="button" class="del-btn has-icon" data-delete-field=".setor-item">
+                    <button onclick="excluirAba('setor-${setorCount}','false', '');" type="button" class="del-btn has-icon" data-delete-field=".setor-item">
                         <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
                         excluir setor
                     </button>
@@ -148,11 +149,12 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                     
                 </div>
 
-                <button type="button" class="has-icon add-field-btn col-12" data-add-field="ingresso">
+                <button  type="button" class="has-icon add-field-btn col-12" data-add-field="ingresso">
                     <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
                     adicionar ingresso
                 </button>
             </div>
+                            </div>
         `
         setorContainer.appendChild(newElement)
     })
@@ -170,7 +172,8 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
             const newElement = document.createElement("div")
             newElement.classList.add("ingresso-item", "has-del-btn")
             newElement.innerHTML = `
-                <button type="button" class="del-btn has-icon" data-delete-field=".ingresso-item">
+            <div id='cardingresso-${ingressosCount}'>
+                <button onclick="excluirAba('ingresso-${ingressosCount}','false', '');" type="button" class="del-btn has-icon" data-delete-field=".ingresso-item">
                     <img src="<?= PATHSITE ?>assets/images/icon-trash-can.svg" alt="">
                     excluir ingresso
                 </button>
@@ -182,6 +185,7 @@ $infoPagina['iconePagina'] = 'icon-pricing.svg';
                     Valor
                     <input type="text" name="setorIngresso[${currentSetor}][ingressos][${ingressosCount}][preco]" class="form-control money" required>
                 </label>
+                        </div>
             `
             ingressosContainer.appendChild(newElement)
             $('.money').mask('000.000.000.000.000,00', {reverse: true});

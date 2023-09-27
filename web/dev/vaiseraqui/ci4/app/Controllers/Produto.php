@@ -18,6 +18,9 @@ class Produto extends BaseController {
 
     public function index() {
         helper('date');
+         $data['produtosFKs'] = [];
+           $data['altaProdutosFKs'] = [];
+        
         if (isset($_POST['excluir'])) {
             foreach ($_POST['excluir'] as $exc) {
                 $data['excluiu'] = $this->model->delete(['id' => $exc]);
@@ -1575,10 +1578,19 @@ class Produto extends BaseController {
             $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
             $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
             $produtoModel->join('estado e', 'e.id = c.estadoFK');
-            $emAlta1[5] = $produtoModel->find($emAlta->produtoFK5);
+            $emAlta1[5] = $produtoModel->find($emAlta->produtoFK6);
             $emAlta1[5]->fotos = $produtoModel->fotos($emAlta->produtoFK6, 4, true);
         } 
-         ob_start();
+        if ($emAlta->produtoFK7) {
+            $produtoModel->resetQuery();
+            $produtoModel->select('produto.*, pc.titulo as categoria, c.titulo as cidade, e.sigla as estado');
+            $produtoModel->join('cidade c', 'c.id = produto.cidadeFK');
+            $produtoModel->join('produto_categoria pc', 'pc.id = produto.categoriaFK');
+            $produtoModel->join('estado e', 'e.id = c.estadoFK');
+            $emAlta1[6] = $produtoModel->find($emAlta->produtoFK7);
+            $emAlta1[6]->fotos = $produtoModel->fotos($emAlta->produtoFK7, 4, true); 
+        } 
+         ob_start();   
         ?>
         <script>
             (function () {
@@ -1701,9 +1713,9 @@ class Produto extends BaseController {
                                     </div>
                                 </div>
                     <?
-                    $listaCmdd = explode(";", $emAlta2[0]->principaiscomodidades);
+                    $listaCmdd = explode(";", $emAlta1[$i]->principaiscomodidades);
                     if (!$listaCmdd) {
-                        $listaCmdd = explode(";", $emAlta2[0]->itensdisponiveis);
+                        $listaCmdd = explode(";", $emAlta1[$i]->itensdisponiveis);
                     }
                     ?>
                                 <div class="info">
@@ -1719,7 +1731,7 @@ class Produto extends BaseController {
                     }
                     ?></p>
                                     <div class="box-price">
-                                        <span class="price">R$<?= number_format($emAlta2[0]->preco, 2, ',', '.') ?></span>
+                                        <span class="price">R$<?= number_format($emAlta1[0]->preco, 2, ',', '.') ?></span>
                                         <span class="per">/diária</span>
                                     </div>
                                     <span href="#" class="icon-heart <?= (in_array($emAlta1[$i]->id, $data['todosFavoritos'])) ? 'active' : '' ?>" onclick="favoritar(<?= $emAlta1[$i]->id ?>)" data-id-heart="<?= $emAlta1[$i]->id ?>">
@@ -1791,7 +1803,9 @@ class Produto extends BaseController {
               </article>
                 <? } ?>
               <div class="list-article-service">
-                  <? $i = 0; while($i < 5) {?>
+                  <? $i = 1; while($i <= 6) {
+                      if($emAlta1[$i]) {
+                      ?>
                 <article class="card-services">
                  <a href="<?=PATHSITE?>espaco/<?=$emAlta1[$i]->identificador?>/">
                   <div class="cover">
@@ -1841,7 +1855,7 @@ class Produto extends BaseController {
                   <?
                     $i++;
                   
-                        } ?>        
+                  } } ?>        
               </div>
             </div>
           </div>

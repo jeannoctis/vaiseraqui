@@ -280,8 +280,7 @@ function novoPreco() {
 }
 
 function excluirAba(index, tipo, model) {
-    console.log(tipo);
-    console.log(index);
+
     if (tipo == 'false') {
         $('#card' + index).remove();
     } else {

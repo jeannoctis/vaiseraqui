@@ -47,6 +47,28 @@ class Config extends BaseController
         $data['tabela'] = 'config';
         $data['resultado'] = "";
 
+   $this->estadoModel = model('App\Models\EstadoModel', false)
+                ->select('estado.id AS estado_id, estado.titulo AS estado_titulo, cidade.id AS cidade_id, cidade.titulo AS cidade_titulo')
+                ->join('cidade', 'estado.id = cidade.estadoFK', 'inner')
+                ->orderBy('estado_titulo ASC, cidade_titulo ASC');
+        $data['estados'] = $this->estadoModel->findAll();
+
+        $estados = [];
+        foreach ($data['estados'] as $item) {
+            if (!isset($estados[$item->estado_id])) {
+                $estados[$item->estado_id] = (object) [
+                            'estado_id' => $item->estado_id,
+                            'estado_titulo' => $item->estado_titulo,
+                            'cidades' => []
+                ];
+            }
+
+            $estados[$item->estado_id]->cidades[] = (object) [
+                        'cidade_id' => $item->cidade_id,
+                        'cidade_titulo' => $item->cidade_titulo
+            ];
+        }
+        $data['estados'] = array_values($estados);
 
         $id = decode($this->request->uri->getSegment(4));
 

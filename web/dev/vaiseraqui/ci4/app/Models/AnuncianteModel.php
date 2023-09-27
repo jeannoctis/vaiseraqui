@@ -527,6 +527,14 @@ class AnuncianteModel extends Model
                 $data['precos'] = $produtoValorModel->findAll();
 
                 if ($post) {
+                    
+                     $save2['id'] = $data['anuncio']->id;
+                      $save2['preco'] =  str_replace(".", "", $post['preco']);
+                     $save2['preco'] =  str_replace(",", ".", $post['preco']);
+                 
+                     
+                    $data["salvou"] = $produtoModel->save($save2);
+                    
                     if ($post['titulo']) {
                         $save['produtoFK'] = $data['anuncio']->id;
                         foreach ($post['titulo'] as $ind => $titulo) {
@@ -926,6 +934,53 @@ class AnuncianteModel extends Model
                 $data["categorias"] = $produtoCategoriaModel->findAll();
 
                 break;
+            case "datas":
+                  $this->produtoDataModel = \model("App\Models\ProdutoDataModel", false);
+                    $data['datas'] = $this->produtoDataModel->where("produtoFK", $data['anuncio']->id)->findAll();
+                    
+                        $lastId = $data['anuncio']->id;
+
+                        if (!empty($post['datas'])) {
+
+                            $IDsReceviedDatas = \array_column($post['datas'], "id");
+
+                            if (!empty($IDsReceviedDatas)) {
+                                $this->produtoDataModel
+                                    ->where("produtoFK", $lastId)
+                                    ->whereNotIn("id", $IDsReceviedDatas)
+                                    ->delete();
+                        }
+
+                            foreach ($post['datas'] as $item) {
+                                if (!empty($item['id'])) {
+                                    $updateDatas[] = [
+                                        'id' => $item['id'],
+                                        'data' => $item['data'],
+                                        'horarioInicio' => $item['horarioInicio'],
+                                        'horarioTermino' => $item['horarioTermino']
+                                    ];
+                                } else {
+                                    $insertDatas[] = [
+                                        'produtoFK' => $lastId,
+                                        'data' => $item['data'],
+                                        'horarioInicio' => $item['horarioInicio'],
+                                        'horarioTermino' => $item['horarioTermino']
+                                    ];
+                    }
+                            }
+
+                            if (!empty($updateDatas)) {
+                                $data['salvou'] = $this->produtoDataModel->updateBatch($updateDatas, "id");
+                }
+                            if (!empty($insertDatas)) {
+                                $data['salvou'] = $this->produtoDataModel->insertBatch($insertDatas);
+                            }
+                        } else {
+                         //   $data['salvou'] = $this->produtoDataModel->where("produtoFK", $lastId)->delete();
+                        }
+                    
+                    
+                break;
             case "dados":
                 $textoModel = model('App\Models\TextoModel', false);
                 $data['textoExplicativo'] = $textoModel->find(51);
@@ -949,10 +1004,10 @@ class AnuncianteModel extends Model
                     ->where("tipoFK", $data['anuncio']->tipoFK);
                 $data['categoriasDoTipo'] = $produtoCategoriaModel->findAll();                
 
-                if ($data['anuncio']->tipoFK == 5) {
+                /* if ($data['anuncio']->tipoFK == 5) {
                     $this->produtoDataModel = \model("App\Models\ProdutoDataModel", false);
                     $data['datas'] = $this->produtoDataModel->where("produtoFK", $data['anuncio']->id)->findAll();
-                }
+                } */
 
                 if ($post) {
                     if ($post['coordenadas']) {
@@ -965,7 +1020,7 @@ class AnuncianteModel extends Model
                     $post['id'] = $data['anuncio']->id;
                     $data["salvou"] = $produtoModel->save($post);
                    
-                    if ($data['anuncio']->tipoFK == 5) {
+               /*     if ($data['anuncio']->tipoFK == 5) {
 
                         $lastId = $data['anuncio']->id;
 
@@ -1007,7 +1062,7 @@ class AnuncianteModel extends Model
                         } else {
                             $data['salvou'] = $this->produtoDataModel->where("produtoFK", $lastId)->delete();
                         }
-                    }
+                    } */
                 }
 
                 if ($data["anuncio"]->inicioAlta) {

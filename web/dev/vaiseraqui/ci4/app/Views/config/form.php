@@ -8,9 +8,29 @@
                   <!-- /.box-title -->
                   <div class="card-content">
 
-                     <div class='col-xs-12 form-group'>
+                     <div class='col-xs-12 col-lg-6 form-group'>
                         <label for="nome">Nome da empresa </label>
                         <input type="text" name="nome" class="form-control" id="nome" value="<?= $resultado->nome ?>" placeholder="Escreva...">
+                     </div>
+         
+                      <div class='col-xs-12 col-lg-6 paddingZeroM'>
+                        <div class="col-xs-12 form-group">
+                           <label for="cidadeFK">Cidade Principal</label>
+                           <? if ($estados) { ?>
+                              <select required name="cidadeFK" required class="form-control js-example-basic-single" id="cidadeFK">
+                                 <option value="">-- selecione uma cidade --</option>
+                                 <? foreach ($estados as $estado) { ?>
+                                    <optgroup label="<?= $estado->estado_titulo ?>">
+                                       <? foreach ($estado->cidades as $cidade) { ?>
+                                          <option <?= $resultado->cidadeFK == $cidade->cidade_id ? 'selected' : '' ?> value="<?= $cidade->cidade_id ?>">
+                                             <?= $cidade->cidade_titulo ?>
+                                          </option>
+                                       <? } ?>
+                                    </optgroup>
+                                 <? } ?>
+                              </select>
+                           <? } ?>
+                        </div>
                      </div>
 
                      <div class='col-xs-12 col-lg-4 form-group'>
@@ -27,6 +47,8 @@
                         <label for="whatsapp">WhatsApp </label>
                         <input type="text" name="whatsapp" class="form-control telefone" id="whatsapp" value="<?= $resultado->whatsapp ?>" placeholder="Escreva...">
                      </div>
+                      
+                      
 
                      <div class="col-xs-12 form-group">
                         <input type="submit" name="salvar" value="Salvar e atualizar" class="btn btn-success btn-rounded waves-effect mb-1">

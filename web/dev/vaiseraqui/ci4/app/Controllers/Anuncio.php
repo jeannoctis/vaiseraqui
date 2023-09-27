@@ -316,19 +316,25 @@ class Anuncio extends BaseController
    public function emAltaG()
    {
       $post = \request()->getPost();
-
+   
+      if(!$post['categoriaFK']){
+          unset($post['categoriaFK']);
+      }
+      
       if ($post) {
-         $post['produtoFK1'] = \decode($post['produtoFK1']);
+         $post['produtoFK'] = \decode($post['produtoFK1']);
+         $post['produtoFK1'] = $post['produtoFK'];
 
          $busca = $this->model
-            ->where("tipoFK", $post['tipoFK'])
+          //  ->where("tipoFK", $post['tipoFK'])
             ->where("cidadeFK", $post['cidadeFK'])
             ->where("tipo", $post['tipo'])
          ->first();
-
+         
          if ($busca) {
             $post['id'] = $busca->id;
 
+            
             $produtosFKs = [$busca->produtoFK2, $busca->produtoFK3, $busca->produtoFK4, $busca->produtoFK5];
             if(\in_array($post['produtoFK1'], $produtosFKs)) {
                $return['produtoEmAltaMenor'] = true;
@@ -337,15 +343,15 @@ class Anuncio extends BaseController
 }
 
             if($busca->produtoFK1 == $post['produtoFK1']) {
-               $post['produtoFK1'] = NULL;
-
+               $post['produtoFK1'] = NULL;              
                $return['remove'] = $this->model->save($post);
                echo \json_encode($return);
                return;
             }
-
+            $return['id'] = $post['produtoFK1'];
             $return['save'] = $this->model->save($post);
          } else {
+                $return['id'] = $post['produtoFK1'];
             $return['insert'] = $this->model->insert($post);
          }
       }
@@ -355,12 +361,16 @@ class Anuncio extends BaseController
    public function emAltaP()
    {
       $post = \request()->getPost();
-
+      
+        if(!$post['categoriaFK']){
+          unset($post['categoriaFK']);
+      }
+      
       if ($post) {
          $post['produtoFK'] = \decode($post['produtoFK']);
 
          $busca = $this->model
-            ->where("tipoFK", $post['tipoFK'])
+         //   ->where("tipoFK", $post['tipoFK'])
             ->where("cidadeFK", $post['cidadeFK'])
             ->where("tipo", $post['tipo'])
          ->first();
@@ -407,6 +417,7 @@ class Anuncio extends BaseController
    public function destaqueG()
    {
       $post = \request()->getPost();
+      
 
       if ($post) {
          $post['produtoFK1'] = \decode($post['produtoFK1']);
@@ -414,6 +425,10 @@ class Anuncio extends BaseController
          $tipoModel = \model('App\Models\TipoModel', false);
         $tipoAtual = $tipoModel->find($post['tipoFK']);
 
+        if(!$post['categoriaFK']) {
+            unset($post['categoriaFK']);
+        }
+        
          $this->model
             ->where("tipoFK", $post['tipoFK'])
             ->where("cidadeFK", $post['cidadeFK']);
@@ -458,6 +473,10 @@ class Anuncio extends BaseController
 
       if ($post) {
          $post['produtoFK'] = \decode($post['produtoFK']);
+         
+            if(!$post['categoriaFK']) {
+            unset($post['categoriaFK']);
+        }
          
           $tipoModel = \model('App\Models\TipoModel', false);
         $tipoAtual = $tipoModel->find($post['tipoFK']);

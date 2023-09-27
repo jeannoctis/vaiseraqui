@@ -136,30 +136,6 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                             <textarea name="description" class="form-control"><?= $anuncio->description ?></textarea>
                         </div>
 
-                        <? if ($tipoAtual->tipo == 'EVENTOS') { ?>
-                            <!-- Datas Eventos -->
-                            <h2 class="col-12 mt-5">Datas do Evento</h2>
-                            <div class="dates-container col-12 row">
-                                <? foreach ($datas as $ind => $data) { ?>
-                                    <label class="has-del-btn py-3 col">
-                                        <input type="hidden" name="datas[<?= $ind ?>][id]" value="">
-                                        Data 1
-                                        <input type="date" name="datas[<?= $ind ?>][data]" value="<?= $data->data ?>" class="form-control mt-3">
-                                        Início
-                                        <input type="time" name="datas[<?= $ind ?>][horarioInicio]" value="<?= $data->horarioInicio ?>" class="form-control mt-3">
-                                        Término
-                                        <input type="time" name="datas[<?= $ind ?>][horarioTermino]" value="<?= $data->horarioTermino ?>" class="form-control mt-3">
-                                    </label>
-                                <? } ?>
-                            </div>
-
-                            <button type="button" class="has-icon add-field-btn" data-add-field="date">
-                                <img src="<?= PATHSITE ?>assets/images/icon-plus.svg" alt="">
-                                adicionar novo campo de data
-                            </button>
-
-                        <? } ?>
-
                         <div class="col-12">
                             <button type="submit" class="form-control formsubmit" name="">
                                 Atualizar dados

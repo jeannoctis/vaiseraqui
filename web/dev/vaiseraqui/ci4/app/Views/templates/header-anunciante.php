@@ -161,14 +161,19 @@
                     </a>
                <? } ?>
                 
-                 <? if (in_array($tipoAtual->tipo, ['ALUGUEL', 'SALOES', 'HOSPEDAGEM', 'LOJAS','EVENTOS'])) {?>               
+                 <? if (in_array($tipoAtual->tipo, ['ALUGUEL', 'SALOES', 'HOSPEDAGEM', 'LOJAS'])) {?>               
                     <a href="<?= PATHSITE ?>area-do-anunciante/precos" class="itemMenuPainel <?= ($segments[1] == 'precos') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-pricing.svg">
                         <h5>Valores</h5>
                     </a>
                <? } ?>
 
-                <? if (in_array($tipoAtual->tipo, ['EVENTOS'])) {?>               
+                <? if (in_array($tipoAtual->tipo, ['EVENTOS'])) {?>       
+                 <a href="<?= PATHSITE ?>area-do-anunciante/datas" class="itemMenuPainel <?= ($segments[1] == 'datas') ? 'menuAtivo' : '' ?>">
+                        <img src="<?= PATHSITE ?>images/icon-calendar.svg">
+                        <h5>Datas</h5>
+                    </a>
+                
                     <a href="<?= PATHSITE ?>area-do-anunciante/pontos-de-venda" class="itemMenuPainel <?= ($segments[1] == 'pontos-de-venda') ? 'menuAtivo' : '' ?>">
                         <img src="<?= PATHSITE ?>images/icon-sales-point.svg">
                         <h5>Pontos de Venda</h5>

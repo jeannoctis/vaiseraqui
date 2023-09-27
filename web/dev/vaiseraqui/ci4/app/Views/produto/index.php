@@ -93,10 +93,10 @@
 												<th>Galeria</th>
 												<th>Vídeos</th>
 												<? if (!empty($get['cidade']) && (($get['tipo'] == 6 && !empty($get['categoria'])) || $get['tipo'] != 6)) { ?>
-													<th>Em alta G</th>
-													<th>Em alta P</th>
-													<th>Destaque G</th>
-													<th>Destaque P</th>
+                                                                                                <th>Em alta G  <i class="menu-icon bi bi-question-circle"></i> </th>
+													<th>Em alta P <i class="menu-icon bi bi-question-circle"></i> </th>
+													<th>Destaque G <i class="menu-icon bi bi-question-circle"></i> </th>
+													<th>Destaque P <i class="menu-icon bi bi-question-circle"></i> </th>
 												<? } ?>
 												<th>Ordenar</th>
 											</tr>
@@ -129,8 +129,8 @@
 													</td>
 													<? if (!empty($get['cidade']) && (($get['tipo'] == 6 && !empty($get['categoria'])) || $get['tipo'] != 6)) { ?>
 														<td>
-															<button type="button" class="btn btn-md btn-rounded <?= $elemento->id == $altaProdutoFK1 ? "btn-warning" : "" ?>" onclick="emAltaG('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'emaltaprestador' : 'emalta' ?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)" data-emalta-g>
-																<i class="bi bi-fire"></i>
+															<button id="emAltaG<?=$elemento->id?>" type="button" class="btn btn-md btn-rounded <?= $elemento->id == $altaProdutoFK1 ? "btn-warning" : "" ?>" onclick="emAltaG('<?= encode($elemento->id) ?>', <?= $get['tipo'] ?>, <?= $get['cidade'] ?>, '<?= $get['tipo'] == 6 ? 'emaltaprestador' : 'emalta' ?>', <?= !empty($get['categoria']) ? $get['categoria'] : 'null' ?>, this)" data-emalta-g>
+																<i class="bi bi-fire"></i> 
 															</button>
 														</td>
 														<td>
@@ -224,7 +224,7 @@
 					categoriaFK
 				}, function(retorno) {
 					const response = jQuery.parseJSON(retorno)
-
+                                        console.log(response);
 					if (response.save || response.insert) {
 						const destaqueGBtns = document.querySelectorAll("[data-emalta-g]").forEach(
 							btn => btn.classList.remove("btn-warning")
@@ -233,7 +233,7 @@
 					} else if (response.remove) {
 						el.classList.toggle("btn-warning")
 					} else if (response.produtoEmAltaMenor) {
-						swal("Produto já destacado", "Este produto está destacado como em alta P", "warning")
+						swal("Produto já destacado", "Este produto está destacado como em alta G", "warning")
 					}
 				})
 			}

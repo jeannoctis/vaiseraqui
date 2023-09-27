@@ -1,6 +1,6 @@
 <?
 $infoPagina['nomeDaPagina'] = "Pontos de venda";
-$infoPagina['iconePagina'] = 'sales-point.svg';
+$infoPagina['iconePagina'] = 'icon-sales-point.svg';
 ?>
 <section class="wrap">
 
