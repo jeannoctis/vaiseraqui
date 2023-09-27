@@ -1,6 +1,14 @@
 <link rel="stylesheet" href="<?= PATHSITE ?>style.css?v=1.0.3">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+<style>
+    .header .container{
+        max-width: 100%;
+    }
+</style>
+
+
+
 <section class="meuPerfil mt-5">
     <div class="container mt-5">
         <div class="row mt-5">
@@ -43,7 +51,7 @@
                         </li>
                         <li onclick="$('#avisoSair').modal('show');">
                             <a href="<?=PATHSITE?>logout/">
-                            <img src="<?= PATHSITE ?>images/perfil_sair.svg"> Sair
+                            <img src="<?= PATHSITE ?>assets/images/perfil_sair.svg"> Sair
                             </a>
                         </li>
 
@@ -140,6 +148,8 @@
                             </fieldset>
                         </form>
                     </div>
+                    
+                    
 
                     <div class="boxTabView boxViewTab2">
                         <h3 class="fav-title">
@@ -152,23 +162,24 @@
                         <? if ($favoritos) { ?>
                             <div class="favoritos-container">
                                 <? foreach ($favoritos as $ind => $fav) {
-                                    switch ($fav->tipo_id) {
-                                        case 1:
+                                    
+                                    switch ($fav->tipo2) {
+                                        case 'ALUGUEL':
                                             echo view("templates/aluguel-para-temporada-card", (array)$fav);
                                             break;
-                                        case 2:
+                                        case 'SALOES':
                                             echo view("templates/aluguel-para-temporada-card", (array)$fav);
                                             break;
-                                        case 3:
+                                        case 'HOSPEDAGEM':
                                             echo view("templates/hospedagem-card", (array)$fav);
                                             break;
-                                        case 5:
+                                        case 'EVENTOS':
                                             echo view("templates/aluguel-para-temporada-card", (array)$fav);
                                             break;
-                                        case 6:
+                                        case 'PRESTADORES':
                                             echo view("templates/aluguel-para-temporada-card", (array)$fav);
                                             break;
-                                        case 7:
+                                        case 'HOSPEDAGEM':
                                             echo view("templates/aluguel-para-temporada-card", (array)$fav);
                                             break;
                                     } ?>

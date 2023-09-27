@@ -469,7 +469,6 @@
     <script type="module">
                 // Controla modal de mapa
          
-
                 // AOS
                 AOS.init({
                 once: true,
@@ -501,26 +500,8 @@
                         }
                 })
 
-                // Controller swiper callendar
-                const buttonNext = document.querySelector('.navigation-swiper-blog > .next')
-                const buttonPrev = document.querySelector('.navigation-swiper-blog > .prev')
+            
 
-                buttonNext.addEventListener('click', function(e) {
-                e.preventDefault()
-                        console.log('next')
-                        swiperImoveis.slideNext()
-                })
-
-                buttonPrev.addEventListener('click', function(e) {
-                e.preventDefault()
-                        console.log('prev')
-                        swiperImoveis.slidePrev()
-                })
-
-                swiperImoveis.on('reachBeginning', function() {
-                buttonNext.classList.add('active')
-                        buttonPrev.classList.remove('active')
-                });
         swiperImoveis.on('reachEnd', function() {
         buttonNext.classList.remove('active')
                 buttonPrev.classList.add('active')

@@ -26,7 +26,6 @@ var PATHSITE = '<?=PATHSITE?>';
 <script>
  <?
   
-  
   if($erroLogin){?>
    swal.fire("Ops,", "<?=$erroLogin?>", "error");
 <?  } else if ($salvou) {

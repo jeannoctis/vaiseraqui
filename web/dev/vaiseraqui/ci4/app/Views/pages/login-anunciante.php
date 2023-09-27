@@ -45,7 +45,7 @@
                         </form>
 
                         <div class="linkPerfil">
-                                <a href="<?= PATHSITE ?>esqueci/anunciante">Esqueci a senha</a>
+                                <a href="<?= PATHSITE ?>esqueci?tipo=anunciante">Esqueci a senha</a>
                         </div>    
                         </div>                            
                     </div>

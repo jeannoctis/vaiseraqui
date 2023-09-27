@@ -40,7 +40,7 @@
                                     </div>
                                     
                                     <div class="col-12">
-                                        <button type="submit" class="form-control formsubmit" name="enviar" value="Enviar">
+                                        <button type="submit" class="form-control formsubmit" name="" value="Enviar">
                                                 Recuperar
                                         </button>
                                     </div>

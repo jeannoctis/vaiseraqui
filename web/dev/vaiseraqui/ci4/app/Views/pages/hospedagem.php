@@ -219,24 +219,29 @@
             </span>
           </h2>
          
+              <?    $soma = $metatag->preco; ?>
+               
           <table>
             <tbody>
               <tr>
                 <td>Aluguel</td>
-                <td>R$<?= number_format($metatag->preco, 2, ";", ".") ?></td>
+                <td>R$<?= number_format($metatag->preco, 2, ",", ".") ?></td>
               </tr>
-              <? foreach ($metatag->valores as $valor) { ?>
+              <? foreach ($metatag->valores as $valor) {
+                    $soma+= $valor->valor;
+                  ?>
                 <tr>
                   <td><?= $valor->titulo ?></td>
                   <td class="<?= $valor->valor == 0 ? 'empashis' : '' ?>">
-                    R$<?= number_format($metatag->preco, 2, ";", ".") ?></td>
+                    R$<?= number_format($valor->valor, 2, ",", ".") ?></td>
                 </tr>
               <? } ?>
+                
             </tbody>
             <tfoot>
-              <tr>
+              <tr> 
                 <td>Total</td>
-                <td>R$<?= number_format($metatag->total, 2, ";", ".") ?></td>
+                <td>R$<?= number_format($soma, 2, ",", ".") ?></td>
               </tr>
             </tfoot>
           </table>

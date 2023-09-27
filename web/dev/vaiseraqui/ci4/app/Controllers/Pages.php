@@ -8,7 +8,14 @@ class Pages extends Controller {
 
     public function buscaGeral() {
         helper('text');
-
+        
+        $data['segments'] = $segments = $this->request->uri->getSegments();
+          
+        if($data['segments'][0] == 'uploads') {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException();
+            die();
+        }
+     
         $this->session = \Config\Services::session($config);
         $this->redeSocialModel = model('App\Models\RedeSocialModel', false);
         $this->redeSocialModel->where("link != '' AND link IS NOT NULL ");
@@ -80,7 +87,7 @@ class Pages extends Controller {
 
         $data["cookies"] = $this->session->get("cookies");
 
-        $data['segments'] = $segments = $this->request->uri->getSegments();
+        
 
         if ($_POST["cookies"]) {
             $this->session->set("cookies", TRUE);
@@ -195,16 +202,17 @@ class Pages extends Controller {
         $ArtigoModel->orderBy("artigo.ordem ASC, artigo.id DESC");
         $data["blogs"] = $ArtigoModel->findAll(6);
 
+        $textoModel = model('App\Models\TextoModel', false);
+        $data['anuncioBannerH'] = $textoModel->find(20);
+          
         $anuncioModel = model('App\Models\AnuncioModel', false);
-          $data['anuncioBannerH'] = $anuncioModel->find(11);
-          
-          
-          $anuncioModel->resetQuery();
+     
+             $anuncioModel->resetQuery();
           $anuncioModel->select('id');
           $anuncioModel->where('tipo','emalta');
      $anuncioModel->where('anuncio.cidadeFK',$_SESSION['cidade']);
     $data['destaqueEmAlta'] = $anuncioModel->find()[0];     
-     
+        
           $anuncioModel->resetQuery();
           $anuncioModel->select('anuncio.id, t.titulo, t.arquivo');
           $anuncioModel->join('tipo t', 't.id = anuncio.tipoFK');
@@ -314,6 +322,8 @@ class Pages extends Controller {
                 $tipoModel = model('App\Models\TipoModel', false);
                 $tipoModel->select('identificador');
                 $tipo = $tipoModel->find($pc->tipoFK);
+                
+          
                 if ($tipo) {
                     Header("HTTP/1.1 301 Moved Permanently");
                     Header("Location:" . PATHSITE . $tipo->identificador . "/" . $segments[1] . "/");
@@ -496,8 +506,9 @@ class Pages extends Controller {
                 $page = "blog-listagem";
 
                 $anuncioModel = \model("App\Models\AnuncioModel", false);
+                $textoModel = \model("App\Models\TextoModel", false);
                 
-                $data['anuncioBannerH'] = $anuncioModel->find(11);
+                $data['anuncioBannerH'] = $textoModel->find(22);
                 $paginate = \is_numeric($get['page_artigos']) ? $get['page_artigos'] : 1;
 
                 $this->artigoModel = \model("App\Models\ArtigoModel", false);
@@ -528,7 +539,7 @@ class Pages extends Controller {
                     // Blog Interna
                     $data['style_list'] = ['swiper'];
                     $data['script_list'] = ['swiper','header','form-filter','select','modal-filter','controller-page-internal-3'];
-                    $data['anuncioBannerV'] = $anuncioModel->find(12);
+                    $data['anuncioBannerV'] = $textoModel->find(21);
 
                     \helper("url");
                     $data['crrUrl'] = \current_url(); // Compartilhar: copiar link ?
@@ -558,7 +569,6 @@ class Pages extends Controller {
                     $data['artigosCategoria'] = $this->artigoModel->paginate(9, "artigos", $paginate);
                     $data['pager'] = $this->artigoModel->pager;
                 } else if ($segments[1]) {
-
                     throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
                 }
 
@@ -615,8 +625,13 @@ class Pages extends Controller {
                 $request = \Config\Services::request();
                 $post = $request->getPost();
                 $get = $request->getGet();
+                
+if($get['tipo'] == 'cliente') {                
                 $model = model('App\Models\ClienteModel', false);
-
+}else {
+         $model = model('App\Models\AnuncianteModel', false);
+}
+                
                 if ($post) {
                     if (!$post["email"]) {
                         $data["erro"] = "Preencha o e-mail";
@@ -718,8 +733,6 @@ class Pages extends Controller {
                     }
                 }
 
-  
-
                 foreach ($data['tipos'] as $ind => $tipo) {
                     $produtoCategoriaModel->resetQuery()
                             ->select("id, titulo")
@@ -800,6 +813,7 @@ class Pages extends Controller {
                         ->whereIn("produto.id", $data['todosFavoritos']);
                     $data['favoritos'] = $produtoModel->findAll();
                
+                    
                     foreach ($data['favoritos'] as $ind => $favorito) {
                     $favorito->fotos = $produtoModel->fotos($favorito->id, 4, true);
                     }
@@ -812,15 +826,22 @@ class Pages extends Controller {
                 $data['coordenadas'] = array();
                 break;
             case 'novasenha':
+                $header = "header2";
+                $footer = "footer2";
                 $data['pagina'] = 19;
                 $request = \Config\Services::request();
                 $post = $request->getPost();
                 $get = $request->getGet();
+                if($get['tipo'] == 'cliente') {
                 $model = model('App\Models\ClienteModel', false);
-
+                } else {
+                    $model = model('App\Models\AnuncianteModel', false);
+                }
+                
                 $model->where("recuperar", $get['codigo']);
                 $model->where("recuperar IS NOT NULL");
                 $result = $model->find();
+      
 
                 if ($result) {
                     if (isset($_POST["senha1"])) {
@@ -831,18 +852,24 @@ class Pages extends Controller {
                             $inserir["recuperar"] = "";
                             $model->resetQuery();
                             $inserir["id"] = $result[0]->id;
-                            $data["salvar"] = $model->save($inserir);
+                                                                                 
+                            $data["salvou"] = $model->save($inserir);
+                                                        
                             $data["sucesso"] = "Senha alterada com sucesso!";
+                            if($get['tipo'] == 'cliente') {
                             ?>
-                            <meta http-equiv="refresh" content="3; url=<?= PATHSITE ?>area-do-cliente/login/">
+                            <meta http-equiv="refresh" content="3; url=<?= PATHSITE ?>meu-perfil/">
                             <?
+                            } else { ?>
+                                 <meta http-equiv="refresh" content="3; url=<?= PATHSITE ?>area-do-anunciante/">
+                           <? }
                         } else {
                             $data["erro"] = "Senha sestão Diferentes";
                         }
                     }
                 } else {
                     ?>
-                    <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?><?= $qualLogin ?>/">
+                    <meta http-equiv="refresh" content="0; url=<?= PATHSITE ?>/">
                     <?
                     session_write_close();
                     exit();
@@ -1002,10 +1029,12 @@ class Pages extends Controller {
             break;
             
             default:
-                  $produtoModel = \model("App\Models\ProdutoModel", false);
+            
+                $produtoModel = \model("App\Models\ProdutoModel", false);
                 $plusData = $produtoModel->default($data, $page);
                 $data = array_merge($data,$plusData);
                 $page = $data['page'];
+                
                 break;
             
         }

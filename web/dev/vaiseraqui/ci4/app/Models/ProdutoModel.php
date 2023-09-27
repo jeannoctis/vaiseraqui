@@ -226,7 +226,7 @@ class ProdutoModel extends Model {
     }
 
     public function dadosCard() {
-        return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado, t.identificador as tipo, t.id as tipo_id")
+        return $this->select("produto.*, pc.titulo as categoria ,c.titulo as cidade, e.sigla as estado, t.identificador as tipo, t.id as tipo_id, t.tipo as tipo2")
                         ->join("produto_categoria pc", "pc.id = produto.categoriaFK")
                         ->join("cidade c", "c.id = produto.cidadeFK")
                         ->join("estado e", "e.id = c.estadoFK")
@@ -458,6 +458,11 @@ class ProdutoModel extends Model {
         $tipoModel->where('identificador', $data['segments'][0]);
         $tipo = $tipoModel->find()[0];
         
+        if(!$tipo){
+            throw new \CodeIgniter\Exceptions\PageNotFoundException($page);
+            exit();
+        }
+        
         if($data['segments'][1]) {
             $data['canonical'] = PATHSITE . $data['segments'][0] . '/' . $data['segments'][1] . '/';
         } else {
@@ -565,7 +570,7 @@ class ProdutoModel extends Model {
                     $anuncioModel = \model("App\Models\AnuncioModel", false)
                             ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5, anuncio.produtoFK6");
                     $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
-                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipo','emaltaprestador');
                     $anuncioModel->where('tipoFK',$data['tipoAtual']->id);
                     $emAlta = $anuncioModel->find()[0];
                     
@@ -601,8 +606,14 @@ class ProdutoModel extends Model {
                     //  $data['setores'] = $produtoModel->setores($data['metatag']->id);
                     //  $data['organizacoes'] = $produtoModel->organizacoes($data['metatag']->id);
 
-                    $produtoModel = \model("App\Models\ProdutoModel", false);
-                    $data['destaques'] = $produtoModel->destaquePrestadores();
+                      $anuncioModel = \model("App\Models\AnuncioModel", false)
+                            ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5, anuncio.produtoFK6");
+                    $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
+                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipoFK',$data['tipoAtual']->id);
+                    $emAlta = $anuncioModel->find()[0];
+                    
+                        $data['destaques'] = $anuncioModel->emAlta($emAlta);
                 } else {
                     $data['get'] = $get = request()->getGet();
                     $data['style_list'] = ['swiper'];
@@ -614,7 +625,7 @@ class ProdutoModel extends Model {
                       $anuncioModel = \model("App\Models\AnuncioModel", false)
                             ->select("anuncio.produtoFK1, anuncio.produtoFK2, anuncio.produtoFK3,anuncio.produtoFK4, anuncio.produtoFK5, anuncio.produtoFK6");
                     $anuncioModel->where('cidadeFK',$_SESSION['cidade']);
-                    $anuncioModel->where('tipo','tipo');
+                    $anuncioModel->where('tipo','emaltaprestador');
                     $anuncioModel->where('tipoFK',$data['tipoAtual']->id);
                     $emAlta = $anuncioModel->find()[0];
                     
@@ -628,7 +639,7 @@ class ProdutoModel extends Model {
              }
                
              $data['destaques'] = $destaques;
-                
+          
                     if (!is_numeric($get['page_produto'])) {
                         $paginate = 1;
                     } else {

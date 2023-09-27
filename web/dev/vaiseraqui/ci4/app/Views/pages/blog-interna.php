@@ -43,22 +43,23 @@
 
         <hr>
 
+            
         <div class="box-social" data-aos="fade-up">
           <span class="title">Compartilhe</span>
           <nav>
             <!-- <a href="#">
               <img src="<?= PATHSITE ?>assets/images/icon-instagram.svg" alt="ícone">
             </a> -->
-            <a href="#">
+            <a target='_blank' href="https://www.facebook.com/sharer/sharer.php?u=<?=$_SERVER['SCRIPT_URI']?>">
               <img src="<?= PATHSITE ?>assets/images/icon-facebook.svg" alt="ícone">
             </a>
-            <a href="#">
+             <a target='_blank' href="https://twitter.com/intent/tweet?url=<?=$_SERVER['SCRIPT_URI']?>">
               <img src="<?= PATHSITE ?>assets/images/icon-twitter.svg" alt="ícone">
             </a>
-            <a href="#">
+              <a target='_blank' href="https://www.linkedin.com/shareArticle?mini=true&url=<?=$_SERVER['SCRIPT_URI']?>">
               <img src="<?= PATHSITE ?>assets/images/icon-linkedin.svg" alt="ícone">
             </a>
-            <a href="#">
+            <a class='share' href="#">
               <img src="<?= PATHSITE ?>assets/images/link.svg" alt="ícone">
             </a>
           </nav>
@@ -71,9 +72,9 @@
           <a href="<?= $anuncioBannerV->link ?>">
             <picture>
                 <? if(FALSE) {?>
-              <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerV->arquivo ?>.webp" type="image/webp">
+              <source srcset="<?= PATHSITE ?>uploads/texto/<?= $anuncioBannerV->arquivo ?>.webp" type="image/webp">
                 <? } ?>
-              <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerV->arquivo ?>">
+              <img src="<?= PATHSITE ?>uploads/texto/<?= $anuncioBannerV->arquivo ?>">
             </picture>
           </a>
 
@@ -123,7 +124,7 @@
 </main>
 
 <script>
-  const shareButtons = document.querySelectorAll('.box-social a');
+  const shareButtons = document.querySelectorAll('.share');
   shareButtons.forEach(btn => {
     btn.addEventListener("click", async () => {
     try {

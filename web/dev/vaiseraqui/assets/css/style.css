@@ -390,6 +390,13 @@ main {
 .header .container .account .box-logged.show {
   display: flex;
 }
+
+.header .container .account .box-logged.show img{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
 .header .container .account .box-logged div .title {
   font-size: 0.875rem;
   color: #932327;
@@ -1734,10 +1741,7 @@ select {
   color: #FFFFFF;
 }
 @media screen and (max-width: 769px) {
-  .navigation {
-    width: calc(100% + 40px);
-    margin-left: -20px;
-  }
+
   .navigation a {
     width: 42px;
     height: 42px;
@@ -7394,6 +7398,10 @@ header.header-bg .group-title span {
     width: 100% !important;
         max-width: 100%;
 }
+
+.box-social img{
+ filter: brightness(0) saturate(100%) invert(0%) sepia(90%) saturate(7459%) hue-rotate(59deg) brightness(105%) contrast(111%);
+ }
 
 .blog-list .two-columns .column:first-of-type ol,.blog-list .two-columns .column:first-of-type ul{
     padding-left: 15px;

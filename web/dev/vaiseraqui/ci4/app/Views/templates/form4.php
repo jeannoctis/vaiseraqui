@@ -21,7 +21,7 @@
                   }
                   ?>
 
-<form method="get" action="<?=PATHSITE?><?=$identificador?>/" class="form<?=$id?> <?=$form4Visible?>">            
+<form method="get" action="<?=PATHSITE?><?=$identificador?>/" class="form<?=$id?> <?=$form4Visible?>  <?=$visivel?>">            
      <input type="hidden" id="cidadeFK<?=$id?>" name="cidadeFK" value="<?=$idCidade?>" />
      <input type="hidden" id="tipoFK<?=$id?>" name="tipoFK" value="<?=$idTipo?>" />
      <input type="hidden"  name="ordem" value="<?=$get['ordem']?>" />

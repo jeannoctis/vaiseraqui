@@ -1,4 +1,5 @@
- <section class="s-title-and-list-cards" id="servicos-destaque">
+<? if($destaques) {?>
+<section class="s-title-and-list-cards" id="servicos-destaque">
    <div class="container-medium">
      <header data-aos="fade-up">
        <h2>Mais destaques</h2>
@@ -82,3 +83,4 @@
      </div>
    </div>
  </section>
+<? } ?>

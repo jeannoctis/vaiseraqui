@@ -116,13 +116,13 @@
                <div class="container-medium">
 
                   <picture>
-                     <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>.webp" type="image/webp">
-                     <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>" class="only-mobile">
+                     <source srcset="<?= PATHSITE ?>uploads/texto<?= $anuncioBannerH->arquivo2 ?>.webp" type="image/webp">
+                     <img src="<?= PATHSITE ?>uploads/texto/<?= $anuncioBannerH->arquivo2 ?>" class="only-mobile">
                   </picture>
 
                   <picture>
-                     <source srcset="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>.webp" type="image/webp">
-                     <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>">
+                     <source srcset="<?= PATHSITE ?>uploads/texto/<?= $anuncioBannerH->arquivo ?>.webp" type="image/webp">
+                     <img src="<?= PATHSITE ?>uploads/texto/<?= $anuncioBannerH->arquivo ?>">
                   </picture>
 
                </div>

@@ -196,7 +196,7 @@
                                                                 <form action="#">
                                                                     <div class="input-group">
                                                                         <label for="date-event">Data do Evento</label>
-                                                                        <input type="text" readonly="" name="" value="" id="mobile-table-checkin" class="hasDatepicker">                
+                                                                        <input type="text" readonly="" name="" value="" id="mobile-table-checkin" class="">                
                                                                     </div>
                                                                     <div style='display: none; margin-top: 15px;' id='maisDeUmDia2' class="input-group">
                                                                         <label for="date-event">Data final do Evento</label>

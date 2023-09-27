@@ -1,5 +1,5 @@
 <article class="card-item" data-aos="fade-right">
-   <a href="<?= PATHSITE ?><?= $tipo ?>/<?= $identificador ?>/">
+   <a href="<?= PATHSITE ?>espaco/<?= $identificador ?>/">
       <div class="cover">
          <? if ($destaque == 1) { ?>
             <span class="button-category">

@@ -150,6 +150,7 @@ if ($acesso['usuarioFK'] > 3) {
                         <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 17) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(17) ?>">Seção Calendário</a></li>
                         <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 18) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(18) ?>">Seção Blog</a></li>
                         <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 7) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(7) ?>">Bloco Contato</a></li>
+                        <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 20) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(20) ?>">Banner Ads</a></li>
                      </ul>
                   </li>
                </ul>
@@ -173,6 +174,8 @@ if ($acesso['usuarioFK'] > 3) {
                   <li class='<?= ($_SESSION["menuAdmin"] == 3) ? 'current active' : '' ?> '>
                      <a class="waves-effect parent-item js__control" href="#"><i class="menu-icon bi bi-pencil-fill"></i><span>Blog</span><span class="menu-arrow fa fa-angle-down"></span></a>
                      <ul class="sub-menu js__content">
+                         <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 21) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(21) ?>">Banner Scroll</a></li>
+                         <li class='<?= ($segments[1] == 'texto' && decode($segments[3]) == 22) ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/texto/form/<?= encode(22) ?>">Banner Grande</a></li>
                         <li class='<?= ($segments[1] == 'artigo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/artigo/"><i class="bi-caret-right-fill"></i> Artigos</a></li>
                         <li class='<?= ($segments[1] == 'categoriaArtigo') ? "linha-selected" : "" ?>'><a href="<?= PATHSITE ?>admin/categoriaArtigo/">Categorias</a></li>
                      </ul>

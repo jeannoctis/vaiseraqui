@@ -47,7 +47,6 @@
       <div class="presentation-form-content">
           <? foreach($tipos as $ind => $tipo) {
 
-              
               switch($tipo->tipo ) {
                   case 'ALUGUEL':
                       $idForm = 1;
@@ -70,7 +69,10 @@
               }
               $tipo = (array) $tipo;
                   if(!$ind){
-                    $tipo["form{$idForm}Visible"] = 'visible';
+                      $tipo['visivel'] = 'visible';
+                 //   $tipo["form{$idForm}Visible"] = 'visible';
+              } else {
+                  $tipo['visivel'] = '';
               }
               ?>
         <? echo View("templates/form{$idForm}",$tipo) ?>
@@ -176,11 +178,16 @@
     </div>
   </div>
 
+
   <a href="<?= $anuncioBanner->link ?>">
     <div class="banner-zinho" data-aos="fade-up">
       <div class="container-medium">
-        <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo2 ?>" alt="" class="only-mobile">
-        <img src="<?= PATHSITE ?>uploads/anuncio/<?= $anuncioBannerH->arquivo ?>" alt="Banner Ads">
+            <? if($anuncioBannerH->arquivo2) {?> 
+        <img src="<?= PATHSITE ?>uploads/texto/<?= $anuncioBannerH->arquivo2 ?>" alt="" class="only-mobile">
+            <? } ?>
+            <? if($anuncioBannerH->arquivo) {?> 
+        <img src="<?= PATHSITE ?>uploads/texto/<?= $anuncioBannerH->arquivo ?>" alt="Banner Ads">
+            <? } ?>
       </div>
     </div>
   </a>

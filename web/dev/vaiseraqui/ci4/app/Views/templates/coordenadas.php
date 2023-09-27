@@ -39,6 +39,12 @@
 
     var locations = [
       <? foreach ($coordenadas as $ind => $coord) {
+          
+          $explode = explode(",",$coord['coord']);
+          
+          if(is_numeric($explode[0]) && is_numeric($explode[1]) ) {
+          
+          
         if (is_numeric($coord["preco"])) {
           $preco = "R$ " . number_format($coord["preco"], 2, ',', ' ');
         } else {
@@ -46,7 +52,7 @@
         }
       ?>["<a href='<?= PATHSITE ?>espaco/<?= $coord["identificador"] ?>'><div style='width:240px; height: 130px; background-size: cover; background-image:url(<?= PATHSITE ?>uploads/produto/<?= $coord["id"] ?>/<?= $coord["foto"]->arquivo ?>)' ></div></a> <div class='cobretudo'> " +
           "<div><?= $coord["titulo"] ?></div><div><?= ($preco) ? "A partir de" : "" ?> <b> <?= $preco ?></b></div></div>", <?= $coord["coord"] ?>,'<?=$coord['identificador']?>'],
-      <? } ?>
+          <? } }  ?>
     ];
 
     for (var i = 0; i < locations.length; i++) {

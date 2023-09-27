@@ -22,7 +22,7 @@ if ($get['tipoFK']) {
 }
 ?>    
 
-<form action="<?=PATHSITE?>eventos/" method="get"  class="form<?=$id?> <?= $form7Visible ?>">
+<form action="<?=PATHSITE?>eventos/" method="get"  class="form<?=$id?> <?= $form7Visible ?>  <?=$visivel?>">
       <input type="hidden" id="cidadeFK<?=$id?>" name="cidadeFK" value="<?= $idCidade ?>" />
     <input type="hidden" id="tipoFK<?=$id?>" name="tipoFK" value="<?= $idTipo ?>" />
     <input type="hidden"  name="ordem" value="<?= $get['ordem'] ?>" />

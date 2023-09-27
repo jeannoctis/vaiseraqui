@@ -9,7 +9,6 @@
                   <a href="<?= PATHSITE ?>aluguel-para-temporada/">Aluguel para Temporada</a>
                </nav>
                <span class="result"><?= count($alugueisParaTemporada) ?> espaços encontrados</span>
-
                <?= view("templates/order-filter", $get) ?>
             </div>
          </header>
@@ -23,8 +22,7 @@
                } ?>
                 <? } ?>
 
-               <div class="list-articles">
-               
+               <div class="list-articles">               
                   <!-- Listagem comumn -->
                   <? foreach ($alugueisParaTemporada as $produto) {
                      $produto->tipo = 'aluguel-para-temporada';

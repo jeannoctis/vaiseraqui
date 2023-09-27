@@ -54,7 +54,7 @@
                             </form>
 
                             <div class="linkPerfil">
-                                <a href="<?= PATHSITE ?>esqueci/anunciante">Esqueci a senha</a>
+                                <a href="<?= PATHSITE ?>esqueci?tipo=cliente">Esqueci a senha</a>
                             </div>
                             <div class="linkPerfil">
                                 Não tem uma conta? <a href="<?= PATHSITE ?>cadastro/">Cadastre-se</a>
@@ -72,7 +72,7 @@
                             </div>
 
                             <a style='width: 285px;' onclick="checkLoginState();" href="#" class="cta9 mr-auto ml-auto">
-                                <img src="<?= PATHSITE ?>images/perfil_facebook.svg">
+                                <img src="<?= PATHSITE ?>assets/images/perfil_facebook.svg">
                                 Fazer login com o Facebook
                             </a>
 

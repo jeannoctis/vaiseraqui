@@ -1852,10 +1852,8 @@ class Produto extends BaseController {
                     </div>
                 </a>
                 </article>
-                  <?
-                    $i++;
-                  
-                  } } ?>        
+                  <?                  
+                  }  $i++; } ?>        
               </div>
             </div>
           </div>
