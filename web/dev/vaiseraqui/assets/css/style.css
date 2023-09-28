@@ -9683,6 +9683,20 @@ header.header-bg .group-title span {
   max-height: 617px;
   padding: 80px;
 }
+
+.dialog-cidade{
+    padding: 20px;
+}
+
+.dialog-cidade .box-select{
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+}
+
+.dialog-cidade .content{
+    padding: 20px;
+}
+
 .dialog-not-logged span {
   position: absolute;
   top: 2rem;
@@ -9739,6 +9753,17 @@ header.header-bg .group-title span {
   cursor: pointer;
   transition: all 200ms ease;
 }
+
+.dialog-not-logged.dialog-cidade :is(a,button){
+    background-color: unset !important;    
+    height: unset;
+    max-width: unset;
+    color: #000;
+    font-size: unset;
+    font-weight: unset;
+    width: unset;
+}
+
 .dialog-not-logged button:hover {
   background: #c82328;
 }

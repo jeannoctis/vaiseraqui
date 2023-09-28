@@ -245,3 +245,7 @@ function carregaDestaques(id,index){
         $("#conteudoAlta"+index).html(dados.html);
     });
 }
+
+function mudaCidade(id){
+    window.location.href="" + PATHSITE + "muda-cidade?id="+id;
+}

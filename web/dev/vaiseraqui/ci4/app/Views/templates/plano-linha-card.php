@@ -34,5 +34,5 @@
          } ?>
       </ul>
    <? } ?>
-   <a href="#" class="btn-primary">Contratar</a>
+   <a onclick="$('#planoform').val('Anúncio de linha'); $('#duracao').val('<?=$titulo?>'); $('#duracao').removeAttr('disabled'); $('.p-linha').hide(); $('.p-destaque').show(); " href="#contato" class="btn-primary">Contratar</a>
 </article>

@@ -136,7 +136,7 @@
 
                      <div class='col-xs-12 paddingZeroM'>
                         <div class="col-xs-12 form-group">
-                           <label for="mapa">Link do Mapa no Google
+                           <label for="mapa">Link do Mapa no Google (É o link que fica em cima do navegador na localização no Google Maps)
                               <a style='display: none;' href='https://www.youtube.com/watch?v=tkDykmlUvYo' target='_blank'>
                                  <i class='mdi mdi-comment-question-outline'></i>
                               </a>

@@ -182,7 +182,7 @@
                <div class="input-group j-input-order-select">
                   <label for="plano">Plano</label>
                   <div class="modal-order">
-                     <input type="text" name="plano" value="selecione uma modalidade">
+                      <input id="planoform" readonly="" type="text" name="plano" value="selecione uma modalidade">
                      <div class="modal-order-select">
                         <div class="wraper-scroll">
                            <nav class="content">                              
@@ -196,7 +196,7 @@
                <div class="input-group j-input-order-select">
                   <label for="email">Duração</label>
                   <div class="modal-order">
-                     <input type="text" name="duracao" value="selecione a duração" disabled>
+                     <input id="duracao" readonly="" type="text" name="duracao" value="selecione a duração" disabled>
                      <div class="modal-order-select">
                         <div class="wraper-scroll">
                            <nav class="content">
@@ -222,7 +222,7 @@
             </div>
             <div class="input-group">
                <label for="mensagem">Mensagem</label>
-               <textarea name="mensagem" id="mensagem" placeholder="Escreva aqui sua mensagem"></textarea>
+               <textarea style="resize: none;" name="mensagem" id="mensagem" placeholder="Escreva aqui sua mensagem"></textarea>
             </div>
             <input type="hidden" name="origem" value="planos">
             <input type="hidden" name="g-recaptcha-response" class="g-recaptcha-response" value="">

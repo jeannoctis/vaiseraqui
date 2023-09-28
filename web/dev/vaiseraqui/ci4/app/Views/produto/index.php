@@ -1,3 +1,146 @@
+<style>
+         /* Input Dinamico */
+         label.with-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+         }
+
+         .dialog {
+            padding: 0;
+            max-width: 80%;
+            min-width: 375px;
+            border: none;
+            border-radius: 3px;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 1px rgba(0, 0, 0, 0.05);
+         }
+
+         .dialog .content {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 2.75rem;
+         }
+
+         .dialog .content label.form-group.col-xs-12 {
+            padding-inline: 0;
+         }
+
+         .dialog::backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+         }
+
+         .dialog .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+         }
+
+         .dialog .msgErro {
+            display: block;
+            margin-block-start: 6px;
+            color: red;
+         }
+
+         .box-title.with-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+         }
+
+         .with-btn img {
+            width: 26px;
+            aspect-ratio: 1;
+            object-fit: contain;
+            margin-inline-end: 1rem;
+         }
+
+         :is(.dialog#modalProximidades, .dialog#modalPontoDeVenda) ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            align-items: center;
+            gap: 1.75rem;
+            padding: 0;
+         }
+
+         :is(.dialog#modalProximidades, .dialog#modalPontoDeVenda) ul img {
+            width: 26px;
+            aspect-ratio: 1;
+            object-fit: contain;
+         }
+
+         :is(.dialog#modalProximidades, .dialog#modalPontoDeVenda) ul li {
+            padding: 10px 20px;
+            border-radius: 1rem;
+            transition: all 200ms ease-in-out;
+            width: fit-content;
+         }
+
+         :is(.dialog#modalProximidades, .dialog#modalPontoDeVenda) ul li:hover {
+            background-color: aliceblue;
+         }
+
+         .dialog#modalPontoDeVenda ul li:hover {
+            background-color: aliceblue;
+         }
+
+          .dialog#modalPontoDeVenda label {
+            max-width: 50%;
+         }
+
+         /* Sugestões */
+         :is(.catCmdd-div, .proximidade-div, .setor-ingresso-div, div[data-setor-ingresso], .pdv-div, .cardapio-div, .organizacao-div) {
+            border: 1px solid #e6e9ed;
+            border-radius: 4px;
+            margin-block-end: 3rem;
+         }
+
+         .sugestoes {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            align-content: flex-start;
+            justify-content: space-between;
+            gap: 2rem;
+            height: fit-content;
+            max-height: 175px;
+            padding: 9px 14px;
+            border-color: #ccd1d9;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            overflow-y: scroll;
+         }
+
+         .sugestoes:hover {
+            border-color: #00aeff !important;
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.12) !important;
+         }
+
+         .sugestoes .sugestao {
+            padding: 0.5rem 1rem;
+            background-color: aquamarine;
+            display: flex;
+            border-radius: 8px;
+         }
+
+         li.customTag {
+            background-color: red !important;
+         }
+
+         .organizacao-div {
+            position: relative;
+         }
+
+         .organizacao-div button[data-parent] {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 5;
+         }
+      </style>
+
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
@@ -93,10 +236,10 @@
 												<th>Galeria</th>
 												<th>Vídeos</th>
 												<? if (!empty($get['cidade']) && (($get['tipo'] == 6 && !empty($get['categoria'])) || $get['tipo'] != 6)) { ?>
-                                                                                                <th>Em alta G  <i class="menu-icon bi bi-question-circle"></i> </th>
-													<th>Em alta P <i class="menu-icon bi bi-question-circle"></i> </th>
-													<th>Destaque G <i class="menu-icon bi bi-question-circle"></i> </th>
-													<th>Destaque P <i class="menu-icon bi bi-question-circle"></i> </th>
+                                                                                                <th>Em alta G  <i data-target="emaltaG"  style="cursor: pointer;" class="menu-icon bi bi-question-circle"></i> </th>
+													<th>Em alta P <i data-target="emaltaP" class="menu-icon bi bi-question-circle"></i> </th>
+													<th>Destaque G <i data-target="destaqueG" class="menu-icon bi bi-question-circle"></i> </th>
+													<th>Destaque P <i data-target="destaqueP" class="menu-icon bi bi-question-circle"></i> </th>
 												<? } ?>
 												<th>Ordenar</th>
 											</tr>
@@ -302,3 +445,95 @@
 				});
 			}
 		</script>
+               
+                
+<dialog id="emaltaG" class="dialog">
+         <div class="content box-content">
+            <h2 class="box-title">Em Alta G</h2>
+            <span class="close"><i class="bi bi-x-lg"></i></span>
+
+            <label for="" class="form-group">
+               São os destaques que vão ficar maiores, na cidade especificada, conforme as imagens a seguir               
+            </label>
+            
+            <img src="<?=PATHSITE?>assets/images/bg-modal-1.svg"/>
+    
+         </div>
+      </dialog>
+                
+         <dialog id="emaltaP" class="dialog">
+         <div class="content box-content">
+            <h2 class="box-title">Em Alta P</h2>
+            <span class="close"><i class="bi bi-x-lg"></i></span>
+
+            <label for="" class="form-group">
+               São os destaques que vão ficar menores, na cidade especificada, conforme as imagens a seguir               
+            </label>
+            
+            <img src="<?=PATHSITE?>assets/images/bg-modal-2.svg"/>
+    
+         </div>
+      </dialog>
+                
+         <dialog id="destaqueG" class="dialog">
+         <div class="content box-content">
+            <h2 class="box-title">Destaque G</h2>
+            <span class="close"><i class="bi bi-x-lg"></i></span>
+
+            <label for="" class="form-group">
+               São os destaques que vão ficar maiores, na cidade e categoria especificada, conforme as imagens a seguir               
+            </label>
+            
+            <img src="<?=PATHSITE?>assets/images/bg-modal-3.svg"/>
+    
+         </div>
+      </dialog>
+                
+                <dialog id="destaqueP" class="dialog">
+         <div class="content box-content">
+            <h2 class="box-title">Destaque P</h2>
+            <span class="close"><i class="bi bi-x-lg"></i></span>
+
+            <label for="" class="form-group">
+               São os destaques que vão ficar menores, na cidade e categoria especificada, conforme as imagens a seguir               
+            </label>
+            
+            <img src="<?=PATHSITE?>assets/images/bg-modal-4.svg"/>
+    
+         </div>
+      </dialog>
+                
+                <script>
+                     // Dialogs Geral
+         const boxesContent = document.querySelectorAll(".bi-question-circle")
+         const dialogs = document.querySelectorAll(".dialog")
+         const closeBtns = document.querySelectorAll(".dialog .close")
+         let catInngresso
+         boxesContent.forEach(box => {
+            box.addEventListener("click", e => {
+          
+                  const btn = e.target
+                  const modalTarget = document.querySelector(`#${btn.dataset.target}`)
+
+                  if (btn.dataset.setor) {
+                     setorIngresso = btn.dataset.setor
+                     console.log(setorIngresso);
+                  }
+                  modalTarget.showModal()
+                  modalTarget.querySelector("input").focus()
+               
+            })
+         })
+         dialogs.forEach(dialog => {
+            dialog.addEventListener("click", e => {
+               if (e.target == dialog) {
+                  dialog.close()
+               }
+            })
+         })
+         closeBtns.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+               e.target.closest("dialog").close();
+            })
+         })
+                    </script>

@@ -13,5 +13,5 @@
       <span class="value">R$<?= $mensalidade ?></span>
       <span class="period">/mês</span>
    </div>
-   <a href="#" class="btn-primary">Contratar</a>
+   <a onclick="$('#planoform').val('Anúncio destaque'); $('#duracao').val('<?=$titulo?>'); $('#duracao').removeAttr('disabled'); $('.p-linha').show(); $('.p-destaque').hide();  " href="#contato" class="btn-primary">Contratar</a>
 </div>

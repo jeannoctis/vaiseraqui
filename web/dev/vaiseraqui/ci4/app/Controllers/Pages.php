@@ -101,7 +101,7 @@ class Pages extends Controller {
          $data['primeiraVisita'] = true;
          } 
          
-         $data['cidadeAtual'] = $cidadeModel->find($data['configs']->cidadeFK);
+         $data['cidadeAtual'] = $cidadeModel->find($_SESSION['cidade']);
 
                  
         return $data;
@@ -302,8 +302,11 @@ class Pages extends Controller {
                 break;
             case 'muda-cidade':
                 $get = \request()->getGet();
+             
+                
                 $_SESSION['cidade'] = $get['id'];
                 
+             
                 Header("HTTP/1.1 301 Moved Permanently");
                     Header("Location:" . $_SESSION['_ci_previous_url']);
                     exit();

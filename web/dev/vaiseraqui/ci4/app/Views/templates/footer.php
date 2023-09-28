@@ -99,17 +99,33 @@
 
           <h3>Você está em  <b><?=$cidadeAtual->titulo?> </b> </h3>
           
-          <p>Caso não esteja em Maringá, selecione a sua cidade aqui!</p>
+          <p>Caso não esteja em <?=$cidadeAtual->titulo?>, selecione a sua cidade aqui!</p>
      
-      <div class="buttons-div">
-          <? if($cidades) {
-              foreach($cidades as $cidade) {
-              ?>
-        <a href="<?=PATHSITE?>muda-cidade?id=<?=$cidade->id?>">
-          <button type="button"><?=$cidade->titulo?> - <?=$cidade->sigla?> </button>
-        </a>
-          <? } } ?>
-      </div>
+          <div class="box-select mb-10 j-box-select">
+        <label for="cities">
+            <div>
+                <img src="<?= PATHSITE ?>assets/images/icon-map-2.svg" alt="icon map">
+                Cidade
+            </div>
+            <button class="j-btn-select">
+                <img src="<?= PATHSITE ?>assets/images/icon-selector.svg" alt="icon dropdown">
+            </button>
+        </label>
+        <div class="select">
+            <input  type="text" placeholder="Busque por cidade"value="<?= $nomeCidade ?>" >
+            <div class="select-list">
+                <?
+                if ($cidades) { ?>
+                    <ul class="dropdown-select">
+                        <? foreach ($cidades as $cidade) { ?>                         
+                            <li onclick="mudaCidade(<?=$cidade->id?>)"><?= $cidade->titulo ?> - <?= $cidade->sigla ?></li>                                  
+                        <? } ?>
+                    </ul>
+                <? } ?>
+            </div>
+        </div>
+    </div>       
+          
     </div>
   </dialog>
 
@@ -213,11 +229,13 @@
         $('ul.menuDados li').removeClass('ativo');
         $(this).addClass('ativo');
       });
+     
     </script>    
   <? } ?>
-    
-    <? if($primeiraVisita) { ?>
+   
+    <? if($primeiraVisita)  { ?>
     <script>
+       
           $(document).ready(function() {
         showCidadeModal();
       });
@@ -230,7 +248,7 @@
   <script src="<?= PATHSITE ?>assets/scripts/select.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/menu-mobile.js"></script>
   <script src="<?= PATHSITE ?>assets/scripts/sweetalert2/swal2.min.js"></script>
-  <script src="<?= PATHSITE ?>assets/scripts/script.js?v=1.0.1"></script>
+  <script src="<?= PATHSITE ?>assets/scripts/script.js?v=1.0.2"></script>
 
   <!-- Scripts Individuais -->
   <?= view("templates/script-individual") ?>

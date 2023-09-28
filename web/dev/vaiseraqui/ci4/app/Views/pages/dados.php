@@ -84,7 +84,7 @@ $infoPagina['iconePagina'] = 'icon-write.svg';
                         <div class="row col-12">
                              <? if ( $tipoAtual->tipo !=  'EVENTOS' ) { ?>
                             <div class="col-12 col-md-6">
-                                <label>Link do mapa</label>
+                                <label>Link do Mapa no Google (É o link que fica em cima do navegador na localização no Google Maps)</label>
                                 <input type="text" name="mapa" class="form-control" value="<?= $anuncio->mapa ?>" />
                             </div>
 
