@@ -11,7 +11,7 @@ class UsuarioModel extends Model {
     protected $primaryKey = 'id';
     protected $returnType = 'object';
     protected $useSoftDeletes = true;
-    protected $allowedFields = ['usuario', 'senha','secoes'];
+    protected $allowedFields = ['usuario', 'senha','secoes']; 
     protected $useTimestamps = true;
     protected $createdField = 'dtCriacao';
     protected $updatedField = 'dtAlteracao';

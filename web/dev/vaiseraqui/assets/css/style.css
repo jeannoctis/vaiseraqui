@@ -100,6 +100,13 @@ ul {
   .container {
     padding: 0 20px;
   }
+  .dialog-cidade{
+      min-width: 90% !important;
+  }
+  .dialog-cidade .content{
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+  }
 }
 
 .container-medium {

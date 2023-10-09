@@ -8,7 +8,7 @@
   <?= view("templates/styles-group", $style_list) ?>
 
   <link href="<?= PATHSITE ?>assets/scripts/aos/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css?v=1.0.5">
+  <link rel="stylesheet" href="<?= PATHSITE ?>assets/css/style.css?v=1.0.6">
   <title><?= ($metatag->title) ? $metatag->title : $metatag->description  ?> - <?= $configs->nome ?></title>
   <meta name="description" content="<?= ($metatag->description) ? $metatag->description : character_limiter(strip_tags($metatag->texto),160); ?>">
   

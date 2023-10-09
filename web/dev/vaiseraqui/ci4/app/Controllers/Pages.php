@@ -11,7 +11,7 @@ class Pages extends Controller {
         
         $data['segments'] = $segments = $this->request->uri->getSegments();
           
-        if($data['segments'][0] == 'uploads') {
+        if($data['segments'][0] == 'uploads' || $data['segments'][0] == 'images') {
             throw new \CodeIgniter\Exceptions\PageNotFoundException();
             die();
         }
